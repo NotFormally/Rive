@@ -2,19 +2,20 @@
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/AuthProvider";
+import { TrialModal } from "@/components/TrialModal";
 
 type CheckoutButtonProps = {
   priceId?: string;
   cta: string;
   ctaColor: string;
   presentationClasses?: string;
+  isTrial?: boolean;
 }
 
-export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "" }: CheckoutButtonProps) {
+export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "", isTrial = false }: CheckoutButtonProps) {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const [showTrialModal, setShowTrialModal] = useState(false);
   const { profile, loading: authLoading } = useAuth();
 
   const handleCheckout = async () => {
@@ -24,11 +25,16 @@ export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "
       return;
     }
 
+    // Si c'est un essai gratuit, afficher la modal d'explication
+    if (isTrial) {
+      setShowTrialModal(true);
+      return;
+    }
+
     if (authLoading) return;
 
     if (!profile) {
-      // Pas authentifié : on envoie vers le signup
-      router.push(`/signup?plan=${priceId}`);
+      window.location.assign(`/signup?plan=${priceId}`);
       return;
     }
 
@@ -58,12 +64,15 @@ export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "
   };
 
   return (
-    <button
-      onClick={handleCheckout}
-      className={`block w-full text-center py-4 rounded-[2rem] font-bold text-sm transition-all duration-300 hover:scale-[1.03] ${ctaColor} ${presentationClasses}`}
-      disabled={loading}
-    >
-      {loading ? <Loader2 className="w-5 h-5 mx-auto animate-spin" /> : cta}
-    </button>
+    <>
+      <button
+        onClick={handleCheckout}
+        className={`block w-full text-center py-4 rounded-[2rem] font-bold text-sm transition-all duration-300 hover:scale-[1.03] ${ctaColor} ${presentationClasses}`}
+        disabled={loading}
+      >
+        {loading ? <Loader2 className="w-5 h-5 mx-auto animate-spin" /> : cta}
+      </button>
+      <TrialModal isOpen={showTrialModal} onClose={() => setShowTrialModal(false)} priceId={priceId} />
+    </>
   );
 }

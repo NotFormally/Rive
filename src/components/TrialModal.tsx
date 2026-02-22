@@ -68,8 +68,8 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
                   <feature.icon className="w-4 h-4 md:w-5 md:h-5 text-[#2E4036]" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-jakarta font-bold text-[13px] md:text-sm text-[#1A1A1A] leading-tight mb-0.5 truncate">{feature.label}</p>
-                  <p className="font-outfit text-[11px] md:text-sm text-slate-400 leading-tight truncate">{feature.desc}</p>
+                  <p className="font-jakarta font-bold text-[13px] md:text-sm text-[#1A1A1A] leading-tight mb-0.5">{feature.label}</p>
+                  <p className="font-outfit text-[11px] md:text-sm text-slate-400 leading-tight">{feature.desc}</p>
                 </div>
               </div>
             ))}

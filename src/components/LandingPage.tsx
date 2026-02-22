@@ -108,7 +108,7 @@ export function LandingPage() {
             </span>
           </h1>
           <p className="hero-text font-outfit text-lg md:text-2xl mt-8 max-w-2xl opacity-90 leading-relaxed tracking-wide">
-            Intelligence algorithmique pour la restauration gastronomique.
+            L'intelligence algorithmique au service de votre tranquillité d'esprit. Automatisez la conformité (MAPAQ) et reprenez le contrôle de vos opérations.
           </p>
           <div className="hero-text mt-12">
             <Link 
@@ -221,16 +221,16 @@ export function LandingPage() {
           {/* Three Pillars */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24">
             <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">Proactif</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">Agit avant le problème. Chaque donnée déclenche une action, pas un rapport.</p>
+              <h3 className="font-jakarta font-bold text-2xl mb-3">Conformité Invisible</h3>
+              <p className="font-outfit text-[#6B7280] text-lg">Les normes MAPAQ et le registre d'hygiène sont validés silencieusement dans le flux quotidien de votre équipe. Simple et sans friction.</p>
             </div>
             <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">Anticipatif</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">Voit venir. L'algorithme détecte les signaux faibles avant qu'ils ne deviennent des urgences.</p>
+              <h3 className="font-jakarta font-bold text-2xl mb-3">Tranquillité d'Esprit</h3>
+              <p className="font-outfit text-[#6B7280] text-lg">L'algorithme détecte les anomalies (températures, DLC, notes de service) avant qu'elles ne deviennent des écueils. Quittez le restaurant l'esprit léger.</p>
             </div>
             <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">Préventif</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">Empêche plutôt que corriger. La conformité devient un réflexe, pas une corvée.</p>
+              <h3 className="font-jakarta font-bold text-2xl mb-3">Action Prescriptive</h3>
+              <p className="font-outfit text-[#6B7280] text-lg">Le système ne se contente pas d'archiver vos données : il génère automatiquement les actions correctives exactes à suivre en cas de problème.</p>
             </div>
           </div>
         </div>

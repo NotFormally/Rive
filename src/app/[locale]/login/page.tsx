@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
+  const t = useTranslations("Auth");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,7 +28,7 @@ export default function LoginPage() {
     });
 
     if (authError) {
-      setError("Email ou mot de passe incorrect.");
+      setError(t("error_auth"));
       setLoading(false);
     } else {
       router.push("/dashboard");
@@ -36,26 +38,26 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-slate-900">Rive</h1>
-        <p className="text-slate-500 mt-2">Connectez-vous à votre espace restaurant</p>
+        <h1 className="text-3xl font-bold text-slate-900">{t("login_title")}</h1>
+        <p className="text-slate-500 mt-2">{t("login_subtitle")}</p>
       </div>
 
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle>Connexion</CardTitle>
-          <CardDescription>Entrez vos identifiants</CardDescription>
+          <CardTitle>{t("login_card_title")}</CardTitle>
+          <CardDescription>{t("login_card_desc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
-                Adresse email
+                {t("label_email")}
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="chef@monrestaurant.com"
+                placeholder={t("placeholder_email")}
                 className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
               />
@@ -63,7 +65,7 @@ export default function LoginPage() {
 
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
-                Mot de passe
+                {t("label_password")}
               </label>
               <input
                 type="password"
@@ -82,17 +84,17 @@ export default function LoginPage() {
               className="w-full bg-blue-600 hover:bg-blue-700 text-white"
               disabled={loading}
             >
-              {loading ? "Connexion..." : "Se connecter"}
+              {loading ? t("btn_loading_login") : t("btn_login")}
             </Button>
           </form>
 
           <div className="text-center text-sm text-slate-500 mt-4">
-            Pas encore de compte ?{" "}
+            {t("no_account")}{" "}
             <button
               onClick={() => router.push("/signup")}
               className="text-blue-600 hover:underline font-medium"
             >
-              Créer un espace
+              {t("link_signup")}
             </button>
           </div>
         </CardContent>

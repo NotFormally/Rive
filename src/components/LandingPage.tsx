@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from 'next-intl';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, RotateCw, Activity, Calendar } from "lucide-react";
+import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe } from "lucide-react";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
@@ -12,6 +14,7 @@ if (typeof window !== "undefined") {
 }
 
 export function LandingPage() {
+  const t = useTranslations('LandingPage');
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -75,47 +78,50 @@ export function LandingPage() {
       <nav className="navbar fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full flex items-center gap-8 text-[#F2F0E9] transition-colors">
         <div className="font-outfit font-bold tracking-tight text-xl">Rive</div>
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link href="#features" className="hover:-translate-y-[1px] transition-transform">Fonctionnalités</Link>
-          <Link href="#philosophy" className="hover:-translate-y-[1px] transition-transform">Philosophie</Link>
-          <Link href="/pricing" className="hover:-translate-y-[1px] transition-transform">Tarifs</Link>
+          <Link href="#features" className="hover:-translate-y-[1px] transition-transform">{t('nav_features')}</Link>
+          <Link href="#philosophy" className="hover:-translate-y-[1px] transition-transform">{t('nav_philosophy')}</Link>
+          <Link href="/pricing" className="hover:-translate-y-[1px] transition-transform">{t('nav_pricing')}</Link>
         </div>
-        <Link 
-          href="/signup" 
-          className="nav-btn bg-[#F2F0E9] text-[#1A1A1A] px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[1.03] transition-transform duration-300"
-        >
-          Créer mon espace Rive
-        </Link>
+        <div className="flex items-center gap-4">
+          <LanguageSelector />
+          <Link 
+            href="/signup" 
+            className="nav-btn bg-[#F2F0E9] text-[#1A1A1A] px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[1.03] transition-transform duration-300"
+          >
+            {t('nav_cta')}
+          </Link>
+        </div>
       </nav>
 
       {/* B. HERO SECTION — "The Opening Shot" */}
       <section className="hero-section relative h-[100dvh] w-full flex items-end pb-24 px-8 md:px-24">
         {/* Background Image with Global CSS Noise */}
         <div 
-          className="absolute inset-0 bg-cover bg-center -z-10"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop')" }} /* Match: dark forest / laboratory */
+          className="absolute inset-0 bg-cover bg-center z-0"
+          style={{ backgroundImage: "url('/hero-concept.png')" }} /* Match: AI Gastronomy Concept */
         >
           {/* Heavy primary-to-black gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#2E4036]/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#2E4036]/80 to-[#1A1A1A]/40"></div>
         </div>
 
-        <div className="max-w-4xl text-[#F2F0E9]">
+        <div className="relative z-10 max-w-4xl text-[#F2F0E9]">
           <h1 className="flex flex-col gap-2">
             <span className="hero-text font-jakarta font-bold text-3xl md:text-5xl tracking-tight uppercase text-[#CC5833]">
-              L'algorithme est
+              {t('hero_subtitle')}
             </span>
             <span className="hero-text font-cormorant italic text-7xl md:text-9xl tracking-tighter leading-[0.85]">
-              le nouveau Chef.
+              {t('hero_title')}
             </span>
           </h1>
           <p className="hero-text font-outfit text-lg md:text-2xl mt-8 max-w-2xl opacity-90 leading-relaxed tracking-wide">
-            L'intelligence algorithmique au service de votre tranquillité d'esprit. Automatisez la conformité (MAPAQ) et reprenez le contrôle de vos opérations.
+            {t('hero_description')}
           </p>
           <div className="hero-text mt-12">
             <Link 
               href="/signup" 
               className="group relative overflow-hidden inline-flex items-center justify-center gap-2 bg-[#CC5833] text-[#F2F0E9] px-8 py-4 rounded-[2rem] font-bold text-lg hover:scale-[1.03] transition-transform duration-300"
             >
-              <span className="relative z-10 flex items-center gap-2">Déployer Rive <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
+              <span className="relative z-10 flex items-center gap-2">{t('hero_cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
               <span className="absolute inset-0 bg-[#1A1A1A] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></span>
             </Link>
           </div>
@@ -126,26 +132,25 @@ export function LandingPage() {
       <section id="features" className="py-32 px-8 md:px-24 max-w-screen-2xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          {/* Card 1: Diagnostic Shuffler (Ingénierie de Menu IA) */}
+          {/* Card 1: Conformité & Actions Correctives IA */}
           <div className="bg-[#FFFFFF] p-8 rounded-[2rem] shadow-sm border border-slate-200/60 relative overflow-hidden h-[400px] flex flex-col hover:-translate-y-1 transition-transform duration-500">
             <div className="flex items-center gap-3 mb-6">
-              <div className="bg-[#2E4036]/10 p-3 rounded-full"><RotateCw className="w-6 h-6 text-[#2E4036]" /></div>
-              <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">Ingénierie IA</h3>
+              <div className="bg-[#2E4036]/10 p-3 rounded-full"><Thermometer className="w-6 h-6 text-[#2E4036]" /></div>
+              <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">{t('features_card1_title')}</h3>
             </div>
-            <p className="font-outfit text-slate-500 mb-8">Classification BCG algorithmique en temps réel.</p>
+            <p className="font-outfit text-slate-500 mb-8">{t('features_card1_desc')}</p>
             
-            <div className="relative flex-1 mt-auto flex justify-center items-end pb-8">
-              <div className="shuffler-item absolute bg-[#F2F0E9] border border-slate-200 p-4 rounded-2xl w-full max-w-[240px] shadow-sm bottom-8 z-30 flex justify-between items-center">
-                <span className="font-outfit font-medium text-sm">Tartare de Bœuf</span>
-                <span className="font-plex-mono text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-sm">🏮 Phare</span>
+            <div className="relative flex-1 mt-auto bg-slate-50 rounded-2xl p-5 border border-slate-100 flex flex-col justify-between">
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-outfit font-medium text-sm">Frigo Viandes</span>
+                <span className="font-plex-mono text-lg text-red-500 font-bold">8.5°C</span>
               </div>
-              <div className="shuffler-item absolute bg-[#F2F0E9] border border-slate-200 p-4 rounded-2xl w-full max-w-[220px] shadow-sm bottom-12 z-20 opacity-60 scale-95 flex justify-between items-center">
-                <span className="font-outfit font-medium text-sm">Salade César</span>
-                <span className="font-plex-mono text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-sm">⚓ Ancre</span>
-              </div>
-              <div className="shuffler-item absolute bg-[#F2F0E9] border border-slate-200 p-4 rounded-2xl w-full max-w-[200px] shadow-sm bottom-16 z-10 opacity-30 scale-90 flex justify-between items-center">
-                <span className="font-outfit font-medium text-sm">Risotto Truffe</span>
-                <span className="font-plex-mono text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-sm">🧭 Dérive</span>
+              <div className="bg-indigo-50/80 rounded-xl p-3 border border-indigo-100 shuffler-item">
+                <div className="flex items-center gap-2 mb-1 text-indigo-700">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+                  <span className="text-xs font-bold">Assistant IA</span>
+                </div>
+                <p className="text-xs text-indigo-900/80">Vérifiez le compresseur et déplacez les viandes immédiatement.</p>
               </div>
             </div>
           </div>
@@ -155,13 +160,13 @@ export function LandingPage() {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <div className="bg-[#2E4036]/10 p-3 rounded-full"><Activity className="w-6 h-6 text-[#2E4036]" /></div>
-                <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">Logbook Synapse</h3>
+                <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">{t('features_card2_title')}</h3>
               </div>
               <div className="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Live Feed
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> {t('features_card2_live')}
               </div>
             </div>
-            <p className="font-outfit text-slate-500 mb-8">Analyse NLP des notes de l'équipe de salle.</p>
+            <p className="font-outfit text-slate-500 mb-8">{t('features_card2_desc')}</p>
             
             <div className="bg-[#1A1A1A] flex-1 rounded-2xl p-6 font-plex-mono text-sm text-[#CC5833] overflow-hidden relative">
               <div className="opacity-50 mb-2">{">"} Analyse de la note serveur...</div>
@@ -175,26 +180,21 @@ export function LandingPage() {
             </div>
           </div>
 
-          {/* Card 3: Cursor Protocol Scheduler (Assistants IA Temporels) */}
+          {/* Card 3: Native Multilingual (13 Languages) */}
           <div className="bg-[#FFFFFF] p-8 rounded-[2rem] shadow-sm border border-slate-200/60 relative overflow-hidden h-[400px] flex flex-col hover:-translate-y-1 transition-transform duration-500">
             <div className="flex items-center gap-3 mb-6">
-              <div className="bg-[#2E4036]/10 p-3 rounded-full"><Calendar className="w-6 h-6 text-[#2E4036]" /></div>
-              <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">Assistants Autonomes</h3>
+              <div className="bg-[#2E4036]/10 p-3 rounded-full"><Globe className="w-6 h-6 text-[#2E4036]" /></div>
+              <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">{t('features_card3_title')}</h3>
             </div>
-            <p className="font-outfit text-slate-500 mb-8">Génération sociale et rappels automatisés.</p>
+            <p className="font-outfit text-slate-500 mb-8">{t('features_card3_desc')}</p>
             
-            <div className="flex-1 border-t border-slate-100 pt-6">
-              <div className="grid grid-cols-7 gap-1 text-center text-xs font-plex-mono text-slate-400 mb-2">
-                <div>L</div><div>M</div><div>M</div><div>J</div><div className="text-[#CC5833] font-bold">V</div><div>S</div><div>D</div>
-              </div>
-              <div className="grid grid-cols-7 gap-1">
-                {Array.from({length: 21}).map((_, i) => (
-                  <div key={i} className={`aspect-square rounded-md ${i === 11 ? 'bg-[#CC5833] animate-pulse' : 'bg-slate-100'}`}></div>
-                ))}
-              </div>
-              <div className="mt-6 flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span className="font-outfit text-sm font-medium">Post Instagram (Phare)</span>
-                <span className="font-plex-mono text-xs text-[#2E4036]">17:30</span>
+            <div className="flex-1 rounded-2xl bg-[#1A1A1A] flex flex-col items-center justify-center relative overflow-hidden p-6 group cursor-pointer">
+              <div className="absolute top-4 left-4 bg-white/10 text-white/50 px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider transition-opacity duration-300 group-hover:opacity-0">Français</div>
+              <div className="text-xl font-cormorant italic text-[#F2F0E9] text-center transition-opacity duration-300 group-hover:opacity-0">Nettoyer la zone froides des frigos</div>
+              
+              <div className="absolute inset-0 bg-[#CC5833] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-4 right-4 bg-white/20 text-white px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider">Español</div>
+                <div className="text-2xl font-cormorant italic text-white text-center">Limpiar la zona fría de las neveras</div>
               </div>
             </div>
           </div>
@@ -212,25 +212,25 @@ export function LandingPage() {
         
         <div className="relative z-10 max-w-5xl mx-auto px-8 md:px-24 text-center">
           <p className="philosophy-text font-outfit text-xl md:text-2xl text-[#6B7280] mb-8">
-            La plupart des logiciels de gestion offrent : des tableaux de bord statiques et des données mortes.
+            {t('philosophy_intro')}
           </p>
           <p className="philosophy-text font-cormorant italic text-4xl md:text-7xl font-semibold leading-tight">
-            Nous offrons : un flux de travail <span className="text-[#CC5833]">vivant</span>, qui prescrit l'action avant le problème.
+            {t('philosophy_vision')}
           </p>
 
           {/* Three Pillars */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24">
             <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">Conformité Invisible</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">Les normes MAPAQ et le registre d'hygiène sont validés silencieusement dans le flux quotidien de votre équipe. Simple et sans friction.</p>
+              <h3 className="font-jakarta font-bold text-2xl mb-3">{t('philosophy_pillar1_title')}</h3>
+              <p className="font-outfit text-[#6B7280] text-lg">{t('philosophy_pillar1_desc')}</p>
             </div>
             <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">Tranquillité d'Esprit</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">L'algorithme détecte les anomalies (températures, DLC, notes de service) avant qu'elles ne deviennent des écueils. Quittez le restaurant l'esprit léger.</p>
+              <h3 className="font-jakarta font-bold text-2xl mb-3">{t('philosophy_pillar2_title')}</h3>
+              <p className="font-outfit text-[#6B7280] text-lg">{t('philosophy_pillar2_desc')}</p>
             </div>
             <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">Action Prescriptive</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">Le système ne se contente pas d'archiver vos données : il génère automatiquement les actions correctives exactes à suivre en cas de problème.</p>
+              <h3 className="font-jakarta font-bold text-2xl mb-3">{t('philosophy_pillar3_title')}</h3>
+              <p className="font-outfit text-[#6B7280] text-lg">{t('philosophy_pillar3_desc')}</p>
             </div>
           </div>
         </div>
@@ -239,8 +239,8 @@ export function LandingPage() {
       {/* E. PROTOCOL — "Sticky Stacking Archive" */}
       <section id="protocol" className="py-24 px-8 md:px-24 max-w-screen-xl mx-auto">
         <div className="text-center mb-24">
-          <h2 className="font-jakarta font-bold text-4xl text-[#1A1A1A] mb-4">Protocole d'Intégration</h2>
-          <p className="font-outfit text-slate-500">De l'inscription au pilotage automatisé.</p>
+          <h2 className="font-jakarta font-bold text-4xl text-[#1A1A1A] mb-4">{t('protocol_title')}</h2>
+          <p className="font-outfit text-slate-500">{t('protocol_desc')}</p>
         </div>
 
         <div className="protocol-container relative">
@@ -248,8 +248,8 @@ export function LandingPage() {
           <div className="stack-card sticky top-32 bg-[#2E4036] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 01</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">Connexion des Télémétries</h3>
-              <p className="font-outfit text-lg opacity-80 mb-8 max-w-md">Importation de votre carte existante et configuration de vos alertes Food Cost.</p>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase1_title')}</h3>
+              <p className="font-outfit text-lg opacity-80 mb-8 max-w-md">{t('protocol_phase1_desc')}</p>
             </div>
             <div className="flex-1 flex justify-center">
               <div className="w-48 h-48 border border-[#CC5833]/30 rounded-full flex items-center justify-center relative spin-slow">
@@ -263,8 +263,8 @@ export function LandingPage() {
           <div className="stack-card sticky top-40 bg-[#CC5833] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#1A1A1A] font-bold text-sm mb-4">PHASE 02</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">Matrice Analytique</h3>
-              <p className="font-outfit text-lg opacity-90 mb-8 max-w-md">L'Intelligence Artificielle classifie chaque plat (Phare, Ancre, Dérive, Écueil) et suggère des actions correctives.</p>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase2_title')}</h3>
+              <p className="font-outfit text-lg opacity-90 mb-8 max-w-md">{t('protocol_phase2_desc')}</p>
             </div>
             <div className="flex-1 flex justify-center">
               <div className="w-64 h-32 border border-[#F2F0E9]/30 rounded-xl relative overflow-hidden flex flex-col justify-between p-2">
@@ -279,10 +279,10 @@ export function LandingPage() {
           <div className="stack-card sticky top-48 bg-[#1A1A1A] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 03</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">Pilotage Autonome</h3>
-              <p className="font-outfit text-lg opacity-80 mb-8 max-w-md">Génération des posts réseaux sociaux et résumés des carnets de bord en multilingue.</p>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase3_title')}</h3>
+              <p className="font-outfit text-lg opacity-80 mb-8 max-w-md">{t('protocol_phase3_desc')}</p>
               <Link href="/signup" className="inline-block bg-[#F2F0E9] text-[#1A1A1A] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
-                Lancer Rive
+                {t('protocol_cta')}
               </Link>
             </div>
             <div className="flex-1 flex justify-center">
@@ -307,15 +307,15 @@ export function LandingPage() {
         <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
           <div>
             <div className="font-outfit font-bold text-3xl mb-4">Rive</div>
-            <p className="font-outfit text-slate-400 max-w-xs">Intelligence algorithmique pour la restauration gastronomique.</p>
+            <p className="font-outfit text-slate-400 max-w-xs">{t('footer_desc')}</p>
           </div>
-          <div className="flex items-center gap-3 bg-[#2E4036]/30 border border-[#2E4036] px-4 py-2 rounded-full">
-            <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-            <span className="font-plex-mono text-sm uppercase tracking-wider text-green-400">System Operational</span>
+          <div className="flex items-center gap-3 bg-[#2E4036]/30 border border-[#2E4036] px-4 py-2 rounded-full animate-pulse transition-opacity">
+            <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+            <span className="font-plex-mono text-sm uppercase tracking-wider text-green-400">{t('footer_status')}</span>
           </div>
         </div>
         <div className="max-w-screen-xl mx-auto mt-24 pt-8 border-t border-slate-800 text-slate-500 text-sm font-outfit flex justify-between">
-          <p>© 2026 Rive. Tous droits réservés.</p>
+          <p>{t('footer_rights')}</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-[#F2F0E9] transition-colors">Confidentialité</a>
             <a href="#" className="hover:text-[#F2F0E9] transition-colors">CGU</a>

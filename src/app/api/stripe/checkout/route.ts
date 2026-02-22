@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const session = await stripe.checkout.sessions.create({
+      const origin = new URL(req.url).origin;
+      const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       payment_method_types: ['card'],
       line_items: [
@@ -21,8 +22,8 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: successUrl || `${req.headers.get('origin')}/dashboard/settings?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: cancelUrl || `${req.headers.get('origin')}/pricing`,
+      success_url: successUrl || `${origin}/dashboard/settings?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: cancelUrl || `${origin}/pricing`,
       metadata: {
         restaurantId: restaurantId,
       },

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
+import { useTranslations } from "next-intl";
 import { 
   LayoutDashboard, 
   MenuSquare, 
@@ -16,16 +16,17 @@ import {
 } from "lucide-react";
 
 export function Sidebar() {
+  const t = useTranslations("Sidebar");
   const pathname = usePathname();
   const { profile, settings, signOut } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
-    { name: "Vue d'ensemble", href: "/dashboard", icon: LayoutDashboard, show: true },
-    { name: "Éditeur de Menu", href: "/dashboard/menu", icon: MenuSquare, show: settings?.module_menu_editor },
-    { name: "Food Cost", href: "/dashboard/food-cost", icon: Calculator, show: settings?.module_food_cost },
-    { name: "Carte Marine", href: "/dashboard/engineering", icon: Compass, show: settings?.module_menu_engineering },
-    { name: "Paramètres", href: "/dashboard/settings", icon: Settings, show: true },
+    { name: t("nav_overview"), href: "/dashboard", icon: LayoutDashboard, show: true },
+    { name: t("nav_menu"), href: "/dashboard/menu", icon: MenuSquare, show: settings?.module_menu_editor },
+    { name: t("nav_foodcost"), href: "/dashboard/food-cost", icon: Calculator, show: settings?.module_food_cost },
+    { name: t("nav_engineering"), href: "/dashboard/engineering", icon: Compass, show: settings?.module_menu_engineering },
+    { name: t("nav_settings"), href: "/dashboard/settings", icon: Settings, show: true },
   ];
 
   const handleNavClick = () => setMobileOpen(false);
@@ -35,7 +36,7 @@ export function Sidebar() {
       <div className="p-6">
         <h1 className="text-2xl font-bold text-white tracking-tight">Rive</h1>
         <p className="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">
-          {profile?.restaurant_name || "Espace Restaurant"}
+          {profile?.restaurant_name || t("restaurant_space")}
         </p>
       </div>
 
@@ -66,7 +67,7 @@ export function Sidebar() {
           className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-colors"
         >
           <LogOut className="w-4 h-4" />
-          Déconnexion
+          {t("btn_logout")}
         </button>
       </div>
     </>

@@ -31,7 +31,7 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-2xl bg-[#F2F0E9] rounded-[2rem] shadow-2xl overflow-hidden"
+        className="relative w-full max-w-3xl bg-[#F2F0E9] rounded-[2rem] shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -62,13 +62,13 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
             {TRIAL_FEATURES.map((feature) => (
               <div
                 key={feature.label}
-                className="flex flex-row items-start gap-3 md:gap-4 bg-white rounded-xl p-3 md:p-4 border border-slate-100 hover:-translate-y-0.5 transition-transform duration-300"
+                className="flex flex-row items-start gap-3 md:gap-4 bg-white rounded-xl p-3 md:p-4 border border-slate-100 hover:-translate-y-0.5 transition-transform duration-300 w-full"
               >
                 <div className="bg-[#2E4036]/10 p-1.5 rounded-lg shrink-0 mt-0.5">
                   <feature.icon className="w-4 h-4 md:w-5 md:h-5 text-[#2E4036]" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-jakarta font-bold text-[13px] md:text-sm text-[#1A1A1A] leading-tight mb-0.5">{feature.label}</p>
+                <div className="flex-1 w-full">
+                  <p className="font-jakarta font-bold text-[13px] md:text-sm text-[#1A1A1A] leading-tight mb-0.5 whitespace-nowrap">{feature.label}</p>
                   <p className="font-outfit text-[11px] md:text-sm text-slate-400 leading-tight">{feature.desc}</p>
                 </div>
               </div>

@@ -58,18 +58,18 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
           <p className="font-plex-mono text-[11px] uppercase tracking-[0.2em] text-slate-400 mb-5">
             Vos crédits gratuits
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full">
             {TRIAL_FEATURES.map((feature) => (
               <div
                 key={feature.label}
-                className="flex flex-row items-start gap-3 md:gap-4 bg-white rounded-xl p-3 md:p-4 border border-slate-100 hover:-translate-y-0.5 transition-transform duration-300 w-full"
+                className="flex flex-row items-start gap-3 md:gap-4 bg-white rounded-xl p-3 md:p-4 border border-slate-100 hover:-translate-y-0.5 transition-transform duration-300 min-w-0"
               >
                 <div className="bg-[#2E4036]/10 p-1.5 rounded-lg shrink-0 mt-0.5">
                   <feature.icon className="w-4 h-4 md:w-5 md:h-5 text-[#2E4036]" />
                 </div>
-                <div className="flex-1 w-full">
-                  <p className="font-jakarta font-bold text-[13px] md:text-sm text-[#1A1A1A] leading-tight mb-0.5 whitespace-nowrap">{feature.label}</p>
-                  <p className="font-outfit text-[11px] md:text-sm text-slate-400 leading-tight">{feature.desc}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="font-jakarta font-bold text-[13px] md:text-sm text-[#1A1A1A] leading-tight mb-0.5 truncate">{feature.label}</p>
+                  <p className="font-outfit text-[11px] md:text-sm text-slate-400 leading-tight truncate">{feature.desc}</p>
                 </div>
               </div>
             ))}

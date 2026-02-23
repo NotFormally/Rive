@@ -4,10 +4,10 @@
     "nav_philosophy": "理念",
     "nav_pricing": "價目",
     "nav_cta": "建立我嘅 Rive 空間",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "演算法已",
+    "hero_title": "準備就緒。",
+    "hero_description": "為你帶來安心嘅演算法智能。自動化合規管理（食環署）並完全掌控你嘅營運。",
+    "hero_cta": "啟動 Rive",
     "features_card1_title": "合規與糾正措施",
     "features_card1_desc": "AI 分析你嘅記錄，並喺出現異常情況時即時提供建議。",
     "features_card2_title": "Synapse 日誌",
@@ -105,9 +105,7 @@
     "feature_support": "優先支援",
     "month": "/月",
     "powered_by": "由以下技術驅動",
-    "nav_login": "登入 →",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "登入 →"
   },
   "Auth": {
     "login_title": "Rive",

@@ -4,10 +4,10 @@
     "nav_philosophy": "தத்துவம்",
     "nav_pricing": "விலை",
     "nav_cta": "எனது Rive இடத்தை உருவாக்கு",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "அல்காரிதம்",
+    "hero_title": "தயார்.",
+    "hero_description": "உங்கள் மன அமைதிக்கான அல்காரிதமிக் நுண்ணறிவு. ஒழுங்குமுறை இணக்கத்தை (FSSAI) தானியங்கு செய்து உங்கள் செயல்பாடுகளை முழுமையாகக் கட்டுப்படுத்துங்கள்.",
+    "hero_cta": "Rive ஐ நிறுவு",
     "features_card1_title": "இணக்கம் மற்றும் திருத்த நடவடிக்கைகள்",
     "features_card1_desc": "AI உங்கள் பதிவுகளை பகுப்பாய்வு செய்து முரண்பாடுகள் ஏற்பட்டால் உடனடி பரிந்துரைகளை உருவாக்குகிறது.",
     "features_card2_title": "Synapse பதிவேடு",
@@ -105,9 +105,7 @@
     "feature_support": "முன்னுரிமை ஆதரவு",
     "month": "/மாதம்",
     "powered_by": "ஆல் இயங்குகிறது",
-    "nav_login": "உள்நுழை →",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "உள்நுழை →"
   },
   "Auth": {
     "login_title": "Rive",

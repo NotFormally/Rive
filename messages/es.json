@@ -4,10 +4,10 @@
     "nav_philosophy": "Filosofía",
     "nav_pricing": "Precios",
     "nav_cta": "Crear mi espacio Rive",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "El algoritmo está",
+    "hero_title": "listo.",
+    "hero_description": "Inteligencia algorítmica para tu tranquilidad. Automatiza el cumplimiento normativo (AESAN) y toma el control total de tus operaciones.",
+    "hero_cta": "Desplegar Rive",
     "features_card1_title": "Cumplimiento y Acciones Correctivas",
     "features_card1_desc": "La IA analiza tus registros y genera sugerencias inmediatas ante cualquier anomalía.",
     "features_card2_title": "Logbook Synapse",
@@ -105,9 +105,7 @@
     "feature_support": "Soporte Prioritario",
     "month": "/mes",
     "powered_by": "Impulsado por",
-    "nav_login": "Iniciar sesión →",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "Iniciar sesión →"
   },
   "Auth": {
     "login_title": "Rive",

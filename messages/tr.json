@@ -4,10 +4,10 @@
     "nav_philosophy": "Felsefe",
     "nav_pricing": "Fiyatlar",
     "nav_cta": "Rive alanımı oluştur",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "Algoritma",
+    "hero_title": "hazır.",
+    "hero_description": "Huzurunuz için algoritmik zeka. Yasal uyumluluğu (TFDA) otomatikleştirin ve operasyonlarınızın tam kontrolünü elinize alın.",
+    "hero_cta": "Rive'ı Başlat",
     "features_card1_title": "Uyumluluk ve Düzeltici Eylemler",
     "features_card1_desc": "Yapay zeka kayıtlarınızı analiz eder ve anormallikler için anında önerilerde bulunur.",
     "features_card2_title": "Synapse Kayıt Defteri",
@@ -105,9 +105,7 @@
     "feature_support": "Öncelikli Destek",
     "month": "/ay",
     "powered_by": "Altyapı",
-    "nav_login": "Giriş yap →",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "Giriş yap →"
   },
   "Auth": {
     "login_title": "Rive",

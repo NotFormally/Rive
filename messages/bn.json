@@ -15,7 +15,7 @@
     "features_card2_live": "লাইভ ফিড",
     "features_card3_title": "নেটিভ বহুভাষিক (১৩টি ভাষা)",
     "features_card3_desc": "ইন্টারফেসটি তাৎক্ষণিকভাবে আপনার রান্নাঘরের দলের মাতৃভাষার সাথে মানিয়ে নেয়।",
-    "philosophy_intro": "বেশিরভাগ ম্যানেজমেন্ট সফটওয়্যার অফার করে: স্থির ড্যাশবোর্ড এবং মৃত ডেটা।",
+    "philosophy_intro": "বেশিরভাগ ম্যানেজমেন্ট সফটওয়্যার অফার করে স্থির ড্যাশবোর্ড এবং মৃত ডেটা।",
     "philosophy_vision": "আমরা অফার করি: একটি জীবন্ত ওয়ার্কফ্লো যা সমস্যা আসার আগেই পদক্ষেপ নির্ধারণ করে।",
     "philosophy_pillar1_title": "অদৃশ্য সম্মতি",
     "philosophy_pillar1_desc": "স্বাস্থ্য বিধি এবং স্বাস্থ্যবিধি লগ আপনার দলের দৈনিক প্রবাহে নীরবে যাচাই করা হয়।",
@@ -78,7 +78,8 @@
     "f6_desc": "Attirez de nouveaux clients avec des publications engageantes générées en un clic à partir de vos menus.",
     "f6_ex1": "Générer un post accrocheur pour le menu Saint-Valentin avec emojis et hashtags.",
     "f6_ex2": "Traduire automatiquement un post pour attirer la clientèle touristique locale.",
-    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo)."
+    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo).",
+    "philosophy_approach": "Notre approche"
   },
   "Pricing": {
     "title": "স্পষ্ট মূল্য, প্রকৃত প্রভাব।",
@@ -177,4 +178,4 @@
     "cta_subscribe": "এখনই সাবস্ক্রাইব করুন",
     "footer_note": "আপনার বিনামূল্যের ক্রেডিট শেষ হলেই পেমেন্ট শুরু হবে।"
   }
-}\n
+}

@@ -15,7 +15,7 @@
     "features_card2_live": "Canlı",
     "features_card3_title": "Yerel Çok Dilli (13 Dil)",
     "features_card3_desc": "Arayüz, mutfak ekibinizin ana diline anında uyum sağlar.",
-    "philosophy_intro": "Çoğu yönetim yazılımı sunar: statik panolar ve ölü veriler.",
+    "philosophy_intro": "Çoğu yönetim yazılımı sunar statik panolar ve ölü veriler.",
     "philosophy_vision": "Biz yaşayan bir iş akışı sunuyoruz; sorun gelmeden eylemi öngören.",
     "philosophy_pillar1_title": "Görünmez Uyumluluk",
     "philosophy_pillar1_desc": "Sağlık düzenlemeleri ve hijyen kayıtları, ekibinizin günlük akışında sessizce doğrulanır. Basit ve sürtünmesiz.",
@@ -78,7 +78,8 @@
     "f6_desc": "Attirez de nouveaux clients avec des publications engageantes générées en un clic à partir de vos menus.",
     "f6_ex1": "Générer un post accrocheur pour le menu Saint-Valentin avec emojis et hashtags.",
     "f6_ex2": "Traduire automatiquement un post pour attirer la clientèle touristique locale.",
-    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo)."
+    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo).",
+    "philosophy_approach": "Notre approche"
   },
   "Pricing": {
     "title": "Net fiyatlandırma, gerçek etki.",
@@ -177,4 +178,4 @@
     "cta_subscribe": "Şimdi abone ol",
     "footer_note": "Ödeme yalnızca ücretsiz kredileriniz tükendiğinde başlar."
   }
-}\n
+}

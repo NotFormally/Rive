@@ -15,7 +15,7 @@
     "features_card2_live": "实时动态",
     "features_card3_title": "原生多国语言 (13种语言)",
     "features_card3_desc": "界面即时适应您厨房团队的母语。",
-    "philosophy_intro": "大多数管理软件提供的是：静态仪表板和死数据。",
+    "philosophy_intro": "大多数管理软件提供的是静态仪表板和死数据。",
     "philosophy_vision": "我们提供的是：一个在问题出现之前就开出行动处方的活系统。",
     "philosophy_pillar1_title": "隐形合规",
     "philosophy_pillar1_desc": "卫生法规和清洁日志在您团队的日常工作流程中默默得到验证。简单无摩擦。",
@@ -78,7 +78,8 @@
     "f6_desc": "Attirez de nouveaux clients avec des publications engageantes générées en un clic à partir de vos menus.",
     "f6_ex1": "Générer un post accrocheur pour le menu Saint-Valentin avec emojis et hashtags.",
     "f6_ex2": "Traduire automatiquement un post pour attirer la clientèle touristique locale.",
-    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo)."
+    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo).",
+    "philosophy_approach": "Notre approche"
   },
   "Pricing": {
     "title": "清晰定价，真实影响。",
@@ -177,4 +178,4 @@
     "cta_subscribe": "立即订阅",
     "footer_note": "仅在您的免费额度用完后才开始收费。"
   }
-}\n
+}

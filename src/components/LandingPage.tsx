@@ -317,7 +317,7 @@ export function LandingPage() {
             {/* The decorative accent line */}
             <div className="flex items-center gap-6">
               <div className="w-24 h-[2px] bg-gradient-to-r from-[#CC5833] to-transparent"></div>
-              <span className="font-plex-mono text-xs uppercase tracking-[0.3em] text-[#CC5833]/60">Notre approche</span>
+              <span className="font-plex-mono text-xs uppercase tracking-[0.3em] text-[#CC5833]/60">{t('philosophy_approach')}</span>
             </div>
 
             {/* The "Rive way" — massive, cinematic */}

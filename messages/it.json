@@ -15,7 +15,7 @@
     "features_card2_live": "In Diretta",
     "features_card3_title": "Multilingue Nativo (13 Lingue)",
     "features_card3_desc": "L'interfaccia si adatta istantaneamente alla lingua madre della tua brigata di cucina.",
-    "philosophy_intro": "La maggior parte dei software di gestione offre: dashboard statiche e dati morti.",
+    "philosophy_intro": "La maggior parte dei software di gestione offre dashboard statiche e dati morti.",
     "philosophy_vision": "Noi offriamo: un flusso di lavoro vivo che prescrive l'azione prima che arrivi il problema.",
     "philosophy_pillar1_title": "Conformità Invisibile",
     "philosophy_pillar1_desc": "Le normative sanitarie e i registri igienici vengono validati silenziosamente nel flusso quotidiano del tuo team. Semplice e senza attriti.",
@@ -78,7 +78,8 @@
     "f6_desc": "Attirez de nouveaux clients avec des publications engageantes générées en un clic à partir de vos menus.",
     "f6_ex1": "Générer un post accrocheur pour le menu Saint-Valentin avec emojis et hashtags.",
     "f6_ex2": "Traduire automatiquement un post pour attirer la clientèle touristique locale.",
-    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo)."
+    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo).",
+    "philosophy_approach": "Notre approche"
   },
   "Pricing": {
     "title": "Prezzi chiari, impatto reale.",
@@ -177,4 +178,4 @@
     "cta_subscribe": "Abbonati ora",
     "footer_note": "Il pagamento inizia solo una volta esauriti i crediti gratuiti."
   }
-}\n
+}

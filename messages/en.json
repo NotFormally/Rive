@@ -15,7 +15,7 @@
     "features_card2_live": "Live Feed",
     "features_card3_title": "Native Multilingual (13 Languages)",
     "features_card3_desc": "The interface instantly adapts to the native language of your kitchen brigade.",
-    "philosophy_intro": "Most management software offers: static dashboards and dead data.",
+    "philosophy_intro": "Most management software offers static dashboards and dead data.",
     "philosophy_vision": "We offer a living workflow that prescribes action before the problem arrives.",
     "philosophy_pillar1_title": "Invisible Compliance",
     "philosophy_pillar1_desc": "Health regulations and hygiene logs are silently validated within your team's daily flow. Simple and frictionless.",
@@ -78,7 +78,8 @@
     "f6_desc": "Attirez de nouveaux clients avec des publications engageantes générées en un clic à partir de vos menus.",
     "f6_ex1": "Générer un post accrocheur pour le menu Saint-Valentin avec emojis et hashtags.",
     "f6_ex2": "Traduire automatiquement un post pour attirer la clientèle touristique locale.",
-    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo)."
+    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo).",
+    "philosophy_approach": "Notre approche"
   },
   "Pricing": {
     "title": "Clear pricing, real impact.",
@@ -177,4 +178,4 @@
     "cta_subscribe": "Subscribe now",
     "footer_note": "Payment only starts once your free credits are used up."
   }
-}\n
+}

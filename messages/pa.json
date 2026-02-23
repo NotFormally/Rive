@@ -15,7 +15,7 @@
     "features_card2_live": "ਲਾਈਵ ਫ਼ੀਡ",
     "features_card3_title": "ਮੂਲ ਬਹੁਭਾਸ਼ਾਈ (13 ਭਾਸ਼ਾਵਾਂ)",
     "features_card3_desc": "ਇੰਟਰਫੇਸ ਪਲਾਂ ਵਿੱਚ ਤੁਹਾਡੀ ਰਸੋਈ ਟੀਮ ਦੀ ਮਾਂ ਬੋਲੀ ਦੇ ਅਨੁਕੂਲ ਹੋ ਜਾਂਦਾ ਹੈ।",
-    "philosophy_intro": "ਜ਼ਿਆਦਾਤਰ ਪ੍ਰਬੰਧਨ ਸੌਫ਼ਟਵੇਅਰ ਪੇਸ਼ ਕਰਦੇ ਹਨ: ਸਥਿਰ ਡੈਸ਼ਬੋਰਡ ਅਤੇ ਮੁਰਦਾ ਡੇਟਾ।",
+    "philosophy_intro": "ਜ਼ਿਆਦਾਤਰ ਪ੍ਰਬੰਧਨ ਸੌਫ਼ਟਵੇਅਰ ਪੇਸ਼ ਕਰਦੇ ਹਨ ਸਥਿਰ ਡੈਸ਼ਬੋਰਡ ਅਤੇ ਮੁਰਦਾ ਡੇਟਾ।",
     "philosophy_vision": "ਅਸੀਂ ਪੇਸ਼ ਕਰਦੇ ਹਾਂ: ਇੱਕ ਜੀਵਤ ਵਰਕਫ਼ਲੋ ਜੋ ਸਮੱਸਿਆ ਆਉਣ ਤੋਂ ਪਹਿਲਾਂ ਕਾਰਵਾਈ ਨਿਰਧਾਰਿਤ ਕਰਦਾ ਹੈ।",
     "philosophy_pillar1_title": "ਅਦਿੱਖ ਪਾਲਣਾ",
     "philosophy_pillar1_desc": "ਸਿਹਤ ਨਿਯਮ ਅਤੇ ਸਫ਼ਾਈ ਲੌਗ ਤੁਹਾਡੀ ਟੀਮ ਦੇ ਰੋਜ਼ਾਨਾ ਪ੍ਰਵਾਹ ਵਿੱਚ ਚੁੱਪਚਾਪ ਪ੍ਰਮਾਣਿਤ ਹੁੰਦੇ ਹਨ।",
@@ -78,7 +78,8 @@
     "f6_desc": "Attirez de nouveaux clients avec des publications engageantes générées en un clic à partir de vos menus.",
     "f6_ex1": "Générer un post accrocheur pour le menu Saint-Valentin avec emojis et hashtags.",
     "f6_ex2": "Traduire automatiquement un post pour attirer la clientèle touristique locale.",
-    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo)."
+    "f6_ex3": "Rédiger une description alléchante pour votre plateforme de livraison (Uber Eats/Deliveroo).",
+    "philosophy_approach": "Notre approche"
   },
   "Pricing": {
     "title": "ਸਪੱਸ਼ਟ ਕੀਮਤਾਂ, ਅਸਲ ਪ੍ਰਭਾਵ।",
@@ -177,4 +178,4 @@
     "cta_subscribe": "ਹੁਣੇ ਸਬਸਕ੍ਰਾਇਬ ਕਰੋ",
     "footer_note": "ਭੁਗਤਾਨ ਤਾਂ ਹੀ ਸ਼ੁਰੂ ਹੋਵੇਗਾ ਜਦੋਂ ਤੁਹਾਡੇ ਮੁਫ਼ਤ ਕ੍ਰੈਡਿਟ ਖਤਮ ਹੋ ਜਾਣ।"
   }
-}\n
+}

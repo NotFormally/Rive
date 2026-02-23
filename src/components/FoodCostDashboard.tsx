@@ -34,8 +34,8 @@ export function FoodCostDashboard() {
     try {
       const res = await fetch('/api/food-cost');
       const data = await res.json();
-      setItems(data.items);
-      setSummary(data.summary);
+      setItems(data.items || []);
+      setSummary(data.summary || null);
     } catch (err) {
       console.error('Failed to load food cost data:', err);
     } finally {

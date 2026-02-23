@@ -4,10 +4,10 @@
     "nav_philosophy": "दर्शन",
     "nav_pricing": "मूल्य",
     "nav_cta": "मेरा Rive स्थान बनाएं",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "एल्गोरिथम",
+    "hero_title": "तैयार है।",
+    "hero_description": "आपकी मानसिक शांति के लिए एल्गोरिदमिक बुद्धिमत्ता। नियामक अनुपालन (FSSAI) को स्वचालित करें और अपने संचालन पर पूर्ण नियंत्रण लें।",
+    "hero_cta": "Rive तैनात करें",
     "features_card1_title": "अनुपालन और सुधारात्मक कार्रवाइयां",
     "features_card1_desc": "AI आपके लॉग का विश्लेषण करता है और विसंगतियों के मामले में तत्काल सुझाव उत्पन्न करता है।",
     "features_card2_title": "Synapse लॉगबुक",
@@ -105,9 +105,7 @@
     "feature_support": "प्राथमिकता सहायता",
     "month": "/माह",
     "powered_by": "द्वारा संचालित",
-    "nav_login": "लॉगिन →",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "लॉगिन →"
   },
   "Auth": {
     "login_title": "Rive",

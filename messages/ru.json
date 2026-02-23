@@ -4,10 +4,10 @@
     "nav_philosophy": "Философия",
     "nav_pricing": "Цены",
     "nav_cta": "Создать мое пространство Rive",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "Алгоритм",
+    "hero_title": "готов.",
+    "hero_description": "Алгоритмический интеллект для вашего спокойствия. Автоматизируйте соблюдение нормативов (Роспотребнадзор) и возьмите полный контроль над своими операциями.",
+    "hero_cta": "Развернуть Rive",
     "features_card1_title": "Соблюдение норм и действия",
     "features_card1_desc": "ИИ анализирует журналы и мгновенно предлагает решения в случае аномалий.",
     "features_card2_title": "Журнал Synapse",
@@ -105,9 +105,7 @@
     "feature_support": "Приоритетная поддержка",
     "month": "/мес",
     "powered_by": "Работает на",
-    "nav_login": "Войти →",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "Войти →"
   },
   "Auth": {
     "login_title": "Rive",

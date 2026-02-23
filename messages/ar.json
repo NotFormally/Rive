@@ -4,10 +4,10 @@
     "nav_philosophy": "الفلسفة",
     "nav_pricing": "الأسعار",
     "nav_cta": "أنشئ مساحة Rive الخاصة بي",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "الخوارزمية",
+    "hero_title": "جاهزة.",
+    "hero_description": "ذكاء خوارزمي من أجل راحة بالك. قم بأتمتة الامتثال التنظيمي (SFDA) وتحكم بالكامل في عملياتك.",
+    "hero_cta": "أطلق Rive",
     "features_card1_title": "الامتثال والإجراءات التصحيحية",
     "features_card1_desc": "يحلل الذكاء الاصطناعي سجلاتك ويولد اقتراحات فورية في حالة وجود حالات شاذة.",
     "features_card2_title": "سجل Synapse",
@@ -105,9 +105,7 @@
     "feature_support": "دعم ذو أولوية",
     "month": "/شهر",
     "powered_by": "مدعوم من",
-    "nav_login": "تسجيل الدخول ←",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "تسجيل الدخول ←"
   },
   "Auth": {
     "login_title": "Rive",

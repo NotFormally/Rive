@@ -4,10 +4,10 @@
     "nav_philosophy": "Philosophy",
     "nav_pricing": "Pricing",
     "nav_cta": "Create my Rive workspace",
-    "hero_subtitle": "DÉLÉGUEZ L'OPÉRATIONNEL",
-    "hero_title": "L'assistant IA complet pour les restaurateurs.",
-    "hero_description": "Rive remplace vos cahiers de bord papier, pilote votre rentabilité, assure votre conformité sanitaire et gère vos réseaux sociaux. Le tout traduit instantanément pour vos équipes de toutes origines.",
-    "hero_cta": "Commencer l'essai gratuit",
+    "hero_subtitle": "The algorithm is",
+    "hero_title": "ready.",
+    "hero_description": "Algorithmic intelligence for your peace of mind. Automate regulatory compliance (FDA) and take total control over your operations.",
+    "hero_cta": "Deploy Rive",
     "features_card1_title": "Compliance & Corrective Actions",
     "features_card1_desc": "AI analyzes your temperature logs and generates immediate suggestions for anomalies.",
     "features_card2_title": "Synapse Logbook",
@@ -105,9 +105,7 @@
     "feature_support": "Priority Support",
     "month": "/month",
     "powered_by": "Powered by",
-    "nav_login": "Login →",
-    "pricing_title": "Tarification Simple",
-    "pricing_desc": "Rentabilisé en une journée de gestion économisée."
+    "nav_login": "Login →"
   },
   "Auth": {
     "login_title": "Rive",

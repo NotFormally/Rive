@@ -34,7 +34,20 @@
     "protocol_cta": "أطلق Rive",
     "footer_desc": "ذكاء خوارزمي للمطاعم الراقية.",
     "footer_status": "النظام يعمل",
-    "footer_rights": "© 2026 Rive. جميع الحقوق محفوظة."
+    "footer_rights": "© 2026 Rive. جميع الحقوق محفوظة.",
+    "features_card1_fridge": "ثلاجة اللحوم",
+    "features_card1_ai_badge": "مساعد ذكي",
+    "features_card1_ai_suggestion": "تحقق من الضاغط وانقل اللحوم فوراً.",
+    "features_card2_line1": "> تحليل ملاحظة النادل...",
+    "features_card2_line2": "> استخراج الكلمات المفتاحية...",
+    "features_card2_alert": "حالة طوارئ: ثلاجة اللحوم عند 8 درجات مئوية.",
+    "features_card2_action": "إجراء وصفي: تحقق من الضاغط.",
+    "features_card3_source_lang": "العربية",
+    "features_card3_source_text": "تنظيف المنطقة الباردة في الثلاجات",
+    "features_card3_target_lang": "English",
+    "features_card3_target_text": "Clean the cold zone of the fridges",
+    "footer_privacy": "الخصوصية",
+    "footer_terms": "الشروط"
   },
   "Pricing": {
     "title": "أسعار واضحة، تأثير حقيقي.",
@@ -108,5 +121,27 @@
     "btn_review": "مراجعة",
     "btn_start": "ابدأ",
     "section_logbook": "السجل"
+  },
+  "TrialModal": {
+    "title": "تجربة مجانية 100%",
+    "description_before": "أنشئ مساحة مطعمك في 30 ثانية.",
+    "description_bold": "لا حاجة لبطاقة ائتمان.",
+    "description_after": "احصل على جميع ميزات Rive الذكية بحصص سخية.",
+    "credits_label": "أرصدتك المجانية",
+    "feature1_label": "150 ملاحظة ذكية",
+    "feature1_desc": "سجل ذكي",
+    "feature2_label": "40 إجراء تصحيحي",
+    "feature2_desc": "اقتراحات ذكية",
+    "feature3_label": "30 ترجمة",
+    "feature3_desc": "متعدد اللغات",
+    "feature4_label": "تحليلان للقائمة",
+    "feature4_desc": "تحسين القائمة",
+    "feature5_label": "20 منشور Instagram",
+    "feature5_desc": "محتوى ذكي",
+    "feature6_label": "10 مسح إيصالات",
+    "feature6_desc": "رقمنة ذكية",
+    "cta_free": "أنشئ مساحتي مجاناً ←",
+    "cta_subscribe": "اشترك الآن",
+    "footer_note": "لا يبدأ الدفع إلا بعد استنفاد أرصدتك المجانية."
   }
 }

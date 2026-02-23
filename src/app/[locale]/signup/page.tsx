@@ -6,9 +6,11 @@ import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 export default function SignupPage() {
   const t = useTranslations("Auth");
+  const currentLocale = useLocale();
   const [restaurantName, setRestaurantName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -86,7 +88,18 @@ export default function SignupPage() {
       trial_ends_at: trialEndsAt.toISOString(),
     });
 
-    // 5. Redirect to dashboard
+    // 5. Notify admin of new signup (fire and forget)
+    fetch('/api/notify-signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        restaurant_name: restaurantName,
+        email,
+        locale: currentLocale,
+      }),
+    }).catch(() => {}); // non-blocking
+
+    // 6. Redirect to dashboard
     router.push("/dashboard");
   };
 

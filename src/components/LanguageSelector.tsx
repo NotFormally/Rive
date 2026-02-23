@@ -19,6 +19,7 @@ const LANGUAGES = [
   { code: 'pt', label: 'Português' },
   { code: 'zh-HK', label: '粵語' },
   { code: 'zh-CN', label: '中文' },
+  { code: 'tr', label: 'Türkçe' },
 ];
 
 export function LanguageSelector() {

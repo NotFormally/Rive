@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { createServerClient } from "@supabase/ssr";
 import createMiddleware from 'next-intl/middleware';
 import { routing } from '@/i18n/routing';
 
@@ -21,39 +21,32 @@ export default async function middleware(request: NextRequest) {
   );
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname.includes(route));
 
-  // Get the Supabase auth token from cookies
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-  const allCookies = request.cookies.getAll();
-  const authCookie = allCookies.find(
-    (c) =>
-      c.name.startsWith("sb-") && c.name.endsWith("-auth-token")
+  // Only check auth for protected or auth routes
+  if (!isProtected && !isAuthRoute) {
+    return response;
+  }
+
+  // Create a Supabase client that reads/writes cookies via the request/response
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            request.cookies.set(name, value);
+            response.cookies.set(name, value, options);
+          });
+        },
+      },
+    }
   );
 
-  let isAuthenticated = false;
-
-  if (authCookie) {
-    try {
-      const tokenData = JSON.parse(authCookie.value);
-      const accessToken = Array.isArray(tokenData) ? tokenData[0] : tokenData;
-
-      if (accessToken && typeof accessToken === "string") {
-        const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-          global: {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          },
-        });
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        isAuthenticated = !!user;
-      }
-    } catch {
-      isAuthenticated = false;
-    }
-  }
+  const { data: { user } } = await supabase.auth.getUser();
+  const isAuthenticated = !!user;
 
   // Get the applied locale
   const activeLocale = response.headers.get('x-middleware-request-x-next-intl-locale') || routing.defaultLocale;
@@ -75,10 +68,5 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   // Skip all paths that should not be internationalized.
-  // This matches all request paths except for the ones starting with:
-  // - api (API routes)
-  // - _next/static (static files)
-  // - _next/image (image optimization files)
-  // - favicon.ico, sitemap.xml, robots.txt (metadata files)
   matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

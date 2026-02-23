@@ -34,7 +34,20 @@
     "protocol_cta": "Lançar Rive",
     "footer_desc": "Inteligência algorítmica para restaurantes gastronômicos.",
     "footer_status": "Sistema Operacional",
-    "footer_rights": "© 2026 Rive. Todos os direitos reservados."
+    "footer_rights": "© 2026 Rive. Todos os direitos reservados.",
+    "features_card1_fridge": "Geladeira de Carnes",
+    "features_card1_ai_badge": "Assistente IA",
+    "features_card1_ai_suggestion": "Verifique o compressor e mova as carnes imediatamente.",
+    "features_card2_line1": "> Analisando nota do servidor...",
+    "features_card2_line2": "> Extraindo palavras-chave...",
+    "features_card2_alert": "Urgência detectada: Geladeira de carnes a 8°C.",
+    "features_card2_action": "Ação prescritiva: Verificar compressor.",
+    "features_card3_source_lang": "Português",
+    "features_card3_source_text": "Limpar a zona fria das geladeiras",
+    "features_card3_target_lang": "Español",
+    "features_card3_target_text": "Limpiar la zona fría de las neveras",
+    "footer_privacy": "Privacidade",
+    "footer_terms": "Termos"
   },
   "Pricing": {
     "title": "Preços claros, impacto real.",
@@ -108,5 +121,27 @@
     "btn_review": "Revisar",
     "btn_start": "Começar",
     "section_logbook": "Diário de Bordo"
+  },
+  "TrialModal": {
+    "title": "Teste 100% gratuito",
+    "description_before": "Crie seu espaço restaurante em 30 segundos.",
+    "description_bold": "Sem cartão de crédito.",
+    "description_after": "Acesse todas as funcionalidades IA do Rive com cotas generosas.",
+    "credits_label": "Seus créditos gratuitos",
+    "feature1_label": "150 notas IA",
+    "feature1_desc": "Diário inteligente",
+    "feature2_label": "40 ações corretivas",
+    "feature2_desc": "Sugestões IA",
+    "feature3_label": "30 traduções",
+    "feature3_desc": "Multilíngue",
+    "feature4_label": "2 análises de menu",
+    "feature4_desc": "Otimização de cardápio",
+    "feature5_label": "20 posts Instagram",
+    "feature5_desc": "Conteúdo IA",
+    "feature6_label": "10 escaneamentos de recibos",
+    "feature6_desc": "Digitalização IA",
+    "cta_free": "Criar meu espaço gratuitamente →",
+    "cta_subscribe": "Assinar agora",
+    "footer_note": "O pagamento só começa após o esgotamento dos seus créditos gratuitos."
   }
 }

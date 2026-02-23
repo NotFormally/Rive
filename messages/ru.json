@@ -34,7 +34,20 @@
     "protocol_cta": "Запустить Rive",
     "footer_desc": "Алгоритмический интеллект для гастрономических ресторанов.",
     "footer_status": "Система работает",
-    "footer_rights": "© 2026 Rive. Все права защищены."
+    "footer_rights": "© 2026 Rive. Все права защищены.",
+    "features_card1_fridge": "Холодильник мяса",
+    "features_card1_ai_badge": "Ассистент ИИ",
+    "features_card1_ai_suggestion": "Проверьте компрессор и немедленно переместите мясо.",
+    "features_card2_line1": "> Анализ записи официанта...",
+    "features_card2_line2": "> Извлечение ключевых слов...",
+    "features_card2_alert": "Срочно: Холодильник мяса при 8°C.",
+    "features_card2_action": "Предписывающее действие: Проверить компрессор.",
+    "features_card3_source_lang": "Русский",
+    "features_card3_source_text": "Очистить холодную зону холодильников",
+    "features_card3_target_lang": "English",
+    "features_card3_target_text": "Clean the cold zone of the fridges",
+    "footer_privacy": "Конфиденциальность",
+    "footer_terms": "Условия"
   },
   "Pricing": {
     "title": "Понятные цены, реальный результат.",
@@ -108,5 +121,27 @@
     "btn_review": "Проверить",
     "btn_start": "Начать",
     "section_logbook": "Журнал"
+  },
+  "TrialModal": {
+    "title": "100% бесплатная пробная версия",
+    "description_before": "Создайте пространство ресторана за 30 секунд.",
+    "description_bold": "Без кредитной карты.",
+    "description_after": "Получите доступ ко всем AI-функциям Rive с щедрыми квотами.",
+    "credits_label": "Ваши бесплатные кредиты",
+    "feature1_label": "150 AI-заметок",
+    "feature1_desc": "Умный журнал",
+    "feature2_label": "40 корректирующих действий",
+    "feature2_desc": "AI-предложения",
+    "feature3_label": "30 переводов",
+    "feature3_desc": "Многоязычный",
+    "feature4_label": "2 анализа меню",
+    "feature4_desc": "Оптимизация меню",
+    "feature5_label": "20 постов Instagram",
+    "feature5_desc": "AI-контент",
+    "feature6_label": "10 сканов чеков",
+    "feature6_desc": "AI-дигитализация",
+    "cta_free": "Создать моё пространство бесплатно →",
+    "cta_subscribe": "Подписаться сейчас",
+    "footer_note": "Оплата начнётся только после исчерпания бесплатных кредитов."
   }
 }

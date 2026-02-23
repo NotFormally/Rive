@@ -34,7 +34,20 @@
     "protocol_cta": "Rive চালু করুন",
     "footer_desc": "গ্যাস্ট্রোনমিক রেস্তোরাঁর জন্য অ্যালগরিদমিক বুদ্ধিমত্তা।",
     "footer_status": "সিস্টেম চালু",
-    "footer_rights": "© 2026 Rive. সর্বস্বত্ব সংরক্ষিত।"
+    "footer_rights": "© 2026 Rive. সর্বস্বত্ব সংরক্ষিত।",
+    "features_card1_fridge": "মাংসের ফ্রিজ",
+    "features_card1_ai_badge": "AI সহকারী",
+    "features_card1_ai_suggestion": "কম্প্রেসর পরীক্ষা করুন এবং মাংস অবিলম্বে সরান।",
+    "features_card2_line1": "> সার্ভার নোট বিশ্লেষণ...",
+    "features_card2_line2": "> মূল শব্দ বের করা...",
+    "features_card2_alert": "জরুরি সনাক্ত: মাংসের ফ্রিজ ২°C এ।",
+    "features_card2_action": "প্রেসক্রিপটিভ অ্যাকশন: কম্প্রেসর পরীক্ষা করুন।",
+    "features_card3_source_lang": "বাংলা",
+    "features_card3_source_text": "ফ্রিজের ঠান্ডা জোন পরিষ্কার করুন",
+    "features_card3_target_lang": "English",
+    "features_card3_target_text": "Clean the cold zone of the fridges",
+    "footer_privacy": "গোপনীয়তা",
+    "footer_terms": "শর্তাবলী"
   },
   "Pricing": {
     "title": "স্পষ্ট মূল্য, প্রকৃত প্রভাব।",
@@ -108,5 +121,27 @@
     "btn_review": "পর্যালোচনা",
     "btn_start": "শুরু করুন",
     "section_logbook": "লগবুক"
+  },
+  "TrialModal": {
+    "title": "100% বিনামূল্যে ট্রায়াল",
+    "description_before": "30 সেকেন্ডে আপনার রেস্তোরাঁ স্পেস তৈরি করুন।",
+    "description_bold": "কোনো ক্রেডিট কার্ড প্রয়োজন নেই।",
+    "description_after": "Rive-এর সব AI ফিচার উদার কোটায় পান।",
+    "credits_label": "আপনার বিনামূল্যের ক্রেডিট",
+    "feature1_label": "150 AI নোট",
+    "feature1_desc": "স্মার্ট লগবুক",
+    "feature2_label": "40 সংশোধনমূলক পদক্ষেপ",
+    "feature2_desc": "AI পরামর্শ",
+    "feature3_label": "30 অনুবাদ",
+    "feature3_desc": "বহুভাষিক",
+    "feature4_label": "2 মেনু বিশ্লেষণ",
+    "feature4_desc": "মেনু অপ্টিমাইজেশন",
+    "feature5_label": "20 Instagram পোস্ট",
+    "feature5_desc": "AI কন্টেন্ট",
+    "feature6_label": "10 রসিদ স্ক্যান",
+    "feature6_desc": "AI ডিজিটাইজেশন",
+    "cta_free": "আমার স্পেস বিনামূল্যে তৈরি করুন →",
+    "cta_subscribe": "এখনই সাবস্ক্রাইব করুন",
+    "footer_note": "আপনার বিনামূল্যের ক্রেডিট শেষ হলেই পেমেন্ট শুরু হবে।"
   }
 }

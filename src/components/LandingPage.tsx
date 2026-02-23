@@ -93,27 +93,27 @@ export function LandingPage() {
         </div>
       </nav>
 
-      {/* B. HERO SECTION — "The Opening Shot" */}
-      <section className="hero-section relative h-[100dvh] w-full flex items-end pb-24 px-8 md:px-24">
+        {/* B. HERO SECTION — "The Opening Shot" */}
+      <section className="hero-section relative h-[100dvh] w-full flex items-center md:items-end pb-24 px-8 md:px-24">
         {/* Background Image with Global CSS Noise */}
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('/hero-concept.png')" }} /* Match: AI Gastronomy Concept */
+          style={{ backgroundImage: "url('/hero-image.png')" }} /* Optional: A more restaurant-focused dark image */
         >
           {/* Heavy primary-to-black gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#2E4036]/80 to-[#1A1A1A]/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#2E4036]/90 to-[#1A1A1A]/70"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl text-[#F2F0E9]">
-          <h1 className="flex flex-col gap-2">
-            <span className="hero-text font-jakarta font-bold text-3xl md:text-5xl tracking-tight uppercase text-[#CC5833]">
+        <div className="relative z-10 max-w-5xl text-[#F2F0E9] pt-24 md:pt-0">
+          <h1 className="flex flex-col gap-3">
+            <span className="hero-text font-jakarta font-bold text-xl md:text-2xl tracking-widest uppercase text-[#CC5833] opacity-90">
               {t('hero_subtitle')}
             </span>
-            <span className="hero-text font-cormorant italic text-7xl md:text-9xl tracking-tighter leading-[0.85]">
+            <span className="hero-text font-cormorant italic text-6xl md:text-8xl tracking-tighter leading-[0.95] max-w-4xl">
               {t('hero_title')}
             </span>
           </h1>
-          <p className="hero-text font-outfit text-lg md:text-2xl mt-8 max-w-2xl opacity-90 leading-relaxed tracking-wide">
+          <p className="hero-text font-outfit text-lg md:text-xl mt-8 max-w-3xl opacity-90 leading-relaxed tracking-wide">
             {t('hero_description')}
           </p>
           <div className="hero-text mt-12">
@@ -128,73 +128,169 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* C. FEATURES — "Interactive Functional Artifacts" */}
-      <section id="features" className="py-32 px-8 md:px-24 max-w-screen-2xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* C. THE 6 PILLARS — "Explicit Features & Use Cases" */}
+      <section id="features" className="py-32 px-8 md:px-24 max-w-screen-2xl mx-auto bg-[#F2F0E9]">
+        <div className="text-center mb-24 max-w-3xl mx-auto">
+          <h2 className="font-cormorant italic text-5xl md:text-7xl text-[#1A1A1A] tracking-tighter leading-none mb-6">
+            {t('features_title')}
+          </h2>
+        </div>
+
+        <div className="flex flex-col gap-12 md:gap-24">
           
-          {/* Card 1: Conformité & Actions Correctives IA */}
-          <div className="bg-[#FFFFFF] p-8 rounded-[2rem] shadow-sm border border-slate-200/60 relative overflow-hidden h-[400px] flex flex-col hover:-translate-y-1 transition-transform duration-500">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="bg-[#2E4036]/10 p-3 rounded-full"><Thermometer className="w-6 h-6 text-[#2E4036]" /></div>
-              <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">{t('features_card1_title')}</h3>
-            </div>
-            <p className="font-outfit text-slate-500 mb-8">{t('features_card1_desc')}</p>
-            
-            <div className="relative flex-1 mt-auto bg-slate-50 rounded-2xl p-5 border border-slate-100 flex flex-col justify-between">
-              <div className="flex justify-between items-center mb-4">
-                <span className="font-outfit font-medium text-sm">{t('features_card1_fridge')}</span>
-                <span className="font-plex-mono text-lg text-red-500 font-bold">8.5°C</span>
-              </div>
-              <div className="bg-indigo-50/80 rounded-xl p-3 border border-indigo-100 shuffler-item">
-                <div className="flex items-center gap-2 mb-1 text-indigo-700">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
-                  <span className="text-xs font-bold">{t('features_card1_ai_badge')}</span>
+          {/* Feature 1: Logbook */}
+          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <div className="flex flex-col gap-6">
+                <div className="bg-[#2E4036]/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Activity className="w-8 h-8 text-[#2E4036]" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f1_title')}</h3>
+                <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f1_desc')}</p>
+                <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">Exemples d'utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f1_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f1_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f1_ex3')}</li>
+                  </ul>
                 </div>
-                <p className="text-xs text-indigo-900/80">{t('features_card1_ai_suggestion')}</p>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden">
+               <div className="absolute inset-4 bg-white shadow-sm rounded-xl border border-slate-200 p-6 rot-3 flex flex-col gap-4">
+                 <div className="h-4 w-1/3 bg-slate-200 rounded animate-pulse"></div>
+                 <div className="h-3 w-3/4 bg-slate-100 rounded"></div>
+                 <div className="h-3 w-2/3 bg-slate-100 rounded"></div>
+                 <div className="mt-auto self-end px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Résolu</div>
+               </div>
+            </div>
+          </div>
+
+          {/* Feature 2: Compliance */}
+          <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 md:p-12 shadow-md grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-1 bg-[#232323] rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden">
+              <div className="absolute flex flex-col gap-3">
+                 <div className="bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-3 rounded-xl flex items-center gap-3 backdrop-blur-sm shadow-xl">
+                   <Thermometer className="w-5 h-5" />
+                   <span className="font-plex-mono text-sm">Frigo 2 : 8.5°C détecté</span>
+                 </div>
+                 <div className="bg-[#CC5833] text-white px-4 py-3 rounded-xl flex items-center gap-3 shadow-xl ml-8">
+                   <RotateCw className="w-5 h-5 animate-spin-slow" />
+                   <span className="font-outfit text-sm font-bold">Action : Jeter les aliments à risque</span>
+                 </div>
+              </div>
+            </div>
+            <div className="order-2">
+              <div className="flex flex-col gap-6">
+                <div className="bg-red-500/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Thermometer className="w-8 h-8 text-red-500" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl">{t('f2_title')}</h3>
+                <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f2_desc')}</p>
+                <div className="bg-[#232323] p-6 rounded-2xl mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-500 mb-4">Exemples d'utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-300">
+                    <li className="flex gap-3"><span className="text-red-400">✦</span> {t('f2_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-red-400">✦</span> {t('f2_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-red-400">✦</span> {t('f2_ex3')}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Card 2: Telemetry Typewriter (Cahier de Bord Intelligent) */}
-          <div className="bg-[#FFFFFF] p-8 rounded-[2rem] shadow-sm border border-slate-200/60 relative overflow-hidden h-[400px] flex flex-col hover:-translate-y-1 transition-transform duration-500">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="bg-[#2E4036]/10 p-3 rounded-full"><Activity className="w-6 h-6 text-[#2E4036]" /></div>
-                <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">{t('features_card2_title')}</h3>
-              </div>
-              <div className="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> {t('features_card2_live')}
+          {/* Feature 3: Translations */}
+          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <div className="flex flex-col gap-6">
+                <div className="bg-indigo-50 w-16 h-16 rounded-2xl flex items-center justify-center"><Globe className="w-8 h-8 text-indigo-600" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f3_title')}</h3>
+                <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f3_desc')}</p>
+                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-50 mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">Exemples d'utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
+                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex3')}</li>
+                  </ul>
+                </div>
               </div>
             </div>
-            <p className="font-outfit text-slate-500 mb-8">{t('features_card2_desc')}</p>
-            
-            <div className="bg-[#1A1A1A] flex-1 rounded-2xl p-6 font-plex-mono text-sm text-[#CC5833] overflow-hidden relative">
-              <div className="opacity-50 mb-2">{t('features_card2_line1')}</div>
-              <div className="opacity-50 mb-2">{t('features_card2_line2')}</div>
-              <div className="text-[#F2F0E9] mt-4">
-                {t('features_card2_alert')}
-                <br />
-                <span className="text-green-400">{t('features_card2_action')}</span>
-                <span className="inline-block w-2 h-4 bg-[#CC5833] animate-pulse ml-1 align-middle"></span>
+            <div className="order-1 md:order-2 bg-indigo-950 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden">
+               <div className="text-center">
+                 <div className="text-indigo-300 font-cormorant italic text-3xl mb-2 opacity-50 transition-opacity">"Nettoyer le sol ce soir"</div>
+                 <div className="text-white font-cormorant italic text-4xl">"Limpiar el piso esta noche"</div>
+               </div>
+            </div>
+          </div>
+
+          {/* Feature 4: Food Cost & Menu Engineering */}
+          <div className="feature-row bg-slate-50 border border-slate-200/60 rounded-[3rem] p-8 md:p-12 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-1 bg-white border border-slate-200 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden p-8">
+               <div className="w-full flex justify-between items-end h-32 border-b border-slate-100 pb-2">
+                 <div className="w-12 bg-slate-200 rounded-t-md h-12"></div>
+                 <div className="w-12 bg-slate-300 rounded-t-md h-20"></div>
+                 <div className="w-12 bg-[#CC5833] rounded-t-md h-32 animate-pulse shadow-lg"></div>
+               </div>
+            </div>
+            <div className="order-2">
+              <div className="flex flex-col gap-6">
+                <div className="bg-[#CC5833]/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Activity className="w-8 h-8 text-[#CC5833]" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f4_title')}</h3>
+                <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f4_desc')}</p>
+                <div className="bg-white p-6 rounded-2xl border border-slate-100 mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">Exemples d'utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f4_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f4_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f4_ex3')}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Card 3: Native Multilingual (13 Languages) */}
-          <div className="bg-[#FFFFFF] p-8 rounded-[2rem] shadow-sm border border-slate-200/60 relative overflow-hidden h-[400px] flex flex-col hover:-translate-y-1 transition-transform duration-500">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="bg-[#2E4036]/10 p-3 rounded-full"><Globe className="w-6 h-6 text-[#2E4036]" /></div>
-              <h3 className="font-jakarta font-bold text-xl text-[#1A1A1A]">{t('features_card3_title')}</h3>
+           {/* Feature 5: Invoice Scanning */}
+          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <div className="flex flex-col gap-6">
+                <div className="bg-[#2E4036]/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Calendar className="w-8 h-8 text-[#2E4036]" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f5_title')}</h3>
+                <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f5_desc')}</p>
+                <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">Exemples d'utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f5_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f5_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f5_ex3')}</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <p className="font-outfit text-slate-500 mb-8">{t('features_card3_desc')}</p>
-            
-            <div className="flex-1 rounded-2xl bg-[#1A1A1A] flex flex-col items-center justify-center relative overflow-hidden p-6 group cursor-pointer">
-              <div className="absolute top-4 left-4 bg-white/10 text-white/50 px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider transition-opacity duration-300 group-hover:opacity-0">{t('features_card3_source_lang')}</div>
-              <div className="text-xl font-cormorant italic text-[#F2F0E9] text-center transition-opacity duration-300 group-hover:opacity-0">{t('features_card3_source_text')}</div>
-              
-              <div className="absolute inset-0 bg-[#CC5833] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute top-4 right-4 bg-white/20 text-white px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider">{t('features_card3_target_lang')}</div>
-                <div className="text-2xl font-cormorant italic text-white text-center">{t('features_card3_target_text')}</div>
+            <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden">
+               <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-green-400 animate-pulse shadow-[0_0_10px_#4ade80]"></div>
+               <div className="bg-white border text-xs p-4 rounded shadow font-mono opacity-50">SAUMON NORVEGE... 12.50/KG</div>
+            </div>
+          </div>
+
+          {/* Feature 6: Social Media Marketing */}
+          <div className="feature-row bg-[#2E4036] text-[#F2F0E9] rounded-[3rem] p-8 md:p-12 shadow-md grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-1 bg-[#1f2d25] border border-[#3e5548] rounded-[2rem] h-64 md:h-full min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden p-6 text-center">
+               <div className="text-3xl mb-4">📸</div>
+               <div className="font-outfit text-sm text-green-100/70 max-w-xs leading-relaxed">
+                 "Découvrez le menu spécial de ce soir ! Un thon rouge mi-cuit parfaitement braisé... ✨ Réservation en bio 👇"
+               </div>
+            </div>
+            <div className="order-2">
+              <div className="flex flex-col gap-6">
+                <div className="bg-green-400/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Activity className="w-8 h-8 text-green-400" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl">{t('f6_title')}</h3>
+                <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f6_desc')}</p>
+                <div className="bg-[#1f2d25] p-6 rounded-2xl mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-green-700/50 mb-4">Exemples d'utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-green-50">
+                    <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex3')}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

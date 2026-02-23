@@ -299,34 +299,60 @@ export function LandingPage() {
       </section>
 
       {/* D. PHILOSOPHY — "The Manifesto" */}
-      <section id="philosophy" className="relative py-48 bg-[#1A1A1A] text-[#F2F0E9] overflow-hidden">
-        {/* Parallax Background */}
+      <section id="philosophy" className="relative py-0 bg-[#1A1A1A] text-[#F2F0E9] overflow-hidden">
+        {/* Parallax Organic Texture */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542841791-d3fa1b439f03?q=80&w=2000&auto=format&fit=crop')" }} /* Organic laboratory glassware */
+          className="absolute inset-0 bg-cover bg-center opacity-[0.07]"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542841791-d3fa1b439f03?q=80&w=2000&auto=format&fit=crop')" }}
         ></div>
-        
-        <div className="relative z-10 max-w-5xl mx-auto px-8 md:px-24 text-center">
-          <p className="philosophy-text font-outfit text-xl md:text-2xl text-[#6B7280] mb-8">
-            {t('philosophy_intro')}
-          </p>
-          <p className="philosophy-text font-cormorant italic text-4xl md:text-7xl font-semibold leading-tight">
-            {t('philosophy_vision')}
-          </p>
 
-          {/* Three Pillars */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24">
-            <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">{t('philosophy_pillar1_title')}</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">{t('philosophy_pillar1_desc')}</p>
+        {/* Top Manifesto — Contrast Statements */}
+        <div className="relative z-10 max-w-6xl mx-auto px-8 md:px-24 py-32 md:py-48">
+          <div className="flex flex-col gap-6 md:gap-10">
+            {/* The "old way" — muted, understated */}
+            <p className="philosophy-text font-outfit text-lg md:text-2xl text-[#6B7280] leading-relaxed max-w-4xl">
+              {t('philosophy_intro')}
+            </p>
+
+            {/* The decorative accent line */}
+            <div className="flex items-center gap-6">
+              <div className="w-24 h-[2px] bg-gradient-to-r from-[#CC5833] to-transparent"></div>
+              <span className="font-plex-mono text-xs uppercase tracking-[0.3em] text-[#CC5833]/60">Notre approche</span>
             </div>
-            <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">{t('philosophy_pillar2_title')}</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">{t('philosophy_pillar2_desc')}</p>
-            </div>
-            <div className="text-left border-t border-[#CC5833]/30 pt-8">
-              <h3 className="font-jakarta font-bold text-2xl mb-3">{t('philosophy_pillar3_title')}</h3>
-              <p className="font-outfit text-[#6B7280] text-lg">{t('philosophy_pillar3_desc')}</p>
+
+            {/* The "Rive way" — massive, cinematic */}
+            <p className="philosophy-text font-cormorant italic text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] max-w-5xl">
+              {t('philosophy_vision')}
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom Pillars — Horizontal numbered cards */}
+        <div className="relative z-10 border-t border-white/[0.06]">
+          <div className="max-w-6xl mx-auto px-8 md:px-24 py-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-0">
+              
+              {/* Pillar 1 */}
+              <div className="group relative py-10 md:py-12 md:px-10 md:border-r border-white/[0.06] border-b md:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
+                <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">01</span>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar1_title')}</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar1_desc')}</p>
+              </div>
+              
+              {/* Pillar 2 */}
+              <div className="group relative py-10 md:py-12 md:px-10 md:border-r border-white/[0.06] border-b md:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
+                <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">02</span>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar2_title')}</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar2_desc')}</p>
+              </div>
+              
+              {/* Pillar 3 */}
+              <div className="group relative py-10 md:py-12 md:px-10 transition-colors duration-500 hover:bg-white/[0.02]">
+                <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">03</span>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar3_title')}</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar3_desc')}</p>
+              </div>
+
             </div>
           </div>
         </div>

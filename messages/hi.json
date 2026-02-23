@@ -34,7 +34,20 @@
     "protocol_cta": "Rive लॉन्च करें",
     "footer_desc": "गैस्ट्रोनॉमिक रेस्तरां के लिए एल्गोरिदमिक बुद्धिमत्ता।",
     "footer_status": "सिस्टम चालू",
-    "footer_rights": "© 2026 Rive. सर्वाधिकार सुरक्षित।"
+    "footer_rights": "© 2026 Rive. सर्वाधिकार सुरक्षित।",
+    "features_card1_fridge": "मीट फ्रिज",
+    "features_card1_ai_badge": "AI सहायक",
+    "features_card1_ai_suggestion": "कंप्रेसर जाँचें और मीट तुरंत हटाएं।",
+    "features_card2_line1": "> सर्वर नोट का विश्लेषण...",
+    "features_card2_line2": "> मुख्य शब्द निकालना...",
+    "features_card2_alert": "आपात पहचान: मीट फ्रिज 8°C पर।",
+    "features_card2_action": "निर्देशात्मक कार्रवाई: कंप्रेसर जाँचें।",
+    "features_card3_source_lang": "हिंदी",
+    "features_card3_source_text": "फ्रिज के ठंडे क्षेत्र को साफ करें",
+    "features_card3_target_lang": "English",
+    "features_card3_target_text": "Clean the cold zone of the fridges",
+    "footer_privacy": "गोपनीयता",
+    "footer_terms": "शर्तें"
   },
   "Pricing": {
     "title": "स्पष्ट मूल्य, वास्तविक प्रभाव।",
@@ -108,5 +121,27 @@
     "btn_review": "समीक्षा",
     "btn_start": "शुरू करें",
     "section_logbook": "लॉगबुक"
+  },
+  "TrialModal": {
+    "title": "100% मुफ्त ट्रायल",
+    "description_before": "30 सेकंड में अपना रेस्टोरेंट स्पेस बनाएं।",
+    "description_bold": "क्रेडिट कार्ड की आवश्यकता नहीं।",
+    "description_after": "Rive की सभी AI सुविधाएं उदार कोटे के साथ प्राप्त करें।",
+    "credits_label": "आपके मुफ्त क्रेडिट",
+    "feature1_label": "150 AI नोट्स",
+    "feature1_desc": "स्मार्ट लॉगबुक",
+    "feature2_label": "40 सुधारात्मक कार्रवाइयां",
+    "feature2_desc": "AI सुझाव",
+    "feature3_label": "30 अनुवाद",
+    "feature3_desc": "बहुभाषी",
+    "feature4_label": "2 मेनू विश्लेषण",
+    "feature4_desc": "मेनू ऑप्टिमाइजेशन",
+    "feature5_label": "20 Instagram पोस्ट",
+    "feature5_desc": "AI कॉन्टेंट",
+    "feature6_label": "10 रसीद स्कैन",
+    "feature6_desc": "AI डिजिटाइजेशन",
+    "cta_free": "मेरा स्पेस मुफ्त में बनाएं →",
+    "cta_subscribe": "अभी सब्सक्राइब करें",
+    "footer_note": "भुगतान तभी शुरू होगा जब आपके मुफ्त क्रेडिट समाप्त हो जाएं।"
   }
 }

@@ -34,7 +34,20 @@
     "protocol_cta": "Rive ਲਾਂਚ ਕਰੋ",
     "footer_desc": "ਗੈਸਟ੍ਰੋਨੋਮਿਕ ਰੈਸਟੋਰੈਂਟਾਂ ਲਈ ਐਲਗੋਰਿਦਮਿਕ ਬੁੱਧੀ।",
     "footer_status": "ਸਿਸਟਮ ਚਾਲੂ",
-    "footer_rights": "© 2026 Rive. ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।"
+    "footer_rights": "© 2026 Rive. ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।",
+    "features_card1_fridge": "ਮੀਟ ਫ੍ਰਿਜ",
+    "features_card1_ai_badge": "AI ਸਹਾਇਕ",
+    "features_card1_ai_suggestion": "ਕੰਪ੍ਰੈਸਰ ਚੈੱਕ ਕਰੋ ਅਤੇ ਮੀਟ ਤੁਰੰਤ ਹਟਾਓ।",
+    "features_card2_line1": "> ਸਰਵਰ ਨੋਟ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ...",
+    "features_card2_line2": "> ਮੁੱਖ ਸ਼ਬਦ ਕੱਢਣਾ...",
+    "features_card2_alert": "ਐਮਰਜੈਂਸੀ: ਮੀਟ ਫ੍ਰਿਜ 8°C ਤੇ।",
+    "features_card2_action": "ਨਿਰਦੇਸ਼ਾਤਮਕ ਕਾਰਵਾਈ: ਕੰਪ੍ਰੈਸਰ ਚੈੱਕ ਕਰੋ।",
+    "features_card3_source_lang": "ਪੰਜਾਬੀ",
+    "features_card3_source_text": "ਫ੍ਰਿਜ ਦੇ ਠੰਡੇ ਖੇਤਰ ਨੂੰ ਸਾਫ਼ ਕਰੋ",
+    "features_card3_target_lang": "English",
+    "features_card3_target_text": "Clean the cold zone of the fridges",
+    "footer_privacy": "ਗੋਪਨੀਯਤਾ",
+    "footer_terms": "ਸ਼ਰਤਾਂ"
   },
   "Pricing": {
     "title": "ਸਪੱਸ਼ਟ ਕੀਮਤਾਂ, ਅਸਲ ਪ੍ਰਭਾਵ।",
@@ -108,5 +121,27 @@
     "btn_review": "ਸਮੀਖਿਆ",
     "btn_start": "ਸ਼ੁਰੂ ਕਰੋ",
     "section_logbook": "ਲੌਗਬੁੱਕ"
+  },
+  "TrialModal": {
+    "title": "100% ਮੁਫ਼ਤ ਟ੍ਰਾਇਲ",
+    "description_before": "30 ਸਕਿੰਟਾਂ ਵਿੱਚ ਅਪਣਾ ਰੈਸਟੋਰੈਂਟ ਸਪੇਸ ਬਣਾਓ।",
+    "description_bold": "ਕ੍ਰੈਡਿਟ ਕਾਰਡ ਦੀ ਲੋੜ ਨਹੀਂ।",
+    "description_after": "Rive ਦੀਆਂ ਸਾਰੀਆਂ AI ਸੁਵਿਧਾਵਾਂ ਉਦਾਰ ਕੋਟੇ ਨਾਲ ਪ੍ਰਾਪਤ ਕਰੋ।",
+    "credits_label": "ਤੁਹਾਡੇ ਮੁਫ਼ਤ ਕ੍ਰੈਡਿਟ",
+    "feature1_label": "150 AI ਨੋਟਸ",
+    "feature1_desc": "ਸਮਾਰਟ ਲੌਗਬੁੱਕ",
+    "feature2_label": "40 ਸੁਧਾਰਾਤਮਕ ਕਾਰਵਾਈਆਂ",
+    "feature2_desc": "AI ਸੁਝਾਅ",
+    "feature3_label": "30 ਅਨੁਵਾਦ",
+    "feature3_desc": "ਬਹੁ-ਭਾਸ਼ਾਈ",
+    "feature4_label": "2 ਮੈਨੂ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "feature4_desc": "ਮੈਨੂ ਔਪਟਿਮਾਈਜ਼ੇਸ਼ਨ",
+    "feature5_label": "20 Instagram ਪੋਸਟ",
+    "feature5_desc": "AI ਕੰਟੈਂਟ",
+    "feature6_label": "10 ਰਸੀਦ ਸਕੈਨ",
+    "feature6_desc": "AI ਡਿਜਿਟਾਈਜ਼ੇਸ਼ਨ",
+    "cta_free": "ਮੇਰਾ ਸਪੇਸ ਮੁਫ਼ਤ ਬਣਾਓ →",
+    "cta_subscribe": "ਹੁਣੇ ਸਬਸਕ੍ਰਾਇਬ ਕਰੋ",
+    "footer_note": "ਭੁਗਤਾਨ ਤਾਂ ਹੀ ਸ਼ੁਰੂ ਹੋਵੇਗਾ ਜਦੋਂ ਤੁਹਾਡੇ ਮੁਫ਼ਤ ਕ੍ਰੈਡਿਟ ਖਤਮ ਹੋ ਜਾਣ।"
   }
 }

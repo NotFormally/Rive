@@ -34,7 +34,20 @@
     "protocol_cta": "Lancer Rive",
     "footer_desc": "Intelligence algorithmique pour la restauration gastronomique.",
     "footer_status": "System Operational",
-    "footer_rights": "© 2026 Rive. Tous droits réservés."
+    "footer_rights": "© 2026 Rive. Tous droits réservés.",
+    "features_card1_fridge": "Frigo Viandes",
+    "features_card1_ai_badge": "Assistant IA",
+    "features_card1_ai_suggestion": "Vérifiez le compresseur et déplacez les viandes immédiatement.",
+    "features_card2_line1": "> Analyse de la note serveur...",
+    "features_card2_line2": "> Extraction des mots clés...",
+    "features_card2_alert": "Urgence détectée : Frigo viandes à 8°C.",
+    "features_card2_action": "Action prescriptive : Vérifier compresseur.",
+    "features_card3_source_lang": "Français",
+    "features_card3_source_text": "Nettoyer la zone froide des frigos",
+    "features_card3_target_lang": "Español",
+    "features_card3_target_text": "Limpiar la zona fría de las neveras",
+    "footer_privacy": "Confidentialité",
+    "footer_terms": "CGU"
   },
   "Pricing": {
     "title": "Un prix clair, un impact réel.",
@@ -108,5 +121,27 @@
     "btn_review": "Revoir",
     "btn_start": "Commencer",
     "section_logbook": "Cahier de Bord"
+  },
+  "TrialModal": {
+    "title": "Essai 100% gratuit",
+    "description_before": "Créez votre espace restaurant en 30 secondes.",
+    "description_bold": "Aucune carte de crédit requise.",
+    "description_after": "Accédez à toutes les fonctionnalités IA de Rive avec des quotas généreux.",
+    "credits_label": "Vos crédits gratuits",
+    "feature1_label": "150 notes IA",
+    "feature1_desc": "Logbook intelligent",
+    "feature2_label": "40 actions correctives",
+    "feature2_desc": "Suggestions IA",
+    "feature3_label": "30 traductions",
+    "feature3_desc": "Multilingue",
+    "feature4_label": "2 analyses de menu",
+    "feature4_desc": "Optimisation de carte",
+    "feature5_label": "20 posts Instagram",
+    "feature5_desc": "Contenu IA",
+    "feature6_label": "10 scans de reçus",
+    "feature6_desc": "Numérisation IA",
+    "cta_free": "Créer mon espace gratuitement →",
+    "cta_subscribe": "S'abonner maintenant",
+    "footer_note": "Le paiement n'intervient qu'une fois vos crédits gratuits épuisés."
   }
 }

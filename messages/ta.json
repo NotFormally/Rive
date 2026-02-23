@@ -34,7 +34,20 @@
     "protocol_cta": "Rive ஐ தொடங்கு",
     "footer_desc": "சுவையான உணவகங்களுக்கான அல்காரிதமிக் நுண்ணறிவு.",
     "footer_status": "கணினி செயல்பாட்டில்",
-    "footer_rights": "© 2026 Rive. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."
+    "footer_rights": "© 2026 Rive. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    "features_card1_fridge": "இறைச்சி ஃப்ரிஜ்",
+    "features_card1_ai_badge": "AI உதவியாளர்",
+    "features_card1_ai_suggestion": "கம்ப்ரசரை சரிபார்த்து இறைச்சியை உடனடியாக நகர்த்தவும்.",
+    "features_card2_line1": "> சர்வர் குறிப்பு பகுப்பாய்வு...",
+    "features_card2_line2": "> முக்கிய சொற்கள் பிரித்தெடுப்பு...",
+    "features_card2_alert": "அவசரம்: இறைச்சி ஃப்ரிஜ் 8°C இல்.",
+    "features_card2_action": "பரிந்துரைக்கப்பட்ட நடவடிக்கை: கம்ப்ரசரை சரிபார்க்க.",
+    "features_card3_source_lang": "தமிழ்",
+    "features_card3_source_text": "ஃப்ரிஜ்களின் குளிர் பகுதியை சுத்தம் செய்யவும்",
+    "features_card3_target_lang": "English",
+    "features_card3_target_text": "Clean the cold zone of the fridges",
+    "footer_privacy": "தனியுரிமை",
+    "footer_terms": "விதிமுறைகள்"
   },
   "Pricing": {
     "title": "தெளிவான விலை, உண்மையான தாக்கம்.",
@@ -108,5 +121,27 @@
     "btn_review": "மதிப்பாய்வு",
     "btn_start": "தொடங்கு",
     "section_logbook": "பதிவேடு"
+  },
+  "TrialModal": {
+    "title": "100% உசித செயல்பாடு",
+    "description_before": "30 விநாடிகளில் உங்கள் ரெஸ்டாரன்ட் இடத்தை உருவாக்குங்கள்.",
+    "description_bold": "கிரெடிட் கார்டு தேவையில்லை.",
+    "description_after": "Rive இன் அனைத்து AI செயல்பாடுகளை நியாயமான கோட்டாகளுடன் பெறுங்கள்.",
+    "credits_label": "உங்கள் உசித கிரெடிட்கள்",
+    "feature1_label": "150 AI குறிப்புகள்",
+    "feature1_desc": "ச்மார்ட் லாக்புக்",
+    "feature2_label": "40 திருத்த நடவடிக்கைகள்",
+    "feature2_desc": "AI பரிந்துரைகள்",
+    "feature3_label": "30 மொழிபெயர்ப்புகள்",
+    "feature3_desc": "பல்மொழி",
+    "feature4_label": "2 மெனு பகுப்பாய்வுகள்",
+    "feature4_desc": "மெனு மேம்படுத்தல்",
+    "feature5_label": "20 Instagram பதிவுகள்",
+    "feature5_desc": "AI உள்ளடக்கம்",
+    "feature6_label": "10 ரசீது ஸ்கான்கள்",
+    "feature6_desc": "AI டிஜிட்டல்மயமாக்கல்",
+    "cta_free": "என் இடத்தை உசிதமாக உருவாக்குங்கள் →",
+    "cta_subscribe": "இப்போதே சந்தா செய்யுங்கள்",
+    "footer_note": "உங்கள் உசித கிரெடிட்கள் முடிந்தபின் மட்டுமே கட்டணம் தொடங்கும்."
   }
 }

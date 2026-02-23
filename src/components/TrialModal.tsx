@@ -1,16 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, Sparkles, BookOpen, ShieldCheck, Languages, BarChart3, Camera, Image, CreditCard } from "lucide-react";
 
-const TRIAL_FEATURES = [
-  { icon: BookOpen, label: "150 notes IA", desc: "Logbook intelligent" },
-  { icon: ShieldCheck, label: "40 actions correctives", desc: "Suggestions IA" },
-  { icon: Languages, label: "30 traductions", desc: "Multilingue" },
-  { icon: BarChart3, label: "2 analyses de menu", desc: "Optimisation de carte" },
-  { icon: Image, label: "20 posts Instagram", desc: "Contenu IA" },
-  { icon: Camera, label: "10 scans de reçus", desc: "Numérisation IA" },
-];
+const TRIAL_FEATURE_ICONS = [BookOpen, ShieldCheck, Languages, BarChart3, Image, Camera];
 
 type TrialModalProps = {
   isOpen: boolean;
@@ -19,7 +13,15 @@ type TrialModalProps = {
 };
 
 export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
+  const t = useTranslations('TrialModal');
+
   if (!isOpen) return null;
+
+  const features = TRIAL_FEATURE_ICONS.map((icon, i) => ({
+    icon,
+    label: t(`feature${i + 1}_label`),
+    desc: t(`feature${i + 1}_desc`),
+  }));
 
   return (
     <div
@@ -46,20 +48,20 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
             <div className="bg-[#CC5833] p-2.5 rounded-xl">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
-            <h2 className="font-jakarta font-bold text-2xl">Essai 100% gratuit</h2>
+            <h2 className="font-jakarta font-bold text-2xl">{t('title')}</h2>
           </div>
           <p className="font-outfit text-white/80 text-base leading-relaxed max-w-lg">
-            Créez votre espace restaurant en 30 secondes. <strong className="text-white">Aucune carte de crédit requise.</strong> Accédez à toutes les fonctionnalités IA de Rive avec des quotas généreux.
+            {t('description_before')} <strong className="text-white">{t('description_bold')}</strong> {t('description_after')}
           </p>
         </div>
 
         {/* Quota Grid */}
         <div className="px-6 sm:px-8 md:px-12 py-8">
           <p className="font-plex-mono text-[11px] uppercase tracking-[0.2em] text-slate-400 mb-5">
-            Vos crédits gratuits
+            {t('credits_label')}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full">
-            {TRIAL_FEATURES.map((feature) => (
+          <div className="flex flex-col gap-3 w-full">
+            {features.map((feature) => (
               <div
                 key={feature.label}
                 className="flex flex-row items-start gap-3 md:gap-4 bg-white rounded-xl p-3 md:p-4 border border-slate-100 hover:-translate-y-0.5 transition-transform duration-300 min-w-0"
@@ -82,7 +84,7 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
             href="/signup"
             className="block w-full text-center py-4 rounded-[2rem] font-bold text-base bg-[#CC5833] text-white hover:bg-[#b84d2d] transition-all duration-300 hover:scale-[1.03] shadow-lg shadow-[#CC5833]/20"
           >
-            Créer mon espace gratuitement →
+            {t('cta_free')}
           </a>
 
           {priceId && (
@@ -91,12 +93,12 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
               className="flex items-center justify-center gap-2 w-full text-center py-3.5 rounded-[2rem] font-semibold text-sm bg-transparent border-2 border-[#2E4036]/20 text-[#2E4036] hover:border-[#2E4036]/50 hover:bg-[#2E4036]/5 transition-all duration-300"
             >
               <CreditCard className="w-4 h-4" />
-              S'abonner maintenant
+              {t('cta_subscribe')}
             </a>
           )}
 
           <p className="text-center font-outfit text-xs text-slate-400">
-            Le paiement n'intervient qu'une fois vos crédits gratuits épuisés.
+            {t('footer_note')}
           </p>
         </div>
       </div>

@@ -142,15 +142,15 @@ export function LandingPage() {
             
             <div className="relative flex-1 mt-auto bg-slate-50 rounded-2xl p-5 border border-slate-100 flex flex-col justify-between">
               <div className="flex justify-between items-center mb-4">
-                <span className="font-outfit font-medium text-sm">Frigo Viandes</span>
+                <span className="font-outfit font-medium text-sm">{t('features_card1_fridge')}</span>
                 <span className="font-plex-mono text-lg text-red-500 font-bold">8.5°C</span>
               </div>
               <div className="bg-indigo-50/80 rounded-xl p-3 border border-indigo-100 shuffler-item">
                 <div className="flex items-center gap-2 mb-1 text-indigo-700">
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
-                  <span className="text-xs font-bold">Assistant IA</span>
+                  <span className="text-xs font-bold">{t('features_card1_ai_badge')}</span>
                 </div>
-                <p className="text-xs text-indigo-900/80">Vérifiez le compresseur et déplacez les viandes immédiatement.</p>
+                <p className="text-xs text-indigo-900/80">{t('features_card1_ai_suggestion')}</p>
               </div>
             </div>
           </div>
@@ -169,12 +169,12 @@ export function LandingPage() {
             <p className="font-outfit text-slate-500 mb-8">{t('features_card2_desc')}</p>
             
             <div className="bg-[#1A1A1A] flex-1 rounded-2xl p-6 font-plex-mono text-sm text-[#CC5833] overflow-hidden relative">
-              <div className="opacity-50 mb-2">{">"} Analyse de la note serveur...</div>
-              <div className="opacity-50 mb-2">{">"} Extraction des mots clés...</div>
+              <div className="opacity-50 mb-2">{t('features_card2_line1')}</div>
+              <div className="opacity-50 mb-2">{t('features_card2_line2')}</div>
               <div className="text-[#F2F0E9] mt-4">
-                Urgence détectée : Frigo viandes à 8°C.
+                {t('features_card2_alert')}
                 <br />
-                <span className="text-green-400">Action prescriptive : Vérifier compresseur.</span>
+                <span className="text-green-400">{t('features_card2_action')}</span>
                 <span className="inline-block w-2 h-4 bg-[#CC5833] animate-pulse ml-1 align-middle"></span>
               </div>
             </div>
@@ -189,12 +189,12 @@ export function LandingPage() {
             <p className="font-outfit text-slate-500 mb-8">{t('features_card3_desc')}</p>
             
             <div className="flex-1 rounded-2xl bg-[#1A1A1A] flex flex-col items-center justify-center relative overflow-hidden p-6 group cursor-pointer">
-              <div className="absolute top-4 left-4 bg-white/10 text-white/50 px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider transition-opacity duration-300 group-hover:opacity-0">Français</div>
-              <div className="text-xl font-cormorant italic text-[#F2F0E9] text-center transition-opacity duration-300 group-hover:opacity-0">Nettoyer la zone froides des frigos</div>
+              <div className="absolute top-4 left-4 bg-white/10 text-white/50 px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider transition-opacity duration-300 group-hover:opacity-0">{t('features_card3_source_lang')}</div>
+              <div className="text-xl font-cormorant italic text-[#F2F0E9] text-center transition-opacity duration-300 group-hover:opacity-0">{t('features_card3_source_text')}</div>
               
               <div className="absolute inset-0 bg-[#CC5833] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute top-4 right-4 bg-white/20 text-white px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider">Español</div>
-                <div className="text-2xl font-cormorant italic text-white text-center">Limpiar la zona fría de las neveras</div>
+                <div className="absolute top-4 right-4 bg-white/20 text-white px-2 py-1 rounded-md text-[10px] font-plex-mono uppercase tracking-wider">{t('features_card3_target_lang')}</div>
+                <div className="text-2xl font-cormorant italic text-white text-center">{t('features_card3_target_text')}</div>
               </div>
             </div>
           </div>
@@ -317,8 +317,8 @@ export function LandingPage() {
         <div className="max-w-screen-xl mx-auto mt-24 pt-8 border-t border-slate-800 text-slate-500 text-sm font-outfit flex justify-between">
           <p>{t('footer_rights')}</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-[#F2F0E9] transition-colors">Confidentialité</a>
-            <a href="#" className="hover:text-[#F2F0E9] transition-colors">CGU</a>
+            <a href="#" className="hover:text-[#F2F0E9] transition-colors">{t('footer_privacy')}</a>
+            <a href="#" className="hover:text-[#F2F0E9] transition-colors">{t('footer_terms')}</a>
           </div>
         </div>
       </footer>

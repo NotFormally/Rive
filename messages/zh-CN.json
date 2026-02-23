@@ -34,7 +34,20 @@
     "protocol_cta": "启动 Rive",
     "footer_desc": "为高级餐厅打造的算法智能。",
     "footer_status": "系统运行中",
-    "footer_rights": "© 2026 Rive. 保留所有权利。"
+    "footer_rights": "© 2026 Rive. 保留所有权利。",
+    "features_card1_fridge": "肉类冰箱",
+    "features_card1_ai_badge": "AI 助手",
+    "features_card1_ai_suggestion": "检查压缩机并立即转移肉类。",
+    "features_card2_line1": "> 分析服务员笔记...",
+    "features_card2_line2": "> 提取关键词...",
+    "features_card2_alert": "紧急检测：肉类冰箱温度 8°C。",
+    "features_card2_action": "处方行动：检查压缩机。",
+    "features_card3_source_lang": "中文",
+    "features_card3_source_text": "清洁冰箱的冷藏区",
+    "features_card3_target_lang": "English",
+    "features_card3_target_text": "Clean the cold zone of the fridges",
+    "footer_privacy": "隐私政策",
+    "footer_terms": "使用条款"
   },
   "Pricing": {
     "title": "清晰定价，真实影响。",
@@ -108,5 +121,27 @@
     "btn_review": "审核",
     "btn_start": "开始",
     "section_logbook": "日志"
+  },
+  "TrialModal": {
+    "title": "100% 免费试用",
+    "description_before": "30秒内创建您的餐厅空间。",
+    "description_bold": "无需信用卡。",
+    "description_after": "以慈善的配额获取 Rive 的所有 AI 功能。",
+    "credits_label": "您的免费额度",
+    "feature1_label": "150 条 AI 笔记",
+    "feature1_desc": "智能日志",
+    "feature2_label": "40 项纠正措施",
+    "feature2_desc": "AI 建议",
+    "feature3_label": "30 次翻译",
+    "feature3_desc": "多语言",
+    "feature4_label": "2 次菜单分析",
+    "feature4_desc": "菜单优化",
+    "feature5_label": "20 篇 Instagram 帖子",
+    "feature5_desc": "AI 内容",
+    "feature6_label": "10 次收据扫描",
+    "feature6_desc": "AI 数字化",
+    "cta_free": "免费创建我的空间 →",
+    "cta_subscribe": "立即订阅",
+    "footer_note": "仅在您的免费额度用完后才开始收费。"
   }
 }

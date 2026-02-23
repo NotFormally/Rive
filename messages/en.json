@@ -34,7 +34,20 @@
     "protocol_cta": "Launch Rive",
     "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
     "footer_status": "System Operational",
-    "footer_rights": "© 2026 Rive. All rights reserved."
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "features_card1_fridge": "Meat Fridge",
+    "features_card1_ai_badge": "AI Assistant",
+    "features_card1_ai_suggestion": "Check the compressor and move the meats immediately.",
+    "features_card2_line1": "> Analyzing server note...",
+    "features_card2_line2": "> Extracting key words...",
+    "features_card2_alert": "Urgency detected: Meat fridge at 8°C.",
+    "features_card2_action": "Prescriptive action: Check compressor.",
+    "features_card3_source_lang": "English",
+    "features_card3_source_text": "Clean the cold zone of the fridges",
+    "features_card3_target_lang": "Español",
+    "features_card3_target_text": "Limpiar la zona fría de las neveras",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Pricing": {
     "title": "Clear pricing, real impact.",
@@ -108,5 +121,27 @@
     "btn_review": "Review",
     "btn_start": "Start",
     "section_logbook": "Logbook"
+  },
+  "TrialModal": {
+    "title": "100% Free Trial",
+    "description_before": "Create your restaurant workspace in 30 seconds.",
+    "description_bold": "No credit card required.",
+    "description_after": "Access all Rive AI features with generous quotas.",
+    "credits_label": "Your free credits",
+    "feature1_label": "150 AI notes",
+    "feature1_desc": "Smart Logbook",
+    "feature2_label": "40 corrective actions",
+    "feature2_desc": "AI Suggestions",
+    "feature3_label": "30 translations",
+    "feature3_desc": "Multilingual",
+    "feature4_label": "2 menu analyses",
+    "feature4_desc": "Menu Optimization",
+    "feature5_label": "20 Instagram posts",
+    "feature5_desc": "AI Content",
+    "feature6_label": "10 receipt scans",
+    "feature6_desc": "AI Digitization",
+    "cta_free": "Create my workspace for free →",
+    "cta_subscribe": "Subscribe now",
+    "footer_note": "Payment only starts once your free credits are used up."
   }
 }

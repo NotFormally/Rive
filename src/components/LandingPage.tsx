@@ -155,12 +155,28 @@ export function LandingPage() {
                 </div>
               </div>
             </div>
-            <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden">
+             <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden">
                <div className="absolute inset-4 bg-white shadow-sm rounded-xl border border-slate-200 p-6 rot-3 flex flex-col gap-4">
-                 <div className="h-4 w-1/3 bg-slate-200 rounded animate-pulse"></div>
-                 <div className="h-3 w-3/4 bg-slate-100 rounded"></div>
-                 <div className="h-3 w-2/3 bg-slate-100 rounded"></div>
-                 <div className="mt-auto self-end px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Résolu</div>
+                 <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <span className="text-xs font-jakarta font-bold text-slate-400">23 FÉV • SERVICE DU SOIR</span>
+                    <span className="px-2 py-1 bg-red-50 text-red-600 rounded-lg text-[10px] font-bold">1 URGENT</span>
+                 </div>
+                 <div className="flex flex-col gap-4">
+                    <div className="flex gap-3 items-start">
+                       <div className="w-2 h-2 rounded-full bg-red-400 mt-1.5 shrink-0 shadow-[0_0_8px_#f87171]"></div>
+                       <div>
+                          <p className="text-sm font-outfit text-slate-700 leading-tight">Le frigo 2 fuit, réparateur appelé</p>
+                          <p className="text-[11px] font-outfit text-indigo-500 mt-1.5 bg-indigo-50 px-2 py-0.5 rounded-md inline-block">✨ IA: Tâche "Appeler le plombier" créée</p>
+                       </div>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                       <div className="w-2 h-2 rounded-full bg-green-400 mt-1.5 shrink-0"></div>
+                       <div>
+                          <p className="text-sm font-outfit text-slate-700 leading-tight">Service parfait, RAS</p>
+                       </div>
+                    </div>
+                 </div>
+                 <div className="mt-auto self-end px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">IA Active</div>
                </div>
             </div>
           </div>
@@ -168,16 +184,24 @@ export function LandingPage() {
           {/* Feature 2: Compliance */}
           <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 md:p-12 shadow-md grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-1 bg-[#232323] rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden">
-              <div className="absolute flex flex-col gap-3">
-                 <div className="bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-3 rounded-xl flex items-center gap-3 backdrop-blur-sm shadow-xl">
-                   <Thermometer className="w-5 h-5" />
-                   <span className="font-plex-mono text-sm">Frigo 2 : 8.5°C détecté</span>
-                 </div>
-                 <div className="bg-[#CC5833] text-white px-4 py-3 rounded-xl flex items-center gap-3 shadow-xl ml-8">
-                   <RotateCw className="w-5 h-5 animate-spin-slow" />
-                   <span className="font-outfit text-sm font-bold">Action : Jeter les aliments à risque</span>
-                 </div>
-              </div>
+               {/* Background List Mockup to better use space */}
+               <div className="absolute inset-0 p-8 flex flex-col gap-4 opacity-20">
+                  <div className="h-10 w-full bg-[#1A1A1A] rounded-lg border border-white/5 flex items-center px-4"><div className="h-2 w-1/3 bg-white/20 rounded"></div></div>
+                  <div className="h-10 w-full bg-[#1A1A1A] rounded-lg border border-white/5 flex items-center px-4"><div className="h-2 w-1/2 bg-white/20 rounded"></div></div>
+                  <div className="h-10 w-full bg-[#1A1A1A] rounded-lg border border-white/5 flex items-center px-4"><div className="h-2 w-1/4 bg-white/20 rounded"></div></div>
+                  <div className="h-10 w-full bg-[#1A1A1A] rounded-lg border border-white/5 flex items-center px-4"><div className="h-2 w-2/5 bg-white/20 rounded"></div></div>
+               </div>
+
+               <div className="relative z-10 flex flex-col gap-4 w-full max-w-[300px]">
+                  <div className="bg-red-500/20 text-red-400 border border-red-500/30 px-5 py-4 rounded-xl flex items-center gap-3 backdrop-blur-md shadow-2xl">
+                    <Thermometer className="w-5 h-5 shrink-0" />
+                    <span className="font-plex-mono text-sm leading-tight">Frigo 2 : 8.5°C détecté</span>
+                  </div>
+                  <div className="bg-[#CC5833] text-white px-5 py-4 rounded-xl flex items-center gap-3 shadow-2xl ml-8">
+                    <RotateCw className="w-5 h-5 shrink-0 animate-spin-slow" />
+                    <span className="font-outfit text-sm font-bold leading-tight">Action : Jeter les aliments à risque</span>
+                  </div>
+               </div>
             </div>
             <div className="order-2">
               <div className="flex flex-col gap-6">
@@ -214,9 +238,10 @@ export function LandingPage() {
               </div>
             </div>
             <div className="order-1 md:order-2 bg-indigo-950 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden">
-               <div className="text-center">
-                 <div className="text-indigo-300 font-cormorant italic text-3xl mb-2 opacity-50 transition-opacity">"Nettoyer le sol ce soir"</div>
-                 <div className="text-white font-cormorant italic text-4xl">"Limpiar el piso esta noche"</div>
+               <div className="text-center flex flex-col gap-3 px-6">
+                 <div className="text-indigo-300 font-cormorant italic text-2xl md:text-3xl opacity-40 transition-opacity">"Nettoyer le sol ce soir"</div>
+                 <div className="text-indigo-200 font-cormorant italic text-3xl md:text-4xl opacity-75">"Limpiar el piso esta noche"</div>
+                 <div className="text-white font-jakarta text-2xl md:text-3xl font-medium mt-2">"আজ রাতে মেঝে পরিষ্কার করুন"</div>
                </div>
             </div>
           </div>

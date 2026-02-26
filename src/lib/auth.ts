@@ -1,15 +1,15 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 type AuthResult =
-  | { user: { id: string }; restaurantId: string }
+  | { user: { id: string }; restaurantId: string; supabase: SupabaseClient }
   | null;
 
 /**
  * Extract and verify the Supabase auth token from an API request.
- * Returns user + restaurantId, or null if not authenticated.
+ * Returns user, restaurantId, and the authenticated supabase client, or null if not authenticated.
  */
 export async function requireAuth(req: Request): Promise<AuthResult> {
   const authHeader = req.headers.get('authorization');
@@ -55,7 +55,7 @@ export async function requireAuth(req: Request): Promise<AuthResult> {
 
   if (!profile) return null;
 
-  return { user: { id: user.id }, restaurantId: profile.id };
+  return { user: { id: user.id }, restaurantId: profile.id, supabase };
 }
 
 /**

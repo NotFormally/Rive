@@ -21,6 +21,7 @@ export async function POST(req: Request) {
       return new Response('Image data is required', { status: 400 });
     }
 
+    let invoiceData;
     try {
       const { object } = await generateObject({
         model: anthropic(MODEL_EXTRACT),
@@ -28,7 +29,14 @@ export async function POST(req: Request) {
           supplierName: z.string().describe('The name of the supplier or business on the receipt.'),
           totalAmount: z.string().describe('The total amount of the invoice, including currency symbol (e.g. 150.50$, €45.00).'),
           date: z.string().describe('The date of the receipt in YYYY-MM-DD or DD/MM/YYYY format.'),
-          topItems: z.array(z.string()).describe('List of 1 to 3 main items purchased.'),
+          topItems: z.array(z.string()).describe('List of 1 to 3 main items purchased (general strings).'),
+          items: z.array(z.object({
+            name: z.string().describe('The name/description of the item purchased.'),
+            quantity: z.number().describe('The total quantity purchased.'),
+            unit: z.string().describe('The unit of measurement (e.g., kg, L, unit, case). Default to "unit" if unknown.'),
+            unitPrice: z.number().describe('The price per single unit.'),
+            totalPrice: z.number().describe('The total price for this line item (quantity * unitPrice).')
+          })).describe('List of all individual line items on the receipt.')
         }),
         messages: [
           {
@@ -40,27 +48,118 @@ export async function POST(req: Request) {
           },
         ],
       });
-
-      return new Response(JSON.stringify(object), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      invoiceData = object;
     } catch (aiError) {
       console.error('AI Receipt scan failed, using fallback:', aiError);
       
       // Fallback mock
-      const mockObject = {
+      invoiceData = {
         supplierName: "Metro Cash & Carry",
         totalAmount: "345.20$",
         date: new Date().toISOString().split('T')[0],
         topItems: ["Farine T55 25kg", "Tomates Pelées (Lot)", "Huile de friture"],
+        items: [
+          { name: "Farine T55", quantity: 25, unit: "kg", unitPrice: 1.20, totalPrice: 30.00 },
+          { name: "Tomates Pelées", quantity: 10, unit: "kg", unitPrice: 2.50, totalPrice: 25.00 },
+          { name: "Huile de friture", quantity: 5, unit: "L", unitPrice: 4.00, totalPrice: 20.00 }
+        ]
       };
-
-      return new Response(JSON.stringify(mockObject), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      });
     }
+
+    // Basic date parsing to avoid Postgres errors
+    let formattedDate = invoiceData.date;
+    try {
+      if (!/^\\d{4}-\\d{2}-\\d{2}/.test(formattedDate)) {
+        const d = new Date(formattedDate);
+        if (!isNaN(d.getTime())) {
+          formattedDate = d.toISOString().split('T')[0];
+        } else {
+          formattedDate = new Date().toISOString().split('T')[0];
+        }
+      }
+    } catch {
+      formattedDate = new Date().toISOString().split('T')[0];
+    }
+
+    // 1. Fetch existing ingredients for fuzzy matching
+    const { data: existingIngredients } = await auth.supabase
+      .from('ingredients')
+      .select('id, name, unit')
+      .eq('restaurant_id', auth.restaurantId);
+
+    // Normalize string for basic matching
+    const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").trim();
+
+    // 2. Save the main Invoice Header
+    const { data: savedInvoice, error: dbError } = await auth.supabase.from('invoices').insert({
+      restaurant_id: auth.restaurantId,
+      supplier_name: invoiceData.supplierName,
+      total_amount: invoiceData.totalAmount,
+      date: formattedDate,
+      top_items: invoiceData.topItems || [],
+    }).select('id').single();
+
+    if (dbError || !savedInvoice) {
+      console.error('Failed to save invoice to Supabase:', dbError);
+    } else {
+      // 3. Process Line Items and attempt matching
+      const invoiceItemsToInsert = [];
+      const ingredientsToUpdate = [];
+
+      for (const item of invoiceData.items || []) {
+        let matchedIngredientId = null;
+
+        // Try to find a match
+        if (existingIngredients) {
+          const normalizedItemName = normalize(item.name);
+          // Very basic matching: if the extracted name contains the ingredient name or vice-versa
+          const match = existingIngredients.find(ing => {
+            const normIng = normalize(ing.name);
+            return normalizedItemName.includes(normIng) || normIng.includes(normalizedItemName);
+          });
+
+          if (match) {
+            matchedIngredientId = match.id;
+            // Schedule ingredient price update (we assume the unit matches roughly, otherwise conversion is needed)
+            ingredientsToUpdate.push({
+              id: match.id,
+              unit_cost: item.unitPrice
+            });
+          }
+        }
+
+        invoiceItemsToInsert.push({
+          invoice_id: savedInvoice.id,
+          name: item.name,
+          quantity: item.quantity,
+          unit: item.unit,
+          unit_price: item.unitPrice,
+          total_price: item.totalPrice,
+          matched_ingredient_id: matchedIngredientId
+        });
+      }
+
+      // Insert line items
+      if (invoiceItemsToInsert.length > 0) {
+        await auth.supabase.from('invoice_items').insert(invoiceItemsToInsert);
+      }
+
+      // Update matched ingredients pricing directly!
+      if (ingredientsToUpdate.length > 0) {
+        for (const update of ingredientsToUpdate) {
+          await auth.supabase
+            .from('ingredients')
+            .update({ unit_cost: update.unit_cost, updated_at: new Date().toISOString() })
+            .eq('id', update.id)
+            .eq('restaurant_id', auth.restaurantId); 
+        }
+      }
+    }
+
+    return new Response(JSON.stringify(invoiceData), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
     console.error('Error analyzing receipt:', error);
     return new Response('Internal Server Error', { status: 500 });

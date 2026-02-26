@@ -16,10 +16,14 @@ export default function EngineeringPage() {
 
   return (
     <>
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4">
-        <div>
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+        <div className="px-8 py-4">
           <h1 className="text-xl font-bold">Carte Marine</h1>
           <p className="text-sm text-slate-500">Classification BCG et optimisation IA de votre menu</p>
+        </div>
+        <div className="px-8 flex items-center gap-6 text-sm font-medium">
+          <a href="/dashboard/engineering" className="py-3 border-b-2 border-indigo-600 text-indigo-600">Matrice</a>
+          <a href="/dashboard/engineering/sales" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Ventes POS</a>
         </div>
       </header>
 

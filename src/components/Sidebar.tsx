@@ -4,11 +4,13 @@ import { useState } from "react";
 import { Link, usePathname } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { useTranslations } from "next-intl";
-import { 
-  LayoutDashboard, 
-  MenuSquare, 
-  Calculator, 
-  Compass, 
+import {
+  LayoutDashboard,
+  MenuSquare,
+  Calculator,
+  Compass,
+  CalendarDays,
+  Brain,
   Settings,
   LogOut,
   Menu,
@@ -26,6 +28,8 @@ export function Sidebar() {
     { name: t("nav_menu"), href: "/dashboard/menu", icon: MenuSquare, show: settings?.module_menu_editor },
     { name: t("nav_foodcost"), href: "/dashboard/food-cost", icon: Calculator, show: settings?.module_food_cost },
     { name: t("nav_engineering"), href: "/dashboard/engineering", icon: Compass, show: settings?.module_menu_engineering },
+    { name: t("nav_reservations"), href: "/dashboard/reservations", icon: CalendarDays, show: settings?.module_reservations },
+    { name: t("nav_smartprep"), href: "/dashboard/prep-list", icon: Brain, show: settings?.module_smart_prep },
     { name: t("nav_settings"), href: "/dashboard/settings", icon: Settings, show: true },
   ];
 
@@ -49,8 +53,8 @@ export function Sidebar() {
               href={item.href}
               onClick={handleNavClick}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-sm font-medium ${
-                isActive 
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/20" 
+                isActive
+                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/20"
                   : "hover:bg-slate-800 hover:text-white"
               }`}
             >
@@ -115,3 +119,4 @@ export function Sidebar() {
     </>
   );
 }
+

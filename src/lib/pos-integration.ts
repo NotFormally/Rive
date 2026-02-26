@@ -1,6 +1,8 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+
 // Simulated POS Integration (Lightspeed / Square / Toast)
 
-export type POSProvider = 'mock' | 'lightspeed' | 'square';
+export type POSProvider = 'mock' | 'lightspeed' | 'square' | 'supabase';
 
 export type SalesData = {
   menuItemId: string;
@@ -15,9 +17,30 @@ export type SalesData = {
  */
 export async function fetchWeeklySales(
   provider: POSProvider, 
-  activeMenuItemIds: string[]
+  activeMenuItemIds: string[],
+  supabase?: SupabaseClient,
+  restaurantId?: string
 ): Promise<SalesData[]> {
   
+  if (provider === 'supabase' && supabase && restaurantId) {
+    const { data, error } = await supabase
+      .from('pos_sales')
+      .select('menu_item_id, quantity_sold_weekly')
+      .eq('restaurant_id', restaurantId)
+      .in('menu_item_id', activeMenuItemIds);
+
+    if (error) {
+      console.error('Failed to fetch POS sales from Supabase:', error);
+      return [];
+    }
+
+    return (data || []).map(row => ({
+      menuItemId: row.menu_item_id,
+      quantitySoldWeekly: row.quantity_sold_weekly,
+      revenueWeekly: 0,
+    }));
+  }
+
   if (provider === 'mock') {
     return generateMockSalesData(activeMenuItemIds);
   }

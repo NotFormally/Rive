@@ -7,18 +7,33 @@ export async function POST(req: NextRequest) {
 
     if (!priceId || !restaurantId) {
       return NextResponse.json(
-        { error: 'Missing priceId or restaurantId' },
+        { error: 'Missing lookup key (priceId) or restaurantId' },
         { status: 400 }
       );
     }
 
-      const origin = new URL(req.url).origin;
-      const session = await stripe.checkout.sessions.create({
+    // Use priceId as a lookup_key instead of a direct Stripe price ID
+    const prices = await stripe.prices.list({
+      lookup_keys: [priceId],
+      expand: ['data.product']
+    });
+
+    if (!prices.data || prices.data.length === 0) {
+      return NextResponse.json(
+        { error: `No active price found for lookup key: ${priceId}` },
+        { status: 404 }
+      );
+    }
+
+    const actualPriceId = prices.data[0].id;
+
+    const origin = new URL(req.url).origin;
+    const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       payment_method_types: ['card'],
       line_items: [
         {
-          price: priceId,
+          price: actualPriceId,
           quantity: 1,
         },
       ],

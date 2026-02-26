@@ -86,7 +86,7 @@ export function LandingPage() {
           <LanguageSelector />
           <Link 
             href="/signup" 
-            className="nav-btn bg-[#F2F0E9] text-[#1A1A1A] px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[1.03] transition-transform duration-300"
+            className="nav-btn flex items-center justify-center text-center whitespace-nowrap bg-[#F2F0E9] text-[#1A1A1A] px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[1.03] transition-transform duration-300"
           >
             {t('nav_cta')}
           </Link>
@@ -98,7 +98,7 @@ export function LandingPage() {
         {/* Background Image with Global CSS Noise */}
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('/hero-image.png')" }} /* Optional: A more restaurant-focused dark image */
+          style={{ backgroundImage: "url('/the-harbor.jpeg')" }}
         >
           {/* Heavy primary-to-black gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#2E4036]/90 to-[#1A1A1A]/70"></div>
@@ -116,12 +116,12 @@ export function LandingPage() {
           <p className="hero-text font-outfit text-lg md:text-xl mt-8 max-w-3xl opacity-90 leading-relaxed tracking-wide">
             {t('hero_description')}
           </p>
-          <div className="hero-text mt-12">
+          <div className="hero-text mt-12 w-full flex">
             <Link 
               href="/signup" 
-              className="group relative overflow-hidden inline-flex items-center justify-center gap-2 bg-[#CC5833] text-[#F2F0E9] px-8 py-4 rounded-[2rem] font-bold text-lg hover:scale-[1.03] transition-transform duration-300"
+              className="group relative overflow-hidden inline-flex items-center justify-center text-center whitespace-nowrap gap-2 bg-[#CC5833] text-[#F2F0E9] px-8 py-4 rounded-full font-bold text-lg hover:scale-[1.03] transition-transform duration-300"
             >
-              <span className="relative z-10 flex items-center gap-2">{t('hero_cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
+              <span className="relative z-10 flex items-center justify-center gap-2">{t('hero_cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
               <span className="absolute inset-0 bg-[#1A1A1A] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></span>
             </Link>
           </div>
@@ -169,28 +169,28 @@ export function LandingPage() {
                 </div>
               </div>
             </div>
-             <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden">
+              <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden">
                <div className="absolute inset-4 bg-white shadow-sm rounded-xl border border-slate-200 p-6 rot-3 flex flex-col gap-4">
                  <div className="flex justify-between items-center border-b border-slate-100 pb-2">
-                    <span className="text-xs font-jakarta font-bold text-slate-400">23 FÉV • SERVICE DU SOIR</span>
-                    <span className="px-2 py-1 bg-red-50 text-red-600 rounded-lg text-[10px] font-bold">1 URGENT</span>
+                    <span className="text-xs font-jakarta font-bold text-slate-400">{t('f1_mock_date')}</span>
+                    <span className="px-2 py-1 bg-red-50 text-red-600 rounded-lg text-[10px] font-bold">{t('f1_mock_urgent')}</span>
                  </div>
                  <div className="flex flex-col gap-4">
                     <div className="flex gap-3 items-start">
                        <div className="w-2 h-2 rounded-full bg-red-400 mt-1.5 shrink-0 shadow-[0_0_8px_#f87171]"></div>
                        <div>
-                          <p className="text-sm font-outfit text-slate-700 leading-tight">Le frigo 2 fuit, réparateur appelé</p>
-                          <p className="text-[11px] font-outfit text-indigo-500 mt-1.5 bg-indigo-50 px-2 py-0.5 rounded-md inline-block">✨ IA: Tâche "Appeler le plombier" créée</p>
+                          <p className="text-sm font-outfit text-slate-700 leading-tight">{t('f1_mock_entry1')}</p>
+                          <p className="text-[11px] font-outfit text-indigo-500 mt-1.5 bg-indigo-50 px-2 py-0.5 rounded-md inline-block">{t('f1_mock_ai_task')}</p>
                        </div>
                     </div>
                     <div className="flex gap-3 items-start">
                        <div className="w-2 h-2 rounded-full bg-green-400 mt-1.5 shrink-0"></div>
                        <div>
-                          <p className="text-sm font-outfit text-slate-700 leading-tight">Service parfait, RAS</p>
+                          <p className="text-sm font-outfit text-slate-700 leading-tight">{t('f1_mock_entry2')}</p>
                        </div>
                     </div>
                  </div>
-                 <div className="mt-auto self-end px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">IA Active</div>
+                 <div className="mt-auto self-end px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">{t('f1_mock_ai_badge')}</div>
                </div>
             </div>
           </div>
@@ -209,11 +209,11 @@ export function LandingPage() {
                <div className="relative z-10 flex flex-col gap-4 w-full max-w-[300px]">
                   <div className="bg-red-500/20 text-red-400 border border-red-500/30 px-5 py-4 rounded-xl flex items-center gap-3 backdrop-blur-md shadow-2xl">
                     <Thermometer className="w-5 h-5 shrink-0" />
-                    <span className="font-plex-mono text-sm leading-tight">Frigo 2 : 8.5°C détecté</span>
+                    <span className="font-plex-mono text-sm leading-tight">{t('f2_mock_alert')}</span>
                   </div>
                   <div className="bg-[#CC5833] text-white px-5 py-4 rounded-xl flex items-center gap-3 shadow-2xl ml-8">
                     <RotateCw className="w-5 h-5 shrink-0 animate-spin-slow" />
-                    <span className="font-outfit text-sm font-bold leading-tight">Action : Jeter les aliments à risque</span>
+                    <span className="font-outfit text-sm font-bold leading-tight">{t('f2_mock_action')}</span>
                   </div>
                </div>
             </div>
@@ -264,16 +264,16 @@ export function LandingPage() {
           <div className="feature-row bg-slate-50 border border-slate-200/60 rounded-[3rem] p-8 md:p-12 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-1 bg-white border border-slate-200 rounded-[2rem] h-64 md:h-full min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden p-6 md:p-8">
                {/* Matrix Background */}
-               <div className="absolute inset-5 grid grid-cols-2 grid-rows-2 gap-1 opacity-70">
-                 <div className="bg-green-50 rounded-tl-2xl border border-green-100 flex items-center justify-center text-green-700/50 text-xs font-bold font-jakarta">Étoiles</div>
-                 <div className="bg-amber-50 rounded-tr-2xl border border-amber-100 flex items-center justify-center text-amber-700/50 text-xs font-bold font-jakarta">Vaches à lait</div>
-                 <div className="bg-red-50 rounded-bl-2xl border border-red-100 flex items-center justify-center text-red-700/50 text-xs font-bold font-jakarta">Poids morts</div>
-                 <div className="bg-blue-50 rounded-br-2xl border border-blue-100 flex items-center justify-center text-blue-700/50 text-xs font-bold font-jakarta">Énigmes</div>
-               </div>
+                <div className="absolute inset-5 grid grid-cols-2 grid-rows-2 gap-1 opacity-70">
+                  <div className="bg-green-50 rounded-tl-2xl border border-green-100 flex items-center justify-center text-green-700/50 text-xs font-bold font-jakarta">{t('bcg_stars')}</div>
+                  <div className="bg-amber-50 rounded-tr-2xl border border-amber-100 flex items-center justify-center text-amber-700/50 text-xs font-bold font-jakarta">{t('bcg_cashcows')}</div>
+                  <div className="bg-red-50 rounded-bl-2xl border border-red-100 flex items-center justify-center text-red-700/50 text-xs font-bold font-jakarta">{t('bcg_deadweights')}</div>
+                  <div className="bg-blue-50 rounded-br-2xl border border-blue-100 flex items-center justify-center text-blue-700/50 text-xs font-bold font-jakarta">{t('bcg_puzzles')}</div>
+                </div>
                
                {/* POS Data lines flowing in */}
                <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 w-full justify-center z-10">
-                 <div className="font-plex-mono text-[10px] text-slate-500 bg-white px-3 py-1.5 rounded-full shadow-sm animate-bounce">↓ API Sync (Toast, Square...)</div>
+                 <div className="font-plex-mono text-[10px] text-slate-500 bg-white px-3 py-1.5 rounded-full shadow-sm animate-bounce">{t('pos_sync_text')}</div>
                </div>
 
                {/* Animated dots moving into quadrants */}
@@ -323,15 +323,15 @@ export function LandingPage() {
                  <div className="bg-white border border-slate-200 text-xs p-4 rounded-xl shadow-sm flex flex-col gap-2 transition-all duration-500 transform hover:-translate-y-1">
                     <span className="font-plex-mono text-slate-400 text-[10px]">SCAN-REQ-4829</span>
                     <div className="flex justify-between font-bold font-jakarta text-[#1A1A1A] text-sm">
-                      <span>Saumon Norvège</span>
-                      <span>12.50/KG</span>
+                      <span>{t('ocr_product')}</span>
+                      <span>{t('ocr_price')}</span>
                     </div>
-                    <span className="text-[10px] text-red-500 bg-red-50 border border-red-100 px-2 py-1 rounded w-fit font-medium">▲ +0.50€ / KG</span>
+                    <span className="text-[10px] text-red-500 bg-red-50 border border-red-100 px-2 py-1 rounded w-fit font-medium">{t('ocr_alert')}</span>
                  </div>
                  
                  {/* Success Update Indicator */}
                  <div className="bg-green-500 text-white text-xs font-bold px-4 py-3 rounded-xl flex items-center justify-between shadow-lg opacity-90 animate-pulse mt-2">
-                    <span>MAJ OK : TARTARE</span>
+                    <span>{t('ocr_status')}</span>
                     <span className="font-plex-mono text-[10px]">28% → 29.5%</span>
                  </div>
                </div>
@@ -343,7 +343,7 @@ export function LandingPage() {
             <div className="order-1 bg-[#1f2d25] border border-[#3e5548] rounded-[2rem] h-64 md:h-full min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden p-6 text-center">
                <div className="text-3xl mb-4">📸</div>
                <div className="font-outfit text-sm text-green-100/70 max-w-xs leading-relaxed">
-                 "Découvrez le menu spécial de ce soir ! Un thon rouge mi-cuit parfaitement braisé... ✨ Réservation en bio 👇"
+                 {t('f6_mock_caption')}
                </div>
             </div>
             <div className="order-2">
@@ -390,15 +390,15 @@ export function LandingPage() {
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex justify-between items-center">
                   <div><p className="font-jakarta font-bold text-white text-xs">Martin, L.</p><p className="font-outfit text-slate-400 text-[10px]">19:30 · 4 pers.</p></div>
-                  <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">Confirmé</span>
+                  <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">{t('res_confirmed')}</span>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex justify-between items-center">
                   <div><p className="font-jakarta font-bold text-white text-xs">Dubois, A.</p><p className="font-outfit text-slate-400 text-[10px]">20:00 · 2 pers.</p></div>
-                  <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">Confirmé</span>
+                  <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">{t('res_confirmed')}</span>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex justify-between items-center opacity-50">
                   <div><p className="font-jakarta font-bold text-white text-xs">Bernard, S.</p><p className="font-outfit text-slate-400 text-[10px]">21:00 · 6 pers.</p></div>
-                  <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-bold">Annulé</span>
+                  <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-bold">{t('res_cancelled')}</span>
                 </div>
                 <div className="mt-1 flex justify-between items-center">
                   <span className="font-plex-mono text-[9px] text-slate-500">LAST SYNC: 2 min ago</span>
@@ -413,27 +413,27 @@ export function LandingPage() {
             <div className="order-1 bg-[#141414] border border-amber-900/20 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden p-6">
               <div className="w-full max-w-[290px] flex flex-col gap-2">
                 <div className="font-plex-mono text-[10px] text-amber-400/70 mb-3 flex justify-between">
-                  <span>PRÉPARATION — 47 cvts</span>
+                  <span>{t('prep_header')}</span>
                   <span className="text-amber-300 animate-pulse">Auto</span>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
-                  <span className="font-outfit text-white/80 text-xs">Filet de bœuf</span>
+                  <span className="font-outfit text-white/80 text-xs">{t('prep_item_beef')}</span>
                   <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">4.8 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">POS</span></div>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
-                  <span className="font-outfit text-white/80 text-xs">Saumon frais</span>
+                  <span className="font-outfit text-white/80 text-xs">{t('prep_item_salmon')}</span>
                   <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">3.2 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-indigo-500/20 text-indigo-300">RÉSA</span></div>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
-                  <span className="font-outfit text-white/80 text-xs">Pommes de terre</span>
+                  <span className="font-outfit text-white/80 text-xs">{t('prep_item_potato')}</span>
                   <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">12 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-green-500/20 text-green-300">RECETTE</span></div>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
-                  <span className="font-outfit text-white/80 text-xs">Crème fraîche</span>
+                  <span className="font-outfit text-white/80 text-xs">{t('prep_item_cream')}</span>
                   <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">1.5 L</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">POS</span></div>
                 </div>
                 <div className="mt-2 bg-amber-500/10 border border-amber-500/20 rounded-lg p-2.5 flex justify-between">
-                  <span className="font-outfit text-amber-200 text-xs font-bold">Coût estimé</span>
+                  <span className="font-outfit text-amber-200 text-xs font-bold">{t('prep_cost_label')}</span>
                   <span className="font-plex-mono text-amber-300 text-xs font-bold">342.50 $</span>
                 </div>
               </div>

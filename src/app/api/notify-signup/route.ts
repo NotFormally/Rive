@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { sendEmail } from '@/lib/email';
 
 const ADMIN_EMAIL = "nassim.saighi@gmail.com";
 
@@ -29,6 +30,13 @@ export async function POST(request: Request) {
     console.log(
       `🆕 NEW SIGNUP | ${restaurant_name} | ${email} | locale: ${locale || "fr"} | ${new Date().toISOString()}`
     );
+
+    // Send welcome email (fire and forget — never blocks signup)
+    sendEmail({
+      type: 'welcome',
+      to: email,
+      restaurantName: restaurant_name,
+    }).catch((err) => console.error('[email] welcome email failed:', err));
 
     return NextResponse.json({ success: true });
   } catch (error) {

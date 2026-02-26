@@ -1,0 +1,28 @@
+# Walkthrough: Développement Backend Rive
+
+Les fondations du backend Rive ont été restructurées pour remplacer les données "Mock" par une vraie base de données PostgreSQL (Supabase) et pour gérer le cache de recommandations de l'IA.
+
+## Ce qui a été accompli :
+
+1. **Migrations Supabase (Tables et RLS) :**
+   - Création de [migration_v8_food_cost.sql](file:///Users/nassim/Shore/supabase/migrations/migration_v8_food_cost.sql) pour les tables `ingredients`, `recipes` et `recipe_ingredients`.
+   - Création de [migration_v9_invoices.sql](file:///Users/nassim/Shore/supabase/migrations/migration_v9_invoices.sql) pour sauvegarder les tickets de caisse scannés.
+   - Création de [migration_v10_pos_sales.sql](file:///Users/nassim/Shore/supabase/migrations/migration_v10_pos_sales.sql) pour gérer les intégrations de données de vente (CSV/POS).
+   - Création de [migration_v11_ai_cache.sql](file:///Users/nassim/Shore/supabase/migrations/migration_v11_ai_cache.sql) pour le cache IA. 
+   *(Toutes ces tables sont entièrement sécurisées via le Row Level Security (RLS) basé sur le paramètre multi-tenant `restaurant_id`).*
+
+2. **Modification du système de Food Cost :**
+   - Mise à jour de [food-cost.ts](file:///Users/nassim/Shore/src/lib/food-cost.ts) pour ne plus utiliser de constantes, mais exécuter des requêtes dynamiques vers Supabase via un client authentifié.
+   - Refonte légère de [auth.ts](file:///Users/nassim/Shore/src/lib/auth.ts) afin de retourner l'instance Supabase authentifiée dans les middlewares d'API.
+
+3. **Mise à jour des Scans de Facture (OCR) :**
+   - Ajout du code d'insertion dans la table `invoices` à la fin du traitement OCR (à la fois pour les succès venant de Claude et le comportement "mock/fallback") directement dans la [route API scan-receipt](file:///Users/nassim/Shore/src/app/api/scan-receipt/route.ts).
+
+4. **Refonte de la Matrice BCG & Cache IA :**
+   - L'API [menu-engineering](file:///Users/nassim/Shore/src/app/api/menu-engineering/route.ts) pioche désormais en vrai temps dans les données de food cost distantes.
+   - Intégration à une fonctionnalité "Fallback" Mock si la base est encore vierge de données de vente.
+   - **Optimisation massive :** Claude AI n'est appelé que pour les items n'ayant pas de recommandation cache valide (plus ancienne que 7 jours ou si la position BCG a basculé). Les nouveaux résultats sont auto-sauvegardés dans Supabase.
+
+## Prochaines étapes côté Frontend
+- Exécuter les migrations manuellement dans le panel Supabase.
+- Ajouter des pages d'administration pour manipuler les fiches d'Ingrédients et Recettes et de Sales/POS depuis le Dashboard Next.js.

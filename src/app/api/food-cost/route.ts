@@ -1,14 +1,20 @@
-import { RECIPES, calculateItemFoodCost } from '@/lib/food-cost';
+import { loadFoodCostData, calculateItemFoodCost } from '@/lib/food-cost';
 import { loadMenuFromSupabase } from '@/lib/menu-store';
+import { requireAuth, unauthorized } from '@/lib/auth';
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const auth = await requireAuth(req);
+    if (!auth) return unauthorized();
+
     const { items: menuItems } = await loadMenuFromSupabase();
 
-    const results = RECIPES.map(recipe => {
+    const { ingredients, recipes } = await loadFoodCostData(auth.supabase, auth.restaurantId);
+
+    const results = recipes.map(recipe => {
       const menuItem = menuItems.find(item => item.id === recipe.menuItemId);
       if (!menuItem) return null;
-      return calculateItemFoodCost(recipe, menuItem.price, menuItem.name);
+      return calculateItemFoodCost(recipe, menuItem.price, menuItem.name, ingredients);
     }).filter(Boolean);
 
     // Calculate overall stats

@@ -14,6 +14,7 @@ const MODULE_LABELS: Record<string, { label: string; emoji: string; description:
   module_menu_engineering: { label: "Menu Engineering — Carte Marine", emoji: "🧭", description: "Classification Phare/Ancre/Dérive/Écueil + IA" },
   module_receipt_scanner:  { label: "Scanner de Reçus (OCR)",      emoji: "📸", description: "Extraction IA des factures fournisseurs" },
   module_instagram:        { label: "Générateur Instagram",        emoji: "📱", description: "Posts IA pour vos plats avec captions et hashtags" },
+  module_reservations:     { label: "Réservations (Libro/Resy/Zenchef)", emoji: "📅", description: "Flux en temps réel de vos réservations depuis vos plateformes" },
 };
 
 export default function SettingsPage() {
@@ -188,6 +189,49 @@ export default function SettingsPage() {
             <p className="text-sm text-slate-600">
               <strong>Slug du menu QR :</strong> /menu/{profile?.slug}
             </p>
+          </CardContent>
+        </Card>
+
+        {/* Webhooks & Integrations */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">🔌 Intégrations & Webhooks</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-slate-600">
+              Connectez vos plateformes de réservation (Libro, Resy, etc.) pour bénéficier des <strong>Smart Prep Lists</strong> (Prédictions IA).
+            </p>
+            <Button 
+              onClick={() => router.push('/dashboard/settings/reservations')} 
+              className="bg-blue-600 hover:bg-blue-700 text-white w-full"
+            >
+              Gérer mes intégrations natives
+            </Button>
+            <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 mt-4">
+               <div className="flex flex-col gap-2">
+                 <span className="text-sm font-medium text-slate-900">Webhook Universel Rive</span>
+                 <p className="text-xs text-slate-500 mb-2">Copiez ce lien et collez-le dans les paramètres "Webhooks" de votre logiciel de réservation.</p>
+                 <div className="flex gap-2 items-center">
+                    <code className="flex-1 bg-slate-200 px-3 py-2 rounded text-xs overflow-hidden text-ellipsis whitespace-nowrap font-mono text-slate-700">
+                      https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_{profile?.id?.slice(0,8) || 'XXXX'}
+                    </code>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => {
+                        navigator.clipboard.writeText(`https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_${profile?.id?.slice(0,8)}`);
+                        alert('Lien copié !');
+                      }}
+                    >
+                      Copier
+                    </Button>
+                 </div>
+                 <div className="mt-4 flex items-center gap-2 text-xs text-amber-600 bg-amber-50 p-2 rounded">
+                    <span className="animate-pulse h-2 w-2 bg-amber-500 rounded-full inline-block"></span>
+                    <span>En attente de la première réservation pour activer la prédiction...</span>
+                 </div>
+               </div>
+            </div>
           </CardContent>
         </Card>
 

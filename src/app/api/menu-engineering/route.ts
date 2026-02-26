@@ -1,4 +1,4 @@
-import { RECIPES, calculateItemFoodCost, FoodCostResult } from '@/lib/food-cost';
+import { loadFoodCostData, calculateItemFoodCost, FoodCostResult } from '@/lib/food-cost';
 import { loadMenuFromSupabase } from '@/lib/menu-store';
 import { fetchWeeklySales } from '@/lib/pos-integration';
 import { anthropic } from '@ai-sdk/anthropic';
@@ -35,14 +35,21 @@ export async function GET(req: Request) {
     const { items: menuItems } = await loadMenuFromSupabase();
     const activeMenuItemIds = menuItems.filter(i => i.available).map(i => i.id);
 
-    // 2. Fetch mock POS sales data
-    const posSales = await fetchWeeklySales('mock', activeMenuItemIds);
+    // 2. Fetch POS sales data from Supabase
+    let posSales = await fetchWeeklySales('supabase', activeMenuItemIds, auth.supabase, auth.restaurantId);
+    
+    // Fallback to mock data if the database is empty (for demo purposes)
+    if (posSales.length === 0) {
+      posSales = await fetchWeeklySales('mock', activeMenuItemIds);
+    }
 
-    // 3. Calculate food cost for all available items
-    const costResults: FoodCostResult[] = RECIPES.map(recipe => {
+    // 3. Calculate food cost for all available recipes
+    const { ingredients, recipes } = await loadFoodCostData(auth.supabase, auth.restaurantId);
+
+    const costResults: FoodCostResult[] = recipes.map(recipe => {
       const menuItem = menuItems.find(item => item.id === recipe.menuItemId);
       if (!menuItem) return null;
-      return calculateItemFoodCost(recipe, menuItem.price, menuItem.name);
+      return calculateItemFoodCost(recipe, menuItem.price, menuItem.name, ingredients);
     }).filter(Boolean) as FoodCostResult[];
 
     // 4. Determine medians for classification
@@ -83,24 +90,47 @@ export async function GET(req: Request) {
     baseItems.sort((a, b) => b.weeklyProfit - a.weeklyProfit);
 
     // 6. Generate AI Insights via Claude (Batch processing to save time)
-    // Create a structured prompt containing all crossed data
-    const aiPromptContext = baseItems.map(item => {
-      const fullMenuData = menuItems.find(m => m.id === item.menuItemId);
-      return `
-      ID: ${item.menuItemId}
-      Plat: ${item.menuItemName}
-      Description Menu: ${fullMenuData?.description || 'N/A'}
-      Prix: ${item.sellingPrice}$
-      Marge: ${item.marginPercent}%
-      Ventes Hédo (POS): ${item.weeklyOrders}
-      Statut Matrice BCG: ${item.category}
-      Profit Hebdo: ${item.weeklyProfit}$
-      `;
-    }).join('\n---\n');
+    // Fetch cached recommendations first
+    const { data: cachedRecommendations } = await auth.supabase
+      .from('menu_item_recommendations')
+      .select('menu_item_id, recommendation, category, calculated_at')
+      .eq('restaurant_id', auth.restaurantId)
+      .in('menu_item_id', activeMenuItemIds);
+
+    const cacheMap = new Map((cachedRecommendations || []).map(r => [r.menu_item_id, r]));
+
+    const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+    const now = new Date().getTime();
+
+    // Determine which items need a fresh AI generation
+    const itemsToProcess = baseItems.filter(item => {
+      const cached = cacheMap.get(item.menuItemId);
+      if (!cached) return true;
+      if (cached.category !== item.category) return true;
+      
+      const calcDate = new Date(cached.calculated_at).getTime();
+      if (now - calcDate > SEVEN_DAYS) return true;
+      
+      return false;
+    });
 
     let aiRecommendations: Record<string, string> = {};
 
-    if (process.env.ANTHROPIC_API_KEY) {
+    if (itemsToProcess.length > 0 && process.env.ANTHROPIC_API_KEY) {
+      const aiPromptContext = itemsToProcess.map(item => {
+        const fullMenuData = menuItems.find(m => m.id === item.menuItemId);
+        return `
+        ID: ${item.menuItemId}
+        Plat: ${item.menuItemName}
+        Description Menu: ${fullMenuData?.description || 'N/A'}
+        Prix: ${item.sellingPrice}$
+        Marge: ${item.marginPercent}%
+        Ventes Hédo (POS): ${item.weeklyOrders}
+        Statut Matrice BCG: ${item.category}
+        Profit Hebdo: ${item.weeklyProfit}$
+        `;
+      }).join('\n---\n');
+
       try {
         const { text } = await generateText({
           model: anthropic(MODEL_CREATE),
@@ -109,27 +139,55 @@ export async function GET(req: Request) {
           temperature: 0.3,
         });
 
-        // Basic cleaning if Claude wraps in markdown json payload
+        // Basic cleaning
         const jsonStr = text.replace(/```json\n|```/g, '');
         aiRecommendations = JSON.parse(jsonStr);
+
+        // Upsert newly generated recommendations to Supabase
+        const upsertData = itemsToProcess.map(item => ({
+          restaurant_id: auth.restaurantId,
+          menu_item_id: item.menuItemId,
+          recommendation: aiRecommendations[item.menuItemId] || '',
+          category: item.category,
+          calculated_at: new Date().toISOString()
+        })).filter(u => u.recommendation);
+
+        if (upsertData.length > 0) {
+          const { error: upsertError } = await auth.supabase
+            .from('menu_item_recommendations')
+            .upsert(upsertData, { onConflict: 'restaurant_id,menu_item_id' });
+            
+          if (upsertError) console.error('Failed to upsert recommendations:', upsertError);
+        }
+
       } catch (aiError) {
-        console.error("Erreur avec l'API Anthropic :", JSON.stringify(aiError, null, 2));
+        console.error("Erreur avec l'API Anthropic :", aiError);
       }
     }
 
     // 7. Merge AI recommendations
     const items: MenuEngineeringItem[] = baseItems.map(item => {
-      // Fallback strategies if AI fails or key is missing
-      const genericFallback = {
-        phare: 'Mettre en avant sur le menu QR. Maintenir la qualité.',
-        ancre: 'Populaire mais marge faible. Augmenter le prix ou réduire le coût.',
-        derive: 'Rentable mais peu commandé. Améliorer la description.',
-        ecueil: 'Envisager un retrait ou une refonte totale.'
-      };
+      const cached = cacheMap.get(item.menuItemId);
+      const newlyGenerated = aiRecommendations[item.menuItemId];
+      
+      let recommendation = '';
+      if (newlyGenerated) {
+        recommendation = newlyGenerated;
+      } else if (cached && cached.category === item.category) {
+        recommendation = cached.recommendation;
+      } else {
+        const genericFallback: Record<string, string> = {
+          phare: 'Mettre en avant sur le menu QR. Maintenir la qualité.',
+          ancre: 'Populaire mais marge faible. Augmenter le prix ou réduire le coût.',
+          derive: 'Rentable mais peu commandé. Améliorer la description.',
+          ecueil: 'Envisager un retrait ou une refonte totale.'
+        };
+        recommendation = genericFallback[item.category];
+      }
 
       return {
         ...item,
-        recommendation: aiRecommendations[item.menuItemId] || genericFallback[item.category]
+        recommendation
       };
     });
 

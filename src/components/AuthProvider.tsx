@@ -53,6 +53,8 @@ const defaultSettings: ModuleSettings = {
   module_menu_engineering: true,
   module_instagram: false,
   module_receipt_scanner: true,
+  module_reservations: true,
+  module_smart_prep: true,
 };
 
 const AuthContext = createContext<AuthContextType>({

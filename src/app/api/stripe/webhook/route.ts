@@ -13,13 +13,14 @@ function getServiceClient() {
   );
 }
 
-async function getRestaurantEmail(supabase: ReturnType<typeof createClient>, restaurantId: string): Promise<{ email: string; restaurantName: string } | null> {
-  const { data: profile } = await supabase
+async function getRestaurantEmail(supabase: any, restaurantId: string): Promise<{ email: string; restaurantName: string } | null> {
+  const { data } = await supabase
     .from('restaurant_profiles')
     .select('user_id, restaurant_name')
     .eq('id', restaurantId)
     .single();
 
+  const profile = data as { user_id: string; restaurant_name: string } | null;
   if (!profile) return null;
 
   const { data: { user } } = await supabase.auth.admin.getUserById(profile.user_id);

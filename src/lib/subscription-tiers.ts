@@ -1,7 +1,7 @@
 // Rive — Subscription Tier Configuration
 // Maps each tier to the modules it includes
 
-export type SubscriptionTier = 'trial' | 'essential' | 'performance' | 'enterprise';
+export type SubscriptionTier = 'trial' | 'essential' | 'performance' | 'intelligence' | 'enterprise';
 
 export type TierModules = {
   module_logbook: boolean;
@@ -10,6 +10,8 @@ export type TierModules = {
   module_menu_engineering: boolean;
   module_instagram: boolean;
   module_receipt_scanner: boolean;
+  module_reservations: boolean;
+  module_smart_prep: boolean;
 };
 
 export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: TierModules }> = {
@@ -22,6 +24,8 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_menu_engineering: true,
       module_instagram: true,
       module_receipt_scanner: true,
+      module_reservations: true,  // Full access during trial
+      module_smart_prep: true,    // Smart Prep available during trial (degrades gracefully by data level)
     },
   },
   essential: {
@@ -33,6 +37,8 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_menu_engineering: false,
       module_instagram: false,
       module_receipt_scanner: false,
+      module_reservations: false,
+      module_smart_prep: false,
     },
   },
   performance: {
@@ -44,6 +50,21 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_menu_engineering: true,
       module_instagram: true,
       module_receipt_scanner: false,
+      module_reservations: false,
+      module_smart_prep: false,
+    },
+  },
+  intelligence: {
+    label: 'Intelligence',
+    modules: {
+      module_logbook: true,
+      module_menu_editor: true,
+      module_food_cost: true,
+      module_menu_engineering: true,
+      module_instagram: true,
+      module_receipt_scanner: true,
+      module_reservations: true,   // ✅ Tier 3: Libro, Resy, Zenchef
+      module_smart_prep: true,     // ✅ Smart Prep Lists (data-level degradation, not tier-gated)
     },
   },
   enterprise: {
@@ -55,6 +76,8 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_menu_engineering: true,
       module_instagram: true,
       module_receipt_scanner: true,
+      module_reservations: true,
+      module_smart_prep: true,
     },
   },
 };
@@ -85,7 +108,10 @@ export function computeEffectiveModules(
     module_menu_engineering: tierModules.module_menu_engineering && dbSettings.module_menu_engineering,
     module_instagram: tierModules.module_instagram && dbSettings.module_instagram,
     module_receipt_scanner: tierModules.module_receipt_scanner && dbSettings.module_receipt_scanner,
+    module_reservations: tierModules.module_reservations && (dbSettings.module_reservations ?? true),
+    module_smart_prep: tierModules.module_smart_prep && (dbSettings.module_smart_prep ?? true),
   };
 
   return { modules, tier: effectiveTier, trialExpired, daysLeft };
 }
+

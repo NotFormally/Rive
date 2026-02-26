@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from 'next-intl';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe } from "lucide-react";
+import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 
 // Register GSAP Plugin
@@ -128,6 +128,20 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* POS Integrations Banner */}
+      <div className="w-full bg-[#1A1A1A] text-[#CC5833] py-5 overflow-hidden border-y border-[#1A1A1A]/10">
+        <div className="flex whitespace-nowrap animate-scroll-x items-center gap-12 font-plex-mono text-sm font-bold tracking-widest uppercase">
+          <span>{t('integrations_banner')}</span>
+          <span>{t('integrations_banner')}</span>
+          <span>{t('integrations_banner')}</span>
+          <span>{t('integrations_banner')}</span>
+          <span>{t('integrations_banner')}</span>
+          <span>{t('integrations_banner')}</span>
+          <span>{t('integrations_banner')}</span>
+          <span>{t('integrations_banner')}</span>
+        </div>
+      </div>
+
       {/* C. THE 6 PILLARS — "Explicit Features & Use Cases" */}
       <section id="features" className="py-32 px-8 md:px-24 max-w-screen-2xl mx-auto bg-[#F2F0E9]">
         <div className="text-center mb-24 max-w-3xl mx-auto">
@@ -248,12 +262,23 @@ export function LandingPage() {
 
           {/* Feature 4: Food Cost & Menu Engineering */}
           <div className="feature-row bg-slate-50 border border-slate-200/60 rounded-[3rem] p-8 md:p-12 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-1 bg-white border border-slate-200 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden p-8">
-               <div className="w-full flex justify-between items-end h-32 border-b border-slate-100 pb-2">
-                 <div className="w-12 bg-slate-200 rounded-t-md h-12"></div>
-                 <div className="w-12 bg-slate-300 rounded-t-md h-20"></div>
-                 <div className="w-12 bg-[#CC5833] rounded-t-md h-32 animate-pulse shadow-lg"></div>
+            <div className="order-1 bg-white border border-slate-200 rounded-[2rem] h-64 md:h-full min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden p-6 md:p-8">
+               {/* Matrix Background */}
+               <div className="absolute inset-5 grid grid-cols-2 grid-rows-2 gap-1 opacity-70">
+                 <div className="bg-green-50 rounded-tl-2xl border border-green-100 flex items-center justify-center text-green-700/50 text-xs font-bold font-jakarta">Étoiles</div>
+                 <div className="bg-amber-50 rounded-tr-2xl border border-amber-100 flex items-center justify-center text-amber-700/50 text-xs font-bold font-jakarta">Vaches à lait</div>
+                 <div className="bg-red-50 rounded-bl-2xl border border-red-100 flex items-center justify-center text-red-700/50 text-xs font-bold font-jakarta">Poids morts</div>
+                 <div className="bg-blue-50 rounded-br-2xl border border-blue-100 flex items-center justify-center text-blue-700/50 text-xs font-bold font-jakarta">Énigmes</div>
                </div>
+               
+               {/* POS Data lines flowing in */}
+               <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 w-full justify-center z-10">
+                 <div className="font-plex-mono text-[10px] text-slate-500 bg-white px-3 py-1.5 rounded-full shadow-sm animate-bounce">↓ API Sync (Toast, Square...)</div>
+               </div>
+
+               {/* Animated dots moving into quadrants */}
+               <div className="absolute w-4 h-4 bg-[#CC5833] rounded-full shadow-[0_0_15px_#CC5833] animate-pulse top-[30%] left-[70%] z-10 transition-transform duration-1000"></div>
+               <div className="absolute w-4 h-4 bg-[#2e4036] rounded-full shadow-[0_0_15px_#2e4036] animate-pulse bottom-[30%] right-[70%] z-10 transition-transform duration-1000 delay-500"></div>
             </div>
             <div className="order-2">
               <div className="flex flex-col gap-6">
@@ -289,9 +314,27 @@ export function LandingPage() {
                 </div>
               </div>
             </div>
-            <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden">
-               <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-green-400 animate-pulse shadow-[0_0_10px_#4ade80]"></div>
-               <div className="bg-white border text-xs p-4 rounded shadow font-mono opacity-50">SAUMON NORVEGE... 12.50/KG</div>
+            <div className="order-1 md:order-2 bg-slate-50 rounded-[2rem] h-64 md:h-full min-h-[300px] border border-slate-100 flex items-center justify-center relative overflow-hidden p-6 hover:bg-slate-100 transition-colors duration-500">
+               <div className="absolute top-0 bottom-0 left-1/2 w-[1px] bg-green-400 opacity-50 shadow-[0_0_5px_#4ade80]">
+                  <div className="w-full h-16 bg-gradient-to-b from-transparent via-green-400 to-transparent animate-scroll-y"></div>
+               </div>
+               <div className="relative z-10 w-full max-w-[260px] flex flex-col gap-4">
+                 {/* Extracted line item */}
+                 <div className="bg-white border border-slate-200 text-xs p-4 rounded-xl shadow-sm flex flex-col gap-2 transition-all duration-500 transform hover:-translate-y-1">
+                    <span className="font-plex-mono text-slate-400 text-[10px]">SCAN-REQ-4829</span>
+                    <div className="flex justify-between font-bold font-jakarta text-[#1A1A1A] text-sm">
+                      <span>Saumon Norvège</span>
+                      <span>12.50/KG</span>
+                    </div>
+                    <span className="text-[10px] text-red-500 bg-red-50 border border-red-100 px-2 py-1 rounded w-fit font-medium">▲ +0.50€ / KG</span>
+                 </div>
+                 
+                 {/* Success Update Indicator */}
+                 <div className="bg-green-500 text-white text-xs font-bold px-4 py-3 rounded-xl flex items-center justify-between shadow-lg opacity-90 animate-pulse mt-2">
+                    <span>MAJ OK : TARTARE</span>
+                    <span className="font-plex-mono text-[10px]">28% → 29.5%</span>
+                 </div>
+               </div>
             </div>
           </div>
 
@@ -314,6 +357,98 @@ export function LandingPage() {
                     <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex1')}</li>
                     <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex2')}</li>
                     <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex3')}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          {/* Feature 7: Reservations */}
+          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <div className="flex flex-col gap-6">
+                <div className="bg-indigo-50 w-16 h-16 rounded-2xl flex items-center justify-center"><CalendarCheck className="w-8 h-8 text-indigo-600" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f7_title')}</h3>
+                <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f7_desc')}</p>
+                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100/60 mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">Exemples d&apos;utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
+                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f7_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f7_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f7_ex3')}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 bg-slate-900 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden p-6">
+              <div className="w-full max-w-[300px] flex flex-col gap-3">
+                <div className="flex gap-2 mb-1">
+                  <span className="font-plex-mono text-[9px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-1 rounded-full">LIBRO ●</span>
+                  <span className="font-plex-mono text-[9px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-1 rounded-full">RESY ●</span>
+                  <span className="font-plex-mono text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-2 py-1 rounded-full">ZENCHEF ●</span>
+                </div>
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex justify-between items-center">
+                  <div><p className="font-jakarta font-bold text-white text-xs">Martin, L.</p><p className="font-outfit text-slate-400 text-[10px]">19:30 · 4 pers.</p></div>
+                  <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">Confirmé</span>
+                </div>
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex justify-between items-center">
+                  <div><p className="font-jakarta font-bold text-white text-xs">Dubois, A.</p><p className="font-outfit text-slate-400 text-[10px]">20:00 · 2 pers.</p></div>
+                  <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">Confirmé</span>
+                </div>
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex justify-between items-center opacity-50">
+                  <div><p className="font-jakarta font-bold text-white text-xs">Bernard, S.</p><p className="font-outfit text-slate-400 text-[10px]">21:00 · 6 pers.</p></div>
+                  <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-bold">Annulé</span>
+                </div>
+                <div className="mt-1 flex justify-between items-center">
+                  <span className="font-plex-mono text-[9px] text-slate-500">LAST SYNC: 2 min ago</span>
+                  <span className="font-plex-mono text-[9px] text-indigo-400 animate-pulse">● LIVE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature 8: Smart Prep Lists */}
+          <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 md:p-12 shadow-md grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-1 bg-[#141414] border border-amber-900/20 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden p-6">
+              <div className="w-full max-w-[290px] flex flex-col gap-2">
+                <div className="font-plex-mono text-[10px] text-amber-400/70 mb-3 flex justify-between">
+                  <span>PRÉPARATION — 47 cvts</span>
+                  <span className="text-amber-300 animate-pulse">Auto</span>
+                </div>
+                <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
+                  <span className="font-outfit text-white/80 text-xs">Filet de bœuf</span>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">4.8 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">POS</span></div>
+                </div>
+                <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
+                  <span className="font-outfit text-white/80 text-xs">Saumon frais</span>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">3.2 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-indigo-500/20 text-indigo-300">RÉSA</span></div>
+                </div>
+                <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
+                  <span className="font-outfit text-white/80 text-xs">Pommes de terre</span>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">12 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-green-500/20 text-green-300">RECETTE</span></div>
+                </div>
+                <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
+                  <span className="font-outfit text-white/80 text-xs">Crème fraîche</span>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">1.5 L</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">POS</span></div>
+                </div>
+                <div className="mt-2 bg-amber-500/10 border border-amber-500/20 rounded-lg p-2.5 flex justify-between">
+                  <span className="font-outfit text-amber-200 text-xs font-bold">Coût estimé</span>
+                  <span className="font-plex-mono text-amber-300 text-xs font-bold">342.50 $</span>
+                </div>
+              </div>
+            </div>
+            <div className="order-2">
+              <div className="flex flex-col gap-6">
+                <div className="bg-amber-500/10 w-16 h-16 rounded-2xl flex items-center justify-center"><ChefHat className="w-8 h-8 text-amber-400" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl">{t('f8_title')}</h3>
+                <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f8_desc')}</p>
+                <div className="bg-[#232323] p-6 rounded-2xl mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-amber-500/40 mb-4">Exemples d&apos;utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-300">
+                    <li className="flex gap-3"><span className="text-amber-400">✦</span> {t('f8_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-amber-400">✦</span> {t('f8_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-amber-400">✦</span> {t('f8_ex3')}</li>
                   </ul>
                 </div>
               </div>
@@ -455,6 +590,9 @@ export function LandingPage() {
           <div>
             <div className="font-outfit font-bold text-3xl mb-4">Rive</div>
             <p className="font-outfit text-slate-400 max-w-xs">{t('footer_desc')}</p>
+            <a href="mailto:dock@rivehub.com" className="font-outfit text-sm text-[#CC5833] mt-3 inline-block hover:text-[#F2F0E9] transition-colors tracking-wide">
+              dock@rivehub.com
+            </a>
           </div>
           <div className="flex items-center gap-3 bg-[#2E4036]/30 border border-[#2E4036] px-4 py-2 rounded-full animate-pulse transition-opacity">
             <span className="w-3 h-3 bg-green-500 rounded-full"></span>
@@ -474,6 +612,20 @@ export function LandingPage() {
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes dash {
           to { stroke-dashoffset: 0; }
+        }
+        @keyframes scrollY {
+          from { transform: translateY(-100%); }
+          to { transform: translateY(300px); }
+        }
+        .animate-scroll-y {
+           animation: scrollY 3s linear infinite;
+        }
+        @keyframes scrollX {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-scroll-x {
+          animation: scrollX 30s linear infinite;
         }
       `}} />
     </div>

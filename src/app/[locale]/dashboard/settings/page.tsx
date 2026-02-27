@@ -161,8 +161,9 @@ export default function SettingsPage() {
                 return (
                   <div
                     key={key}
+                    onClick={() => !isAllowed && router.push('/pricing')}
                     className={`flex items-center justify-between p-4 border border-slate-200 rounded-xl transition-colors ${
-                      isAllowed ? 'hover:bg-slate-50' : 'opacity-60 bg-slate-50 relative'
+                      isAllowed ? 'hover:bg-slate-50' : 'opacity-60 bg-slate-50 relative cursor-pointer hover:border-orange-200'
                     }`}
                   >
                     {!isAllowed && (

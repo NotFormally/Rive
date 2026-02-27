@@ -130,7 +130,7 @@ export function LandingPage() {
         {/* Background Image with Global CSS Noise */}
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('/the-harbor.jpeg')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1442406964439-e46ab8eff7c4?q=80&w=2048&auto=format&fit=crop')" }}
         >
           {/* Heavy primary-to-black gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#2E4036]/90 to-[#1A1A1A]/70"></div>

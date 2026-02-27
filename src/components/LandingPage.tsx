@@ -62,6 +62,38 @@ export function LandingPage() {
           { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)" }
         );
       }, 3000);
+      // 4. Protocol Stacking Cards Animation
+      const stackCards = gsap.utils.toArray<HTMLElement>('.stack-card');
+      stackCards.forEach((card, i) => {
+        if (i === stackCards.length - 1) {
+          // Last card just pins, no scale/blur needed
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top+=100",
+            endTrigger: ".protocol-container",
+            end: "bottom bottom",
+            pin: true,
+            pinSpacing: false
+          });
+          return;
+        }
+
+        gsap.to(card, {
+          scale: 0.9,
+          opacity: 0.5,
+          filter: "blur(20px)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            start: "top top+=100",
+            endTrigger: ".protocol-container",
+            end: "bottom bottom",
+            pin: true,
+            pinSpacing: false,
+            scrub: true,
+          }
+        });
+      });
 
       return () => {
         clearInterval(shufflerInterval);
@@ -468,20 +500,21 @@ export function LandingPage() {
 
         {/* Top Manifesto — Contrast Statements */}
         <div className="relative z-10 max-w-6xl mx-auto px-8 md:px-24 py-32 md:py-48">
-          <div className="flex flex-col gap-6 md:gap-10">
+          <div className="flex flex-col gap-6 md:gap-10 items-center text-center">
             {/* The "old way" — muted, understated */}
-            <p className="philosophy-text font-outfit text-lg md:text-2xl text-[#6B7280] leading-relaxed max-w-4xl">
+            <p className="philosophy-text font-outfit text-lg md:text-2xl text-[#6B7280] leading-relaxed max-w-4xl mx-auto">
               {t('philosophy_intro')}
             </p>
 
             {/* The decorative accent line */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center justify-center gap-6">
               <div className="w-24 h-[2px] bg-gradient-to-r from-[#CC5833] to-transparent"></div>
               <span className="font-plex-mono text-xs uppercase tracking-[0.3em] text-[#CC5833]/60">{t('philosophy_approach')}</span>
+              <div className="w-24 h-[2px] bg-gradient-to-l from-[#CC5833] to-transparent"></div>
             </div>
 
             {/* The "Rive way" — massive, cinematic */}
-            <p className="philosophy-text font-cormorant italic text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] max-w-5xl">
+            <p className="philosophy-text font-cormorant italic text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] max-w-5xl mx-auto">
               {t('philosophy_vision')}
             </p>
           </div>
@@ -527,7 +560,7 @@ export function LandingPage() {
 
         <div className="protocol-container relative">
           {/* Card 1 */}
-          <div className="stack-card sticky top-32 bg-[#2E4036] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
+          <div className="stack-card bg-[#2E4036] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 01</div>
               <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase1_title')}</h3>
@@ -542,7 +575,7 @@ export function LandingPage() {
           </div>
 
           {/* Card 2 */}
-          <div className="stack-card sticky top-40 bg-[#CC5833] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
+          <div className="stack-card bg-[#CC5833] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#1A1A1A] font-bold text-sm mb-4">PHASE 02</div>
               <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase2_title')}</h3>
@@ -558,7 +591,7 @@ export function LandingPage() {
           </div>
 
           {/* Card 3 */}
-          <div className="stack-card sticky top-48 bg-[#1A1A1A] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
+          <div className="stack-card bg-[#1A1A1A] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 03</div>
               <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase3_title')}</h3>

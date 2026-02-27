@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter, Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { supabase } from "@/lib/supabase";
 
@@ -23,9 +24,8 @@ function InviteAcceptContent() {
     }
 
     const acceptInvite = async () => {
-      // Check if user is logged in
       const { data: { session } } = await supabase.auth.getSession();
-      
+
       if (!session) {
         setStatus("login_needed");
         setMessage("Veuillez vous connecter pour accepter l'invitation.");
@@ -62,67 +62,73 @@ function InviteAcceptContent() {
   }, [token]);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 max-w-md w-full text-center space-y-6">
+    <div className="min-h-screen bg-background noise-bg flex items-center justify-center p-4">
+      <div className="bg-card rounded-[2rem] shadow-2xl shadow-black/10 border border-border/50 p-8 md:p-10 max-w-md w-full text-center space-y-6">
         {/* Logo */}
-        <div className="text-3xl font-bold text-slate-900">Rive</div>
+        <div className="text-3xl font-jakarta font-bold text-foreground tracking-tighter">Rive</div>
 
         {status === "loading" && (
           <>
-            <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto" />
-            <p className="text-sm text-slate-500">Traitement de votre invitation...</p>
+            <div className="animate-spin h-8 w-8 border-4 border-accent border-t-transparent rounded-full mx-auto" />
+            <p className="text-sm font-outfit text-muted-foreground">Traitement de votre invitation...</p>
           </>
         )}
 
         {status === "success" && (
           <>
-            <div className="text-5xl">✅</div>
-            <p className="text-lg font-semibold text-slate-900">{message}</p>
-            <p className="text-sm text-slate-500">
+            <div className="w-16 h-16 mx-auto rounded-full bg-green-50 flex items-center justify-center">
+              <span className="text-3xl">✓</span>
+            </div>
+            <p className="text-lg font-jakarta font-bold text-foreground">{message}</p>
+            <p className="text-sm font-outfit text-muted-foreground">
               Vous avez maintenant accès au tableau de bord du restaurant.
             </p>
-            <button
-              onClick={() => router.push(`/${locale}/dashboard`)}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl font-medium transition-colors"
+            <Link
+              href="/dashboard"
+              className="block w-full bg-primary hover:bg-[#3A4F43] text-primary-foreground py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300 hover:scale-[1.02]"
             >
-              Accéder au dashboard →
-            </button>
+              Accéder au dashboard
+            </Link>
           </>
         )}
 
         {status === "error" && (
           <>
-            <div className="text-5xl">❌</div>
-            <p className="text-lg font-semibold text-red-600">{message}</p>
-            <button
-              onClick={() => router.push(`/${locale}`)}
-              className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 px-6 rounded-xl font-medium transition-colors"
+            <div className="w-16 h-16 mx-auto rounded-full bg-red-50 flex items-center justify-center">
+              <span className="text-3xl text-red-500">✕</span>
+            </div>
+            <p className="text-lg font-jakarta font-bold text-red-600">{message}</p>
+            <Link
+              href="/"
+              className="block w-full bg-foreground hover:bg-foreground/90 text-background py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300"
             >
               Retour à l&apos;accueil
-            </button>
+            </Link>
           </>
         )}
 
         {status === "login_needed" && (
           <>
-            <div className="text-5xl">🔐</div>
-            <p className="text-lg font-semibold text-slate-900">{message}</p>
-            <p className="text-sm text-slate-500">
+            <div className="w-16 h-16 mx-auto rounded-full bg-accent/10 flex items-center justify-center">
+              <span className="text-3xl text-accent">→</span>
+            </div>
+            <p className="text-lg font-jakarta font-bold text-foreground">{message}</p>
+            <p className="text-sm font-outfit text-muted-foreground">
               Connectez-vous ou créez un compte, puis revenez sur ce lien.
             </p>
             <div className="space-y-3">
-              <button
-                onClick={() => router.push(`/${locale}/login?redirect=/${locale}/invite?token=${token}`)}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl font-medium transition-colors"
+              <a
+                href={`/${locale}/login?redirect=/${locale}/invite?token=${token}`}
+                className="block w-full bg-primary hover:bg-[#3A4F43] text-primary-foreground py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300 text-center"
               >
                 Se connecter
-              </button>
-              <button
-                onClick={() => router.push(`/${locale}/signup?redirect=/${locale}/invite?token=${token}`)}
-                className="w-full bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-6 rounded-xl font-medium transition-colors"
+              </a>
+              <a
+                href={`/${locale}/signup?redirect=/${locale}/invite?token=${token}`}
+                className="block w-full bg-secondary hover:bg-secondary/80 text-foreground py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300 text-center"
               >
                 Créer un compte
-              </button>
+              </a>
             </div>
           </>
         )}
@@ -134,8 +140,8 @@ function InviteAcceptContent() {
 export default function InvitePage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" />
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin h-8 w-8 border-4 border-accent border-t-transparent rounded-full" />
       </div>
     }>
       <InviteAcceptContent />

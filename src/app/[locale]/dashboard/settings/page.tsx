@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter, Link } from "@/i18n/routing";
 import { useTranslations, useLocale } from 'next-intl';
 import { useAuth, type MemberRole } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
@@ -17,13 +17,13 @@ const MODULE_LABELS: Record<string, { label: string; emoji: string; description:
   module_receipt_scanner:  { label: "Scanner de Reçus (OCR)",      emoji: "📸", description: "Extraction IA des factures fournisseurs" },
   module_instagram:        { label: "Générateur Instagram",        emoji: "📱", description: "Posts IA pour vos plats avec captions et hashtags" },
   module_reservations:     { label: "Réservations (Libro/Resy/Zenchef)", emoji: "📅", description: "Flux en temps réel de vos réservations depuis vos plateformes" },
+  module_smart_prep:       { label: "Smart Prep Lists",            emoji: "🧠", description: "Listes de préparation IA basées sur vos ventes et réservations" },
 };
 
 const ROLE_LABELS: Record<MemberRole, { label: string; color: string }> = {
   owner:  { label: "Propriétaire", color: "bg-amber-100 text-amber-800 border-amber-200" },
-  admin:  { label: "Administrateur", color: "bg-blue-100 text-blue-800 border-blue-200" },
-  editor: { label: "Éditeur", color: "bg-green-100 text-green-800 border-green-200" },
-
+  admin:  { label: "Administrateur", color: "bg-[#2E4036]/10 text-[#2E4036] border-[#2E4036]/20" },
+  editor: { label: "Éditeur", color: "bg-[#CC5833]/10 text-[#CC5833] border-[#CC5833]/20" },
 };
 
 type TeamMember = {
@@ -38,7 +38,6 @@ type TeamMember = {
 
 export default function SettingsPage() {
   const { user, profile, role, settings, subscription, loading: authLoading, refreshSettings } = useAuth();
-  const t = useTranslations('settings');
   const locale = useLocale();
   const [localSettings, setLocalSettings] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState(false);
@@ -67,7 +66,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (!authLoading && !user) {
-      router.push("/");
+      router.push("/login");
     }
   }, [user, authLoading, router]);
 
@@ -80,6 +79,8 @@ export default function SettingsPage() {
         module_menu_engineering: settings.module_menu_engineering,
         module_receipt_scanner: settings.module_receipt_scanner,
         module_instagram: settings.module_instagram,
+        module_reservations: settings.module_reservations,
+        module_smart_prep: settings.module_smart_prep,
       });
     }
     if (profile) {
@@ -221,47 +222,51 @@ export default function SettingsPage() {
     }
   };
 
-  if (authLoading) return <div className="p-8 text-center flex-1">Génération de l&apos;espace...</div>;
+  if (authLoading) return <div className="p-8 text-center flex-1 font-outfit text-muted-foreground">Chargement...</div>;
   if (!user) return null;
 
   const canManageTeam = role === 'owner' || role === 'admin';
 
   return (
-    <>
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4">
+    <div className="flex flex-col gap-6 md:gap-10">
+      <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
         <div>
-          <h1 className="text-xl font-bold">Menu &amp; Paramètres</h1>
-          <p className="text-sm text-slate-500">Gérez vos préférences et modules</p>
+          <h1 className="text-3xl md:text-5xl font-jakarta font-bold text-foreground tracking-tighter mb-1 md:mb-2">
+            Paramètres
+          </h1>
+          <p className="text-base md:text-lg font-outfit text-muted-foreground opacity-80">
+            Gérez vos préférences, modules et équipe
+          </p>
         </div>
       </header>
 
-      <main className="p-8 max-w-3xl space-y-8">
+      <div className="max-w-3xl space-y-8">
         {/* Restaurant Profile */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">🏠 Mon Restaurant</CardTitle>
+        <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+          <CardHeader className="bg-card p-6 md:p-8 pb-4">
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Mon Restaurant</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 p-6 md:p-8 pt-2">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Nom du restaurant</label>
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">Nom du restaurant</label>
               <input
                 type="text"
                 value={profileName}
                 onChange={(e) => setProfileName(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Slogan</label>
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">Slogan</label>
               <input
                 type="text"
                 value={profileTagline}
                 onChange={(e) => setProfileTagline(e.target.value)}
                 placeholder="Cuisine française contemporaine"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
               />
             </div>
-            <Button onClick={handleSaveProfile} disabled={saving} className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Button onClick={handleSaveProfile} disabled={saving} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
               {saving ? "Enregistrement..." : "Enregistrer"}
             </Button>
           </CardContent>
@@ -269,43 +274,42 @@ export default function SettingsPage() {
 
         {/* Team Management */}
         {canManageTeam && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">👥 Équipe</CardTitle>
+          <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+            <CardHeader className="bg-card p-6 md:p-8 pb-4">
+              <CardTitle className="text-lg font-jakarta font-bold text-foreground">Équipe</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <p className="text-sm text-slate-500">
+            <CardContent className="space-y-6 p-6 md:p-8 pt-2">
+              <p className="text-sm font-outfit text-muted-foreground">
                 Invitez d&apos;autres personnes à co-administrer votre restaurant. Chaque membre reçoit un lien d&apos;invitation.
               </p>
 
               {/* Invite form */}
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                <p className="text-sm font-medium text-slate-700">Inviter un membre</p>
+              <div className="bg-secondary/50 p-5 rounded-2xl border border-border space-y-3">
+                <p className="text-sm font-medium font-jakarta text-foreground">Inviter un membre</p>
                 <div className="flex gap-2">
                   <input
                     type="email"
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
                     placeholder="email@example.com"
-                    className="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
                     disabled={inviting}
                   />
                   <select
                     value={inviteRole}
                     onChange={(e) => setInviteRole(e.target.value as 'admin' | 'editor')}
-                    className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    className="px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
                     disabled={inviting}
                   >
                     {role === 'owner' && <option value="admin">Administrateur</option>}
                     <option value="editor">Éditeur</option>
-
                   </select>
                 </div>
-                <Button onClick={handleInvite} disabled={inviting || !inviteEmail.trim()} className="bg-blue-600 hover:bg-blue-700 text-white w-full">
+                <Button onClick={handleInvite} disabled={inviting || !inviteEmail.trim()} className="bg-accent hover:bg-[#b84d2d] text-accent-foreground w-full rounded-xl">
                   {inviting ? "Envoi..." : "Envoyer l'invitation"}
                 </Button>
                 {inviteMsg && (
-                  <p className={`text-sm ${inviteMsg.type === 'success' ? 'text-green-600' : 'text-red-500'}`}>
+                  <p className={`text-sm font-outfit ${inviteMsg.type === 'success' ? 'text-green-600' : 'text-red-500'}`}>
                     {inviteMsg.text}
                   </p>
                 )}
@@ -313,11 +317,11 @@ export default function SettingsPage() {
 
               {/* Members list */}
               <div className="space-y-2">
-                <p className="text-sm font-medium text-slate-700">Membres actuels</p>
+                <p className="text-sm font-medium font-jakarta text-foreground">Membres actuels</p>
                 {teamLoading ? (
-                  <p className="text-sm text-slate-400">Chargement...</p>
+                  <p className="text-sm font-outfit text-muted-foreground">Chargement...</p>
                 ) : members.length === 0 ? (
-                  <p className="text-sm text-slate-400">Aucun membre pour le moment.</p>
+                  <p className="text-sm font-outfit text-muted-foreground">Aucun membre pour le moment.</p>
                 ) : (
                   <div className="space-y-2">
                     {members.map((member) => {
@@ -328,16 +332,16 @@ export default function SettingsPage() {
                       return (
                         <div
                           key={member.id}
-                          className={`flex items-center justify-between p-3 border border-slate-200 rounded-xl ${isPending ? 'opacity-60 bg-slate-50' : 'bg-white'}`}
+                          className={`flex items-center justify-between p-3 border border-border rounded-xl ${isPending ? 'opacity-60 bg-secondary/30' : 'bg-card'}`}
                         >
                           <div className="flex items-center gap-3 min-w-0">
-                            <div className="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-sm font-bold text-slate-600">
+                            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold font-jakarta text-primary">
                               {(member.email || member.invited_email || '?')[0].toUpperCase()}
                             </div>
                             <div className="min-w-0">
-                              <p className="text-sm font-medium text-slate-900 truncate">
+                              <p className="text-sm font-medium font-outfit text-foreground truncate">
                                 {member.email || member.invited_email}
-                                {isCurrentUser && <span className="text-xs text-slate-400 ml-1">(vous)</span>}
+                                {isCurrentUser && <span className="text-xs text-muted-foreground ml-1">(vous)</span>}
                               </p>
                               <div className="flex items-center gap-2 mt-0.5">
                                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${roleInfo.color}`}>
@@ -360,11 +364,10 @@ export default function SettingsPage() {
                                 <select
                                   value={member.role}
                                   onChange={(e) => handleChangeRole(member.id, e.target.value)}
-                                  className="text-xs px-2 py-1 border border-slate-200 rounded-lg bg-white"
+                                  className="text-xs px-2 py-1 border border-border rounded-lg bg-background font-outfit"
                                 >
                                   <option value="admin">Admin</option>
                                   <option value="editor">Éditeur</option>
-
                                 </select>
                               )}
                               <button
@@ -387,16 +390,16 @@ export default function SettingsPage() {
         )}
 
         {/* Module Toggles */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">🧩 Modules Actifs</CardTitle>
+        <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+          <CardHeader className="bg-card p-6 md:p-8 pb-4">
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Modules Actifs</CardTitle>
           </CardHeader>
-          <CardContent>
-            <p className="text-sm text-slate-500 mb-6">Activez ou désactivez les modules que vous souhaitez voir apparaître dans votre barre latérale de navigation.</p>
-            <div className="space-y-4">
+          <CardContent className="p-6 md:p-8 pt-2">
+            <p className="text-sm font-outfit text-muted-foreground mb-6">Activez ou désactivez les modules de votre barre de navigation.</p>
+            <div className="space-y-3">
               {Object.entries(MODULE_LABELS).map(([key, config]) => {
                 const isAllowed = subscription && TIER_CONFIG[subscription.tier].modules[key as keyof TierModules];
-                
+
                 // Find minimum tier required for this module if not allowed
                 let requiredTierLabel = "Supérieur";
                 if (!isAllowed) {
@@ -407,9 +410,9 @@ export default function SettingsPage() {
                 return (
                   <div
                     key={key}
-                    onClick={() => !isAllowed && router.push('/pricing')}
-                    className={`flex items-center justify-between p-4 border border-slate-200 rounded-xl transition-colors ${
-                      isAllowed ? 'hover:bg-slate-50' : 'opacity-60 bg-slate-50 relative cursor-pointer hover:border-orange-200'
+                    onClick={() => !isAllowed && router.push('/pricing' as any)}
+                    className={`flex items-center justify-between p-4 border border-border rounded-2xl transition-all duration-300 ${
+                      isAllowed ? 'hover:bg-secondary/30 bg-card' : 'opacity-60 bg-secondary/20 relative cursor-pointer hover:border-accent/30'
                     }`}
                   >
                     {!isAllowed && (
@@ -419,26 +422,26 @@ export default function SettingsPage() {
                       <span className="text-2xl">{config.emoji}</span>
                       <div>
                         <div className="flex items-center gap-2 mb-0.5">
-                          <p className="font-medium text-sm text-slate-900">{config.label}</p>
+                          <p className="font-medium text-sm font-jakarta text-foreground">{config.label}</p>
                           {!isAllowed && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-[#CC5833] px-2 py-0.5 rounded-full inline-flex items-center gap-1 border border-orange-200">
-                              🔒 Inclus avec {requiredTierLabel}
+                            <span className="text-[10px] font-bold uppercase tracking-wider bg-accent/10 text-accent px-2 py-0.5 rounded-full inline-flex items-center gap-1 border border-accent/20">
+                              Inclus avec {requiredTierLabel}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-slate-500">{config.description}</p>
+                        <p className="text-xs font-outfit text-muted-foreground">{config.description}</p>
                       </div>
                     </div>
                     <button
-                      onClick={() => isAllowed && handleToggle(key)}
+                      onClick={(e) => { e.stopPropagation(); isAllowed && handleToggle(key); }}
                       disabled={!isAllowed}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                        !isAllowed ? "bg-slate-200/50 cursor-not-allowed" :
-                        localSettings[key] ? "bg-blue-600 cursor-pointer" : "bg-slate-300 cursor-pointer"
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 ${
+                        !isAllowed ? "bg-border/50 cursor-not-allowed" :
+                        localSettings[key] ? "bg-primary cursor-pointer" : "bg-border cursor-pointer"
                       }`}
                     >
                       <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
                           !isAllowed ? "translate-x-1" :
                           localSettings[key] ? "translate-x-6" : "translate-x-1"
                         }`}
@@ -452,20 +455,20 @@ export default function SettingsPage() {
         </Card>
 
         {/* Account Info */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">👤 Compte</CardTitle>
+        <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+          <CardHeader className="bg-card p-6 md:p-8 pb-4">
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Compte</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <p className="text-sm text-slate-600">
-              <strong>Email :</strong> {user.email}
+          <CardContent className="space-y-3 p-6 md:p-8 pt-2">
+            <p className="text-sm font-outfit text-foreground/70">
+              <strong className="text-foreground">Email :</strong> {user.email}
             </p>
-            <p className="text-sm text-slate-600">
-              <strong>Slug du menu QR :</strong> /menu/{profile?.slug}
+            <p className="text-sm font-outfit text-foreground/70">
+              <strong className="text-foreground">Slug du menu QR :</strong> /menu/{profile?.slug}
             </p>
             {role && (
-              <p className="text-sm text-slate-600">
-                <strong>Rôle :</strong>{" "}
+              <p className="text-sm font-outfit text-foreground/70">
+                <strong className="text-foreground">Rôle :</strong>{" "}
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${ROLE_LABELS[role].color}`}>
                   {ROLE_LABELS[role].label}
                 </span>
@@ -475,31 +478,32 @@ export default function SettingsPage() {
         </Card>
 
         {/* Webhooks & Integrations */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">🔌 Intégrations &amp; Webhooks</CardTitle>
+        <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+          <CardHeader className="bg-card p-6 md:p-8 pb-4">
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Intégrations &amp; Webhooks</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-sm text-slate-600">
-              Connectez vos plateformes de réservation (Libro, Resy, etc.) pour bénéficier des <strong>Smart Prep Lists</strong> (Prédictions IA).
+          <CardContent className="space-y-4 p-6 md:p-8 pt-2">
+            <p className="text-sm font-outfit text-foreground/70">
+              Connectez vos plateformes de réservation (Libro, Resy, etc.) pour bénéficier des <strong className="text-foreground">Smart Prep Lists</strong> (Prédictions IA).
             </p>
-            <Button 
-              onClick={() => router.push('/dashboard/settings/reservations')} 
-              className="bg-blue-600 hover:bg-blue-700 text-white w-full"
+            <Button
+              onClick={() => router.push('/dashboard/settings/reservations' as any)}
+              className="bg-primary hover:bg-[#3A4F43] text-primary-foreground w-full rounded-xl"
             >
               Gérer mes intégrations natives
             </Button>
-            <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 mt-4">
+            <div className="bg-secondary/50 p-5 rounded-2xl border border-border mt-4">
                <div className="flex flex-col gap-2">
-                 <span className="text-sm font-medium text-slate-900">Webhook Universel Rive</span>
-                 <p className="text-xs text-slate-500 mb-2">Copiez ce lien et collez-le dans les paramètres &quot;Webhooks&quot; de votre logiciel de réservation.</p>
+                 <span className="text-sm font-medium font-jakarta text-foreground">Webhook Universel Rive</span>
+                 <p className="text-xs font-outfit text-muted-foreground mb-2">Copiez ce lien et collez-le dans les paramètres &quot;Webhooks&quot; de votre logiciel de réservation.</p>
                  <div className="flex gap-2 items-center">
-                    <code className="flex-1 bg-slate-200 px-3 py-2 rounded text-xs overflow-hidden text-ellipsis whitespace-nowrap font-mono text-slate-700">
+                    <code className="flex-1 bg-background px-3 py-2 rounded-lg text-xs overflow-hidden text-ellipsis whitespace-nowrap font-plex-mono text-foreground/70 border border-border">
                       https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_{profile?.id?.slice(0,8) || 'XXXX'}
                     </code>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       size="sm"
+                      className="rounded-lg"
                       onClick={() => {
                         navigator.clipboard.writeText(`https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_${profile?.id?.slice(0,8)}`);
                         alert('Lien copié !');
@@ -508,9 +512,9 @@ export default function SettingsPage() {
                       Copier
                     </Button>
                  </div>
-                 <div className="mt-4 flex items-center gap-2 text-xs text-amber-600 bg-amber-50 p-2 rounded">
-                    <span className="animate-pulse h-2 w-2 bg-amber-500 rounded-full inline-block"></span>
-                    <span>En attente de la première réservation pour activer la prédiction...</span>
+                 <div className="mt-4 flex items-center gap-2 text-xs text-amber-600 bg-amber-50 p-2.5 rounded-xl border border-amber-100">
+                    <span className="animate-pulse h-2 w-2 bg-amber-500 rounded-full inline-block shrink-0"></span>
+                    <span className="font-outfit">En attente de la première réservation pour activer la prédiction...</span>
                  </div>
                </div>
             </div>
@@ -518,34 +522,33 @@ export default function SettingsPage() {
         </Card>
 
         {/* Subscription Info */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">💳 Abonnement &amp; Facturation</CardTitle>
+        <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+          <CardHeader className="bg-card p-6 md:p-8 pb-4">
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Abonnement &amp; Facturation</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-sm text-slate-600">
-              <strong>Forfait actuel :</strong> <span className="capitalize">{subscription?.tier || 'trial'}</span>
+          <CardContent className="space-y-4 p-6 md:p-8 pt-2">
+            <p className="text-sm font-outfit text-foreground/70">
+              <strong className="text-foreground">Forfait actuel :</strong> <span className="capitalize">{subscription?.tier || 'trial'}</span>
             </p>
             {subscription?.stripeCustomerId ? (
-              <Button 
-                onClick={handlePortalSession} 
+              <Button
+                onClick={handlePortalSession}
                 disabled={portalLoading}
-                className="bg-slate-900 text-white hover:bg-slate-800"
+                className="bg-foreground text-background hover:bg-foreground/90 rounded-xl"
               >
                 {portalLoading ? "Chargement du portail..." : "Gérer mon abonnement (Stripe)"}
               </Button>
             ) : (
               <div>
-                <p className="text-sm text-slate-500 mb-4">Vous êtes actuellement sur le système d&apos;essai gratuit ou manuel. Vous n&apos;avez pas de facturation automatique configurée.</p>
-                <Button onClick={() => router.push('/pricing')} className="bg-blue-600 text-white hover:bg-blue-700">
+                <p className="text-sm font-outfit text-muted-foreground mb-4">Vous êtes actuellement sur le système d&apos;essai gratuit ou manuel. Vous n&apos;avez pas de facturation automatique configurée.</p>
+                <Button onClick={() => router.push('/pricing' as any)} className="bg-accent hover:bg-[#b84d2d] text-accent-foreground rounded-xl">
                   Voir les forfaits
                 </Button>
               </div>
             )}
           </CardContent>
         </Card>
-      </main>
-    </>
+      </div>
+    </div>
   );
 }
-

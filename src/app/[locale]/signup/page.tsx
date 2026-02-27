@@ -97,7 +97,7 @@ export default function SignupPage() {
       accepted_at: new Date().toISOString(),
     });
 
-    // 5. Notify admin of new signup (fire and forget)
+    // 6. Notify admin of new signup (fire and forget)
     fetch('/api/notify-signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -108,26 +108,26 @@ export default function SignupPage() {
       }),
     }).catch(() => {}); // non-blocking
 
-    // 6. Redirect to dashboard
+    // 7. Redirect to dashboard
     router.push("/dashboard");
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-background noise-bg flex flex-col items-center justify-center p-4">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-slate-900">{t("signup_title")}</h1>
-        <p className="text-slate-500 mt-2">{t("signup_subtitle")}</p>
+        <h1 className="text-3xl font-jakarta font-bold text-foreground tracking-tighter">{t("signup_title")}</h1>
+        <p className="text-muted-foreground font-outfit mt-2">{t("signup_subtitle")}</p>
       </div>
 
-      <Card className="w-full max-w-sm">
-        <CardHeader className="text-center">
-          <CardTitle>{t("signup_card_title")}</CardTitle>
-          <CardDescription>{t("signup_card_desc")}</CardDescription>
+      <Card className="w-full max-w-sm rounded-[2rem] border-border/50 shadow-xl shadow-black/5">
+        <CardHeader className="text-center p-6 pb-2">
+          <CardTitle className="font-jakarta font-bold">{t("signup_card_title")}</CardTitle>
+          <CardDescription className="font-outfit">{t("signup_card_desc")}</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6 pt-4">
           <form onSubmit={handleSignup} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">
                 {t("label_name")}
               </label>
               <input
@@ -135,13 +135,13 @@ export default function SignupPage() {
                 value={restaurantName}
                 onChange={(e) => setRestaurantName(e.target.value)}
                 placeholder={t("placeholder_name")}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">
                 {t("label_email")}
               </label>
               <input
@@ -149,13 +149,13 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t("placeholder_email")}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">
                 {t("label_password")}
               </label>
               <input
@@ -163,33 +163,33 @@ export default function SignupPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
                 disabled={loading}
               />
             </div>
 
-            {error && <p className="text-red-500 text-sm text-center font-medium">{error}</p>}
+            {error && <p className="text-red-500 text-sm text-center font-medium font-outfit">{error}</p>}
 
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full bg-accent hover:bg-[#b84d2d] text-accent-foreground rounded-xl"
               disabled={loading}
             >
               {loading ? t("btn_loading_signup") : t("btn_signup")}
             </Button>
-            <div className="text-xs text-center text-slate-500 mt-4">
+            <div className="text-xs text-center text-muted-foreground font-outfit mt-4">
               {t("terms_agreement")}{" "}
-              <Link href="/cgu" className="underline hover:text-slate-800">
+              <Link href="/cgu" className="underline hover:text-foreground">
                 {t("terms_link")}
               </Link>
             </div>
           </form>
 
-          <div className="text-center text-sm text-slate-500 mt-4">
+          <div className="text-center text-sm text-muted-foreground font-outfit mt-4">
             {t("has_account")}{" "}
             <button
               onClick={() => router.push("/login")}
-              className="text-blue-600 hover:underline font-medium"
+              className="text-accent hover:underline font-medium"
             >
               {t("link_login")}
             </button>

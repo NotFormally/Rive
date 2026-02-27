@@ -81,32 +81,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   const loadProfile = async (userId: string) => {
-    const { data: profileData } = await supabase
-      .from("restaurant_profiles")
-      .select("*")
-      .eq("user_id", userId)
-      .single();
-
-    if (profileData) {
-      setProfile(profileData);
-
-      const { data: settingsData } = await supabase
-        .from("restaurant_settings")
+    try {
+      const { data: profileData, error: profileError } = await supabase
+        .from("restaurant_profiles")
         .select("*")
-        .eq("restaurant_id", profileData.id)
+        .eq("user_id", userId)
         .single();
 
-      if (settingsData) {
-        // Compute effective modules based on subscription tier
-        const { modules, tier, trialExpired, daysLeft } = computeEffectiveModules(settingsData);
-        setSettings(modules);
-        setUsage(settingsData.usage_metrics || null);
-        setSubscription({ tier, trialExpired, daysLeft, stripeCustomerId: settingsData.stripe_customer_id || null });
-      } else {
-        setSettings(defaultSettings);
-        setUsage(null);
-        setSubscription({ tier: 'trial', trialExpired: false, daysLeft: 14, stripeCustomerId: null });
+      if (profileError && profileError.code !== 'PGRST116') {
+        console.warn("Expected error loading profile:", profileError);
       }
+
+      if (profileData) {
+        setProfile(profileData);
+
+        const { data: settingsData } = await supabase
+          .from("restaurant_settings")
+          .select("*")
+          .eq("restaurant_id", profileData.id)
+          .single();
+
+        if (settingsData) {
+          // Compute effective modules based on subscription tier
+          const { modules, tier, trialExpired, daysLeft } = computeEffectiveModules(settingsData);
+          setSettings(modules);
+          setUsage(settingsData.usage_metrics || null);
+          setSubscription({ tier, trialExpired, daysLeft, stripeCustomerId: settingsData.stripe_customer_id || null });
+        } else {
+          setSettings(defaultSettings);
+          setUsage(null);
+          setSubscription({ tier: 'trial', trialExpired: false, daysLeft: 14, stripeCustomerId: null });
+        }
+      }
+    } catch (err) {
+      console.error("Critical error in loadProfile:", err);
     }
   };
 
@@ -126,35 +134,61 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
+    // Failsafe: if Supabase hangs indefinitely or throws silently, force loading to false after 3 seconds.
+    const fallbackTimeout = setTimeout(() => {
+      if (isMounted) setLoading(false);
+    }, 3000);
+
     // Check initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) console.error("Initial getSession error:", error);
       const currentUser = session?.user ?? null;
-      setUser(currentUser);
+      if (isMounted) setUser(currentUser);
+      
       if (currentUser) {
-        loadProfile(currentUser.id).finally(() => setLoading(false));
+        loadProfile(currentUser.id).finally(() => {
+          if (isMounted) setLoading(false);
+        });
       } else {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
+    }).catch(e => {
+      console.error("Unhandled rejection in getSession:", e);
+      if (isMounted) setLoading(false);
     });
 
     // Listen for auth changes
     const { data: { subscription: authSub } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
-        const currentUser = session?.user ?? null;
-        setUser(currentUser);
-        if (currentUser) {
-          await loadProfile(currentUser.id);
-        } else {
-          setProfile(null);
-          setSettings(null);
-          setUsage(null);
-          setSubscription(null);
+        try {
+          const currentUser = session?.user ?? null;
+          if (isMounted) setUser(currentUser);
+          
+          if (currentUser) {
+            await loadProfile(currentUser.id);
+          } else {
+            if (isMounted) {
+              setProfile(null);
+              setSettings(null);
+              setUsage(null);
+              setSubscription(null);
+            }
+          }
+        } catch (e) {
+          console.error("Unhandled error in onAuthStateChange:", e);
+        } finally {
+          if (isMounted) setLoading(false);
         }
-        setLoading(false);
       }
     );
 
-    return () => authSub.unsubscribe();
+    return () => {
+      isMounted = false;
+      clearTimeout(fallbackTimeout);
+      authSub.unsubscribe();
+    };
   }, []);
 
   const signOut = async () => {

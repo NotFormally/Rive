@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { Sidebar } from "@/components/Sidebar";
 
@@ -20,10 +20,14 @@ export default function DashboardLayout({
       return;
     }
 
-    if (!authLoading && user && subscription?.trialExpired) {
-      // Allow access to settings (to manage billing) and success page
-      if (!pathname.includes('/settings') && !pathname.includes('/success') && !pathname.includes('/pricing')) {
-        router.push("/pricing");
+    if (!authLoading && user && subscription) {
+      if (subscription.trialExpired) {
+        // Allow access to settings (to manage billing) and success page
+        if (!pathname.startsWith('/dashboard/settings') && 
+            !pathname.startsWith('/dashboard/success') && 
+            pathname !== '/pricing') {
+          router.push("/pricing");
+        }
       }
     }
   }, [user, subscription, authLoading, router, pathname]);

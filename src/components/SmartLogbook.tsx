@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { hasReachedQuota, FREE_QUOTAS } from "@/lib/quotas";
+import { useTranslations } from "next-intl";
 
 type LogEntry = {
   id: number;
@@ -29,9 +30,10 @@ export function SmartLogbook() {
   const [entries, setEntries] = useState<LogEntry[]>([]);
   const [viewingLanguage, setViewingLanguage] = useState("original");
   const [isTranslating, setIsTranslating] = useState<number | null>(null);
-  
   const [isScanning, setIsScanning] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const t = useTranslations('Logbook');
+  const tCommon = useTranslations('Common');
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
   const isTrial = subscription?.tier === 'trial';
@@ -164,9 +166,9 @@ export function SmartLogbook() {
       
       const newEntry: LogEntry = {
         id: Date.now(),
-        text: `Facture de ${data.supplierName} ajoutée.`,
+        text: t('extracted_data'),
         timestamp: new Date().toISOString(),
-        tags: ["Facture", "Opex"],
+        tags: [t('supplier'), "Opex"],
         sentiment: "Neutral",
         originalLanguage: "fr",
         summary: `Reçu scanné : ${data.totalAmount} chez ${data.supplierName}.`,
@@ -188,9 +190,9 @@ export function SmartLogbook() {
   };
 
   return (
-    <div className="w-full space-y-6">
-      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6">
-        <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">Cahier de Bord Intelligent</h2>
+    <div className="w-full space-y-4 md:space-y-6">
+      <div className="bg-white dark:bg-zinc-900 rounded-[2rem] md:rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-5 md:p-6">
+        <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">{t('title')}</h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -198,8 +200,8 @@ export function SmartLogbook() {
             <textarea
               id="log-entry"
               rows={3}
-              className="block w-full rounded-lg border-0 py-3 text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-zinc-800 dark:ring-zinc-700 dark:text-zinc-100"
-              placeholder="Que s'est-il passé pendant ce service ? L'IA va analyser et classer votre note automatiquement..."
+              className="block w-full rounded-2xl md:rounded-lg border-0 py-3 md:py-4 px-4 text-zinc-900 shadow-inner ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-zinc-800 dark:ring-zinc-700 dark:text-zinc-100 resize-none"
+              placeholder={t('placeholder')}
               value={note}
               onChange={(e) => setNote(e.target.value)}
               disabled={notesQuotaReached}
@@ -210,31 +212,31 @@ export function SmartLogbook() {
             <div className="rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800">
               <div className="flex">
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300">Quota atteint</h3>
+                  <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300">{t('quota_reached')}</h3>
                   <div className="mt-2 text-sm text-blue-700 dark:text-blue-200">
-                    <p>Vous avez analysé vos {FREE_QUOTAS.logbook_notes} notes gratuites. Passez au forfait Performance pour continuer à utiliser l'IA de Rive.</p>
+                    <p>{t('quota_desc', { count: FREE_QUOTAS.logbook_notes })}</p>
                   </div>
                 </div>
               </div>
             </div>
           )}
           
-          <div className="flex justify-between items-center">
-            <span className="text-xs text-zinc-500">
+          <div className="flex flex-col-reverse md:flex-row justify-between md:items-center gap-3 md:gap-0 mt-2">
+            <span className="text-[10px] md:text-xs text-zinc-500 font-plex-mono uppercase tracking-wider text-center md:text-left">
               {isTrial && !notesQuotaReached && `${usage?.logbook_notes || 0} / ${FREE_QUOTAS.logbook_notes} notes IA utilisées`}
             </span>
             <button
               type="submit"
               disabled={isClassifying || !note.trim() || notesQuotaReached}
-              className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex w-full md:w-auto justify-center items-center rounded-2xl md:rounded-md bg-indigo-600 px-4 py-3 md:py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 active:scale-95"
             >
-              {isClassifying ? "Analyse par l'IA..." : "Sauvegarder la note"}
+              {isClassifying ? t('btn_loading') : t('btn_save')}
             </button>
           </div>
         </form>
 
         <div className="mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
-          <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">Scanner un reçu de livraison</h3>
+          <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">{t('scan_title')}</h3>
           <div className="flex items-center gap-4">
             <input
               type="file"
@@ -249,7 +251,7 @@ export function SmartLogbook() {
                 disabled={isScanning || scansQuotaReached}
                 className="whitespace-nowrap inline-flex items-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:opacity-50"
               >
-                {isScanning ? "Analyse en cours..." : "Extraire les données"}
+                {isScanning ? t('scan_loading') : t('btn_scan')}
               </button>
             )}
           </div>
@@ -257,7 +259,7 @@ export function SmartLogbook() {
           {scansQuotaReached && selectedImage && (
             <div className="mt-4 rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800">
               <p className="text-sm text-blue-800 dark:text-blue-300">
-                Vous avez atteint votre quota de {FREE_QUOTAS.receipt_scans} scans gratuits. Passez au forfait Entreprise pour débloquer les scans illimités.
+                {t('scan_quota_desc', { count: FREE_QUOTAS.receipt_scans })}
               </p>
             </div>
           )}
@@ -275,19 +277,20 @@ export function SmartLogbook() {
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">Dernières entrées</h3>
+          <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">{t('last_entries')}</h3>
           <div className="flex items-center gap-2">
-            <label htmlFor="view-lang" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Afficher en:</label>
+            <label htmlFor="view-lang" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{t('view_lang')}</label>
             <select
               id="view-lang"
               value={viewingLanguage}
               onChange={(e) => setViewingLanguage(e.target.value)}
               className="text-sm rounded-md border-0 py-1.5 pl-3 pr-8 text-zinc-900 ring-1 ring-inset ring-zinc-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-zinc-800 dark:ring-zinc-700 dark:text-zinc-100"
             >
-              <option value="original">Langue originale</option>
+              <option value="original">{t('lang_original')}</option>
               <option value="fr">Français</option>
-              <option value="en">English (Anglais)</option>
-              <option value="es">Español (Espagnol)</option>
+              <option value="en">English</option>
+              <option value="it">Italiano</option>
+              <option value="es">Español</option>
             </select>
           </div>
         </div>
@@ -325,26 +328,26 @@ export function SmartLogbook() {
               
               {entry.receiptData && (
                 <div className="mt-2 mb-3 bg-zinc-50 dark:bg-zinc-800/50 rounded p-3 border border-zinc-200 dark:border-zinc-700">
-                  <h4 className="font-semibold text-sm mb-1 text-zinc-900 dark:text-zinc-100">Données extraites :</h4>
+                  <h4 className="font-semibold text-sm mb-1 text-zinc-900 dark:text-zinc-100">{t('extracted_data')}</h4>
                   <ul className="text-xs text-zinc-600 dark:text-zinc-400 space-y-1">
-                    <li><span className="font-medium text-zinc-800 dark:text-zinc-300">Fournisseur :</span> {entry.receiptData.supplierName}</li>
+                    <li><span className="font-medium text-zinc-800 dark:text-zinc-300">{t('supplier')} :</span> {entry.receiptData.supplierName}</li>
                     <li><span className="font-medium text-zinc-800 dark:text-zinc-300">Date :</span> {entry.receiptData.date}</li>
-                    <li><span className="font-medium text-zinc-800 dark:text-zinc-300">Montant Total :</span> <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{entry.receiptData.totalAmount}</span></li>
-                    <li><span className="font-medium text-zinc-800 dark:text-zinc-300">Articles Pincipaux :</span> {entry.receiptData.topItems.join(', ')}</li>
+                    <li><span className="font-medium text-zinc-800 dark:text-zinc-300">{t('amount')} :</span> <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{entry.receiptData.totalAmount}</span></li>
+                    <li><span className="font-medium text-zinc-800 dark:text-zinc-300">{t('items')} :</span> {entry.receiptData.topItems.join(', ')}</li>
                   </ul>
                 </div>
               )}
 
               {displaySummary && !entry.receiptData && (
                 <div className="mt-2 p-2 bg-indigo-50/50 dark:bg-indigo-900/10 rounded text-xs text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800/30">
-                  <span className="font-semibold mr-1">💡 Résumé IA:</span> {displaySummary}
+                  <span className="font-semibold mr-1">{t('ai_summary')}</span> {displaySummary}
                 </div>
               )}
               <div className="flex items-center justify-between mt-4">
                 <div className="flex gap-2 flex-wrap">
                   {entry.isUrgent && (
                     <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300 ring-1 ring-inset ring-red-600/20">
-                      🚨 Urgent
+                      {t('urgent')}
                     </span>
                   )}
                   {entry.tags.map((tag, idx) => (

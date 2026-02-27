@@ -77,15 +77,15 @@
   --input: #E5E7EB;
   --ring: #2E4036;
 
-  /* Sidebar Colors (Dashboard) */
-  --sidebar: #0f172a;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #4f46e5;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e293b;
-  --sidebar-accent-foreground: #f8fafc;
-  --sidebar-border: #1e293b;
-  --sidebar-ring: #6366f1;
+  /* Sidebar Colors (Dashboard: Moss Palette) */
+  --sidebar: #2E4036;
+  --sidebar-foreground: #F2F0E9;
+  --sidebar-primary: #CC5833;
+  --sidebar-primary-foreground: #F2F0E9;
+  --sidebar-accent: #3A4F43;
+  --sidebar-accent-foreground: #F2F0E9;
+  --sidebar-border: rgba(242, 240, 233, 0.1);
+  --sidebar-ring: #CC5833;
 }
 
 .noise-bg {

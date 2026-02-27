@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { hasReachedQuota, FREE_QUOTAS } from "@/lib/quotas";
+import { useTranslations } from "next-intl";
 
 type InstagramPost = {
   caption_fr: string;
@@ -43,6 +44,8 @@ export function InstagramGenerator({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const t = useTranslations('Instagram');
+  const tCommon = useTranslations('Common');
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
   const isTrial = subscription?.tier === 'trial';
@@ -70,7 +73,7 @@ export function InstagramGenerator({
         }
       }
     } catch {
-      setError("Erreur de connexion.");
+      setError(t('error_conn'));
     } finally {
       setLoading(false);
     }
@@ -96,7 +99,7 @@ export function InstagramGenerator({
         {/* Header */}
         <div className="p-5 border-b border-slate-200 flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-slate-900">📸 Générateur Instagram</h3>
+            <h3 className="font-semibold text-slate-900">{t('title')}</h3>
             <p className="text-xs text-slate-500">{menuItemName}</p>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 text-xl">✕</button>
@@ -106,21 +109,21 @@ export function InstagramGenerator({
         <div className="p-5">
           {!post && !loading && (
             <div className="text-center py-8">
-              <p className="text-slate-500 mb-4">Rive va générer un post Instagram complet avec caption, hashtags et call-to-action, adapté à la classificationvotre plat.</p>
+              <p className="text-slate-500 mb-4">{t('desc')}</p>
               
               {instaQuotaReached ? (
                 <div className="rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800 mb-4">
-                  <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">Quota atteint</h3>
+                  <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">{t('quota_reached')}</h3>
                   <p className="text-sm text-blue-700 dark:text-blue-200">
-                    Vous avez généré vos {FREE_QUOTAS.instagram_posts} posts gratuits. Passez au forfait Performance pour des posts illimités.
+                    {t('quota_desc', { count: FREE_QUOTAS.instagram_posts })}
                   </p>
                 </div>
               ) : (
                 <>
                   <Button onClick={generatePost} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
-                    🚀 Générer le post
+                    {t('btn_generate')}
                   </Button>
-                  {isTrial && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {FREE_QUOTAS.instagram_posts} posts générés</p>}
+                  {isTrial && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {FREE_QUOTAS.instagram_posts} {t('btn_regenerate').toLowerCase().includes('pos') ? 'posts' : 'posts'}</p>}
                 </>
               )}
             </div>
@@ -129,14 +132,14 @@ export function InstagramGenerator({
           {loading && (
             <div className="text-center py-12">
               <div className="animate-spin w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full mx-auto mb-4" />
-              <p className="text-sm text-slate-500">L&apos;IA compose votre post...</p>
+              <p className="text-sm text-slate-500">{t('btn_loading')}</p>
             </div>
           )}
 
           {error && (
             <div className="text-center py-8">
               <p className="text-red-500 text-sm mb-3">{error}</p>
-              <Button variant="outline" onClick={generatePost}>Réessayer</Button>
+              <Button variant="outline" onClick={generatePost}>{t('btn_retry')}</Button>
             </div>
           )}
 
@@ -164,23 +167,23 @@ export function InstagramGenerator({
 
               {/* English Version */}
               <div className="bg-slate-50 rounded-xl p-4">
-                <p className="text-xs font-semibold text-slate-500 mb-2">🇬🇧 Version anglaise</p>
+                <p className="text-xs font-semibold text-slate-500 mb-2">{t('eng_version')}</p>
                 <p className="text-sm text-slate-700">{post.caption_en}</p>
               </div>
 
               {/* Suggested Time */}
               <div className="flex items-center justify-between bg-blue-50 rounded-xl p-3">
-                <span className="text-xs text-blue-700 font-medium">⏰ Meilleur moment pour poster :</span>
+                <span className="text-xs text-blue-700 font-medium">{t('best_time')}</span>
                 <span className="text-xs text-blue-800 font-bold">{post.suggested_time}</span>
               </div>
 
               {/* Actions */}
               <div className="flex gap-3">
                 <Button onClick={copyToClipboard} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                  {copied ? "✅ Copié !" : "📋 Copier le texte"}
+                  {copied ? t('btn_copied') : t('btn_copy')}
                 </Button>
                 <Button variant="outline" onClick={generatePost} className="flex-1">
-                  🔄 Régénérer
+                  {t('btn_regenerate')}
                 </Button>
               </div>
             </div>

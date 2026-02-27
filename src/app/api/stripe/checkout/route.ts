@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: successUrl || `${origin}/dashboard/settings?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: successUrl || `${origin}/dashboard/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: cancelUrl || `${origin}/pricing`,
       metadata: {
         restaurantId: restaurantId,

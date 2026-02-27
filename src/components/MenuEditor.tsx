@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { MenuItem, MenuCategory, RestaurantInfo, loadMenuFromSupabase, addMenuItem, updateMenuItem, deleteMenuItem, toggleMenuItemAvailability } from "@/lib/menu-store";
 import { QRCode } from "react-qrcode-logo";
 import { InstagramGenerator } from "./InstagramGenerator";
+import { useTranslations, useLocale } from "next-intl";
 
 export function MenuEditor() {
   const [categories, setCategories] = useState<MenuCategory[]>([]);
@@ -14,6 +15,9 @@ export function MenuEditor() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [instagramItem, setInstagramItem] = useState<{ id: string; name: string } | null>(null);
+  const t = useTranslations('MenuEditor');
+  const locale = useLocale();
+  const symbol = locale === 'en' ? '$' : '€';
 
   const refresh = useCallback(async () => {
     const data = await loadMenuFromSupabase();
@@ -61,15 +65,15 @@ export function MenuEditor() {
       <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">🍽️ Gestionnaire de Menu</h2>
-            <p className="text-sm text-zinc-500 mt-1">Modifiez votre menu ici — les changements sont instantanément reflétés sur votre QR code et mini-site.</p>
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">{t('title')}</h2>
+            <p className="text-sm text-zinc-500 mt-1">{t('desc')}</p>
           </div>
           <a
             href="/menu/chez-marcel"
             target="_blank"
             className="inline-flex items-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500"
           >
-            Voir le Menu QR →
+            {t('btn_view_qr')}
           </a>
         </div>
 
@@ -84,7 +88,7 @@ export function MenuEditor() {
             onClick={() => setShowQR(!showQR)}
             className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
           >
-            {showQR ? 'Masquer le QR Code' : '📱 Afficher le QR Code à imprimer'}
+            {showQR ? t('btn_hide_qr') : t('btn_show_qr')}
           </button>
         </div>
 
@@ -98,7 +102,7 @@ export function MenuEditor() {
               qrStyle="dots"
               eyeRadius={8}
             />
-            <p className="text-[10px] text-zinc-400 mt-1">Scannez pour accéder au menu</p>
+            <p className="text-[10px] text-zinc-400 mt-1">{t('qr_scan_prompt')}</p>
           </div>
         )}
       </div>
@@ -129,7 +133,7 @@ export function MenuEditor() {
                 <div className="flex items-center gap-2 mb-1">
                   <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">{item.name}</h3>
                   {!item.available && (
-                    <span className="text-xs bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 px-2 py-0.5 rounded-full">Indisponible</span>
+                    <span className="text-xs bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 px-2 py-0.5 rounded-full">{t('status_unavailable')}</span>
                   )}
                 </div>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">{item.description}</p>
@@ -142,15 +146,15 @@ export function MenuEditor() {
                 )}
               </div>
               <div className="flex flex-col items-end gap-2 shrink-0">
-                <span className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{item.price.toFixed(2)}$</span>
+                <span className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{item.price.toFixed(2)}{symbol}</span>
                 <div className="flex gap-1">
-                  <button onClick={() => setEditingItem(item)} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline">Modifier</button>
+                  <button onClick={() => setEditingItem(item)} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline">{t('btn_edit')}</button>
                   <span className="text-zinc-300">|</span>
                   <button onClick={() => handleToggleAvailability(item.id)} className="text-xs text-amber-600 dark:text-amber-400 hover:underline">
-                    {item.available ? 'Masquer' : 'Remettre'}
+                    {item.available ? t('btn_hide') : t('btn_show')}
                   </button>
                   <span className="text-zinc-300">|</span>
-                  <button onClick={() => handleDeleteItem(item.id)} className="text-xs text-red-600 dark:text-red-400 hover:underline">Suppr.</button>
+                  <button onClick={() => handleDeleteItem(item.id)} className="text-xs text-red-600 dark:text-red-400 hover:underline">{t('btn_delete')}</button>
                     <span className="text-zinc-300">|</span>
                     <button onClick={() => setInstagramItem({ id: item.id, name: item.name })} className="text-xs text-pink-600 dark:text-pink-400 hover:underline">📸</button>
                 </div>
@@ -160,7 +164,7 @@ export function MenuEditor() {
         ))}
 
         {filteredItems.length === 0 && (
-          <div className="text-center py-8 text-zinc-400 text-sm">Aucun plat dans cette catégorie.</div>
+          <div className="text-center py-8 text-zinc-400 text-sm">{t('no_items')}</div>
         )}
       </div>
 
@@ -181,7 +185,7 @@ export function MenuEditor() {
           }}
           className="w-full py-3 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg text-sm font-medium text-zinc-500 hover:border-indigo-400 hover:text-indigo-600 transition-colors"
         >
-          + Ajouter un plat à « {categories.find(c => c.id === activeCategory)?.name} »
+          {t('btn_add_item', { cat: categories.find(c => c.id === activeCategory)?.name || '' })}
         </button>
       )}
 
@@ -189,21 +193,21 @@ export function MenuEditor() {
       {editingItem && (
         <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-lg border border-indigo-200 dark:border-indigo-800 p-6 space-y-4">
           <h3 className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">
-            {showAddForm ? '➕ Nouveau plat' : '✏️ Modifier le plat'}
+            {showAddForm ? t('form_new') : t('form_edit')}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Nom</label>
+              <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">{t('label_name')}</label>
               <input
                 type="text"
                 value={editingItem.name}
                 onChange={e => setEditingItem({ ...editingItem, name: e.target.value })}
                 className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 focus:ring-2 focus:ring-indigo-500"
-                placeholder="Risotto aux champignons..."
+                placeholder={t('placeholder_name')}
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Prix ($)</label>
+              <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">{t('label_price', { symbol })}</label>
               <input
                 type="number"
                 step="0.50"
@@ -215,23 +219,23 @@ export function MenuEditor() {
             </div>
           </div>
           <div>
-            <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Description</label>
+            <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">{t('label_desc')}</label>
             <textarea
               rows={2}
               value={editingItem.description}
               onChange={e => setEditingItem({ ...editingItem, description: e.target.value })}
               className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 focus:ring-2 focus:ring-indigo-500"
-              placeholder="Décrivez le plat..."
+              placeholder={t('placeholder_desc')}
             />
           </div>
           <div>
-            <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Allergènes (séparés par virgule)</label>
+            <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">{t('label_allergens')}</label>
             <input
               type="text"
               value={editingItem.allergens.join(', ')}
               onChange={e => setEditingItem({ ...editingItem, allergens: e.target.value.split(',').map(a => a.trim()).filter(Boolean) })}
               className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 focus:ring-2 focus:ring-indigo-500"
-              placeholder="Gluten, Produits laitiers, Noix..."
+              placeholder={t('placeholder_allergens')}
             />
           </div>
           <div className="flex justify-end gap-3">
@@ -239,14 +243,14 @@ export function MenuEditor() {
               onClick={() => { setEditingItem(null); setShowAddForm(false); }}
               className="px-4 py-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900"
             >
-              Annuler
+              {t('btn_cancel')}
             </button>
             <button
               onClick={() => handleSaveItem(editingItem)}
               disabled={!editingItem.name || !editingItem.price}
               className="px-4 py-2 rounded-md bg-indigo-600 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50"
             >
-              Sauvegarder
+              {t('btn_save')}
             </button>
           </div>
         </div>

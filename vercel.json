@@ -13,19 +13,5 @@
         }
       ]
     }
-  ],
-  "crons": [
-    {
-      "path": "/api/cron/trial-check",
-      "schedule": "0 9 * * *"
-    },
-    {
-      "path": "/api/cron/sync-reservations",
-      "schedule": "*/15 * * * *"
-    },
-    {
-      "path": "/api/cron/generate-prep-list",
-      "schedule": "0 4 * * *"
-    }
   ]
 }

@@ -6,6 +6,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { TIER_CONFIG, type TierModules } from "@/lib/subscription-tiers";
 
 const MODULE_LABELS: Record<string, { label: string; emoji: string; description: string }> = {
   module_logbook:          { label: "Cahier de Bord Intelligent",  emoji: "📋", description: "Notes IA, classification automatique, urgences" },
@@ -147,32 +148,58 @@ export default function SettingsPage() {
           <CardContent>
             <p className="text-sm text-slate-500 mb-6">Activez ou désactivez les modules que vous souhaitez voir apparaître dans votre barre latérale de navigation.</p>
             <div className="space-y-4">
-              {Object.entries(MODULE_LABELS).map(([key, config]) => (
-                <div
-                  key={key}
-                  className="flex items-center justify-between p-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{config.emoji}</span>
-                    <div>
-                      <p className="font-medium text-sm text-slate-900">{config.label}</p>
-                      <p className="text-xs text-slate-500">{config.description}</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleToggle(key)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      localSettings[key] ? "bg-blue-600" : "bg-slate-300"
+              {Object.entries(MODULE_LABELS).map(([key, config]) => {
+                const isAllowed = subscription && TIER_CONFIG[subscription.tier].modules[key as keyof TierModules];
+                
+                // Find minimum tier required for this module if not allowed
+                let requiredTierLabel = "Supérieur";
+                if (!isAllowed) {
+                  const entry = Object.entries(TIER_CONFIG).find(([_, t]) => t.modules[key as keyof TierModules]);
+                  if (entry) requiredTierLabel = entry[1].label;
+                }
+
+                return (
+                  <div
+                    key={key}
+                    className={`flex items-center justify-between p-4 border border-slate-200 rounded-xl transition-colors ${
+                      isAllowed ? 'hover:bg-slate-50' : 'opacity-60 bg-slate-50 relative'
                     }`}
                   >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        localSettings[key] ? "translate-x-6" : "translate-x-1"
+                    {!isAllowed && (
+                      <div className="absolute inset-0 bg-transparent z-10" title={`Requis: ${requiredTierLabel}`} />
+                    )}
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{config.emoji}</span>
+                      <div>
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <p className="font-medium text-sm text-slate-900">{config.label}</p>
+                          {!isAllowed && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-[#CC5833] px-2 py-0.5 rounded-full inline-flex items-center gap-1 border border-orange-200">
+                              🔒 Inclus avec {requiredTierLabel}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-500">{config.description}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => isAllowed && handleToggle(key)}
+                      disabled={!isAllowed}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        !isAllowed ? "bg-slate-200/50 cursor-not-allowed" :
+                        localSettings[key] ? "bg-blue-600 cursor-pointer" : "bg-slate-300 cursor-pointer"
                       }`}
-                    />
-                  </button>
-                </div>
-              ))}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          !isAllowed ? "translate-x-1" :
+                          localSettings[key] ? "translate-x-6" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           </CardContent>
         </Card>

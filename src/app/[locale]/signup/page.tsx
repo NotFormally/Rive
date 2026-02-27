@@ -11,6 +11,7 @@ import { useLocale } from "next-intl";
 export default function SignupPage() {
   const t = useTranslations("Auth");
   const currentLocale = useLocale();
+  const tCommon = useTranslations('Common');
   const [restaurantName, setRestaurantName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -67,7 +68,7 @@ export default function SignupPage() {
 
     if (profileError || !profileData) {
       console.error("Profile creation error:", profileError);
-      setError(`${t('error_creation')} ${profileError?.message || 'Inconnue'}`);
+      setError(`${t('error_creation')} ${profileError?.message || tCommon('error_unknown')}`);
       setLoading(false);
       return;
     }

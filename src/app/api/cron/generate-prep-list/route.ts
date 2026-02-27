@@ -41,14 +41,14 @@ export async function GET(req: Request) {
         default_lookback_weeks,
         restaurants!inner ( name )
       `)
-      .eq('enabled', true);
+      .eq('enabled', true) as { data: any[] | null; error: any };
 
     if (error || !restaurants || restaurants.length === 0) {
       // Fallback: check restaurant_settings for legacy flag
       const { data: legacy } = await admin
         .from('restaurant_settings')
         .select('restaurant_id')
-        .eq('module_smart_prep', true);
+        .eq('module_smart_prep', true) as { data: any[] | null; error: any };
 
       if (!legacy || legacy.length === 0) {
         return NextResponse.json({
@@ -64,7 +64,7 @@ export async function GET(req: Request) {
       }
     } else {
       // Use prep_settings for each restaurant
-      for (const r of restaurants as any[]) {
+      for (const r of restaurants) {
         const restaurantName = r.restaurants?.name;
         const servicePeriods = r.service_periods || ['all_day'];
         const safetyBuffer = r.default_safety_buffer || 0.10;
@@ -170,7 +170,7 @@ async function processRestaurant(
     // Persist items
     if (result.items.length > 0) {
       await admin.from('prep_list_items').insert(
-        result.items.map(item => ({
+        result.items.map((item: any) => ({
           prep_list_id: prepList.id,
           menu_item_id: item.menuItemId,
           menu_item_name: item.menuItemName,
@@ -190,7 +190,7 @@ async function processRestaurant(
     // Persist ingredients (Level 3)
     if (result.ingredients.length > 0) {
       await admin.from('prep_list_ingredients').insert(
-        result.ingredients.map(ing => ({
+        result.ingredients.map((ing: any) => ({
           prep_list_id: prepList.id,
           ingredient_id: ing.ingredientId,
           ingredient_name: ing.ingredientName,

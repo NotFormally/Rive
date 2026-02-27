@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/components/AuthProvider";
 import { Sidebar } from "@/components/Sidebar";
 
@@ -10,23 +10,34 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading: authLoading } = useAuth();
+  const { user, subscription, loading: authLoading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!authLoading && !user) {
       router.push("/login");
+      return;
     }
-  }, [user, authLoading, router]);
+
+    if (!authLoading && user && subscription?.trialExpired) {
+      // Allow access to settings (to manage billing) and success page
+      if (!pathname.includes('/settings') && !pathname.includes('/success') && !pathname.includes('/pricing')) {
+        router.push("/pricing");
+      }
+    }
+  }, [user, subscription, authLoading, router, pathname]);
 
   if (authLoading) return <div className="p-8 text-center flex-1">Génération de l'espace...</div>;
   if (!user) return null;
 
   return (
-    <div className="flex min-h-screen bg-slate-50 text-slate-900">
+    <div className="flex min-h-[100dvh] bg-background noise-bg text-foreground selection:bg-[--accent]/30">
       <Sidebar />
-      <main className="flex-1 md:ml-64 flex flex-col">
-        {children}
+      <main className="flex-1 md:ml-64 flex flex-col pt-20 md:pt-0">
+        <div className="flex-1 p-4 md:p-10">
+          {children}
+        </div>
       </main>
     </div>
   );

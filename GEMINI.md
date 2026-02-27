@@ -149,3 +149,19 @@ After receiving answers to the 4 questions:
 7. Ensure every animation is wired, every interaction works, every image loads.
 
 **Execution Directive:** "Do not build a website; build a digital instrument. Every scroll should feel intentional, every animation should feel weighted and professional. Eradicate all generic AI patterns."
+
+---
+
+## 2026-02-26 Insights: Building Multilingual High-Fidelity UIs
+
+### 1. The Power of "Code-as-a-CMS" Scripts
+Using bespoke Node scripts (`fix_all_translations.js`) to systematically iterate and inject translations into JSON files is a massive multiplier. It acts as a "compilation step" for dictionaries, ensuring absolute consistency across 14 languages without relying on manual find-and-replace.
+
+### 2. High-Fidelity UI is Highly Sensitive to String Lengths
+Pixel-perfect designs are threatened by internationalization (e.g., "Cash Cows" vs "Mucche da mungere"). Premium, cinematic UIs must strictly utilize flexible layouts (`flex`, `text-ellipsis`, `line-clamp`) because rigid container constraints will inevitably break across different languages.
+
+### 3. Decoupling State from Content Iteration
+When translating components with hooks (`SmartLogbook`, `MenuEditor`), refactoring hardcoded text can inadvertently break React state or effect dependencies. Structural refactoring should always be decoupled from content/localization injection.
+
+### 4. Resolving Acronyms
+Avoid industry-specific acronyms on the landing page (e.g., BCG Matrix) where possible to maintain an accessible, premium feel. Replace them with descriptive features (e.g., "Menu Engineering") for a broader audience.

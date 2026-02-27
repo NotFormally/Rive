@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/components/AuthProvider";
+import { useTranslations, useLocale } from 'next-intl';
+import { useAuth, type MemberRole } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,14 +19,51 @@ const MODULE_LABELS: Record<string, { label: string; emoji: string; description:
   module_reservations:     { label: "Réservations (Libro/Resy/Zenchef)", emoji: "📅", description: "Flux en temps réel de vos réservations depuis vos plateformes" },
 };
 
+const ROLE_LABELS: Record<MemberRole, { label: string; color: string }> = {
+  owner:  { label: "Propriétaire", color: "bg-amber-100 text-amber-800 border-amber-200" },
+  admin:  { label: "Administrateur", color: "bg-blue-100 text-blue-800 border-blue-200" },
+  editor: { label: "Éditeur", color: "bg-green-100 text-green-800 border-green-200" },
+
+};
+
+type TeamMember = {
+  id: string;
+  user_id: string | null;
+  role: MemberRole;
+  email: string | null;
+  invited_email: string | null;
+  invited_at: string;
+  accepted_at: string | null;
+};
+
 export default function SettingsPage() {
-  const { user, profile, settings, subscription, loading: authLoading, refreshSettings } = useAuth();
+  const { user, profile, role, settings, subscription, loading: authLoading, refreshSettings } = useAuth();
+  const t = useTranslations('settings');
+  const locale = useLocale();
   const [localSettings, setLocalSettings] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profileTagline, setProfileTagline] = useState("");
   const [portalLoading, setPortalLoading] = useState(false);
   const router = useRouter();
+
+  // Team state
+  const [members, setMembers] = useState<TeamMember[]>([]);
+  const [teamLoading, setTeamLoading] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteRole, setInviteRole] = useState<'admin' | 'editor'>("editor");
+  const [inviting, setInviting] = useState(false);
+  const [inviteMsg, setInviteMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Helper to get auth headers for API calls
+  const getAuthHeaders = async (): Promise<Record<string, string>> => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (session?.access_token) {
+      headers['Authorization'] = `Bearer ${session.access_token}`;
+    }
+    return headers;
+  };
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -49,6 +87,30 @@ export default function SettingsPage() {
       setProfileTagline(profile.tagline || "");
     }
   }, [settings, profile]);
+
+  // Load team members
+  const loadMembers = useCallback(async () => {
+    if (!profile) return;
+    setTeamLoading(true);
+    try {
+      const headers = await getAuthHeaders();
+      const res = await fetch('/api/team/members', { headers });
+      if (res.ok) {
+        const data = await res.json();
+        setMembers(data.members || []);
+      }
+    } catch (e) {
+      console.error("Failed to load team:", e);
+    } finally {
+      setTeamLoading(false);
+    }
+  }, [profile]);
+
+  useEffect(() => {
+    if (profile && role && ['owner', 'admin'].includes(role)) {
+      loadMembers();
+    }
+  }, [profile, role, loadMembers]);
 
   const handleToggle = async (moduleKey: string) => {
     const newValue = !localSettings[moduleKey];
@@ -76,6 +138,69 @@ export default function SettingsPage() {
     setSaving(false);
   };
 
+  const handleInvite = async () => {
+    if (!inviteEmail.trim()) return;
+    setInviting(true);
+    setInviteMsg(null);
+    try {
+      const headers = await getAuthHeaders();
+      const res = await fetch('/api/team/invite', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ email: inviteEmail.trim(), role: inviteRole, locale }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setInviteMsg({ type: 'success', text: data.message || 'Invitation envoyée !' });
+        setInviteEmail("");
+        loadMembers();
+      } else {
+        setInviteMsg({ type: 'error', text: data.error || 'Erreur' });
+      }
+    } catch {
+      setInviteMsg({ type: 'error', text: 'Erreur réseau.' });
+    } finally {
+      setInviting(false);
+    }
+  };
+
+  const handleRemoveMember = async (memberId: string) => {
+    if (!confirm("Retirer ce membre de l'équipe ?")) return;
+    try {
+      const headers = await getAuthHeaders();
+      const res = await fetch('/api/team/members', {
+        method: 'DELETE',
+        headers,
+        body: JSON.stringify({ memberId }),
+      });
+      if (res.ok) loadMembers();
+      else {
+        const d = await res.json();
+        alert(d.error || "Erreur");
+      }
+    } catch {
+      alert("Erreur réseau.");
+    }
+  };
+
+  const handleChangeRole = async (memberId: string, newRole: string) => {
+    try {
+      const headers = await getAuthHeaders();
+      const res = await fetch('/api/team/members', {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({ memberId, newRole }),
+      });
+      if (res.ok) loadMembers();
+      else {
+        const d = await res.json();
+        alert(d.error || "Erreur");
+      }
+    } catch {
+      alert("Erreur réseau.");
+    }
+  };
+
   const handlePortalSession = async () => {
     if (!subscription?.stripeCustomerId) return;
     try {
@@ -96,14 +221,16 @@ export default function SettingsPage() {
     }
   };
 
-  if (authLoading) return <div className="p-8 text-center flex-1">Génération de l'espace...</div>;
+  if (authLoading) return <div className="p-8 text-center flex-1">Génération de l&apos;espace...</div>;
   if (!user) return null;
+
+  const canManageTeam = role === 'owner' || role === 'admin';
 
   return (
     <>
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4">
         <div>
-          <h1 className="text-xl font-bold">Menu & Paramètres</h1>
+          <h1 className="text-xl font-bold">Menu &amp; Paramètres</h1>
           <p className="text-sm text-slate-500">Gérez vos préférences et modules</p>
         </div>
       </header>
@@ -139,6 +266,125 @@ export default function SettingsPage() {
             </Button>
           </CardContent>
         </Card>
+
+        {/* Team Management */}
+        {canManageTeam && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">👥 Équipe</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <p className="text-sm text-slate-500">
+                Invitez d&apos;autres personnes à co-administrer votre restaurant. Chaque membre reçoit un lien d&apos;invitation.
+              </p>
+
+              {/* Invite form */}
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <p className="text-sm font-medium text-slate-700">Inviter un membre</p>
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    value={inviteEmail}
+                    onChange={(e) => setInviteEmail(e.target.value)}
+                    placeholder="email@example.com"
+                    className="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={inviting}
+                  />
+                  <select
+                    value={inviteRole}
+                    onChange={(e) => setInviteRole(e.target.value as 'admin' | 'editor')}
+                    className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    disabled={inviting}
+                  >
+                    {role === 'owner' && <option value="admin">Administrateur</option>}
+                    <option value="editor">Éditeur</option>
+
+                  </select>
+                </div>
+                <Button onClick={handleInvite} disabled={inviting || !inviteEmail.trim()} className="bg-blue-600 hover:bg-blue-700 text-white w-full">
+                  {inviting ? "Envoi..." : "Envoyer l'invitation"}
+                </Button>
+                {inviteMsg && (
+                  <p className={`text-sm ${inviteMsg.type === 'success' ? 'text-green-600' : 'text-red-500'}`}>
+                    {inviteMsg.text}
+                  </p>
+                )}
+              </div>
+
+              {/* Members list */}
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-slate-700">Membres actuels</p>
+                {teamLoading ? (
+                  <p className="text-sm text-slate-400">Chargement...</p>
+                ) : members.length === 0 ? (
+                  <p className="text-sm text-slate-400">Aucun membre pour le moment.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {members.map((member) => {
+                      const roleInfo = ROLE_LABELS[member.role];
+                      const isPending = !member.accepted_at;
+                      const isCurrentUser = member.user_id === user.id;
+
+                      return (
+                        <div
+                          key={member.id}
+                          className={`flex items-center justify-between p-3 border border-slate-200 rounded-xl ${isPending ? 'opacity-60 bg-slate-50' : 'bg-white'}`}
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <div className="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-sm font-bold text-slate-600">
+                              {(member.email || member.invited_email || '?')[0].toUpperCase()}
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-sm font-medium text-slate-900 truncate">
+                                {member.email || member.invited_email}
+                                {isCurrentUser && <span className="text-xs text-slate-400 ml-1">(vous)</span>}
+                              </p>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${roleInfo.color}`}>
+                                  {roleInfo.label}
+                                </span>
+                                {isPending && (
+                                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-100 text-orange-600 border border-orange-200 flex items-center gap-1">
+                                    <span className="animate-pulse h-1.5 w-1.5 bg-orange-500 rounded-full inline-block"></span>
+                                    En attente
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Actions */}
+                          {!isCurrentUser && member.role !== 'owner' && (
+                            <div className="flex items-center gap-1 shrink-0">
+                              {role === 'owner' && member.accepted_at && (
+                                <select
+                                  value={member.role}
+                                  onChange={(e) => handleChangeRole(member.id, e.target.value)}
+                                  className="text-xs px-2 py-1 border border-slate-200 rounded-lg bg-white"
+                                >
+                                  <option value="admin">Admin</option>
+                                  <option value="editor">Éditeur</option>
+
+                                </select>
+                              )}
+                              <button
+                                onClick={() => handleRemoveMember(member.id)}
+                                className="text-xs text-red-500 hover:text-red-700 px-2 py-1"
+                                title="Retirer"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Module Toggles */}
         <Card>
@@ -217,13 +463,21 @@ export default function SettingsPage() {
             <p className="text-sm text-slate-600">
               <strong>Slug du menu QR :</strong> /menu/{profile?.slug}
             </p>
+            {role && (
+              <p className="text-sm text-slate-600">
+                <strong>Rôle :</strong>{" "}
+                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${ROLE_LABELS[role].color}`}>
+                  {ROLE_LABELS[role].label}
+                </span>
+              </p>
+            )}
           </CardContent>
         </Card>
 
         {/* Webhooks & Integrations */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">🔌 Intégrations & Webhooks</CardTitle>
+            <CardTitle className="text-lg">🔌 Intégrations &amp; Webhooks</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-slate-600">
@@ -238,7 +492,7 @@ export default function SettingsPage() {
             <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 mt-4">
                <div className="flex flex-col gap-2">
                  <span className="text-sm font-medium text-slate-900">Webhook Universel Rive</span>
-                 <p className="text-xs text-slate-500 mb-2">Copiez ce lien et collez-le dans les paramètres "Webhooks" de votre logiciel de réservation.</p>
+                 <p className="text-xs text-slate-500 mb-2">Copiez ce lien et collez-le dans les paramètres &quot;Webhooks&quot; de votre logiciel de réservation.</p>
                  <div className="flex gap-2 items-center">
                     <code className="flex-1 bg-slate-200 px-3 py-2 rounded text-xs overflow-hidden text-ellipsis whitespace-nowrap font-mono text-slate-700">
                       https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_{profile?.id?.slice(0,8) || 'XXXX'}
@@ -266,7 +520,7 @@ export default function SettingsPage() {
         {/* Subscription Info */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">💳 Abonnement & Facturation</CardTitle>
+            <CardTitle className="text-lg">💳 Abonnement &amp; Facturation</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-slate-600">
@@ -282,7 +536,7 @@ export default function SettingsPage() {
               </Button>
             ) : (
               <div>
-                <p className="text-sm text-slate-500 mb-4">Vous êtes actuellement sur le système d'essai gratuit ou manuel. Vous n'avez pas de facturation automatique configurée.</p>
+                <p className="text-sm text-slate-500 mb-4">Vous êtes actuellement sur le système d&apos;essai gratuit ou manuel. Vous n&apos;avez pas de facturation automatique configurée.</p>
                 <Button onClick={() => router.push('/pricing')} className="bg-blue-600 text-white hover:bg-blue-700">
                   Voir les forfaits
                 </Button>
@@ -294,3 +548,4 @@ export default function SettingsPage() {
     </>
   );
 }
+

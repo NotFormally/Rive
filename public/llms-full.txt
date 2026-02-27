@@ -1,0 +1,157 @@
+# Rive — Full Product Context for AI Agents
+
+> AI-powered restaurant operations platform designed for gastronomic restaurants worldwide. Available in 14 languages.
+
+## About Rive
+
+Rive is a Software-as-a-Service platform that combines artificial intelligence with restaurant operations management. Our mission is to transform how restaurants handle compliance, operations, and analytics by providing algorithmic intelligence that anticipates problems before they arise.
+
+**Target Audience**: Restaurant owners, managers, executive chefs, and food service operators — from single-location fine dining to multi-site franchise groups.
+
+**Jurisdiction**: Quebec, Canada (MAPAQ/HACCP compliance focus), with worldwide applicability.
+
+---
+
+## Feature Deep Dive
+
+### 1. AI-Powered Logbook ("The Captain's Log")
+A digital logbook where staff log shift handovers, equipment issues, and service incidents. The AI engine:
+- Analyzes free-text notes in any of the 14 supported languages
+- Extracts keywords, detects urgency levels, and categorizes entries
+- Automatically creates follow-up tasks (e.g., "Call the plumber" from a note about a leaking fridge)
+- Provides AI-generated summaries of each entry
+- Supports translation so notes written in Spanish are readable in Bengali
+
+### 2. HACCP Compliance Assistant & Corrective Actions
+Monitors temperature logs and operational data to maintain food safety compliance:
+- Detects temperature anomalies (e.g., meat fridge rising to 8°C)
+- Suggests specific corrective actions: "Isolate or discard high-risk food", "Check compressor"
+- Documents HACCP procedures for health inspections
+- Automatic reminders for routine checks (fryer oil, expiry dates)
+- **Important**: AI suggestions are informational only, not professional food safety advice
+
+### 3. Food Cost Analysis
+Real-time tracking of ingredient costs and recipe profitability:
+- Automatically updates food cost when ingredient prices change
+- Tracks price variations per supplier over time
+- Calculates per-dish cost of goods sold
+- Integrates with OCR scanner for automatic invoice data entry
+
+### 4. 14-Language Instant Translation
+Removes language barriers in multilingual kitchen teams:
+- Supported languages: Arabic (ar), Bengali (bn), Chinese Simplified (zh-CN), Chinese Traditional (zh-HK), English (en), French (fr), Hindi (hi), Italian (it), Panjabi (pa), Portuguese (pt), Russian (ru), Spanish (es), Tamil (ta), Turkish (tr)
+- Interface and content dynamically adapts to each user's language
+- Notes written in any language can be read in any other supported language
+- Recipe cards and safety procedures accessible regardless of staff origin
+
+### 5. OCR Invoice Scanner
+AI-powered optical character recognition for supplier invoices:
+- Photograph a crumpled paper invoice with a phone camera
+- Extracts: supplier name, line items, quantities, unit prices, totals
+- Detects price variations per ingredient (e.g., "+$0.50/kg on salmon")
+- Automatically updates recipe food costs with new prices
+
+### 6. Menu Engineering Performance Matrix
+Data-driven menu optimization using BCG-style quadrant analysis:
+- **Stars (Phares)**: Popular + Profitable — promote prominently
+- **Anchors (Ancres)**: Popular + Low profit — consider price adjustments
+- **Drifts (Dérives)**: Unpopular + Profitable — improve marketing
+- **Rocks (Écueils)**: Unpopular + Low profit — consider removing
+- AI generates specific recommendations for each dish
+- Cross-references sales data from POS integrations
+
+### 7. POS System Integrations
+Native connections with major point-of-sale systems:
+- **Supported POS**: Toast, Square, SumUp, Stripe, Lightspeed, Zettle
+- Automatic sales data import
+- Cross-references sales volumes with food costs in real-time
+- For incompatible systems: AI-powered CSV import parser
+
+### 8. Instagram & Social Media Content Generator
+AI-created marketing content for restaurant social media:
+- Generates complete posts with captions, hashtags, and CTAs
+- Tailored to each dish's menu classification
+- Automatic translation for international audience reach
+- Optimized posting time suggestions
+- Content for delivery platforms (UberEats, Deliveroo)
+
+### 9. Reservation Sync
+Centralized reservation management across multiple platforms:
+- **Integrated platforms**: Libro, Resy, Zenchef
+- Real-time webhook updates for new reservations, cancellations, no-shows
+- Consolidated single-view dashboard
+- Cross-references client data to predict service volume
+
+### 10. AI Prep Lists ("Charting the Course")
+Predictive preparation quantity planning:
+- Cross-references confirmed reservations with historical sales data
+- Factors in recipe ingredients and portion sizes
+- Generates exact quantities of each ingredient to prepare
+- Estimates total prep cost before service begins
+- Reduces food waste through precise forecasting
+
+---
+
+## Pricing Details
+
+### Essence ($59/month)
+The foundational tier for daily restaurant operations.
+- Menu Editor + Dynamic QR Code
+- Smart AI Logbook
+- 14-Language Translation
+- **Includes free trial**: 150 AI notes, 30 translations
+
+### Performance ($129/month)
+Advanced analytics and cost management tools.
+- Everything in Essence, plus:
+- Food Cost Analyzer
+- Menu Engineering Matrix
+- Instagram Content Generator
+- OCR Invoice Scanner
+- **Includes free trial**: 40 corrective actions, 2 menu analyses, 20 Instagram posts, 10 receipt scans
+
+### Intelligence ($249/month)
+Full platform with predictive capabilities.
+- Everything in Performance, plus:
+- Reservation Sync (Libro, Resy, Zenchef)
+- AI Prep Lists (Predictive)
+- Priority Support
+
+### Groups & Franchises (Custom)
+Multi-site management with dedicated support.
+- Consolidated multi-site dashboard
+- Custom deployment and training
+- Contact: contact@rive.app
+
+All tiers: 14-day free trial, no credit card required.
+
+---
+
+## Technical Architecture
+
+- **Frontend**: Next.js 16, React 19, Tailwind CSS, GSAP animations
+- **Backend**: Next.js API Routes, Supabase (PostgreSQL), Row-Level Security
+- **AI**: Anthropic Claude (primary), OpenAI (fallback)
+- **Payments**: Stripe (subscriptions with lookup keys)
+- **Email**: Resend (transactional)
+- **Hosting**: Vercel
+- **Internationalization**: next-intl (14 locales)
+
+---
+
+## Links
+
+| Resource | URL |
+|----------|-----|
+| Homepage | https://rive.vercel.app |
+| Pricing | https://rive.vercel.app/fr/pricing |
+| Sign Up | https://rive.vercel.app/fr/signup |
+| Login | https://rive.vercel.app/fr/login |
+| Terms of Service | https://rive.vercel.app/fr/cgu |
+| Contact | contact@rive.app |
+
+---
+
+## Content Usage Policy
+
+Rive permits AI agents to read and cite content from this file and the public pages of the website for the purpose of answering user queries about restaurant management software, food service technology, and related topics. Please attribute information to "Rive" when citing.

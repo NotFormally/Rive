@@ -5,6 +5,8 @@ import { supabase } from "@/lib/supabase";
 import { computeEffectiveModules, type SubscriptionTier, type TierModules } from "@/lib/subscription-tiers";
 import type { User } from "@supabase/supabase-js";
 
+export type MemberRole = 'owner' | 'admin' | 'editor';
+
 export type RestaurantProfile = {
   id: string;
   user_id: string;
@@ -38,6 +40,7 @@ type SubscriptionInfo = {
 type AuthContextType = {
   user: User | null;
   profile: RestaurantProfile | null;
+  role: MemberRole | null;
   settings: ModuleSettings | null;
   usage: UsageMetrics | null;
   subscription: SubscriptionInfo | null;
@@ -60,6 +63,7 @@ const defaultSettings: ModuleSettings = {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   profile: null,
+  role: null,
   settings: null,
   usage: null,
   subscription: null,
@@ -75,6 +79,7 @@ export function useAuth() {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<RestaurantProfile | null>(null);
+  const [role, setRole] = useState<MemberRole | null>(null);
   const [settings, setSettings] = useState<ModuleSettings | null>(null);
   const [usage, setUsage] = useState<UsageMetrics | null>(null);
   const [subscription, setSubscription] = useState<SubscriptionInfo | null>(null);
@@ -82,14 +87,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loadProfile = async (userId: string) => {
     try {
+      console.log("[AuthProvider] Loading profile for user:", userId);
+      // 1. Find membership (which restaurant does this user belong to?)
+      const { data: membership, error: memberError } = await supabase
+        .from("restaurant_members")
+        .select("restaurant_id, role")
+        .eq("user_id", userId)
+        .not("accepted_at", "is", null)
+        .limit(1)
+        .single();
+
+      if (memberError && memberError.code !== 'PGRST116') {
+        console.error("[AuthProvider] DB Error loading membership:", memberError);
+      }
+
+      console.log("[AuthProvider] Membership result:", membership);
+
+      if (!membership) {
+         console.warn("[AuthProvider] No active membership found for user. Team Management will be hidden.");
+         return;
+      }
+
+      setRole(membership.role as MemberRole);
+      console.log("[AuthProvider] Role set to:", membership.role);
+
+      // 2. Load the restaurant profile
       const { data: profileData, error: profileError } = await supabase
         .from("restaurant_profiles")
         .select("*")
-        .eq("user_id", userId)
+        .eq("id", membership.restaurant_id)
         .single();
 
       if (profileError && profileError.code !== 'PGRST116') {
-        console.warn("Expected error loading profile:", profileError);
+        console.error("[AuthProvider] DB Error loading profile:", profileError);
       }
 
       if (profileData) {
@@ -171,6 +201,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           } else {
             if (isMounted) {
               setProfile(null);
+              setRole(null);
               setSettings(null);
               setUsage(null);
               setSubscription(null);
@@ -195,13 +226,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut();
     setUser(null);
     setProfile(null);
+    setRole(null);
     setSettings(null);
     setUsage(null);
     setSubscription(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, settings, usage, subscription, loading, signOut, refreshSettings }}>
+    <AuthContext.Provider value={{ user, profile, role, settings, usage, subscription, loading, signOut, refreshSettings }}>
       {children}
     </AuthContext.Provider>
   );

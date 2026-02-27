@@ -1,0 +1,39 @@
+# Rive
+
+> AI-powered restaurant operations platform. Algorithmic intelligence for gastronomic restaurants.
+
+Rive is a SaaS platform that helps restaurant owners and managers streamline daily operations using artificial intelligence. Available in 14 languages with a 14-day free trial.
+
+## Core Features
+
+- **AI Logbook**: Intelligent digital logbook that analyzes staff notes, extracts keywords, detects urgencies, and suggests corrective actions automatically.
+- **HACCP Compliance Assistant**: Monitors temperature logs, detects anomalies (e.g., fridge at 8°C), and proposes corrective actions for food safety compliance.
+- **Food Cost Analysis**: Real-time food cost tracking with automatic updates when ingredient prices change.
+- **14-Language Translation**: Interface and notes instantly available in Arabic, Bengali, Chinese (Simplified & Traditional), English, French, Hindi, Italian, Panjabi, Portuguese, Russian, Spanish, Tamil, and Turkish.
+- **OCR Invoice Scanner**: Photograph supplier invoices to automatically extract line items, quantities, and prices using AI.
+- **Menu Engineering Matrix**: Classifies dishes by popularity and profitability (Stars, Anchors, Drifts, Rocks) to optimize your menu.
+- **POS Integration**: Connects natively with Toast, Square, SumUp, Stripe, Lightspeed, and Zettle point-of-sale systems.
+- **Instagram Content Generator**: Creates complete social media posts with captions, hashtags, and CTAs tailored to each dish.
+- **Reservation Sync**: Integrates with Libro, Resy, and Zenchef for real-time reservation management.
+- **AI Prep Lists**: Cross-references reservations, historical sales, and recipes to generate precise preparation quantities.
+
+## Pricing
+
+| Tier | Price | Key Features |
+|------|-------|-------------|
+| Essence | $59/month | Menu Editor, QR Code, Smart Logbook, Multilingual Translation |
+| Performance | $129/month | + Food Cost Analyzer, Menu Engineering, Instagram Generator, OCR Scanner |
+| Intelligence | $249/month | + Reservations Integration, Smart Prep Lists, Priority Support |
+
+All tiers include a 14-day free trial with no credit card required.
+
+## Links
+
+- Homepage: https://rive.vercel.app
+- Pricing: https://rive.vercel.app/fr/pricing
+- Terms of Service: https://rive.vercel.app/fr/cgu
+- Sign Up: https://rive.vercel.app/fr/signup
+
+## Technical Stack
+
+Built with Next.js 16, React 19, Supabase (PostgreSQL), Anthropic Claude AI, and Stripe for payments. Deployed on Vercel.

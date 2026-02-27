@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "@/i18n/routing";
+import { useRouter, Link } from "@/i18n/routing";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -89,6 +89,14 @@ export default function SignupPage() {
       trial_ends_at: trialEndsAt.toISOString(),
     });
 
+    // 5. Create owner membership — links user to restaurant
+    await supabase.from("restaurant_members").insert({
+      restaurant_id: profileData.id,
+      user_id: authData.user.id,
+      role: 'owner',
+      accepted_at: new Date().toISOString(),
+    });
+
     // 5. Notify admin of new signup (fire and forget)
     fetch('/api/notify-signup', {
       method: 'POST',
@@ -169,6 +177,12 @@ export default function SignupPage() {
             >
               {loading ? t("btn_loading_signup") : t("btn_signup")}
             </Button>
+            <div className="text-xs text-center text-slate-500 mt-4">
+              {t("terms_agreement")}{" "}
+              <Link href="/cgu" className="underline hover:text-slate-800">
+                {t("terms_link")}
+              </Link>
+            </div>
           </form>
 
           <div className="text-center text-sm text-slate-500 mt-4">

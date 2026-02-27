@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "@/i18n/routing";
+import { useRouter, Link } from "@/i18n/routing";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -96,6 +96,11 @@ export default function LoginPage() {
             >
               {t("link_signup")}
             </button>
+            <div className="text-xs text-center mt-6">
+               <Link href="/cgu" className="underline hover:text-slate-800">
+                 {t("terms_link")}
+               </Link>
+            </div>
           </div>
         </CardContent>
       </Card>

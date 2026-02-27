@@ -35,7 +35,7 @@ export default function PricingPage() {
       dimIconColor: "text-[#F2F0E9]/20",
       dimTextColor: "text-[#F2F0E9]/40",
       featureTextColor: "text-[#F2F0E9]/90",
-      presentationClasses: "md:scale-[1.05] z-10 shadow-2xl shadow-[#2E4036]/30 ring-2 ring-[#CC5833]",
+      presentationClasses: "z-10 shadow-lg shadow-[#2E4036]/30 ring-2 ring-[#CC5833]",
       isTrial: true,
     },
     {
@@ -88,7 +88,7 @@ export default function PricingPage() {
         { name: t('feature_preplists'), included: true },
         { name: t('feature_support'), included: true },
       ],
-      cta: t('cta_contact'),
+      cta: t('cta_trial'),
       color: "bg-[#1A1A1A]",
       textColor: "text-[#F2F0E9]",
       borderColor: "border-[#1A1A1A]",
@@ -128,18 +128,18 @@ export default function PricingPage() {
 
       {/* Pricing Grid */}
       <div className="max-w-screen-xl mx-auto px-8 md:px-24 pb-32">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 items-stretch">
           {tiers.map((tier) => (
             <div
               key={tier.name}
-              className={`${tier.color} ${tier.textColor} rounded-[2rem] p-8 border ${tier.borderColor} relative flex flex-col ${tier.presentationClasses} hover:-translate-y-2 transition-transform duration-500`}
+              className={`${tier.color} ${tier.textColor} rounded-[2rem] p-8 border ${tier.borderColor} relative flex flex-col h-full ${tier.presentationClasses} transition-colors duration-300`}
             >
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-black/10 backdrop-blur-md text-inherit border border-current/10 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full whitespace-nowrap overflow-hidden">
                  <span className="opacity-90">{tier.badge}</span>
               </div>
 
               <div className="mb-8 pt-4">
-                <div className="text-4xl mb-4 transform hover:scale-110 transition-transform origin-left">{tier.emoji}</div>
+                <div className="text-4xl mb-4">{tier.emoji}</div>
                 <h2 className={`font-jakarta font-bold text-2xl mb-2 ${tier.name === t('tier_intelligence_name') ? 'font-serif italic text-3xl' : ''}`}>{tier.name}</h2>
                 <p className={`font-outfit text-sm ${tier.dimTextColor}`}>
                   {tier.description}

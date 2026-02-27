@@ -130,10 +130,11 @@ export function LandingPage() {
         {/* Background Image with Global CSS Noise */}
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1442406964439-e46ab8eff7c4?q=80&w=2048&auto=format&fit=crop')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542401886-65d6c61db217?q=80&w=2048&auto=format&fit=crop')" }}
         >
-          {/* Heavy primary-to-black gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#2E4036]/90 to-[#1A1A1A]/70"></div>
+          {/* Dune 2049 heavy amber/obsidian gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#4A1C00]/80 to-[#1A1A1A]/60 mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl text-[#F2F0E9] pt-24 md:pt-0">

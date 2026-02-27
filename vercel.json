@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/generate-prep-list",
+      "schedule": "0 9 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

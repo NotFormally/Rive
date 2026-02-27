@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useAuth } from "@/components/AuthProvider";
 import { useTranslations } from "next-intl";
-import { X, Sparkles, BookOpen, ShieldCheck, Languages, BarChart3, Camera, Image, CreditCard } from "lucide-react";
+import { Loader2, X, Sparkles, BookOpen, ShieldCheck, Languages, BarChart3, Camera, Image, CreditCard } from "lucide-react";
 
 const TRIAL_FEATURE_ICONS = [BookOpen, ShieldCheck, Languages, BarChart3, Image, Camera];
 
@@ -14,6 +15,9 @@ type TrialModalProps = {
 
 export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
   const t = useTranslations('TrialModal');
+  const tCommon = useTranslations('Common');
+  const { profile, loading: authLoading } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
@@ -22,6 +26,37 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
     label: t(`feature${i + 1}_label`),
     desc: t(`feature${i + 1}_desc`),
   }));
+
+  const handleSubscribe = async () => {
+    if (authLoading) return;
+    
+    // If not logged in, redirect to signup
+    if (!profile) {
+      window.location.assign(`/signup?plan=${priceId}&checkout=true`);
+      return;
+    }
+
+    // If logged in, go straight to Stripe
+    try {
+      setLoading(true);
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, restaurantId: profile.id })
+      });
+      const data = await res.json();
+      
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error);
+      }
+    } catch (err) {
+      console.error("Payment error:", err);
+      alert(tCommon('error_payment'));
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -88,13 +123,20 @@ export function TrialModal({ isOpen, onClose, priceId }: TrialModalProps) {
           </a>
 
           {priceId && (
-            <a
-              href={`/signup?plan=${priceId}&checkout=true`}
-              className="flex items-center justify-center gap-2 w-full text-center py-3.5 rounded-[2rem] font-semibold text-sm bg-transparent border-2 border-[#2E4036]/20 text-[#2E4036] hover:border-[#2E4036]/50 hover:bg-[#2E4036]/5 transition-all duration-300"
+            <button
+              onClick={handleSubscribe}
+              disabled={loading}
+              className="flex items-center justify-center gap-2 w-full text-center py-3.5 rounded-[2rem] font-semibold text-sm bg-transparent border-2 border-[#2E4036]/20 text-[#2E4036] hover:border-[#2E4036]/50 hover:bg-[#2E4036]/5 transition-all duration-300 disabled:opacity-50"
             >
-              <CreditCard className="w-4 h-4" />
-              {t('cta_subscribe')}
-            </a>
+              {loading ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  <CreditCard className="w-4 h-4" />
+                  {t('cta_subscribe')}
+                </>
+              )}
+            </button>
           )}
 
           <p className="text-center font-outfit text-xs text-slate-400">

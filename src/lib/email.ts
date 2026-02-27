@@ -4,6 +4,7 @@ import { TrialWarningEmail } from '@/emails/TrialWarningEmail';
 import { TrialExpiredEmail } from '@/emails/TrialExpiredEmail';
 import { PaymentConfirmationEmail } from '@/emails/PaymentConfirmationEmail';
 import { SubscriptionCancelledEmail } from '@/emails/SubscriptionCancelledEmail';
+import { TeamInviteEmail } from '@/emails/TeamInviteEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_fallback_for_build');
 const FROM = 'Rive <dock@rivehub.com>';
@@ -13,7 +14,8 @@ export type EmailPayload =
   | { type: 'trial_warning'; to: string; restaurantName: string; daysLeft: 7 | 3 }
   | { type: 'trial_expired'; to: string; restaurantName: string }
   | { type: 'payment_confirmation'; to: string; restaurantName: string; tier: string }
-  | { type: 'subscription_cancelled'; to: string; restaurantName: string };
+  | { type: 'subscription_cancelled'; to: string; restaurantName: string }
+  | { type: 'team_invite'; to: string; restaurantName: string; roleName: string; inviteUrl: string };
 
 const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => string)> = {
   welcome: 'Bienvenue sur Rive \u{1F30A}',
@@ -24,6 +26,10 @@ const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => stri
   trial_expired: 'Votre essai Rive est termin\u00e9',
   payment_confirmation: 'Bienvenue dans l\'\u00e9quipe Rive \u2713',
   subscription_cancelled: 'Votre abonnement Rive a \u00e9t\u00e9 annul\u00e9',
+  team_invite: (p) => 
+    p.type === 'team_invite'
+      ? `Invitation à rejoindre l'équipe de ${p.restaurantName} sur Rive`
+      : '',
 };
 
 function getSubject(payload: EmailPayload): string {
@@ -43,6 +49,12 @@ function getReactComponent(payload: EmailPayload) {
       return PaymentConfirmationEmail({ restaurantName: payload.restaurantName, tier: payload.tier });
     case 'subscription_cancelled':
       return SubscriptionCancelledEmail({ restaurantName: payload.restaurantName });
+    case 'team_invite':
+      return TeamInviteEmail({
+         restaurantName: payload.restaurantName,
+         roleName: payload.roleName,
+         inviteUrl: payload.inviteUrl
+      });
   }
 }
 

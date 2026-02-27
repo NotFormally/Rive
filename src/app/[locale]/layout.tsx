@@ -30,12 +30,59 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rivehub.com'
+const allLocales = ['fr', 'en', 'ar', 'es', 'it', 'hi', 'pa', 'ta', 'bn', 'ru', 'pt', 'zh-HK', 'zh-CN', 'tr']
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = (await params).locale;
-  const t = await getTranslations({ locale, namespace: 'LandingPage' });
+  const t = await getTranslations({ locale, namespace: 'Meta' });
+
+  const title = t('home_title');
+  const description = t('home_description');
+  const url = `${SITE_URL}/${locale}`;
+
+  // Build hreflang alternates
+  const languages: Record<string, string> = {};
+  for (const loc of allLocales) {
+    languages[loc] = `${SITE_URL}/${loc}`;
+  }
+  languages['x-default'] = `${SITE_URL}/fr`;
+
   return {
-    title: "Rive — " + t('nav_features'), // A simple translated title for now
-    description: t('footer_desc'),
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: title,
+      template: `%s | Rive`,
+    },
+    description,
+    alternates: {
+      canonical: url,
+      languages,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'Rive',
+      locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large' as const,
+        'max-snippet': -1,
+      },
+    },
   };
 }
 

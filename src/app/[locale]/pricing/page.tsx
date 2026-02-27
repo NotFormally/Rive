@@ -2,6 +2,18 @@ import { Link } from "@/i18n/routing";
 import { Check, X } from "lucide-react";
 import { CheckoutButton } from "@/components/CheckoutButton";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale;
+  const t = await getTranslations({ locale, namespace: 'Meta' });
+  return {
+    title: t('pricing_title'),
+    description: t('pricing_description'),
+  };
+}
 
 // Force rebuild cache
 export default function PricingPage() {

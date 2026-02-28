@@ -192,31 +192,33 @@ export default function ReservationsDashboard() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold text-slate-900">Réservations</h1>
-          <p className="text-sm text-slate-500">
-            Libro · Resy · Zenchef — Flux de réservations en temps réel
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => loadData()}
-            className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
-            title="Rafraîchir"
-          >
-            <RefreshCw className="w-4 h-4 text-slate-500" />
-          </button>
-          <button
-            onClick={() => setShowSetup(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
-          >
-            <Plus className="w-4 h-4" /> Connecter une plateforme
-          </button>
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-4 sm:px-8 py-3 sm:py-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <h1 className="text-lg sm:text-xl font-bold text-slate-900">Réservations</h1>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Libro · Resy · Zenchef — Flux en temps réel
+            </p>
+          </div>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => loadData()}
+              className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
+              title="Rafraîchir"
+            >
+              <RefreshCw className="w-4 h-4 text-slate-500" />
+            </button>
+            <button
+              onClick={() => setShowSetup(true)}
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-indigo-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+            >
+              <Plus className="w-4 h-4" /> <span className="hidden sm:inline">Connecter une</span> plateforme
+            </button>
+          </div>
         </div>
       </header>
 
-      <main className="p-8 space-y-8 max-w-6xl">
+      <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 max-w-6xl">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
@@ -316,16 +318,16 @@ export default function ReservationsDashboard() {
 
         {/* Date Filter + Reservations List */}
         <section>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
             <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
               <CalendarDays className="w-4 h-4" /> Réservations
             </h2>
-            <div className="flex bg-slate-100 rounded-lg p-0.5">
+            <div className="flex bg-slate-100 rounded-lg p-0.5 overflow-x-auto">
               {(['today', 'tomorrow', 'week', 'all'] as const).map((f) => (
                 <button
                   key={f}
                   onClick={() => setDateFilter(f)}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
                     dateFilter === f ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
@@ -344,7 +346,8 @@ export default function ReservationsDashboard() {
             </div>
           ) : (
             <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-              <div className="grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              {/* Desktop table header */}
+              <div className="hidden md:grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 <span>Client</span>
                 <span>Couverts</span>
                 <span>Heure</span>
@@ -359,27 +362,55 @@ export default function ReservationsDashboard() {
                 const time = new Date(r.reservation_time);
 
                 return (
-                  <div key={r.id} className="grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3.5 border-b border-slate-100 last:border-b-0 items-center hover:bg-slate-50/50 transition-colors">
-                    <div>
-                      <p className="text-sm font-medium text-slate-900">{r.customer_name || 'Client inconnu'}</p>
+                  <div key={r.id} className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50 transition-colors">
+                    {/* Desktop row */}
+                    <div className="hidden md:grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3.5 items-center">
+                      <div>
+                        <p className="text-sm font-medium text-slate-900">{r.customer_name || 'Client inconnu'}</p>
+                        {r.customer_notes && (
+                          <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{r.customer_notes}</p>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Users className="w-3.5 h-3.5 text-slate-400" />
+                        <span className="text-sm text-slate-700 font-medium">{r.guest_count}</span>
+                      </div>
+                      <span className="text-sm text-slate-700 font-mono">
+                        {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                      <span className={`inline-flex w-fit px-2 py-0.5 rounded-full text-xs font-medium ${pm.color} ${pm.bg}`}>
+                        {pm.label}
+                      </span>
+                      <span className={`inline-flex items-center gap-1 text-xs font-medium ${sc.color}`}>
+                        <StatusIcon className="w-3 h-3" />
+                        {sc.label}
+                      </span>
+                    </div>
+                    {/* Mobile card */}
+                    <div className="md:hidden px-4 py-3">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <p className="text-sm font-medium text-slate-900">{r.customer_name || 'Client inconnu'}</p>
+                        <span className="text-sm text-slate-700 font-mono">
+                          {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <div className="flex items-center gap-1">
+                          <Users className="w-3 h-3 text-slate-400" />
+                          <span className="text-xs text-slate-600">{r.guest_count}</span>
+                        </div>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${pm.color} ${pm.bg}`}>
+                          {pm.label}
+                        </span>
+                        <span className={`inline-flex items-center gap-1 text-[10px] font-medium ${sc.color}`}>
+                          <StatusIcon className="w-3 h-3" />
+                          {sc.label}
+                        </span>
+                      </div>
                       {r.customer_notes && (
-                        <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{r.customer_notes}</p>
+                        <p className="text-xs text-slate-400 mt-1 truncate">{r.customer_notes}</p>
                       )}
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Users className="w-3.5 h-3.5 text-slate-400" />
-                      <span className="text-sm text-slate-700 font-medium">{r.guest_count}</span>
-                    </div>
-                    <span className="text-sm text-slate-700 font-mono">
-                      {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
-                    </span>
-                    <span className={`inline-flex w-fit px-2 py-0.5 rounded-full text-xs font-medium ${pm.color} ${pm.bg}`}>
-                      {pm.label}
-                    </span>
-                    <span className={`inline-flex items-center gap-1 text-xs font-medium ${sc.color}`}>
-                      <StatusIcon className="w-3 h-3" />
-                      {sc.label}
-                    </span>
                   </div>
                 );
               })}

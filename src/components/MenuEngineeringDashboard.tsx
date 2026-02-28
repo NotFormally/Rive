@@ -128,36 +128,38 @@ export function MenuEngineeringDashboard() {
 
   return (
     <div className="w-full h-full flex flex-col space-y-6">
-      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-1">{t('title')}</h2>
-          <p className="text-sm text-zinc-500">{t('desc_short')} {t('median_info', { margin: medianMargin, orders: medianOrders })}</p>
-        </div>
-        
-        <div className="flex bg-slate-100 dark:bg-zinc-800 p-1 rounded-lg">
-          <button 
-            onClick={() => setSelectedTier('standard')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${selectedTier === 'standard' ? 'bg-white shadow-sm text-slate-900 dark:bg-zinc-700 dark:text-white' : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'}`}
-          >
-            Standard
-          </button>
-          <button 
-            onClick={() => setSelectedTier('happy_hour')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${selectedTier === 'happy_hour' ? 'bg-white shadow-sm text-slate-900 dark:bg-zinc-700 dark:text-white' : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'}`}
-          >
-            Happy Hour
-          </button>
-          <button 
-            onClick={() => setSelectedTier('combined')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${selectedTier === 'combined' ? 'bg-white shadow-sm text-slate-900 dark:bg-zinc-700 dark:text-white' : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'}`}
-          >
-            Combiné (Pondéré)
-          </button>
+      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <h2 className="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-1">{t('title')}</h2>
+            <p className="text-xs sm:text-sm text-zinc-500">{t('desc_short')} {t('median_info', { margin: medianMargin, orders: medianOrders })}</p>
+          </div>
+
+          <div className="flex bg-slate-100 dark:bg-zinc-800 p-1 rounded-lg overflow-x-auto shrink-0">
+            <button
+              onClick={() => setSelectedTier('standard')}
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap ${selectedTier === 'standard' ? 'bg-white shadow-sm text-slate-900 dark:bg-zinc-700 dark:text-white' : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'}`}
+            >
+              Standard
+            </button>
+            <button
+              onClick={() => setSelectedTier('happy_hour')}
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap ${selectedTier === 'happy_hour' ? 'bg-white shadow-sm text-slate-900 dark:bg-zinc-700 dark:text-white' : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'}`}
+            >
+              Happy Hour
+            </button>
+            <button
+              onClick={() => setSelectedTier('combined')}
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap ${selectedTier === 'combined' ? 'bg-white shadow-sm text-slate-900 dark:bg-zinc-700 dark:text-white' : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'}`}
+            >
+              Combiné
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 flex-1">
-        <div className="grid grid-cols-2 gap-1 aspect-square w-full max-w-md mx-auto" style={{ maxHeight: '320px' }}>
+      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-4 sm:p-6 flex-1">
+        <div className="grid grid-cols-2 gap-1 aspect-square w-full max-w-xs sm:max-w-md mx-auto" style={{ maxHeight: '320px' }}>
           <div className="bg-yellow-50 dark:bg-yellow-900/15 rounded-tl-xl border border-yellow-200 dark:border-yellow-800/30 p-3 flex flex-col">
             <div className="text-xs font-bold text-yellow-700 dark:text-yellow-400 mb-1">{t('cat_phare')}</div>
             <div className="text-[10px] text-yellow-600/70 dark:text-yellow-500/60 mb-2">{t('cat_phare_desc')}</div>
@@ -195,7 +197,7 @@ export function MenuEngineeringDashboard() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto mt-2 flex justify-between text-[10px] text-zinc-400">
+        <div className="max-w-xs sm:max-w-md mx-auto mt-2 flex justify-between text-[10px] text-zinc-400">
           <span>{t('axis_pop')}</span>
           <span>{t('axis_impop')}</span>
         </div>
@@ -209,23 +211,23 @@ export function MenuEngineeringDashboard() {
           {items.map(item => {
             const cfg = CATEGORY_CONFIG[item.category];
             return (
-              <div key={item.menuItemId} className="px-4 py-3">
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
+              <div key={item.menuItemId} className="px-3 sm:px-4 py-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1.5 gap-1">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ${cfg.bg} ${cfg.color} ring-1 ring-inset ${cfg.ring}`}>
                       {cfg.label}
                     </span>
                     <span className="font-medium text-sm text-zinc-900 dark:text-zinc-100">{item.menuItemName}</span>
                     {selectedTier === 'happy_hour' && item.hhPrice && (
-                      <span className="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded ml-2">Prix HH appliqué</span>
+                      <span className="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Prix HH</span>
                     )}
                   </div>
                   <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">
                     {t('profit_label', { amount: selectedTier === 'combined' && item.combinedProfit ? item.combinedProfit.toFixed(0) : item.weeklyProfit.toFixed(0) })}
                   </span>
                 </div>
-                <div className="flex gap-4 text-xs text-zinc-500 mb-1.5">
-                  <span>Volume: {selectedTier === 'happy_hour' && item.hhWeeklyOrders ? item.hhWeeklyOrders : item.weeklyOrders}</span>
+                <div className="flex flex-wrap gap-2 sm:gap-4 text-xs text-zinc-500 mb-1.5">
+                  <span>Vol: {selectedTier === 'happy_hour' && item.hhWeeklyOrders ? item.hhWeeklyOrders : item.weeklyOrders}</span>
                   <span>Marge: {selectedTier === 'happy_hour' && item.hhMarginPercent ? item.hhMarginPercent.toFixed(1) : item.marginPercent.toFixed(1)}%</span>
                   <span>Prix: {selectedTier === 'happy_hour' && item.hhPrice ? item.hhPrice.toFixed(2) : item.sellingPrice.toFixed(2)}$</span>
                 </div>

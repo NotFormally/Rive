@@ -135,7 +135,8 @@
     "f9_desc": "Tracciamento ultra-preciso dei liquidi. Gestisci le rese dei fusti, isola i vuoti a rendere e gestisci la produzione del tuo micro-birrificio.",
     "f9_ex1": "Isola istantaneamente i depositi di fusti e bottiglie dal tuo vero Food Cost.",
     "f9_ex2": "Rileva lo spreco esatto tra le vendite POS e le giacenze di magazzino.",
-    "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche."
+    "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche.",
+    "beta_badge": "In Sviluppo"
   },
   "Pricing": {
     "title": "Prezzi chiari, impatto reale.",
@@ -215,7 +216,8 @@
     "f9_desc": "Tracciamento ultra-preciso dei liquidi. Gestisci le rese dei fusti, isola i vuoti a rendere e gestisci la produzione del tuo micro-birrificio.",
     "f9_ex1": "Isola istantaneamente i depositi di fusti e bottiglie dal tuo vero Food Cost.",
     "f9_ex2": "Rileva lo spreco esatto tra le vendite POS e le giacenze di magazzino.",
-    "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche."
+    "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche.",
+    "beta_badge": "In Sviluppo"
   },
   "Auth": {
     "login_title": "Rive",

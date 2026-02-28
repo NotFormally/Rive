@@ -145,7 +145,8 @@
     "f9_desc": "Suivi ultra-précis des liquides. Gérez vos rendements de fûts, isolez vos consignes, et pilotez la production de votre micro-brasserie.",
     "f9_ex1": "Isolez instantanément l'argent bloqué dans les consignes (fûts/verres) de votre vrai Food Cost.",
     "f9_ex2": "Décelez les pertes exactes (coulage) entre les ventes du POS et vos décomptes d'inventaire.",
-    "f9_ex3": "Gérez vos brassins de la cuve de fermentation jusqu'à l'enfûtage avec des rendements précis."
+    "f9_ex3": "Gérez vos brassins de la cuve de fermentation jusqu'à l'enfûtage avec des rendements précis.",
+    "beta_badge": "En développement"
   },
   "Pricing": {
     "title": "Un prix clair, un impact réel.",
@@ -212,7 +213,8 @@
     "f9_desc": "Suivi ultra-précis des liquides. Gérez vos rendements de fûts, isolez vos consignes, et pilotez la production de votre micro-brasserie.",
     "f9_ex1": "Isolez instantanément l'argent bloqué dans les consignes (fûts/verres) de votre vrai Food Cost.",
     "f9_ex2": "Décelez les pertes exactes (coulage) entre les ventes du POS et vos décomptes d'inventaire.",
-    "f9_ex3": "Gérez vos brassins de la cuve de fermentation jusqu'à l'enfûtage avec des rendements précis."
+    "f9_ex3": "Gérez vos brassins de la cuve de fermentation jusqu'à l'enfûtage avec des rendements précis.",
+    "beta_badge": "En développement"
   },
   "Auth": {
     "login_title": "Rive",

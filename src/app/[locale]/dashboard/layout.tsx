@@ -33,7 +33,16 @@ export default function DashboardLayout({
     }
   }, [user, subscription, authLoading, router, pathname]);
 
-  if (authLoading) return <div className="p-8 text-center flex-1">Génération de l'espace...</div>;
+  if (authLoading) return (
+    <div className="flex min-h-[100dvh] w-full items-center justify-center bg-background noise-bg text-foreground">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-8 h-8 md:w-12 md:h-12 border-4 border-[#CC5833]/20 border-t-[#CC5833] rounded-full animate-spin"></div>
+        <p className="font-plex-mono text-xs md:text-sm tracking-widest uppercase opacity-70 animate-pulse text-[#CC5833]">
+          Génération de l'espace...
+        </p>
+      </div>
+    </div>
+  );
   if (!user) return null;
 
   return (

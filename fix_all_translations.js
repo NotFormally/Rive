@@ -441,6 +441,7 @@ const dashboardSections = {
 };
 
 const enFixes = {
+  "beta_badge": "In Development",
   "features_title": "All the instruments you need to navigate, in one place.",
   "f1_title": "The Captain's Log",
   "f1_desc": "Forget loose notebooks. Staff handovers, equipment issues, and crew incidents are logged, mapped, and tracked by AI.",
@@ -500,6 +501,7 @@ const enFixes = {
 };
 
 const itFixes = {
+  "beta_badge": "In Sviluppo",
   "features_title": "Tutto ciò di cui hai bisogno per operare, in un unico posto.",
   "f1_title": "Logbook Intelligente",
   "f1_desc": "Dimentica i taccuini volanti. Consegne, problemi alle attrezzature e incidenti con gli ospiti vengono registrati, analizzati e monitorati dall'IA.",
@@ -563,6 +565,7 @@ const itFixes = {
 };
 
 const frFixes = {
+  "beta_badge": "En développement",
   "features_title": "Tous les instruments nautiques réunis sur la passerelle.",
   "f1_title": "Le Journal de Bord",
   "f1_desc": "Oubliez la paperasse. Les relèves d'équipage, avaries matérielles et incidents passagers sont consignés et cartographiés par l'IA.",

@@ -25,6 +25,7 @@ export default function FoodCostPage() {
           <a href="/dashboard/food-cost" className="py-3 border-b-2 border-indigo-600 text-indigo-600">Vue Globale</a>
           <a href="/dashboard/food-cost/ingredients" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Ingrédients</a>
           <a href="/dashboard/food-cost/recipes" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Recettes</a>
+          <a href="/dashboard/food-cost/invoices" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Factures Scannées</a>
         </div>
       </header>
 

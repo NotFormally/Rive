@@ -183,10 +183,10 @@ export function LandingPage() {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-12 md:gap-24">
+        <div className="flex flex-col gap-12 lg:gap-24">
           
           {/* Feature 1: Logbook */}
-          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-white rounded-[3rem] p-8 lg:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex flex-col gap-6">
                 <div className="bg-[#2E4036]/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Activity className="w-8 h-8 text-[#2E4036]" /></div>
@@ -229,7 +229,7 @@ export function LandingPage() {
           </div>
 
           {/* Feature 2: Compliance */}
-          <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 md:p-12 shadow-md grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 lg:p-12 shadow-md grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-1 bg-[#232323] rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden">
                {/* Background List Mockup to better use space */}
                <div className="absolute inset-0 p-8 flex flex-col gap-4 opacity-20">
@@ -271,7 +271,7 @@ export function LandingPage() {
           </div>
 
           {/* Feature 3: Translations */}
-          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-white rounded-[3rem] p-8 lg:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex flex-col gap-6">
                 <div className="bg-indigo-50 w-16 h-16 rounded-2xl flex items-center justify-center"><Globe className="w-8 h-8 text-indigo-600" /></div>
@@ -297,7 +297,7 @@ export function LandingPage() {
           </div>
 
           {/* Feature 4: Food Cost & Menu Engineering */}
-          <div className="feature-row bg-slate-50 border border-slate-200/60 rounded-[3rem] p-8 md:p-12 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-slate-50 border border-slate-200/60 rounded-[3rem] p-8 lg:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-1 bg-white border border-slate-200 rounded-[2rem] h-64 md:h-full min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden p-6 md:p-8">
                {/* Matrix Background */}
                 <div className="absolute inset-5 grid grid-cols-2 grid-rows-2 gap-1 opacity-70">
@@ -334,7 +334,7 @@ export function LandingPage() {
           </div>
 
            {/* Feature 5: Invoice Scanning */}
-          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-white rounded-[3rem] p-8 lg:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex flex-col gap-6">
                 <div className="bg-blue-500/10 w-16 h-16 rounded-2xl flex items-center justify-center"><ScanLine className="w-8 h-8 text-blue-600" /></div>
@@ -375,7 +375,7 @@ export function LandingPage() {
           </div>
 
           {/* Feature 6: Social Media Marketing */}
-          <div className="feature-row bg-[#2E4036] text-[#F2F0E9] rounded-[3rem] p-8 md:p-12 shadow-md grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-[#2E4036] text-[#F2F0E9] rounded-[3rem] p-8 lg:p-12 shadow-md grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-1 bg-[#1f2d25] border border-[#3e5548] rounded-[2rem] h-64 md:h-full min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden p-6 text-center">
                <div className="text-3xl mb-4">📸</div>
                <div className="font-outfit text-sm text-green-100/70 max-w-xs leading-relaxed">
@@ -404,7 +404,7 @@ export function LandingPage() {
 
 
           {/* Feature 7: Reservations */}
-          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-white rounded-[3rem] p-8 lg:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex flex-col gap-6">
                 <div className="bg-indigo-50 w-16 h-16 rounded-2xl flex items-center justify-center"><CalendarCheck className="w-8 h-8 text-indigo-600" /></div>
@@ -448,7 +448,7 @@ export function LandingPage() {
           </div>
 
           {/* Feature 8: Smart Prep Lists */}
-          <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 md:p-12 shadow-md grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 lg:p-12 shadow-md grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-1 bg-[#141414] border border-amber-900/20 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden p-6">
               <div className="w-full max-w-[290px] flex flex-col gap-2">
                 <div className="font-plex-mono text-[10px] text-amber-400/70 mb-3 flex justify-between">
@@ -495,7 +495,7 @@ export function LandingPage() {
           </div>
 
           {/* Feature 9: Liquid Intelligence (Bar & Brewery) */}
-          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="feature-row bg-white rounded-[3rem] p-8 lg:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex flex-col gap-6">
                 <div className="bg-emerald-50 w-16 h-16 rounded-2xl flex items-center justify-center"><Beer className="w-8 h-8 text-emerald-600" /></div>
@@ -594,17 +594,17 @@ export function LandingPage() {
         {/* Bottom Pillars — Horizontal numbered cards */}
         <div className="relative z-10 border-t border-white/[0.06]">
           <div className="max-w-6xl mx-auto px-8 md:px-24 py-24">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-0">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 md:gap-0">
               
               {/* Pillar 1 */}
-              <div className="group relative py-10 md:py-12 md:px-10 md:border-r border-white/[0.06] border-b md:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
+              <div className="group relative py-10 md:py-12 md:px-10 lg:border-r border-white/[0.06] border-b lg:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">01</span>
                 <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar1_title')}</h3>
                 <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar1_desc')}</p>
               </div>
               
               {/* Pillar 2 */}
-              <div className="group relative py-10 md:py-12 md:px-10 md:border-r border-white/[0.06] border-b md:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
+              <div className="group relative py-10 md:py-12 md:px-10 lg:border-r border-white/[0.06] border-b lg:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">02</span>
                 <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar2_title')}</h3>
                 <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar2_desc')}</p>
@@ -631,7 +631,7 @@ export function LandingPage() {
 
         <div className="protocol-container relative">
           {/* Card 1 */}
-          <div className="stack-card bg-[#2E4036] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
+          <div className="stack-card bg-[#2E4036] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 01</div>
               <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase1_title')}</h3>
@@ -646,7 +646,7 @@ export function LandingPage() {
           </div>
 
           {/* Card 2 */}
-          <div className="stack-card bg-[#CC5833] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
+          <div className="stack-card bg-[#CC5833] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#1A1A1A] font-bold text-sm mb-4">PHASE 02</div>
               <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase2_title')}</h3>
@@ -662,7 +662,7 @@ export function LandingPage() {
           </div>
 
           {/* Card 3 */}
-          <div className="stack-card bg-[#1A1A1A] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col md:flex-row items-center gap-12 min-h-[50vh]">
+          <div className="stack-card bg-[#1A1A1A] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 03</div>
               <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase3_title')}</h3>
@@ -690,7 +690,7 @@ export function LandingPage() {
 
       {/* G. FOOTER */}
       <footer className="bg-[#1A1A1A] text-[#F2F0E9] rounded-t-[4rem] px-8 md:px-24 pt-24 pb-12 mt-24">
-        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+        <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-12">
           <div>
             <div className="font-outfit font-bold text-3xl mb-4">Rive</div>
             <p className="font-outfit text-slate-400 max-w-xs">{t('footer_desc')}</p>

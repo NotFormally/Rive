@@ -45,7 +45,7 @@ export function ProductionDashboard() {
         <Button className="bg-indigo-600 hover:bg-indigo-700">Démarrer une Production</Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {columns.map((col) => (
           <div key={col.status} className="bg-slate-50/50 rounded-xl p-4 border border-slate-200 shadow-sm min-h-[500px]">
             <div className="flex items-center gap-2 mb-4 pb-2 border-b border-slate-200">

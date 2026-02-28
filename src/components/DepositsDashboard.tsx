@@ -51,7 +51,7 @@ export function DepositsDashboard() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       {/* KPI Cards */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3">
         <Card className="border-slate-200 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-indigo-50 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
@@ -92,9 +92,9 @@ export function DepositsDashboard() {
       </div>
 
       {/* Main Content Area */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3">
         {/* Left Column (Main Table) */}
-        <div className="md:col-span-2">
+        <div className="lg:col-span-2">
           <Card className="shadow-sm border-slate-200 h-full">
             <CardHeader className="border-b border-slate-100 flex flex-row items-center justify-between">
               <div>

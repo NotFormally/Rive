@@ -26,9 +26,9 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_logbook: true,        // Carnet de bord (avec quotas)
       module_menu_editor: true,     // Éditeur de recettes (accès de base)
       module_food_cost: false,
-      module_menu_engineering: false,
-      module_instagram: false,
-      module_receipt_scanner: false,
+      module_menu_engineering: true, // Accès limité par quota
+      module_instagram: true,        // Accès limité par quota
+      module_receipt_scanner: true,  // Accès limité par quota
       module_reservations: false,
       module_smart_prep: false,
       module_deposits: false,
@@ -139,9 +139,9 @@ export function computeEffectiveModules(
     module_logbook: tierModules.module_logbook && (dbSettings.module_logbook ?? true),
     module_menu_editor: tierModules.module_menu_editor && (dbSettings.module_menu_editor ?? true),
     module_food_cost: tierModules.module_food_cost && dbSettings.module_food_cost,
-    module_menu_engineering: tierModules.module_menu_engineering && dbSettings.module_menu_engineering,
-    module_instagram: tierModules.module_instagram && dbSettings.module_instagram,
-    module_receipt_scanner: tierModules.module_receipt_scanner && dbSettings.module_receipt_scanner,
+    module_menu_engineering: tierModules.module_menu_engineering && (dbSettings.module_menu_engineering ?? true),
+    module_instagram: tierModules.module_instagram && (dbSettings.module_instagram ?? true),
+    module_receipt_scanner: tierModules.module_receipt_scanner && (dbSettings.module_receipt_scanner ?? true),
     module_reservations: tierModules.module_reservations && (dbSettings.module_reservations ?? true),
     module_smart_prep: tierModules.module_smart_prep && (dbSettings.module_smart_prep ?? true),
     module_deposits: tierModules.module_deposits && (dbSettings.module_deposits ?? true),

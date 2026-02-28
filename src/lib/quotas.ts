@@ -13,9 +13,9 @@ export const FREEMIUM_QUOTAS: Record<MetricName, number> = {
   logbook_notes: 20,       // ~5 par semaine, suffisant pour garder l'habitude
   corrective_actions: 5,
   translations: 5,
-  menu_engineering: 0,     // Réservé aux tiers payants
-  instagram_posts: 0,      // Réservé aux tiers payants
-  receipt_scans: 0         // Réservé aux tiers payants
+  menu_engineering: 1,     // 1 essai pour voir la valeur
+  instagram_posts: 3,      // 3 essais pour comprendre
+  receipt_scans: 3         // 3 scans OCR 
 };
 
 // Legacy alias — kept for backward compatibility with existing imports

@@ -8,6 +8,10 @@ export async function GET(req: NextRequest) {
   const error = searchParams.get("error");
   const errorDescription = searchParams.get("error_description");
 
+  if (!process.env.NEXT_PUBLIC_SITE_URL && process.env.NODE_ENV === 'production') {
+    console.error('[meta/callback] NEXT_PUBLIC_SITE_URL is not set in production');
+    return new NextResponse('Server misconfiguration', { status: 500 });
+  }
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
   if (error) {

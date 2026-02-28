@@ -241,7 +241,10 @@
     "f9_ex1": "실제 Food Cost에서 병 및 케그 보증금을 즉시 분리합니다.",
     "f9_ex2": "POS 매출과 실물 재고 간의 정확한 서빙 손실(차이)을 추적합니다.",
     "f9_ex3": "발효에서 케그 충전까지 맥주 배치를 특정 수율로 관리합니다.",
-    "beta_badge": "개발 중"
+    "beta_badge": "개발 중",
+    "cta_start": "절약 시작하기",
+    "pricing_popular": "가장 인기",
+    "pricing_includes": "{tier}의 모든 것 +"
   },
   "Auth": {
     "login_title": "Rive",

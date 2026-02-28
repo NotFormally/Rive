@@ -1,4 +1,5 @@
 import { requireAuth, unauthorized } from '@/lib/auth';
+import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { anthropic } from '@ai-sdk/anthropic';
 import { generateObject } from 'ai';
 import { z } from 'zod';
@@ -10,6 +11,9 @@ export async function POST(req: Request) {
   try {
     const auth = await requireAuth(req);
     if (!auth) return unauthorized();
+
+    const rl = await checkRateLimit(auth.restaurantId, 'csv-sync');
+    if (!rl.allowed) return tooManyRequests();
 
     const { csvData } = await req.json();
 

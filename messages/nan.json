@@ -241,7 +241,10 @@
     "f9_ex1": "即時對你真正的 Food Cost 隔開瓶仔佮酒桶押金。",
     "f9_ex2": "追蹤 POS 銷售佮庫存盤點之間精確的倒酒損耗（差異）。",
     "f9_ex3": "管理你的啤酒批次，對發酵到入桶，有特定的產出率。",
-    "beta_badge": "開發中"
+    "beta_badge": "開發中",
+    "cta_start": "開始節省",
+    "pricing_popular": "上蓋受歡迎",
+    "pricing_includes": "{tier}的全部 +"
   },
   "Auth": {
     "login_title": "Rive",

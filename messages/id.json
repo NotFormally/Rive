@@ -241,7 +241,10 @@
     "f9_ex1": "Pisahkan deposit botol dan keg dari Food Cost sebenarnya secara instan.",
     "f9_ex2": "Lacak kerugian tuang (varians) yang tepat antara penjualan POS dan penghitungan fisik inventaris.",
     "f9_ex3": "Kelola batch bir Anda dari fermentasi hingga pengisian keg dengan hasil spesifik.",
-    "beta_badge": "Dalam Pengembangan"
+    "beta_badge": "Dalam Pengembangan",
+    "cta_start": "Mulai hemat",
+    "pricing_popular": "Paling populer",
+    "pricing_includes": "Semua dari {tier} +"
   },
   "Auth": {
     "login_title": "Rive",

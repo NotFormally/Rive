@@ -218,7 +218,10 @@
     "f9_ex1": "Isola istantaneamente i depositi di fusti e bottiglie dal tuo vero Food Cost.",
     "f9_ex2": "Rileva lo spreco esatto tra le vendite POS e le giacenze di magazzino.",
     "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche.",
-    "beta_badge": "In Sviluppo"
+    "beta_badge": "In Sviluppo",
+    "cta_start": "Inizia a risparmiare",
+    "pricing_popular": "Il più popolare",
+    "pricing_includes": "Tutto di {tier} +"
   },
   "Auth": {
     "login_title": "Rive",

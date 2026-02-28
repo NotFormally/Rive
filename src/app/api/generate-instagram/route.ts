@@ -38,7 +38,8 @@ export async function POST(req: Request) {
     // Fetch BCG classification for this item
     let bcgCategory = "inconnu";
     try {
-      const engRes = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/menu-engineering`);
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+      const engRes = await fetch(`${siteUrl}/api/menu-engineering`);
       const engData = await engRes.json();
       const engItem = engData.items?.find((i: any) => i.menuItemId === menuItemId);
       if (engItem) bcgCategory = engItem.category;

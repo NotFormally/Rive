@@ -7,6 +7,10 @@ export async function GET(req: NextRequest) {
     if (!auth) return unauthorized();
 
     const clientKey = process.env.TIKTOK_CLIENT_KEY;
+    if (!process.env.NEXT_PUBLIC_SITE_URL && process.env.NODE_ENV === 'production') {
+      console.error('[tiktok/auth] NEXT_PUBLIC_SITE_URL is not set in production');
+      return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 });
+    }
     const redirectUri = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/auth/tiktok/callback`;
     const state = auth.restaurantId;
 

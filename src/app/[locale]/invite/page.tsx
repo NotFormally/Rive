@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter, Link } from "@/i18n/routing";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { supabase } from "@/lib/supabase";
 
 function InviteAcceptContent() {
@@ -11,6 +11,7 @@ function InviteAcceptContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const locale = useLocale();
+  const t = useTranslations("Invite");
 
   const [status, setStatus] = useState<"loading" | "success" | "error" | "login_needed">("loading");
   const [message, setMessage] = useState("");
@@ -19,7 +20,7 @@ function InviteAcceptContent() {
   useEffect(() => {
     if (!token) {
       setStatus("error");
-      setMessage("Lien d'invitation invalide.");
+      setMessage(t("error_invalid_link"));
       return;
     }
 
@@ -28,7 +29,7 @@ function InviteAcceptContent() {
 
       if (!session) {
         setStatus("login_needed");
-        setMessage("Veuillez vous connecter pour accepter l'invitation.");
+        setMessage(t("login_needed"));
         return;
       }
 
@@ -46,15 +47,15 @@ function InviteAcceptContent() {
 
         if (res.ok) {
           setStatus("success");
-          setMessage(data.message || "Invitation acceptée !");
+          setMessage(data.message || t("success_default"));
           setRestaurantId(data.restaurantId);
         } else {
           setStatus("error");
-          setMessage(data.error || "Erreur lors de l'acceptation.");
+          setMessage(data.error || t("error_accept"));
         }
       } catch {
         setStatus("error");
-        setMessage("Erreur réseau. Réessayez plus tard.");
+        setMessage(t("error_network"));
       }
     };
 
@@ -70,7 +71,7 @@ function InviteAcceptContent() {
         {status === "loading" && (
           <>
             <div className="animate-spin h-8 w-8 border-4 border-accent border-t-transparent rounded-full mx-auto" />
-            <p className="text-sm font-outfit text-muted-foreground">Traitement de votre invitation...</p>
+            <p className="text-sm font-outfit text-muted-foreground">{t("processing")}</p>
           </>
         )}
 
@@ -81,13 +82,13 @@ function InviteAcceptContent() {
             </div>
             <p className="text-lg font-jakarta font-bold text-foreground">{message}</p>
             <p className="text-sm font-outfit text-muted-foreground">
-              Vous avez maintenant accès au tableau de bord du restaurant.
+              {t("success_access")}
             </p>
             <Link
               href="/dashboard"
               className="block w-full bg-primary hover:bg-[#3A4F43] text-primary-foreground py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300 hover:scale-[1.02]"
             >
-              Accéder au dashboard
+              {t("btn_dashboard")}
             </Link>
           </>
         )}
@@ -102,7 +103,7 @@ function InviteAcceptContent() {
               href="/"
               className="block w-full bg-foreground hover:bg-foreground/90 text-background py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300"
             >
-              Retour à l&apos;accueil
+              {t("btn_home")}
             </Link>
           </>
         )}
@@ -114,20 +115,20 @@ function InviteAcceptContent() {
             </div>
             <p className="text-lg font-jakarta font-bold text-foreground">{message}</p>
             <p className="text-sm font-outfit text-muted-foreground">
-              Connectez-vous ou créez un compte, puis revenez sur ce lien.
+              {t("login_prompt")}
             </p>
             <div className="space-y-3">
               <a
                 href={`/${locale}/login?redirect=/${locale}/invite?token=${token}`}
                 className="block w-full bg-primary hover:bg-[#3A4F43] text-primary-foreground py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300 text-center"
               >
-                Se connecter
+                {t("btn_login")}
               </a>
               <a
                 href={`/${locale}/signup?redirect=/${locale}/invite?token=${token}`}
                 className="block w-full bg-secondary hover:bg-secondary/80 text-foreground py-3 px-6 rounded-2xl font-bold font-outfit transition-all duration-300 text-center"
               >
-                Créer un compte
+                {t("btn_signup")}
               </a>
             </div>
           </>

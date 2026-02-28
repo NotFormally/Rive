@@ -9,21 +9,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TIER_CONFIG, type TierModules } from "@/lib/subscription-tiers";
 
-const MODULE_LABELS: Record<string, { label: string; emoji: string; description: string }> = {
-  module_logbook:          { label: "Cahier de Bord Intelligent",  emoji: "📋", description: "Notes IA, classification automatique, urgences" },
-  module_menu_editor:      { label: "Gestionnaire de Menu + QR",   emoji: "🍽️", description: "Menu CRUD, mini-site web public, QR Code" },
-  module_food_cost:        { label: "Food Cost — Marges",          emoji: "💰", description: "Calcul automatique des marges par plat" },
-  module_menu_engineering: { label: "Menu Engineering — Carte Marine", emoji: "🧭", description: "Classification Phare/Ancre/Dérive/Écueil + IA" },
-  module_receipt_scanner:  { label: "Scanner de Reçus (OCR)",      emoji: "📸", description: "Extraction IA des factures fournisseurs" },
-  module_instagram:        { label: "Générateur Instagram",        emoji: "📱", description: "Posts IA pour vos plats avec captions et hashtags" },
-  module_reservations:     { label: "Réservations (Libro/Resy/Zenchef)", emoji: "📅", description: "Flux en temps réel de vos réservations depuis vos plateformes" },
-  module_smart_prep:       { label: "Smart Prep Lists",            emoji: "🧠", description: "Listes de préparation IA basées sur vos ventes et réservations" },
+const MODULE_EMOJIS: Record<string, string> = {
+  module_logbook: "📋",
+  module_menu_editor: "🍽️",
+  module_food_cost: "💰",
+  module_menu_engineering: "🧭",
+  module_receipt_scanner: "📸",
+  module_instagram: "📱",
+  module_reservations: "📅",
+  module_smart_prep: "🧠",
 };
 
-const ROLE_LABELS: Record<MemberRole, { label: string; color: string }> = {
-  owner:  { label: "Propriétaire", color: "bg-amber-100 text-amber-800 border-amber-200" },
-  admin:  { label: "Administrateur", color: "bg-[#2E4036]/10 text-[#2E4036] border-[#2E4036]/20" },
-  editor: { label: "Éditeur", color: "bg-[#CC5833]/10 text-[#CC5833] border-[#CC5833]/20" },
+const ROLE_COLORS: Record<MemberRole, string> = {
+  owner:  "bg-amber-100 text-amber-800 border-amber-200",
+  admin:  "bg-[#2E4036]/10 text-[#2E4036] border-[#2E4036]/20",
+  editor: "bg-[#CC5833]/10 text-[#CC5833] border-[#CC5833]/20",
 };
 
 type TeamMember = {
@@ -38,6 +38,7 @@ type TeamMember = {
 
 export default function SettingsPage() {
   const { user, profile, role, settings, subscription, loading: authLoading, refreshSettings } = useAuth();
+  const t = useTranslations("Settings");
   const locale = useLocale();
   const [localSettings, setLocalSettings] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState(false);
@@ -152,21 +153,21 @@ export default function SettingsPage() {
       });
       const data = await res.json();
       if (res.ok) {
-        setInviteMsg({ type: 'success', text: data.message || 'Invitation envoyée !' });
+        setInviteMsg({ type: 'success', text: data.message || t("btn_invite") });
         setInviteEmail("");
         loadMembers();
       } else {
-        setInviteMsg({ type: 'error', text: data.error || 'Erreur' });
+        setInviteMsg({ type: 'error', text: data.error || t("error_generic") });
       }
     } catch {
-      setInviteMsg({ type: 'error', text: 'Erreur réseau.' });
+      setInviteMsg({ type: 'error', text: t("error_network") });
     } finally {
       setInviting(false);
     }
   };
 
   const handleRemoveMember = async (memberId: string) => {
-    if (!confirm("Retirer ce membre de l'équipe ?")) return;
+    if (!confirm(t("confirm_remove"))) return;
     try {
       const headers = await getAuthHeaders();
       const res = await fetch('/api/team/members', {
@@ -177,10 +178,10 @@ export default function SettingsPage() {
       if (res.ok) loadMembers();
       else {
         const d = await res.json();
-        alert(d.error || "Erreur");
+        alert(d.error || t("error_generic"));
       }
     } catch {
-      alert("Erreur réseau.");
+      alert(t("error_network"));
     }
   };
 
@@ -195,10 +196,10 @@ export default function SettingsPage() {
       if (res.ok) loadMembers();
       else {
         const d = await res.json();
-        alert(d.error || "Erreur");
+        alert(d.error || t("error_generic"));
       }
     } catch {
-      alert("Erreur réseau.");
+      alert(t("error_network"));
     }
   };
 
@@ -217,12 +218,12 @@ export default function SettingsPage() {
       }
     } catch (e) {
       console.error(e);
-      alert("Impossible de charger le portail.");
+      alert(t("portal_error"));
       setPortalLoading(false);
     }
   };
 
-  if (authLoading) return <div className="p-8 text-center flex-1 font-outfit text-muted-foreground">Chargement...</div>;
+  if (authLoading) return <div className="p-8 text-center flex-1 font-outfit text-muted-foreground">{t("loading")}</div>;
   if (!user) return null;
 
   const canManageTeam = role === 'owner' || role === 'admin';
@@ -232,10 +233,10 @@ export default function SettingsPage() {
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
         <div>
           <h1 className="text-3xl md:text-5xl font-jakarta font-bold text-foreground tracking-tighter mb-1 md:mb-2">
-            Paramètres
+            {t("title")}
           </h1>
           <p className="text-base md:text-lg font-outfit text-muted-foreground opacity-80">
-            Gérez vos préférences, modules et équipe
+            {t("subtitle")}
           </p>
         </div>
       </header>
@@ -244,11 +245,11 @@ export default function SettingsPage() {
         {/* Restaurant Profile */}
         <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
           <CardHeader className="bg-card p-6 md:p-8 pb-4">
-            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Mon Restaurant</CardTitle>
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_restaurant")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 p-6 md:p-8 pt-2">
             <div>
-              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">Nom du restaurant</label>
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_name")}</label>
               <input
                 type="text"
                 value={profileName}
@@ -257,17 +258,17 @@ export default function SettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">Slogan</label>
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_tagline")}</label>
               <input
                 type="text"
                 value={profileTagline}
                 onChange={(e) => setProfileTagline(e.target.value)}
-                placeholder="Cuisine française contemporaine"
+                placeholder={t("placeholder_tagline")}
                 className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
               />
             </div>
             <Button onClick={handleSaveProfile} disabled={saving} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
-              {saving ? "Enregistrement..." : "Enregistrer"}
+              {saving ? t("btn_saving") : t("btn_save")}
             </Button>
           </CardContent>
         </Card>
@@ -276,16 +277,16 @@ export default function SettingsPage() {
         {canManageTeam && (
           <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
             <CardHeader className="bg-card p-6 md:p-8 pb-4">
-              <CardTitle className="text-lg font-jakarta font-bold text-foreground">Équipe</CardTitle>
+              <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_team")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 p-6 md:p-8 pt-2">
               <p className="text-sm font-outfit text-muted-foreground">
-                Invitez d&apos;autres personnes à co-administrer votre restaurant. Chaque membre reçoit un lien d&apos;invitation.
+                {t("team_desc")}
               </p>
 
               {/* Invite form */}
               <div className="bg-secondary/50 p-5 rounded-2xl border border-border space-y-3">
-                <p className="text-sm font-medium font-jakarta text-foreground">Inviter un membre</p>
+                <p className="text-sm font-medium font-jakarta text-foreground">{t("invite_title")}</p>
                 <div className="flex gap-2">
                   <input
                     type="email"
@@ -301,12 +302,12 @@ export default function SettingsPage() {
                     className="px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
                     disabled={inviting}
                   >
-                    {role === 'owner' && <option value="admin">Administrateur</option>}
-                    <option value="editor">Éditeur</option>
+                    {role === 'owner' && <option value="admin">{t("role_admin")}</option>}
+                    <option value="editor">{t("role_editor")}</option>
                   </select>
                 </div>
                 <Button onClick={handleInvite} disabled={inviting || !inviteEmail.trim()} className="bg-accent hover:bg-[#b84d2d] text-accent-foreground w-full rounded-xl">
-                  {inviting ? "Envoi..." : "Envoyer l'invitation"}
+                  {inviting ? t("btn_sending") : t("btn_invite")}
                 </Button>
                 {inviteMsg && (
                   <p className={`text-sm font-outfit ${inviteMsg.type === 'success' ? 'text-green-600' : 'text-red-500'}`}>
@@ -317,15 +318,15 @@ export default function SettingsPage() {
 
               {/* Members list */}
               <div className="space-y-2">
-                <p className="text-sm font-medium font-jakarta text-foreground">Membres actuels</p>
+                <p className="text-sm font-medium font-jakarta text-foreground">{t("members_title")}</p>
                 {teamLoading ? (
-                  <p className="text-sm font-outfit text-muted-foreground">Chargement...</p>
+                  <p className="text-sm font-outfit text-muted-foreground">{t("loading")}</p>
                 ) : members.length === 0 ? (
-                  <p className="text-sm font-outfit text-muted-foreground">Aucun membre pour le moment.</p>
+                  <p className="text-sm font-outfit text-muted-foreground">{t("no_members")}</p>
                 ) : (
                   <div className="space-y-2">
                     {members.map((member) => {
-                      const roleInfo = ROLE_LABELS[member.role];
+                      const roleColor = ROLE_COLORS[member.role];
                       const isPending = !member.accepted_at;
                       const isCurrentUser = member.user_id === user.id;
 
@@ -341,16 +342,16 @@ export default function SettingsPage() {
                             <div className="min-w-0">
                               <p className="text-sm font-medium font-outfit text-foreground truncate">
                                 {member.email || member.invited_email}
-                                {isCurrentUser && <span className="text-xs text-muted-foreground ml-1">(vous)</span>}
+                                {isCurrentUser && <span className="text-xs text-muted-foreground ml-1">{t("you_label")}</span>}
                               </p>
                               <div className="flex items-center gap-2 mt-0.5">
-                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${roleInfo.color}`}>
-                                  {roleInfo.label}
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${roleColor}`}>
+                                  {t(`role_${member.role}`)}
                                 </span>
                                 {isPending && (
                                   <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-100 text-orange-600 border border-orange-200 flex items-center gap-1">
                                     <span className="animate-pulse h-1.5 w-1.5 bg-orange-500 rounded-full inline-block"></span>
-                                    En attente
+                                    {t("status_pending")}
                                   </span>
                                 )}
                               </div>
@@ -366,14 +367,14 @@ export default function SettingsPage() {
                                   onChange={(e) => handleChangeRole(member.id, e.target.value)}
                                   className="text-xs px-2 py-1 border border-border rounded-lg bg-background font-outfit"
                                 >
-                                  <option value="admin">Admin</option>
-                                  <option value="editor">Éditeur</option>
+                                  <option value="admin">{t("role_admin_short")}</option>
+                                  <option value="editor">{t("role_editor")}</option>
                                 </select>
                               )}
                               <button
                                 onClick={() => handleRemoveMember(member.id)}
                                 className="text-xs text-red-500 hover:text-red-700 px-2 py-1"
-                                title="Retirer"
+                                title={t("btn_remove_title")}
                               >
                                 ✕
                               </button>
@@ -392,16 +393,16 @@ export default function SettingsPage() {
         {/* Module Toggles */}
         <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
           <CardHeader className="bg-card p-6 md:p-8 pb-4">
-            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Modules Actifs</CardTitle>
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_modules")}</CardTitle>
           </CardHeader>
           <CardContent className="p-6 md:p-8 pt-2">
-            <p className="text-sm font-outfit text-muted-foreground mb-6">Activez ou désactivez les modules de votre barre de navigation.</p>
+            <p className="text-sm font-outfit text-muted-foreground mb-6">{t("modules_desc")}</p>
             <div className="space-y-3">
-              {Object.entries(MODULE_LABELS).map(([key, config]) => {
+              {Object.entries(MODULE_EMOJIS).map(([key, emoji]) => {
                 const isAllowed = subscription && TIER_CONFIG[subscription.tier].modules[key as keyof TierModules];
 
                 // Find minimum tier required for this module if not allowed
-                let requiredTierLabel = "Supérieur";
+                let requiredTierLabel = "";
                 if (!isAllowed) {
                   const entry = Object.entries(TIER_CONFIG).find(([_, t]) => t.modules[key as keyof TierModules]);
                   if (entry) requiredTierLabel = entry[1].label;
@@ -419,17 +420,17 @@ export default function SettingsPage() {
                       <div className="absolute inset-0 bg-transparent z-10" title={`Requis: ${requiredTierLabel}`} />
                     )}
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl">{config.emoji}</span>
+                      <span className="text-2xl">{emoji}</span>
                       <div>
                         <div className="flex items-center gap-2 mb-0.5">
-                          <p className="font-medium text-sm font-jakarta text-foreground">{config.label}</p>
+                          <p className="font-medium text-sm font-jakarta text-foreground">{t(`${key}_label`)}</p>
                           {!isAllowed && (
                             <span className="text-[10px] font-bold uppercase tracking-wider bg-accent/10 text-accent px-2 py-0.5 rounded-full inline-flex items-center gap-1 border border-accent/20">
-                              Inclus avec {requiredTierLabel}
+                              {t("included_with", { tier: requiredTierLabel })}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs font-outfit text-muted-foreground">{config.description}</p>
+                        <p className="text-xs font-outfit text-muted-foreground">{t(`${key}_desc`)}</p>
                       </div>
                     </div>
                     <button
@@ -457,20 +458,20 @@ export default function SettingsPage() {
         {/* Account Info */}
         <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
           <CardHeader className="bg-card p-6 md:p-8 pb-4">
-            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Compte</CardTitle>
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_account")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 p-6 md:p-8 pt-2">
             <p className="text-sm font-outfit text-foreground/70">
-              <strong className="text-foreground">Email :</strong> {user.email}
+              <strong className="text-foreground">{t("label_email")}</strong> {user.email}
             </p>
             <p className="text-sm font-outfit text-foreground/70">
-              <strong className="text-foreground">Slug du menu QR :</strong> /menu/{profile?.slug}
+              <strong className="text-foreground">{t("label_slug")}</strong> /menu/{profile?.slug}
             </p>
             {role && (
               <p className="text-sm font-outfit text-foreground/70">
-                <strong className="text-foreground">Rôle :</strong>{" "}
-                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${ROLE_LABELS[role].color}`}>
-                  {ROLE_LABELS[role].label}
+                <strong className="text-foreground">{t("label_role")}</strong>{" "}
+                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${ROLE_COLORS[role]}`}>
+                  {t(`role_${role}`)}
                 </span>
               </p>
             )}
@@ -480,22 +481,22 @@ export default function SettingsPage() {
         {/* Webhooks & Integrations */}
         <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
           <CardHeader className="bg-card p-6 md:p-8 pb-4">
-            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Intégrations &amp; Webhooks</CardTitle>
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_integrations")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 p-6 md:p-8 pt-2">
             <p className="text-sm font-outfit text-foreground/70">
-              Connectez vos plateformes de réservation (Libro, Resy, etc.) pour bénéficier des <strong className="text-foreground">Smart Prep Lists</strong> (Prédictions IA).
+              {t("integrations_desc")}
             </p>
             <Button
               onClick={() => router.push('/dashboard/settings/reservations' as any)}
               className="bg-primary hover:bg-[#3A4F43] text-primary-foreground w-full rounded-xl"
             >
-              Gérer mes intégrations natives
+              {t("btn_manage_integrations")}
             </Button>
             <div className="bg-secondary/50 p-5 rounded-2xl border border-border mt-4">
                <div className="flex flex-col gap-2">
-                 <span className="text-sm font-medium font-jakarta text-foreground">Webhook Universel Rive</span>
-                 <p className="text-xs font-outfit text-muted-foreground mb-2">Copiez ce lien et collez-le dans les paramètres &quot;Webhooks&quot; de votre logiciel de réservation.</p>
+                 <span className="text-sm font-medium font-jakarta text-foreground">{t("webhook_title")}</span>
+                 <p className="text-xs font-outfit text-muted-foreground mb-2">{t("webhook_desc")}</p>
                  <div className="flex gap-2 items-center">
                     <code className="flex-1 bg-background px-3 py-2 rounded-lg text-xs overflow-hidden text-ellipsis whitespace-nowrap font-plex-mono text-foreground/70 border border-border">
                       https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_{profile?.id?.slice(0,8) || 'XXXX'}
@@ -506,15 +507,15 @@ export default function SettingsPage() {
                       className="rounded-lg"
                       onClick={() => {
                         navigator.clipboard.writeText(`https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_${profile?.id?.slice(0,8)}`);
-                        alert('Lien copié !');
+                        alert(t("copied_alert"));
                       }}
                     >
-                      Copier
+                      {t("btn_copy")}
                     </Button>
                  </div>
                  <div className="mt-4 flex items-center gap-2 text-xs text-amber-600 bg-amber-50 p-2.5 rounded-xl border border-amber-100">
                     <span className="animate-pulse h-2 w-2 bg-amber-500 rounded-full inline-block shrink-0"></span>
-                    <span className="font-outfit">En attente de la première réservation pour activer la prédiction...</span>
+                    <span className="font-outfit">{t("webhook_waiting")}</span>
                  </div>
                </div>
             </div>
@@ -524,11 +525,11 @@ export default function SettingsPage() {
         {/* Subscription Info */}
         <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
           <CardHeader className="bg-card p-6 md:p-8 pb-4">
-            <CardTitle className="text-lg font-jakarta font-bold text-foreground">Abonnement &amp; Facturation</CardTitle>
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_subscription")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 p-6 md:p-8 pt-2">
             <p className="text-sm font-outfit text-foreground/70">
-              <strong className="text-foreground">Forfait actuel :</strong> <span className="capitalize">{subscription?.tier || 'trial'}</span>
+              <strong className="text-foreground">{t("label_plan")}</strong> <span className="capitalize">{subscription?.tier || 'trial'}</span>
             </p>
             {subscription?.stripeCustomerId ? (
               <Button
@@ -536,13 +537,13 @@ export default function SettingsPage() {
                 disabled={portalLoading}
                 className="bg-foreground text-background hover:bg-foreground/90 rounded-xl"
               >
-                {portalLoading ? "Chargement du portail..." : "Gérer mon abonnement (Stripe)"}
+                {portalLoading ? t("portal_loading") : t("btn_manage_subscription")}
               </Button>
             ) : (
               <div>
-                <p className="text-sm font-outfit text-muted-foreground mb-4">Vous êtes actuellement sur le système d&apos;essai gratuit ou manuel. Vous n&apos;avez pas de facturation automatique configurée.</p>
+                <p className="text-sm font-outfit text-muted-foreground mb-4">{t("trial_desc")}</p>
                 <Button onClick={() => router.push('/pricing' as any)} className="bg-accent hover:bg-[#b84d2d] text-accent-foreground rounded-xl">
-                  Voir les forfaits
+                  {t("btn_view_plans")}
                 </Button>
               </div>
             )}

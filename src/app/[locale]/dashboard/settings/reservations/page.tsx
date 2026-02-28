@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -20,6 +21,7 @@ interface IntegrationState {
 export default function ReservationIntegrationsPage() {
   const { user, profile, loading } = useAuth();
   const router = useRouter();
+  const t = useTranslations("SettingsReservations");
   const [integrations, setIntegrations] = useState<IntegrationState[]>([]);
   const [loadingIntegrations, setLoadingIntegrations] = useState(true);
   
@@ -90,23 +92,23 @@ export default function ReservationIntegrationsPage() {
       
       setActiveProviderSetup(null);
       setApiKeyInput("");
-      alert(`${provider} connecté avec succès !`);
+      alert(t("success_connected", { name: provider }));
       
     } catch (error) {
       console.error(error);
-      alert("Erreur lors de la connexion");
+      alert(t("error_connection"));
     } finally {
       setSavingKey(false);
     }
   };
 
   const providers = [
-    { id: 'libro', name: 'Libro Reserve', description: 'Logiciel de réservation canadien.', logo: 'L' },
-    { id: 'resy', name: 'Resy', description: 'L\'un des leaders mondiaux de la réservation.', logo: 'R' },
-    { id: 'zenchef', name: 'Zenchef', description: 'La référence européenne (sans commission).', logo: 'Z' }
-  ] as const;
+    { id: 'libro' as const, name: t("libro_name"), description: t("libro_desc"), logo: 'L' },
+    { id: 'resy' as const, name: t("resy_name"), description: t("resy_desc"), logo: 'R' },
+    { id: 'zenchef' as const, name: t("zenchef_name"), description: t("zenchef_desc"), logo: 'Z' }
+  ];
 
-  if (loading) return <div className="p-8">Chargement...</div>;
+  if (loading) return <div className="p-8">{t("loading")}</div>;
 
   return (
     <>
@@ -115,8 +117,8 @@ export default function ReservationIntegrationsPage() {
           <ArrowLeft className="h-5 w-5 text-slate-500" />
         </Button>
         <div>
-          <h1 className="text-2xl font-jakarta font-bold text-[#1A1A1A] dark:text-white">Intégrations Réservations</h1>
-          <p className="text-sm font-outfit text-slate-500 mt-1">Connectez vos plateformes natives (Libro, Resy, Zenchef)</p>
+          <h1 className="text-2xl font-jakarta font-bold text-[#1A1A1A] dark:text-white">{t("title")}</h1>
+          <p className="text-sm font-outfit text-slate-500 mt-1">{t("subtitle")}</p>
         </div>
       </header>
 
@@ -139,11 +141,11 @@ export default function ReservationIntegrationsPage() {
                 </div>
                 {isConnected ? (
                   <div className="flex items-center gap-2 text-green-400 text-xs font-plex-mono uppercase tracking-widest font-semibold bg-[#2E4036]/20 border border-[#2E4036]/50 px-3 py-1.5 rounded-full">
-                    <CheckCircle2 className="h-4 w-4" /> Connecté
+                    <CheckCircle2 className="h-4 w-4" /> {t("status_connected")}
                   </div>
                 ) : (
                   <div className="flex items-center gap-2 text-[#F2F0E9]/40 text-xs font-plex-mono uppercase tracking-widest font-semibold bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-                    <AlertCircle className="h-4 w-4" /> Non connecté
+                    <AlertCircle className="h-4 w-4" /> {t("status_not_connected")}
                   </div>
                 )}
               </CardHeader>
@@ -151,11 +153,11 @@ export default function ReservationIntegrationsPage() {
                 {activeProviderSetup === provider.id ? (
                   <div className="bg-black/20 p-5 border border-white/10 rounded-[1.5rem] mt-2 space-y-5">
                     <p className="text-sm font-outfit text-[#F2F0E9]/80 leading-relaxed">
-                      Entrez votre clé API {provider.name}. Vous pouvez la trouver dans les paramètres développeur de votre compte {provider.name}.
+                      {t("api_key_prompt", { name: provider.name })}
                     </p>
                     <input
                       type="text"
-                      placeholder="sk_live_..."
+                      placeholder={t("api_key_placeholder")}
                       value={apiKeyInput}
                       onChange={e => setApiKeyInput(e.target.value)}
                       className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm font-mono text-[#F2F0E9] placeholder:text-white/20 focus:outline-none focus:border-[#CC5833] focus:ring-1 focus:ring-[#CC5833] transition-all"
@@ -166,29 +168,29 @@ export default function ReservationIntegrationsPage() {
                         disabled={!apiKeyInput || savingKey}
                         className="bg-[#CC5833] text-[#F2F0E9] hover:bg-[#b04b2b] hover:scale-[1.02] active:scale-[0.98] transition-all rounded-xl font-jakarta font-bold px-6 h-11"
                       >
-                        {savingKey ? "Connexion..." : "Valider la connexion"}
+                        {savingKey ? t("btn_connecting") : t("btn_connect")}
                       </Button>
                       <Button 
                         variant="ghost" 
                         onClick={() => { setActiveProviderSetup(null); setApiKeyInput(""); }}
                         className="text-[#F2F0E9]/60 hover:text-[#F2F0E9] hover:bg-white/5 rounded-xl font-outfit h-11 px-6"
                       >
-                        Annuler
+                        {t("btn_cancel")}
                       </Button>
                     </div>
                   </div>
                 ) : (
                   <div className="mt-2 flex items-center justify-between">
                     <p className="text-sm font-outfit text-[#F2F0E9]/50">
-                       {isConnected 
-                          ? `Dernière synchronisation : ${integration.last_sync_at ? new Date(integration.last_sync_at).toLocaleString() : 'Jamais'}`
-                          : "Synchronisation automatique de l'historique et action bi-directionnelle."}
+                       {isConnected
+                          ? t("last_sync", { date: integration.last_sync_at ? new Date(integration.last_sync_at).toLocaleString() : t("last_sync_never") })
+                          : t("auto_sync_desc")}
                     </p>
                     <Button 
                       onClick={() => setActiveProviderSetup(provider.id)}
                       className="bg-white/10 text-[#F2F0E9] hover:bg-white/20 border border-white/10 hover:border-white/20 rounded-xl font-jakarta font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all h-10 px-6"
                     >
-                      {isConnected ? "Modifier la connexion" : `Connecter ${provider.name}`}
+                      {isConnected ? t("btn_modify") : t("btn_connect_provider", { name: provider.name })}
                     </Button>
                   </div>
                 )}

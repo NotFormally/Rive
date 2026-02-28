@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rive — Smart Prep List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f4f0;
+      --bg-warm: #efe9e0;
+      --bg-deep: #1c1917;
+      --surface: #ffffff;
+      --surface-alt: #f9f6f2;
+      --border: #d4c9bb;
+      --border-light: #e4dbd0;
+      --text: #141210;
+      --text-secondary: #57534e;
+      --text-dim: #78716c;
+      --accent: #9a3c00;
+      --accent-light: #c2410c;
+      --accent-bg: rgba(154,60,0,0.08);
+      --accent-border: rgba(154,60,0,0.2);
+      --green: #166534;
+      --green-bg: rgba(22,101,52,0.08);
+      --green-border: rgba(22,101,52,0.2);
+      --red: #991b1b;
+      --red-bg: rgba(153,27,27,0.07);
+      --red-border: rgba(153,27,27,0.18);
+      --amber: #854d0e;
+      --amber-bg: rgba(133,77,14,0.08);
+      --amber-border: rgba(133,77,14,0.2);
+      --blue: #1e40af;
+      --blue-bg: rgba(30,64,175,0.07);
+      --blue-border: rgba(30,64,175,0.18);
+      --purple: #6b21a8;
+      --purple-bg: rgba(107,33,168,0.07);
+      --purple-border: rgba(107,33,168,0.18);
+      --teal: #115e59;
+      --teal-bg: rgba(17,94,89,0.07);
+      --shadow-sm: 0 1px 3px rgba(28,25,23,0.06);
+      --shadow-md: 0 4px 16px rgba(28,25,23,0.09);
+      --shadow-lg: 0 12px 40px rgba(28,25,23,0.12);
+      --shadow-xl: 0 20px 60px rgba(28,25,23,0.16);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', 'SF Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════ LAYOUT SHELL ═══════════ */
+    .app-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ═══════════ SIDEBAR ═══════════ */
+    .sidebar {
+      background: var(--bg-deep);
+      color: #e7e5e4;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar-brand {
+      padding: 28px 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-brand h1 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fafaf9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-brand h1 .brand-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-light);
+      box-shadow: 0 0 12px rgba(217,119,6,0.4);
+    }
+    .sidebar-brand p {
+      font-size: 12px;
+      color: #78716c;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .sidebar-nav { padding: 16px 12px; flex: 1; }
+    .nav-section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #78716c;
+      padding: 16px 12px 6px;
+      font-weight: 600;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      color: #d6d3d1;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      margin-bottom: 1px;
+      font-weight: 400;
+      position: relative;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.06); color: #fafaf9; }
+    .nav-item.active {
+      background: rgba(217,119,6,0.1);
+      color: #fbbf24;
+    }
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 3px; height: 20px;
+      background: var(--accent-light);
+      border-radius: 0 3px 3px 0;
+    }
+    .nav-item svg { width: 18px; height: 18px; opacity: 0.75; flex-shrink: 0; }
+    .nav-item.active svg { opacity: 1; }
+    .nav-badge {
+      margin-left: auto;
+      font-size: 10px;
+      padding: 1px 7px;
+      border-radius: 10px;
+      background: rgba(217,119,6,0.15);
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, #b45309, #d97706);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; color: white;
+    }
+    .sidebar-footer .user-info { flex: 1; }
+    .sidebar-footer .user-name { font-size: 13px; font-weight: 500; color: #e7e5e4; }
+    .sidebar-footer .user-role { font-size: 11px; color: #78716c; }
+
+    /* ═══════════ MAIN CONTENT ═══════════ */
+    .main-content {
+      padding: 0;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    /* Top bar */
+    .topbar {
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-light);
+      background: rgba(250,248,245,0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 16px; }
+    .topbar-left h2 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .topbar-left .date-badge {
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: var(--bg-warm);
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      transition: all 0.15s;
+      font-family: var(--sans);
+    }
+    .btn:hover { background: var(--bg-warm); border-color: #d6cfc5; }
+    .btn-primary {
+      background: var(--bg-deep);
+      color: white;
+      border-color: var(--bg-deep);
+    }
+    .btn-primary:hover { background: #292524; }
+    .btn svg { width: 15px; height: 15px; }
+
+    /* ═══════════ TABS ═══════════ */
+    .tabs-container {
+      padding: 0 40px;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--surface-alt);
+    }
+    .tabs-row {
+      display: flex; gap: 0;
+    }
+    .tab-btn {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      font-family: var(--sans);
+      position: relative;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tab-btn .tab-icon { margin-right: 6px; font-size: 14px; }
+
+    /* ═══════════ PANELS ═══════════ */
+    .panel-area { padding: 32px 40px 60px; max-width: 1200px; }
+    .panel { display: none; animation: fadeUp 0.35s ease; }
+    .panel.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════ SECTION / CARDS ═══════════ */
+    .section { margin-bottom: 40px; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .section-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .card:hover { box-shadow: var(--shadow-md); border-color: #d6cfc5; }
+    .card-accent {
+      border-left: 3px solid;
+      padding-left: 23px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .card-desc strong, .card-desc code { color: var(--text); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .badge-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+    .badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+    .badge-red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+    .badge-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); border: 1px solid rgba(15,118,110,0.15); }
+    .badge-neutral { background: var(--bg-warm); color: var(--text-secondary); border: 1px solid var(--border); }
+
+    /* ═══════════ LEVEL CARDS ═══════════ */
+    .level-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+    .level-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .level-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .level-card.l1::before { background: var(--green); }
+    .level-card.l2::before { background: var(--amber); }
+    .level-card.l3::before { background: var(--purple); }
+    .level-number {
+      font-family: var(--mono);
+      font-size: 44px;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .l1 .level-number { color: rgba(21,128,61,0.12); }
+    .l2 .level-number { color: rgba(161,98,7,0.12); }
+    .l3 .level-number { color: rgba(126,34,206,0.12); }
+    .level-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* ═══════════ ALGO STEPS ═══════════ */
+    .algo-timeline {
+      position: relative;
+      padding-left: 36px;
+    }
+    .algo-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--border), transparent);
+    }
+    .algo-step {
+      position: relative;
+      margin-bottom: 28px;
+      animation: fadeUp 0.4s ease both;
+    }
+    .algo-step:nth-child(1) { animation-delay: 0.05s; }
+    .algo-step:nth-child(2) { animation-delay: 0.1s; }
+    .algo-step:nth-child(3) { animation-delay: 0.15s; }
+    .algo-step:nth-child(4) { animation-delay: 0.2s; }
+    .algo-step:nth-child(5) { animation-delay: 0.25s; }
+    .algo-step:nth-child(6) { animation-delay: 0.3s; }
+    .algo-step:nth-child(7) { animation-delay: 0.35s; }
+
+    .algo-dot {
+      position: absolute;
+      left: -36px; top: 2px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      z-index: 2;
+      border: 2px solid var(--surface);
+    }
+    .algo-step h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .algo-step p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .algo-step code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--bg-warm);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+
+    /* ═══════════ CODE BLOCK ═══════════ */
+    .code-block {
+      background: var(--bg-deep);
+      color: #d6d3d1;
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.8;
+      overflow-x: auto;
+      margin: 16px 0;
+      position: relative;
+    }
+    .code-block::before {
+      content: 'formules';
+      position: absolute;
+      top: 10px; right: 16px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #78716c;
+    }
+    .code-block .kw { color: #fbbf24; }
+    .code-block .cm { color: #78716c; font-style: italic; }
+    .code-block .num { color: #fb923c; }
+    .code-block .fn { color: #22d3ee; }
+
+    /* ═══════════ FLOW DIAGRAM ═══════════ */
+    .flow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .flow-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .flow-node {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      min-width: 170px;
+      max-width: 230px;
+      flex: 1;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .flow-node:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .flow-node .fn-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .flow-node .fn-title { font-size: 14px; font-weight: 600; }
+    .flow-node .fn-detail { font-size: 12px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
+    .flow-node.accent-left { border-left: 3px solid; padding-left: 17px; }
+    .flow-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+      color: var(--text-dim);
+    }
+    .flow-arrow svg { width: 18px; height: 18px; stroke: var(--border); }
+    .flow-arrow .arrow-label {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .flow-engine {
+      background: var(--bg-deep);
+      color: #e7e5e4;
+      border: none;
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+    }
+    .flow-engine .fn-label { color: #fbbf24; }
+    .flow-engine .fn-title { color: white; font-size: 17px; font-family: var(--serif); font-weight: 400; }
+    .flow-engine .fn-detail { color: #a8a29e; font-size: 13px; line-height: 1.8; }
+    .flow-output { border: 2px solid; }
+
+    /* ═══════════ SCHEMA TABLES ═══════════ */
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .table-card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .table-card-header h4 { font-size: 15px; font-weight: 600; }
+    .schema-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .schema-table th {
+      text-align: left;
+      padding: 10px 24px;
+      background: var(--bg-warm);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+    .schema-table td {
+      padding: 10px 24px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .schema-table tr:last-child td { border-bottom: none; }
+    .schema-table tr:hover td { background: var(--surface-alt); }
+    .col-name { font-family: var(--mono); font-size: 12.5px; color: var(--accent); font-weight: 500; }
+    .col-type { font-family: var(--mono); font-size: 12px; color: var(--text-secondary); }
+    .row-new td { background: var(--amber-bg); }
+
+    /* ═══════════ API ROUTES ═══════════ */
+    .api-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      margin-bottom: 14px;
+      transition: all 0.2s;
+    }
+    .api-card:hover { box-shadow: var(--shadow-md); }
+    .api-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    .method-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+      letter-spacing: 0.02em;
+    }
+    .method-get { background: var(--green-bg); color: var(--green); }
+    .method-post { background: var(--blue-bg); color: var(--blue); }
+    .method-patch { background: var(--amber-bg); color: var(--amber); }
+    .api-path {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .api-card h4 { font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
+
+    .file-tree {
+      background: var(--bg-deep);
+      color: #d6d3d1;
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .file-tree .comment { color: #78716c; }
+    .file-tree .dir { color: #fbbf24; }
+    .file-tree .new { color: #fb923c; }
+
+    /* ═══════════ PREP LIST UI ═══════════ */
+    .prep-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .prep-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s;
+    }
+    .prep-card:hover { box-shadow: var(--shadow-lg); }
+    .prep-card-header {
+      padding: 22px 26px 18px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .prep-card-header h3 {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .prep-meta {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .prep-card-body { padding: 16px 22px 22px; }
+
+    .alert-bar {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .alert-bar.warn {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+    .alert-bar.info {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+    }
+    .alert-bar .alert-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+
+    .prep-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      font-weight: 700;
+      padding: 14px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prep-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+    }
+
+    .prep-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 4px;
+      transition: background 0.12s;
+      cursor: default;
+    }
+    .prep-item:hover { background: var(--surface-alt); }
+
+    .pi-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .pi-dot.high { background: var(--red); box-shadow: 0 0 8px rgba(185,28,28,0.2); }
+    .pi-dot.medium { background: var(--amber); box-shadow: 0 0 8px rgba(161,98,7,0.2); }
+    .pi-dot.low { background: var(--green); box-shadow: 0 0 8px rgba(21,128,61,0.2); }
+
+    .pi-info { flex: 1; min-width: 0; }
+    .pi-name { font-size: 14px; font-weight: 500; }
+    .pi-detail { font-size: 12px; color: var(--text-secondary); }
+
+    .pi-qty {
+      text-align: right;
+      min-width: 72px;
+      flex-shrink: 0;
+    }
+    .pi-qty .number {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .pi-qty .unit {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-left: 3px;
+    }
+
+    .prep-card-footer {
+      padding: 14px 26px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      background: var(--surface-alt);
+    }
+    .prep-card-footer strong {
+      color: var(--text);
+      font-family: var(--mono);
+    }
+
+    /* Feedback card */
+    .feedback-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+      border: 1px solid;
+    }
+    .feedback-item.perfect {
+      background: var(--green-bg);
+      border-color: var(--green-border);
+    }
+    .feedback-item.over {
+      background: var(--red-bg);
+      border-color: var(--red-border);
+    }
+    .feedback-item.under {
+      background: var(--amber-bg);
+      border-color: var(--amber-border);
+    }
+    .fb-status {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 600;
+      min-width: 48px;
+      text-align: right;
+    }
+    .perfect .fb-status { color: var(--green); }
+    .over .fb-status { color: var(--red); }
+    .under .fb-status { color: var(--amber); }
+
+    .accuracy-box {
+      text-align: center;
+      padding: 18px;
+      background: var(--bg-warm);
+      border-radius: var(--radius);
+      margin-top: 14px;
+    }
+    .accuracy-number {
+      font-family: var(--mono);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .accuracy-label { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .accuracy-delta {
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* ═══════════ STAT CARDS (top of dashboard) ═══════════ */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      transition: all 0.2s;
+    }
+    .stat-card:hover { box-shadow: var(--shadow-md); }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-sub {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    /* ═══════════ INTEGRATION CARDS ═══════════ */
+    .integration-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .int-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      border-left: 3px solid;
+      transition: all 0.2s;
+    }
+    .int-card:hover { box-shadow: var(--shadow-md); }
+    .int-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .int-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .int-card code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--bg-warm);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--accent);
+    }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 1024px) {
+      .app-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .prep-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .panel-area { padding: 20px; }
+      .topbar { padding: 16px 20px; }
+      .tabs-container { padding: 0 20px; }
+      .grid-2, .grid-3, .integration-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h1><span class="brand-dot"></span> Rive</h1>
+      <p>Restaurant Intelligence</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Vue d'ensemble
+      </div>
+      <div class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+        Smart Prep List
+        <span class="nav-badge">Nouveau</span>
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Réservations
+      </div>
+
+      <div class="nav-section-label">Opérations</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+        Ventes POS
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Checklists
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Logbook
+      </div>
+
+      <div class="nav-section-label">Intelligence</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Food Cost
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Menu Engineering
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar">N</div>
+      <div class="user-info">
+        <div class="user-name">Le Petit Comptoir</div>
+        <div class="user-role">Plan Professionnel</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="main-content">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <h2>Smart Prep List</h2>
+        <span class="date-badge">Jeu. 27 février 2026 · Service du soir</span>
+      </div>
+      <div class="topbar-right">
+        <button class="btn" onclick="window.print()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Imprimer
+        </button>
+        <button class="btn btn-primary" onclick="switchTab('mockup')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+          Voir la prep du jour
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-container">
+      <div class="tabs-row">
+        <button class="tab-btn active" onclick="switchTab('concept')"><span class="tab-icon">◆</span> Concept</button>
+        <button class="tab-btn" onclick="switchTab('algorithm')"><span class="tab-icon">◈</span> Algorithme</button>
+        <button class="tab-btn" onclick="switchTab('dataflow')"><span class="tab-icon">⬡</span> Flux de données</button>
+        <button class="tab-btn" onclick="switchTab('schema')"><span class="tab-icon">⊞</span> Schéma DB</button>
+        <button class="tab-btn" onclick="switchTab('api')"><span class="tab-icon">⟐</span> API & Routes</button>
+        <button class="tab-btn" onclick="switchTab('mockup')"><span class="tab-icon">◧</span> Prototype UI</button>
+      </div>
+    </div>
+
+    <!-- Panel area -->
+    <div class="panel-area">
+
+      <!-- ═══════ TAB: CONCEPT ═══════ -->
+      <div id="concept" class="panel active">
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Sources croisées</div>
+            <div class="stat-value">6</div>
+            <div class="stat-sub">Réservations, POS, Menu, Recettes, BCG, Logbook</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Réduction gaspillage</div>
+            <div class="stat-value" style="color:var(--green);">–22%</div>
+            <div class="stat-sub">Estimation moyenne en phase pilote</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Temps gagné</div>
+            <div class="stat-value">37<span style="font-size:16px;color:var(--text-secondary);"> min</span></div>
+            <div class="stat-sub">Planification matinale automatisée</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Convergence</div>
+            <div class="stat-value">4–6<span style="font-size:16px;color:var(--text-secondary);"> sem.</span></div>
+            <div class="stat-sub">Pour atteindre 90%+ de précision</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">01</span>
+            <h3 class="section-title">Le problème</h3>
+          </div>
+          <p class="section-desc">
+            Chaque matin, un chef de cuisine se pose la même question : « Qu'est-ce que je dois préparer aujourd'hui, et en quelle quantité ? » Aujourd'hui, cette décision repose sur l'intuition et l'expérience. La Smart Prep List transforme cette intuition en données actionnables en croisant 6 sources d'information que Rive possède déjà.
+          </p>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">02</span>
+            <h3 class="section-title">Les 6 sources de données</h3>
+          </div>
+          <div class="grid-3">
+            <div class="card card-accent" style="border-left-color:var(--blue);">
+              <div class="card-title">Réservations</div>
+              <div class="card-desc">Couverts prévus par créneau, notes clients (allergies, VIP, occasions). Données Libro, Resy, Zenchef.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--green);">
+              <div class="card-title">Ventes POS</div>
+              <div class="card-desc">Historique des ventes par item, jour de semaine, service. Patterns saisonniers et tendances.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--amber);">
+              <div class="card-title">Menu actif</div>
+              <div class="card-desc">Items disponibles, catégories, prix. Filtre les prédictions sur le menu réellement servi.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--purple);">
+              <div class="card-title">Recettes & ingrédients</div>
+              <div class="card-desc">Décomposition exacte de chaque plat. Calcul inverse : portions → ingrédients bruts.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--red);">
+              <div class="card-title">Menu Engineering</div>
+              <div class="card-desc">Matrice BCG — phare, ancre, dérive, écueil. Priorisation intelligente de la prep.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--teal);">
+              <div class="card-title">Notes & Logbook</div>
+              <div class="card-desc">Événements spéciaux, météo, contexte qualitatif qui ajuste les prédictions.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">03</span>
+            <h3 class="section-title">Valeur ajoutée</h3>
+          </div>
+          <div class="grid-2">
+            <div class="card card-accent" style="border-left-color:var(--green);">
+              <div class="card-title">Réduction du gaspillage</div>
+              <div class="card-desc">En prédisant les quantités exactes, on réduit la surproduction de 15-25%. Les ingrédients périssables sont commandés au plus juste.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--blue);">
+              <div class="card-title">Gain de temps matinal</div>
+              <div class="card-desc">Le chef arrive avec sa liste déjà prête, priorisée, et quantifiée. 30-45 minutes gagnées chaque matin.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--amber);">
+              <div class="card-title">Alertes proactives</div>
+              <div class="card-desc">« 3 réservations sans gluten ce soir » — alertes avant les problèmes, pas après.</div>
+            </div>
+            <div class="card card-accent" style="border-left-color:var(--purple);">
+              <div class="card-title">Apprentissage continu</div>
+              <div class="card-desc">Chaque feedback du chef affine le modèle via un coefficient de confiance personnalisé par item.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">04</span>
+            <h3 class="section-title">Trois niveaux de sophistication</h3>
+          </div>
+          <p class="section-desc">Le système fonctionne même avec des données partielles, en dégradant gracieusement selon ce qui est disponible.</p>
+          <div class="grid-3">
+            <div class="level-card l1">
+              <div class="level-number">01</div>
+              <h4>Basique</h4>
+              <div class="badge badge-green" style="margin:8px 0;">Réservations seules</div>
+              <div class="card-desc">Couverts prévus par créneau, alertes diététiques extraites des notes clients, ratio walk-in historique.</div>
+            </div>
+            <div class="level-card l2">
+              <div class="level-number">02</div>
+              <h4>Prédictif</h4>
+              <div class="badge badge-amber" style="margin:8px 0;">+ Ventes POS + Menu</div>
+              <div class="card-desc">Prédiction des portions par item de menu basée sur l'historique du même jour de la semaine.</div>
+            </div>
+            <div class="level-card l3">
+              <div class="level-number">03</div>
+              <h4>Complet</h4>
+              <div class="badge badge-purple" style="margin:8px 0;">+ Recettes + Food Cost</div>
+              <div class="card-desc">Conversion complète en ingrédients bruts avec quantités exactes, coûts et traçabilité.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ TAB: ALGORITHM ═══════ -->
+      <div id="algorithm" class="panel">
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">◈</span>
+            <h3 class="section-title">Pipeline de prédiction</h3>
+          </div>
+          <p class="section-desc">L'algorithme s'exécute chaque nuit (cron 4h) ou à la demande, et produit une Smart Prep List pour le lendemain.</p>
+
+          <div class="algo-timeline">
+            <div class="algo-step">
+              <div class="algo-dot" style="background:var(--blue-bg);color:var(--blue);">1</div>
+              <h4>Collecter les réservations</h4>
+              <p>Requête sur <code>reservations</code> pour la date cible, groupée par créneau. Extraction des <code>guest_count</code> et <code>customer_notes</code> pour les alertes diététiques.</p>
+            </div>
+            <div class="algo-step">
+              <div class="algo-dot" style="background:var(--green-bg);color:var(--green);">2</div>
+              <h4>Estimer les walk-ins</h4>
+              <p>Ratio walk-in moyen sur 8 semaines pour ce jour/service. 40 réservés + 30% walk-ins = ~57 couverts. Buffer de sécurité configurable (+10% par défaut).</p>
+            </div>
+            <div class="algo-step">
+              <div class="algo-dot" style="background:var(--amber-bg);color:var(--amber);">3</div>
+              <h4>Calculer le mix produit</h4>
+              <p>Pour chaque item du menu actif : <code>item_share = ventes_item / ventes_totales</code> sur 8 semaines pour ce jour. Application au nombre de couverts estimé.</p>
+            </div>
+            <div class="algo-step">
+              <div class="algo-dot" style="background:var(--purple-bg);color:var(--purple);">4</div>
+              <h4>Convertir en ingrédients bruts</h4>
+              <p>Multiplication portions × recette, puis agrégation par ingrédient. 12 risottos × 200g parmesan + 8 gratins × 150g = 3 600g total.</p>
+            </div>
+            <div class="algo-step">
+              <div class="algo-dot" style="background:var(--red-bg);color:var(--red);">5</div>
+              <h4>Prioriser avec la matrice BCG</h4>
+              <p>Items Phare en priorité haute (ne jamais en manquer). Items Écueil en priorité basse (préparer le minimum).</p>
+            </div>
+            <div class="algo-step">
+              <div class="algo-dot" style="background:var(--amber-bg);color:var(--amber);">6</div>
+              <h4>Générer les alertes</h4>
+              <p>Claude AI analyse les notes de réservation : mentions diététiques, occasions, anomalies de volume. Détection automatique.</p>
+            </div>
+            <div class="algo-step">
+              <div class="algo-dot" style="background:var(--teal-bg);color:var(--teal);">7</div>
+              <h4>Feedback loop</h4>
+              <p>En fin de service, le chef indique les écarts. Le <code>confidence_modifier</code> par item s'ajuste. Convergence en 4-6 semaines.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">◈</span>
+            <h3 class="section-title">Formules clés</h3>
+          </div>
+          <div class="code-block">
+<span class="cm">// Étape 2 — Estimation des couverts totaux</span>
+<span class="kw">total_covers</span> = reserved_covers / (1 - walk_in_ratio)
+<span class="kw">adjusted_covers</span> = total_covers × (1 + safety_buffer)   <span class="cm">// default 0.10</span>
+
+<span class="cm">// Étape 3 — Portions prédites par item</span>
+<span class="kw">item_share[i]</span> = Σ(ventes_item[i], 8 sem.) / Σ(ventes_totales, 8 sem.)
+<span class="kw">predicted[i]</span> = round(adjusted_covers × item_share[i] × confidence_modifier[i])
+
+<span class="cm">// Étape 4 — Ingrédients bruts</span>
+<span class="kw">ingredient[j]</span> = Σ over items i: (predicted[i] × recipe_qty[i][j])
+
+<span class="cm">// Étape 5 — Score de priorité (0-100)</span>
+<span class="kw">priority[i]</span> = bcg_weight × <span class="num">0.4</span> + margin_pct × <span class="num">0.3</span> + popularity × <span class="num">0.3</span>
+<span class="cm">// bcg_weight: phare=100, ancre=70, dérive=50, écueil=20</span>
+
+<span class="cm">// Étape 7 — Ajustement continu</span>
+<span class="kw">confidence_modifier[i]</span> = <span class="num">1.0</span> + (avg_delta[i] / predicted[i])
+<span class="cm">// Clamp [0.5, 2.0] pour stabilité</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ TAB: DATAFLOW ═══════ -->
+      <div id="dataflow" class="panel">
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">⬡</span>
+            <h3 class="section-title">Flux de données complet</h3>
+          </div>
+          <p class="section-desc">De la donnée brute à la prep list — chaque module Rive alimente le moteur de prédiction.</p>
+        </div>
+
+        <div class="flow-container">
+          <!-- Sources -->
+          <div class="flow-row">
+            <div class="flow-node accent-left" style="border-left-color:var(--blue);">
+              <div class="fn-label">Plateformes</div>
+              <div class="fn-title">Libro · Resy · Zenchef</div>
+              <div class="fn-detail">Webhooks + Polling</div>
+            </div>
+            <div class="flow-node accent-left" style="border-left-color:var(--green);">
+              <div class="fn-label">POS</div>
+              <div class="fn-title">Lightspeed · Square · Toast</div>
+              <div class="fn-detail">Sync CSV ou API</div>
+            </div>
+            <div class="flow-node accent-left" style="border-left-color:var(--amber);">
+              <div class="fn-label">Inventaire</div>
+              <div class="fn-title">Scan factures · Saisie</div>
+              <div class="fn-detail">scan-receipt → ingredients</div>
+            </div>
+          </div>
+
+          <div class="flow-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+            <span class="arrow-label">Données normalisées dans Supabase</span>
+          </div>
+
+          <!-- Modules -->
+          <div class="flow-row">
+            <div class="flow-node accent-left" style="border-left-color:var(--blue);">
+              <div class="fn-label">Module</div>
+              <div class="fn-title">Réservations</div>
+              <div class="fn-detail">Couverts, horaires, notes, statuts</div>
+            </div>
+            <div class="flow-node accent-left" style="border-left-color:var(--green);">
+              <div class="fn-label">Module</div>
+              <div class="fn-title">Ventes POS</div>
+              <div class="fn-detail">item_id → qty par jour</div>
+            </div>
+            <div class="flow-node accent-left" style="border-left-color:var(--purple);">
+              <div class="fn-label">Module</div>
+              <div class="fn-title">Food Cost & Recettes</div>
+              <div class="fn-detail">item → ingrédients × coûts</div>
+            </div>
+            <div class="flow-node accent-left" style="border-left-color:var(--red);">
+              <div class="fn-label">Module</div>
+              <div class="fn-title">Menu Engineering</div>
+              <div class="fn-detail">BCG: phare / ancre / dérive / écueil</div>
+            </div>
+          </div>
+
+          <div class="flow-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+            <span class="arrow-label">Agrégation & prédiction</span>
+          </div>
+
+          <!-- Engine -->
+          <div class="flow-row" style="justify-content:center;">
+            <div class="flow-node flow-engine">
+              <div class="fn-label">Moteur central</div>
+              <div class="fn-title">Smart Prep Engine</div>
+              <div class="fn-detail" style="margin-top:8px;">
+                1. Couverts réservés + walk-in ratio → couverts estimés<br>
+                2. Mix produit historique × couverts → portions par item<br>
+                3. Portions × recettes → ingrédients bruts agrégés<br>
+                4. BCG × marges → priorisation<br>
+                5. Claude AI → alertes diététiques et anomalies
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+            <span class="arrow-label">Résultat structuré</span>
+          </div>
+
+          <!-- Outputs -->
+          <div class="flow-row">
+            <div class="flow-node flow-output" style="border-color:var(--green);">
+              <div class="fn-label" style="color:var(--green);">Output</div>
+              <div class="fn-title">Prep List</div>
+              <div class="fn-detail">Items triés par priorité</div>
+            </div>
+            <div class="flow-node flow-output" style="border-color:var(--amber);">
+              <div class="fn-label" style="color:var(--amber);">Output</div>
+              <div class="fn-title">Liste d'ingrédients</div>
+              <div class="fn-detail">Quantités brutes agrégées</div>
+            </div>
+            <div class="flow-node flow-output" style="border-color:var(--red);">
+              <div class="fn-label" style="color:var(--red);">Output</div>
+              <div class="fn-title">Alertes</div>
+              <div class="fn-detail">Allergènes, anomalies, VIP</div>
+            </div>
+            <div class="flow-node flow-output" style="border-color:var(--purple);">
+              <div class="fn-label" style="color:var(--purple);">Output</div>
+              <div class="fn-title">Coût estimé</div>
+              <div class="fn-detail">Food cost total du service</div>
+            </div>
+          </div>
+
+          <div class="flow-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+            <span class="arrow-label">Feedback loop</span>
+          </div>
+
+          <!-- Feedback -->
+          <div class="flow-row" style="justify-content:center;">
+            <div class="flow-node accent-left" style="border-left-color:var(--teal);max-width:380px;">
+              <div class="fn-label">Fin de service</div>
+              <div class="fn-title">Chef Feedback</div>
+              <div class="fn-detail">Validation des quantités réelles → ajustement du confidence_modifier par item</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ TAB: SCHEMA ═══════ -->
+      <div id="schema" class="panel">
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">⊞</span>
+            <h3 class="section-title">Nouvelles tables — Migration v15</h3>
+          </div>
+          <p class="section-desc">Deux nouvelles tables et un enrichissement de pos_sales pour stocker prédictions, feedback, et agrégats historiques.</p>
+        </div>
+
+        <div class="table-card">
+          <div class="table-card-header">
+            <h4>prep_lists</h4>
+            <span class="badge badge-neutral">Liste de préparation générée</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Colonne</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td class="col-name">id</td><td class="col-type">UUID PK</td><td>Identifiant unique</td></tr>
+              <tr><td class="col-name">restaurant_id</td><td class="col-type">UUID FK</td><td>→ restaurants.id</td></tr>
+              <tr><td class="col-name">target_date</td><td class="col-type">DATE</td><td>Date cible</td></tr>
+              <tr><td class="col-name">service_period</td><td class="col-type">TEXT CHECK</td><td>'lunch' | 'dinner' | 'all_day'</td></tr>
+              <tr><td class="col-name">reserved_covers</td><td class="col-type">INTEGER</td><td>Couverts réservés</td></tr>
+              <tr><td class="col-name">estimated_covers</td><td class="col-type">INTEGER</td><td>Couverts estimés (walk-ins inclus)</td></tr>
+              <tr><td class="col-name">walk_in_ratio</td><td class="col-type">DECIMAL(4,3)</td><td>Ratio walk-in utilisé</td></tr>
+              <tr><td class="col-name">safety_buffer</td><td class="col-type">DECIMAL(3,2)</td><td>Buffer sécurité (ex: 0.10)</td></tr>
+              <tr><td class="col-name">estimated_food_cost</td><td class="col-type">DECIMAL(10,2)</td><td>Coût food total estimé</td></tr>
+              <tr><td class="col-name">alerts</td><td class="col-type">JSONB</td><td>Alertes (allergènes, anomalies, VIP)</td></tr>
+              <tr><td class="col-name">generation_level</td><td class="col-type">INTEGER</td><td>1=base, 2=POS, 3=complet</td></tr>
+              <tr><td class="col-name">status</td><td class="col-type">TEXT CHECK</td><td>'draft' | 'confirmed' | 'completed'</td></tr>
+              <tr><td class="col-name">chef_notes</td><td class="col-type">TEXT</td><td>Notes manuelles du chef</td></tr>
+              <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td>Date de génération</td></tr>
+              <tr><td class="col-name">confirmed_at</td><td class="col-type">TIMESTAMPTZ</td><td>Date de confirmation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <div class="table-card-header">
+            <h4>prep_list_items</h4>
+            <span class="badge badge-neutral">Items individuels</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Colonne</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td class="col-name">id</td><td class="col-type">UUID PK</td><td>Identifiant unique</td></tr>
+              <tr><td class="col-name">prep_list_id</td><td class="col-type">UUID FK</td><td>→ prep_lists.id</td></tr>
+              <tr><td class="col-name">menu_item_id</td><td class="col-type">UUID FK</td><td>→ menu_items</td></tr>
+              <tr><td class="col-name">menu_item_name</td><td class="col-type">TEXT</td><td>Nom snapshot</td></tr>
+              <tr><td class="col-name">predicted_portions</td><td class="col-type">INTEGER</td><td>Portions prédites</td></tr>
+              <tr><td class="col-name">item_share</td><td class="col-type">DECIMAL(5,4)</td><td>% commande historique</td></tr>
+              <tr><td class="col-name">confidence_score</td><td class="col-type">DECIMAL(3,2)</td><td>Score de confiance 0-1</td></tr>
+              <tr><td class="col-name">confidence_modifier</td><td class="col-type">DECIMAL(4,2)</td><td>Modificateur appris (0.5-2.0)</td></tr>
+              <tr><td class="col-name">priority</td><td class="col-type">TEXT CHECK</td><td>'high' | 'medium' | 'low'</td></tr>
+              <tr><td class="col-name">priority_score</td><td class="col-type">INTEGER</td><td>Score 0-100</td></tr>
+              <tr><td class="col-name">bcg_category</td><td class="col-type">TEXT</td><td>phare | ancre | derive | ecueil</td></tr>
+              <tr><td class="col-name">estimated_cost</td><td class="col-type">DECIMAL(8,2)</td><td>Coût food estimé</td></tr>
+              <tr><td class="col-name">actual_portions</td><td class="col-type">INTEGER</td><td>Portions réelles (feedback)</td></tr>
+              <tr><td class="col-name">feedback_delta</td><td class="col-type">INTEGER</td><td>Écart actual - predicted</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <div class="table-card-header">
+            <h4>prep_list_ingredients</h4>
+            <span class="badge badge-purple">Niveau 3 uniquement</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Colonne</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td class="col-name">id</td><td class="col-type">UUID PK</td><td>Identifiant unique</td></tr>
+              <tr><td class="col-name">prep_list_id</td><td class="col-type">UUID FK</td><td>→ prep_lists.id</td></tr>
+              <tr><td class="col-name">ingredient_id</td><td class="col-type">UUID FK</td><td>→ ingredients.id</td></tr>
+              <tr><td class="col-name">ingredient_name</td><td class="col-type">TEXT</td><td>Nom snapshot</td></tr>
+              <tr><td class="col-name">total_quantity</td><td class="col-type">DECIMAL(10,3)</td><td>Quantité totale nécessaire</td></tr>
+              <tr><td class="col-name">unit</td><td class="col-type">TEXT</td><td>kg, L, unité, botte</td></tr>
+              <tr><td class="col-name">estimated_cost</td><td class="col-type">DECIMAL(8,2)</td><td>Coût estimé</td></tr>
+              <tr><td class="col-name">used_by_items</td><td class="col-type">JSONB</td><td>Traçabilité par item</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <div class="table-card-header">
+            <h4>pos_sales</h4>
+            <span class="badge badge-red">Colonnes ajoutées</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Colonne</th><th>Type</th><th>Description</th><th></th></tr></thead>
+            <tbody>
+              <tr class="row-new"><td class="col-name">day_of_week</td><td class="col-type">INTEGER</td><td>0=Dim … 6=Sam</td><td><span class="badge badge-red">NEW</span></td></tr>
+              <tr class="row-new"><td class="col-name">service_period</td><td class="col-type">TEXT</td><td>'lunch' | 'dinner'</td><td><span class="badge badge-red">NEW</span></td></tr>
+              <tr class="row-new"><td class="col-name">sale_date</td><td class="col-type">DATE</td><td>Date de la vente</td><td><span class="badge badge-red">NEW</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══════ TAB: API ═══════ -->
+      <div id="api" class="panel">
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">⟐</span>
+            <h3 class="section-title">Nouvelles routes API</h3>
+          </div>
+          <p class="section-desc">3 routes principales + 1 route cron pour la génération automatique nocturne.</p>
+        </div>
+
+        <div class="api-card">
+          <div class="api-card-top">
+            <span class="method-badge method-get">GET</span>
+            <span class="method-badge method-post">POST</span>
+            <span class="api-path">/api/prep-list</span>
+            <span class="badge badge-purple">Auth JWT</span>
+          </div>
+          <h4>Générer ou consulter la Smart Prep List</h4>
+          <p class="card-desc"><strong>GET</strong> <code>?date=2026-02-27&service=dinner</code> — Retourne la prep list existante ou en génère une nouvelle. Point d'entrée principal.<br><br><strong>POST</strong> — Force la régénération avec paramètres personnalisés (safety_buffer, exclusions).</p>
+        </div>
+
+        <div class="api-card">
+          <div class="api-card-top">
+            <span class="method-badge method-patch">PATCH</span>
+            <span class="api-path">/api/prep-list/feedback</span>
+            <span class="badge badge-purple">Auth JWT</span>
+          </div>
+          <h4>Soumettre le feedback du chef</h4>
+          <p class="card-desc">Envoie les portions réelles. Calcule le feedback_delta, met à jour le confidence_modifier, passe le statut à 'completed'.</p>
+        </div>
+
+        <div class="api-card">
+          <div class="api-card-top">
+            <span class="method-badge method-get">GET</span>
+            <span class="api-path">/api/prep-list/history</span>
+            <span class="badge badge-purple">Auth JWT</span>
+          </div>
+          <h4>Historique et précision des prédictions</h4>
+          <p class="card-desc">Prep lists passées avec métriques : écart moyen, évolution du confidence_modifier, taux de gaspillage.</p>
+        </div>
+
+        <div class="api-card">
+          <div class="api-card-top">
+            <span class="method-badge method-get">GET</span>
+            <span class="api-path">/api/cron/generate-prep-list</span>
+            <span class="badge badge-amber">CRON_SECRET</span>
+          </div>
+          <h4>Génération automatique nocturne</h4>
+          <p class="card-desc">Vercel Cron à 4h. Génère la prep list du lendemain pour chaque restaurant. Alertes AI en batch.</p>
+        </div>
+
+        <div class="section" style="margin-top:32px;">
+          <div class="section-header">
+            <span class="section-number">⟐</span>
+            <h3 class="section-title">Structure des fichiers</h3>
+          </div>
+          <div class="file-tree">
+<span class="dir">src/app/api/</span>
+├── <span class="dir">prep-list/</span>
+│   ├── route.ts              <span class="comment">// GET: consulter, POST: (re)générer</span>
+│   ├── <span class="dir">feedback/</span>
+│   │   └── route.ts          <span class="comment">// PATCH: soumettre feedback chef</span>
+│   └── <span class="dir">history/</span>
+│       └── route.ts          <span class="comment">// GET: historique + métriques</span>
+├── <span class="dir">cron/</span>
+│   ├── <span class="dir">sync-reservations/</span>    <span class="comment">// (existant) polling</span>
+│   │   └── route.ts
+│   └── <span class="new">generate-prep-list/</span>   <span class="comment">// (nouveau)</span>
+│       └── route.ts
+<span class="dir">src/lib/</span>
+└── <span class="new">prep-engine.ts</span>            <span class="comment">// Moteur de prédiction</span>
+
+<span class="dir">supabase/migrations/</span>
+└── <span class="new">migration_v15_smart_prep.sql</span>
+          </div>
+        </div>
+
+        <div class="section" style="margin-top:32px;">
+          <div class="section-header">
+            <span class="section-number">⟐</span>
+            <h3 class="section-title">Points d'intégration</h3>
+          </div>
+          <div class="integration-grid">
+            <div class="int-card" style="border-left-color:var(--blue);">
+              <h4>Réservations → Prep Engine</h4>
+              <p>Requête <code>reservations</code> pour la date cible. Extraction <code>guest_count</code>, <code>reservation_time</code>, <code>customer_notes</code>.</p>
+            </div>
+            <div class="int-card" style="border-left-color:var(--green);">
+              <h4>POS Sales → Mix produit</h4>
+              <p>Utilise <code>fetchWeeklySales()</code> enrichi avec <code>day_of_week</code> pour le ratio de commande par item.</p>
+            </div>
+            <div class="int-card" style="border-left-color:var(--purple);">
+              <h4>Food Cost → Ingrédients bruts</h4>
+              <p>Appel à <code>loadFoodCostData()</code>. Pour chaque item, récupère la recette et multiplie par portions.</p>
+            </div>
+            <div class="int-card" style="border-left-color:var(--red);">
+              <h4>Menu Engineering → Priorisation</h4>
+              <p>Réutilise la logique BCG existante. Items Phare toujours en haut de la liste.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ TAB: MOCKUP ═══════ -->
+      <div id="mockup" class="panel">
+
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">◧</span>
+            <h3 class="section-title">Prototype UI — Smart Prep List</h3>
+          </div>
+          <p class="section-desc">La prep list vue par le chef sur le dashboard Rive : items prioritaires, liste d'ingrédients, et alertes intelligentes.</p>
+        </div>
+
+        <div class="prep-grid">
+          <!-- Prep list -->
+          <div class="prep-card">
+            <div class="prep-card-header">
+              <h3>Prep List du soir</h3>
+              <div class="prep-meta">Jeudi 27 février 2026 · 54 couverts estimés</div>
+              <div class="prep-meta">38 réservés + ~16 walk-ins (30%) · Buffer +10%</div>
+            </div>
+            <div class="prep-card-body">
+
+              <div class="alert-bar warn">
+                <span class="alert-icon">⚠️</span>
+                <div><strong>3 réservations « sans gluten »</strong> (tables 12, 18, 22). Vérifier pâtes GF et pain alternatif.</div>
+              </div>
+              <div class="alert-bar info">
+                <span class="alert-icon">🎂</span>
+                <div><strong>1 anniversaire</strong> (table 8, 20h, 6 pers.) — Prévoir dessert spécial ?</div>
+              </div>
+
+              <div class="prep-section-label">Priorité haute — Phare</div>
+              <div class="prep-item">
+                <div class="pi-dot high"></div>
+                <div class="pi-info">
+                  <div class="pi-name">Risotto aux champignons</div>
+                  <div class="pi-detail">Phare · Marge 74% · Confiance 92%</div>
+                </div>
+                <div class="pi-qty"><span class="number">12</span> <span class="unit">portions</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-dot high"></div>
+                <div class="pi-info">
+                  <div class="pi-name">Pavé de saumon</div>
+                  <div class="pi-detail">Phare · Marge 71% · Confiance 88%</div>
+                </div>
+                <div class="pi-qty"><span class="number">10</span> <span class="unit">portions</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-dot high"></div>
+                <div class="pi-info">
+                  <div class="pi-name">Tartare de bœuf</div>
+                  <div class="pi-detail">Phare · Marge 68% · Confiance 85%</div>
+                </div>
+                <div class="pi-qty"><span class="number">8</span> <span class="unit">portions</span></div>
+              </div>
+
+              <div class="prep-section-label">Priorité moyenne — Ancre & Dérive</div>
+              <div class="prep-item">
+                <div class="pi-dot medium"></div>
+                <div class="pi-info">
+                  <div class="pi-name">Burger classique</div>
+                  <div class="pi-detail">Ancre · Marge 58% · Confiance 90%</div>
+                </div>
+                <div class="pi-qty"><span class="number">7</span> <span class="unit">portions</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-dot medium"></div>
+                <div class="pi-info">
+                  <div class="pi-name">Salade César</div>
+                  <div class="pi-detail">Dérive · Marge 76% · Confiance 79%</div>
+                </div>
+                <div class="pi-qty"><span class="number">5</span> <span class="unit">portions</span></div>
+              </div>
+
+              <div class="prep-section-label">Priorité basse — Minimum</div>
+              <div class="prep-item">
+                <div class="pi-dot low"></div>
+                <div class="pi-info">
+                  <div class="pi-name">Soupe du jour</div>
+                  <div class="pi-detail">Écueil · Marge 52% · Confiance 73%</div>
+                </div>
+                <div class="pi-qty"><span class="number">4</span> <span class="unit">portions</span></div>
+              </div>
+            </div>
+            <div class="prep-card-footer">
+              <span>Coût food estimé : <strong>$187.40</strong></span>
+              <span class="badge badge-purple">Niveau 3 — Complet</span>
+            </div>
+          </div>
+
+          <!-- Ingredients -->
+          <div class="prep-card">
+            <div class="prep-card-header">
+              <h3>Ingrédients nécessaires</h3>
+              <div class="prep-meta">Agrégé depuis 46 portions prédites · 6 items du menu</div>
+            </div>
+            <div class="prep-card-body">
+
+              <div class="prep-section-label">Protéines</div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Pavé de saumon</div>
+                  <div class="pi-detail">→ Pavé de saumon (10 × 200g)</div>
+                </div>
+                <div class="pi-qty"><span class="number">2.0</span> <span class="unit">kg</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Bœuf tartare (filet)</div>
+                  <div class="pi-detail">→ Tartare (8 × 180g)</div>
+                </div>
+                <div class="pi-qty"><span class="number">1.44</span> <span class="unit">kg</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Steak haché</div>
+                  <div class="pi-detail">→ Burger (7 × 200g)</div>
+                </div>
+                <div class="pi-qty"><span class="number">1.4</span> <span class="unit">kg</span></div>
+              </div>
+
+              <div class="prep-section-label">Féculents & céréales</div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Riz arborio</div>
+                  <div class="pi-detail">→ Risotto (12 × 200g)</div>
+                </div>
+                <div class="pi-qty"><span class="number">2.4</span> <span class="unit">kg</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Pain burger brioche</div>
+                  <div class="pi-detail">→ Burger (7 × 1)</div>
+                </div>
+                <div class="pi-qty"><span class="number">7</span> <span class="unit">pcs</span></div>
+              </div>
+
+              <div class="prep-section-label">Produits laitiers</div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Parmesan reggiano</div>
+                  <div class="pi-detail">→ Risotto (12×50g) + César (5×30g)</div>
+                </div>
+                <div class="pi-qty"><span class="number">750</span> <span class="unit">g</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Bouillon de légumes</div>
+                  <div class="pi-detail">→ Risotto (12×150ml) + Soupe (4×300ml)</div>
+                </div>
+                <div class="pi-qty"><span class="number">3.0</span> <span class="unit">L</span></div>
+              </div>
+
+              <div class="prep-section-label">Légumes & herbes</div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Champignons variés</div>
+                  <div class="pi-detail">→ Risotto (12 × 80g)</div>
+                </div>
+                <div class="pi-qty"><span class="number">960</span> <span class="unit">g</span></div>
+              </div>
+              <div class="prep-item">
+                <div class="pi-info">
+                  <div class="pi-name">Laitue romaine</div>
+                  <div class="pi-detail">→ César (5×1) + Burger (7×2 feuilles)</div>
+                </div>
+                <div class="pi-qty"><span class="number">5</span> <span class="unit">pcs</span></div>
+              </div>
+            </div>
+            <div class="prep-card-footer">
+              <span>Coût ingrédients : <strong>$187.40</strong></span>
+              <span>12 ingrédients · 6 catégories</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback UI -->
+        <div class="section" style="margin-top:36px;">
+          <div class="section-header">
+            <span class="section-number">◧</span>
+            <h3 class="section-title">Feedback — Fin de service</h3>
+          </div>
+          <p class="section-desc">Le chef ajuste uniquement les items où la prédiction était incorrecte. 30 secondes suffisent.</p>
+
+          <div style="max-width:520px;">
+            <div class="feedback-item perfect">
+              <div class="pi-info">
+                <div class="pi-name">Risotto aux champignons</div>
+                <div class="pi-detail" style="color:var(--green);">Prédit : 12 → Réel : 12</div>
+              </div>
+              <div class="fb-status">= 12</div>
+            </div>
+            <div class="feedback-item over">
+              <div class="pi-info">
+                <div class="pi-name">Pavé de saumon</div>
+                <div class="pi-detail" style="color:var(--red);">Prédit : 10 → Réel : 14 (+4 manqués)</div>
+              </div>
+              <div class="fb-status">→ 14</div>
+            </div>
+            <div class="feedback-item under">
+              <div class="pi-info">
+                <div class="pi-name">Tartare de bœuf</div>
+                <div class="pi-detail" style="color:var(--amber);">Prédit : 8 → Réel : 5 (3 surplus)</div>
+              </div>
+              <div class="fb-status">→ 5</div>
+            </div>
+
+            <div class="accuracy-box">
+              <div class="accuracy-number">82%</div>
+              <div class="accuracy-label">Précision moyenne ce soir</div>
+              <div class="accuracy-delta">↑ +3% vs la semaine dernière</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end panel-area -->
+  </main>
+</div>
+
+<script>
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  // Find the tab button that matches
+  document.querySelectorAll('.tab-btn').forEach(t => {
+    if (t.onclick && t.onclick.toString().includes("'" + tabId + "'")) {
+      t.classList.add('active');
+    }
+  });
+  // Scroll to top of panel area
+  document.querySelector('.panel-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Fix tab activation by using event delegation
+document.querySelector('.tabs-row').addEventListener('click', function(e) {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+});
+
+// Sidebar nav clicks
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', function() {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Animate stat cards on load
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.stat-card').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(12px)';
+    card.style.transition = 'all 0.4s ease';
+    setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, 100 + i * 80);
+  });
+});
+</script>
+
+</body>
+</html>

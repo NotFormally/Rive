@@ -159,7 +159,7 @@ async function processRestaurant(
         alerts: result.alerts,
         generation_level: result.generationLevel,
         status: 'draft',
-      })
+      } as any)
       .select()
       .single();
 
@@ -171,7 +171,7 @@ async function processRestaurant(
     if (result.items.length > 0) {
       await admin.from('prep_list_items').insert(
         result.items.map((item: any) => ({
-          prep_list_id: prepList.id,
+          prep_list_id: (prepList as any).id,
           menu_item_id: item.menuItemId,
           menu_item_name: item.menuItemName,
           predicted_portions: item.predictedPortions,
@@ -183,7 +183,7 @@ async function processRestaurant(
           bcg_category: item.bcgCategory,
           margin_percent: item.marginPercent,
           estimated_cost: item.estimatedCost,
-        }))
+        })) as any
       );
     }
 
@@ -191,14 +191,14 @@ async function processRestaurant(
     if (result.ingredients.length > 0) {
       await admin.from('prep_list_ingredients').insert(
         result.ingredients.map((ing: any) => ({
-          prep_list_id: prepList.id,
+          prep_list_id: (prepList as any).id,
           ingredient_id: ing.ingredientId,
           ingredient_name: ing.ingredientName,
           total_quantity: ing.totalQuantity,
           unit: ing.unit,
           estimated_cost: ing.estimatedCost,
           used_by_items: ing.usedByItems,
-        }))
+        })) as any
       );
     }
 

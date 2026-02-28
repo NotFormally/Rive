@@ -55,6 +55,8 @@ type PrepItem = {
   estimated_cost: number;
   actual_portions: number | null;
   feedback_delta: number | null;
+  ai_suggestion_quantity?: number | null;
+  ai_reasoning?: string | null;
 };
 
 type PrepIngredient = {
@@ -153,6 +155,7 @@ export default function SmartPrepDashboard() {
   const [ingredients, setIngredients] = useState<PrepIngredient[]>([]);
   const [loading, setLoading] = useState(true);
   const [regenerating, setRegenerating] = useState(false);
+  const [aiGenerating, setAiGenerating] = useState(false);
   const [activeTab, setActiveTab] = useState<'prep' | 'ingredients' | 'feedback'>('prep');
 
   // Date picker
@@ -220,6 +223,28 @@ export default function SmartPrepDashboard() {
       console.error('Error regenerating:', err);
     } finally {
       setRegenerating(false);
+    }
+  };
+
+  const generateAI = async () => {
+    if (!prepList) return;
+    setAiGenerating(true);
+    try {
+      const res = await fetch('/api/prep-list/ai-generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prep_list_id: prepList.id }),
+      });
+      if (res.ok) {
+        await loadPrepList(); // Reload to get the new AI suggestions
+      } else {
+        const errData = await res.json();
+        alert("Erreur de l'IA: " + (errData.error || "Inconnue"));
+      }
+    } catch (err) {
+      console.error('Error generating AI:', err);
+    } finally {
+      setAiGenerating(false);
     }
   };
 
@@ -305,11 +330,23 @@ export default function SmartPrepDashboard() {
                 </button>
               ))}
             </div>
+            {prepList && (
+              <Button
+                variant="default"
+                size="sm"
+                onClick={generateAI}
+                disabled={aiGenerating || regenerating}
+                className="gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
+              >
+                {aiGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                ✨ Générer avec l'IA
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
               onClick={regenerate}
-              disabled={regenerating}
+              disabled={regenerating || aiGenerating}
               className="gap-1.5"
             >
               {regenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
@@ -653,11 +690,28 @@ function PrepItemRow({ item }: { item: PrepItem }) {
           <span className="text-xs text-slate-400">
             · Confiance {Math.round(item.confidence_score * 100)}%
           </span>
+          {item.ai_reasoning && (
+             <span className="text-xs text-indigo-500 flex items-center gap-1 ml-2 bg-indigo-50 px-2 rounded-md">
+                 <Sparkles className="w-3 h-3" /> {item.ai_reasoning}
+             </span>
+          )}
         </div>
       </div>
       <div className="text-right">
-        <p className="text-lg font-bold text-slate-900">{item.predicted_portions}</p>
-        <p className="text-[11px] text-slate-400">portions</p>
+        {item.ai_suggestion_quantity !== undefined && item.ai_suggestion_quantity !== null ? (
+            <div className="flex flex-col items-end">
+                <div className="flex items-center gap-2">
+                    <span className="text-sm line-through text-slate-400">{item.predicted_portions}</span>
+                    <p className="text-xl font-bold text-indigo-600">{item.ai_suggestion_quantity}</p>
+                </div>
+                <p className="text-[11px] text-indigo-400 font-medium">suggestion IA</p>
+            </div>
+        ) : (
+            <>
+                <p className="text-lg font-bold text-slate-900">{item.predicted_portions}</p>
+                <p className="text-[11px] text-slate-400">portions</p>
+            </>
+        )}
       </div>
       {item.estimated_cost > 0 && (
         <div className="text-right min-w-[70px]">

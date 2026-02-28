@@ -67,7 +67,7 @@ export async function GET(req: Request) {
         alerts: result.alerts,
         generation_level: result.generationLevel,
         status: 'draft',
-      })
+      } as any)
       .select()
       .single();
 
@@ -80,7 +80,7 @@ export async function GET(req: Request) {
     if (result.items.length > 0) {
       await auth.supabase.from('prep_list_items').insert(
         result.items.map(item => ({
-          prep_list_id: prepList.id,
+          prep_list_id: (prepList as any).id,
           menu_item_id: item.menuItemId,
           menu_item_name: item.menuItemName,
           predicted_portions: item.predictedPortions,
@@ -92,7 +92,7 @@ export async function GET(req: Request) {
           bcg_category: item.bcgCategory,
           margin_percent: item.marginPercent,
           estimated_cost: item.estimatedCost,
-        }))
+        })) as any
       );
     }
 
@@ -100,14 +100,14 @@ export async function GET(req: Request) {
     if (result.ingredients.length > 0) {
       await auth.supabase.from('prep_list_ingredients').insert(
         result.ingredients.map(ing => ({
-          prep_list_id: prepList.id,
+          prep_list_id: (prepList as any).id,
           ingredient_id: ing.ingredientId,
           ingredient_name: ing.ingredientName,
           total_quantity: ing.totalQuantity,
           unit: ing.unit,
           estimated_cost: ing.estimatedCost,
           used_by_items: ing.usedByItems,
-        }))
+        })) as any
       );
     }
 
@@ -174,7 +174,7 @@ export async function POST(req: Request) {
         alerts: result.alerts,
         generation_level: result.generationLevel,
         status: 'draft',
-      })
+      } as any)
       .select()
       .single();
 
@@ -185,7 +185,7 @@ export async function POST(req: Request) {
     if (result.items.length > 0) {
       await auth.supabase.from('prep_list_items').insert(
         result.items.map(item => ({
-          prep_list_id: prepList.id, menu_item_id: item.menuItemId,
+          prep_list_id: (prepList as any).id, menu_item_id: item.menuItemId,
           menu_item_name: item.menuItemName, predicted_portions: item.predictedPortions,
           item_share: item.itemShare, confidence_score: item.confidenceScore,
           confidence_modifier: item.confidenceModifier, priority: item.priority,
@@ -198,7 +198,7 @@ export async function POST(req: Request) {
     if (result.ingredients.length > 0) {
       await auth.supabase.from('prep_list_ingredients').insert(
         result.ingredients.map(ing => ({
-          prep_list_id: prepList.id, ingredient_id: ing.ingredientId,
+          prep_list_id: (prepList as any).id, ingredient_id: ing.ingredientId,
           ingredient_name: ing.ingredientName, total_quantity: ing.totalQuantity,
           unit: ing.unit, estimated_cost: ing.estimatedCost, used_by_items: ing.usedByItems,
         }))

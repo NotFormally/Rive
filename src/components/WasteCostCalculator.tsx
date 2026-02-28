@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type WasteCostCalculatorProps = {
   variant?: "landing" | "pricing";
@@ -22,6 +23,8 @@ const INDUSTRY_BENCHMARKS = {
 export function WasteCostCalculator({
   variant = "landing",
 }: WasteCostCalculatorProps) {
+  const t = useTranslations("WasteCalculator");
+
   const [covers, setCovers] = useState(200);
   const [ticket, setTicket] = useState(65);
   const [foodCostPercent, setFoodCostPercent] = useState(32);
@@ -60,7 +63,7 @@ export function WasteCostCalculator({
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className="font-outfit text-sm text-inherit opacity-80">
-            Couverts par semaine
+            {t("covers_week")}
           </label>
           <span className="font-plex-mono text-sm font-semibold tabular-nums">
             {covers}
@@ -86,7 +89,7 @@ export function WasteCostCalculator({
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className="font-outfit text-sm text-inherit opacity-80">
-            Prix moyen du couvert
+            {t("avg_ticket")}
           </label>
           <span className="font-plex-mono text-sm font-semibold tabular-nums">
             {ticket}$
@@ -112,7 +115,7 @@ export function WasteCostCalculator({
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className="font-outfit text-sm text-inherit opacity-80">
-            Votre ratio food cost
+            {t("food_cost_ratio")}
           </label>
           <span className="font-plex-mono text-sm font-semibold tabular-nums">
             {foodCostPercent}%
@@ -138,7 +141,7 @@ export function WasteCostCalculator({
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className="font-outfit text-sm text-inherit opacity-80">
-            Votre taux de surproduction estimé
+            {t("overproduction_rate")}
           </label>
           <span className="font-plex-mono text-sm font-semibold tabular-nums">
             {wastePercent}%
@@ -164,7 +167,7 @@ export function WasteCostCalculator({
       <div className="space-y-3 pt-2">
         <div className="flex items-baseline gap-2">
           <span className="font-outfit text-sm opacity-70">
-            Achats alimentaires hebdo :
+            {t("weekly_purchases")}
           </span>
           <span className="font-plex-mono text-sm font-semibold tabular-nums">
             {formatCurrency(calculations.weeklyFoodSpend)}$
@@ -175,28 +178,33 @@ export function WasteCostCalculator({
             ~{formatCurrency(calculations.weeklyWaste)}$
           </span>
           <span className="font-outfit text-sm opacity-70 ml-1">
-            /semaine de surproduction
+            {t("weekly_loss")}
           </span>
         </div>
         <p className="font-outfit text-sm opacity-60">
-          soit{" "}
-          <span className="font-plex-mono font-semibold tabular-nums">
-            {formatCurrency(calculations.yearlyWaste)}$
-          </span>
-          /an de perte sur la surproduction seule
+          {t.rich("yearly_loss", {
+            val: `${formatCurrency(calculations.yearlyWaste)}$`,
+            value: (chunks) => (
+              <span className="font-plex-mono font-semibold tabular-nums">
+                {chunks}
+              </span>
+            )
+          })}
         </p>
         <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-4 py-3">
           <p className="font-outfit text-sm font-medium text-emerald-400">
-            Une gestion prévisionnelle basée sur vos données pourrait réduire cette perte de{" "}
-            <span className="font-plex-mono font-bold tabular-nums">
-              ~{formatCurrency(calculations.potentialSavings)}$
-            </span>
-            /an
+            {t.rich("potential_reduction", {
+              val: `~${formatCurrency(calculations.potentialSavings)}$`,
+              value: (chunks) => (
+                <span className="font-plex-mono font-bold tabular-nums">
+                  {chunks}
+                </span>
+              )
+            })}
           </p>
         </div>
         <p className="font-plex-mono text-[10px] opacity-40 leading-relaxed">
-          Estimation basée sur une réduction de 40% du gaspillage, cohérente avec les études sur la gestion prévisionnelle assistée par données (WRAP, NRA).
-          Les résultats réels dépendent de votre contexte opérationnel.
+          {t("disclaimer", { percent: 40 })}
         </p>
       </div>
 
@@ -206,7 +214,7 @@ export function WasteCostCalculator({
           href="/signup"
           className="inline-flex items-center gap-2 rounded-xl bg-[#CC5833] px-6 py-3 font-jakarta text-sm font-semibold text-white transition-colors hover:bg-[#CC5833]/90"
         >
-          Commencer à économiser
+          {t("cta")}
           <ArrowRight className="h-4 w-4" />
         </Link>
       )}
@@ -259,10 +267,10 @@ export function WasteCostCalculator({
     <section className="w-full bg-[#1A1A1A] text-[#F2F0E9]">
       <div className="mx-auto max-w-2xl px-4 sm:px-8 py-16 sm:py-24">
         <h2 className="font-jakarta text-2xl sm:text-3xl font-bold mb-2">
-          Combien vous coûte l&apos;incertitude ?
+          {t("title")}
         </h2>
         <p className="font-outfit text-sm opacity-60 mb-10">
-          Entrez vos propres chiffres pour estimer votre gaspillage alimentaire
+          {t("subtitle")}
         </p>
         {content}
       </div>

@@ -18,6 +18,7 @@ if (typeof window !== "undefined") {
 
 export function LandingPage() {
   const t = useTranslations('LandingPage');
+  const tMockups = useTranslations('LandingMockups');
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -259,7 +260,7 @@ export function LandingPage() {
                   <div className="bg-red-500/10 text-red-400 border border-red-500/20 px-5 py-4 rounded-xl flex flex-col gap-3 backdrop-blur-md shadow-2xl">
                     <div className="flex items-center gap-2 mb-1">
                       <TrendingDown className="w-5 h-5 shrink-0" />
-                      <span className="font-plex-mono text-xs font-bold tracking-wide uppercase">Alerte IA - Marge en Baisse</span>
+                      <span className="font-plex-mono text-xs font-bold tracking-wide uppercase">{tMockups('alert_title')}</span>
                     </div>
                     <span className="font-jakarta text-sm leading-tight">{t('f2_mock_alert')}</span>
                   </div>
@@ -305,8 +306,8 @@ export function LandingPage() {
             </div>
             <div className="order-1 md:order-2 bg-indigo-950 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden">
                <div className="text-center flex flex-col gap-3 px-6">
-                 <div className="text-indigo-300 font-cormorant italic text-2xl md:text-3xl opacity-40 transition-opacity">"Nettoyer le sol ce soir"</div>
-                 <div className="text-indigo-200 font-cormorant italic text-3xl md:text-4xl opacity-75">"Limpiar el piso esta noche"</div>
+                 <div className="text-indigo-300 font-cormorant italic text-2xl md:text-3xl opacity-40 transition-opacity">{tMockups('trans_fr')}</div>
+                 <div className="text-indigo-200 font-cormorant italic text-3xl md:text-4xl opacity-75">{tMockups('trans_es')}</div>
                  <div className="text-white font-jakarta text-2xl md:text-3xl font-medium mt-2">"আজ রাতে মেঝে পরিষ্কার করুন"</div>
                </div>
             </div>
@@ -373,7 +374,7 @@ export function LandingPage() {
                <div className="relative z-10 w-full max-w-[260px] flex flex-col gap-4">
                  {/* Extracted line item */}
                  <div className="bg-white border border-slate-200 text-xs p-4 rounded-xl shadow-sm flex flex-col gap-2 transition-all duration-500 transform hover:-translate-y-1">
-                    <span className="font-plex-mono text-slate-400 text-[10px]">SCAN-REQ-4829</span>
+                    <span className="font-plex-mono text-slate-400 text-[10px]">{tMockups('invoice_id')}</span>
                     <div className="flex justify-between font-bold font-jakarta text-[#1A1A1A] text-sm">
                       <span>{t('ocr_product')}</span>
                       <span>{t('ocr_price')}</span>
@@ -384,7 +385,7 @@ export function LandingPage() {
                  {/* Success Update Indicator */}
                  <div className="bg-green-500 text-white text-xs font-bold px-4 py-3 rounded-xl flex items-center justify-between shadow-lg opacity-90 animate-pulse mt-2">
                     <span>{t('ocr_status')}</span>
-                    <span className="font-plex-mono text-[10px]">28% → 29.5%</span>
+                    <span className="font-plex-mono text-[10px]">{tMockups('invoice_update')}</span>
                  </div>
                </div>
             </div>
@@ -552,7 +553,7 @@ export function LandingPage() {
                     <div className="flex-1 min-w-0">
                       <p className="font-plex-mono text-[10px] text-red-400/70 tracking-widest uppercase mb-1">{t('bar_mock_variance')}</p>
                       <div className="flex justify-between items-end">
-                        <p className="font-jakarta font-bold text-white text-base truncate">Draft IPA</p>
+                        <p className="font-jakarta font-bold text-white text-base truncate">{tMockups('mock_beer1')}</p>
                         <p className="font-outfit font-bold text-red-400 text-sm tabular-nums">-1.2L</p>
                       </div>
                     </div>
@@ -564,7 +565,7 @@ export function LandingPage() {
                     <div className="flex-1 min-w-0">
                       <p className="font-plex-mono text-[10px] text-amber-500/70 tracking-widest uppercase mb-1">{t('bar_mock_batch')}</p>
                       <div className="flex justify-between items-end">
-                        <p className="font-jakarta font-bold text-white text-base truncate">Pale Ale</p>
+                        <p className="font-jakarta font-bold text-white text-base truncate">{tMockups('mock_beer2')}</p>
                         <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full font-bold uppercase border border-indigo-500/20">{t('bar_mock_kegging')}</span>
                       </div>
                     </div>

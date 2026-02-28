@@ -299,23 +299,37 @@ export default function SmartPrepDashboard() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-              <Brain className="w-5 h-5 text-indigo-600" />
-              Smart Prep List
-            </h1>
-            <p className="text-sm text-slate-500">
-              Planification prédictive basée sur vos réservations, ventes et recettes
-            </p>
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-4 sm:px-8 py-3 sm:py-4">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                <Brain className="w-5 h-5 text-indigo-600" />
+                Smart Prep List
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">
+                Planification prédictive basée sur vos réservations, ventes et recettes
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={regenerate}
+                disabled={regenerating || aiGenerating}
+                className="gap-1.5"
+              >
+                {regenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+                <span className="hidden sm:inline">Régénérer</span>
+              </Button>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             <input
               type="date"
               value={targetDate}
               onChange={(e) => setTargetDate(e.target.value)}
-              className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-3 py-1.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <div className="flex bg-slate-100 rounded-lg p-0.5">
               {(['all_day', 'lunch', 'dinner'] as const).map((s) => (
@@ -339,24 +353,14 @@ export default function SmartPrepDashboard() {
                 className="gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
               >
                 {aiGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                ✨ Générer avec l'IA
+                <span className="hidden sm:inline">Générer avec</span> l&apos;IA
               </Button>
             )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={regenerate}
-              disabled={regenerating || aiGenerating}
-              className="gap-1.5"
-            >
-              {regenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
-              Régénérer
-            </Button>
           </div>
         </div>
       </header>
 
-      <main className="p-8 space-y-6 max-w-6xl">
+      <main className="p-4 sm:p-8 space-y-6 max-w-6xl">
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <Loader2 className="w-6 h-6 text-indigo-500 animate-spin" />
@@ -448,7 +452,7 @@ export default function SmartPrepDashboard() {
             )}
 
             {/* Tabs */}
-            <div className="flex bg-slate-100 rounded-lg p-0.5 w-fit">
+            <div className="flex bg-slate-100 rounded-lg p-0.5 w-full sm:w-fit overflow-x-auto">
               {([
                 { key: 'prep', label: '📋 Prep List', icon: ChefHat },
                 { key: 'ingredients', label: '🥕 Ingrédients', icon: ShoppingBasket },
@@ -521,26 +525,43 @@ export default function SmartPrepDashboard() {
                   </Card>
                 ) : (
                   <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                    <div className="grid grid-cols-[1fr_100px_80px_140px] gap-2 px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                    {/* Desktop header */}
+                    <div className="hidden sm:grid grid-cols-[1fr_100px_80px_140px] gap-2 px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                       <span>Ingrédient</span>
                       <span>Quantité</span>
                       <span>Unité</span>
                       <span>Coût estimé</span>
                     </div>
                     {ingredients.map((ing) => (
-                      <div key={ing.id || ing.ingredient_id} className="grid grid-cols-[1fr_100px_80px_140px] gap-2 px-5 py-3.5 border-b border-slate-100 last:border-b-0 items-center hover:bg-slate-50/50">
-                        <div>
-                          <p className="text-sm font-medium text-slate-900">{ing.ingredient_name}</p>
-                          <p className="text-xs text-slate-400 mt-0.5">
+                      <div key={ing.id || ing.ingredient_id} className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50">
+                        {/* Desktop row */}
+                        <div className="hidden sm:grid grid-cols-[1fr_100px_80px_140px] gap-2 px-5 py-3.5 items-center">
+                          <div>
+                            <p className="text-sm font-medium text-slate-900">{ing.ingredient_name}</p>
+                            <p className="text-xs text-slate-400 mt-0.5">
+                              {(ing.used_by_items || []).map((u: any) => `${u.menuItemName} (${u.portions}×)`).join(' · ')}
+                            </p>
+                          </div>
+                          <span className="text-sm font-bold text-slate-800">{ing.total_quantity}</span>
+                          <span className="text-sm text-slate-500">{ing.unit}</span>
+                          <span className="text-sm text-slate-700 font-medium">${ing.estimated_cost.toFixed(2)}</span>
+                        </div>
+                        {/* Mobile card */}
+                        <div className="sm:hidden px-4 py-3">
+                          <div className="flex items-center justify-between mb-1">
+                            <p className="text-sm font-medium text-slate-900">{ing.ingredient_name}</p>
+                            <span className="text-sm text-slate-700 font-medium">${ing.estimated_cost.toFixed(2)}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-slate-500">
+                            <span className="font-bold text-slate-800">{ing.total_quantity} {ing.unit}</span>
+                          </div>
+                          <p className="text-[10px] text-slate-400 mt-1 truncate">
                             {(ing.used_by_items || []).map((u: any) => `${u.menuItemName} (${u.portions}×)`).join(' · ')}
                           </p>
                         </div>
-                        <span className="text-sm font-bold text-slate-800">{ing.total_quantity}</span>
-                        <span className="text-sm text-slate-500">{ing.unit}</span>
-                        <span className="text-sm text-slate-700 font-medium">${ing.estimated_cost.toFixed(2)}</span>
                       </div>
                     ))}
-                    <div className="px-5 py-3 bg-slate-50 border-t border-slate-200 flex justify-between text-sm">
+                    <div className="px-4 sm:px-5 py-3 bg-slate-50 border-t border-slate-200 flex justify-between text-sm">
                       <span className="text-slate-500">{ingredients.length} ingrédients</span>
                       <span className="font-bold text-slate-900">
                         Total: ${ingredients.reduce((s, i) => s + i.estimated_cost, 0).toFixed(2)}
@@ -676,49 +697,53 @@ function PrepItemRow({ item }: { item: PrepItem }) {
   };
 
   return (
-    <div className="flex items-center gap-4 px-5 py-3.5 hover:bg-slate-50/50 transition-colors">
-      <PriorityIcon priority={item.priority} />
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-slate-900">{item.menu_item_name}</p>
-        <div className="flex items-center gap-2 mt-0.5">
-          <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${bcgColors[item.bcg_category] || bcgColors.ecueil}`}>
-            {bcgLabels[item.bcg_category] || item.bcg_category}
-          </span>
-          <span className="text-xs text-slate-400">
-            Marge {item.margin_percent.toFixed(0)}%
-          </span>
-          <span className="text-xs text-slate-400">
-            · Confiance {Math.round(item.confidence_score * 100)}%
-          </span>
+    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-4 sm:px-5 py-3 sm:py-3.5 hover:bg-slate-50/50 transition-colors">
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <PriorityIcon priority={item.priority} />
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium text-slate-900">{item.menu_item_name}</p>
+          <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+            <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${bcgColors[item.bcg_category] || bcgColors.ecueil}`}>
+              {bcgLabels[item.bcg_category] || item.bcg_category}
+            </span>
+            <span className="text-xs text-slate-400">
+              Marge {item.margin_percent.toFixed(0)}%
+            </span>
+            <span className="text-xs text-slate-400 hidden sm:inline">
+              · Confiance {Math.round(item.confidence_score * 100)}%
+            </span>
+          </div>
           {item.ai_reasoning && (
-             <span className="text-xs text-indigo-500 flex items-center gap-1 ml-2 bg-indigo-50 px-2 rounded-md">
-                 <Sparkles className="w-3 h-3" /> {item.ai_reasoning}
-             </span>
+            <span className="text-xs text-indigo-500 flex items-center gap-1 mt-1 bg-indigo-50 px-2 py-0.5 rounded-md w-fit">
+              <Sparkles className="w-3 h-3 shrink-0" /> <span className="truncate">{item.ai_reasoning}</span>
+            </span>
           )}
         </div>
       </div>
-      <div className="text-right">
-        {item.ai_suggestion_quantity !== undefined && item.ai_suggestion_quantity !== null ? (
-            <div className="flex flex-col items-end">
-                <div className="flex items-center gap-2">
-                    <span className="text-sm line-through text-slate-400">{item.predicted_portions}</span>
-                    <p className="text-xl font-bold text-indigo-600">{item.ai_suggestion_quantity}</p>
-                </div>
-                <p className="text-[11px] text-indigo-400 font-medium">suggestion IA</p>
+      <div className="flex items-center gap-4 pl-7 sm:pl-0">
+        <div className="text-left sm:text-right">
+          {item.ai_suggestion_quantity !== undefined && item.ai_suggestion_quantity !== null ? (
+            <div className="flex items-center sm:flex-col sm:items-end gap-2 sm:gap-0">
+              <div className="flex items-center gap-2">
+                <span className="text-sm line-through text-slate-400">{item.predicted_portions}</span>
+                <p className="text-lg sm:text-xl font-bold text-indigo-600">{item.ai_suggestion_quantity}</p>
+              </div>
+              <p className="text-[11px] text-indigo-400 font-medium">suggestion IA</p>
             </div>
-        ) : (
-            <>
-                <p className="text-lg font-bold text-slate-900">{item.predicted_portions}</p>
-                <p className="text-[11px] text-slate-400">portions</p>
-            </>
+          ) : (
+            <div className="flex items-center sm:flex-col gap-1 sm:gap-0">
+              <p className="text-base sm:text-lg font-bold text-slate-900">{item.predicted_portions}</p>
+              <p className="text-[11px] text-slate-400">portions</p>
+            </div>
+          )}
+        </div>
+        {item.estimated_cost > 0 && (
+          <div className="text-left sm:text-right">
+            <p className="text-sm font-medium text-slate-600">${item.estimated_cost.toFixed(2)}</p>
+            <p className="text-[11px] text-slate-400 hidden sm:block">coût food</p>
+          </div>
         )}
       </div>
-      {item.estimated_cost > 0 && (
-        <div className="text-right min-w-[70px]">
-          <p className="text-sm font-medium text-slate-600">${item.estimated_cost.toFixed(2)}</p>
-          <p className="text-[11px] text-slate-400">coût food</p>
-        </div>
-      )}
     </div>
   );
 }

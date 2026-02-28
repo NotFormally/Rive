@@ -39,15 +39,15 @@ export function ProductionDashboard() {
   ];
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-slate-800">Suivi des Brassins</h2>
-        <Button className="bg-indigo-600 hover:bg-indigo-700">Démarrer une Production</Button>
+    <div className="space-y-4 sm:space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <h2 className="text-lg sm:text-xl font-semibold text-slate-800">Suivi des Brassins</h2>
+        <Button className="bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto">Démarrer une Production</Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {columns.map((col) => (
-          <div key={col.status} className="bg-slate-50/50 rounded-xl p-4 border border-slate-200 shadow-sm min-h-[500px]">
+          <div key={col.status} className="bg-slate-50/50 rounded-xl p-3 sm:p-4 border border-slate-200 shadow-sm min-h-[200px] lg:min-h-[500px]">
             <div className="flex items-center gap-2 mb-4 pb-2 border-b border-slate-200">
               {col.icon}
               <h3 className="font-medium text-slate-700">{col.title}</h3>

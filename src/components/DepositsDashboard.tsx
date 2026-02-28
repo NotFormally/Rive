@@ -49,9 +49,9 @@ export function DepositsDashboard() {
   }
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    <div className="space-y-4 sm:space-y-6 animate-in fade-in duration-500">
       {/* KPI Cards */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
         <Card className="border-slate-200 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-indigo-50 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
@@ -92,7 +92,7 @@ export function DepositsDashboard() {
       </div>
 
       {/* Main Content Area */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-3">
         {/* Left Column (Main Table) */}
         <div className="lg:col-span-2">
           <Card className="shadow-sm border-slate-200 h-full">
@@ -133,7 +133,7 @@ export function DepositsDashboard() {
                         </Badge>
                       </div>
                       {item.status === "held" && (
-                        <Button size="sm" className="hidden md:flex shrink-0">Marquer Retourné</Button>
+                        <Button size="sm" className="shrink-0 text-xs sm:text-sm">Retourné</Button>
                       )}
                     </div>
                   </div>

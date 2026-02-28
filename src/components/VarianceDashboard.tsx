@@ -53,7 +53,7 @@ export function VarianceDashboard() {
     <div className="space-y-6 animate-in fade-in duration-500">
       
       {/* KPIs */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
         <Card className="border-red-200 bg-red-50 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-red-100 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
@@ -93,21 +93,22 @@ export function VarianceDashboard() {
 
       {/* Main Table */}
       <Card className="shadow-sm border-slate-200">
-        <CardHeader className="border-b border-slate-100 flex flex-row items-center justify-between">
+        <CardHeader className="border-b border-slate-100 px-4 sm:px-6">
           <div>
-            <CardTitle className="text-lg">Rapport Théorique vs Réel</CardTitle>
-            <p className="text-sm text-slate-500">Comparaison entre ce que le POS dit avoir vendu et ce qu'il manque vraiment dans l'inventaire.</p>
+            <CardTitle className="text-base sm:text-lg">Rapport Théorique vs Réel</CardTitle>
+            <p className="text-xs sm:text-sm text-slate-500">Comparaison POS vs inventaire réel.</p>
           </div>
         </CardHeader>
-        <div className="overflow-x-auto">
+        {/* Desktop table */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-slate-500 bg-slate-50 border-b border-slate-100 uppercase">
               <tr>
                 <th className="px-6 py-4 font-medium">Produit</th>
-                <th className="px-6 py-4 font-medium text-right">Vente Pos (Théorique)</th>
-                <th className="px-6 py-4 font-medium text-right">Utilisation Réelle</th>
-                <th className="px-6 py-4 font-medium text-right">Écart (Variance)</th>
-                <th className="px-6 py-4 font-medium text-right text-red-600">Perte Financière</th>
+                <th className="px-6 py-4 font-medium text-right">POS (Théorique)</th>
+                <th className="px-6 py-4 font-medium text-right">Réel</th>
+                <th className="px-6 py-4 font-medium text-right">Écart</th>
+                <th className="px-6 py-4 font-medium text-right text-red-600">Perte</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -136,6 +137,26 @@ export function VarianceDashboard() {
               ))}
             </tbody>
           </table>
+        </div>
+        {/* Mobile cards */}
+        <div className="md:hidden divide-y divide-slate-100">
+          {variances.sort((a,b) => b.variance_cost - a.variance_cost).map((item) => (
+            <div key={item.id} className="p-4 hover:bg-slate-50 transition-colors">
+              <div className="flex items-center justify-between mb-2">
+                <div>
+                  <p className="text-sm font-medium text-slate-900">{item.name}</p>
+                  <p className="text-xs text-slate-500">{item.category}</p>
+                </div>
+                <span className="text-sm font-bold text-red-600 tabular-nums">-${item.variance_cost.toFixed(2)}</span>
+              </div>
+              <div className="flex items-center gap-3 text-xs text-slate-500">
+                <span>POS: {item.theoretical_usage} {item.unit}</span>
+                <ArrowRight className="w-3 h-3 text-slate-400" />
+                <span className="font-medium text-slate-900">{item.actual_usage} {item.unit}</span>
+                <span className="text-red-600 font-medium">+{item.variance_amount.toFixed(1)}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </Card>
       

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter, usePathname } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { Sidebar } from "@/components/Sidebar";
+import VirtualSousChef from "@/components/VirtualSousChef";
 
 export default function DashboardLayout({
   children,
@@ -38,10 +39,11 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-[100dvh] bg-background noise-bg text-foreground selection:bg-[--accent]/30">
       <Sidebar />
-      <main className="flex-1 md:ml-64 flex flex-col pt-20 md:pt-0">
+      <main className="flex-1 md:ml-64 flex flex-col pt-20 md:pt-0 relative">
         <div className="flex-1 p-4 md:p-10">
           {children}
         </div>
+        <VirtualSousChef />
       </main>
     </div>
   );

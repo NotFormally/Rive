@@ -1,30 +1,78 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/components/AuthProvider";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Beaker, Settings, CheckCircle, Clock } from "lucide-react";
+import { Beaker, Settings, CheckCircle, Clock, RefreshCw } from "lucide-react";
 
 type ProductionBatch = {
   id: string;
   name: string;
   recipe_name: string;
+  recipe_id?: string;
   start_date: string;
+  end_date?: string;
   expected_yield: number;
+  actual_yield?: number;
   yield_unit: string;
   status: "fermenting" | "kegged" | "canned";
 };
 
-const mockBatches: ProductionBatch[] = [
-  { id: "1", name: "Brassage #042", recipe_name: "IPA Côte Ouest", start_date: "2026-02-10T08:00:00Z", expected_yield: 500, yield_unit: "L", status: "fermenting" },
-  { id: "2", name: "Brassage #043", recipe_name: "Stout Impériale", start_date: "2026-02-18T09:30:00Z", expected_yield: 300, yield_unit: "L", status: "fermenting" },
-  { id: "3", name: "Brassage #040", recipe_name: "Blonde Lager", start_date: "2026-01-25T10:00:00Z", expected_yield: 1000, yield_unit: "L", status: "kegged" },
-  { id: "4", name: "Brassage #041", recipe_name: "Sour Framboise", start_date: "2026-02-05T14:00:00Z", expected_yield: 400, yield_unit: "L", status: "canned" },
-];
-
 export function ProductionDashboard() {
-  const [batches, setBatches] = useState<ProductionBatch[]>(mockBatches);
+  const [batches, setBatches] = useState<ProductionBatch[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState<string | null>(null);
+  const { profile } = useAuth();
+
+  const loadBatches = useCallback(async () => {
+    if (!profile?.id) return;
+    try {
+      const res = await fetch('/api/production');
+      if (!res.ok) throw new Error('Failed to load');
+      const data = await res.json();
+      const mapped: ProductionBatch[] = data.map((b: Record<string, unknown>) => ({
+        id: b.id as string,
+        name: b.name as string,
+        recipe_name: (b.recipes as Record<string, string>)?.name || 'Recette inconnue',
+        recipe_id: b.recipe_id as string,
+        start_date: b.start_date as string,
+        end_date: b.end_date as string | undefined,
+        expected_yield: b.expected_yield as number,
+        actual_yield: b.actual_yield as number | undefined,
+        yield_unit: (b.yield_unit as string) || 'L',
+        status: b.status as ProductionBatch['status'],
+      }));
+      setBatches(mapped);
+    } catch (error) {
+      console.error('Failed to load production batches:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [profile?.id]);
+
+  useEffect(() => {
+    loadBatches();
+  }, [loadBatches]);
+
+  const updateStatus = async (id: string, newStatus: 'kegged' | 'canned') => {
+    setUpdating(id);
+    try {
+      const res = await fetch('/api/production', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status: newStatus }),
+      });
+      if (res.ok) {
+        setBatches(prev => prev.map(b => b.id === id ? { ...b, status: newStatus, end_date: new Date().toISOString() } : b));
+      }
+    } catch (error) {
+      console.error('Failed to update batch:', error);
+    } finally {
+      setUpdating(null);
+    }
+  };
 
   const getDaysElapsed = (startDate: string) => {
     const start = new Date(startDate).getTime();
@@ -33,16 +81,43 @@ export function ProductionDashboard() {
   };
 
   const columns = [
-    { title: "En Fermentation (Cuve)", status: "fermenting", icon: <Beaker className="w-5 h-5 text-amber-500" /> },
-    { title: "Enfûtage (Kegs)", status: "kegged", icon: <Settings className="w-5 h-5 text-indigo-500" /> },
-    { title: "Cannage / Bouteilles", status: "canned", icon: <CheckCircle className="w-5 h-5 text-emerald-500" /> },
+    { title: "En Fermentation (Cuve)", status: "fermenting" as const, icon: <Beaker className="w-5 h-5 text-amber-500" /> },
+    { title: "Enfûtage (Kegs)", status: "kegged" as const, icon: <Settings className="w-5 h-5 text-indigo-500" /> },
+    { title: "Cannage / Bouteilles", status: "canned" as const, icon: <CheckCircle className="w-5 h-5 text-emerald-500" /> },
   ];
+
+  if (loading) {
+    return (
+      <div className="flex h-[400px] items-center justify-center">
+        <div className="flex flex-col items-center gap-4 text-slate-400">
+          <RefreshCw className="h-8 w-8 animate-spin" />
+          <p>Chargement des productions...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (batches.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center">
+        <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mb-4">
+          <Beaker className="w-8 h-8 text-amber-400" />
+        </div>
+        <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune production enregistrée</h3>
+        <p className="text-sm text-slate-500 max-w-md mb-6">
+          Commencez par créer une recette de brassage dans l'éditeur de recettes, puis lancez votre première production ici.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4 sm:space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <h2 className="text-lg sm:text-xl font-semibold text-slate-800">Suivi des Brassins</h2>
-        <Button className="bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto">Démarrer une Production</Button>
+        <div className="flex items-center gap-3 text-sm text-slate-500">
+          <span>{batches.length} production{batches.length > 1 ? 's' : ''} au total</span>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -66,7 +141,7 @@ export function ProductionDashboard() {
                         <div className="font-bold text-slate-900 mt-1">{batch.recipe_name}</div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-4 mt-4 text-sm text-slate-600">
                       <div className="flex items-center gap-1.5 bg-slate-100 px-2 py-1 rounded text-xs font-medium">
                         <Beaker className="w-3.5 h-3.5" />
@@ -79,14 +154,31 @@ export function ProductionDashboard() {
                     </div>
 
                     {col.status === "fermenting" && (
-                      <Button variant="outline" size="sm" className="w-full mt-4 text-xs h-8">
-                        Transférer en Fût
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full mt-4 text-xs h-8"
+                        onClick={() => updateStatus(batch.id, 'kegged')}
+                        disabled={updating === batch.id}
+                      >
+                        {updating === batch.id ? 'Transfert...' : 'Transférer en Fût'}
+                      </Button>
+                    )}
+                    {col.status === "kegged" && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full mt-4 text-xs h-8"
+                        onClick={() => updateStatus(batch.id, 'canned')}
+                        disabled={updating === batch.id}
+                      >
+                        {updating === batch.id ? 'Transfert...' : 'Mettre en cannette'}
                       </Button>
                     )}
                   </CardContent>
                 </Card>
               ))}
-              
+
               {batches.filter(b => b.status === col.status).length === 0 && (
                 <div className="text-center p-8 border-2 border-dashed border-slate-200 rounded-lg text-slate-400 text-sm mt-4">
                   Aucun lot dans cette étape

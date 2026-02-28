@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/components/AuthProvider";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,30 +11,84 @@ type VarianceItem = {
   id: string;
   name: string;
   category: string;
-  theoretical_usage: number; // e.g. from POS sales
-  actual_usage: number;      // e.g. from inventory counts
+  theoretical_usage: number;
+  actual_usage: number;
   unit: string;
   variance_amount: number;
   variance_cost: number;
+  period_start?: string;
+  period_end?: string;
 };
 
-// Mock Data
-const mockVariances: VarianceItem[] = [
-  { id: "1", name: "Tequila Casamigos Reposado", category: "Spiritueux", theoretical_usage: 45.5, actual_usage: 56.0, unit: "oz", variance_amount: 10.5, variance_cost: 31.50 },
-  { id: "2", name: "Fût IPA Locale 50L", category: "Bière Fût", theoretical_usage: 40.0, actual_usage: 42.0, unit: "L", variance_amount: 2.0, variance_cost: 12.00 },
-  { id: "3", name: "Sirop Simple Maison", category: "Prep", theoretical_usage: 300, actual_usage: 320, unit: "ml", variance_amount: 20, variance_cost: 0.80 },
-  { id: "4", name: "Vodka Grey Goose", category: "Spiritueux", theoretical_usage: 25.0, actual_usage: 26.0, unit: "oz", variance_amount: 1.0, variance_cost: 3.50 },
-  { id: "5", name: "Vin Rouge Pinot Noir (Verre)", category: "Vin", theoretical_usage: 15, actual_usage: 22, unit: "verres (5oz)", variance_amount: 7, variance_cost: 24.50 },
-];
+type SpoilageForm = {
+  quantity: string;
+  unit: string;
+  reason: string;
+  logged_by: string;
+};
 
 export function VarianceDashboard() {
-  const [variances, setVariances] = useState<VarianceItem[]>(mockVariances);
+  const [variances, setVariances] = useState<VarianceItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showSpoilageForm, setShowSpoilageForm] = useState(false);
+  const [spoilageForm, setSpoilageForm] = useState<SpoilageForm>({ quantity: '', unit: 'oz', reason: 'spill', logged_by: '' });
+  const [submittingSpoilage, setSubmittingSpoilage] = useState(false);
+  const { profile } = useAuth();
+
+  const loadData = useCallback(async () => {
+    if (!profile?.id) return;
+    try {
+      const res = await fetch('/api/variance');
+      if (!res.ok) throw new Error('Failed to load');
+      const data = await res.json();
+      const mapped: VarianceItem[] = data.map((v: Record<string, unknown>) => ({
+        id: v.id as string,
+        name: (v.ingredients as Record<string, string>)?.name || 'Produit inconnu',
+        category: (v.ingredients as Record<string, string>)?.category || '',
+        theoretical_usage: v.theoretical_usage as number,
+        actual_usage: v.actual_usage as number,
+        unit: (v.ingredients as Record<string, string>)?.unit || '',
+        variance_amount: v.variance_amount as number,
+        variance_cost: v.variance_cost as number,
+        period_start: v.period_start as string,
+        period_end: v.period_end as string,
+      }));
+      setVariances(mapped);
+    } catch (error) {
+      console.error('Failed to load variances:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [profile?.id]);
 
   useEffect(() => {
-    // Simulate API fetch
-    setTimeout(() => setLoading(false), 800);
-  }, []);
+    loadData();
+  }, [loadData]);
+
+  const submitSpoilage = async () => {
+    if (!spoilageForm.quantity) return;
+    setSubmittingSpoilage(true);
+    try {
+      const res = await fetch('/api/spoilage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          quantity: parseFloat(spoilageForm.quantity),
+          unit: spoilageForm.unit,
+          reason: spoilageForm.reason,
+          logged_by: spoilageForm.logged_by || null,
+        }),
+      });
+      if (res.ok) {
+        setShowSpoilageForm(false);
+        setSpoilageForm({ quantity: '', unit: 'oz', reason: 'spill', logged_by: '' });
+      }
+    } catch (error) {
+      console.error('Failed to submit spoilage:', error);
+    } finally {
+      setSubmittingSpoilage(false);
+    }
+  };
 
   const totalLostCost = variances.reduce((sum, item) => sum + item.variance_cost, 0);
   const itemsWithHighVariance = variances.filter(v => v.variance_cost > 20);
@@ -49,9 +104,100 @@ export function VarianceDashboard() {
     );
   }
 
+  if (variances.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
+            <TrendingDown className="w-8 h-8 text-red-400" />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune variance détectée</h3>
+          <p className="text-sm text-slate-500 max-w-md mb-6">
+            Les données de variance apparaîtront automatiquement après vos premiers dépôts et ventes POS. Rive croisera vos ventes théoriques avec votre inventaire réel.
+          </p>
+          <Button
+            onClick={() => setShowSpoilageForm(true)}
+            className="bg-indigo-600 hover:bg-indigo-700"
+          >
+            <GlassWater className="w-4 h-4 mr-2" />
+            Déclarer une perte
+          </Button>
+        </div>
+        {showSpoilageForm && (
+          <Card className="shadow-sm border-slate-200 max-w-lg mx-auto">
+            <CardHeader>
+              <CardTitle className="text-base">Déclarer une perte</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-slate-700 block mb-1">Quantité</label>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={spoilageForm.quantity}
+                    onChange={(e) => setSpoilageForm(prev => ({ ...prev, quantity: e.target.value }))}
+                    className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                    placeholder="Ex: 2.5"
+                  />
+                  <select
+                    value={spoilageForm.unit}
+                    onChange={(e) => setSpoilageForm(prev => ({ ...prev, unit: e.target.value }))}
+                    className="rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  >
+                    <option value="oz">oz</option>
+                    <option value="ml">ml</option>
+                    <option value="L">L</option>
+                    <option value="unit">unité</option>
+                    <option value="kg">kg</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-slate-700 block mb-1">Raison</label>
+                <select
+                  value={spoilageForm.reason}
+                  onChange={(e) => setSpoilageForm(prev => ({ ...prev, reason: e.target.value }))}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                >
+                  <option value="spill">Renversé (Spill)</option>
+                  <option value="spoil">Périmé (Spoil)</option>
+                  <option value="comp">Offert (Comp)</option>
+                  <option value="staff">Consommation personnel</option>
+                </select>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-slate-700 block mb-1">Déclaré par (optionnel)</label>
+                <input
+                  type="text"
+                  value={spoilageForm.logged_by}
+                  onChange={(e) => setSpoilageForm(prev => ({ ...prev, logged_by: e.target.value }))}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="Nom du membre d'équipe"
+                />
+              </div>
+              <div className="flex gap-2 pt-2">
+                <Button
+                  onClick={submitSpoilage}
+                  disabled={submittingSpoilage || !spoilageForm.quantity}
+                  className="bg-indigo-600 hover:bg-indigo-700"
+                >
+                  {submittingSpoilage ? 'Envoi...' : 'Enregistrer'}
+                </Button>
+                <Button variant="outline" onClick={() => setShowSpoilageForm(false)}>
+                  Annuler
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      
+
       {/* KPIs */}
       <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
         <Card className="border-red-200 bg-red-50 shadow-sm relative overflow-hidden group">
@@ -73,7 +219,7 @@ export function VarianceDashboard() {
             <AlertTriangle className="h-4 w-4 text-amber-500" />
           </CardHeader>
           <CardContent className="relative z-10">
-            <div className="text-3xl font-bold text-amber-900">{itemsWithHighVariance.length} produits</div>
+            <div className="text-3xl font-bold text-amber-900">{itemsWithHighVariance.length} produit{itemsWithHighVariance.length > 1 ? 's' : ''}</div>
             <p className="text-xs text-amber-700 mt-1">Pertes de plus de 20$ / item</p>
           </CardContent>
         </Card>
@@ -83,13 +229,85 @@ export function VarianceDashboard() {
             <div className="mx-auto w-12 h-12 bg-indigo-50 text-indigo-600 rounded-full items-center justify-center flex mb-2">
               <GlassWater className="h-6 w-6" />
             </div>
-            <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm">
+            <Button
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
+              onClick={() => setShowSpoilageForm(!showSpoilageForm)}
+            >
               Déclarer Périmé / Renversé
             </Button>
-            <p className="text-xs text-slate-500 mt-2">Justifiez vos pertes ("Spill" ou "Comp")</p>
+            <p className="text-xs text-slate-500 mt-2">Justifiez vos pertes (&ldquo;Spill&rdquo; ou &ldquo;Comp&rdquo;)</p>
           </CardContent>
         </Card>
       </div>
+
+      {showSpoilageForm && (
+        <Card className="shadow-sm border-slate-200 max-w-lg mx-auto">
+          <CardHeader>
+            <CardTitle className="text-base">Déclarer une perte</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-slate-700 block mb-1">Quantité</label>
+              <div className="flex gap-2">
+                <input
+                  type="number"
+                  step="0.1"
+                  value={spoilageForm.quantity}
+                  onChange={(e) => setSpoilageForm(prev => ({ ...prev, quantity: e.target.value }))}
+                  className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="Ex: 2.5"
+                />
+                <select
+                  value={spoilageForm.unit}
+                  onChange={(e) => setSpoilageForm(prev => ({ ...prev, unit: e.target.value }))}
+                  className="rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                >
+                  <option value="oz">oz</option>
+                  <option value="ml">ml</option>
+                  <option value="L">L</option>
+                  <option value="unit">unité</option>
+                  <option value="kg">kg</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-slate-700 block mb-1">Raison</label>
+              <select
+                value={spoilageForm.reason}
+                onChange={(e) => setSpoilageForm(prev => ({ ...prev, reason: e.target.value }))}
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+              >
+                <option value="spill">Renversé (Spill)</option>
+                <option value="spoil">Périmé (Spoil)</option>
+                <option value="comp">Offert (Comp)</option>
+                <option value="staff">Consommation personnel</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-slate-700 block mb-1">Déclaré par (optionnel)</label>
+              <input
+                type="text"
+                value={spoilageForm.logged_by}
+                onChange={(e) => setSpoilageForm(prev => ({ ...prev, logged_by: e.target.value }))}
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                placeholder="Nom du membre d'équipe"
+              />
+            </div>
+            <div className="flex gap-2 pt-2">
+              <Button
+                onClick={submitSpoilage}
+                disabled={submittingSpoilage || !spoilageForm.quantity}
+                className="bg-indigo-600 hover:bg-indigo-700"
+              >
+                {submittingSpoilage ? 'Envoi...' : 'Enregistrer'}
+              </Button>
+              <Button variant="outline" onClick={() => setShowSpoilageForm(false)}>
+                Annuler
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Main Table */}
       <Card className="shadow-sm border-slate-200">
@@ -159,7 +377,7 @@ export function VarianceDashboard() {
           ))}
         </div>
       </Card>
-      
+
     </div>
   );
 }

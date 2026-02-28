@@ -140,7 +140,8 @@
   },
   "Pricing": {
     "title": "Prezzi chiari, impatto reale.",
-    "subtitle": "14 giorni di prova gratuita, senza carta di credito. Tutti i moduli attivati.",
+    "subtitle": "Inizia gratis, passa a un piano a pagamento quando sei pronto.",
+    "badge_free": "Inizia gratis — senza carta di credito",
     "tier_essential_name": "Essence",
     "tier_essential_badge": "Carta di Navigazione",
     "tier_essential_desc": "L'Ecosistema del Menu fondamentale per strutturare le tue operazioni.",
@@ -404,7 +405,7 @@
     "s2_title": "2. Access and Registration",
     "s2_p1": "**2.1.** The user must create an account with a valid email address to access the service.",
     "s2_p2": "**2.2.** The user is responsible for the confidentiality of their login credentials.",
-    "s2_p3": "**2.3.** A 14-day free trial is offered without a credit card. Beyond that, a paid subscription is required to continue using the service.",
+    "s2_p3": "**2.3.** Viene offerta una versione gratuita (Freemium) senza carta di credito, con funzionalità limitate. È necessario un abbonamento a pagamento per accedere a tutte le funzionalità.",
     "s3_title": "3. Specific Clause — Artificial Intelligence and Liability",
     "s3_s1_title": "3.1. Nature of AI-generated suggestions",
     "s3_s1_p1": "The Rive service integrates artificial intelligence technologies (LLM models) provided by third parties (Anthropic / Claude). These technologies are used to:",
@@ -459,9 +460,9 @@
   },
   "Meta": {
     "home_title": "Rive — Intelligenza algoritmica per la ristorazione",
-    "home_description": "Conformità sanitaria, diario IA, food cost, traduzione 14 lingue. Prova gratuita 14 giorni.",
+    "home_description": "Conformità sanitaria, diario IA, food cost, traduzione 14 lingue. Versione gratuita disponibile.",
     "pricing_title": "Prezzi — Rive",
-    "pricing_description": "Abbonamenti Rive da 59$/mese. Prova gratuita 14 giorni.",
+    "pricing_description": "Abbonamenti Rive da 59$/mese. Versione gratuita disponibile, senza carta di credito.",
     "cgu_title": "Condizioni d'Uso — Rive",
     "cgu_description": "Leggi le nostre condizioni d'uso e la politica IA."
   },
@@ -529,6 +530,7 @@
     "portal_loading": "Chargement du portail...",
     "btn_manage_subscription": "Gérer mon abonnement (Stripe)",
     "trial_desc": "Vous êtes actuellement sur le système d'essai gratuit ou manuel. Vous n'avez pas de facturation automatique configurée.",
+    "freemium_desc": "Stai usando la versione gratuita di Rive. Passa a un piano a pagamento per sbloccare tutte le funzionalità.",
     "btn_view_plans": "Voir les forfaits",
     "portal_error": "Impossible de charger le portail.",
     "module_deposits_label": "Tracciatore Vuoti",

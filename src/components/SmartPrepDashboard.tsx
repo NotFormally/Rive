@@ -28,6 +28,9 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { InsightAttribution } from "@/components/InsightAttribution";
+import { ChefCalibrationBadge } from "@/components/ChefCalibrationBadge";
+import { UpgradeNudge } from "@/components/UpgradeNudge";
 
 // =============================================================================
 // Types
@@ -308,7 +311,7 @@ export default function SmartPrepDashboard() {
                 Smart Prep List
               </h1>
               <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">
-                Planification prédictive basée sur vos réservations, ventes et recettes
+                Votre système apprend de vos réservations, ventes et feedback
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -383,14 +386,14 @@ export default function SmartPrepDashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Card>
                 <CardContent className="pt-5">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-blue-50 rounded-lg"><Users className="w-5 h-5 text-blue-600" /></div>
-                    <span className="text-sm text-slate-500">Couverts estimés</span>
-                  </div>
-                  <p className="text-3xl font-bold text-slate-900">{prepList.estimated_covers}</p>
-                  <p className="text-xs text-slate-400 mt-1">
-                    {prepList.reserved_covers} réservés + ~{prepList.estimated_covers - prepList.reserved_covers} walk-ins ({Math.round(prepList.walk_in_ratio * 100)}%)
-                  </p>
+                  <InsightAttribution
+                    chefValue={prepList.reserved_covers}
+                    riveValue={prepList.estimated_covers}
+                    chefLabel="Vos réservations"
+                    riveLabel="Rive anticipe"
+                    unit="couverts"
+                    explanation={`+${prepList.estimated_covers - prepList.reserved_covers} walk-ins estimés (${Math.round(prepList.walk_in_ratio * 100)}%)`}
+                  />
                 </CardContent>
               </Card>
 
@@ -449,6 +452,11 @@ export default function SmartPrepDashboard() {
                   <AlertCard key={i} alert={alert} />
                 ))}
               </div>
+            )}
+
+            {/* Upgrade Nudge — Loss framing for sub-optimal generation levels */}
+            {prepList.generation_level < 3 && (
+              <UpgradeNudge currentLevel={prepList.generation_level as 1 | 2} />
             )}
 
             {/* Tabs */}
@@ -594,6 +602,22 @@ export default function SmartPrepDashboard() {
                         <CardDescription>
                           Ajustez les portions réelles pour chaque item. Seuls les items modifiés affecteront les prédictions futures.
                         </CardDescription>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="mt-2 gap-1.5 border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                          onClick={() => {
+                            // "Tout correct" — accept all predictions as-is
+                            const allCorrect: Record<string, number> = {};
+                            items.forEach(item => {
+                              allCorrect[item.menu_item_id] = item.predicted_portions;
+                            });
+                            setFeedbackValues(allCorrect);
+                          }}
+                        >
+                          <Check className="w-3.5 h-3.5" />
+                          Tout correct
+                        </Button>
                       </CardHeader>
                       <CardContent className="space-y-2">
                         {items.map((item) => {
@@ -710,8 +734,15 @@ function PrepItemRow({ item }: { item: PrepItem }) {
               Marge {item.margin_percent.toFixed(0)}%
             </span>
             <span className="text-xs text-slate-400 hidden sm:inline">
-              · Confiance {Math.round(item.confidence_score * 100)}%
+              · Fiabilité {Math.round(item.confidence_score * 100)}%
             </span>
+            {item.confidence_modifier !== 1 && (
+              <ChefCalibrationBadge
+                feedbackCount={Math.round(Math.abs(item.confidence_modifier - 1) * 50)}
+                modifier={item.confidence_modifier}
+                trend={item.confidence_modifier > 1 ? 'up' : item.confidence_modifier < 1 ? 'down' : 'stable'}
+              />
+            )}
           </div>
           {item.ai_reasoning && (
             <span className="text-xs text-indigo-500 flex items-center gap-1 mt-1 bg-indigo-50 px-2 py-0.5 rounded-md w-fit">
@@ -728,7 +759,7 @@ function PrepItemRow({ item }: { item: PrepItem }) {
                 <span className="text-sm line-through text-slate-400">{item.predicted_portions}</span>
                 <p className="text-lg sm:text-xl font-bold text-indigo-600">{item.ai_suggestion_quantity}</p>
               </div>
-              <p className="text-[11px] text-indigo-400 font-medium">suggestion IA</p>
+              <p className="text-[11px] text-indigo-400 font-medium">votre système</p>
             </div>
           ) : (
             <div className="flex items-center sm:flex-col gap-1 sm:gap-0">

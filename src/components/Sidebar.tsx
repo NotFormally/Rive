@@ -18,7 +18,8 @@ import {
   Share2,
   Recycle,
   Droplets,
-  Beer
+  Beer,
+  Gauge
 } from "lucide-react";
 
 export function Sidebar() {
@@ -38,6 +39,7 @@ export function Sidebar() {
     { name: t("nav_smartprep"), href: "/dashboard/prep-list", icon: Brain, show: settings?.module_smart_prep },
     { name: t("nav_social"), href: "/dashboard/social", icon: Share2, show: settings?.module_instagram },
     { name: t("nav_production"), href: "/dashboard/production", icon: Beer, show: settings?.module_production },
+    { name: "Mon Intelligence", href: "/dashboard/my-intelligence", icon: Gauge, show: true },
     { name: t("nav_settings"), href: "/dashboard/settings", icon: Settings, show: true },
   ];
 
@@ -46,7 +48,7 @@ export function Sidebar() {
   const sidebarContent = (
     <>
       <div className="p-8">
-        <h1 className="text-3xl font-jakarta font-bold text-[--sidebar-foreground] tracking-tighter">Rive</h1>
+        <h1 className="text-2xl font-outfit font-semibold text-[--sidebar-foreground] tracking-[0.3em] uppercase">RIVE</h1>
         <div className="h-px w-12 bg-[--sidebar-primary] mt-2 opacity-60"></div>
         <p className="text-[10px] text-[--sidebar-foreground] opacity-40 mt-4 uppercase tracking-[0.2em] font-plex-mono font-bold">
           {profile?.restaurant_name || t("restaurant_space")}

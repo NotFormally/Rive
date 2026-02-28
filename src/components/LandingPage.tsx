@@ -7,6 +7,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat, TrendingDown, ScanLine, Beer, Droplets, Recycle } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { WasteCostCalculator } from "@/components/WasteCostCalculator";
+import { SocialProofBanner } from "@/components/SocialProofBanner";
+import TelemetryScanner from "@/components/TelemetryScanner";
+import RiveLogo from "@/components/RiveLogo";
 
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
@@ -108,7 +112,9 @@ export function LandingPage() {
       
       {/* A. NAVBAR — "The Floating Island" */}
       <nav className="navbar fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full flex items-center gap-8 text-[#F2F0E9] transition-colors">
-        <div className="font-outfit font-bold tracking-tight text-xl">Rive</div>
+        <Link href="/" className="group">
+          <RiveLogo className="text-xl md:text-2xl text-current" />
+        </Link>
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
           <Link href="#features" className="hover:-translate-y-[1px] transition-transform">{t('nav_features')}</Link>
           <Link href="#philosophy" className="hover:-translate-y-[1px] transition-transform">{t('nav_philosophy')}</Link>
@@ -125,8 +131,8 @@ export function LandingPage() {
         </div>
       </nav>
 
-        {/* B. HERO SECTION — "The Opening Shot" */}
-      <section className="hero-section relative h-[100dvh] w-full flex items-center md:items-end pb-24 px-8 md:px-24">
+      {/* B. HERO SECTION — "The Opening Shot" */}
+      <section className="hero-section relative min-h-[100dvh] w-full flex flex-col justify-center pb-24 px-8 md:px-24">
         {/* Background Image with Global CSS Noise */}
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
@@ -137,27 +143,33 @@ export function LandingPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent"></div>
         </div>
 
-        <div className="relative z-10 max-w-5xl text-[#F2F0E9] pt-24 md:pt-0">
-          <h1 className="flex flex-col gap-3">
-            <span className="hero-text font-jakarta font-bold text-xl md:text-2xl tracking-widest uppercase text-[#CC5833] opacity-90">
-              {t('hero_subtitle')}
-            </span>
-            <span className="hero-text font-cormorant italic text-6xl md:text-8xl tracking-tighter leading-[0.95] max-w-4xl">
-              {t('hero_title')}
-            </span>
-          </h1>
-          <p className="hero-text font-outfit text-lg md:text-xl mt-8 max-w-3xl opacity-90 leading-relaxed tracking-wide">
-            {t('hero_description')}
-          </p>
-          <div className="hero-text mt-12 w-full flex">
-            <Link 
-              href="/signup" 
-              className="group relative overflow-hidden inline-flex items-center justify-center text-center whitespace-nowrap gap-2 bg-[#CC5833] text-[#F2F0E9] px-8 py-4 rounded-full font-bold text-lg hover:scale-[1.03] transition-transform duration-300"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">{t('hero_cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
-              <span className="absolute inset-0 bg-[#1A1A1A] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></span>
-            </Link>
+        <div className="relative z-10 w-full pt-32 md:pt-40 max-w-3xl">
+          <div className="text-[#F2F0E9]">
+            <h1 className="flex flex-col gap-3">
+              <span className="hero-text font-jakarta font-bold text-xl md:text-2xl tracking-widest uppercase text-[#CC5833] opacity-90">
+                {t('hero_subtitle')}
+              </span>
+              <span className="hero-text font-cormorant italic text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.95] max-w-2xl">
+                {t('hero_title')}
+              </span>
+            </h1>
+            <p className="hero-text font-outfit text-lg md:text-xl mt-8 max-w-xl opacity-90 leading-relaxed tracking-wide">
+              {t('hero_description')}
+            </p>
+            <p className="hero-text font-plex-mono text-xs tracking-widest uppercase opacity-60 mt-4">
+              Chaque jour sans donn&eacute;es, c&rsquo;est du gaspillage invisible.
+            </p>
+            <div className="hero-text mt-12 w-full flex">
+              <Link 
+                href="/signup" 
+                className="group relative overflow-hidden inline-flex items-center justify-center text-center whitespace-nowrap gap-2 bg-[#CC5833] text-[#F2F0E9] px-8 py-4 rounded-full font-bold text-lg hover:scale-[1.03] transition-transform duration-300 shadow-[0_0_40px_rgba(204,88,51,0.3)]"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">{t('hero_cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
+                <span className="absolute inset-0 bg-[#1A1A1A] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></span>
+              </Link>
+            </div>
           </div>
+
         </div>
       </section>
 
@@ -561,6 +573,21 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* WASTE COST CALCULATOR — Behavioral Lever */}
+      <section className="py-20 md:py-32 px-8 md:px-24 bg-[#1A1A1A]">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-jakarta text-3xl md:text-4xl font-bold text-[#F2F0E9]">
+              Combien vous co&ucirc;te l&rsquo;incertitude&nbsp;?
+            </h2>
+            <p className="font-outfit text-lg text-[#F2F0E9]/60 mt-4">
+              Estimez le co&ucirc;t de la surproduction sans donn&eacute;es fiables.
+            </p>
+          </div>
+          <WasteCostCalculator variant="landing" />
+        </div>
+      </section>
+
       {/* D. PHILOSOPHY — "The Manifesto" */}
       <section id="philosophy" className="relative py-0 bg-[#1A1A1A] text-[#F2F0E9] overflow-hidden">
         {/* Parallax Organic Texture */}
@@ -599,22 +626,22 @@ export function LandingPage() {
               {/* Pillar 1 */}
               <div className="group relative py-10 md:py-12 md:px-10 lg:border-r border-white/[0.06] border-b lg:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">01</span>
-                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar1_title')}</h3>
-                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar1_desc')}</p>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">Amplifier votre savoir</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">Rive ne remplace pas votre expertise — elle l&rsquo;amplifie avec des donn&eacute;es.</p>
               </div>
-              
+
               {/* Pillar 2 */}
               <div className="group relative py-10 md:py-12 md:px-10 lg:border-r border-white/[0.06] border-b lg:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">02</span>
-                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar2_title')}</h3>
-                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar2_desc')}</p>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">Voir ce que l&rsquo;inaction co&ucirc;te</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">Chaque point de donn&eacute;es manquant a un prix. Rive le rend visible.</p>
               </div>
-              
+
               {/* Pillar 3 */}
               <div className="group relative py-10 md:py-12 md:px-10 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">03</span>
-                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar3_title')}</h3>
-                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar3_desc')}</p>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">Construire votre intelligence</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">Plus vous calibrez, plus votre syst&egrave;me apprend. C&rsquo;est votre intelligence, pas la n&ocirc;tre.</p>
               </div>
 
             </div>
@@ -634,8 +661,11 @@ export function LandingPage() {
           <div className="stack-card bg-[#2E4036] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 01</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase1_title')}</h3>
-              <p className="font-outfit text-lg opacity-80 mb-8 max-w-md">{t('protocol_phase1_desc')}</p>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">40%&nbsp;&mdash; Connectez vos r&eacute;servations</h3>
+              <p className="font-outfit text-lg opacity-80 mb-4 max-w-md">Un bouton, et Rive commence &agrave; apprendre votre rythme.</p>
+              <div className="w-full max-w-md bg-white/10 rounded-full overflow-hidden mb-8">
+                <div className="h-1 bg-[#CC5833] rounded-full" style={{ width: '40%' }}></div>
+              </div>
             </div>
             <div className="flex-1 flex justify-center">
               <div className="w-48 h-48 border border-[#CC5833]/30 rounded-full flex items-center justify-center relative spin-slow">
@@ -649,8 +679,11 @@ export function LandingPage() {
           <div className="stack-card bg-[#CC5833] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#1A1A1A] font-bold text-sm mb-4">PHASE 02</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase2_title')}</h3>
-              <p className="font-outfit text-lg opacity-90 mb-8 max-w-md">{t('protocol_phase2_desc')}</p>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">65%&nbsp;&mdash; Branchez votre POS</h3>
+              <p className="font-outfit text-lg opacity-90 mb-4 max-w-md">Vos ventes pass&eacute;es deviennent des pr&eacute;dictions par item.</p>
+              <div className="w-full max-w-md bg-white/10 rounded-full overflow-hidden mb-8">
+                <div className="h-1 bg-[#F2F0E9] rounded-full" style={{ width: '65%' }}></div>
+              </div>
             </div>
             <div className="flex-1 flex justify-center">
               <div className="w-64 h-32 border border-[#F2F0E9]/30 rounded-xl relative overflow-hidden flex flex-col justify-between p-2">
@@ -665,18 +698,21 @@ export function LandingPage() {
           <div className="stack-card bg-[#1A1A1A] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
               <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 03</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase3_title')}</h3>
-              <p className="font-outfit text-lg opacity-80 mb-8 max-w-md">{t('protocol_phase3_desc')}</p>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">95%&nbsp;&mdash; Calibrez votre syst&egrave;me</h3>
+              <p className="font-outfit text-lg opacity-80 mb-4 max-w-md">30 secondes de feedback par jour et votre syst&egrave;me atteint 92% de pr&eacute;cision.</p>
+              <div className="w-full max-w-md bg-white/10 rounded-full overflow-hidden mb-8">
+                <div className="h-1 bg-[#CC5833] rounded-full" style={{ width: '95%' }}></div>
+              </div>
               <Link href="/signup" className="inline-block bg-[#F2F0E9] text-[#1A1A1A] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
-                {t('protocol_cta')}
+                Commencer &agrave; 40%
               </Link>
             </div>
             <div className="flex-1 flex justify-center">
                <svg className="w-full max-w-[300px] h-32" viewBox="0 0 300 100">
-                <path 
-                  d="M0,50 L50,50 L60,20 L80,80 L90,50 L150,50 L160,30 L180,70 L190,50 L300,50" 
-                  fill="none" 
-                  stroke="#CC5833" 
+                <path
+                  d="M0,50 L50,50 L60,20 L80,80 L90,50 L150,50 L160,30 L180,70 L190,50 L300,50"
+                  fill="none"
+                  stroke="#CC5833"
                   strokeWidth="3"
                   className="animate-[dash_3s_linear_infinite]"
                   strokeDasharray="300"
@@ -688,11 +724,23 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* G. FOOTER */}
-      <footer className="bg-[#1A1A1A] text-[#F2F0E9] rounded-t-[4rem] px-8 md:px-24 pt-24 pb-12 mt-24">
+      {/* Social Proof Banner */}
+      <SocialProofBanner variant="landing" />
+
+      {/* G. FOOTER — with integrated Telemetry Scanner */}
+      <footer className="bg-[#1A1A1A] text-[#F2F0E9] rounded-t-[4rem] px-8 md:px-24 pt-16 pb-12 mt-24">
+        {/* Telemetry Scanner */}
+        <div className="max-w-screen-xl mx-auto h-[350px] md:h-[420px] relative mb-16">
+          <div className="absolute inset-0 bg-[#00FFAA]/5 blur-[80px] rounded-full pointer-events-none"></div>
+          <div className="w-full h-full relative z-10 rounded-[2rem] border border-white/10 bg-[#050505]/80 overflow-hidden">
+            <TelemetryScanner />
+          </div>
+        </div>
+
+        {/* Footer content */}
         <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-12">
           <div>
-            <div className="font-outfit font-bold text-3xl mb-4">Rive</div>
+            <div className="font-outfit font-semibold text-2xl tracking-[0.3em] uppercase mb-4">RIVE</div>
             <p className="font-outfit text-slate-400 max-w-xs">{t('footer_desc')}</p>
             <a href="mailto:dock@rivehub.com" className="font-outfit text-sm text-[#CC5833] mt-3 inline-block hover:text-[#F2F0E9] transition-colors tracking-wide">
               dock@rivehub.com
@@ -703,7 +751,7 @@ export function LandingPage() {
             <span className="font-plex-mono text-sm uppercase tracking-wider text-green-400">{t('footer_status')}</span>
           </div>
         </div>
-        <div className="max-w-screen-xl mx-auto mt-24 pt-8 border-t border-slate-800 text-slate-500 text-sm font-outfit flex justify-between">
+        <div className="max-w-screen-xl mx-auto mt-16 pt-8 border-t border-slate-800 text-slate-500 text-sm font-outfit flex justify-between">
           <p>{t('footer_rights')}</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-[#F2F0E9] transition-colors">{t('footer_privacy')}</a>

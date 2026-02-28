@@ -1,6 +1,6 @@
-// Rive — Freemium Active Quotas Configuration
+// Rive — Freemium Quotas Configuration
 
-export type MetricName = 
+export type MetricName =
   | 'logbook_notes'
   | 'corrective_actions'
   | 'translations'
@@ -8,23 +8,27 @@ export type MetricName =
   | 'instagram_posts'
   | 'receipt_scans';
 
-export const FREE_QUOTAS: Record<MetricName, number> = {
-  logbook_notes: 150,
-  corrective_actions: 40,
-  translations: 30,
-  menu_engineering: 2,
-  instagram_posts: 20,
-  receipt_scans: 10
+// Freemium quotas: enough to keep users engaged, encourages upgrade
+export const FREEMIUM_QUOTAS: Record<MetricName, number> = {
+  logbook_notes: 20,       // ~5 par semaine, suffisant pour garder l'habitude
+  corrective_actions: 5,
+  translations: 5,
+  menu_engineering: 0,     // Réservé aux tiers payants
+  instagram_posts: 0,      // Réservé aux tiers payants
+  receipt_scans: 0         // Réservé aux tiers payants
 };
 
+// Legacy alias — kept for backward compatibility with existing imports
+export const FREE_QUOTAS = FREEMIUM_QUOTAS;
+
 export function hasReachedQuota(
-  usage: Record<string, number> | undefined | null, 
-  metric: MetricName, 
-  isTrial: boolean
+  usage: Record<string, number> | undefined | null,
+  metric: MetricName,
+  isFreemium: boolean
 ): boolean {
-  // If not in trial (meaning they are paying), there's no quota limit
-  if (!isTrial) return false;
-  
+  // Paid subscribers have no quota limits
+  if (!isFreemium) return false;
+
   const currentUsage = usage?.[metric] || 0;
-  return currentUsage >= FREE_QUOTAS[metric];
+  return currentUsage >= FREEMIUM_QUOTAS[metric];
 }

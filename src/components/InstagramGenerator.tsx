@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
-import { hasReachedQuota, FREE_QUOTAS } from "@/lib/quotas";
+import { hasReachedQuota, FREEMIUM_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
 
 type InstagramPost = {
@@ -51,8 +51,8 @@ export function InstagramGenerator({
   const tCommon = useTranslations('Common');
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
-  const isTrial = subscription?.tier === 'trial';
-  const instaQuotaReached = hasReachedQuota(usage, 'instagram_posts', isTrial);
+  const isFreemium = subscription?.tier === 'freemium';
+  const instaQuotaReached = hasReachedQuota(usage, 'instagram_posts', isFreemium);
 
   useEffect(() => {
     if (profile) {
@@ -154,7 +154,7 @@ export function InstagramGenerator({
                 <div className="rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800 mb-4">
                   <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">{t('quota_reached')}</h3>
                   <p className="text-sm text-blue-700 dark:text-blue-200">
-                    {t('quota_desc', { count: FREE_QUOTAS.instagram_posts })}
+                    {t('quota_desc', { count: FREEMIUM_QUOTAS.instagram_posts })}
                   </p>
                 </div>
               ) : (
@@ -162,7 +162,7 @@ export function InstagramGenerator({
                   <Button onClick={generatePost} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
                     {t('btn_generate')}
                   </Button>
-                  {isTrial && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {FREE_QUOTAS.instagram_posts} {t('btn_regenerate').toLowerCase().includes('pos') ? 'posts' : 'posts'}</p>}
+                  {isFreemium && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {FREEMIUM_QUOTAS.instagram_posts} posts</p>}
                 </>
               )}
             </div>

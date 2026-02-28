@@ -549,7 +549,7 @@ export default function SettingsPage() {
           </CardHeader>
           <CardContent className="space-y-4 p-6 md:p-8 pt-2">
             <p className="text-sm font-outfit text-foreground/70">
-              <strong className="text-foreground">{t("label_plan")}</strong> <span className="capitalize">{subscription?.tier || 'trial'}</span>
+              <strong className="text-foreground">{t("label_plan")}</strong> <span className="capitalize">{subscription?.tier || 'freemium'}</span>
             </p>
             {subscription?.stripeCustomerId ? (
               <Button
@@ -561,7 +561,7 @@ export default function SettingsPage() {
               </Button>
             ) : (
               <div>
-                <p className="text-sm font-outfit text-muted-foreground mb-4">{t("trial_desc")}</p>
+                <p className="text-sm font-outfit text-muted-foreground mb-4">{t("freemium_desc")}</p>
                 <Button onClick={() => router.push('/pricing' as any)} className="bg-accent hover:bg-[#b84d2d] text-accent-foreground rounded-xl">
                   {t("btn_view_plans")}
                 </Button>
@@ -569,6 +569,7 @@ export default function SettingsPage() {
             )}
           </CardContent>
         </Card>
+
       </div>
     </div>
   );

@@ -73,20 +73,16 @@ export default function SignupPage() {
       return;
     }
 
-    // 4. Create default module settings — Trial period, all modules ON
-    const trialEndsAt = new Date();
-    trialEndsAt.setDate(trialEndsAt.getDate() + 14);
-
+    // 4. Create default module settings — Freemium tier
     await supabase.from("restaurant_settings").insert({
       restaurant_id: profileData.id,
       module_logbook: true,
       module_menu_editor: true,
-      module_food_cost: true,
-      module_menu_engineering: true,
-      module_instagram: true,
-      module_receipt_scanner: true,
-      subscription_tier: 'trial',
-      trial_ends_at: trialEndsAt.toISOString(),
+      module_food_cost: false,
+      module_menu_engineering: false,
+      module_instagram: false,
+      module_receipt_scanner: false,
+      subscription_tier: 'freemium',
     });
 
     // 5. Create owner membership — links user to restaurant

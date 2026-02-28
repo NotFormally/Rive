@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { sendEmail } from '@/lib/email';
 
-const ADMIN_EMAIL = "nassim.saighi@gmail.com";
+const ADMIN_EMAIL = "dock@rivehub.com";
 
 export async function POST(request: Request) {
   try {
@@ -37,6 +37,14 @@ export async function POST(request: Request) {
       to: email,
       restaurantName: restaurant_name,
     }).catch((err) => console.error('[email] welcome email failed:', err));
+
+    sendEmail({
+      type: 'admin_signup_notification',
+      to: ADMIN_EMAIL,
+      restaurantName: restaurant_name,
+      email: email,
+      locale: locale || "fr",
+    }).catch((err) => console.error('[email] admin signup notification failed:', err));
 
     return NextResponse.json({ success: true });
   } catch (error) {

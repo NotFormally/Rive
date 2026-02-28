@@ -28,12 +28,38 @@ export async function POST(req: Request) {
     // Fetch Prep List
     const { data: prepList } = await auth.supabase
       .from('prep_lists')
-      .select('estimated_covers, status, alerts')
+      .select('id, estimated_covers, status, alerts')
       .eq('restaurant_id', auth.restaurantId)
       .eq('target_date', today)
       .maybeSingle();
 
-    // Fetch quick stats (example: recent revenue) to make it smart
+    // Fetch Prep List Items with AI suggestions
+    let prepListItems: any[] = [];
+    if (prepList) {
+      const { data } = await auth.supabase
+        .from('prep_list_items')
+        .select(`
+          ai_suggestion_quantity, ai_reasoning,
+          recipes(name)
+        `)
+        .eq('prep_list_id', prepList.id as string)
+        .not('ai_suggestion_quantity', 'is', null);
+      
+      if (data) prepListItems = data;
+    }
+
+    // Fetch Food Cost Alerts
+    const { data: foodCostAlerts } = await auth.supabase
+      .from('food_cost_alerts')
+      .select(`
+        status, new_cost, previous_cost, ai_recommendation,
+        recipes(name),
+        ingredients(name)
+      `)
+      .eq('restaurant_id', auth.restaurantId)
+      .eq('status', 'unread');
+
+    // Fetch quick stats
     const { data: recentSales } = await auth.supabase
       .from('pos_sales')
       .select('total_amount, sale_date')
@@ -43,7 +69,27 @@ export async function POST(req: Request) {
 
     const salesContext = recentSales ? recentSales.map(s => `${s.sale_date}: $${s.total_amount}`).join(', ') : 'Aucune donnée récente';
     const coversContext = prepList ? `${prepList.estimated_covers} couverts estimés` : 'Non calculé';
-    const alertsContext = prepList?.alerts && prepList.alerts.length > 0 ? JSON.stringify(prepList.alerts) : 'Aucune alerte critique en cours';
+    
+    // Format Alerts
+    let ecosystemContext = "";
+    if (foodCostAlerts && foodCostAlerts.length > 0) {
+        ecosystemContext += `\n[ALERTE FOOD COST] ${foodCostAlerts.length} plats en marge critique :\n`;
+        foodCostAlerts.forEach((a: any) => {
+           ecosystemContext += `- Recette: ${a.recipes?.name || 'Inconnue'} | Ingrédient Fautif: ${a.ingredients?.name || 'Inconnu'} | Sugg.: ${a.ai_recommendation}\n`; 
+        });
+    }
+
+    // Format Prep Items
+    if (prepListItems && prepListItems.length > 0) {
+        ecosystemContext += `\n[SMART PREP DU JOUR] Suggestions IA demandées :\n`;
+        prepListItems.forEach((i: any) => {
+           ecosystemContext += `- ${i.recipes?.name}: Suggéré ${i.ai_suggestion_quantity} portions (${i.ai_reasoning})\n`; 
+        });
+    }
+
+    if (!ecosystemContext) {
+        ecosystemContext = "Aucune alerte ou conseil IA spécifique en cours dans l'écosystème.";
+    }
 
     const systemPrompt = `Tu es Rive, le Sous-Chef Exécutif Virtuel d'un logiciel de gestion de restaurant haut de gamme.
 Ton but est d'aider le restaurateur ou le Chef à analyser ses données, prendre des décisions, ou répondre à des questions sur la gestion (Food Cost, Menu Engineering, RH, Opérations).
@@ -51,8 +97,8 @@ Ton but est d'aider le restaurateur ou le Chef à analyser ses données, prendre
 Voici le contexte actuel du restaurant pour l'aider :
 - Date d'aujourd'hui : ${today}
 - Prévisions du jour : ${coversContext}
-- Alertes opérationnelles : ${alertsContext}
 - Historique récent des ventes (5 derniers jours) : ${salesContext}
+- Alertes et Données de l'Écosystème Rive IA : ${ecosystemContext}
 
 Règles de comportement :
 1. Sois professionnel, concis mais amical (ton de Chef respectueux).

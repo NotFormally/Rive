@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from 'next-intl';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat } from "lucide-react";
+import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat, TrendingDown, ScanLine } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 
 // Register GSAP Plugin
@@ -239,10 +239,13 @@ export function LandingPage() {
                   <div className="h-10 w-full bg-[#1A1A1A] rounded-lg border border-white/5 flex items-center px-4"><div className="h-2 w-2/5 bg-white/20 rounded"></div></div>
                </div>
 
-               <div className="relative z-10 flex flex-col gap-4 w-full max-w-[300px]">
-                  <div className="bg-red-500/20 text-red-400 border border-red-500/30 px-5 py-4 rounded-xl flex items-center gap-3 backdrop-blur-md shadow-2xl">
-                    <Thermometer className="w-5 h-5 shrink-0" />
-                    <span className="font-plex-mono text-sm leading-tight">{t('f2_mock_alert')}</span>
+               <div className="relative z-10 flex flex-col gap-4 w-full max-w-[340px]">
+                  <div className="bg-red-500/10 text-red-400 border border-red-500/20 px-5 py-4 rounded-xl flex flex-col gap-3 backdrop-blur-md shadow-2xl">
+                    <div className="flex items-center gap-2 mb-1">
+                      <TrendingDown className="w-5 h-5 shrink-0" />
+                      <span className="font-plex-mono text-xs font-bold tracking-wide uppercase">Alerte IA - Marge en Baisse</span>
+                    </div>
+                    <span className="font-jakarta text-sm leading-tight">{t('f2_mock_alert')}</span>
                   </div>
                   <div className="bg-[#CC5833] text-white px-5 py-4 rounded-xl flex items-center gap-3 shadow-2xl ml-8">
                     <RotateCw className="w-5 h-5 shrink-0 animate-spin-slow" />
@@ -252,7 +255,7 @@ export function LandingPage() {
             </div>
             <div className="order-2">
               <div className="flex flex-col gap-6">
-                <div className="bg-red-500/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Thermometer className="w-8 h-8 text-red-500" /></div>
+                <div className="bg-amber-500/10 w-16 h-16 rounded-2xl flex items-center justify-center"><TrendingDown className="w-8 h-8 text-amber-500" /></div>
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl">{t('f2_title')}</h3>
                 <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f2_desc')}</p>
                 <div className="bg-[#232323] p-6 rounded-2xl mt-4">
@@ -334,7 +337,7 @@ export function LandingPage() {
           <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex flex-col gap-6">
-                <div className="bg-[#2E4036]/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Calendar className="w-8 h-8 text-[#2E4036]" /></div>
+                <div className="bg-blue-500/10 w-16 h-16 rounded-2xl flex items-center justify-center"><ScanLine className="w-8 h-8 text-blue-600" /></div>
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f5_title')}</h3>
                 <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f5_desc')}</p>
                 <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 mt-4">

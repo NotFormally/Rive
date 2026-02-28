@@ -68,7 +68,7 @@ Produis le JSON pour ajuster ces quantités.
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20241022',
+        model: process.env.ANTHROPIC_MODEL || 'claude-3-7-sonnet-latest',
         max_tokens: 2000,
         temperature: 0.2, // Low temperature for deterministic output
         system: systemPrompt,

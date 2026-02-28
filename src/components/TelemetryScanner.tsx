@@ -9,25 +9,76 @@ import gsap from "gsap";
  */
 export function RadarLogo({ className = "" }: { className?: string }) {
   const ref = useRef<SVGSVGElement>(null);
+  const sweepRef = useRef<SVGGElement>(null);
+  const pingRef = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
+      // Entrance
       gsap.fromTo(ref.current, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" });
+
+      // Radar sweep — slow continuous rotation
+      gsap.to(sweepRef.current, {
+        rotation: 360,
+        duration: 6,
+        repeat: -1,
+        ease: "none",
+        transformOrigin: "0 0",
+      });
+
+      // Ping — center dot pulses every sweep
+      gsap.to(pingRef.current, {
+        attr: { r: 8 },
+        opacity: 0,
+        duration: 1.5,
+        repeat: -1,
+        repeatDelay: 4.5,
+        ease: "power2.out",
+      });
+
+      // Circles breathe subtly
+      gsap.to(".radar-ring", {
+        opacity: "+=0.15",
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.4,
+      });
     }, ref);
     return () => ctx.revert();
   }, []);
 
   return (
     <svg ref={ref} viewBox="-100 -100 200 250" className={className} aria-label="Rive radar">
-      <circle cx="0" cy="0" r="15" fill="none" stroke="#FFFFFF" strokeWidth="2" />
-      <circle cx="0" cy="0" r="35" fill="none" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.6" />
-      <circle cx="0" cy="0" r="60" fill="none" stroke="#FFFFFF" strokeWidth="1" opacity="0.3" />
-      <circle cx="0" cy="0" r="85" fill="none" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.15" />
+      <defs>
+        <linearGradient id="sweepGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-85">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
+          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.12" />
+        </linearGradient>
+      </defs>
+
+      {/* Concentric rings */}
+      <circle className="radar-ring" cx="0" cy="0" r="15" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="1" />
+      <circle className="radar-ring" cx="0" cy="0" r="35" fill="none" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.6" />
+      <circle className="radar-ring" cx="0" cy="0" r="60" fill="none" stroke="#FFFFFF" strokeWidth="1" opacity="0.3" />
+      <circle className="radar-ring" cx="0" cy="0" r="85" fill="none" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.15" />
+
+      {/* Sweep beam */}
+      <g ref={sweepRef}>
+        <path d="M0,0 L-22,-82 A85,85 0 0,1 22,-82 Z" fill="url(#sweepGrad)" />
+      </g>
+
+      {/* Crosshairs */}
       <line x1="0" y1="-90" x2="0" y2="-25" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.8" />
+      <line x1="-90" y1="0" x2="90" y2="0" stroke="#FFFFFF" strokeWidth="1" opacity="0.2" />
+
+      {/* Center + ping */}
       <circle cx="0" cy="-25" r="3" fill="#FFFFFF" />
       <circle cx="0" cy="0" r="4" fill="#FFFFFF" />
-      <line x1="-90" y1="0" x2="90" y2="0" stroke="#FFFFFF" strokeWidth="1" opacity="0.2" />
+      <circle ref={pingRef} cx="0" cy="0" r="4" fill="none" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.6" />
+
       <text x="0" y="120" fontFamily="'Space Grotesk', sans-serif" fontSize="24" fontWeight="400" letterSpacing="0.35em" fill="#FFFFFF" textAnchor="middle" opacity="0.8">RIVE</text>
     </svg>
   );

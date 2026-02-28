@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
+import { useTranslations } from "next-intl";
 import {
   getLevelLabel,
   getLevelColor,
@@ -19,31 +20,29 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 
 // =============================================================================
-// Milestone config
-// =============================================================================
-
-const MILESTONES: Array<{
-  threshold: number;
-  level: IntelligenceLevel;
-  label: string;
-  description: string;
-}> = [
-  { threshold: 0, level: "discovery", label: "Découverte", description: "Première connexion — bienvenue." },
-  { threshold: 40, level: "operational", label: "Opérationnel", description: "Réservations connectées, prédictions de couverts actives." },
-  { threshold: 65, level: "predictive", label: "Prédictif", description: "POS branché — prédictions par item débloquées." },
-  { threshold: 80, level: "calibrated", label: "Calibré", description: "7+ jours de feedback — le système s'adapte à votre réalité." },
-  { threshold: 95, level: "expert", label: "Expert", description: "4 semaines consécutives — précision maximale atteinte." },
-];
-
-// =============================================================================
 // My Intelligence Page
 // =============================================================================
 
 export default function MyIntelligencePage() {
   const { intelligenceScore, intelligenceLevel } = useAuth();
+  const t = useTranslations("Intelligence");
+
+  const MILESTONES: Array<{
+    threshold: number;
+    level: IntelligenceLevel;
+    label: string;
+    description: string;
+  }> = [
+    { threshold: 0, level: "discovery", label: t("milestone_discovery_title"), description: t("milestone_discovery_desc") },
+    { threshold: 40, level: "operational", label: t("milestone_operational_title"), description: t("milestone_operational_desc") },
+    { threshold: 65, level: "predictive", label: t("milestone_predictive_title"), description: t("milestone_predictive_desc") },
+    { threshold: 80, level: "calibrated", label: t("milestone_calibrated_title"), description: t("milestone_calibrated_desc") },
+    { threshold: 95, level: "expert", label: t("milestone_expert_title"), description: t("milestone_expert_desc") },
+  ];
 
   const score = intelligenceScore ?? 0;
   const level = intelligenceLevel ?? ("discovery" as IntelligenceLevel);
+  // Optional: You could also localize getLevelLabel if you want, but sticking to existing logic for now.
   const levelLabel = getLevelLabel(level);
   const levelColor = getLevelColor(level);
   const levelBgColor = getLevelBgColor(level);
@@ -59,10 +58,10 @@ export default function MyIntelligencePage() {
       <div>
         <h1 className="text-2xl md:text-3xl font-jakarta font-bold text-foreground flex items-center gap-3">
           <Gauge className="w-7 h-7 text-[#CC5833]" />
-          Mon Intelligence
+          {t("title")}
         </h1>
         <p className="font-outfit text-muted-foreground mt-1">
-          Votre système apprend de chaque donnée que vous connectez et chaque feedback que vous donnez.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -99,13 +98,13 @@ export default function MyIntelligencePage() {
             {/* Info */}
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-xl font-jakarta font-bold text-foreground mb-1">
-                Niveau : {levelLabel}
+                {t("score_label", { level: levelLabel })}
               </h2>
               <p className="text-sm font-outfit text-muted-foreground mb-4">
                 {MILESTONES[currentMilestoneIdx]?.description}
               </p>
               <p className="text-xs font-plex-mono uppercase tracking-widest text-muted-foreground/60">
-                C&apos;est votre intelligence, pas la nôtre.
+                {t("score_footer")}
               </p>
             </div>
           </div>
@@ -115,7 +114,7 @@ export default function MyIntelligencePage() {
       {/* Progression Timeline */}
       <div>
         <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
-          <TrendingUp className="w-4 h-4" /> Parcours d&apos;intelligence
+          <TrendingUp className="w-4 h-4" /> {t("timeline_title")}
         </h3>
         <div className="space-y-1">
           {MILESTONES.map((milestone, i) => {
@@ -146,7 +145,7 @@ export default function MyIntelligencePage() {
                     </span>
                     {isCurrent && (
                       <span className="px-2 py-0.5 bg-[#CC5833]/10 text-[#CC5833] text-[10px] font-bold rounded-full uppercase tracking-wider">
-                        Vous êtes ici
+                        {t("you_are_here")}
                       </span>
                     )}
                   </div>
@@ -161,15 +160,15 @@ export default function MyIntelligencePage() {
       {/* Data sources overview */}
       <div>
         <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
-          <Brain className="w-4 h-4" /> Sources de données
+          <Brain className="w-4 h-4" /> {t("sources_title")}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Card>
             <CardContent className="py-4 flex items-center gap-3">
               <div className="p-2 bg-blue-50 rounded-lg"><CalendarDays className="w-4 h-4 text-blue-600" /></div>
               <div>
-                <p className="text-sm font-medium text-foreground">Réservations</p>
-                <p className="text-xs text-muted-foreground">+40 points</p>
+                <p className="text-sm font-medium text-foreground">{t("source_res_title")}</p>
+                <p className="text-xs text-muted-foreground">{t("source_res_desc")}</p>
               </div>
             </CardContent>
           </Card>
@@ -177,8 +176,8 @@ export default function MyIntelligencePage() {
             <CardContent className="py-4 flex items-center gap-3">
               <div className="p-2 bg-emerald-50 rounded-lg"><Target className="w-4 h-4 text-emerald-600" /></div>
               <div>
-                <p className="text-sm font-medium text-foreground">POS</p>
-                <p className="text-xs text-muted-foreground">+25 points</p>
+                <p className="text-sm font-medium text-foreground">{t("source_pos_title")}</p>
+                <p className="text-xs text-muted-foreground">{t("source_pos_desc")}</p>
               </div>
             </CardContent>
           </Card>
@@ -186,8 +185,8 @@ export default function MyIntelligencePage() {
             <CardContent className="py-4 flex items-center gap-3">
               <div className="p-2 bg-amber-50 rounded-lg"><Brain className="w-4 h-4 text-amber-600" /></div>
               <div>
-                <p className="text-sm font-medium text-foreground">Recettes</p>
-                <p className="text-xs text-muted-foreground">+15 points (5+ recettes)</p>
+                <p className="text-sm font-medium text-foreground">{t("source_recipes_title")}</p>
+                <p className="text-xs text-muted-foreground">{t("source_recipes_desc")}</p>
               </div>
             </CardContent>
           </Card>
@@ -195,8 +194,8 @@ export default function MyIntelligencePage() {
             <CardContent className="py-4 flex items-center gap-3">
               <div className="p-2 bg-purple-50 rounded-lg"><MessageSquare className="w-4 h-4 text-purple-600" /></div>
               <div>
-                <p className="text-sm font-medium text-foreground">Feedback quotidien</p>
-                <p className="text-xs text-muted-foreground">+10 points (7+ jours)</p>
+                <p className="text-sm font-medium text-foreground">{t("source_feedback_title")}</p>
+                <p className="text-xs text-muted-foreground">{t("source_feedback_desc")}</p>
               </div>
             </CardContent>
           </Card>
@@ -204,8 +203,8 @@ export default function MyIntelligencePage() {
             <CardContent className="py-4 flex items-center gap-3">
               <div className="p-2 bg-red-50 rounded-lg"><Flame className="w-4 h-4 text-red-600" /></div>
               <div>
-                <p className="text-sm font-medium text-foreground">Série de calibration</p>
-                <p className="text-xs text-muted-foreground">+5 points (4 semaines consécutives)</p>
+                <p className="text-sm font-medium text-foreground">{t("source_streak_title")}</p>
+                <p className="text-xs text-muted-foreground">{t("source_streak_desc")}</p>
               </div>
             </CardContent>
           </Card>

@@ -136,8 +136,8 @@ export function computeEffectiveModules(
 
   // Intersect: a module is active only if BOTH the tier allows it AND the user hasn't manually disabled it
   const modules: TierModules = {
-    module_logbook: tierModules.module_logbook && dbSettings.module_logbook,
-    module_menu_editor: tierModules.module_menu_editor && dbSettings.module_menu_editor,
+    module_logbook: tierModules.module_logbook && (dbSettings.module_logbook ?? true),
+    module_menu_editor: tierModules.module_menu_editor && (dbSettings.module_menu_editor ?? true),
     module_food_cost: tierModules.module_food_cost && dbSettings.module_food_cost,
     module_menu_engineering: tierModules.module_menu_engineering && dbSettings.module_menu_engineering,
     module_instagram: tierModules.module_instagram && dbSettings.module_instagram,

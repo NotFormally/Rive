@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter, usePathname } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
+import { useTranslations } from "next-intl";
 import { Sidebar } from "@/components/Sidebar";
 import { IntelligenceGauge } from "@/components/IntelligenceGauge";
 import VirtualSousChef from "@/components/VirtualSousChef";
@@ -13,6 +14,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { user, subscription, loading: authLoading } = useAuth();
+  const t = useTranslations("Success");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -31,7 +33,7 @@ export default function DashboardLayout({
       <div className="flex flex-col items-center gap-4">
         <div className="w-8 h-8 md:w-12 md:h-12 border-4 border-[#CC5833]/20 border-t-[#CC5833] rounded-full animate-spin"></div>
         <p className="font-plex-mono text-xs md:text-sm tracking-widest uppercase opacity-70 animate-pulse text-[#CC5833]">
-          Génération de l'espace...
+          {t("generating_space")}
         </p>
       </div>
     </div>

@@ -58,7 +58,7 @@ export default function DashboardPage() {
         </div>
         <div className="flex items-center gap-3 bg-primary/5 border border-primary/10 px-4 py-2 rounded-full hidden md:flex">
           <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
-          <span className="text-[10px] font-plex-mono font-bold uppercase tracking-wider text-primary/60">Système Opérationnel</span>
+          <span className="text-[10px] font-plex-mono font-bold uppercase tracking-wider text-primary/60">{t("operational_system")}</span>
         </div>
       </header>
 
@@ -146,7 +146,7 @@ export default function DashboardPage() {
               <div className="mt-8 md:mt-10 flex items-center gap-4 mb-6">
                 <div className="h-px w-8 bg-border"></div>
                 <h2 className="text-xs font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                  Terminal Staff (Démo)
+                  Staff Terminal (Demo)
                 </h2>
                 <div className="h-px flex-1 bg-border"></div>
               </div>

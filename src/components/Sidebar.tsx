@@ -39,7 +39,7 @@ export function Sidebar() {
     { name: t("nav_smartprep"), href: "/dashboard/prep-list", icon: Brain, show: settings?.module_smart_prep },
     { name: t("nav_social"), href: "/dashboard/social", icon: Share2, show: settings?.module_instagram },
     { name: t("nav_production"), href: "/dashboard/production", icon: Beer, show: settings?.module_production },
-    { name: "Mon Intelligence", href: "/dashboard/my-intelligence", icon: Gauge, show: true },
+    { name: t("nav_my_intelligence"), href: "/dashboard/my-intelligence", icon: Gauge, show: true },
     { name: t("nav_settings"), href: "/dashboard/settings", icon: Settings, show: true },
   ];
 

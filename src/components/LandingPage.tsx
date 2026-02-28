@@ -730,22 +730,18 @@ export function LandingPage() {
 
       {/* G. FOOTER */}
       <footer className="bg-[#1A1A1A] text-[#F2F0E9] rounded-t-[4rem] px-8 md:px-24 pt-16 pb-12 mt-24">
-        {/* Radar Logo + Social Proof Banner */}
-        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mb-16">
-          <p className="font-plex-mono text-lg sm:text-xl text-slate-400 text-center md:text-right max-w-md">
-            Intelligence algorithmique pour la restauration gastronomique
-          </p>
-          <RadarLogo className="w-[160px] md:w-[200px] h-auto shrink-0" />
-        </div>
-
         {/* Footer content */}
         <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-12">
-          <div>
-            <div className="font-outfit font-semibold text-2xl tracking-[0.3em] uppercase mb-4">RIVE</div>
-            <p className="font-outfit text-slate-400 max-w-xs">{t('footer_desc')}</p>
-            <a href="mailto:dock@rivehub.com" className="font-outfit text-sm text-[#CC5833] mt-3 inline-block hover:text-[#F2F0E9] transition-colors tracking-wide">
-              dock@rivehub.com
-            </a>
+          <div className="flex items-start gap-6">
+            <RadarLogo className="w-[80px] md:w-[100px] h-auto shrink-0 -mt-1" />
+            <div>
+              <p className="font-plex-mono text-sm text-slate-400 mb-3">
+                Intelligence algorithmique pour la restauration gastronomique
+              </p>
+              <a href="mailto:dock@rivehub.com" className="font-outfit text-sm text-[#CC5833] inline-block hover:text-[#F2F0E9] transition-colors tracking-wide">
+                dock@rivehub.com
+              </a>
+            </div>
           </div>
           <div className="flex items-center gap-3 bg-[#2E4036]/30 border border-[#2E4036] px-4 py-2 rounded-full animate-pulse transition-opacity">
             <span className="w-3 h-3 bg-green-500 rounded-full"></span>

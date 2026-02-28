@@ -109,9 +109,9 @@ export function DepositsDashboard() {
             <CardContent className="p-0">
               <div className="divide-y divide-slate-100">
                 {deposits.map((item) => (
-                  <div key={item.id} className="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                  <div key={item.id} className="p-4 flex flex-col md:flex-row md:items-center justify-between hover:bg-slate-50 transition-colors gap-4 md:gap-0">
                     <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
+                      <div className="h-10 w-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0">
                         {item.item_type.includes("Fût") ? <Beer className="h-5 w-5" /> : <Package className="h-5 w-5" />}
                       </div>
                       <div>
@@ -119,21 +119,21 @@ export function DepositsDashboard() {
                         <p className="text-sm text-slate-500">{item.supplier_name} • Reçu le {new Date(item.created_at).toLocaleDateString()}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6">
-                      <div className="text-right">
+                    <div className="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto pl-14 md:pl-0">
+                      <div className="text-left md:text-right">
                         <p className="font-medium text-slate-900">${item.deposit_amount.toFixed(2)}</p>
                         <Badge 
                           variant={item.status === "held" ? "outline" : item.status === "returned" ? "secondary" : "destructive"}
                           className={
-                            item.status === "held" ? "text-amber-600 border-amber-200 bg-amber-50" :
-                            item.status === "returned" ? "text-emerald-600 border-emerald-200 bg-emerald-50" : ""
+                            item.status === "held" ? "text-amber-600 border-amber-200 bg-amber-50 mt-1" :
+                            item.status === "returned" ? "text-emerald-600 border-emerald-200 bg-emerald-50 mt-1" : "mt-1"
                           }
                         >
                           {item.status === "held" ? "En possession" : item.status === "returned" ? "Retourné" : "Perdu"}
                         </Badge>
                       </div>
                       {item.status === "held" && (
-                        <Button size="sm" className="hidden md:flex">Marquer Retourné</Button>
+                        <Button size="sm" className="hidden md:flex shrink-0">Marquer Retourné</Button>
                       )}
                     </div>
                   </div>

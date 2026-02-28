@@ -116,7 +116,22 @@
     "prep_cost_label": "Estimated Cost",
     "res_confirmed": "Confirmed",
     "res_cancelled": "Cancelled",
-    "f6_mock_caption": "Discover tonight's special menu! A perfectly seared bluefin tuna... ✨ Reservation in bio 👇"
+    "f6_mock_caption": "Discover tonight's special menu! A perfectly seared bluefin tuna... ✨ Reservation in bio 👇",
+    "examples_title": "Use cases",
+    "res_mock_last_sync": "LAST SYNC: 2 min ago",
+    "res_mock_live": "● LIVE",
+    "prep_mock_auto": "Auto",
+    "prep_mock_recipe": "RECIPE",
+    "prep_mock_resa": "RESA",
+    "prep_mock_pos": "POS",
+    "bar_mock_kegs": "Keg Deposits",
+    "bar_mock_kegs_val": "24x 30L Kegs",
+    "bar_mock_variance": "Pour Variance",
+    "bar_mock_batch": "Batch #042",
+    "bar_mock_kegging": "Kegging",
+    "protocol_phase1_label": "PHASE 01",
+    "protocol_phase2_label": "PHASE 02",
+    "protocol_phase3_label": "PHASE 03"
   },
   "Pricing": {
     "title": "தெளிவான விலை, உண்மையான தாக்கம்.",

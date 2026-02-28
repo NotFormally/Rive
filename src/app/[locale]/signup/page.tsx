@@ -1,17 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, Link } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 
-export default function SignupPage() {
+function SignupForm() {
   const t = useTranslations("Auth");
   const currentLocale = useLocale();
   const tCommon = useTranslations('Common');
+  const searchParams = useSearchParams();
+  const plan = searchParams.get("plan");
+  
   const [restaurantName, setRestaurantName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -104,7 +108,28 @@ export default function SignupPage() {
       }),
     }).catch(() => {}); // non-blocking
 
-    // 7. Redirect to dashboard
+    // 7. Check if there's a plan parameter for Stripe Checkout
+    if (plan) {
+      try {
+        const res = await fetch("/api/stripe/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            priceId: plan,
+            restaurantId: profileData.id,
+          }),
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+          return;
+        }
+      } catch (e) {
+        console.error("Payment redirect failed:", e);
+      }
+    }
+
+    // 8. Redirect to dashboard as a fallback or if no plan is selected
     router.push("/dashboard");
   };
 
@@ -184,7 +209,7 @@ export default function SignupPage() {
           <div className="text-center text-sm text-muted-foreground font-outfit mt-4">
             {t("has_account")}{" "}
             <button
-              onClick={() => router.push("/login")}
+              onClick={() => router.push(`/login${plan ? `?plan=${plan}` : ""}`)}
               className="text-accent hover:underline font-medium"
             >
               {t("link_login")}
@@ -193,5 +218,13 @@ export default function SignupPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background noise-bg flex items-center justify-center">Loading...</div>}>
+      <SignupForm />
+    </Suspense>
   );
 }

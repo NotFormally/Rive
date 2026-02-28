@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { DynamicFoodCostAlerts } from "./food-cost/DynamicFoodCostAlerts";
 
 type FoodCostItem = {
   menuItemId: string;
@@ -61,6 +62,8 @@ export function FoodCostDashboard() {
 
   return (
     <div className="w-full h-full flex flex-col space-y-6">
+      <DynamicFoodCostAlerts />
+
       {/* Header */}
       <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6">
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-1">💰 Food Cost — Analyse des Marges</h2>

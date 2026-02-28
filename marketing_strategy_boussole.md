@@ -104,3 +104,16 @@ Pour capturer des clients avec une "High Buying Intent" sur ces subreddits, voic
     Faites une recherche hebdomadaire sur ces subreddits avec les mots-clés : `food cost`, `margins`, `inflation`, `struggling`, `inventory software`. Répondez (en DM ou en commentaire) spécifiquement aux restaurateurs en détresse avec votre message axé sur la "boussole pour naviguer dans la tempête".
 * **Les Reddit Ads (Payant) :**
     Si vous lancez une campagne payante, vous pouvez insérer exactement le texte du message de vente ci-dessus. Ciblez *exclusivement* le subreddit **r/restaurantowners**. Utilisez une publicité textuelle (Promoted Post) qui ressemble à une publication native pour générer des clics vers votre landing page.
+
+---
+
+## 3. Campagne Marketing sur Facebook : L'Approche Communautaire (Value-First)
+
+En complément de Reddit, les groupes Facebook offrent une opportunité d'engagement plus personnelle et visuelle. Contrairement à Reddit, l'algorithme FB récompense l'identité personnelle et l'authenticité (utiliser son vrai profil, des photos réelles, et engager en commentaires).
+
+**Stratégie détaillée :**
+Voir le guide complet dans `docs/marketing/03-facebook-groups-playbook.md`.
+
+* **Groupes Cibles (Les "Decision Makers") :** *Restaurant Owners and Managers*, *Bar & Restaurant Mastermind Group*, groupes locaux d'association de restaurateurs.
+* **L'approche :** "Storytelling" personnel (études de cas sur l'optimisation des marges), et "Lead Magnets" (offrir un fichier Excel gratuit d'ingénierie de menu, et demander aux gens de commenter pour le recevoir).
+* **Règle d'or :** Ne **jamais** mettre le lien vers le site web dans la publication elle-même (l'algorithme de FB pénalise les liens sortants). Le lien doit toujours être glissé subtilement dans les commentaires (ex: "Le lien est dans le 1er commentaire" ou en réponse directe aux demandes).

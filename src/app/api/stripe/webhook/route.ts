@@ -84,6 +84,14 @@ export async function POST(req: NextRequest) {
               restaurantName: info.restaurantName,
               tier,
             }).catch((err) => console.error('[email] payment confirmation failed:', err));
+
+            sendEmail({
+              type: 'admin_subscription_notification',
+              to: 'dock@rivehub.com',
+              restaurantName: info.restaurantName,
+              email: info.email,
+              tier,
+            }).catch((err) => console.error('[email] admin subscription notification failed:', err));
           }
         }).catch(() => {});
       }

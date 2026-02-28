@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
@@ -44,12 +44,22 @@ export function InstagramGenerator({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [connections, setConnections] = useState<any[]>([]);
+  const [publishing, setPublishing] = useState<string | null>(null);
+  const [publishSuccess, setPublishSuccess] = useState<string | null>(null);
   const t = useTranslations('Instagram');
   const tCommon = useTranslations('Common');
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
   const isTrial = subscription?.tier === 'trial';
   const instaQuotaReached = hasReachedQuota(usage, 'instagram_posts', isTrial);
+
+  useEffect(() => {
+    if (profile) {
+      supabase.from('social_connections').select('id, platform, account_name').eq('restaurant_id', profile.id)
+        .then(({data}) => setConnections(data || []));
+    }
+  }, [profile]);
 
   const generatePost = async () => {
     if (instaQuotaReached) return;
@@ -85,6 +95,35 @@ export function InstagramGenerator({
     await navigator.clipboard.writeText(fullText);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handlePublish = async (platform: string, connectionId: string) => {
+    if (!post) return;
+    setPublishing(platform);
+    setPublishSuccess(null);
+    try {
+      const res = await fetch("/api/social/post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          platform, 
+          connectionId, 
+          text: `${post.caption_fr}\n\n${post.hashtags.join(" ")}\n\n${post.cta}`,
+          imageUrl: "" // MVP doesn't upload image yet, only text
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPublishSuccess(platform);
+        setTimeout(() => setPublishSuccess(null), 3000);
+      } else {
+        alert(data.error || t('error_conn'));
+      }
+    } catch {
+      alert(t('error_conn'));
+    } finally {
+      setPublishing(null);
+    }
   };
 
   const gradientClass = post ? BCG_COLORS[post.bcg] || "from-slate-400 to-slate-500" : "from-slate-400 to-slate-500";
@@ -179,13 +218,37 @@ export function InstagramGenerator({
 
               {/* Actions */}
               <div className="flex gap-3">
-                <Button onClick={copyToClipboard} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                <Button onClick={copyToClipboard} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300">
                   {copied ? t('btn_copied') : t('btn_copy')}
                 </Button>
                 <Button variant="outline" onClick={generatePost} className="flex-1">
                   {t('btn_regenerate')}
                 </Button>
               </div>
+
+              {/* Native Publishing Actions */}
+              {connections.length > 0 && (
+                <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
+                  <p className="text-xs font-semibold text-slate-500 mb-1">Publier directement sur :</p>
+                  {connections.map(c => (
+                     <Button 
+                       key={c.id} 
+                       onClick={() => handlePublish(c.platform, c.id)}
+                       disabled={publishing !== null}
+                       className={`w-full justify-between shadow-sm ${c.platform === 'meta' ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white' : 'bg-black text-white hover:bg-zinc-800'}`}
+                     >
+                       <span>{c.account_name} ({c.platform})</span>
+                       {publishing === c.platform ? (
+                         <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+                       ) : publishSuccess === c.platform ? (
+                         <span>✅ Envoyé !</span>
+                       ) : (
+                         <span>Publier &rarr;</span>
+                       )}
+                     </Button>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

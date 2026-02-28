@@ -96,8 +96,8 @@
     "f1_mock_ai_task": "✨ AI: Task \"Call the plumber\" created",
     "f1_mock_entry2": "Perfect service, All clear",
     "f1_mock_ai_badge": "AI Active",
-    "f2_mock_alert": "El precio del Salmón subió un 15%. El margen del Tartar baja del 72% al 58%.",
-    "f2_mock_action": "Acción IA: Aumentar el precio de venta en .50",
+    "f2_mock_alert": "Fridge 2: 8.5°C detected",
+    "f2_mock_action": "Action: Discard high-risk food",
     "bcg_stars": "Stars",
     "bcg_cashcows": "Cash Cows",
     "bcg_deadweights": "Dead Weights",
@@ -188,7 +188,10 @@
     "nav_settings": "Configuración",
     "restaurant_space": "Espacio Restaurante",
     "btn_logout": "Cerrar sesión",
-    "nav_reservations": "Reservaciones"
+    "nav_reservations": "Reservaciones",
+    "nav_deposits": "Deposits Tracker",
+    "nav_variance": "Variance Hub",
+    "nav_production": "Brewery Prod."
   },
   "Dashboard": {
     "header_title": "Vista general",
@@ -459,7 +462,13 @@
     "btn_manage_subscription": "Gérer mon abonnement (Stripe)",
     "trial_desc": "Vous êtes actuellement sur le système d'essai gratuit ou manuel. Vous n'avez pas de facturation automatique configurée.",
     "btn_view_plans": "Voir les forfaits",
-    "portal_error": "Impossible de charger le portail."
+    "portal_error": "Impossible de charger le portail.",
+    "module_deposits_label": "Deposits Tracker",
+    "module_deposits_desc": "Track kegs and bottle deposits separately from Food Cost.",
+    "module_variance_label": "Variance & Spoilage",
+    "module_variance_desc": "Spot discrepancies between POS expectations and physical inventory.",
+    "module_production_label": "Brewery Production",
+    "module_production_desc": "Track your beer batches from fermentation to kegs."
   },
   "SettingsIntegrations": {
     "title": "Connexions POS",

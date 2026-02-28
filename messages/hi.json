@@ -189,7 +189,10 @@
     "nav_settings": "सेटिंग्स",
     "restaurant_space": "रेस्तरां कार्यस्थान",
     "btn_logout": "लॉगआउट",
-    "nav_reservations": "आरक्षण"
+    "nav_reservations": "आरक्षण",
+    "nav_deposits": "Deposits Tracker",
+    "nav_variance": "Variance Hub",
+    "nav_production": "Brewery Prod."
   },
   "Dashboard": {
     "header_title": "अवलोकन",
@@ -460,7 +463,13 @@
     "btn_manage_subscription": "Gérer mon abonnement (Stripe)",
     "trial_desc": "Vous êtes actuellement sur le système d'essai gratuit ou manuel. Vous n'avez pas de facturation automatique configurée.",
     "btn_view_plans": "Voir les forfaits",
-    "portal_error": "Impossible de charger le portail."
+    "portal_error": "Impossible de charger le portail.",
+    "module_deposits_label": "Deposits Tracker",
+    "module_deposits_desc": "Track kegs and bottle deposits separately from Food Cost.",
+    "module_variance_label": "Variance & Spoilage",
+    "module_variance_desc": "Spot discrepancies between POS expectations and physical inventory.",
+    "module_production_label": "Brewery Production",
+    "module_production_desc": "Track your beer batches from fermentation to kegs."
   },
   "SettingsIntegrations": {
     "title": "Connexions POS",

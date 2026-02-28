@@ -18,6 +18,9 @@ const MODULE_EMOJIS: Record<string, string> = {
   module_instagram: "📱",
   module_reservations: "📅",
   module_smart_prep: "🧠",
+  module_deposits: "♻️",
+  module_variance: "💧",
+  module_production: "🍺",
 };
 
 const ROLE_COLORS: Record<MemberRole, string> = {
@@ -44,6 +47,7 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profileTagline, setProfileTagline] = useState("");
+  const [socialContext, setSocialContext] = useState("");
   const [portalLoading, setPortalLoading] = useState(false);
   const router = useRouter();
 
@@ -82,11 +86,15 @@ export default function SettingsPage() {
         module_instagram: settings.module_instagram,
         module_reservations: settings.module_reservations,
         module_smart_prep: settings.module_smart_prep,
+        module_deposits: settings.module_deposits,
+        module_variance: settings.module_variance,
+        module_production: settings.module_production,
       });
     }
     if (profile) {
       setProfileName(profile.restaurant_name);
       setProfileTagline(profile.tagline || "");
+      setSocialContext(profile.social_media_context || "");
     }
   }, [settings, profile]);
 
@@ -135,6 +143,7 @@ export default function SettingsPage() {
       .update({
         restaurant_name: profileName,
         tagline: profileTagline,
+        social_media_context: socialContext,
       })
       .eq("id", profile.id);
     setSaving(false);
@@ -266,6 +275,17 @@ export default function SettingsPage() {
                 placeholder={t("placeholder_tagline")}
                 className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
               />
+            </div>
+            <div>
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_social_context")}</label>
+              <textarea
+                value={socialContext}
+                onChange={(e) => setSocialContext(e.target.value)}
+                placeholder={t("placeholder_social_context")}
+                rows={3}
+                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50 resize-y"
+              />
+              <p className="text-xs text-muted-foreground mt-1">{t("desc_social_context")}</p>
             </div>
             <Button onClick={handleSaveProfile} disabled={saving} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
               {saving ? t("btn_saving") : t("btn_save")}

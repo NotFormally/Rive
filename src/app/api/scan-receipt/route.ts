@@ -36,13 +36,21 @@ export async function POST(req: Request) {
             unit: z.string().describe('The unit of measurement (e.g., kg, L, unit, case). Default to "unit" if unknown.'),
             unitPrice: z.number().describe('The price per single unit.'),
             totalPrice: z.number().describe('The total price for this line item (quantity * unitPrice).')
-          })).describe('List of all individual line items on the receipt.')
+          })).describe('List of all individual line items on the receipt. CRITICAL: DO NOT INCLUDE deposits (consignes/vidanges) here.'),
+          deposits: z.array(z.object({
+            reference: z.string().describe('Name of the deposit item, like "Consigne Fût 30L" or "Vidange Casier".'),
+            type: z.enum(['keg', 'bottle', 'crate', 'other']).describe('Type of deposit.'),
+            status: z.enum(['held', 'returned']).describe('If charged to the restaurant = held. If refunded/returned = returned.'),
+            quantity: z.number().describe('Number of items. Always positive.'),
+            unitAmount: z.number().describe('Price per deposit. Always positive.'),
+            totalAmount: z.number().describe('Total amount for these deposits. Always positive.')
+          })).optional().describe('Any deposits or returned empties (consignes/vidanges) listed on the invoice.')
         }),
         messages: [
           {
             role: 'user',
             content: [
-              { type: 'text', text: 'Extract the supplier name, total amount, date, and main items from this receipt image.' },
+              { type: 'text', text: 'Extract the supplier name, total amount, date, and main items from this receipt image. Ensure deposits (consignes) are separated from the main food/beverage items.' },
               { type: 'image', image: image },
             ],
           },
@@ -62,6 +70,9 @@ export async function POST(req: Request) {
           { name: "Farine T55", quantity: 25, unit: "kg", unitPrice: 1.20, totalPrice: 30.00 },
           { name: "Tomates Pelées", quantity: 10, unit: "kg", unitPrice: 2.50, totalPrice: 25.00 },
           { name: "Huile de friture", quantity: 5, unit: "L", unitPrice: 4.00, totalPrice: 20.00 }
+        ],
+        deposits: [
+          { reference: "Consigne Fût 30L", type: "keg", status: "held", quantity: 2, unitAmount: 30.00, totalAmount: 60.00 }
         ]
       };
     }
@@ -142,6 +153,22 @@ export async function POST(req: Request) {
       // Insert line items
       if (invoiceItemsToInsert.length > 0) {
         await auth.supabase.from('invoice_items').insert(invoiceItemsToInsert);
+      }
+
+      // Process Deposits (Consignes) into deposits_ledger
+      if (invoiceData.deposits && invoiceData.deposits.length > 0) {
+        const depositsToInsert = invoiceData.deposits.map(dep => ({
+          restaurant_id: auth.restaurantId,
+          invoice_id: savedInvoice.id,
+          type: dep.type,
+          reference: dep.reference,
+          quantity: dep.quantity,
+          unit_amount: dep.unitAmount,
+          total_amount: dep.totalAmount,
+          status: dep.status
+        }));
+        
+        await auth.supabase.from('deposits_ledger').insert(depositsToInsert);
       }
 
       // Update matched ingredients pricing directly!

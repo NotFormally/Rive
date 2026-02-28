@@ -14,7 +14,11 @@ import {
   Settings,
   LogOut,
   Menu,
-  X
+  X,
+  Share2,
+  Recycle,
+  Droplets,
+  Beer
 } from "lucide-react";
 
 export function Sidebar() {
@@ -28,8 +32,12 @@ export function Sidebar() {
     { name: t("nav_menu"), href: "/dashboard/menu", icon: MenuSquare, show: settings?.module_menu_editor },
     { name: t("nav_foodcost"), href: "/dashboard/food-cost", icon: Calculator, show: settings?.module_food_cost },
     { name: t("nav_engineering"), href: "/dashboard/engineering", icon: Compass, show: settings?.module_menu_engineering },
+    { name: t("nav_deposits"), href: "/dashboard/deposits", icon: Recycle, show: settings?.module_deposits },
+    { name: t("nav_variance"), href: "/dashboard/variance", icon: Droplets, show: settings?.module_variance },
     { name: t("nav_reservations"), href: "/dashboard/reservations", icon: CalendarDays, show: settings?.module_reservations },
     { name: t("nav_smartprep"), href: "/dashboard/prep-list", icon: Brain, show: settings?.module_smart_prep },
+    { name: t("nav_social"), href: "/dashboard/social", icon: Share2, show: settings?.module_instagram },
+    { name: t("nav_production"), href: "/dashboard/production", icon: Beer, show: settings?.module_production },
     { name: t("nav_settings"), href: "/dashboard/settings", icon: Settings, show: true },
   ];
 

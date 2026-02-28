@@ -4,6 +4,7 @@ import { loadMenuFromSupabase } from '@/lib/menu-store';
 import { MODEL_CREATE } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
+import { supabase } from '@/lib/supabase';
 
 export const maxDuration = 60;
 
@@ -51,6 +52,17 @@ export async function POST(req: Request) {
       ecueil: "Ne pas générer de post. Suggérez plutôt de retirer le plat ou de le reformuler.",
     };
 
+    // Fetch restaurant profile to get social media context
+    const { data: profile } = await supabase
+      .from("restaurant_profiles")
+      .select("social_media_context")
+      .eq("id", auth.restaurantId)
+      .single();
+
+    const socialMediaContext = profile?.social_media_context 
+      ? `\nDirectives de la marque :\n${profile.social_media_context}\n\nAssure-toi de respecter scrupuleusement ces directives pour le ton, le style et les mots-clés.`
+      : "";
+
     const prompt = `Tu es un community manager expert pour un restaurant. Génère un post Instagram professionnel pour le plat suivant :
 
 Plat : ${targetItem.name}
@@ -58,7 +70,7 @@ Description : ${targetItem.description}
 Prix : ${targetItem.price}$
 Catégorie : ${targetItem.categoryName}
 Allergènes : ${targetItem.allergens?.join(", ") || "Aucun"}
-Classification Rive : ${bcgCategory} (${toneMap[bcgCategory] || "Ton neutre."})
+Classification Rive : ${bcgCategory} (${toneMap[bcgCategory] || "Ton neutre."})${socialMediaContext}
 
 Génère UNIQUEMENT un objet JSON avec cette structure exacte :
 {

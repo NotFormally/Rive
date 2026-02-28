@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
-import { hasReachedQuota, FREE_QUOTAS } from "@/lib/quotas";
+import { hasReachedQuota, FREEMIUM_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
 
 type EngineeringItem = {
@@ -41,8 +41,8 @@ export function MenuEngineeringDashboard() {
   };
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
-  const isTrial = subscription?.tier === 'trial';
-  const engQuotaReached = hasReachedQuota(usage, 'menu_engineering', isTrial);
+  const isFreemium = subscription?.tier === 'freemium';
+  const engQuotaReached = hasReachedQuota(usage, 'menu_engineering', isFreemium);
 
   useEffect(() => {
     fetchData();
@@ -102,7 +102,7 @@ export function MenuEngineeringDashboard() {
             <div className="rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800 max-w-md">
               <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">{t('quota_reached')}</h3>
               <p className="text-sm text-blue-700 dark:text-blue-200 mb-4">
-                {t('quota_desc', { count: FREE_QUOTAS.menu_engineering })}
+                {t('quota_desc', { count: FREEMIUM_QUOTAS.menu_engineering })}
               </p>
             </div>
           ) : (
@@ -114,9 +114,9 @@ export function MenuEngineeringDashboard() {
               >
                 {analyzing ? t('btn_generating') : t('btn_generate')}
               </button>
-              {isTrial && (
+              {isFreemium && (
                 <p className="text-xs text-zinc-500 mt-4">
-                  {t('quota_usage', { used: usage?.menu_engineering || 0, total: FREE_QUOTAS.menu_engineering })}
+                  {t('quota_usage', { used: usage?.menu_engineering || 0, total: FREEMIUM_QUOTAS.menu_engineering })}
                 </p>
               )}
             </>

@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rivehub.com'
 
-const locales = ['fr', 'en', 'ar', 'es', 'it', 'hi', 'pa', 'ta', 'bn', 'ru', 'pt', 'zh-HK', 'zh-CN', 'tr']
+const locales = ['fr', 'en', 'ar', 'es', 'it', 'hi', 'pa', 'ta', 'bn', 'ru', 'pt', 'zh-HK', 'zh-CN', 'tr', 'ms', 'ja', 'ko', 'id', 'nan']
 
 const publicRoutes = [
   { path: '', changeFrequency: 'weekly' as const, priority: 1.0 },

@@ -1,7 +1,8 @@
 // Rive — Subscription Tier Configuration
 // Maps each tier to the modules it includes
 
-export type SubscriptionTier = 'trial' | 'essential' | 'performance' | 'intelligence' | 'enterprise';
+export type SubscriptionTier = 'freemium' | 'trial' | 'essential' | 'performance' | 'intelligence' | 'enterprise';
+// Note: 'trial' is kept for backward compatibility with existing users but new signups use 'freemium'
 
 export type TierModules = {
   module_logbook: boolean;
@@ -19,6 +20,22 @@ export type TierModules = {
 };
 
 export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: TierModules }> = {
+  freemium: {
+    label: 'Gratuit',
+    modules: {
+      module_logbook: true,        // Carnet de bord (avec quotas)
+      module_menu_editor: true,     // Éditeur de recettes (accès de base)
+      module_food_cost: false,
+      module_menu_engineering: false,
+      module_instagram: false,
+      module_receipt_scanner: false,
+      module_reservations: false,
+      module_smart_prep: false,
+      module_deposits: false,
+      module_variance: false,
+      module_production: false,
+    },
+  },
   trial: {
     label: 'Essai gratuit',
     modules: {
@@ -108,15 +125,13 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
 export function computeEffectiveModules(
   dbSettings: TierModules & { subscription_tier?: SubscriptionTier; trial_ends_at?: string }
 ): { modules: TierModules; tier: SubscriptionTier; trialExpired: boolean; daysLeft: number } {
-  const tier = (dbSettings.subscription_tier || 'trial') as SubscriptionTier;
-  const trialEndsAt = dbSettings.trial_ends_at ? new Date(dbSettings.trial_ends_at) : null;
-  const now = new Date();
+  const rawTier = (dbSettings.subscription_tier || 'freemium') as SubscriptionTier;
 
-  const trialExpired = tier === 'trial' && trialEndsAt ? now > trialEndsAt : false;
-  const daysLeft = trialEndsAt ? Math.max(0, Math.ceil((trialEndsAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))) : 0;
+  // Legacy: treat existing 'trial' users as freemium (trial concept removed)
+  const effectiveTier = rawTier === 'trial' ? 'freemium' : rawTier;
+  const trialExpired = false;
+  const daysLeft = 0;
 
-  // If trial expired, enforce essential tier
-  const effectiveTier = trialExpired ? 'essential' : tier;
   const tierModules = TIER_CONFIG[effectiveTier].modules;
 
   // Intersect: a module is active only if BOTH the tier allows it AND the user hasn't manually disabled it

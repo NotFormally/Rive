@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { supabase } from "@/lib/supabase";
 import { computeEffectiveModules, type SubscriptionTier, type TierModules } from "@/lib/subscription-tiers";
+import type { IntelligenceLevel } from "@/lib/intelligence-score";
 import type { User } from "@supabase/supabase-js";
 
 export type MemberRole = 'owner' | 'admin' | 'editor';
@@ -45,6 +46,8 @@ type AuthContextType = {
   settings: ModuleSettings | null;
   usage: UsageMetrics | null;
   subscription: SubscriptionInfo | null;
+  intelligenceScore: number | null;
+  intelligenceLevel: IntelligenceLevel | null;
   loading: boolean;
   signOut: () => Promise<void>;
   refreshSettings: () => Promise<void>;
@@ -71,6 +74,8 @@ const AuthContext = createContext<AuthContextType>({
   settings: null,
   usage: null,
   subscription: null,
+  intelligenceScore: null,
+  intelligenceLevel: null,
   loading: true,
   signOut: async () => {},
   refreshSettings: async () => {},
@@ -87,6 +92,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<ModuleSettings | null>(null);
   const [usage, setUsage] = useState<UsageMetrics | null>(null);
   const [subscription, setSubscription] = useState<SubscriptionInfo | null>(null);
+  const [intelligenceScore, setIntelligenceScore] = useState<number | null>(null);
+  const [intelligenceLevel, setIntelligenceLevel] = useState<IntelligenceLevel | null>(null);
   const [loading, setLoading] = useState(true);
 
   const loadProfile = async (userId: string) => {
@@ -144,7 +151,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           setSettings(defaultSettings);
           setUsage(null);
-          setSubscription({ tier: 'trial', trialExpired: false, daysLeft: 14, stripeCustomerId: null });
+          setSubscription({ tier: 'freemium', trialExpired: false, daysLeft: 0, stripeCustomerId: null });
+        }
+
+        // 4. Load intelligence score
+        const { data: scoreData } = await supabase
+          .from("restaurant_intelligence_score")
+          .select("score, level")
+          .eq("restaurant_id", profileData.id)
+          .single();
+
+        if (scoreData) {
+          setIntelligenceScore(scoreData.score);
+          setIntelligenceLevel(scoreData.level as IntelligenceLevel);
+        } else {
+          setIntelligenceScore(0);
+          setIntelligenceLevel('discovery');
         }
       }
     } catch (err) {
@@ -209,6 +231,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               setSettings(null);
               setUsage(null);
               setSubscription(null);
+              setIntelligenceScore(null);
+              setIntelligenceLevel(null);
             }
           }
         } catch (e) {
@@ -234,10 +258,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setSettings(null);
     setUsage(null);
     setSubscription(null);
+    setIntelligenceScore(null);
+    setIntelligenceLevel(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, role, settings, usage, subscription, loading, signOut, refreshSettings }}>
+    <AuthContext.Provider value={{ user, profile, role, settings, usage, subscription, intelligenceScore, intelligenceLevel, loading, signOut, refreshSettings }}>
       {children}
     </AuthContext.Provider>
   );

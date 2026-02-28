@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter, usePathname } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { Sidebar } from "@/components/Sidebar";
+import { IntelligenceGauge } from "@/components/IntelligenceGauge";
 import VirtualSousChef from "@/components/VirtualSousChef";
 
 export default function DashboardLayout({
@@ -21,16 +22,8 @@ export default function DashboardLayout({
       return;
     }
 
-    if (!authLoading && user && subscription) {
-      if (subscription.trialExpired) {
-        // Allow access to settings (to manage billing) and success page
-        if (!pathname.startsWith('/dashboard/settings') && 
-            !pathname.startsWith('/dashboard/success') && 
-            pathname !== '/pricing') {
-          router.push("/pricing");
-        }
-      }
-    }
+    // Freemium: when trial expires, users keep access with limited features
+    // No redirect to pricing — they can browse the dashboard with freemium modules
   }, [user, subscription, authLoading, router, pathname]);
 
   if (authLoading) return (
@@ -49,6 +42,7 @@ export default function DashboardLayout({
     <div className="flex min-h-[100dvh] bg-background noise-bg text-foreground selection:bg-[--accent]/30">
       <Sidebar />
       <main className="flex-1 md:ml-64 flex flex-col pt-20 md:pt-0 relative">
+        <IntelligenceGauge />
         <div className="flex-1 p-4 md:p-10">
           {children}
         </div>

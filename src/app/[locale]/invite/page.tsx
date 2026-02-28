@@ -66,7 +66,7 @@ function InviteAcceptContent() {
     <div className="min-h-screen bg-background noise-bg flex items-center justify-center p-4">
       <div className="bg-card rounded-[2rem] shadow-2xl shadow-black/10 border border-border/50 p-8 md:p-10 max-w-md w-full text-center space-y-6">
         {/* Logo */}
-        <div className="text-3xl font-jakarta font-bold text-foreground tracking-tighter">Rive</div>
+        <div className="text-2xl font-outfit font-semibold text-foreground tracking-[0.3em] uppercase">RIVE</div>
 
         {status === "loading" && (
           <>

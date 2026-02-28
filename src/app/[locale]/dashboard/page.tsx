@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SmartLogbook } from "@/components/SmartLogbook";
 import { MobileInputTerminal } from "@/components/MobileInputTerminal";
+import { DailyInsight } from "@/components/DailyInsight";
+import { SocialProofBanner } from "@/components/SocialProofBanner";
 import { useTranslations, useLocale } from "next-intl";
 
 export default function DashboardPage() {
@@ -125,6 +127,9 @@ export default function DashboardPage() {
         </div>
 
         <div className="space-y-8 md:space-y-10">
+          {/* Daily Insight — Hook Model ritual */}
+          <DailyInsight />
+
           {s.module_logbook && (
             <section>
               <div className="flex items-center gap-4 mb-6">
@@ -153,6 +158,9 @@ export default function DashboardPage() {
         </div>
 
       </div>
+
+      {/* Social Proof */}
+      <SocialProofBanner variant="dashboard" />
     </div>
     </>
   );

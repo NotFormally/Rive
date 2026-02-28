@@ -806,3 +806,54 @@ export async function processChefFeedback(
 
   return { updatedItems, avgAccuracy };
 }
+
+// =============================================================================
+// Loss Framing — Waste Cost Calculator
+//
+// Estimates food waste cost based on generation level (1/2/3).
+// Used by WasteCostCalculator and UpgradeNudge components.
+// =============================================================================
+
+export type WasteCostResult = {
+  weeklyWaste: number;
+  yearlyWaste: number;
+  weeklySavings: number;
+  yearlySavings: number;
+  accuracyWithout: number;
+  accuracyWith: number;
+};
+
+const WASTE_RATES: Record<1 | 2 | 3, { overproduction: number; accuracy: number }> = {
+  1: { overproduction: 0.15, accuracy: 65 },
+  2: { overproduction: 0.08, accuracy: 82 },
+  3: { overproduction: 0.03, accuracy: 92 },
+};
+
+export function calculateWasteCost(
+  averageCovers: number,
+  averageTicket: number,
+  currentLevel: 1 | 2 | 3 = 1
+): WasteCostResult {
+  const foodCostRatio = 0.35;
+  const weeklyRevenue = averageCovers * averageTicket;
+  const weeklyFoodCost = weeklyRevenue * foodCostRatio;
+
+  const withoutRate = WASTE_RATES[1].overproduction;
+  const withRate = WASTE_RATES[currentLevel].overproduction;
+
+  const weeklyWaste = Math.round(weeklyFoodCost * withoutRate);
+  const yearlyWaste = weeklyWaste * 52;
+
+  const weeklyWasteWith = Math.round(weeklyFoodCost * withRate);
+  const weeklySavings = weeklyWaste - weeklyWasteWith;
+  const yearlySavings = weeklySavings * 52;
+
+  return {
+    weeklyWaste,
+    yearlyWaste,
+    weeklySavings,
+    yearlySavings,
+    accuracyWithout: WASTE_RATES[1].accuracy,
+    accuracyWith: WASTE_RATES[currentLevel].accuracy,
+  };
+}

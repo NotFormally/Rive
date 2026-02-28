@@ -20,6 +20,11 @@ const LANGUAGES = [
   { code: 'zh-HK', label: '粵語' },
   { code: 'zh-CN', label: '中文' },
   { code: 'tr', label: 'Türkçe' },
+  { code: 'ms', label: 'Bahasa Melayu' },
+  { code: 'ja', label: '日本語' },
+  { code: 'ko', label: '한국어' },
+  { code: 'id', label: 'Bahasa Indonesia' },
+  { code: 'nan', label: '閩南語' },
 ];
 
 export function LanguageSelector() {

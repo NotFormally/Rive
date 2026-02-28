@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { processChefFeedback } from '@/lib/prep-engine';
+import { calculateIntelligenceScore } from '@/lib/intelligence-score';
 
 // =============================================================================
 // Prep List Feedback Route — Chef submits actual portions after service
@@ -60,6 +61,78 @@ export async function PATCH(req: Request) {
       prep_list_id,
       feedback,
     );
+
+    // Update chef streak
+    const today = new Date().toISOString().split('T')[0];
+    const { data: streak } = await auth.supabase
+      .from('chef_streaks' as any)
+      .select('*')
+      .eq('restaurant_id', auth.restaurantId)
+      .single();
+
+    if (streak) {
+      const lastDate = streak.last_feedback_date;
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+      const isConsecutive = lastDate === yesterday || lastDate === today;
+      const newStreak = isConsecutive ? streak.current_streak + 1 : 1;
+      const newLongest = Math.max(streak.longest_streak, newStreak);
+
+      await auth.supabase
+        .from('chef_streaks' as any)
+        .update({
+          current_streak: newStreak,
+          longest_streak: newLongest,
+          last_feedback_date: today,
+          total_feedback_days: streak.total_feedback_days + (lastDate === today ? 0 : 1),
+        })
+        .eq('restaurant_id', auth.restaurantId);
+    } else {
+      await auth.supabase
+        .from('chef_streaks' as any)
+        .insert({
+          restaurant_id: auth.restaurantId,
+          current_streak: 1,
+          longest_streak: 1,
+          last_feedback_date: today,
+          total_feedback_days: 1,
+        });
+    }
+
+    // Recalculate intelligence score
+    const { data: scoreData } = await auth.supabase
+      .from('restaurant_intelligence_score' as any)
+      .select('*')
+      .eq('restaurant_id', auth.restaurantId)
+      .single();
+
+    if (scoreData) {
+      const updatedStreak = streak
+        ? (streak.last_feedback_date === new Date(Date.now() - 86400000).toISOString().split('T')[0] || streak.last_feedback_date === today
+          ? streak.current_streak + 1 : 1)
+        : 1;
+      const updatedFeedbackDays = scoreData.feedback_days + (streak?.last_feedback_date === today ? 0 : 1);
+
+      const scoreResult = calculateIntelligenceScore({
+        libroConnected: scoreData.libro_connected,
+        posConnected: scoreData.pos_connected,
+        recipesEntered: scoreData.recipes_entered,
+        feedbackDays: updatedFeedbackDays,
+        feedbackStreak: updatedStreak,
+      });
+
+      await auth.supabase
+        .from('restaurant_intelligence_score' as any)
+        .update({
+          score: scoreResult.score,
+          level: scoreResult.level,
+          feedback_days: updatedFeedbackDays,
+          feedback_streak: updatedStreak,
+          longest_streak: Math.max(scoreData.longest_streak, updatedStreak),
+          last_feedback_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        })
+        .eq('restaurant_id', auth.restaurantId);
+    }
 
     return NextResponse.json({
       success: true,

@@ -1,0 +1,27 @@
+# Bar & Brewery Features: Walkthrough
+
+L'ensemble des fonctionnalités "failproof" destinées aux bars et micro-brasseries a été implémenté avec succès. Rive dispose maintenant d'une architecture native prête à gérer les scénarios d'inventaire et de vente des liquides de bout en bout. 
+
+## 1. Fondation de Données (SQL)
+Une [migration SQL exhaustive](file:///Users/nassim/Shore/supabase/migrations/20260228000000_brewery_features.sql) a été créée pour enrichir la base de données :
+- **Conversions et Volumes**: Support des rendements de fûts de bière (`expected_yield_percentage`).
+- **Pertes et Déclarations**: Tables `variance_logs` et `spoilage_reports` pour déceler immédiatement les écarts fâcheux.
+- **Batches (Micro-Recettes)**: Capacité des recettes à agir comme de nouveaux ingrédients via `is_batch`.
+- **Kanban Brassicole**: Table `production_batches` pour la gestion des étapes de fermentation.
+
+## 2. Modèle Mathématique
+L'utilitaire [units.ts](file:///Users/nassim/Shore/src/lib/units.ts) gère désormais dynamiquement toutes les conversions entre les volumes commerciaux (kegs, litres) et les ratios de bar (dash, oz, pintes) pour un coût par unité sans heurts.
+
+## 3. Interfaces Utilisateur (UI)
+
+### 📈 Tracker de Consignes (Deposits)
+Le [Tableau de consignes](file:///Users/nassim/Shore/src/components/DepositsDashboard.tsx) isole l'argent temporairement immobilisé de véritables dépenses opérationnelles (Food Cost). La détection OCR achemine les résultats dans cet écran pour un suivi des retours.
+
+### ⚠️ Rapport de Pertes & Coulage (Variance)
+Le nouveau hub de [Variance](file:///Users/nassim/Shore/src/components/VarianceDashboard.tsx) offre une vue clinique des écarts entre les ventes attendues (théoriques depuis le POS) et l'utilisation réelle constatée lors des décomptes d'inventaire. Un [formulaire de perte](file:///Users/nassim/Shore/src/app/[locale]/dashboard/variance/spoilage/page.tsx) permet au staff de justifier immédiatement les bouteilles cassées ou offertes.
+
+### 🍺 Suivi de Production Brassicole
+Les micro-brasseries profitent désormais d'un [Kanban en temps réel](file:///Users/nassim/Shore/src/components/ProductionDashboard.tsx) permettant d'acheminer leurs créations de la fermenteuse jusqu'à l'enfûtage, en gardant des métriques précises sur les rendements réels.
+
+### 🕒 Marges Dynamiques (Happy Hour)
+Le [Menu Engineering Dashboard](file:///Users/nassim/Shore/src/components/MenuEngineeringDashboard.tsx#L123-149) intègre maintenant un sélecteur "Pricing Tier". Les gestionnaires de bar peuvent visualiser la rentabilité indépendamment sur un tarif Standard ou de type "Happy Hour", ainsi que l'impact combiné des deux régimes de volume sur leur marge globale.

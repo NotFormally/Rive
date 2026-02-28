@@ -145,7 +145,8 @@
     "f9_desc": "Precise tracking for liquids. Manage keg yields, track glass deposits separately, and operate a full micro-brewery production kanban.",
     "f9_ex1": "Instantly isolate bottle and keg deposits from your true Food Cost.",
     "f9_ex2": "Track exact pour losses (variance) between POS sales and inventory physical counts.",
-    "f9_ex3": "Manage your beer batches from fermentation to kegging with specific yields."
+    "f9_ex3": "Manage your beer batches from fermentation to kegging with specific yields.",
+    "beta_badge": "In Development"
   },
   "Pricing": {
     "title": "Clear pricing, real impact.",
@@ -226,7 +227,8 @@
     "f9_desc": "Precise tracking for liquids. Manage keg yields, track glass deposits separately, and operate a full micro-brewery production kanban.",
     "f9_ex1": "Instantly isolate bottle and keg deposits from your true Food Cost.",
     "f9_ex2": "Track exact pour losses (variance) between POS sales and inventory physical counts.",
-    "f9_ex3": "Manage your beer batches from fermentation to kegging with specific yields."
+    "f9_ex3": "Manage your beer batches from fermentation to kegging with specific yields.",
+    "beta_badge": "In Development"
   },
   "Auth": {
     "login_title": "Rive",

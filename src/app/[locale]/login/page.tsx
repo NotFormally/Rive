@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, Link } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
-export default function LoginPage() {
+function LoginForm() {
   const t = useTranslations("Auth");
+  const searchParams = useSearchParams();
+  const plan = searchParams.get("plan");
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,7 +26,7 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
+    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -31,6 +35,33 @@ export default function LoginPage() {
       setError(t("error_auth"));
       setLoading(false);
     } else {
+      if (plan && authData?.user) {
+        const { data: memberData } = await supabase
+          .from("restaurant_members")
+          .select("restaurant_id")
+          .eq("user_id", authData.user.id)
+          .single();
+
+        if (memberData?.restaurant_id) {
+          try {
+            const res = await fetch("/api/stripe/checkout", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                priceId: plan,
+                restaurantId: memberData.restaurant_id,
+              }),
+            });
+            const data = await res.json();
+            if (data.url) {
+              window.location.href = data.url;
+              return;
+            }
+          } catch (e) {
+            console.error("Payment redirect failed:", e);
+          }
+        }
+      }
       router.push("/dashboard");
     }
   };
@@ -91,7 +122,7 @@ export default function LoginPage() {
           <div className="text-center text-sm text-muted-foreground font-outfit mt-4">
             {t("no_account")}{" "}
             <button
-              onClick={() => router.push("/signup")}
+              onClick={() => router.push(`/signup${plan ? `?plan=${plan}` : ""}`)}
               className="text-accent hover:underline font-medium"
             >
               {t("link_signup")}
@@ -105,5 +136,13 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background noise-bg flex items-center justify-center">Loading...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

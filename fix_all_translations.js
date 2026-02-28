@@ -139,6 +139,81 @@ const mockKeys = {
     fr: "Découvrez le menu spécial de ce soir ! Un thon rouge mi-cuit parfaitement braisé... ✨ Réservation en bio 👇",
     en: "Discover tonight's special menu! A perfectly seared bluefin tuna... ✨ Reservation in bio 👇",
     it: "Scopri il menu speciale di stasera! Un tonno rosso scottato alla perfezione... ✨ Prenotazione in bio 👇"
+  },
+  examples_title: {
+    fr: "Exemples d'utilisation",
+    en: "Use cases",
+    it: "Esempi di utilizzo"
+  },
+  res_mock_last_sync: {
+    fr: "DERNIÈRE SYNC: il y a 2 min",
+    en: "LAST SYNC: 2 min ago",
+    it: "ULTIMA SINC: 2 min fa"
+  },
+  res_mock_live: {
+    fr: "● EN DIRECT",
+    en: "● LIVE",
+    it: "● DAL VIVO"
+  },
+  prep_mock_auto: {
+    fr: "Auto",
+    en: "Auto",
+    it: "Auto"
+  },
+  prep_mock_recipe: {
+    fr: "RECETTE",
+    en: "RECIPE",
+    it: "RICETTA"
+  },
+  prep_mock_resa: {
+    fr: "RÉSA",
+    en: "RESA",
+    it: "PRENOT"
+  },
+  prep_mock_pos: {
+    fr: "POS",
+    en: "POS",
+    it: "POS"
+  },
+  bar_mock_kegs: {
+    fr: "Consignes Fûts",
+    en: "Keg Deposits",
+    it: "Cauzioni Fusti"
+  },
+  bar_mock_kegs_val: {
+    fr: "24x Fûts 30L",
+    en: "24x 30L Kegs",
+    it: "24x Fusti 30L"
+  },
+  bar_mock_variance: {
+    fr: "Pertes (Coulage)",
+    en: "Pour Variance",
+    it: "Perdite"
+  },
+  bar_mock_batch: {
+    fr: "Brassin #042",
+    en: "Batch #042",
+    it: "Lotto #042"
+  },
+  bar_mock_kegging: {
+    fr: "Enfûtage",
+    en: "Kegging",
+    it: "Infustamento"
+  },
+  protocol_phase1_label: {
+    fr: "PHASE 01",
+    en: "PHASE 01",
+    it: "FASE 01"
+  },
+  protocol_phase2_label: {
+    fr: "PHASE 02",
+    en: "PHASE 02",
+    it: "FASE 02"
+  },
+  protocol_phase3_label: {
+    fr: "PHASE 03",
+    en: "PHASE 03",
+    it: "FASE 03"
   }
 };
 

@@ -136,7 +136,22 @@
     "f9_ex1": "Isola istantaneamente i depositi di fusti e bottiglie dal tuo vero Food Cost.",
     "f9_ex2": "Rileva lo spreco esatto tra le vendite POS e le giacenze di magazzino.",
     "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche.",
-    "beta_badge": "In Sviluppo"
+    "beta_badge": "In Sviluppo",
+    "examples_title": "Esempi di utilizzo",
+    "res_mock_last_sync": "ULTIMA SINC: 2 min fa",
+    "res_mock_live": "● DAL VIVO",
+    "prep_mock_auto": "Auto",
+    "prep_mock_recipe": "RICETTA",
+    "prep_mock_resa": "PRENOT",
+    "prep_mock_pos": "POS",
+    "bar_mock_kegs": "Cauzioni Fusti",
+    "bar_mock_kegs_val": "24x Fusti 30L",
+    "bar_mock_variance": "Perdite",
+    "bar_mock_batch": "Lotto #042",
+    "bar_mock_kegging": "Infustamento",
+    "protocol_phase1_label": "FASE 01",
+    "protocol_phase2_label": "FASE 02",
+    "protocol_phase3_label": "FASE 03"
   },
   "Pricing": {
     "title": "Prezzi chiari, impatto reale.",

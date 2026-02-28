@@ -156,7 +156,7 @@ export function LandingPage() {
               {t('hero_description')}
             </p>
             <p className="hero-text font-plex-mono text-xs tracking-widest uppercase opacity-60 mt-4">
-              Chaque jour sans donn&eacute;es, c&rsquo;est du gaspillage invisible.
+              {t('hero_loss_hook')}
             </p>
             <div className="hero-text mt-12 w-full flex">
               <Link
@@ -209,7 +209,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f1_title')}</h3>
                 <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f1_desc')}</p>
                 <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">Exemples d'utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
                     <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f1_ex1')}</li>
                     <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f1_ex2')}</li>
@@ -275,7 +275,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl">{t('f2_title')}</h3>
                 <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f2_desc')}</p>
                 <div className="bg-[#232323] p-6 rounded-2xl mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-500 mb-4">Exemples d'utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-500 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-300">
                     <li className="flex gap-3"><span className="text-red-400">✦</span> {t('f2_ex1')}</li>
                     <li className="flex gap-3"><span className="text-red-400">✦</span> {t('f2_ex2')}</li>
@@ -294,7 +294,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f3_title')}</h3>
                 <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f3_desc')}</p>
                 <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-50 mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">Exemples d'utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
                     <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex1')}</li>
                     <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex2')}</li>
@@ -338,7 +338,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f4_title')}</h3>
                 <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f4_desc')}</p>
                 <div className="bg-white p-6 rounded-2xl border border-slate-100 mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">Exemples d'utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
                     <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f4_ex1')}</li>
                     <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f4_ex2')}</li>
@@ -357,7 +357,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f5_title')}</h3>
                 <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f5_desc')}</p>
                 <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">Exemples d'utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
                     <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f5_ex1')}</li>
                     <li className="flex gap-3"><span className="text-[#CC5833]">✦</span> {t('f5_ex2')}</li>
@@ -407,7 +407,7 @@ export function LandingPage() {
                 </h3>
                 <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f6_desc')}</p>
                 <div className="bg-[#1f2d25] p-6 rounded-2xl mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-green-700/50 mb-4">Exemples d'utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-green-700/50 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-green-50">
                     <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex1')}</li>
                     <li className="flex gap-3"><span className="text-green-400">✦</span> {t('f6_ex2')}</li>
@@ -427,7 +427,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f7_title')}</h3>
                 <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f7_desc')}</p>
                 <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100/60 mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">Exemples d&apos;utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
                     <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f7_ex1')}</li>
                     <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f7_ex2')}</li>
@@ -456,8 +456,8 @@ export function LandingPage() {
                   <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-bold">{t('res_cancelled')}</span>
                 </div>
                 <div className="mt-1 flex justify-between items-center">
-                  <span className="font-plex-mono text-[9px] text-slate-500">LAST SYNC: 2 min ago</span>
-                  <span className="font-plex-mono text-[9px] text-indigo-400 animate-pulse">● LIVE</span>
+                  <span className="font-plex-mono text-[9px] text-slate-500">{t('res_mock_last_sync')}</span>
+                  <span className="font-plex-mono text-[9px] text-indigo-400 animate-pulse">{t('res_mock_live')}</span>
                 </div>
               </div>
             </div>
@@ -469,23 +469,23 @@ export function LandingPage() {
               <div className="w-full max-w-[290px] flex flex-col gap-2">
                 <div className="font-plex-mono text-[10px] text-amber-400/70 mb-3 flex justify-between">
                   <span>{t('prep_header')}</span>
-                  <span className="text-amber-300 animate-pulse">Auto</span>
+                  <span className="text-amber-300 animate-pulse">{t('prep_mock_auto')}</span>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
                   <span className="font-outfit text-white/80 text-xs">{t('prep_item_beef')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">4.8 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">POS</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">4.8 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">{t('prep_mock_pos')}</span></div>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
                   <span className="font-outfit text-white/80 text-xs">{t('prep_item_salmon')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">3.2 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-indigo-500/20 text-indigo-300">RÉSA</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">3.2 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-indigo-500/20 text-indigo-300">{t('prep_mock_resa')}</span></div>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
                   <span className="font-outfit text-white/80 text-xs">{t('prep_item_potato')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">12 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-green-500/20 text-green-300">RECETTE</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">12 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-green-500/20 text-green-300">{t('prep_mock_recipe')}</span></div>
                 </div>
                 <div className="bg-white/5 border border-amber-900/20 rounded-lg p-2.5 flex justify-between items-center">
                   <span className="font-outfit text-white/80 text-xs">{t('prep_item_cream')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">1.5 L</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">POS</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-amber-300 text-xs font-bold">1.5 L</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-500/20 text-orange-300">{t('prep_mock_pos')}</span></div>
                 </div>
                 <div className="mt-2 bg-amber-500/10 border border-amber-500/20 rounded-lg p-2.5 flex justify-between">
                   <span className="font-outfit text-amber-200 text-xs font-bold">{t('prep_cost_label')}</span>
@@ -499,7 +499,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl">{t('f8_title')}</h3>
                 <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f8_desc')}</p>
                 <div className="bg-[#232323] p-6 rounded-2xl mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-amber-500/40 mb-4">Exemples d&apos;utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-amber-500/40 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-300">
                     <li className="flex gap-3"><span className="text-amber-400">✦</span> {t('f8_ex1')}</li>
                     <li className="flex gap-3"><span className="text-amber-400">✦</span> {t('f8_ex2')}</li>
@@ -518,7 +518,7 @@ export function LandingPage() {
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f9_title')}</h3>
                 <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f9_desc')}</p>
                 <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-50 mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-emerald-400 mb-4">Exemples d&apos;utilisation</h4>
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-emerald-400 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
                     <li className="flex gap-3"><span className="text-emerald-500">✦</span> {t('f9_ex1')}</li>
                     <li className="flex gap-3"><span className="text-emerald-500">✦</span> {t('f9_ex2')}</li>
@@ -538,9 +538,9 @@ export function LandingPage() {
                   <div className="bg-[#2E4036] border border-[#3e5548] p-4 rounded-2xl flex items-center gap-4 hover:translate-x-2 transition-transform shadow-lg cursor-default">
                     <div className="bg-white/10 p-2 rounded-xl shrink-0"><Recycle className="w-5 h-5 text-[#F2F0E9]" /></div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-plex-mono text-[10px] text-white/50 tracking-widest uppercase mb-1">Keg Deposits</p>
+                      <p className="font-plex-mono text-[10px] text-white/50 tracking-widest uppercase mb-1">{t('bar_mock_kegs')}</p>
                       <div className="flex justify-between items-end">
-                        <p className="font-jakarta font-bold text-white text-base truncate">24x 30L Kegs</p>
+                        <p className="font-jakarta font-bold text-white text-base truncate">{t('bar_mock_kegs_val')}</p>
                         <p className="font-outfit font-bold text-[#CC5833] text-sm tabular-nums">+$720.00</p>
                       </div>
                     </div>
@@ -550,7 +550,7 @@ export function LandingPage() {
                   <div className="bg-[#1A1A1A] border border-white/10 p-4 rounded-2xl flex items-center gap-4 hover:translate-x-2 transition-transform shadow-lg cursor-default delay-100">
                     <div className="bg-red-500/10 p-2 rounded-xl shrink-0"><Droplets className="w-5 h-5 text-red-400" /></div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-plex-mono text-[10px] text-red-400/70 tracking-widest uppercase mb-1">Pour Variance</p>
+                      <p className="font-plex-mono text-[10px] text-red-400/70 tracking-widest uppercase mb-1">{t('bar_mock_variance')}</p>
                       <div className="flex justify-between items-end">
                         <p className="font-jakarta font-bold text-white text-base truncate">Draft IPA</p>
                         <p className="font-outfit font-bold text-red-400 text-sm tabular-nums">-1.2L</p>
@@ -562,10 +562,10 @@ export function LandingPage() {
                   <div className="bg-[#1f2d25] border border-[#3e5548] p-4 rounded-2xl flex items-center gap-4 hover:translate-x-2 transition-transform shadow-lg cursor-default delay-200">
                     <div className="bg-amber-500/10 p-2 rounded-xl shrink-0"><Beer className="w-5 h-5 text-amber-400" /></div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-plex-mono text-[10px] text-amber-500/70 tracking-widest uppercase mb-1">Batch #042</p>
+                      <p className="font-plex-mono text-[10px] text-amber-500/70 tracking-widest uppercase mb-1">{t('bar_mock_batch')}</p>
                       <div className="flex justify-between items-end">
                         <p className="font-jakarta font-bold text-white text-base truncate">Pale Ale</p>
-                        <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full font-bold uppercase border border-indigo-500/20">Kegging</span>
+                        <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full font-bold uppercase border border-indigo-500/20">{t('bar_mock_kegging')}</span>
                       </div>
                     </div>
                   </div>
@@ -582,10 +582,10 @@ export function LandingPage() {
         <div className="max-w-screen-xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-jakarta text-3xl md:text-4xl font-bold text-[#F2F0E9]">
-              Combien vous co&ucirc;te l&rsquo;incertitude&nbsp;?
+              {t('calculator_title')}
             </h2>
             <p className="font-outfit text-lg text-[#F2F0E9]/60 mt-4">
-              Estimez le co&ucirc;t de la surproduction sans donn&eacute;es fiables.
+              {t('calculator_subtitle')}
             </p>
           </div>
           <WasteCostCalculator variant="landing" />
@@ -630,22 +630,22 @@ export function LandingPage() {
               {/* Pillar 1 */}
               <div className="group relative py-10 md:py-12 md:px-10 lg:border-r border-white/[0.06] border-b lg:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">01</span>
-                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">Amplifier votre savoir</h3>
-                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">Rive ne remplace pas votre expertise — elle l&rsquo;amplifie avec des donn&eacute;es.</p>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar1_title')}</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar1_desc')}</p>
               </div>
 
               {/* Pillar 2 */}
               <div className="group relative py-10 md:py-12 md:px-10 lg:border-r border-white/[0.06] border-b lg:border-b-0 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">02</span>
-                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">Voir ce que l&rsquo;inaction co&ucirc;te</h3>
-                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">Chaque point de donn&eacute;es manquant a un prix. Rive le rend visible.</p>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar2_title')}</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar2_desc')}</p>
               </div>
 
               {/* Pillar 3 */}
               <div className="group relative py-10 md:py-12 md:px-10 transition-colors duration-500 hover:bg-white/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">03</span>
-                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">Construire votre intelligence</h3>
-                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">Plus vous calibrez, plus votre syst&egrave;me apprend. C&rsquo;est votre intelligence, pas la n&ocirc;tre.</p>
+                <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar3_title')}</h3>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar3_desc')}</p>
               </div>
 
             </div>
@@ -664,9 +664,9 @@ export function LandingPage() {
           {/* Card 1 */}
           <div className="stack-card bg-[#2E4036] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
-              <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 01</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">40%&nbsp;&mdash; Connectez vos r&eacute;servations</h3>
-              <p className="font-outfit text-lg opacity-80 mb-4 max-w-md">Un bouton, et Rive commence &agrave; apprendre votre rythme.</p>
+              <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">{t('protocol_phase1_label')}</div>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase1_title')}</h3>
+              <p className="font-outfit text-lg opacity-80 mb-4 max-w-md">{t('protocol_phase1_desc')}</p>
               <div className="w-full max-w-md bg-white/10 rounded-full overflow-hidden mb-8">
                 <div className="h-1 bg-[#CC5833] rounded-full" style={{ width: '40%' }}></div>
               </div>
@@ -682,9 +682,9 @@ export function LandingPage() {
           {/* Card 2 */}
           <div className="stack-card bg-[#CC5833] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
-              <div className="font-plex-mono text-[#1A1A1A] font-bold text-sm mb-4">PHASE 02</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">65%&nbsp;&mdash; Branchez votre POS</h3>
-              <p className="font-outfit text-lg opacity-90 mb-4 max-w-md">Vos ventes pass&eacute;es deviennent des pr&eacute;dictions par item.</p>
+              <div className="font-plex-mono text-[#1A1A1A] font-bold text-sm mb-4">{t('protocol_phase2_label')}</div>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase2_title')}</h3>
+              <p className="font-outfit text-lg opacity-90 mb-4 max-w-md">{t('protocol_phase2_desc')}</p>
               <div className="w-full max-w-md bg-white/10 rounded-full overflow-hidden mb-8">
                 <div className="h-1 bg-[#F2F0E9] rounded-full" style={{ width: '65%' }}></div>
               </div>
@@ -701,14 +701,14 @@ export function LandingPage() {
           {/* Card 3 */}
           <div className="stack-card bg-[#1A1A1A] text-[#F2F0E9] p-12 md:p-16 rounded-[3rem] shadow-xl mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh]">
             <div className="flex-1">
-              <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">PHASE 03</div>
-              <h3 className="font-jakarta font-bold text-4xl mb-6">95%&nbsp;&mdash; Calibrez votre syst&egrave;me</h3>
-              <p className="font-outfit text-lg opacity-80 mb-4 max-w-md">30 secondes de feedback par jour et votre syst&egrave;me atteint 92% de pr&eacute;cision.</p>
+              <div className="font-plex-mono text-[#CC5833] font-bold text-sm mb-4">{t('protocol_phase3_label')}</div>
+              <h3 className="font-jakarta font-bold text-4xl mb-6">{t('protocol_phase3_title')}</h3>
+              <p className="font-outfit text-lg opacity-80 mb-4 max-w-md">{t('protocol_phase3_desc')}</p>
               <div className="w-full max-w-md bg-white/10 rounded-full overflow-hidden mb-8">
                 <div className="h-1 bg-[#CC5833] rounded-full" style={{ width: '95%' }}></div>
               </div>
               <Link href="/signup" className="inline-block bg-[#F2F0E9] text-[#1A1A1A] px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
-                Commencer &agrave; 40%
+                {t('protocol_cta')}
               </Link>
             </div>
             <div className="flex-1 flex justify-center">
@@ -736,7 +736,7 @@ export function LandingPage() {
             <RadarLogo className="w-[80px] md:w-[100px] h-auto shrink-0 -mt-1" />
             <div>
               <p className="font-plex-mono text-sm text-slate-400 mb-3">
-                Intelligence algorithmique pour la restauration gastronomique
+                {t('footer_desc')}
               </p>
               <a href="mailto:dock@rivehub.com" className="font-outfit text-sm text-[#CC5833] inline-block hover:text-[#F2F0E9] transition-colors tracking-wide">
                 dock@rivehub.com

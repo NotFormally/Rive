@@ -4,81 +4,223 @@ import React, { useEffect, useRef, useMemo, useState } from "react";
 import gsap from "gsap";
 
 /**
- * RadarLogo — The concentric-circle scanner with crosshairs and "RIVE" text.
- * Standalone SVG, no dependencies on DataMatrix.
+ * RadarLogo — Realistic sonar display with phosphor green sweep,
+ * afterglow trail, target blips, range rings, and bearing markers.
  */
+
+const SONAR_GREEN = "#00FF41";
+const SONAR_GREEN_DIM = "#00CC33";
+const SONAR_BG = "#0A0F0A";
+
+// Fixed target positions (angle in degrees, distance from center)
+const TARGETS = [
+  { angle: 35, dist: 55, size: 3 },
+  { angle: 110, dist: 72, size: 2.5 },
+  { angle: 200, dist: 40, size: 2 },
+  { angle: 285, dist: 65, size: 3.5 },
+  { angle: 160, dist: 25, size: 2 },
+];
+
 export function RadarLogo({ className = "" }: { className?: string }) {
   const ref = useRef<SVGSVGElement>(null);
   const sweepRef = useRef<SVGGElement>(null);
+  const afterglowRef = useRef<SVGGElement>(null);
+  const blipRefs = useRef<(SVGCircleElement | null)[]>([]);
+  const blipGlowRefs = useRef<(SVGCircleElement | null)[]>([]);
   const pingRef = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
-      // Entrance
-      gsap.fromTo(ref.current, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" });
+      // Entrance fade
+      gsap.fromTo(ref.current, { opacity: 0 }, { opacity: 1, duration: 2, ease: "power2.out" });
 
-      // Radar sweep — slow continuous rotation
+      // Sweep rotation — 4s per revolution (realistic military sonar)
+      const sweepDuration = 4;
       gsap.to(sweepRef.current, {
         rotation: 360,
-        duration: 6,
+        duration: sweepDuration,
         repeat: -1,
         ease: "none",
         transformOrigin: "0 0",
       });
 
-      // Ping — center dot pulses every sweep
-      gsap.to(pingRef.current, {
-        attr: { r: 8 },
-        opacity: 0,
-        duration: 1.5,
+      // Afterglow trail — follows sweep with slight delay, fades
+      gsap.to(afterglowRef.current, {
+        rotation: 360,
+        duration: sweepDuration,
         repeat: -1,
-        repeatDelay: 4.5,
-        ease: "power2.out",
+        ease: "none",
+        transformOrigin: "0 0",
+        delay: 0.05,
       });
 
-      // Circles breathe subtly
-      gsap.to(".radar-ring", {
-        opacity: "+=0.15",
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: 0.4,
+      // Blip animations — each blip lights up when sweep angle matches, then decays
+      TARGETS.forEach((target, i) => {
+        const blip = blipRefs.current[i];
+        const glow = blipGlowRefs.current[i];
+        if (!blip || !glow) return;
+
+        // Time when sweep reaches this blip (fraction of sweep duration)
+        const triggerTime = (target.angle / 360) * sweepDuration;
+
+        // Blip flash + phosphor decay
+        gsap.timeline({ repeat: -1, delay: triggerTime })
+          .set(blip, { opacity: 1, attr: { r: target.size } })
+          .set(glow, { opacity: 0.8, attr: { r: target.size * 3 } })
+          .to(blip, { opacity: 0.15, duration: sweepDuration * 0.8, ease: "power2.in" })
+          .to(glow, { opacity: 0, attr: { r: target.size * 5 }, duration: sweepDuration * 0.6, ease: "power3.out" }, "<");
+      });
+
+      // Center ping — periodic sonar pulse
+      gsap.timeline({ repeat: -1, repeatDelay: sweepDuration - 1.2 })
+        .fromTo(pingRef.current,
+          { attr: { r: 2 }, opacity: 0.8 },
+          { attr: { r: 18 }, opacity: 0, duration: 1.2, ease: "power1.out" }
+        );
+
+      // Subtle ring flicker (CRT phosphor effect)
+      ref.current?.querySelectorAll(".sonar-ring").forEach((ring, i) => {
+        gsap.to(ring, {
+          opacity: `+=${0.08 + i * 0.02}`,
+          duration: 2 + i * 0.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
       });
     }, ref);
     return () => ctx.revert();
   }, []);
 
+  // Convert polar to cartesian
+  const polar = (angle: number, dist: number) => ({
+    x: dist * Math.cos((angle - 90) * Math.PI / 180),
+    y: dist * Math.sin((angle - 90) * Math.PI / 180),
+  });
+
   return (
-    <svg ref={ref} viewBox="-100 -100 200 250" className={className} aria-label="Rive radar">
+    <svg ref={ref} viewBox="-105 -105 210 250" className={className} aria-label="Rive sonar">
       <defs>
-        <linearGradient id="sweepGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-85">
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
-          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.12" />
+        {/* Phosphor glow filter */}
+        <filter id="phosphorGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        {/* Stronger glow for sweep beam */}
+        <filter id="sweepGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        {/* Blip glow */}
+        <filter id="blipGlow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+        </filter>
+
+        {/* Sweep beam gradient — bright leading edge, fading trail */}
+        <linearGradient id="sweepBeam" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-90">
+          <stop offset="0%" stopColor={SONAR_GREEN} stopOpacity="0.05" />
+          <stop offset="60%" stopColor={SONAR_GREEN} stopOpacity="0.25" />
+          <stop offset="100%" stopColor={SONAR_GREEN} stopOpacity="0.5" />
         </linearGradient>
+
+        {/* Afterglow gradient — wider, dimmer trail behind sweep */}
+        <linearGradient id="afterglowGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-90">
+          <stop offset="0%" stopColor={SONAR_GREEN} stopOpacity="0" />
+          <stop offset="50%" stopColor={SONAR_GREEN} stopOpacity="0.06" />
+          <stop offset="100%" stopColor={SONAR_GREEN} stopOpacity="0.12" />
+        </linearGradient>
+
+        {/* Radial vignette for CRT screen effect */}
+        <radialGradient id="screenVignette" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={SONAR_BG} stopOpacity="0" />
+          <stop offset="85%" stopColor={SONAR_BG} stopOpacity="0" />
+          <stop offset="100%" stopColor={SONAR_BG} stopOpacity="0.6" />
+        </radialGradient>
       </defs>
 
-      {/* Concentric rings */}
-      <circle className="radar-ring" cx="0" cy="0" r="15" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="1" />
-      <circle className="radar-ring" cx="0" cy="0" r="35" fill="none" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.6" />
-      <circle className="radar-ring" cx="0" cy="0" r="60" fill="none" stroke="#FFFFFF" strokeWidth="1" opacity="0.3" />
-      <circle className="radar-ring" cx="0" cy="0" r="85" fill="none" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.15" />
+      {/* CRT screen background */}
+      <circle cx="0" cy="0" r="92" fill={SONAR_BG} />
 
-      {/* Sweep beam */}
-      <g ref={sweepRef}>
-        <path d="M0,0 L-22,-82 A85,85 0 0,1 22,-82 Z" fill="url(#sweepGrad)" />
+      {/* Range rings */}
+      <circle className="sonar-ring" cx="0" cy="0" r="20" fill="none" stroke={SONAR_GREEN} strokeWidth="0.4" opacity="0.25" />
+      <circle className="sonar-ring" cx="0" cy="0" r="40" fill="none" stroke={SONAR_GREEN} strokeWidth="0.4" opacity="0.2" />
+      <circle className="sonar-ring" cx="0" cy="0" r="60" fill="none" stroke={SONAR_GREEN} strokeWidth="0.4" opacity="0.18" />
+      <circle className="sonar-ring" cx="0" cy="0" r="80" fill="none" stroke={SONAR_GREEN} strokeWidth="0.4" opacity="0.15" />
+      {/* Outer boundary ring */}
+      <circle cx="0" cy="0" r="88" fill="none" stroke={SONAR_GREEN} strokeWidth="0.8" opacity="0.3" />
+
+      {/* Crosshair lines — full diameter */}
+      <line x1="0" y1="-88" x2="0" y2="88" stroke={SONAR_GREEN} strokeWidth="0.3" opacity="0.12" />
+      <line x1="-88" y1="0" x2="88" y2="0" stroke={SONAR_GREEN} strokeWidth="0.3" opacity="0.12" />
+      {/* Diagonal crosshairs */}
+      <line x1="-62" y1="-62" x2="62" y2="62" stroke={SONAR_GREEN} strokeWidth="0.2" opacity="0.06" />
+      <line x1="62" y1="-62" x2="-62" y2="62" stroke={SONAR_GREEN} strokeWidth="0.2" opacity="0.06" />
+
+      {/* Bearing markers */}
+      <text x="0" y="-90" fill={SONAR_GREEN} fontSize="5" fontFamily="'Space Mono', monospace" textAnchor="middle" opacity="0.5">N</text>
+      <text x="92" y="1.5" fill={SONAR_GREEN} fontSize="5" fontFamily="'Space Mono', monospace" textAnchor="start" opacity="0.4">E</text>
+      <text x="0" y="94" fill={SONAR_GREEN} fontSize="5" fontFamily="'Space Mono', monospace" textAnchor="middle" opacity="0.4">S</text>
+      <text x="-92" y="1.5" fill={SONAR_GREEN} fontSize="5" fontFamily="'Space Mono', monospace" textAnchor="end" opacity="0.4">W</text>
+
+      {/* Range labels */}
+      <text x="2" y={-19} fill={SONAR_GREEN} fontSize="3.5" fontFamily="'Space Mono', monospace" opacity="0.3">10</text>
+      <text x="2" y={-39} fill={SONAR_GREEN} fontSize="3.5" fontFamily="'Space Mono', monospace" opacity="0.3">20</text>
+      <text x="2" y={-59} fill={SONAR_GREEN} fontSize="3.5" fontFamily="'Space Mono', monospace" opacity="0.3">30</text>
+      <text x="2" y={-79} fill={SONAR_GREEN} fontSize="3.5" fontFamily="'Space Mono', monospace" opacity="0.3">40</text>
+
+      {/* Afterglow trail — wider arc behind sweep */}
+      <g ref={afterglowRef}>
+        <path d="M0,0 L-40,-78 A88,88 0 0,1 0,-88 Z" fill="url(#afterglowGrad)" />
       </g>
 
-      {/* Crosshairs */}
-      <line x1="0" y1="-90" x2="0" y2="-25" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.8" />
-      <line x1="-90" y1="0" x2="90" y2="0" stroke="#FFFFFF" strokeWidth="1" opacity="0.2" />
+      {/* Sweep beam — narrow, bright leading edge */}
+      <g ref={sweepRef} filter="url(#sweepGlow)">
+        <path d="M0,0 L-8,-87 A88,88 0 0,1 8,-87 Z" fill="url(#sweepBeam)" />
+        {/* Bright leading edge line */}
+        <line x1="0" y1="0" x2="0" y2="-88" stroke={SONAR_GREEN} strokeWidth="0.8" opacity="0.6" />
+      </g>
 
-      {/* Center + ping */}
-      <circle cx="0" cy="-25" r="3" fill="#FFFFFF" />
-      <circle cx="0" cy="0" r="4" fill="#FFFFFF" />
-      <circle ref={pingRef} cx="0" cy="0" r="4" fill="none" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.6" />
+      {/* Target blips */}
+      {TARGETS.map((target, i) => {
+        const pos = polar(target.angle, target.dist);
+        return (
+          <g key={i}>
+            {/* Glow halo */}
+            <circle
+              ref={el => { blipGlowRefs.current[i] = el; }}
+              cx={pos.x} cy={pos.y} r={target.size * 3}
+              fill={SONAR_GREEN} opacity="0"
+              filter="url(#blipGlow)"
+            />
+            {/* Blip dot */}
+            <circle
+              ref={el => { blipRefs.current[i] = el; }}
+              cx={pos.x} cy={pos.y} r={target.size}
+              fill={SONAR_GREEN} opacity="0.15"
+            />
+          </g>
+        );
+      })}
 
+      {/* Center point */}
+      <circle cx="0" cy="0" r="1.5" fill={SONAR_GREEN} opacity="0.9" />
+      {/* Sonar ping pulse */}
+      <circle ref={pingRef} cx="0" cy="0" r="2" fill="none" stroke={SONAR_GREEN} strokeWidth="0.6" opacity="0" filter="url(#phosphorGlow)" />
+
+      {/* CRT vignette overlay */}
+      <circle cx="0" cy="0" r="92" fill="url(#screenVignette)" />
+
+      {/* RIVE text below */}
       <text x="0" y="120" fontFamily="'Space Grotesk', sans-serif" fontSize="24" fontWeight="400" letterSpacing="0.35em" fill="#FFFFFF" textAnchor="middle" opacity="0.8">RIVE</text>
     </svg>
   );

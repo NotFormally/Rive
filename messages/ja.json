@@ -241,7 +241,10 @@
     "f9_ex1": "ボトルと樽のデポジットを実際のFood Costから即座に分離。",
     "f9_ex2": "POS売上と在庫の実地棚卸の間の正確な注出ロス（差異）を追跡。",
     "f9_ex3": "発酵から樽詰めまで、特定の歩留まりでビールバッチを管理。",
-    "beta_badge": "開発中"
+    "beta_badge": "開発中",
+    "cta_start": "節約を始める",
+    "pricing_popular": "一番人気",
+    "pricing_includes": "{tier}のすべて +"
   },
   "Auth": {
     "login_title": "Rive",

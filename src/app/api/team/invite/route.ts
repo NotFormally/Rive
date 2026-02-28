@@ -100,6 +100,10 @@ export async function POST(req: Request) {
     }
 
     // Build the accept URL
+    if (!process.env.NEXT_PUBLIC_SITE_URL && !process.env.NEXT_PUBLIC_APP_URL && process.env.NODE_ENV === 'production') {
+      console.error('[team/invite] NEXT_PUBLIC_SITE_URL is not set in production');
+      return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 });
+    }
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     const acceptUrl = `${baseUrl}/${locale}/invite?token=${invite_token}`;
 

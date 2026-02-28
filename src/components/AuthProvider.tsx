@@ -98,7 +98,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loadProfile = async (userId: string) => {
     try {
-      console.log("[AuthProvider] Loading profile for user:", userId);
       // 1. Find membership (which restaurant does this user belong to?)
       const { data: membership, error: memberError } = await supabase
         .from("restaurant_members")
@@ -112,15 +111,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.error("[AuthProvider] DB Error loading membership:", memberError);
       }
 
-      console.log("[AuthProvider] Membership result:", membership);
-
       if (!membership) {
          console.warn("[AuthProvider] No active membership found for user. Team Management will be hidden.");
          return;
       }
 
       setRole(membership.role as MemberRole);
-      console.log("[AuthProvider] Role set to:", membership.role);
 
       // 2. Load the restaurant profile
       const { data: profileData, error: profileError } = await supabase

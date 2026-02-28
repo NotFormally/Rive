@@ -151,7 +151,10 @@
     "feature_preplists": "Smart Prep Lists",
     "enterprise_custom_title": "Groups & Franchises",
     "enterprise_custom_desc": "Consolidated dashboard, multi-site, custom deployment, and training.",
-    "enterprise_custom_cta": "Contact Us"
+    "enterprise_custom_cta": "Contact Us",
+    "cta_start": "ਬੱਚਤ ਸ਼ੁਰੂ ਕਰੋ",
+    "pricing_popular": "ਸਭ ਤੋਂ ਪ੍ਰਸਿੱਧ",
+    "pricing_includes": "{tier} ਦਾ ਸਭ ਕੁਝ +"
   },
   "Auth": {
     "login_title": "Rive",

@@ -241,7 +241,10 @@
     "f9_ex1": "Asingkan deposit botol dan tong daripada Food Cost sebenar anda dengan serta-merta.",
     "f9_ex2": "Jejaki kerugian tuangan tepat (varians) antara jualan POS dan kiraan fizikal inventori.",
     "f9_ex3": "Urus kelompok bir anda dari penapaian hingga pengetongan dengan hasil yang khusus.",
-    "beta_badge": "Dalam Pembangunan"
+    "beta_badge": "Dalam Pembangunan",
+    "cta_start": "Mula berjimat",
+    "pricing_popular": "Paling popular",
+    "pricing_includes": "Semua dari {tier} +"
   },
   "Auth": {
     "login_title": "Rive",

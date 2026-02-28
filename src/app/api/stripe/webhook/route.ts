@@ -57,9 +57,10 @@ export async function POST(req: NextRequest) {
         const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
         const priceId = subscription.items.data[0].price.id;
 
-        let tier = 'trial';
+        let tier = 'freemium';
         if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL) tier = 'essential';
         else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_PERFORMANCE) tier = 'performance';
+        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_INTELLIGENCE) tier = 'intelligence';
         else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE) tier = 'enterprise';
 
         const { error } = await supabase.rpc('update_subscription_from_stripe', {
@@ -86,6 +87,36 @@ export async function POST(req: NextRequest) {
           }
         }).catch(() => {});
       }
+    } else if (event.type === 'customer.subscription.updated') {
+      const subscription = event.data.object as any;
+      const priceId = subscription.items.data[0]?.price.id;
+
+      if (priceId) {
+        let tier = 'freemium';
+        if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL) tier = 'essential';
+        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_PERFORMANCE) tier = 'performance';
+        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_INTELLIGENCE) tier = 'intelligence';
+        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE) tier = 'enterprise';
+
+        const { data: settingsData } = await supabase
+          .from('restaurant_settings')
+          .select('restaurant_id')
+          .eq('stripe_subscription_id', subscription.id)
+          .single();
+
+        if (settingsData) {
+          const { error } = await supabase.rpc('update_subscription_from_stripe', {
+            p_restaurant_id: settingsData.restaurant_id,
+            p_stripe_customer_id: subscription.customer,
+            p_stripe_subscription_id: subscription.id,
+            p_tier: tier,
+          });
+
+          if (error) {
+            console.error('[webhook] subscription.updated DB error:', error);
+          }
+        }
+      }
     } else if (event.type === 'customer.subscription.deleted') {
       const subscription = event.data.object as any;
 
@@ -100,7 +131,7 @@ export async function POST(req: NextRequest) {
           p_restaurant_id: settingsData.restaurant_id,
           p_stripe_customer_id: subscription.customer,
           p_stripe_subscription_id: null,
-          p_tier: 'trial',
+          p_tier: 'freemium',
         });
 
         // Send cancellation email (fire and forget)

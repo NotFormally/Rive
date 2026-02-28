@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { requireAuth, unauthorized } from '@/lib/auth';
+import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { loadFoodCostData, calculateItemFoodCost } from '@/lib/food-cost';
 import { loadMenuFromSupabase } from '@/lib/menu-store';
 
@@ -9,6 +10,9 @@ export async function POST(req: Request) {
   try {
     const auth = await requireAuth(req);
     if (!auth) return unauthorized();
+
+    const rl = await checkRateLimit(auth.restaurantId, 'food-cost-analyze');
+    if (!rl.allowed) return tooManyRequests();
 
     const { items: menuItems } = await loadMenuFromSupabase();
     const { ingredients, recipes } = await loadFoodCostData(auth.supabase, auth.restaurantId);

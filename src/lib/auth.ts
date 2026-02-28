@@ -92,7 +92,6 @@ export async function requireAuth(req: Request): Promise<AuthResult> {
     return null;
   }
 
-  console.log('[requireAuth] Authenticated:', user.id, 'role:', membership.role);
   return { user: { id: user.id }, restaurantId: membership.restaurant_id, role: membership.role as MemberRole, supabase };
 }
 

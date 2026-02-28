@@ -151,7 +151,10 @@
     "feature_preplists": "Smart Prep Lists",
     "enterprise_custom_title": "Groups & Franchises",
     "enterprise_custom_desc": "Consolidated dashboard, multi-site, custom deployment, and training.",
-    "enterprise_custom_cta": "Contact Us"
+    "enterprise_custom_cta": "Contact Us",
+    "cta_start": "开始节省",
+    "pricing_popular": "最受欢迎",
+    "pricing_includes": "{tier}的全部 +"
   },
   "Auth": {
     "login_title": "Rive",

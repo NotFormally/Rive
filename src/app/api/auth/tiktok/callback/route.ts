@@ -7,6 +7,10 @@ export async function GET(req: NextRequest) {
   const state = searchParams.get("state"); // This is the restaurantId passed
   const error = searchParams.get("error");
 
+  if (!process.env.NEXT_PUBLIC_SITE_URL && process.env.NODE_ENV === 'production') {
+    console.error('[tiktok/callback] NEXT_PUBLIC_SITE_URL is not set in production');
+    return new NextResponse('Server misconfiguration', { status: 500 });
+  }
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
   if (error) {

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { requireAuth, unauthorized } from '@/lib/auth';
+import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 
 export const maxDuration = 60; // Allow enough time for LLM
 
@@ -12,6 +13,9 @@ export async function POST(req: Request) {
   try {
     const auth = await requireAuth(req);
     if (!auth) return unauthorized();
+
+    const rl = await checkRateLimit(auth.restaurantId, 'assistant');
+    if (!rl.allowed) return tooManyRequests();
 
     const body = await req.json();
     const { messages }: { messages: Message[] } = body;

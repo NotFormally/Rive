@@ -8,8 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat, TrendingDown, ScanLine, Beer, Droplets, Recycle } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { WasteCostCalculator } from "@/components/WasteCostCalculator";
-import { SocialProofBanner } from "@/components/SocialProofBanner";
-import TelemetryScanner from "@/components/TelemetryScanner";
+import { RadarLogo, DataMatrix } from "@/components/TelemetryScanner";
 import RiveLogo from "@/components/RiveLogo";
 
 // Register GSAP Plugin
@@ -143,8 +142,8 @@ export function LandingPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent"></div>
         </div>
 
-        <div className="relative z-10 w-full pt-32 md:pt-40 max-w-3xl">
-          <div className="text-[#F2F0E9]">
+        <div className="relative z-10 w-full pt-32 md:pt-40 max-w-screen-xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
+          <div className="text-[#F2F0E9] flex-1 max-w-2xl">
             <h1 className="flex flex-col gap-3">
               <span className="hero-text font-jakarta font-bold text-xl md:text-2xl tracking-widest uppercase text-[#CC5833] opacity-90">
                 {t('hero_subtitle')}
@@ -160,8 +159,8 @@ export function LandingPage() {
               Chaque jour sans donn&eacute;es, c&rsquo;est du gaspillage invisible.
             </p>
             <div className="hero-text mt-12 w-full flex">
-              <Link 
-                href="/signup" 
+              <Link
+                href="/signup"
                 className="group relative overflow-hidden inline-flex items-center justify-center text-center whitespace-nowrap gap-2 bg-[#CC5833] text-[#F2F0E9] px-8 py-4 rounded-full font-bold text-lg hover:scale-[1.03] transition-transform duration-300 shadow-[0_0_40px_rgba(204,88,51,0.3)]"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">{t('hero_cta')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
@@ -170,6 +169,11 @@ export function LandingPage() {
             </div>
           </div>
 
+          {/* Data Matrix — Running Protocol */}
+          <div className="hidden md:block w-[320px] lg:w-[380px] h-[320px] lg:h-[380px] shrink-0 relative">
+            <div className="absolute inset-0 bg-[#00FFAA]/5 blur-[60px] rounded-full pointer-events-none"></div>
+            <DataMatrix className="w-full h-full relative z-10" />
+          </div>
         </div>
       </section>
 
@@ -724,17 +728,14 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Social Proof Banner */}
-      <SocialProofBanner variant="landing" />
-
-      {/* G. FOOTER — with integrated Telemetry Scanner */}
+      {/* G. FOOTER */}
       <footer className="bg-[#1A1A1A] text-[#F2F0E9] rounded-t-[4rem] px-8 md:px-24 pt-16 pb-12 mt-24">
-        {/* Telemetry Scanner */}
-        <div className="max-w-screen-xl mx-auto h-[350px] md:h-[420px] relative mb-16">
-          <div className="absolute inset-0 bg-[#00FFAA]/5 blur-[80px] rounded-full pointer-events-none"></div>
-          <div className="w-full h-full relative z-10 rounded-[2rem] border border-white/10 bg-[#050505]/80 overflow-hidden">
-            <TelemetryScanner />
-          </div>
+        {/* Radar Logo + Social Proof Banner */}
+        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mb-16">
+          <p className="font-plex-mono text-lg sm:text-xl text-slate-400 text-center md:text-right max-w-md">
+            Intelligence algorithmique pour la restauration gastronomique
+          </p>
+          <RadarLogo className="w-[160px] md:w-[200px] h-auto shrink-0" />
         </div>
 
         {/* Footer content */}

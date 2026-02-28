@@ -109,6 +109,33 @@ export default function VirtualSousChef() {
               </div>
             ))}
             
+            {/* Suggested Prompts (only show if few messages) */}
+            {messages.length === 1 && !isLoading && (
+              <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-slate-200/60">
+                <p className="text-xs font-semibold text-slate-500 px-1 uppercase tracking-wider">Demandes rapides</p>
+                <div className="flex flex-col gap-2">
+                  <button 
+                    onClick={() => setInput("Fais-moi un récapitulatif des alertes Food Cost en cours.")}
+                    className="text-left bg-white border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 text-slate-700 text-xs p-2.5 rounded-xl transition-colors shadow-sm"
+                  >
+                    <span className="text-indigo-600 mr-2">💰</span> Analyse mon Food Cost du jour
+                  </button>
+                  <button 
+                    onClick={() => setInput("Fais un point sur les quantités générées par l'IA pour la Prep List d'aujourd'hui.")}
+                    className="text-left bg-white border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 text-slate-700 text-xs p-2.5 rounded-xl transition-colors shadow-sm"
+                  >
+                    <span className="text-indigo-600 mr-2">📋</span> Vérifier ma Prep List et les suggestions
+                  </button>
+                  <button 
+                    onClick={() => setInput("Quel a été le chiffre d'affaires des derniers jours et quelle est la tendance ?")}
+                    className="text-left bg-white border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 text-slate-700 text-xs p-2.5 rounded-xl transition-colors shadow-sm"
+                  >
+                    <span className="text-indigo-600 mr-2">📈</span> Résume mes récentes ventes
+                  </button>
+                </div>
+              </div>
+            )}
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white border border-slate-200 rounded-2xl p-3 rounded-tl-sm shadow-sm flex gap-1">

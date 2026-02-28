@@ -385,9 +385,9 @@ export function LandingPage() {
             <div className="order-2">
               <div className="flex flex-col gap-6">
                 <div className="bg-green-400/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Activity className="w-8 h-8 text-green-400" /></div>
-                <h3 className="font-jakarta font-bold text-3xl md:text-4xl flex items-center gap-3">
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl flex items-center flex-wrap gap-3">
                   {t('f6_title')}
-                  <span className="text-[10px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-1 rounded-full font-bold tracking-widest uppercase align-middle">{t('beta_badge')}</span>
+                  <span className="text-[10px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-1 rounded-full font-bold tracking-widest uppercase align-middle shrink-0 whitespace-nowrap">{t('beta_badge')}</span>
                 </h3>
                 <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f6_desc')}</p>
                 <div className="bg-[#1f2d25] p-6 rounded-2xl mt-4">

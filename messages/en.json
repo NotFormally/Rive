@@ -633,11 +633,8 @@
     "title": "Payment Successful",
     "subtitle": "Thank you for your trust. Your subscription has been activated.",
     "description": "Your new modules are now unlocked and ready to use. You can find them in your navigation bar.",
-    "btn_dashboard": "Go to dashboard"
-  },
-  "Invite": {
-    "processing": "Processing your invitation...",
-    "success_access": "You now have access to the restaurant dashboard.",
+    "generating_space": "Generating workspace...",
+    "operational_system": "Operational System",
     "btn_dashboard": "Go to dashboard",
     "error_invalid_link": "Invalid invitation link.",
     "btn_home": "Back to home",
@@ -648,5 +645,34 @@
     "error_accept": "Error accepting invitation.",
     "error_network": "Network error. Please try again later.",
     "success_default": "Invitation accepted!"
+  },
+  "Intelligence": {
+    "title": "My Intelligence",
+    "subtitle": "Your system learns from every data point you connect and every feedback you give.",
+    "score_label": "Level: {level}",
+    "score_footer": "It's your intelligence, not ours.",
+    "timeline_title": "Intelligence Journey",
+    "milestone_discovery_title": "Discovery",
+    "milestone_discovery_desc": "First login — welcome.",
+    "milestone_operational_title": "Operational",
+    "milestone_operational_desc": "Reservations connected, cover predictions active.",
+    "milestone_predictive_title": "Predictive",
+    "milestone_predictive_desc": "POS plugged in — item-level predictions unlocked.",
+    "milestone_calibrated_title": "Calibrated",
+    "milestone_calibrated_desc": "7+ days of feedback — the system adapts to your reality.",
+    "milestone_expert_title": "Expert",
+    "milestone_expert_desc": "4 consecutive weeks — maximum accuracy reached.",
+    "sources_title": "Data Sources",
+    "source_res_title": "Reservations",
+    "source_res_desc": "+40 points",
+    "source_pos_title": "POS",
+    "source_pos_desc": "+25 points",
+    "source_recipes_title": "Recipes",
+    "source_recipes_desc": "+15 points (5+ recipes)",
+    "source_feedback_title": "Daily Feedback",
+    "source_feedback_desc": "+10 points (7+ days)",
+    "source_streak_title": "Calibration Streak",
+    "source_streak_desc": "+5 points (4 consecutive weeks)",
+    "you_are_here": "You are here"
   }
 }

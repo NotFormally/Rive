@@ -14,7 +14,9 @@ export type EmailPayload =
   | { type: 'subscription_cancelled'; to: string; restaurantName: string }
   | { type: 'team_invite'; to: string; restaurantName: string; roleName: string; inviteUrl: string }
   | { type: 'monthly_report'; to: string; restaurantName: string; month: string; learnings: string[]; feedbackCount: number; accuracyImprovement: number; siteUrl: string }
-  | { type: 'churn_alert'; to: string; restaurantName: string; daysSinceLastFeedback: number; calibrationCount: number; feedbackDays: number };
+  | { type: 'churn_alert'; to: string; restaurantName: string; daysSinceLastFeedback: number; calibrationCount: number; feedbackDays: number }
+  | { type: 'admin_signup_notification'; to: string; restaurantName: string; email: string; locale: string }
+  | { type: 'admin_subscription_notification'; to: string; restaurantName: string; email: string; tier: string };
 
 const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => string)> = {
   welcome: 'Bienvenue sur Rive \u{1F30A}',
@@ -31,6 +33,14 @@ const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => stri
   churn_alert: (p) =>
     p.type === 'churn_alert'
       ? `${p.restaurantName} — Rive attend vos retours`
+      : '',
+  admin_signup_notification: (p) =>
+    p.type === 'admin_signup_notification'
+      ? `🚨 New Signup: ${p.restaurantName}`
+      : '',
+  admin_subscription_notification: (p) =>
+    p.type === 'admin_subscription_notification'
+      ? `💸 New Subscription: ${p.restaurantName} (${p.tier})`
       : '',
 };
 
@@ -63,6 +73,8 @@ function getReactComponent(payload: EmailPayload) {
         siteUrl: payload.siteUrl,
       });
     case 'churn_alert':
+    case 'admin_signup_notification':
+    case 'admin_subscription_notification':
       // Simple text email — no dedicated template needed
       return null;
   }
@@ -81,6 +93,28 @@ function getTextBody(payload: EmailPayload): string | null {
       ``,
       `— L'équipe Rive`,
       `dock@rivehub.com`,
+    ].join('\n');
+  }
+  if (payload.type === 'admin_signup_notification') {
+    return [
+      `New User Signup on Rive:`,
+      ``,
+      `Restaurant: ${payload.restaurantName}`,
+      `Email: ${payload.email}`,
+      `Locale: ${payload.locale}`,
+      ``,
+      `Action required: None. This is an automated notification.`,
+    ].join('\n');
+  }
+  if (payload.type === 'admin_subscription_notification') {
+    return [
+      `New Subscription on Rive:`,
+      ``,
+      `Restaurant: ${payload.restaurantName}`,
+      `Email: ${payload.email}`,
+      `Tier: ${payload.tier}`,
+      ``,
+      `Action required: None. This is an automated notification.`,
     ].join('\n');
   }
   return null;

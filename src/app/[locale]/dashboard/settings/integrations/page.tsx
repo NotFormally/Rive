@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Check, AlertCircle, Play, Save } from "lucide-react";
@@ -12,47 +13,17 @@ type IntegrationRecord = {
   is_active: boolean;
 };
 
-// Simplified UI components for each integration
-const integrationsList: Array<{ id: 'stripe' | 'square' | 'lightspeed' | 'toast' | 'sumup' | 'zettle', name: string, description: string, placeholder: string }> = [
-  {
-    id: "stripe",
-    name: "Stripe",
-    description: "Synchroniser les volumes de ventes depuis vos transactions et paiements Stripe Checkout.",
-    placeholder: "sk_live_..."
-  },
-  {
-    id: "square",
-    name: "Square",
-    description: "Connecter vos caisses Square pour importer vos ventes de la semaine automatiquement.",
-    placeholder: "EAAA..."
-  },
-  {
-    id: "lightspeed",
-    name: "Lightspeed",
-    description: "Lier votre compte Lightspeed Retail/Restaurant.",
-    placeholder: "ACCOUNT_ID:TOKEN"
-  },
-  {
-    id: "toast",
-    name: "Toast POS",
-    description: "Connecter votre système Toast (M2M API) pour importer les tickets hebdomadaires.",
-    placeholder: "Client ID : Client Secret"
-  },
-  {
-    id: "sumup",
-    name: "SumUp",
-    description: "Synchroniser l'historique de vos paiements SumUp réussis.",
-    placeholder: "sup_sk_..."
-  },
-  {
-    id: "zettle",
-    name: "Zettle (PayPal)",
-    description: "Importer vos transactions iZettle en temps réel.",
-    placeholder: "Bearer Token Zettle"
-  }
+const integrationsList: Array<{ id: 'stripe' | 'square' | 'lightspeed' | 'toast' | 'sumup' | 'zettle', placeholder: string }> = [
+  { id: "stripe", placeholder: "sk_live_..." },
+  { id: "square", placeholder: "EAAA..." },
+  { id: "lightspeed", placeholder: "ACCOUNT_ID:TOKEN" },
+  { id: "toast", placeholder: "Client ID : Client Secret" },
+  { id: "sumup", placeholder: "sup_sk_..." },
+  { id: "zettle", placeholder: "Bearer Token Zettle" }
 ];
 
 export default function IntegrationsSettingsPage() {
+  const t = useTranslations("SettingsIntegrations");
   const { profile } = useAuth();
   const [integrations, setIntegrations] = useState<Record<string, IntegrationRecord>>({});
   const [loading, setLoading] = useState(true);
@@ -102,7 +73,7 @@ export default function IntegrationsSettingsPage() {
     const record = integrations[provider];
     if (!record || !record.access_token) {
       setSavingKeys(prev => ({ ...prev, [provider]: false }));
-      setMessage({ type: 'error', text: 'Veuillez renseigner une clé API avant d\'enregistrer.' });
+      setMessage({ type: 'error', text: t("error_no_key") });
       return;
     }
 
@@ -119,7 +90,7 @@ export default function IntegrationsSettingsPage() {
 
       if (error) throw error;
 
-      setMessage({ type: 'success', text: `Intégration ${provider} sauvegardée avec succès.` });
+      setMessage({ type: 'success', text: t("success_saved", { name: provider }) });
     } catch (err: any) {
       setMessage({ type: 'error', text: err.message });
     } finally {
@@ -131,8 +102,8 @@ export default function IntegrationsSettingsPage() {
     <>
       <header className="bg-[#F2F0E9] dark:bg-zinc-950 border-b border-slate-200 dark:border-zinc-800 sticky top-0 z-10 px-8 py-6">
         <div>
-          <h1 className="text-2xl font-jakarta font-bold text-[#1A1A1A] dark:text-white">Connexions POS</h1>
-          <p className="text-sm text-slate-500 mt-1 font-outfit">Synchronisation en direct & importation de données</p>
+          <h1 className="text-2xl font-jakarta font-bold text-[#1A1A1A] dark:text-white">{t("title")}</h1>
+          <p className="text-sm text-slate-500 mt-1 font-outfit">{t("subtitle")}</p>
         </div>
       </header>
 
@@ -145,7 +116,7 @@ export default function IntegrationsSettingsPage() {
         )}
 
         {loading ? (
-          <div className="text-slate-500">Chargement...</div>
+          <div className="text-slate-500">{t("loading")}</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {integrationsList.map((integration) => {
@@ -155,9 +126,9 @@ export default function IntegrationsSettingsPage() {
               return (
                 <div key={integration.id} className="bg-[#1A1A1A] text-[#F2F0E9] border border-[#2E4036] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col relative noise-bg-subtle">
                   <div className="px-6 py-5 border-b border-white/[0.06] bg-white/[0.02] flex items-center justify-between">
-                    <h3 className="font-jakarta font-bold text-xl">{integration.name}</h3>
+                    <h3 className="font-jakarta font-bold text-xl">{t(`${integration.id}_name`)}</h3>
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-plex-mono font-semibold text-[#CC5833] tracking-widest uppercase">Activer</span>
+                      <span className="text-xs font-plex-mono font-semibold text-[#CC5833] tracking-widest uppercase">{t("label_activate")}</span>
                       <label className="relative inline-flex items-center cursor-pointer">
                         <input 
                           type="checkbox" 
@@ -170,11 +141,11 @@ export default function IntegrationsSettingsPage() {
                     </div>
                   </div>
                   <div className="p-6 flex-1 flex flex-col z-10">
-                    <p className="text-sm font-outfit text-[#F2F0E9]/60 mb-8 leading-relaxed">{integration.description}</p>
+                    <p className="text-sm font-outfit text-[#F2F0E9]/60 mb-8 leading-relaxed">{t(`${integration.id}_desc`)}</p>
                     
                     <div className="mt-auto space-y-4">
                       <div>
-                        <label className="block text-xs font-plex-mono tracking-wider text-[#F2F0E9]/80 mb-2 uppercase">Clé d'API Secrète / Token</label>
+                        <label className="block text-xs font-plex-mono tracking-wider text-[#F2F0E9]/80 mb-2 uppercase">{t("label_api_key")}</label>
                         <input
                           type="password"
                           value={record.access_token}
@@ -188,9 +159,9 @@ export default function IntegrationsSettingsPage() {
                         disabled={isSaving}
                         className="group w-full flex items-center justify-center gap-2 px-6 py-4 bg-[#CC5833] text-[#F2F0E9] font-jakarta font-bold text-sm tracking-wide rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 disabled:opacity-50 disabled:hover:scale-100"
                       >
-                        {isSaving ? "Sauvegarde..." : (
+                        {isSaving ? t("btn_saving") : (
                           <>
-                            <Save className="w-4 h-4 group-hover:-translate-y-[1px] transition-transform" /> Enregistrer {integration.name}
+                            <Save className="w-4 h-4 group-hover:-translate-y-[1px] transition-transform" /> {t("btn_save", { name: t(`${integration.id}_name`) })}
                           </>
                         )}
                       </button>

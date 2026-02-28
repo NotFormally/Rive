@@ -189,7 +189,10 @@
     "nav_settings": "الإعدادات",
     "restaurant_space": "مساحة المطعم",
     "btn_logout": "تسجيل الخروج",
-    "nav_reservations": "الحجوزات"
+    "nav_reservations": "الحجوزات",
+    "nav_deposits": "Deposits Tracker",
+    "nav_variance": "Variance Hub",
+    "nav_production": "Brewery Prod."
   },
   "Dashboard": {
     "header_title": "نظرة عامة",
@@ -460,7 +463,13 @@
     "btn_manage_subscription": "Gérer mon abonnement (Stripe)",
     "trial_desc": "Vous êtes actuellement sur le système d'essai gratuit ou manuel. Vous n'avez pas de facturation automatique configurée.",
     "btn_view_plans": "Voir les forfaits",
-    "portal_error": "Impossible de charger le portail."
+    "portal_error": "Impossible de charger le portail.",
+    "module_deposits_label": "Deposits Tracker",
+    "module_deposits_desc": "Track kegs and bottle deposits separately from Food Cost.",
+    "module_variance_label": "Variance & Spoilage",
+    "module_variance_desc": "Spot discrepancies between POS expectations and physical inventory.",
+    "module_production_label": "Brewery Production",
+    "module_production_desc": "Track your beer batches from fermentation to kegs."
   },
   "SettingsIntegrations": {
     "title": "Connexions POS",

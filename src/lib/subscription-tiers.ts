@@ -12,6 +12,10 @@ export type TierModules = {
   module_receipt_scanner: boolean;
   module_reservations: boolean;
   module_smart_prep: boolean;
+  // Nouvelles fonctionnalités Bar/Brasserie
+  module_deposits: boolean;
+  module_variance: boolean;
+  module_production: boolean;
 };
 
 export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: TierModules }> = {
@@ -26,6 +30,9 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_receipt_scanner: true,
       module_reservations: true,  // Full access during trial
       module_smart_prep: true,    // Smart Prep available during trial (degrades gracefully by data level)
+      module_deposits: true,
+      module_variance: true,
+      module_production: true,
     },
   },
   essential: {
@@ -39,6 +46,9 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_receipt_scanner: false,
       module_reservations: false,
       module_smart_prep: false,
+      module_deposits: false,
+      module_variance: false,
+      module_production: false,
     },
   },
   performance: {
@@ -52,6 +62,9 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_receipt_scanner: false,
       module_reservations: false,
       module_smart_prep: false,
+      module_deposits: false,
+      module_variance: false,
+      module_production: false,
     },
   },
   intelligence: {
@@ -65,6 +78,9 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_receipt_scanner: true,
       module_reservations: true,   // ✅ Tier 3: Libro, Resy, Zenchef
       module_smart_prep: true,     // ✅ Smart Prep Lists (data-level degradation, not tier-gated)
+      module_deposits: true,
+      module_variance: true,
+      module_production: true,
     },
   },
   enterprise: {
@@ -78,6 +94,9 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_receipt_scanner: true,
       module_reservations: true,
       module_smart_prep: true,
+      module_deposits: true,
+      module_variance: true,
+      module_production: true,
     },
   },
 };
@@ -110,6 +129,9 @@ export function computeEffectiveModules(
     module_receipt_scanner: tierModules.module_receipt_scanner && dbSettings.module_receipt_scanner,
     module_reservations: tierModules.module_reservations && (dbSettings.module_reservations ?? true),
     module_smart_prep: tierModules.module_smart_prep && (dbSettings.module_smart_prep ?? true),
+    module_deposits: tierModules.module_deposits && (dbSettings.module_deposits ?? true),
+    module_variance: tierModules.module_variance && (dbSettings.module_variance ?? true),
+    module_production: tierModules.module_production && (dbSettings.module_production ?? true),
   };
 
   return { modules, tier: effectiveTier, trialExpired, daysLeft };

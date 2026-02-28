@@ -17,6 +17,7 @@ export type RestaurantProfile = {
   phone: string;
   hours: string;
   logo_url: string | null;
+  social_media_context?: string;
 };
 
 export type ModuleSettings = TierModules;
@@ -58,6 +59,9 @@ const defaultSettings: ModuleSettings = {
   module_receipt_scanner: true,
   module_reservations: true,
   module_smart_prep: true,
+  module_deposits: true,
+  module_variance: true,
+  module_production: true,
 };
 
 const AuthContext = createContext<AuthContextType>({

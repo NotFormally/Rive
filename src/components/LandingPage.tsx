@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from 'next-intl';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat, TrendingDown, ScanLine } from "lucide-react";
+import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat, TrendingDown, ScanLine, Beer, Droplets, Recycle } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 
 // Register GSAP Plugin
@@ -385,7 +385,10 @@ export function LandingPage() {
             <div className="order-2">
               <div className="flex flex-col gap-6">
                 <div className="bg-green-400/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Activity className="w-8 h-8 text-green-400" /></div>
-                <h3 className="font-jakarta font-bold text-3xl md:text-4xl">{t('f6_title')}</h3>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl flex items-center gap-3">
+                  {t('f6_title')}
+                  <span className="text-[10px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-1 rounded-full font-bold tracking-widest uppercase align-middle">{t('beta_badge')}</span>
+                </h3>
                 <p className="font-outfit text-lg opacity-80 leading-relaxed">{t('f6_desc')}</p>
                 <div className="bg-[#1f2d25] p-6 rounded-2xl mt-4">
                   <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-green-700/50 mb-4">Exemples d'utilisation</h4>
@@ -486,6 +489,70 @@ export function LandingPage() {
                     <li className="flex gap-3"><span className="text-amber-400">✦</span> {t('f8_ex2')}</li>
                     <li className="flex gap-3"><span className="text-amber-400">✦</span> {t('f8_ex3')}</li>
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature 9: Liquid Intelligence (Bar & Brewery) */}
+          <div className="feature-row bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <div className="flex flex-col gap-6">
+                <div className="bg-emerald-50 w-16 h-16 rounded-2xl flex items-center justify-center"><Beer className="w-8 h-8 text-emerald-600" /></div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f9_title')}</h3>
+                <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f9_desc')}</p>
+                <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-50 mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-emerald-400 mb-4">Exemples d&apos;utilisation</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
+                    <li className="flex gap-3"><span className="text-emerald-500">✦</span> {t('f9_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-emerald-500">✦</span> {t('f9_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-emerald-500">✦</span> {t('f9_ex3')}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 bg-[#1A1A1A] rounded-[2rem] h-64 md:h-full min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden shadow-2xl">
+              {/* Animated Mockup of liquid tracking */}
+              <div className="w-full h-full flex items-center justify-center relative">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#2E4036]/20 z-0"></div>
+                
+                {/* 3 Floating Cards for the Bar modules */}
+                <div className="relative z-10 flex flex-col gap-4 w-full max-w-[280px]">
+                  {/* Deposits Card */}
+                  <div className="bg-[#2E4036] border border-[#3e5548] p-4 rounded-2xl flex items-center gap-4 hover:translate-x-2 transition-transform shadow-lg cursor-default">
+                    <div className="bg-white/10 p-2 rounded-xl shrink-0"><Recycle className="w-5 h-5 text-[#F2F0E9]" /></div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-plex-mono text-[10px] text-white/50 tracking-widest uppercase mb-1">Keg Deposits</p>
+                      <div className="flex justify-between items-end">
+                        <p className="font-jakarta font-bold text-white text-base truncate">24x 30L Kegs</p>
+                        <p className="font-outfit font-bold text-[#CC5833] text-sm tabular-nums">+$720.00</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Variance Card */}
+                  <div className="bg-[#1A1A1A] border border-white/10 p-4 rounded-2xl flex items-center gap-4 hover:translate-x-2 transition-transform shadow-lg cursor-default delay-100">
+                    <div className="bg-red-500/10 p-2 rounded-xl shrink-0"><Droplets className="w-5 h-5 text-red-400" /></div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-plex-mono text-[10px] text-red-400/70 tracking-widest uppercase mb-1">Pour Variance</p>
+                      <div className="flex justify-between items-end">
+                        <p className="font-jakarta font-bold text-white text-base truncate">Draft IPA</p>
+                        <p className="font-outfit font-bold text-red-400 text-sm tabular-nums">-1.2L</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Brewery Production Card */}
+                  <div className="bg-[#1f2d25] border border-[#3e5548] p-4 rounded-2xl flex items-center gap-4 hover:translate-x-2 transition-transform shadow-lg cursor-default delay-200">
+                    <div className="bg-amber-500/10 p-2 rounded-xl shrink-0"><Beer className="w-5 h-5 text-amber-400" /></div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-plex-mono text-[10px] text-amber-500/70 tracking-widest uppercase mb-1">Batch #042</p>
+                      <div className="flex justify-between items-end">
+                        <p className="font-jakarta font-bold text-white text-base truncate">Pale Ale</p>
+                        <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full font-bold uppercase border border-indigo-500/20">Kegging</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

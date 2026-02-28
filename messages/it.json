@@ -130,7 +130,12 @@
     "tier_essential_desc": "L'Ecosistema del Menu fondamentale per strutturare le tue operazioni.",
     "tier_performance_name": "Performance",
     "tier_performance_badge": "Bussola di Performance",
-    "tier_performance_desc": "Il tuo Profit Radar per ottimizzare i costi e i margini alimentari."
+    "tier_performance_desc": "Il tuo Profit Radar per ottimizzare i costi e i margini alimentari.",
+    "f9_title": "Intelligenza Liquida (Bar e Birrerie)",
+    "f9_desc": "Tracciamento ultra-preciso dei liquidi. Gestisci le rese dei fusti, isola i vuoti a rendere e gestisci la produzione del tuo micro-birrificio.",
+    "f9_ex1": "Isola istantaneamente i depositi di fusti e bottiglie dal tuo vero Food Cost.",
+    "f9_ex2": "Rileva lo spreco esatto tra le vendite POS e le giacenze di magazzino.",
+    "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche."
   },
   "Pricing": {
     "title": "Prezzi chiari, impatto reale.",
@@ -205,7 +210,12 @@
     "f8_desc": "L'Analisi Sonar incrocia le tue prenotazioni, le vendite POS e le ricette per generare automaticamente le quantità esatte da preparare.",
     "f8_ex1": "Calcolare le porzioni di ogni piatto in base al numero esatto di coperti confermati.",
     "f8_ex2": "Aggregare gli ingredienti grezzi incrociando ricette e vendite storiche.",
-    "f8_ex3": "Stimare il costo totale della preparazione prima ancora di aprire la cucina."
+    "f8_ex3": "Stimare il costo totale della preparazione prima ancora di aprire la cucina.",
+    "f9_title": "Intelligenza Liquida (Bar e Birrerie)",
+    "f9_desc": "Tracciamento ultra-preciso dei liquidi. Gestisci le rese dei fusti, isola i vuoti a rendere e gestisci la produzione del tuo micro-birrificio.",
+    "f9_ex1": "Isola istantaneamente i depositi di fusti e bottiglie dal tuo vero Food Cost.",
+    "f9_ex2": "Rileva lo spreco esatto tra le vendite POS e le giacenze di magazzino.",
+    "f9_ex3": "Gestisci i tuoi lotti di birra dalla fermentazione all'infustamento con rese specifiche."
   },
   "Auth": {
     "login_title": "Rive",
@@ -244,7 +254,10 @@
     "nav_settings": "Impostazioni",
     "restaurant_space": "Spazio Ristorante",
     "btn_logout": "Disconnetti",
-    "nav_reservations": "Prenotazioni"
+    "nav_reservations": "Prenotazioni",
+    "nav_deposits": "Tracciatore Vuoti",
+    "nav_variance": "Perdite e Sprechi",
+    "nav_production": "Produzione"
   },
   "Dashboard": {
     "header_title": "Panoramica",
@@ -515,7 +528,13 @@
     "btn_manage_subscription": "Gérer mon abonnement (Stripe)",
     "trial_desc": "Vous êtes actuellement sur le système d'essai gratuit ou manuel. Vous n'avez pas de facturation automatique configurée.",
     "btn_view_plans": "Voir les forfaits",
-    "portal_error": "Impossible de charger le portail."
+    "portal_error": "Impossible de charger le portail.",
+    "module_deposits_label": "Tracciatore Vuoti",
+    "module_deposits_desc": "Traccia i fusti e i vuoti a rendere separatamente.",
+    "module_variance_label": "Perdite e Sprechi",
+    "module_variance_desc": "Individua le discrepanze tra POS e inventario fisico.",
+    "module_production_label": "Produzione Birrificio",
+    "module_production_desc": "Traccia i lotti di birra dalla fermentazione in poi."
   },
   "SettingsIntegrations": {
     "title": "Connexions POS",

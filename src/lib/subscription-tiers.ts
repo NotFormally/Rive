@@ -1,8 +1,7 @@
 // Rive — Subscription Tier Configuration
 // Maps each tier to the modules it includes
 
-export type SubscriptionTier = 'freemium' | 'trial' | 'essential' | 'performance' | 'intelligence' | 'enterprise';
-// Note: 'trial' is kept for backward compatibility with existing users but new signups use 'freemium'
+export type SubscriptionTier = 'free' | 'essential' | 'performance' | 'intelligence' | 'enterprise';
 
 export type TierModules = {
   module_logbook: boolean;
@@ -20,7 +19,7 @@ export type TierModules = {
 };
 
 export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: TierModules }> = {
-  freemium: {
+  free: {
     label: 'Gratuit',
     modules: {
       module_logbook: true,        // Carnet de bord (avec quotas)
@@ -34,22 +33,6 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_deposits: false,
       module_variance: false,
       module_production: false,
-    },
-  },
-  trial: {
-    label: 'Essai gratuit',
-    modules: {
-      module_logbook: true,
-      module_menu_editor: true,
-      module_food_cost: true,
-      module_menu_engineering: true,
-      module_instagram: true,
-      module_receipt_scanner: true,
-      module_reservations: true,  // Full access during trial
-      module_smart_prep: true,    // Smart Prep available during trial (degrades gracefully by data level)
-      module_deposits: true,
-      module_variance: true,
-      module_production: true,
     },
   },
   essential: {
@@ -120,17 +103,15 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
 
 /**
  * Given raw settings from the database, compute the effective module access.
- * If the trial has expired and no paid tier is active, restrict to essential.
+ * Intersects the tier's allowed modules with the user's manual toggles.
  */
 export function computeEffectiveModules(
-  dbSettings: TierModules & { subscription_tier?: SubscriptionTier; trial_ends_at?: string }
-): { modules: TierModules; tier: SubscriptionTier; trialExpired: boolean; daysLeft: number } {
-  const rawTier = (dbSettings.subscription_tier || 'freemium') as SubscriptionTier;
+  dbSettings: TierModules & { subscription_tier?: string }
+): { modules: TierModules; tier: SubscriptionTier } {
+  const rawTier = (dbSettings.subscription_tier || 'free') as string;
 
-  // Legacy: treat existing 'trial' users as freemium (trial concept removed)
-  const effectiveTier = rawTier === 'trial' ? 'freemium' : rawTier;
-  const trialExpired = false;
-  const daysLeft = 0;
+  // Legacy: treat any unknown tier (including old 'trial') as free
+  const effectiveTier: SubscriptionTier = (rawTier in TIER_CONFIG) ? rawTier as SubscriptionTier : 'free';
 
   const tierModules = TIER_CONFIG[effectiveTier].modules;
 
@@ -149,6 +130,6 @@ export function computeEffectiveModules(
     module_production: tierModules.module_production && (dbSettings.module_production ?? true),
   };
 
-  return { modules, tier: effectiveTier, trialExpired, daysLeft };
+  return { modules, tier: effectiveTier };
 }
 

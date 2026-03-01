@@ -34,8 +34,6 @@ export type UsageMetrics = {
 
 type SubscriptionInfo = {
   tier: SubscriptionTier;
-  trialExpired: boolean;
-  daysLeft: number;
   stripeCustomerId: string | null;
 };
 
@@ -140,14 +138,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         if (settingsData) {
           // Compute effective modules based on subscription tier
-          const { modules, tier, trialExpired, daysLeft } = computeEffectiveModules(settingsData);
+          const { modules, tier } = computeEffectiveModules(settingsData);
           setSettings(modules);
           setUsage(settingsData.usage_metrics || null);
-          setSubscription({ tier, trialExpired, daysLeft, stripeCustomerId: settingsData.stripe_customer_id || null });
+          setSubscription({ tier, stripeCustomerId: settingsData.stripe_customer_id || null });
         } else {
           setSettings(defaultSettings);
           setUsage(null);
-          setSubscription({ tier: 'freemium', trialExpired: false, daysLeft: 0, stripeCustomerId: null });
+          setSubscription({ tier: 'free', stripeCustomerId: null });
         }
 
         // 4. Load intelligence score
@@ -178,10 +176,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .eq("restaurant_id", profile.id)
       .single();
     if (data) {
-      const { modules, tier, trialExpired, daysLeft } = computeEffectiveModules(data);
+      const { modules, tier } = computeEffectiveModules(data);
       setSettings(modules);
       setUsage(data.usage_metrics || null);
-      setSubscription({ tier, trialExpired, daysLeft, stripeCustomerId: data.stripe_customer_id || null });
+      setSubscription({ tier, stripeCustomerId: data.stripe_customer_id || null });
     }
   };
 

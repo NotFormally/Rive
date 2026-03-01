@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import {
@@ -48,21 +49,21 @@ type Reservation = {
   created_at: string;
 };
 
-// Provider metadata (logo colors, labels)
-const PROVIDER_META: Record<string, { label: string; color: string; bg: string }> = {
-  libro:   { label: 'Libro',   color: 'text-emerald-700', bg: 'bg-emerald-100' },
-  resy:    { label: 'Resy',    color: 'text-rose-700',    bg: 'bg-rose-100' },
-  zenchef: { label: 'Zenchef', color: 'text-blue-700',    bg: 'bg-blue-100' },
-  unknown: { label: 'Autre',   color: 'text-slate-600',   bg: 'bg-slate-100' },
+// Provider metadata (logo colors)
+const PROVIDER_META: Record<string, { color: string; bg: string }> = {
+  libro:   { color: 'text-emerald-700', bg: 'bg-emerald-100' },
+  resy:    { color: 'text-rose-700',    bg: 'bg-rose-100' },
+  zenchef: { color: 'text-blue-700',    bg: 'bg-blue-100' },
+  unknown: { color: 'text-slate-600',   bg: 'bg-slate-100' },
 };
 
 // Status icons and colors
-const STATUS_CONFIG: Record<string, { icon: typeof Clock; label: string; color: string; bg: string }> = {
-  booked:    { icon: Clock,     label: 'Réservé',  color: 'text-blue-700',    bg: 'bg-blue-50' },
-  seated:    { icon: Utensils,  label: 'Assis',    color: 'text-amber-700',   bg: 'bg-amber-50' },
-  completed: { icon: UserCheck, label: 'Terminé',  color: 'text-green-700',   bg: 'bg-green-50' },
-  cancelled: { icon: XCircle,   label: 'Annulé',   color: 'text-red-600',     bg: 'bg-red-50' },
-  no_show:   { icon: XCircle,   label: 'No-show',  color: 'text-slate-500',   bg: 'bg-slate-50' },
+const STATUS_CONFIG: Record<string, { icon: typeof Clock; color: string; bg: string }> = {
+  booked:    { icon: Clock,     color: 'text-blue-700',    bg: 'bg-blue-50' },
+  seated:    { icon: Utensils,  color: 'text-amber-700',   bg: 'bg-amber-50' },
+  completed: { icon: UserCheck, color: 'text-green-700',   bg: 'bg-green-50' },
+  cancelled: { icon: XCircle,   color: 'text-red-600',     bg: 'bg-red-50' },
+  no_show:   { icon: XCircle,   color: 'text-slate-500',   bg: 'bg-slate-50' },
 };
 
 // ============================================================================
@@ -71,6 +72,7 @@ const STATUS_CONFIG: Record<string, { icon: typeof Clock; label: string; color: 
 
 export default function ReservationsDashboard() {
   const { profile } = useAuth();
+  const t = useTranslations('Reservations');
   const [providers, setProviders] = useState<Provider[]>([]);
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -79,6 +81,23 @@ export default function ReservationsDashboard() {
   const [showSetup, setShowSetup] = useState(false);
   const [newProviderName, setNewProviderName] = useState<string>('');
   const [dateFilter, setDateFilter] = useState<'today' | 'tomorrow' | 'week' | 'all'>('today');
+
+  // Translated labels for providers
+  const PROVIDER_LABELS: Record<string, string> = {
+    libro: 'Libro',
+    resy: 'Resy',
+    zenchef: 'Zenchef',
+    unknown: t('provider_other'),
+  };
+
+  // Translated labels for statuses
+  const STATUS_LABELS: Record<string, string> = {
+    booked: t('status_booked'),
+    seated: t('status_seated'),
+    completed: t('status_completed'),
+    cancelled: t('status_cancelled'),
+    no_show: t('status_no_show'),
+  };
 
   // Base URL for webhook — uses window.location in browser
   const baseUrl = typeof window !== 'undefined'
@@ -160,7 +179,7 @@ export default function ReservationsDashboard() {
   };
 
   const deleteProvider = async (id: string) => {
-    if (!confirm('Supprimer cette connexion ? Les réservations associées seront conservées.')) return;
+    if (!confirm(t('confirm_delete_provider'))) return;
     await fetch(`/api/reservations/providers?id=${id}`, { method: 'DELETE' });
     await loadData();
   };
@@ -195,16 +214,16 @@ export default function ReservationsDashboard() {
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-4 sm:px-8 py-3 sm:py-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h1 className="text-lg sm:text-xl font-bold text-slate-900">Réservations</h1>
+            <h1 className="text-lg sm:text-xl font-bold text-slate-900">{t('title')}</h1>
             <p className="text-xs sm:text-sm text-slate-500">
-              Libro · Resy · Zenchef — Flux en temps réel
+              {t('subtitle')}
             </p>
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => loadData()}
               className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
-              title="Rafraîchir"
+              title={t('btn_refresh')}
             >
               <RefreshCw className="w-4 h-4 text-slate-500" />
             </button>
@@ -212,7 +231,7 @@ export default function ReservationsDashboard() {
               onClick={() => setShowSetup(true)}
               className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-indigo-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
             >
-              <Plus className="w-4 h-4" /> <span className="hidden sm:inline">Connecter une</span> plateforme
+              <Plus className="w-4 h-4" /> <span className="hidden sm:inline">{t('btn_connect_a')}</span> {t('btn_platform')}
             </button>
           </div>
         </div>
@@ -224,21 +243,21 @@ export default function ReservationsDashboard() {
           <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-blue-50 rounded-lg"><CalendarDays className="w-5 h-5 text-blue-600" /></div>
-              <span className="text-sm text-slate-500">Réservations actives</span>
+              <span className="text-sm text-slate-500">{t('stat_active_reservations')}</span>
             </div>
             <p className="text-3xl font-bold text-slate-900">{activeReservations.length}</p>
           </div>
           <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-emerald-50 rounded-lg"><Users className="w-5 h-5 text-emerald-600" /></div>
-              <span className="text-sm text-slate-500">Couverts attendus</span>
+              <span className="text-sm text-slate-500">{t('stat_expected_covers')}</span>
             </div>
             <p className="text-3xl font-bold text-slate-900">{totalGuests}</p>
           </div>
           <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-red-50 rounded-lg"><XCircle className="w-5 h-5 text-red-500" /></div>
-              <span className="text-sm text-slate-500">Annulations</span>
+              <span className="text-sm text-slate-500">{t('stat_cancellations')}</span>
             </div>
             <p className="text-3xl font-bold text-slate-900">{cancelledCount}</p>
           </div>
@@ -247,32 +266,33 @@ export default function ReservationsDashboard() {
         {/* Connected Providers */}
         <section>
           <h2 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <Link2 className="w-4 h-4" /> Plateformes connectées
+            <Link2 className="w-4 h-4" /> {t('section_connected_platforms')}
           </h2>
           {providers.length === 0 ? (
             <div className="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-8 text-center">
               <Link2 className="w-8 h-8 text-slate-400 mx-auto mb-3" />
-              <p className="text-sm text-slate-600 font-medium mb-1">Aucune plateforme connectée</p>
+              <p className="text-sm text-slate-600 font-medium mb-1">{t('empty_no_platform')}</p>
               <p className="text-xs text-slate-400 mb-4">
-                Connectez Libro, Resy ou Zenchef pour recevoir vos réservations automatiquement.
+                {t('empty_no_platform_desc')}
               </p>
               <button
                 onClick={() => setShowSetup(true)}
                 className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700"
               >
-                Configurer maintenant
+                {t('btn_configure_now')}
               </button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {providers.map((prov) => {
                 const meta = PROVIDER_META[prov.provider_name || 'unknown'] || PROVIDER_META.unknown;
+                const provLabel = PROVIDER_LABELS[prov.provider_name || 'unknown'] || PROVIDER_LABELS.unknown;
                 return (
                   <div key={prov.id} className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${meta.color} ${meta.bg}`}>
-                          {meta.label}
+                          {provLabel}
                         </span>
                         <span className={`inline-flex items-center gap-1 text-xs font-medium ${
                           prov.status === 'active' ? 'text-green-600' :
@@ -282,7 +302,7 @@ export default function ReservationsDashboard() {
                             prov.status === 'active' ? 'bg-green-500' :
                             prov.status === 'error' ? 'bg-red-500' : 'bg-amber-400 animate-pulse'
                           }`}></span>
-                          {prov.status === 'active' ? 'Actif' : prov.status === 'error' ? 'Erreur' : 'En attente'}
+                          {prov.status === 'active' ? t('provider_status_active') : prov.status === 'error' ? t('provider_status_error') : t('provider_status_pending')}
                         </span>
                       </div>
                       <button onClick={() => deleteProvider(prov.id)} className="text-slate-400 hover:text-red-500 transition-colors">
@@ -291,7 +311,7 @@ export default function ReservationsDashboard() {
                     </div>
                     {/* Webhook URL */}
                     <div className="bg-slate-50 rounded-lg p-3 mb-3">
-                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold mb-1">URL Webhook</p>
+                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold mb-1">{t('webhook_url_label')}</p>
                       <div className="flex items-center gap-2">
                         <code className="text-xs text-slate-600 font-mono flex-1 truncate">
                           {baseUrl}?token={prov.webhook_token.slice(0, 20)}...
@@ -306,7 +326,7 @@ export default function ReservationsDashboard() {
                     </div>
                     {prov.last_sync_at && (
                       <p className="text-[11px] text-slate-400">
-                        Dernière synchro : {new Date(prov.last_sync_at).toLocaleString('fr-CA')}
+                        {t('last_sync')} : {new Date(prov.last_sync_at).toLocaleString('fr-CA')}
                       </p>
                     )}
                   </div>
@@ -320,7 +340,7 @@ export default function ReservationsDashboard() {
         <section>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
             <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <CalendarDays className="w-4 h-4" /> Réservations
+              <CalendarDays className="w-4 h-4" /> {t('section_reservations')}
             </h2>
             <div className="flex bg-slate-100 rounded-lg p-0.5 overflow-x-auto">
               {(['today', 'tomorrow', 'week', 'all'] as const).map((f) => (
@@ -331,34 +351,36 @@ export default function ReservationsDashboard() {
                     dateFilter === f ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
-                  {f === 'today' ? "Aujourd'hui" : f === 'tomorrow' ? 'Demain' : f === 'week' ? '7 jours' : 'Tout'}
+                  {f === 'today' ? t('filter_today') : f === 'tomorrow' ? t('filter_tomorrow') : f === 'week' ? t('filter_week') : t('filter_all')}
                 </button>
               ))}
             </div>
           </div>
 
           {loading ? (
-            <div className="text-sm text-slate-400 py-8 text-center">Chargement des réservations...</div>
+            <div className="text-sm text-slate-400 py-8 text-center">{t('loading_reservations')}</div>
           ) : reservations.length === 0 ? (
             <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
               <CalendarDays className="w-8 h-8 text-slate-300 mx-auto mb-3" />
-              <p className="text-sm text-slate-500">Aucune réservation pour cette période.</p>
+              <p className="text-sm text-slate-500">{t('empty_no_reservations')}</p>
             </div>
           ) : (
             <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
               {/* Desktop table header */}
               <div className="hidden md:grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                <span>Client</span>
-                <span>Couverts</span>
-                <span>Heure</span>
-                <span>Source</span>
-                <span>Statut</span>
+                <span>{t('table_client')}</span>
+                <span>{t('table_covers')}</span>
+                <span>{t('table_time')}</span>
+                <span>{t('table_source')}</span>
+                <span>{t('table_status')}</span>
               </div>
               {reservations.map((r) => {
                 const sc = STATUS_CONFIG[r.status] || STATUS_CONFIG.booked;
                 const StatusIcon = sc.icon;
+                const statusLabel = STATUS_LABELS[r.status] || STATUS_LABELS.booked;
                 const provName = getProviderForReservation(r.provider_id);
                 const pm = PROVIDER_META[provName] || PROVIDER_META.unknown;
+                const provLabel = PROVIDER_LABELS[provName] || PROVIDER_LABELS.unknown;
                 const time = new Date(r.reservation_time);
 
                 return (
@@ -366,7 +388,7 @@ export default function ReservationsDashboard() {
                     {/* Desktop row */}
                     <div className="hidden md:grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3.5 items-center">
                       <div>
-                        <p className="text-sm font-medium text-slate-900">{r.customer_name || 'Client inconnu'}</p>
+                        <p className="text-sm font-medium text-slate-900">{r.customer_name || t('unknown_client')}</p>
                         {r.customer_notes && (
                           <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{r.customer_notes}</p>
                         )}
@@ -379,17 +401,17 @@ export default function ReservationsDashboard() {
                         {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
                       </span>
                       <span className={`inline-flex w-fit px-2 py-0.5 rounded-full text-xs font-medium ${pm.color} ${pm.bg}`}>
-                        {pm.label}
+                        {provLabel}
                       </span>
                       <span className={`inline-flex items-center gap-1 text-xs font-medium ${sc.color}`}>
                         <StatusIcon className="w-3 h-3" />
-                        {sc.label}
+                        {statusLabel}
                       </span>
                     </div>
                     {/* Mobile card */}
                     <div className="md:hidden px-4 py-3">
                       <div className="flex items-center justify-between mb-1.5">
-                        <p className="text-sm font-medium text-slate-900">{r.customer_name || 'Client inconnu'}</p>
+                        <p className="text-sm font-medium text-slate-900">{r.customer_name || t('unknown_client')}</p>
                         <span className="text-sm text-slate-700 font-mono">
                           {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
                         </span>
@@ -400,11 +422,11 @@ export default function ReservationsDashboard() {
                           <span className="text-xs text-slate-600">{r.guest_count}</span>
                         </div>
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${pm.color} ${pm.bg}`}>
-                          {pm.label}
+                          {provLabel}
                         </span>
                         <span className={`inline-flex items-center gap-1 text-[10px] font-medium ${sc.color}`}>
                           <StatusIcon className="w-3 h-3" />
-                          {sc.label}
+                          {statusLabel}
                         </span>
                       </div>
                       {r.customer_notes && (
@@ -421,12 +443,11 @@ export default function ReservationsDashboard() {
 
       {/* Modal: Add New Provider */}
       {showSetup && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reservation-modal-title">
           <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Connecter une plateforme</h3>
+            <h3 id="reservation-modal-title" className="text-lg font-bold text-slate-900 mb-2">{t('modal_title')}</h3>
             <p className="text-sm text-slate-500 mb-6">
-              Sélectionnez votre logiciel de réservation. Rive générera un lien Webhook unique que vous 
-              devrez coller dans les paramètres de votre plateforme.
+              {t('modal_description')}
             </p>
 
             <div className="space-y-3 mb-6">
@@ -445,12 +466,12 @@ export default function ReservationsDashboard() {
                   >
                     <div className="flex items-center gap-3">
                       <span className={`px-2.5 py-1 rounded-lg text-xs font-bold ${meta.color} ${meta.bg}`}>
-                        {meta.label}
+                        {PROVIDER_LABELS[name]}
                       </span>
                       <span className="text-sm text-slate-600">
-                        {name === 'libro' && 'Canada & Amérique du Nord'}
-                        {name === 'resy' && 'Tables gastronomiques (Amex)'}
-                        {name === 'zenchef' && 'France & Europe'}
+                        {name === 'libro' && t('provider_libro_region')}
+                        {name === 'resy' && t('provider_resy_region')}
+                        {name === 'zenchef' && t('provider_zenchef_region')}
                       </span>
                     </div>
                     <ChevronRight className={`w-4 h-4 ${isSelected ? 'text-indigo-500' : 'text-slate-300'}`} />
@@ -466,8 +487,8 @@ export default function ReservationsDashboard() {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 bg-slate-100">Autre</span>
-                  <span className="text-sm text-slate-600">Plateforme non listée (détection auto)</span>
+                  <span className="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 bg-slate-100">{t('provider_other')}</span>
+                  <span className="text-sm text-slate-600">{t('provider_other_desc')}</span>
                 </div>
                 <ChevronRight className={`w-4 h-4 ${newProviderName === 'other' ? 'text-indigo-500' : 'text-slate-300'}`} />
               </button>
@@ -478,14 +499,14 @@ export default function ReservationsDashboard() {
                 onClick={() => { setShowSetup(false); setNewProviderName(''); }}
                 className="flex-1 px-4 py-2.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
-                Annuler
+                {t('btn_cancel')}
               </button>
               <button
                 onClick={createProvider}
                 disabled={creating || !newProviderName}
                 className="flex-1 px-4 py-2.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 disabled:opacity-50"
               >
-                {creating ? 'Création...' : 'Générer le Webhook'}
+                {creating ? t('btn_creating') : t('btn_generate_webhook')}
               </button>
             </div>
           </div>
@@ -494,4 +515,3 @@ export default function ReservationsDashboard() {
     </div>
   );
 }
-

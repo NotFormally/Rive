@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from 'next-intl';
 import { useAuth } from "@/components/AuthProvider";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ type ProductionBatch = {
 };
 
 export function ProductionDashboard() {
+  const t = useTranslations('Production');
   const [batches, setBatches] = useState<ProductionBatch[]>([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<string | null>(null);
@@ -35,7 +37,7 @@ export function ProductionDashboard() {
       const mapped: ProductionBatch[] = data.map((b: Record<string, unknown>) => ({
         id: b.id as string,
         name: b.name as string,
-        recipe_name: (b.recipes as Record<string, string>)?.name || 'Recette inconnue',
+        recipe_name: (b.recipes as Record<string, string>)?.name || t('unknown_recipe'),
         recipe_id: b.recipe_id as string,
         start_date: b.start_date as string,
         end_date: b.end_date as string | undefined,
@@ -81,9 +83,9 @@ export function ProductionDashboard() {
   };
 
   const columns = [
-    { title: "En Fermentation (Cuve)", status: "fermenting" as const, icon: <Beaker className="w-5 h-5 text-amber-500" /> },
-    { title: "Enfûtage (Kegs)", status: "kegged" as const, icon: <Settings className="w-5 h-5 text-indigo-500" /> },
-    { title: "Cannage / Bouteilles", status: "canned" as const, icon: <CheckCircle className="w-5 h-5 text-emerald-500" /> },
+    { title: t('col_fermenting'), status: "fermenting" as const, icon: <Beaker className="w-5 h-5 text-amber-500" /> },
+    { title: t('col_kegged'), status: "kegged" as const, icon: <Settings className="w-5 h-5 text-indigo-500" /> },
+    { title: t('col_canned'), status: "canned" as const, icon: <CheckCircle className="w-5 h-5 text-emerald-500" /> },
   ];
 
   if (loading) {
@@ -91,7 +93,7 @@ export function ProductionDashboard() {
       <div className="flex h-[400px] items-center justify-center">
         <div className="flex flex-col items-center gap-4 text-slate-400">
           <RefreshCw className="h-8 w-8 animate-spin" />
-          <p>Chargement des productions...</p>
+          <p>{t('loading')}</p>
         </div>
       </div>
     );
@@ -103,9 +105,9 @@ export function ProductionDashboard() {
         <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mb-4">
           <Beaker className="w-8 h-8 text-amber-400" />
         </div>
-        <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune production enregistrée</h3>
+        <h3 className="text-lg font-semibold text-slate-800 mb-2">{t('empty_title')}</h3>
         <p className="text-sm text-slate-500 max-w-md mb-6">
-          Commencez par créer une recette de brassage dans l'éditeur de recettes, puis lancez votre première production ici.
+          {t('empty_description')}
         </p>
       </div>
     );
@@ -114,9 +116,9 @@ export function ProductionDashboard() {
   return (
     <div className="space-y-4 sm:space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-        <h2 className="text-lg sm:text-xl font-semibold text-slate-800">Suivi des Brassins</h2>
+        <h2 className="text-lg sm:text-xl font-semibold text-slate-800">{t('title')}</h2>
         <div className="flex items-center gap-3 text-sm text-slate-500">
-          <span>{batches.length} production{batches.length > 1 ? 's' : ''} au total</span>
+          <span>{t('total_batches', { count: batches.length })}</span>
         </div>
       </div>
 
@@ -149,7 +151,7 @@ export function ProductionDashboard() {
                       </div>
                       <div className="flex items-center gap-1 text-xs">
                         <Clock className="w-3.5 h-3.5 text-slate-400" />
-                        {getDaysElapsed(batch.start_date)} jours
+                        {t('days_elapsed', { count: getDaysElapsed(batch.start_date) })}
                       </div>
                     </div>
 
@@ -161,7 +163,7 @@ export function ProductionDashboard() {
                         onClick={() => updateStatus(batch.id, 'kegged')}
                         disabled={updating === batch.id}
                       >
-                        {updating === batch.id ? 'Transfert...' : 'Transférer en Fût'}
+                        {updating === batch.id ? t('btn_transferring') : t('btn_transfer_keg')}
                       </Button>
                     )}
                     {col.status === "kegged" && (
@@ -172,7 +174,7 @@ export function ProductionDashboard() {
                         onClick={() => updateStatus(batch.id, 'canned')}
                         disabled={updating === batch.id}
                       >
-                        {updating === batch.id ? 'Transfert...' : 'Mettre en cannette'}
+                        {updating === batch.id ? t('btn_transferring') : t('btn_transfer_can')}
                       </Button>
                     )}
                   </CardContent>
@@ -181,7 +183,7 @@ export function ProductionDashboard() {
 
               {batches.filter(b => b.status === col.status).length === 0 && (
                 <div className="text-center p-8 border-2 border-dashed border-slate-200 rounded-lg text-slate-400 text-sm mt-4">
-                  Aucun lot dans cette étape
+                  {t('empty_column')}
                 </div>
               )}
             </div>

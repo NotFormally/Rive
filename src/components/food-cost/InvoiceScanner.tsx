@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Upload, X, FileText, Loader2, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
 
 export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void }) {
+  const t = useTranslations('InvoiceScanner');
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -57,7 +59,7 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
 
   const handleFileSelect = (selectedFile: File) => {
     if (!selectedFile.type.startsWith('image/') && selectedFile.type !== 'application/pdf') {
-       setErrorMessage("Format non supporté. Veuillez uploader une image ou un PDF court.");
+       setErrorMessage(t('error_unsupported_format'));
        setStatus('error');
        return;
     }
@@ -124,7 +126,7 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
       });
 
       if (!response.ok) {
-        throw new Error('Erreur lors du scan (Le fichier est peut-être trop lourd)');
+        throw new Error(t('error_scan_failed'));
       }
 
       const result = await response.json();
@@ -136,7 +138,7 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
     } catch (err: any) {
       console.error(err);
       setStatus('error');
-      setErrorMessage(err.message || 'Une erreur est survenue lors de l\'analyse.');
+      setErrorMessage(err.message || t('error_analysis_generic'));
     }
   };
 
@@ -153,9 +155,9 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
       <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
         <h2 className="text-lg font-bold flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
           <FileText className="w-5 h-5 text-indigo-500" />
-          Nouveau Scan de Facture
+          {t('title')}
         </h2>
-        <p className="text-sm text-zinc-500 mt-1">Glissez une photo de facture. L'IA mettra automatiquement à jour les prix de vos ingrédients.</p>
+        <p className="text-sm text-zinc-500 mt-1">{t('subtitle')}</p>
       </div>
 
       <div className="p-6">
@@ -174,9 +176,9 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
             <div className="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center mb-4">
               <Upload className="w-8 h-8" />
             </div>
-            <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-1">Cliquez ou Glissez un fichier ici</h3>
-            <p className="text-sm text-zinc-500">Formats supportés : JPEG, PNG, WEBP, PDF.</p>
-            <p className="text-xs text-zinc-400 mt-4">Astuce : Si vous êtes sur mobile, vous pouvez prendre une photo directement.</p>
+            <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-1">{t('dropzone_title')}</h3>
+            <p className="text-sm text-zinc-500">{t('dropzone_formats')}</p>
+            <p className="text-xs text-zinc-400 mt-4">{t('dropzone_tip')}</p>
             
             <input 
               ref={fileInputRef}
@@ -201,7 +203,7 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
               
               <div className="aspect-[3/4] rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex items-center justify-center">
                 {previewUrl ? (
-                  <img src={previewUrl} alt="Facture" className="w-full h-full object-cover" />
+                  <img src={previewUrl} alt={t('preview_alt')} className="w-full h-full object-cover" />
                 ) : (
                   <div className="flex flex-col items-center text-zinc-400">
                     <FileText className="w-12 h-12 mb-2" />
@@ -216,15 +218,15 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
               {status === 'idle' && (
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-lg">Prêt pour l'extraction IA</h3>
-                    <p className="text-sm text-zinc-500">Nous allons extraire le fournisseur, le total et mapper chaque ligne de produit avec votre inventaire local.</p>
+                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-lg">{t('ready_title')}</h3>
+                    <p className="text-sm text-zinc-500">{t('ready_desc')}</p>
                   </div>
                   <button 
                     onClick={handleAnalyze}
                     className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 transition-colors shadow-sm"
                   >
                     <Sparkles className="w-5 h-5" />
-                    Lancer la Lecture IA
+                    {t('btn_analyze')}
                   </button>
                 </div>
               )}
@@ -234,11 +236,11 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
                   <Loader2 className="w-10 h-10 text-indigo-600 animate-spin" />
                   <div>
                     <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
-                      {status === 'compressing' ? 'Optimisation de l\'image...' : 
-                       status === 'uploading' ? 'Envoi au Cerveau IA...' : 
-                       'Déchiffrage du ticket (Claude Vision)...'}
+                      {status === 'compressing' ? t('status_compressing') :
+                       status === 'uploading' ? t('status_uploading') :
+                       t('status_analyzing')}
                     </h3>
-                    <p className="text-sm text-zinc-500 mt-1">Veuillez patienter (cela peut prendre jusqu'à 15s)</p>
+                    <p className="text-sm text-zinc-500 mt-1">{t('status_wait')}</p>
                   </div>
                 </div>
               )}
@@ -253,7 +255,7 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
                     onClick={clearSelection}
                     className="w-full py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-lg font-medium transition-colors"
                   >
-                    Essayer un autre fichier
+                    {t('btn_try_another')}
                   </button>
                 </div>
               )}
@@ -262,34 +264,34 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
                 <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
                   <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-500 mb-2">
                     <CheckCircle2 className="w-6 h-6" />
-                    <h3 className="font-bold text-lg">Extraction Réussie</h3>
+                    <h3 className="font-bold text-lg">{t('success_title')}</h3>
                   </div>
                   
                   <div className="bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 p-4 rounded-lg space-y-3">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-xs text-zinc-500 uppercase font-semibold tracking-wider">Fournisseur</p>
+                        <p className="text-xs text-zinc-500 uppercase font-semibold tracking-wider">{t('label_supplier')}</p>
                         <p className="font-medium text-zinc-900 dark:text-zinc-100">{scanResult.supplierName}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-zinc-500 uppercase font-semibold tracking-wider">Date</p>
+                        <p className="text-xs text-zinc-500 uppercase font-semibold tracking-wider">{t('label_date')}</p>
                         <p className="font-medium text-zinc-900 dark:text-zinc-100">{scanResult.date}</p>
                       </div>
                       <div className="col-span-2">
-                        <p className="text-xs text-zinc-500 uppercase font-semibold tracking-wider">Montant Total</p>
+                        <p className="text-xs text-zinc-500 uppercase font-semibold tracking-wider">{t('label_total_amount')}</p>
                         <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{scanResult.totalAmount}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-900/50 p-4 rounded-lg">
-                    <p className="text-sm text-indigo-800 dark:text-indigo-300 font-medium mb-2">Produits identifiés :</p>
+                    <p className="text-sm text-indigo-800 dark:text-indigo-300 font-medium mb-2">{t('identified_products')}</p>
                     <ul className="text-sm space-y-1 text-indigo-700 dark:text-indigo-400 list-disc list-inside">
                       {scanResult.topItems?.map((item: string, i: number) => (
                         <li key={i}>{item}</li>
                       ))}
                       {(scanResult.items?.length > 3) && (
-                        <li className="text-xs mt-1 text-indigo-500 italic">+ {scanResult.items.length - 3} autres articles ignorés/traités en fond</li>
+                        <li className="text-xs mt-1 text-indigo-500 italic">{t('more_items', { count: scanResult.items.length - 3 })}</li>
                       )}
                     </ul>
                   </div>
@@ -298,7 +300,7 @@ export function InvoiceScanner({ onScanComplete }: { onScanComplete?: () => void
                     onClick={clearSelection}
                     className="w-full mt-2 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-lg font-medium transition-colors"
                   >
-                    Scanner une autre facture
+                    {t('btn_scan_another')}
                   </button>
                 </div>
               )}

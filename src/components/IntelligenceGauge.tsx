@@ -1,8 +1,8 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
+import { useTranslations } from "next-intl";
 import {
-  getLevelLabel,
   getLevelColor,
   getLevelBgColor,
   type IntelligenceLevel,
@@ -20,31 +20,23 @@ const MILESTONES = [
   { position: 95, level: "expert" as IntelligenceLevel },
 ];
 
-// Static hint text per level — gives the user a nudge toward the next tier
-const NEXT_HINTS: Record<IntelligenceLevel, string> = {
-  discovery: "Connectez vos réservations pour progresser",
-  operational: "Ajoutez vos recettes pour passer à Prédictif",
-  predictive: "Donnez du feedback quotidien pour passer à Calibré",
-  calibrated: "4 semaines consécutives pour atteindre Expert",
-  expert: "Score maximal atteint",
-};
-
 // =============================================================================
 // IntelligenceGauge
 // =============================================================================
 
 export function IntelligenceGauge() {
   const { intelligenceScore, intelligenceLevel } = useAuth();
+  const t = useTranslations("Intelligence");
 
   // Nothing to render until the score is loaded
   if (intelligenceScore === null || intelligenceLevel === null) {
     return null;
   }
 
-  const levelLabel = getLevelLabel(intelligenceLevel);
+  const levelLabel = t(`level_${intelligenceLevel}` as any);
   const levelColor = getLevelColor(intelligenceLevel);
   const levelBgColor = getLevelBgColor(intelligenceLevel);
-  const hint = NEXT_HINTS[intelligenceLevel];
+  const hint = t(`hint_${intelligenceLevel}` as any);
 
   return (
     <div className="bg-card border-b border-border/50 px-4 sm:px-8 py-2">
@@ -79,7 +71,7 @@ export function IntelligenceGauge() {
                   : "bg-secondary"
               }`}
               style={{ left: `${m.position}%` }}
-              title={getLevelLabel(m.level)}
+              title={t(`level_${m.level}` as any)}
             />
           ))}
         </div>

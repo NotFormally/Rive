@@ -73,7 +73,7 @@ export default function InvoicesPage() {
                 <div className="p-10 text-center text-zinc-500">Chargement de l'historique...</div>
              ) : invoices.length === 0 ? (
                 <div className="p-10 text-center text-zinc-500">
-                   Aucune facture n'a encore été scannée par RiveFood AI.
+                   Aucune facture n'a encore été scannée par Rive AI.
                 </div>
              ) : (
                 <div className="divide-y divide-zinc-200 dark:divide-zinc-800">

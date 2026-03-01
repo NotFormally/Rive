@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from 'next-intl';
 import { useAuth } from "@/components/AuthProvider";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ type SpoilageForm = {
 };
 
 export function VarianceDashboard() {
+  const t = useTranslations('Variance');
   const [variances, setVariances] = useState<VarianceItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [showSpoilageForm, setShowSpoilageForm] = useState(false);
@@ -43,7 +45,7 @@ export function VarianceDashboard() {
       const data = await res.json();
       const mapped: VarianceItem[] = data.map((v: Record<string, unknown>) => ({
         id: v.id as string,
-        name: (v.ingredients as Record<string, string>)?.name || 'Produit inconnu',
+        name: (v.ingredients as Record<string, string>)?.name || t('unknown_product'),
         category: (v.ingredients as Record<string, string>)?.category || '',
         theoretical_usage: v.theoretical_usage as number,
         actual_usage: v.actual_usage as number,
@@ -98,7 +100,7 @@ export function VarianceDashboard() {
       <div className="flex h-[400px] items-center justify-center">
         <div className="flex flex-col items-center gap-4 text-slate-400">
           <RefreshCw className="h-8 w-8 animate-spin" />
-          <p>Croisement POS et Inventaire...</p>
+          <p>{t('loading')}</p>
         </div>
       </div>
     );
@@ -111,26 +113,26 @@ export function VarianceDashboard() {
           <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4">
             <TrendingDown className="w-8 h-8 text-red-400" />
           </div>
-          <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune variance détectée</h3>
+          <h3 className="text-lg font-semibold text-slate-800 mb-2">{t('empty_title')}</h3>
           <p className="text-sm text-slate-500 max-w-md mb-6">
-            Les données de variance apparaîtront automatiquement après vos premiers dépôts et ventes POS. Rive croisera vos ventes théoriques avec votre inventaire réel.
+            {t('empty_description')}
           </p>
           <Button
             onClick={() => setShowSpoilageForm(true)}
             className="bg-indigo-600 hover:bg-indigo-700"
           >
             <GlassWater className="w-4 h-4 mr-2" />
-            Déclarer une perte
+            {t('btn_declare_loss')}
           </Button>
         </div>
         {showSpoilageForm && (
           <Card className="shadow-sm border-slate-200 max-w-lg mx-auto">
             <CardHeader>
-              <CardTitle className="text-base">Déclarer une perte</CardTitle>
+              <CardTitle className="text-base">{t('btn_declare_loss')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium text-slate-700 block mb-1">Quantité</label>
+                <label className="text-sm font-medium text-slate-700 block mb-1">{t('label_quantity')}</label>
                 <div className="flex gap-2">
                   <input
                     type="number"
@@ -138,7 +140,7 @@ export function VarianceDashboard() {
                     value={spoilageForm.quantity}
                     onChange={(e) => setSpoilageForm(prev => ({ ...prev, quantity: e.target.value }))}
                     className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                    placeholder="Ex: 2.5"
+                    placeholder={t('placeholder_quantity')}
                   />
                   <select
                     value={spoilageForm.unit}
@@ -148,32 +150,32 @@ export function VarianceDashboard() {
                     <option value="oz">oz</option>
                     <option value="ml">ml</option>
                     <option value="L">L</option>
-                    <option value="unit">unité</option>
+                    <option value="unit">{t('unit_unit')}</option>
                     <option value="kg">kg</option>
                   </select>
                 </div>
               </div>
               <div>
-                <label className="text-sm font-medium text-slate-700 block mb-1">Raison</label>
+                <label className="text-sm font-medium text-slate-700 block mb-1">{t('label_reason')}</label>
                 <select
                   value={spoilageForm.reason}
                   onChange={(e) => setSpoilageForm(prev => ({ ...prev, reason: e.target.value }))}
                   className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
                 >
-                  <option value="spill">Renversé (Spill)</option>
-                  <option value="spoil">Périmé (Spoil)</option>
-                  <option value="comp">Offert (Comp)</option>
-                  <option value="staff">Consommation personnel</option>
+                  <option value="spill">{t('reason_spill')}</option>
+                  <option value="spoil">{t('reason_spoil')}</option>
+                  <option value="comp">{t('reason_comp')}</option>
+                  <option value="staff">{t('reason_staff')}</option>
                 </select>
               </div>
               <div>
-                <label className="text-sm font-medium text-slate-700 block mb-1">Déclaré par (optionnel)</label>
+                <label className="text-sm font-medium text-slate-700 block mb-1">{t('label_logged_by')}</label>
                 <input
                   type="text"
                   value={spoilageForm.logged_by}
                   onChange={(e) => setSpoilageForm(prev => ({ ...prev, logged_by: e.target.value }))}
                   className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                  placeholder="Nom du membre d'équipe"
+                  placeholder={t('placeholder_logged_by')}
                 />
               </div>
               <div className="flex gap-2 pt-2">
@@ -182,10 +184,10 @@ export function VarianceDashboard() {
                   disabled={submittingSpoilage || !spoilageForm.quantity}
                   className="bg-indigo-600 hover:bg-indigo-700"
                 >
-                  {submittingSpoilage ? 'Envoi...' : 'Enregistrer'}
+                  {submittingSpoilage ? t('btn_submitting') : t('btn_save')}
                 </Button>
                 <Button variant="outline" onClick={() => setShowSpoilageForm(false)}>
-                  Annuler
+                  {t('btn_cancel')}
                 </Button>
               </div>
             </CardContent>
@@ -203,24 +205,24 @@ export function VarianceDashboard() {
         <Card className="border-red-200 bg-red-50 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-red-100 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
-            <CardTitle className="text-sm font-medium text-red-800">Coût Total du Coulage</CardTitle>
+            <CardTitle className="text-sm font-medium text-red-800">{t('kpi_total_loss_cost')}</CardTitle>
             <TrendingDown className="h-4 w-4 text-red-500" />
           </CardHeader>
           <CardContent className="relative z-10">
             <div className="text-3xl font-bold text-red-700">${totalLostCost.toFixed(2)}</div>
-            <p className="text-xs text-red-600 mt-1">Perte nette de la dernière période</p>
+            <p className="text-xs text-red-600 mt-1">{t('kpi_net_loss_period')}</p>
           </CardContent>
         </Card>
 
         <Card className="border-amber-200 bg-amber-50 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-amber-100 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
-            <CardTitle className="text-sm font-medium text-amber-800">Alertes Critiques</CardTitle>
+            <CardTitle className="text-sm font-medium text-amber-800">{t('kpi_critical_alerts')}</CardTitle>
             <AlertTriangle className="h-4 w-4 text-amber-500" />
           </CardHeader>
           <CardContent className="relative z-10">
-            <div className="text-3xl font-bold text-amber-900">{itemsWithHighVariance.length} produit{itemsWithHighVariance.length > 1 ? 's' : ''}</div>
-            <p className="text-xs text-amber-700 mt-1">Pertes de plus de 20$ / item</p>
+            <div className="text-3xl font-bold text-amber-900">{t('kpi_critical_count', { count: itemsWithHighVariance.length })}</div>
+            <p className="text-xs text-amber-700 mt-1">{t('kpi_loss_threshold')}</p>
           </CardContent>
         </Card>
 
@@ -233,9 +235,9 @@ export function VarianceDashboard() {
               className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
               onClick={() => setShowSpoilageForm(!showSpoilageForm)}
             >
-              Déclarer Périmé / Renversé
+              {t('btn_declare_spoil_spill')}
             </Button>
-            <p className="text-xs text-slate-500 mt-2">Justifiez vos pertes (&ldquo;Spill&rdquo; ou &ldquo;Comp&rdquo;)</p>
+            <p className="text-xs text-slate-500 mt-2">{t('spoilage_justify')}</p>
           </CardContent>
         </Card>
       </div>
@@ -243,11 +245,11 @@ export function VarianceDashboard() {
       {showSpoilageForm && (
         <Card className="shadow-sm border-slate-200 max-w-lg mx-auto">
           <CardHeader>
-            <CardTitle className="text-base">Déclarer une perte</CardTitle>
+            <CardTitle className="text-base">{t('btn_declare_loss')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-slate-700 block mb-1">Quantité</label>
+              <label className="text-sm font-medium text-slate-700 block mb-1">{t('label_quantity')}</label>
               <div className="flex gap-2">
                 <input
                   type="number"
@@ -255,7 +257,7 @@ export function VarianceDashboard() {
                   value={spoilageForm.quantity}
                   onChange={(e) => setSpoilageForm(prev => ({ ...prev, quantity: e.target.value }))}
                   className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                  placeholder="Ex: 2.5"
+                  placeholder={t('placeholder_quantity')}
                 />
                 <select
                   value={spoilageForm.unit}
@@ -265,32 +267,32 @@ export function VarianceDashboard() {
                   <option value="oz">oz</option>
                   <option value="ml">ml</option>
                   <option value="L">L</option>
-                  <option value="unit">unité</option>
+                  <option value="unit">{t('unit_unit')}</option>
                   <option value="kg">kg</option>
                 </select>
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-700 block mb-1">Raison</label>
+              <label className="text-sm font-medium text-slate-700 block mb-1">{t('label_reason')}</label>
               <select
                 value={spoilageForm.reason}
                 onChange={(e) => setSpoilageForm(prev => ({ ...prev, reason: e.target.value }))}
                 className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
               >
-                <option value="spill">Renversé (Spill)</option>
-                <option value="spoil">Périmé (Spoil)</option>
-                <option value="comp">Offert (Comp)</option>
-                <option value="staff">Consommation personnel</option>
+                <option value="spill">{t('reason_spill')}</option>
+                <option value="spoil">{t('reason_spoil')}</option>
+                <option value="comp">{t('reason_comp')}</option>
+                <option value="staff">{t('reason_staff')}</option>
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-700 block mb-1">Déclaré par (optionnel)</label>
+              <label className="text-sm font-medium text-slate-700 block mb-1">{t('label_logged_by')}</label>
               <input
                 type="text"
                 value={spoilageForm.logged_by}
                 onChange={(e) => setSpoilageForm(prev => ({ ...prev, logged_by: e.target.value }))}
                 className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Nom du membre d'équipe"
+                placeholder={t('placeholder_logged_by')}
               />
             </div>
             <div className="flex gap-2 pt-2">
@@ -299,10 +301,10 @@ export function VarianceDashboard() {
                 disabled={submittingSpoilage || !spoilageForm.quantity}
                 className="bg-indigo-600 hover:bg-indigo-700"
               >
-                {submittingSpoilage ? 'Envoi...' : 'Enregistrer'}
+                {submittingSpoilage ? t('btn_submitting') : t('btn_save')}
               </Button>
               <Button variant="outline" onClick={() => setShowSpoilageForm(false)}>
-                Annuler
+                {t('btn_cancel')}
               </Button>
             </div>
           </CardContent>
@@ -313,8 +315,8 @@ export function VarianceDashboard() {
       <Card className="shadow-sm border-slate-200">
         <CardHeader className="border-b border-slate-100 px-4 sm:px-6">
           <div>
-            <CardTitle className="text-base sm:text-lg">Rapport Théorique vs Réel</CardTitle>
-            <p className="text-xs sm:text-sm text-slate-500">Comparaison POS vs inventaire réel.</p>
+            <CardTitle className="text-base sm:text-lg">{t('report_title')}</CardTitle>
+            <p className="text-xs sm:text-sm text-slate-500">{t('report_subtitle')}</p>
           </div>
         </CardHeader>
         {/* Desktop table */}
@@ -322,11 +324,11 @@ export function VarianceDashboard() {
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-slate-500 bg-slate-50 border-b border-slate-100 uppercase">
               <tr>
-                <th className="px-6 py-4 font-medium">Produit</th>
-                <th className="px-6 py-4 font-medium text-right">POS (Théorique)</th>
-                <th className="px-6 py-4 font-medium text-right">Réel</th>
-                <th className="px-6 py-4 font-medium text-right">Écart</th>
-                <th className="px-6 py-4 font-medium text-right text-red-600">Perte</th>
+                <th className="px-6 py-4 font-medium">{t('th_product')}</th>
+                <th className="px-6 py-4 font-medium text-right">{t('th_pos_theoretical')}</th>
+                <th className="px-6 py-4 font-medium text-right">{t('th_actual')}</th>
+                <th className="px-6 py-4 font-medium text-right">{t('th_variance')}</th>
+                <th className="px-6 py-4 font-medium text-right text-red-600">{t('th_loss')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">

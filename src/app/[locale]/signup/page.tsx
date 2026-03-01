@@ -77,7 +77,7 @@ function SignupForm() {
       return;
     }
 
-    // 4. Create default module settings — Freemium tier
+    // 4. Create default module settings — free tier
     await supabase.from("restaurant_settings").insert({
       restaurant_id: profileData.id,
       module_logbook: true,
@@ -86,7 +86,7 @@ function SignupForm() {
       module_menu_engineering: false,
       module_instagram: false,
       module_receipt_scanner: false,
-      subscription_tier: 'freemium',
+      subscription_tier: 'free',
     });
 
     // 5. Create owner membership — links user to restaurant

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { encrypt } from "@/lib/crypto";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
@@ -77,7 +78,7 @@ export async function GET(req: NextRequest) {
         platform: 'meta',
         account_id: userData.id,
         account_name: userData.name || 'Compte Meta',
-        access_token: accessToken,
+        access_token: encrypt(accessToken),
         expires_at: expiresAt
       }, { onConflict: 'restaurant_id,platform,account_id' });
 

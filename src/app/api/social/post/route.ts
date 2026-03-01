@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAuth, unauthorized } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
+import { decrypt } from "@/lib/crypto";
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,7 +26,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Connexion introuvable ou non autorisée" }, { status: 404 });
     }
 
-    const accessToken = connection.access_token;
+    const accessToken = decrypt(connection.access_token);
 
     // 2. Route to the right API
     if (platform === 'meta') {

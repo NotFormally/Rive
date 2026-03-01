@@ -58,23 +58,14 @@ export async function POST(req: Request) {
       });
       invoiceData = object;
     } catch (aiError) {
-      console.error('AI Receipt scan failed, using fallback:', aiError);
-      
-      // Fallback mock
-      invoiceData = {
-        supplierName: "Metro Cash & Carry",
-        totalAmount: "345.20$",
-        date: new Date().toISOString().split('T')[0],
-        topItems: ["Farine T55 25kg", "Tomates Pelées (Lot)", "Huile de friture"],
-        items: [
-          { name: "Farine T55", quantity: 25, unit: "kg", unitPrice: 1.20, totalPrice: 30.00 },
-          { name: "Tomates Pelées", quantity: 10, unit: "kg", unitPrice: 2.50, totalPrice: 25.00 },
-          { name: "Huile de friture", quantity: 5, unit: "L", unitPrice: 4.00, totalPrice: 20.00 }
-        ],
-        deposits: [
-          { reference: "Consigne Fût 30L", type: "keg", status: "held", quantity: 2, unitAmount: 30.00, totalAmount: 60.00 }
-        ]
-      };
+      console.error('AI Receipt scan failed:', aiError);
+      return new Response(JSON.stringify({
+        error: 'receipt_scan_failed',
+        message: 'Unable to extract data from this receipt. Please try again with a clearer image or enter the data manually.'
+      }), {
+        status: 422,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // Basic date parsing to avoid Postgres errors

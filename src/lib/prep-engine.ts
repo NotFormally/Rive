@@ -70,7 +70,7 @@ export type PrepAlert = {
   type: 'dietary' | 'anomaly' | 'vip' | 'occasion' | 'volume';
   severity: 'info' | 'warning' | 'critical';
   message: string;
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
 };
 
 export type PrepListResult = {

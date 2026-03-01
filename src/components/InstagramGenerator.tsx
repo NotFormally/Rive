@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
-import { hasReachedQuota, FREEMIUM_QUOTAS } from "@/lib/quotas";
+import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
 
 type InstagramPost = {
@@ -31,6 +31,12 @@ const BCG_ICONS: Record<string, string> = {
   ecueil: "🪸",
 };
 
+type SocialConnection = {
+  id: string;
+  platform: string;
+  account_name: string;
+};
+
 export function InstagramGenerator({
   menuItemId,
   menuItemName,
@@ -44,15 +50,15 @@ export function InstagramGenerator({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
-  const [connections, setConnections] = useState<any[]>([]);
+  const [connections, setConnections] = useState<SocialConnection[]>([]);
   const [publishing, setPublishing] = useState<string | null>(null);
   const [publishSuccess, setPublishSuccess] = useState<string | null>(null);
   const t = useTranslations('Instagram');
   const tCommon = useTranslations('Common');
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
-  const isFreemium = subscription?.tier === 'freemium';
-  const instaQuotaReached = hasReachedQuota(usage, 'instagram_posts', isFreemium);
+  const isfree = subscription?.tier === 'free';
+  const instaQuotaReached = hasReachedQuota(usage, 'instagram_posts', isfree);
 
   useEffect(() => {
     if (profile) {
@@ -117,9 +123,11 @@ export function InstagramGenerator({
         setPublishSuccess(platform);
         setTimeout(() => setPublishSuccess(null), 3000);
       } else {
+        // TODO: replace with toast UI
         alert(data.error || t('error_conn'));
       }
     } catch {
+      // TODO: replace with toast UI
       alert(t('error_conn'));
     } finally {
       setPublishing(null);
@@ -130,7 +138,7 @@ export function InstagramGenerator({
   const icon = post ? BCG_ICONS[post.bcg] || "📸" : "📸";
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="instagram-modal-title" onClick={onClose}>
       <div
         className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-auto"
         onClick={(e) => e.stopPropagation()}
@@ -138,7 +146,7 @@ export function InstagramGenerator({
         {/* Header */}
         <div className="p-5 border-b border-slate-200 flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-slate-900">{t('title')}</h3>
+            <h3 id="instagram-modal-title" className="font-semibold text-slate-900">{t('title')}</h3>
             <p className="text-xs text-slate-500">{menuItemName}</p>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 text-xl">✕</button>
@@ -154,7 +162,7 @@ export function InstagramGenerator({
                 <div className="rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800 mb-4">
                   <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">{t('quota_reached')}</h3>
                   <p className="text-sm text-blue-700 dark:text-blue-200">
-                    {t('quota_desc', { count: FREEMIUM_QUOTAS.instagram_posts })}
+                    {t('quota_desc', { count: free_QUOTAS.instagram_posts })}
                   </p>
                 </div>
               ) : (
@@ -162,7 +170,7 @@ export function InstagramGenerator({
                   <Button onClick={generatePost} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
                     {t('btn_generate')}
                   </Button>
-                  {isFreemium && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {FREEMIUM_QUOTAS.instagram_posts} posts</p>}
+                  {isfree && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {free_QUOTAS.instagram_posts} posts</p>}
                 </>
               )}
             </div>

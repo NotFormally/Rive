@@ -34,7 +34,7 @@ export default function SocialHubPage() {
         .select('id, platform, account_name')
         .eq('restaurant_id', profile!.id);
 
-      if (error) throw error;
+      if (error && !error.message?.includes('schema cache') && error.code !== '42P01') throw error;
       setConnections(data || []);
     } catch (err) {
       console.error("Error loading connections:", err);

@@ -13,6 +13,10 @@ export async function GET(req: Request) {
       .limit(100);
 
     if (error) {
+      // Return empty array if table doesn't exist yet (migration not run)
+      if (error.message?.includes('schema cache') || error.code === '42P01') {
+        return Response.json([]);
+      }
       console.error('[production GET] Error:', error.message);
       return Response.json({ error: error.message }, { status: 500 });
     }

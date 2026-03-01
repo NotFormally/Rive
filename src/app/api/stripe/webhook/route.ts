@@ -5,6 +5,17 @@ import { sendEmail } from '@/lib/email';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+const PRICE_TO_TIER: Record<string, string> = {
+  [process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL!]: 'essential',
+  [process.env.NEXT_PUBLIC_STRIPE_PRICE_PERFORMANCE!]: 'performance',
+  [process.env.NEXT_PUBLIC_STRIPE_PRICE_INTELLIGENCE!]: 'intelligence',
+  [process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE!]: 'enterprise',
+};
+
+function resolveTierFromPriceId(priceId: string): string | null {
+  return PRICE_TO_TIER[priceId] ?? null;
+}
+
 function getServiceClient() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -43,8 +54,8 @@ export async function POST(req: NextRequest) {
     try {
       event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
     } catch (err: any) {
-      console.error(`Webhook Error: ${err.message}`);
-      return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+      console.error(`Webhook signature verification failed: ${err.message}`);
+      return NextResponse.json({ error: 'Webhook signature verification failed' }, { status: 400 });
     }
 
     const supabase = getServiceClient();
@@ -57,11 +68,11 @@ export async function POST(req: NextRequest) {
         const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
         const priceId = subscription.items.data[0].price.id;
 
-        let tier = 'freemium';
-        if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL) tier = 'essential';
-        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_PERFORMANCE) tier = 'performance';
-        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_INTELLIGENCE) tier = 'intelligence';
-        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE) tier = 'enterprise';
+        const tier = resolveTierFromPriceId(priceId);
+        if (!tier) {
+          console.error(`[webhook] Unknown Stripe price ID: ${priceId}. Aborting tier update to prevent accidental downgrade.`);
+          return NextResponse.json({ error: 'Unknown price ID' }, { status: 400 });
+        }
 
         const { error } = await supabase.rpc('update_subscription_from_stripe', {
           p_restaurant_id: restaurantId,
@@ -100,11 +111,11 @@ export async function POST(req: NextRequest) {
       const priceId = subscription.items.data[0]?.price.id;
 
       if (priceId) {
-        let tier = 'freemium';
-        if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL) tier = 'essential';
-        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_PERFORMANCE) tier = 'performance';
-        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_INTELLIGENCE) tier = 'intelligence';
-        else if (priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE) tier = 'enterprise';
+        const tier = resolveTierFromPriceId(priceId);
+        if (!tier) {
+          console.error(`[webhook] subscription.updated: Unknown price ID: ${priceId}. Skipping update.`);
+          return NextResponse.json({ received: true });
+        }
 
         const { data: settingsData } = await supabase
           .from('restaurant_settings')
@@ -139,7 +150,7 @@ export async function POST(req: NextRequest) {
           p_restaurant_id: settingsData.restaurant_id,
           p_stripe_customer_id: subscription.customer,
           p_stripe_subscription_id: null,
-          p_tier: 'freemium',
+          p_tier: 'free',
         });
 
         // Send cancellation email (fire and forget)

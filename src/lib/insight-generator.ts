@@ -11,7 +11,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 type Insight = {
   text: string;
   type: string;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
 };
 
 type InsightGenerator = (

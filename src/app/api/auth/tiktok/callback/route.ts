@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { encrypt } from "@/lib/crypto";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
@@ -86,8 +87,8 @@ export async function GET(req: NextRequest) {
         platform: 'tiktok',
         account_id: openId,
         account_name: accountName,
-        access_token: accessToken,
-        refresh_token: refreshToken,
+        access_token: encrypt(accessToken),
+        refresh_token: refreshToken ? encrypt(refreshToken) : null,
         expires_at: expiresAt
       }, { onConflict: 'restaurant_id,platform,account_id' });
 

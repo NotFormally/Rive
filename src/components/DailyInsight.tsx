@@ -36,7 +36,9 @@ export function DailyInsight() {
           .limit(1)
           .single();
 
-        if (error && error.code !== "PGRST116") {
+        // Silently ignore expected errors:
+        // PGRST116 = no rows found, 42P01 / schema cache = table doesn't exist yet
+        if (error && error.code !== "PGRST116" && !error.message?.includes("schema cache")) {
           console.error("[DailyInsight] Fetch error:", error.message);
         }
 

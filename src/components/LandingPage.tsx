@@ -752,7 +752,7 @@ export function LandingPage() {
         <div className="max-w-screen-xl mx-auto mt-16 pt-8 border-t border-slate-800 text-slate-500 text-sm font-outfit flex justify-between">
           <p>{t('footer_rights')}</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-[#F2F0E9] transition-colors">{t('footer_privacy')}</a>
+            <Link href="/cgu" className="hover:text-[#F2F0E9] transition-colors">{t('footer_privacy')}</Link>
             <Link href="/cgu" className="hover:text-[#F2F0E9] transition-colors">{t('footer_terms')}</Link>
           </div>
         </div>

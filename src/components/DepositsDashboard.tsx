@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from 'next-intl';
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -21,6 +22,7 @@ type DepositItem = {
 };
 
 export function DepositsDashboard() {
+  const t = useTranslations('Deposits');
   const [deposits, setDeposits] = useState<DepositItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<string | null>(null);
@@ -35,7 +37,7 @@ export function DepositsDashboard() {
       const data = await res.json();
       setDeposits(data.map((d: DepositItem) => ({
         ...d,
-        supplier_name: d.invoices?.supplier_name || 'Fournisseur inconnu',
+        supplier_name: d.invoices?.supplier_name || t('unknown_supplier'),
       })));
     } catch (error) {
       console.error('Failed to load deposits:', error);
@@ -94,7 +96,7 @@ export function DepositsDashboard() {
       <div className="flex h-[400px] items-center justify-center">
         <div className="flex flex-col items-center gap-4 text-slate-400">
           <RefreshCw className="h-8 w-8 animate-spin" />
-          <p>Chargement des consignes...</p>
+          <p>{t('loading')}</p>
         </div>
       </div>
     );
@@ -106,9 +108,9 @@ export function DepositsDashboard() {
         <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mb-4">
           <Package className="w-8 h-8 text-indigo-400" />
         </div>
-        <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucun dépôt enregistré</h3>
+        <h3 className="text-lg font-semibold text-slate-800 mb-2">{t('empty_title')}</h3>
         <p className="text-sm text-slate-500 max-w-md">
-          Les consignes apparaîtront ici automatiquement lorsque vous scannerez une facture contenant des lignes de dépôt (fûts, caisses, etc.).
+          {t('empty_description')}
         </p>
       </div>
     );
@@ -121,25 +123,25 @@ export function DepositsDashboard() {
         <Card className="border-slate-200 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-indigo-50 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
-            <CardTitle className="text-sm font-medium text-slate-500">Argent Immobilisé</CardTitle>
+            <CardTitle className="text-sm font-medium text-slate-500">{t('kpi_held_amount')}</CardTitle>
             <DollarSign className="h-4 w-4 text-indigo-500" />
           </CardHeader>
           <CardContent className="relative z-10">
             <div className="text-3xl font-bold text-slate-900">${totalHeld.toFixed(2)}</div>
-            <p className="text-xs text-slate-500 mt-1">{heldCount} consigne{heldCount > 1 ? 's' : ''} en attente de retour</p>
+            <p className="text-xs text-slate-500 mt-1">{t('kpi_held_pending', { count: heldCount })}</p>
           </CardContent>
         </Card>
 
         <Card className="border-slate-200 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-emerald-50 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
-            <CardTitle className="text-sm font-medium text-slate-500">Retourné (Total)</CardTitle>
+            <CardTitle className="text-sm font-medium text-slate-500">{t('kpi_returned_total')}</CardTitle>
             <TrendingUp className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent className="relative z-10">
             <div className="text-3xl font-bold text-slate-900">${totalReturned.toFixed(2)}</div>
             <p className="text-xs text-emerald-600 mt-1 flex items-center gap-1">
-              <TrendingUp className="h-3 w-3" /> Consignes récupérées
+              <TrendingUp className="h-3 w-3" /> {t('kpi_returned_recovered')}
             </p>
           </CardContent>
         </Card>
@@ -147,12 +149,12 @@ export function DepositsDashboard() {
         <Card className="border-slate-200 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-amber-50 rounded-full transition-transform group-hover:scale-150 duration-700 pointer-events-none" />
           <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
-            <CardTitle className="text-sm font-medium text-slate-500">En Possession</CardTitle>
+            <CardTitle className="text-sm font-medium text-slate-500">{t('kpi_in_possession')}</CardTitle>
             <Beer className="h-4 w-4 text-amber-500" />
           </CardHeader>
           <CardContent className="relative z-10">
             <div className="text-3xl font-bold text-slate-900">{heldCount}</div>
-            <p className="text-xs text-slate-500 mt-1">{heldCount > 0 ? 'À retourner pour récupérer le crédit' : 'Tout est retourné'}</p>
+            <p className="text-xs text-slate-500 mt-1">{heldCount > 0 ? t('kpi_return_for_credit') : t('kpi_all_returned')}</p>
           </CardContent>
         </Card>
       </div>
@@ -164,8 +166,8 @@ export function DepositsDashboard() {
           <Card className="shadow-sm border-slate-200 h-full">
             <CardHeader className="border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
-                <CardTitle className="text-lg">Inventaire des Consignes</CardTitle>
-                <p className="text-sm text-slate-500">Consignes extraites de vos factures scannées</p>
+                <CardTitle className="text-lg">{t('inventory_title')}</CardTitle>
+                <p className="text-sm text-slate-500">{t('inventory_subtitle')}</p>
               </div>
               <div className="flex gap-2">
                 <select
@@ -173,10 +175,10 @@ export function DepositsDashboard() {
                   onChange={(e) => setFilterStatus(e.target.value)}
                   className="text-sm rounded-lg border border-slate-200 px-3 py-1.5 bg-white"
                 >
-                  <option value="all">Tous ({deposits.length})</option>
-                  <option value="held">En possession ({deposits.filter(d => d.status === 'held').length})</option>
-                  <option value="returned">Retournés ({deposits.filter(d => d.status === 'returned').length})</option>
-                  <option value="lost">Perdus ({deposits.filter(d => d.status === 'lost').length})</option>
+                  <option value="all">{t('filter_all', { count: deposits.length })}</option>
+                  <option value="held">{t('filter_held', { count: deposits.filter(d => d.status === 'held').length })}</option>
+                  <option value="returned">{t('filter_returned', { count: deposits.filter(d => d.status === 'returned').length })}</option>
+                  <option value="lost">{t('filter_lost', { count: deposits.filter(d => d.status === 'lost').length })}</option>
                 </select>
               </div>
             </CardHeader>
@@ -203,7 +205,7 @@ export function DepositsDashboard() {
                             item.status === "returned" ? "text-emerald-600 border-emerald-200 bg-emerald-50 mt-1" : "mt-1"
                           }
                         >
-                          {item.status === "held" ? "En possession" : item.status === "returned" ? "Retourné" : "Perdu"}
+                          {item.status === "held" ? t('status_held') : item.status === "returned" ? t('status_returned') : t('status_lost')}
                         </Badge>
                       </div>
                       {item.status === "held" && (
@@ -214,7 +216,7 @@ export function DepositsDashboard() {
                             onClick={() => markReturned(item.id)}
                             disabled={updating === item.id}
                           >
-                            {updating === item.id ? '...' : 'Retourné'}
+                            {updating === item.id ? '...' : t('btn_returned')}
                           </Button>
                           <Button
                             size="sm"
@@ -223,7 +225,7 @@ export function DepositsDashboard() {
                             onClick={() => markLost(item.id)}
                             disabled={updating === item.id}
                           >
-                            Perdu
+                            {t('btn_lost')}
                           </Button>
                         </div>
                       )}
@@ -242,13 +244,12 @@ export function DepositsDashboard() {
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-indigo-100">
                   <AlertCircle className="h-5 w-5" />
-                  Action Requise
+                  {t('action_required')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-indigo-200">
-                  Vous avez <span className="font-bold text-white">${totalHeld.toFixed(2)}</span> de consignes en attente.
-                  Retournez-les pour récupérer le crédit sur votre prochaine commande.
+                  {t('action_required_desc_before')}<span className="font-bold text-white">${totalHeld.toFixed(2)}</span>{t('action_required_desc_after')}
                 </p>
               </CardContent>
             </Card>
@@ -256,14 +257,14 @@ export function DepositsDashboard() {
 
           <Card className="shadow-sm border-slate-200">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-semibold">Mécanique OCR</CardTitle>
+              <CardTitle className="text-base font-semibold">{t('ocr_title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-slate-600 mb-4">
-                Rive extrait automatiquement les lignes &ldquo;Deposit&rdquo; ou &ldquo;Consigne&rdquo; de vos factures scannées pour isoler ce montant de votre véritable indicateur Food Cost / Pour Cost.
+                {t('ocr_description')}
               </p>
               <div className="p-3 bg-slate-50 border border-slate-100 rounded-md text-sm font-mono text-slate-500">
-                Ligne détectée: <br/>
+                {t('ocr_line_detected')} <br/>
                 <span className="text-slate-800 font-bold">1x FÛT 50L DEP  |  $50.00</span>
               </div>
             </CardContent>

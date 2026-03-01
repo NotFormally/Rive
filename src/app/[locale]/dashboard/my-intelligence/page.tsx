@@ -3,7 +3,6 @@
 import { useAuth } from "@/components/AuthProvider";
 import { useTranslations } from "next-intl";
 import {
-  getLevelLabel,
   getLevelColor,
   getLevelBgColor,
   type IntelligenceLevel,
@@ -42,8 +41,7 @@ export default function MyIntelligencePage() {
 
   const score = intelligenceScore ?? 0;
   const level = intelligenceLevel ?? ("discovery" as IntelligenceLevel);
-  // Optional: You could also localize getLevelLabel if you want, but sticking to existing logic for now.
-  const levelLabel = getLevelLabel(level);
+  const levelLabel = t(`level_${level}` as any);
   const levelColor = getLevelColor(level);
   const levelBgColor = getLevelBgColor(level);
 

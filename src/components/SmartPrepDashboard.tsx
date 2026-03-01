@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import {
@@ -40,7 +41,7 @@ type PrepAlert = {
   type: 'dietary' | 'anomaly' | 'vip' | 'occasion' | 'volume';
   severity: 'info' | 'warning' | 'critical';
   message: string;
-  details?: Record<string, any>;
+  details?: Record<string, string | number | boolean>;
 };
 
 type PrepItem = {
@@ -102,11 +103,12 @@ function PriorityIcon({ priority }: { priority: string }) {
 }
 
 function LevelBadge({ level }: { level: number }) {
+  const t = useTranslations('SmartPrep');
   const config = {
-    1: { label: 'Niveau 1 — Réservations', color: 'bg-blue-100 text-blue-700', hint: 'Connectez votre POS pour passer au Niveau 2' },
-    2: { label: 'Niveau 2 — Prédictif', color: 'bg-amber-100 text-amber-700', hint: 'Ajoutez vos recettes pour passer au Niveau 3' },
-    3: { label: 'Niveau 3 — Complet', color: 'bg-emerald-100 text-emerald-700', hint: 'Toutes les données sont disponibles' },
-  }[level] || { label: 'Niveau inconnu', color: 'bg-slate-100 text-slate-700', hint: '' };
+    1: { label: t('level_1_label'), color: 'bg-blue-100 text-blue-700', hint: t('level_1_hint') },
+    2: { label: t('level_2_label'), color: 'bg-amber-100 text-amber-700', hint: t('level_2_hint') },
+    3: { label: t('level_3_label'), color: 'bg-emerald-100 text-emerald-700', hint: t('level_3_hint') },
+  }[level] || { label: t('level_unknown'), color: 'bg-slate-100 text-slate-700', hint: '' };
 
   return (
     <div className="flex items-center gap-2">
@@ -150,6 +152,7 @@ function AlertCard({ alert }: { alert: PrepAlert }) {
 // =============================================================================
 
 export default function SmartPrepDashboard() {
+  const t = useTranslations('SmartPrep');
   const { profile } = useAuth();
 
   // State
@@ -242,7 +245,8 @@ export default function SmartPrepDashboard() {
         await loadPrepList(); // Reload to get the new AI suggestions
       } else {
         const errData = await res.json();
-        alert("Erreur de l'IA: " + (errData.error || "Inconnue"));
+        // TODO: replace with toast UI
+        alert(t('error_ai') + ": " + (errData.error || t('error_unknown')));
       }
     } catch (err) {
       console.error('Error generating AI:', err);
@@ -293,7 +297,7 @@ export default function SmartPrepDashboard() {
     return d.toLocaleDateString('fr-CA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   })();
 
-  const serviceLabel = servicePeriod === 'lunch' ? 'Midi' : servicePeriod === 'dinner' ? 'Soir' : 'Journée complète';
+  const serviceLabel = servicePeriod === 'lunch' ? t('service_lunch') : servicePeriod === 'dinner' ? t('service_dinner') : t('service_all_day');
 
   // --------------------------------------------------------------------------
   // Render
@@ -308,10 +312,10 @@ export default function SmartPrepDashboard() {
             <div>
               <h1 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
                 <Brain className="w-5 h-5 text-indigo-600" />
-                Smart Prep List
+                {t('title')}
               </h1>
               <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">
-                Votre système apprend de vos réservations, ventes et feedback
+                {t('subtitle')}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -323,7 +327,7 @@ export default function SmartPrepDashboard() {
                 className="gap-1.5"
               >
                 {regenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
-                <span className="hidden sm:inline">Régénérer</span>
+                <span className="hidden sm:inline">{t('btn_regenerate')}</span>
               </Button>
             </div>
           </div>
@@ -343,7 +347,7 @@ export default function SmartPrepDashboard() {
                     servicePeriod === s ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
-                  {s === 'all_day' ? 'Tout' : s === 'lunch' ? 'Midi' : 'Soir'}
+                  {s === 'all_day' ? t('period_all') : s === 'lunch' ? t('period_lunch') : t('period_dinner')}
                 </button>
               ))}
             </div>
@@ -356,7 +360,7 @@ export default function SmartPrepDashboard() {
                 className="gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
               >
                 {aiGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                <span className="hidden sm:inline">Générer avec</span> l&apos;IA
+                {t('btn_generate_ai')}
               </Button>
             )}
           </div>
@@ -365,18 +369,18 @@ export default function SmartPrepDashboard() {
 
       <main className="p-4 sm:p-8 space-y-6 max-w-6xl">
         {loading ? (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex items-center justify-center py-20" role="status" aria-live="polite">
             <Loader2 className="w-6 h-6 text-indigo-500 animate-spin" />
-            <span className="ml-3 text-sm text-slate-500">Génération de la Smart Prep List...</span>
+            <span className="ml-3 text-sm text-slate-500">{t('loading_generation')}</span>
           </div>
         ) : !prepList ? (
           <Card className="border-dashed">
             <CardContent className="py-16 text-center">
               <Brain className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-              <p className="text-slate-600 font-medium mb-2">Aucune réservation trouvée pour cette date</p>
-              <p className="text-sm text-slate-400 mb-6">Connectez vos plateformes de réservation pour activer les prédictions.</p>
+              <p className="text-slate-600 font-medium mb-2">{t('empty_no_reservations')}</p>
+              <p className="text-sm text-slate-400 mb-6">{t('empty_connect_platforms')}</p>
               <Button variant="default" onClick={() => window.location.href = '/dashboard/reservations'}>
-                <CalendarDays className="w-4 h-4 mr-2" /> Configurer les réservations
+                <CalendarDays className="w-4 h-4 mr-2" /> {t('btn_configure_reservations')}
               </Button>
             </CardContent>
           </Card>
@@ -389,10 +393,10 @@ export default function SmartPrepDashboard() {
                   <InsightAttribution
                     chefValue={prepList.reserved_covers}
                     riveValue={prepList.estimated_covers}
-                    chefLabel="Vos réservations"
-                    riveLabel="Rive anticipe"
-                    unit="couverts"
-                    explanation={`+${prepList.estimated_covers - prepList.reserved_covers} walk-ins estimés (${Math.round(prepList.walk_in_ratio * 100)}%)`}
+                    chefLabel={t('label_your_reservations')}
+                    riveLabel={t('label_rive_anticipates')}
+                    unit={t('unit_covers')}
+                    explanation={t('walk_ins_estimated', { count: prepList.estimated_covers - prepList.reserved_covers, percent: Math.round(prepList.walk_in_ratio * 100) })}
                   />
                 </CardContent>
               </Card>
@@ -401,10 +405,10 @@ export default function SmartPrepDashboard() {
                 <CardContent className="pt-5">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-indigo-50 rounded-lg"><ChefHat className="w-5 h-5 text-indigo-600" /></div>
-                    <span className="text-sm text-slate-500">Portions totales</span>
+                    <span className="text-sm text-slate-500">{t('card_total_portions')}</span>
                   </div>
                   <p className="text-3xl font-bold text-slate-900">{totalPortions}</p>
-                  <p className="text-xs text-slate-400 mt-1">{items.length} items sur le menu</p>
+                  <p className="text-xs text-slate-400 mt-1">{t('card_menu_items', { count: items.length })}</p>
                 </CardContent>
               </Card>
 
@@ -412,10 +416,10 @@ export default function SmartPrepDashboard() {
                 <CardContent className="pt-5">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-emerald-50 rounded-lg"><DollarSign className="w-5 h-5 text-emerald-600" /></div>
-                    <span className="text-sm text-slate-500">Coût food estimé</span>
+                    <span className="text-sm text-slate-500">{t('card_estimated_food_cost')}</span>
                   </div>
                   <p className="text-3xl font-bold text-slate-900">${prepList.estimated_food_cost.toFixed(2)}</p>
-                  <p className="text-xs text-slate-400 mt-1">Basé sur les recettes configurées</p>
+                  <p className="text-xs text-slate-400 mt-1">{t('card_based_on_recipes')}</p>
                 </CardContent>
               </Card>
 
@@ -423,11 +427,11 @@ export default function SmartPrepDashboard() {
                 <CardContent className="pt-5">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-amber-50 rounded-lg"><AlertTriangle className="w-5 h-5 text-amber-600" /></div>
-                    <span className="text-sm text-slate-500">Alertes</span>
+                    <span className="text-sm text-slate-500">{t('card_alerts')}</span>
                   </div>
                   <p className="text-3xl font-bold text-slate-900">{alerts.length}</p>
                   <p className="text-xs text-slate-400 mt-1">
-                    {alerts.filter(a => a.severity === 'critical').length} critiques
+                    {t('card_critical_count', { count: alerts.filter(a => a.severity === 'critical').length })}
                   </p>
                 </CardContent>
               </Card>
@@ -441,7 +445,7 @@ export default function SmartPrepDashboard() {
               </div>
               <Badge variant={prepList.status === 'completed' ? 'default' : 'secondary'}
                 className={prepList.status === 'completed' ? 'bg-emerald-500' : ''}>
-                {prepList.status === 'completed' ? 'Feedback reçu ✓' : prepList.status === 'confirmed' ? 'Confirmé' : 'Brouillon'}
+                {prepList.status === 'completed' ? t('status_feedback_received') : prepList.status === 'confirmed' ? t('status_confirmed') : t('status_draft')}
               </Badge>
             </div>
 
@@ -462,9 +466,9 @@ export default function SmartPrepDashboard() {
             {/* Tabs */}
             <div className="flex bg-slate-100 rounded-lg p-0.5 w-full sm:w-fit overflow-x-auto">
               {([
-                { key: 'prep', label: '📋 Prep List', icon: ChefHat },
-                { key: 'ingredients', label: '🥕 Ingrédients', icon: ShoppingBasket },
-                { key: 'feedback', label: '🔄 Feedback', icon: MessageSquare },
+                { key: 'prep', label: t('tab_prep_list'), icon: ChefHat },
+                { key: 'ingredients', label: t('tab_ingredients'), icon: ShoppingBasket },
+                { key: 'feedback', label: t('tab_feedback'), icon: MessageSquare },
               ] as const).map((tab) => (
                 <button
                   key={tab.key}
@@ -484,7 +488,7 @@ export default function SmartPrepDashboard() {
                 {highPriority.length > 0 && (
                   <section>
                     <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                      <ChevronsUp className="w-4 h-4 text-red-500" /> Priorité haute — Items phare
+                      <ChevronsUp className="w-4 h-4 text-red-500" /> {t('priority_high')}
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100">
                       {highPriority.map((item) => (
@@ -496,7 +500,7 @@ export default function SmartPrepDashboard() {
                 {medPriority.length > 0 && (
                   <section>
                     <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                      <ChevronUp className="w-4 h-4 text-amber-500" /> Priorité moyenne — Ancre & Dérive
+                      <ChevronUp className="w-4 h-4 text-amber-500" /> {t('priority_medium')}
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100">
                       {medPriority.map((item) => (
@@ -508,7 +512,7 @@ export default function SmartPrepDashboard() {
                 {lowPriority.length > 0 && (
                   <section>
                     <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                      <ChevronDown className="w-4 h-4 text-emerald-500" /> Priorité basse — Prévoir le minimum
+                      <ChevronDown className="w-4 h-4 text-emerald-500" /> {t('priority_low')}
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100">
                       {lowPriority.map((item) => (
@@ -527,18 +531,18 @@ export default function SmartPrepDashboard() {
                   <Card className="border-dashed">
                     <CardContent className="py-12 text-center">
                       <ShoppingBasket className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-                      <p className="text-sm text-slate-500 mb-1">Ingrédients non disponibles</p>
-                      <p className="text-xs text-slate-400">Ajoutez vos recettes dans le module Food Cost pour débloquer le Niveau 3.</p>
+                      <p className="text-sm text-slate-500 mb-1">{t('ingredients_unavailable')}</p>
+                      <p className="text-xs text-slate-400">{t('ingredients_unlock_hint')}</p>
                     </CardContent>
                   </Card>
                 ) : (
                   <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                     {/* Desktop header */}
                     <div className="hidden sm:grid grid-cols-[1fr_100px_80px_140px] gap-2 px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                      <span>Ingrédient</span>
-                      <span>Quantité</span>
-                      <span>Unité</span>
-                      <span>Coût estimé</span>
+                      <span>{t('col_ingredient')}</span>
+                      <span>{t('col_quantity')}</span>
+                      <span>{t('col_unit')}</span>
+                      <span>{t('col_estimated_cost')}</span>
                     </div>
                     {ingredients.map((ing) => (
                       <div key={ing.id || ing.ingredient_id} className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50">
@@ -570,9 +574,9 @@ export default function SmartPrepDashboard() {
                       </div>
                     ))}
                     <div className="px-4 sm:px-5 py-3 bg-slate-50 border-t border-slate-200 flex justify-between text-sm">
-                      <span className="text-slate-500">{ingredients.length} ingrédients</span>
+                      <span className="text-slate-500">{t('ingredients_count', { count: ingredients.length })}</span>
                       <span className="font-bold text-slate-900">
-                        Total: ${ingredients.reduce((s, i) => s + i.estimated_cost, 0).toFixed(2)}
+                        {t('label_total')}: ${ingredients.reduce((s, i) => s + i.estimated_cost, 0).toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -587,8 +591,8 @@ export default function SmartPrepDashboard() {
                   <Card>
                     <CardContent className="py-12 text-center">
                       <Check className="w-10 h-10 text-emerald-500 mx-auto mb-3" />
-                      <p className="text-slate-700 font-semibold mb-1">Feedback déjà enregistré pour cette prep list</p>
-                      <p className="text-sm text-slate-400">Les ajustements ont été intégrés aux prédictions futures.</p>
+                      <p className="text-slate-700 font-semibold mb-1">{t('feedback_already_submitted')}</p>
+                      <p className="text-sm text-slate-400">{t('feedback_adjustments_integrated')}</p>
                     </CardContent>
                   </Card>
                 ) : (
@@ -597,10 +601,10 @@ export default function SmartPrepDashboard() {
                       <CardHeader className="pb-3">
                         <CardTitle className="text-base flex items-center gap-2">
                           <MessageSquare className="w-4 h-4 text-indigo-500" />
-                          Feedback post-service
+                          {t('feedback_title')}
                         </CardTitle>
                         <CardDescription>
-                          Ajustez les portions réelles pour chaque item. Seuls les items modifiés affecteront les prédictions futures.
+                          {t('feedback_desc')}
                         </CardDescription>
                         <Button
                           variant="outline"
@@ -616,7 +620,7 @@ export default function SmartPrepDashboard() {
                           }}
                         >
                           <Check className="w-3.5 h-3.5" />
-                          Tout correct
+                          {t('btn_all_correct')}
                         </Button>
                       </CardHeader>
                       <CardContent className="space-y-2">
@@ -624,7 +628,7 @@ export default function SmartPrepDashboard() {
                           const currentVal = feedbackValues[item.menu_item_id] ?? item.predicted_portions;
                           const delta = currentVal - item.predicted_portions;
                           const deltaColor = delta === 0 ? 'text-emerald-600' : delta > 0 ? 'text-red-600' : 'text-amber-600';
-                          const deltaLabel = delta === 0 ? '= parfait' : delta > 0 ? `+${delta} manqués` : `${delta} surplus`;
+                          const deltaLabel = delta === 0 ? t('delta_perfect') : delta > 0 ? t('delta_missed', { count: delta }) : t('delta_surplus', { count: delta });
 
                           return (
                             <div
@@ -639,7 +643,7 @@ export default function SmartPrepDashboard() {
                               <div className="flex-1">
                                 <p className="text-sm font-medium text-slate-900">{item.menu_item_name}</p>
                                 <p className={`text-xs ${deltaColor}`}>
-                                  Prédit: {item.predicted_portions} → Réel: {currentVal} ({deltaLabel})
+                                  {t('feedback_predicted')}: {item.predicted_portions} → {t('feedback_actual')}: {currentVal} ({deltaLabel})
                                 </p>
                               </div>
                               <div className="flex items-center gap-2">
@@ -691,7 +695,7 @@ export default function SmartPrepDashboard() {
                         ) : (
                           <Send className="w-4 h-4" />
                         )}
-                        {feedbackSuccess ? 'Feedback enregistré !' : 'Soumettre le feedback'}
+                        {feedbackSuccess ? t('feedback_saved') : t('btn_submit_feedback')}
                       </Button>
                     </div>
                   </div>
@@ -710,8 +714,9 @@ export default function SmartPrepDashboard() {
 // =============================================================================
 
 function PrepItemRow({ item }: { item: PrepItem }) {
+  const t = useTranslations('SmartPrep');
   const bcgLabels: Record<string, string> = {
-    phare: 'Phare', ancre: 'Ancre', derive: 'Dérive', ecueil: 'Écueil',
+    phare: t('bcg_phare'), ancre: t('bcg_ancre'), derive: t('bcg_derive'), ecueil: t('bcg_ecueil'),
   };
   const bcgColors: Record<string, string> = {
     phare: 'bg-emerald-100 text-emerald-700',
@@ -731,10 +736,10 @@ function PrepItemRow({ item }: { item: PrepItem }) {
               {bcgLabels[item.bcg_category] || item.bcg_category}
             </span>
             <span className="text-xs text-slate-400">
-              Marge {item.margin_percent.toFixed(0)}%
+              {t('label_margin')} {item.margin_percent.toFixed(0)}%
             </span>
             <span className="text-xs text-slate-400 hidden sm:inline">
-              · Fiabilité {Math.round(item.confidence_score * 100)}%
+              · {t('label_confidence')} {Math.round(item.confidence_score * 100)}%
             </span>
             {item.confidence_modifier !== 1 && (
               <ChefCalibrationBadge
@@ -759,19 +764,19 @@ function PrepItemRow({ item }: { item: PrepItem }) {
                 <span className="text-sm line-through text-slate-400">{item.predicted_portions}</span>
                 <p className="text-lg sm:text-xl font-bold text-indigo-600">{item.ai_suggestion_quantity}</p>
               </div>
-              <p className="text-[11px] text-indigo-400 font-medium">votre système</p>
+              <p className="text-[11px] text-indigo-400 font-medium">{t('label_your_system')}</p>
             </div>
           ) : (
             <div className="flex items-center sm:flex-col gap-1 sm:gap-0">
               <p className="text-base sm:text-lg font-bold text-slate-900">{item.predicted_portions}</p>
-              <p className="text-[11px] text-slate-400">portions</p>
+              <p className="text-[11px] text-slate-400">{t('label_portions')}</p>
             </div>
           )}
         </div>
         {item.estimated_cost > 0 && (
           <div className="text-left sm:text-right">
             <p className="text-sm font-medium text-slate-600">${item.estimated_cost.toFixed(2)}</p>
-            <p className="text-[11px] text-slate-400 hidden sm:block">coût food</p>
+            <p className="text-[11px] text-slate-400 hidden sm:block">{t('label_food_cost')}</p>
           </div>
         )}
       </div>

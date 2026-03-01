@@ -1,4 +1,4 @@
-// Rive — Freemium Quotas Configuration
+// Rive — free Quotas Configuration
 
 export type MetricName =
   | 'logbook_notes'
@@ -8,8 +8,8 @@ export type MetricName =
   | 'instagram_posts'
   | 'receipt_scans';
 
-// Freemium quotas: enough to keep users engaged, encourages upgrade
-export const FREEMIUM_QUOTAS: Record<MetricName, number> = {
+// free quotas: enough to keep users engaged, encourages upgrade
+export const free_QUOTAS: Record<MetricName, number> = {
   logbook_notes: 20,       // ~5 par semaine, suffisant pour garder l'habitude
   corrective_actions: 5,
   translations: 5,
@@ -19,16 +19,16 @@ export const FREEMIUM_QUOTAS: Record<MetricName, number> = {
 };
 
 // Legacy alias — kept for backward compatibility with existing imports
-export const FREE_QUOTAS = FREEMIUM_QUOTAS;
+export const FREE_QUOTAS = free_QUOTAS;
 
 export function hasReachedQuota(
   usage: Record<string, number> | undefined | null,
   metric: MetricName,
-  isFreemium: boolean
+  isfree: boolean
 ): boolean {
   // Paid subscribers have no quota limits
-  if (!isFreemium) return false;
+  if (!isfree) return false;
 
   const currentUsage = usage?.[metric] || 0;
-  return currentUsage >= FREEMIUM_QUOTAS[metric];
+  return currentUsage >= free_QUOTAS[metric];
 }

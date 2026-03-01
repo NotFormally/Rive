@@ -24,8 +24,8 @@ export default function DashboardLayout({
       return;
     }
 
-    // Freemium: when trial expires, users keep access with limited features
-    // No redirect to pricing — they can browse the dashboard with freemium modules
+    // free: when trial expires, users keep access with limited features
+    // No redirect to pricing — they can browse the dashboard with free modules
   }, [user, subscription, authLoading, router, pathname]);
 
   if (authLoading) return (

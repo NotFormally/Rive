@@ -425,7 +425,7 @@
     "btn_save": "Save"
   },
   "MenuEngineering": {
-    "title": "🧭 Performance Matrix — Navigation Map",
+    "title": "🧭 Performance Matrix — Menu Performance",
     "desc_full": "Generate a detailed Profit Topography of your Menu Ecosystem crossing your prices, costs, and popularity to discover your Stars and Rocks.",
     "desc_short": "Automatic classification of your dishes by popularity and profitability.",
     "median_info": "Median margin: {margin}% | Median orders: {orders}/week.",
@@ -680,7 +680,7 @@
     "module_menu_editor_desc": "Menu CRUD, public mini-site, QR Code",
     "module_food_cost_label": "Food Cost — Margins",
     "module_food_cost_desc": "Automatic margin calculation per dish",
-    "module_menu_engineering_label": "Menu Engineering — Navigation Map",
+    "module_menu_engineering_label": "Menu Engineering — Menu Performance",
     "module_menu_engineering_desc": "Star/Anchor/Drift/Rock classification + AI",
     "module_receipt_scanner_label": "Receipt Scanner (OCR)",
     "module_receipt_scanner_desc": "AI extraction of supplier invoices",

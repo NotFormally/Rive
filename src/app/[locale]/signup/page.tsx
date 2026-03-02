@@ -77,20 +77,20 @@ function SignupForm() {
       return;
     }
 
-    // 4. Create default module settings — must match TIER_CONFIG.free.modules
+    // 4. Create default module settings — all modules enabled, quotas limit AI usage
     await supabase.from("restaurant_settings").insert({
       restaurant_id: profileData.id,
       module_logbook: true,
       module_menu_editor: true,
-      module_food_cost: false,
+      module_food_cost: true,
       module_menu_engineering: true,
       module_instagram: true,
       module_receipt_scanner: true,
-      module_reservations: false,
-      module_smart_prep: false,
-      module_deposits: false,
-      module_variance: false,
-      module_production: false,
+      module_reservations: true,
+      module_smart_prep: true,
+      module_deposits: true,
+      module_variance: true,
+      module_production: true,
       subscription_tier: 'free',
     });
 

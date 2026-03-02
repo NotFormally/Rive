@@ -22,17 +22,17 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
   free: {
     label: 'Gratuit',
     modules: {
-      module_logbook: true,        // Carnet de bord (avec quotas)
-      module_menu_editor: true,     // Éditeur de recettes (accès de base)
-      module_food_cost: false,
-      module_menu_engineering: true, // Accès limité par quota
-      module_instagram: true,        // Accès limité par quota
-      module_receipt_scanner: true,  // Accès limité par quota
-      module_reservations: false,
-      module_smart_prep: false,
-      module_deposits: false,
-      module_variance: false,
-      module_production: false,
+      module_logbook: true,           // Carnet de bord (quotas IA)
+      module_menu_editor: true,       // Éditeur de recettes (accès de base)
+      module_food_cost: true,         // Accès avec quotas IA
+      module_menu_engineering: true,  // Accès limité par quota
+      module_instagram: true,         // Accès limité par quota
+      module_receipt_scanner: true,   // Accès limité par quota
+      module_reservations: true,      // Accès de base
+      module_smart_prep: true,        // Accès avec quotas IA
+      module_deposits: true,          // Accès de base
+      module_variance: true,          // Accès de base
+      module_production: true,        // Accès de base
     },
   },
   essence: {
@@ -40,15 +40,15 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
     modules: {
       module_logbook: true,
       module_menu_editor: true,
-      module_food_cost: false,
-      module_menu_engineering: false,
-      module_instagram: false,
-      module_receipt_scanner: false,
-      module_reservations: false,
-      module_smart_prep: false,
-      module_deposits: false,
-      module_variance: false,
-      module_production: false,
+      module_food_cost: true,
+      module_menu_engineering: true,
+      module_instagram: true,
+      module_receipt_scanner: true,
+      module_reservations: true,
+      module_smart_prep: true,
+      module_deposits: true,
+      module_variance: true,
+      module_production: true,
     },
   },
   performance: {
@@ -59,12 +59,12 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_food_cost: true,
       module_menu_engineering: true,
       module_instagram: true,
-      module_receipt_scanner: false,
-      module_reservations: false,
-      module_smart_prep: false,
-      module_deposits: false,
-      module_variance: false,
-      module_production: false,
+      module_receipt_scanner: true,
+      module_reservations: true,
+      module_smart_prep: true,
+      module_deposits: true,
+      module_variance: true,
+      module_production: true,
     },
   },
   intelligence: {

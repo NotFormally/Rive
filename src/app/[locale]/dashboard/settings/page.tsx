@@ -7,7 +7,6 @@ import { useAuth, type MemberRole } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TIER_CONFIG, type TierModules } from "@/lib/subscription-tiers";
 
 const MODULE_EMOJIS: Record<string, string> = {
   module_logbook: "📋",
@@ -418,59 +417,32 @@ export default function SettingsPage() {
           <CardContent className="p-6 md:p-8 pt-2">
             <p className="text-sm font-outfit text-muted-foreground mb-6">{t("modules_desc")}</p>
             <div className="space-y-3">
-              {Object.entries(MODULE_EMOJIS).map(([key, emoji]) => {
-                const isAllowed = subscription && TIER_CONFIG[subscription.tier].modules[key as keyof TierModules];
-
-                // Find minimum tier required for this module if not allowed
-                let requiredTierLabel = "";
-                if (!isAllowed) {
-                  const entry = Object.entries(TIER_CONFIG).find(([_, t]) => t.modules[key as keyof TierModules]);
-                  if (entry) requiredTierLabel = entry[1].label;
-                }
-
-                return (
+              {Object.entries(MODULE_EMOJIS).map(([key, emoji]) => (
                   <div
                     key={key}
-                    onClick={() => !isAllowed && router.push('/pricing' as any)}
-                    className={`flex items-center justify-between p-4 border border-border rounded-2xl transition-all duration-300 ${
-                      isAllowed ? 'hover:bg-secondary/30 bg-card' : 'opacity-60 bg-secondary/20 relative cursor-pointer hover:border-accent/30'
-                    }`}
+                    className="flex items-center justify-between p-4 border border-border rounded-2xl transition-all duration-300 hover:bg-secondary/30 bg-card"
                   >
-                    {!isAllowed && (
-                      <div className="absolute inset-0 bg-transparent z-10" title={`Requis: ${requiredTierLabel}`} />
-                    )}
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{emoji}</span>
                       <div>
-                        <div className="flex items-center gap-2 mb-0.5">
-                          <p className="font-medium text-sm font-jakarta text-foreground">{t(`${key}_label`)}</p>
-                          {!isAllowed && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider bg-accent/10 text-accent px-2 py-0.5 rounded-full inline-flex items-center gap-1 border border-accent/20">
-                              {t("included_with", { tier: requiredTierLabel })}
-                            </span>
-                          )}
-                        </div>
+                        <p className="font-medium text-sm font-jakarta text-foreground mb-0.5">{t(`${key}_label`)}</p>
                         <p className="text-xs font-outfit text-muted-foreground">{t(`${key}_desc`)}</p>
                       </div>
                     </div>
                     <button
-                      onClick={(e) => { e.stopPropagation(); isAllowed && handleToggle(key); }}
-                      disabled={!isAllowed}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 ${
-                        !isAllowed ? "bg-border/50 cursor-not-allowed" :
-                        localSettings[key] ? "bg-primary cursor-pointer" : "bg-border cursor-pointer"
+                      onClick={() => handleToggle(key)}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 cursor-pointer ${
+                        localSettings[key] ? "bg-primary" : "bg-border"
                       }`}
                     >
                       <span
                         className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
-                          !isAllowed ? "translate-x-1" :
                           localSettings[key] ? "translate-x-6" : "translate-x-1"
                         }`}
                       />
                     </button>
                   </div>
-                );
-              })}
+                ))}
             </div>
           </CardContent>
         </Card>

@@ -428,7 +428,7 @@
     "btn_save": "Save"
   },
   "MenuEngineering": {
-    "title": "🧭 Performance Matrix — Navigation Map",
+    "title": "🧭 Performance Matrix — Menu Performance",
     "desc_full": "Generate a detailed Profit Topography of your Menu Ecosystem crossing your prices, costs, and popularity to discover your Stars and Rocks.",
     "desc_short": "Automatic classification of your dishes by popularity and profitability.",
     "median_info": "Median margin: {margin}% | Median orders: {orders}/week.",

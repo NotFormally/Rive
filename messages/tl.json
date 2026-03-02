@@ -423,7 +423,7 @@
     "btn_save": "I-save"
   },
   "MenuEngineering": {
-    "title": "🧭 Performance Matrix — Navigation Map",
+    "title": "🧭 Performance Matrix — Menu Performance",
     "desc_full": "Mag-generate ng detalyadong Profit Topography ng iyong Menu Ecosystem na nag-cross ng iyong mga presyo, gastos, at popularity para matuklasan ang iyong Stars at Rocks.",
     "desc_short": "Automatic na classification ng iyong mga pagkain ayon sa popularity at profitability.",
     "median_info": "Median margin: {margin}% | Median order: {orders}/linggo.",
@@ -678,7 +678,7 @@
     "module_menu_editor_desc": "Menu CRUD, public mini-site, QR Code",
     "module_food_cost_label": "Food Cost — Mga Margin",
     "module_food_cost_desc": "Automatic na pagkalkula ng margin bawat pagkain",
-    "module_menu_engineering_label": "Menu Engineering — Navigation Map",
+    "module_menu_engineering_label": "Menu Engineering — Menu Performance",
     "module_menu_engineering_desc": "Star/Anchor/Drift/Rock classification + AI",
     "module_receipt_scanner_label": "Receipt Scanner (OCR)",
     "module_receipt_scanner_desc": "AI extraction ng supplier invoice",

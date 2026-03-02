@@ -413,7 +413,7 @@
     "btn_save": "Salva"
   },
   "MenuEngineering": {
-    "title": "🧭 Performance Matrix — Carta di Navigazione",
+    "title": "🧭 Performance Matrix — Menu Performance",
     "desc_full": "Genera una Topografia dei Profitti dettagliata del tuo Ecosistema del Menu incrociando prezzi, costi e popolarità per scoprire le tue Stelle e Scogli.",
     "desc_short": "Classificazione automatica dei piatti per popolarità e redditività.",
     "median_info": "Margine mediano: {margin}% | Ordini mediani: {orders}/sett.",
@@ -665,7 +665,7 @@
     "module_menu_editor_desc": "Menu CRUD, mini-site web public, QR Code",
     "module_food_cost_label": "Food Cost — Marges",
     "module_food_cost_desc": "Calcul automatique des marges par plat",
-    "module_menu_engineering_label": "Menu Engineering — Carte Marine",
+    "module_menu_engineering_label": "Menu Engineering — Menu Performance",
     "module_menu_engineering_desc": "Classification Phare/Ancre/Dérive/Écueil + IA",
     "module_receipt_scanner_label": "Scanner de Reçus (OCR)",
     "module_receipt_scanner_desc": "Extraction IA des factures fournisseurs",

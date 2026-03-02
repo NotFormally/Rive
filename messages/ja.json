@@ -639,12 +639,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — AI搭載レストラン運営プラットフォーム",
-    "home_description": "規制遵守、AIログブック、Food Cost分析、19言語翻訳、OCR請求書スキャナー、メニューエンジニアリング。無料版をご利用いただけます。",
-    "pricing_title": "料金 — Rive",
-    "pricing_description": "Riveサブスクリプション月額$59から。AIログブック、コンプライアンス、Food Cost、19言語翻訳。無料版をご利用いただけます、クレジットカード不要。",
+    "home_title": "Rive — AI搭載レストラン管理ソフトウェア",
+    "home_description": "AIによるレストラン管理プラットフォーム：HACCPコンプライアンス、インテリジェントログブック、フードコスト分析、OCR請求書スキャナー、メニューエンジニアリング、POSインテグレーション、25言語翻訳。無料版をご利用いただけます。",
+    "pricing_title": "料金プラン — Rive レストラン管理ソフトウェア",
+    "pricing_description": "Riveサブスクリプション月額$59から。AIログブック、HACCPコンプライアンス、フードコスト管理、POSインテグレーション（Toast、Square、Lightspeed）、25言語翻訳。無料プラン、クレジットカード不要。",
     "cgu_title": "利用規約 — Rive",
-    "cgu_description": "利用規約、AIポリシー、データプライバシーに関する取り組みをお読みください。"
+    "cgu_description": "AI搭載レストラン管理プラットフォームRiveの利用規約。AIポリシー、データ保護およびプライバシーに関する取り組み。"
   },
   "Settings": {
     "title": "設定",

@@ -619,12 +619,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — AI-платформа управления рестораном",
-    "home_description": "Санитарное соответствие, AI-журнал, food cost, перевод на 14 языков. Бесплатная версия доступна.",
-    "pricing_title": "Цены — Rive",
-    "pricing_description": "Подписка Rive от $59/мес. Бесплатная версия доступна, без кредитной карты.",
-    "cgu_title": "Условия — Rive",
-    "cgu_description": "Ознакомьтесь с условиями использования."
+    "home_title": "Rive — Программа для управления рестораном на базе ИИ",
+    "home_description": "Платформа управления рестораном с ИИ: соответствие HACCP, интеллектуальный журнал, анализ food cost, OCR-сканер счетов, инженерия меню, интеграция с POS-системами, перевод на 25 языков. Бесплатная версия доступна.",
+    "pricing_title": "Тарифы и планы — Rive, программа для управления рестораном",
+    "pricing_description": "Подписка Rive от $59/мес. ИИ-журнал, соответствие HACCP, отслеживание food cost, интеграция с POS (Toast, Square, Lightspeed), перевод на 25 языков. Бесплатный план, без кредитной карты.",
+    "cgu_title": "Условия использования — Rive",
+    "cgu_description": "Условия использования Rive, платформы управления рестораном на базе ИИ. Политика ИИ, защита данных и обязательства по конфиденциальности."
   },
   "Settings": {
     "title": "Paramètres",

@@ -619,12 +619,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — Restoranlar için AI platformu",
-    "home_description": "Sağlık uyumluluğu, AI günlüğü, food cost, 14 dil çeviri. Ücretsiz sürüm mevcut.",
-    "pricing_title": "Fiyatlar — Rive",
-    "pricing_description": "Rive aboneliği $59/ay. Ücretsiz sürüm mevcut, kredi kartı gerekmez.",
+    "home_title": "Rive — Yapay Zekâ Destekli Restoran Yönetim Yazılımı",
+    "home_description": "Yapay zekâ ile restoran yönetim platformu: HACCP uyumluluğu, akıllı günlük, food cost analizi, OCR fatura tarayıcı, menü mühendisliği, POS entegrasyonu, 25 dilde çeviri. Ücretsiz sürüm mevcut.",
+    "pricing_title": "Fiyatlar ve Planlar — Rive Restoran Yönetim Yazılımı",
+    "pricing_description": "Rive aboneliği $59/ay'dan başlayan fiyatlarla. AI günlük, HACCP uyumluluğu, food cost takibi, POS entegrasyonu (Toast, Square, Lightspeed), 25 dilde çeviri. Ücretsiz plan, kredi kartı gerekmez.",
     "cgu_title": "Kullanım Koşulları — Rive",
-    "cgu_description": "Kullanım koşullarımızı ve AI politikamızı okuyun."
+    "cgu_description": "Rive'in kullanım koşulları, yapay zekâ destekli restoran yönetim platformu. AI politikası, veri koruma ve gizlilik taahhütleri."
   },
   "Settings": {
     "title": "Paramètres",

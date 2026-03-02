@@ -619,12 +619,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — 餐厅AI智能运营平台",
-    "home_description": "卫生合规、AI日志、食品成本分析、14种语言翻译。免费版本可用。",
-    "pricing_title": "价格 — Rive",
-    "pricing_description": "Rive订阅从$59/月起。免费版本可用，无需信用卡。",
+    "home_title": "Rive — AI驱动的餐厅管理软件",
+    "home_description": "AI餐厅管理平台：HACCP合规、智能日志、食品成本分析、OCR发票扫描仪、菜单工程、POS集成、25种语言翻译。免费版本可用。",
+    "pricing_title": "价格与套餐 — Rive 餐厅管理软件",
+    "pricing_description": "Rive订阅从$59/月起。AI日志、HACCP合规、食品成本追踪、POS集成（Toast、Square、Lightspeed）、25种语言翻译。免费计划，无需信用卡。",
     "cgu_title": "使用条款 — Rive",
-    "cgu_description": "阅读我们的使用条款、AI政策及数据隐私承诺。"
+    "cgu_description": "Rive的使用条款，AI驱动的餐厅管理平台。AI政策、数据保护与隐私承诺。"
   },
   "Settings": {
     "title": "Paramètres",

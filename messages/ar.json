@@ -619,12 +619,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — الذكاء الخوارزمي لإدارة المطاعم",
-    "home_description": "الامتثال الصحي، سجل ذكي بالذكاء الاصطناعي، تحليل التكاليف، ترجمة 14 لغة. نسخة مجانية متاحة.",
-    "pricing_title": "الأسعار — Rive",
-    "pricing_description": "اشتراكات Rive ابتداءً من 59$/شهر. نسخة مجانية متاحة، بدون بطاقة ائتمان.",
+    "home_title": "Rive — برنامج إدارة المطاعم المدعوم بالذكاء الاصطناعي",
+    "home_description": "منصة إدارة مطاعم بالذكاء الاصطناعي: امتثال HACCP، سجل يومي ذكي، تحليل تكلفة الطعام، ماسح فواتير OCR، هندسة قوائم الطعام، تكامل مع أنظمة نقاط البيع، ترجمة إلى 25 لغة. نسخة مجانية متاحة.",
+    "pricing_title": "الأسعار والباقات — Rive، برنامج إدارة المطاعم",
+    "pricing_description": "اشتراكات Rive ابتداءً من 59$/شهر. سجل يومي بالذكاء الاصطناعي، امتثال HACCP، تتبع تكلفة الطعام، تكامل مع أنظمة نقاط البيع (Toast، Square، Lightspeed)، ترجمة إلى 25 لغة. باقة مجانية، بدون بطاقة ائتمان.",
     "cgu_title": "شروط الاستخدام — Rive",
-    "cgu_description": "اقرأ شروط الاستخدام وسياسة الذكاء الاصطناعي."
+    "cgu_description": "شروط استخدام Rive، منصة إدارة المطاعم المدعومة بالذكاء الاصطناعي. سياسة الذكاء الاصطناعي، حماية البيانات والتزامات الخصوصية."
   },
   "Settings": {
     "title": "Paramètres",

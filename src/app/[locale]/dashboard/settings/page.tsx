@@ -48,6 +48,8 @@ export default function SettingsPage() {
   const [profileTagline, setProfileTagline] = useState("");
   const [socialContext, setSocialContext] = useState("");
   const [portalLoading, setPortalLoading] = useState(false);
+  const [hourlyLaborCost, setHourlyLaborCost] = useState<string>("");
+  const [savingLabor, setSavingLabor] = useState(false);
   const router = useRouter();
 
   // Team state
@@ -94,6 +96,7 @@ export default function SettingsPage() {
       setProfileName(profile.restaurant_name);
       setProfileTagline(profile.tagline || "");
       setSocialContext(profile.social_media_context || "");
+      setHourlyLaborCost(profile.hourly_labor_cost ? String(profile.hourly_labor_cost) : "");
     }
   }, [settings, profile]);
 
@@ -146,6 +149,17 @@ export default function SettingsPage() {
       })
       .eq("id", profile.id);
     setSaving(false);
+  };
+
+  const handleSaveLaborCost = async () => {
+    if (!profile) return;
+    setSavingLabor(true);
+    const value = hourlyLaborCost.trim() ? parseFloat(hourlyLaborCost) : null;
+    await supabase
+      .from("restaurant_profiles")
+      .update({ hourly_labor_cost: value })
+      .eq("id", profile.id);
+    setSavingLabor(false);
   };
 
   const handleInvite = async () => {
@@ -288,6 +302,35 @@ export default function SettingsPage() {
             </div>
             <Button onClick={handleSaveProfile} disabled={saving} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
               {saving ? t("btn_saving") : t("btn_save")}
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Operational Costs (Labor) */}
+        <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+          <CardHeader className="bg-card p-6 md:p-8 pb-4">
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_labor")}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 p-6 md:p-8 pt-2">
+            <p className="text-sm font-outfit text-muted-foreground">{t("labor_desc")}</p>
+            <div>
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_hourly_rate")}</label>
+              <div className="flex gap-3 items-center">
+                <input
+                  type="number"
+                  step="0.50"
+                  min="0"
+                  value={hourlyLaborCost}
+                  onChange={(e) => setHourlyLaborCost(e.target.value)}
+                  placeholder="20.00"
+                  className="w-40 px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
+                />
+                <span className="text-sm font-outfit text-muted-foreground">$/h</span>
+              </div>
+              <p className="text-xs font-outfit text-muted-foreground mt-2">{t("labor_help")}</p>
+            </div>
+            <Button onClick={handleSaveLaborCost} disabled={savingLabor} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
+              {savingLabor ? t("btn_saving") : t("btn_save")}
             </Button>
           </CardContent>
         </Card>

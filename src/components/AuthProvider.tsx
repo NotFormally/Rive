@@ -183,6 +183,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSettings(modules);
       setUsage(data.usage_metrics || null);
       setSubscription({ tier, stripeCustomerId: data.stripe_customer_id || null });
+    } else {
+      setSettings(defaultSettings);
+      setUsage(null);
+      setSubscription({ tier: 'free', stripeCustomerId: null });
     }
   };
 

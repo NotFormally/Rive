@@ -778,7 +778,21 @@
     "module_variance_label": "차이 & 손실",
     "module_variance_desc": "POS 예상치와 실물 재고 간의 불일치를 발견합니다.",
     "module_production_label": "브루어리 생산",
-    "module_production_desc": "발효에서 케그까지 맥주 배치를 추적합니다."
+    "module_production_desc": "발효에서 케그까지 맥주 배치를 추적합니다.",
+    "cancel_sub_btn": "Cancel subscription",
+    "cancel_dialog_title": "Cancel Subscription",
+    "cancel_dialog_desc": "Please let us know why you are leaving. Your feedback is very important to us.",
+    "reason_label": "Reason for cancellation",
+    "comments_label": "Additional comments (optional)",
+    "btn_confirm_cancel": "Confirm Cancellation",
+    "btn_keep_sub": "Keep my subscription",
+    "reason_too_expensive": "Too expensive",
+    "reason_missing_features": "Missing features",
+    "reason_closing": "Closing business",
+    "reason_competitor": "Switching to competitor",
+    "reason_other": "Other",
+    "cancel_success": "Your subscription has been cancelled. You will still have access until the end of your billing period.",
+    "cancel_error": "An error occurred while cancelling your subscription. Please contact support."
   },
   "SettingsIntegrations": {
     "title": "POS 연결",

@@ -775,7 +775,21 @@
     "module_variance_label": "Pertes & Coulage",
     "module_variance_desc": "Repérez les liquidités perdues entre votre caisse et l'inventaire.",
     "module_production_label": "Production Brassicole",
-    "module_production_desc": "Pilotez vos brassins de la fermenteuse à l'enfûtage."
+    "module_production_desc": "Pilotez vos brassins de la fermenteuse à l'enfûtage.",
+    "cancel_sub_btn": "Résilier l'abonnement",
+    "cancel_dialog_title": "Résilier l'abonnement",
+    "cancel_dialog_desc": "Merci de nous indiquer la raison de votre départ. Vos retours sont très importants.",
+    "reason_label": "Raison de l'annulation",
+    "comments_label": "Commentaires additionnels (optionnel)",
+    "btn_confirm_cancel": "Confirmer la résiliation",
+    "btn_keep_sub": "Conserver mon abonnement",
+    "reason_too_expensive": "Trop cher",
+    "reason_missing_features": "Manque de fonctionnalités",
+    "reason_closing": "Fermeture de l'établissement",
+    "reason_competitor": "Passage à un concurrent",
+    "reason_other": "Autre",
+    "cancel_success": "Votre abonnement a été annulé. Vous y aurez accès jusqu'à la fin de la période en cours.",
+    "cancel_error": "Une erreur est survenue. Veuillez contacter le support."
   },
   "WasteCalculator": {
     "title": "Combien vous coûte l'incertitude ?",

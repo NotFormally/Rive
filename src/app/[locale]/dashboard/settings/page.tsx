@@ -60,6 +60,12 @@ export default function SettingsPage() {
   const [inviting, setInviting] = useState(false);
   const [inviteMsg, setInviteMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  // Cancellation state
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+  const [cancelComments, setCancelComments] = useState("");
+  const [cancelling, setCancelling] = useState(false);
+
   // Helper to get auth headers for API calls
   const getAuthHeaders = async (): Promise<Record<string, string>> => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -124,17 +130,29 @@ export default function SettingsPage() {
     }
   }, [profile, role, loadMembers]);
 
-  const handleToggle = async (moduleKey: string) => {
-    const newValue = !localSettings[moduleKey];
-    setLocalSettings(prev => ({ ...prev, [moduleKey]: newValue }));
+  const handleToggle = (moduleKey: string) => {
+    setLocalSettings(prev => ({ ...prev, [moduleKey]: !prev[moduleKey] }));
+  };
 
-    if (profile) {
-      await supabase
-        .from("restaurant_settings")
-        .update({ [moduleKey]: newValue })
-        .eq("restaurant_id", profile.id);
+  const handleSaveModules = async () => {
+    if (!profile) return;
+    setSaving(true);
+    
+    // We must use upsert in case the restaurant_settings row doesn't exist yet
+    const { error } = await supabase
+      .from("restaurant_settings")
+      .upsert({
+        restaurant_id: profile.id,
+        ...localSettings
+      }, { onConflict: 'restaurant_id' });
+      
+    if (error) {
+      console.error("Error saving modules:", error);
+      alert(t("error_generic"));
+    } else {
       await refreshSettings();
     }
+    setSaving(false);
   };
 
   const handleSaveProfile = async () => {
@@ -242,6 +260,31 @@ export default function SettingsPage() {
       console.error(e);
       alert(t("portal_error"));
       setPortalLoading(false);
+    }
+  };
+
+  const handleCancelSubmit = async () => {
+    if (!cancelReason) return;
+    setCancelling(true);
+    try {
+      const headers = await getAuthHeaders();
+      const res = await fetch('/api/stripe/cancel', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ reason: cancelReason, comments: cancelComments }),
+      });
+      if (res.ok) {
+        alert(t("cancel_success"));
+        setShowCancelModal(false);
+        refreshSettings();
+      } else {
+        const d = await res.json();
+        alert(d.error || t("cancel_error"));
+      }
+    } catch {
+      alert(t("cancel_error"));
+    } finally {
+      setCancelling(false);
     }
   };
 
@@ -487,6 +530,11 @@ export default function SettingsPage() {
                   </div>
                 ))}
             </div>
+            <div className="mt-6 flex justify-end">
+              <Button onClick={handleSaveModules} disabled={saving} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
+                {saving ? t("btn_saving") : t("btn_save")}
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
@@ -567,13 +615,22 @@ export default function SettingsPage() {
               <strong className="text-foreground">{t("label_plan")}</strong> <span className="capitalize">{subscription?.tier || 'free'}</span>
             </p>
             {subscription?.stripeCustomerId ? (
-              <Button
-                onClick={handlePortalSession}
-                disabled={portalLoading}
-                className="bg-foreground text-background hover:bg-foreground/90 rounded-xl"
-              >
-                {portalLoading ? t("portal_loading") : t("btn_manage_subscription")}
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button
+                  onClick={handlePortalSession}
+                  disabled={portalLoading}
+                  className="bg-foreground text-background hover:bg-foreground/90 rounded-xl flex-1 sm:flex-none"
+                >
+                  {portalLoading ? t("portal_loading") : t("btn_manage_subscription")}
+                </Button>
+                <Button
+                  onClick={() => setShowCancelModal(true)}
+                  variant="outline"
+                  className="text-red-500 hover:text-red-600 hover:bg-red-50 border-red-200 rounded-xl flex-1 sm:flex-none"
+                >
+                  {t("cancel_sub_btn")}
+                </Button>
+              </div>
             ) : (
               <div>
                 <p className="text-sm font-outfit text-muted-foreground mb-4">{t("free_desc")}</p>
@@ -586,6 +643,82 @@ export default function SettingsPage() {
         </Card>
 
       </div>
+
+      {/* Cancellation Modal */}
+      {showCancelModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+          <Card className="w-full max-w-md rounded-3xl border-border shadow-2xl overflow-hidden relative">
+            <button 
+              onClick={() => setShowCancelModal(false)}
+              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-secondary/50 text-muted-foreground transition-colors"
+            >
+              ✕
+            </button>
+            <CardHeader className="bg-card p-6 pb-4 border-b border-border/50">
+              <CardTitle className="text-xl font-jakarta font-bold text-foreground">
+                {t("cancel_dialog_title")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <p className="text-sm font-outfit text-muted-foreground">
+                {t("cancel_dialog_desc")}
+              </p>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium font-outfit text-foreground/70 mb-2">
+                    {t("reason_label")} <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={cancelReason}
+                    onChange={(e) => setCancelReason(e.target.value)}
+                    className="w-full px-4 py-3 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    disabled={cancelling}
+                  >
+                    <option value="" disabled>-- {t("reason_label")} --</option>
+                    <option value={t("reason_too_expensive")}>{t("reason_too_expensive")}</option>
+                    <option value={t("reason_missing_features")}>{t("reason_missing_features")}</option>
+                    <option value={t("reason_closing")}>{t("reason_closing")}</option>
+                    <option value={t("reason_competitor")}>{t("reason_competitor")}</option>
+                    <option value={t("reason_other")}>{t("reason_other")}</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium font-outfit text-foreground/70 mb-2">
+                    {t("comments_label")}
+                  </label>
+                  <textarea
+                    value={cancelComments}
+                    onChange={(e) => setCancelComments(e.target.value)}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none placeholder:text-muted-foreground/50"
+                    disabled={cancelling}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col-reverse sm:flex-row gap-3 pt-2">
+                <Button
+                  onClick={() => setShowCancelModal(false)}
+                  variant="outline"
+                  className="flex-1 rounded-xl text-foreground font-medium"
+                  disabled={cancelling}
+                >
+                  {t("btn_keep_sub")}
+                </Button>
+                <Button
+                  onClick={handleCancelSubmit}
+                  disabled={cancelling || !cancelReason}
+                  className="flex-1 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium"
+                >
+                  {cancelling ? t("btn_saving") : t("btn_confirm_cancel")}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

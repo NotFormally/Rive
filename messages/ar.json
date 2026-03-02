@@ -795,18 +795,18 @@
     "beta_alert": "Direct integration with Instagram and TikTok is currently under development and platform approval (Private Beta). The feature will be rolled out publicly soon."
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "ما هي تكلفة عدم اليقين؟",
+    "subtitle": "أدخل أرقامك الخاصة لتقدير هدر الطعام لديك",
+    "covers_week": "عدد الأغطية في الأسبوع",
+    "avg_ticket": "متوسط سعر الفاتورة",
+    "food_cost_ratio": "نسبة تكلفة الطعام لديك",
+    "overproduction_rate": "معدل الإنتاج الزائد المقدّر لديك",
+    "weekly_purchases": "مشتريات الطعام الأسبوعية:",
+    "weekly_loss": "/أسبوع من الإنتاج الزائد",
+    "yearly_loss": "أي <value>{val}</value>/سنة تُهدر على الإنتاج الزائد فقط",
+    "potential_reduction": "يمكن لإدارة التوقعات المبنية على بياناتك تقليل هذا الهدر بمقدار <value>{val}</value>/سنة",
+    "disclaimer": "تقدير مبني على تخفيض الهدر بنسبة {percent}%، وهو متوافق مع دراسات إدارة التوقعات المبنية على البيانات (WRAP, NRA). تعتمد النتائج الفعلية على سياقك التشغيلي.",
+    "cta": "ابدأ بالتوفير"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

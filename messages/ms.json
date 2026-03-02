@@ -800,18 +800,18 @@
     "success_default": "Jemputan diterima!"
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "Berapakah kos ketidakpastian?",
+    "subtitle": "Masukkan angka anda sendiri untuk menganggar pembaziran makanan anda",
+    "covers_week": "Bilangan tetamu seminggu",
+    "avg_ticket": "Harga tiket purata",
+    "food_cost_ratio": "Nisbah kos makanan anda",
+    "overproduction_rate": "Kadar anggaran lebihan pengeluaran anda",
+    "weekly_purchases": "Pembelian makanan mingguan:",
+    "weekly_loss": "/minggu lebihan pengeluaran",
+    "yearly_loss": "bermaksud <value>{val}</value>/tahun hilang akibat lebihan pengeluaran sahaja",
+    "potential_reduction": "Pengurusan ramalan berdasarkan data anda boleh mengurangkan kerugian ini sebanyak <value>{val}</value>/tahun",
+    "disclaimer": "Anggaran berdasarkan pengurangan pembaziran sebanyak {percent}%, selaras dengan kajian pengurusan ramalan berasaskan data (WRAP, NRA). Keputusan sebenar bergantung pada konteks operasi anda.",
+    "cta": "Mula berjimat"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

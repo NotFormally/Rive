@@ -110,3 +110,59 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Hero "Heat" visual metaphor ── */
+.hero-hot-text {
+  background: linear-gradient(90deg, #CC5833, #FF7A4A, #E04A2A, #CC5833);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: heat-gradient 5s ease infinite;
+}
+
+.hero-hot-glow {
+  color: #CC5833;
+  filter: blur(18px);
+  opacity: 0.35;
+  animation: heat-pulse 3.5s ease-in-out infinite;
+}
+
+.steam-wisp {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 16px;
+  background: linear-gradient(to top, rgba(204, 88, 51, 0.5), transparent);
+  border-radius: 999px;
+  opacity: 0;
+  animation: steam-rise 2.8s ease-out infinite;
+}
+
+@keyframes heat-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes heat-pulse {
+  0%, 100% { opacity: 0.25; filter: blur(18px); }
+  50% { opacity: 0.5; filter: blur(28px); }
+}
+
+@keyframes steam-rise {
+  0% {
+    transform: translateY(0) scaleX(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  60% {
+    transform: translateY(-18px) scaleX(1.8);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-32px) scaleX(2.5);
+    opacity: 0;
+  }
+}

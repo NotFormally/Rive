@@ -795,18 +795,18 @@
     "beta_alert": "Direct integration with Instagram and TikTok is currently under development and platform approval (Private Beta). The feature will be rolled out publicly soon."
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "Qual é o custo da incerteza?",
+    "subtitle": "Insira os seus dados para estimar o seu desperdício alimentar",
+    "covers_week": "Talheres por semana",
+    "avg_ticket": "Preço médio do ticket",
+    "food_cost_ratio": "O seu rácio de custo alimentar",
+    "overproduction_rate": "A sua taxa estimada de sobreprodução",
+    "weekly_purchases": "Compras semanais de alimentos:",
+    "weekly_loss": "/semana de sobreprodução",
+    "yearly_loss": "ou seja, <value>{val}</value>/ano perdidos só em sobreprodução",
+    "potential_reduction": "A gestão previsional baseada nos seus dados pode reduzir esta perda em <value>{val}</value>/ano",
+    "disclaimer": "Estimativa baseada numa redução de {percent}% do desperdício, consistente com estudos de gestão previsional orientados por dados (WRAP, NRA). Os resultados reais dependem do seu contexto operacional.",
+    "cta": "Comece a poupar"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

@@ -67,6 +67,7 @@
     "features_card3_target_text": "Limpiar la zona fría de las neveras",
     "footer_privacy": "Privacy",
     "footer_terms": "Terms",
+    "sticky_cta": "Start for free",
     "features_title": "All the instruments you need to navigate, in one place.",
     "f1_title": "The Captain's Log",
     "f1_desc": "Forget loose notebooks. Staff handovers, equipment issues, and crew incidents are logged, mapped, and tracked by AI.",
@@ -1107,5 +1108,52 @@
     "error_accept": "Error while accepting.",
     "error_network": "Network error. Please try again later.",
     "success_default": "Invitation accepted!"
+  },
+  "HowItWorks": {
+    "title": "How it works",
+    "subtitle": "Three steps to take control of your operations",
+    "step1_title": "Connect your tools",
+    "step1_desc": "Link your POS, suppliers, and invoices. Rive integrates natively with Toast, Square, Lightspeed, and more.",
+    "step2_title": "AI analyzes everything",
+    "step2_desc": "Our algorithms cross-reference your sales, inventory, and costs in real time to detect anomalies and anticipate needs.",
+    "step3_title": "Receive actionable alerts",
+    "step3_desc": "Get precise recommendations before problems occur: margin drops, compliance gaps, overproduction risks."
+  },
+  "DemoVideo": {
+    "title": "See Rive in action",
+    "subtitle": "A quick look at how your daily operations become effortless",
+    "play_label": "Watch the demo"
+  },
+  "BeforeAfter": {
+    "title": "Before and after Rive",
+    "subtitle": "The difference data-driven management makes in your restaurant",
+    "without_title": "Without Rive",
+    "with_title": "With Rive",
+    "without_inventory": "Manual inventory counts, spreadsheets and guesswork",
+    "with_inventory": "Real-time stock tracking with automatic alerts on low levels",
+    "without_orders": "Ordering based on gut feeling, frequent over- or under-buying",
+    "with_orders": "AI-powered order suggestions based on forecasted demand",
+    "without_compliance": "Paper-based HACCP logs, last-minute scrambles before audits",
+    "with_compliance": "Automated digital compliance logs, always audit-ready",
+    "without_management": "Reactive: problems discovered too late, after the damage is done",
+    "with_management": "Proactive: alerts before margin drops, waste spikes, or compliance gaps",
+    "without_waste": "No visibility on overproduction, silent profit leaks",
+    "with_waste": "Precise waste tracking with data-driven reduction strategies"
+  },
+  "FAQ": {
+    "title": "Frequently asked questions",
+    "subtitle": "Everything you need to know before getting started",
+    "q1_q": "How does Rive integrate with my POS system?",
+    "q1_a": "Rive connects natively with major POS systems including Toast, Square, SumUp, Lightspeed, and Zettle. Setup takes less than 5 minutes — just authorize the connection and your data starts syncing automatically.",
+    "q2_q": "Is my restaurant data secure?",
+    "q2_a": "Absolutely. All data is encrypted in transit and at rest. We use Supabase infrastructure with row-level security, meaning your data is isolated and only accessible to your team. We never share or sell your data.",
+    "q3_q": "How long does it take to set up?",
+    "q3_a": "Most restaurants are fully operational within 15 minutes. Connect your POS, invite your team, and Rive starts learning your patterns immediately. You'll receive your first actionable insights within 48 hours.",
+    "q4_q": "What happens after the free plan?",
+    "q4_a": "The free Essence plan has no time limit — use it as long as you want. When you're ready for advanced AI features like predictive ordering and automated compliance, upgrade to Horizon or Intelligence at any time.",
+    "q5_q": "Can my team use Rive in their own language?",
+    "q5_a": "Yes. Rive supports over 25 languages and automatically translates task instructions for each team member. A chef who speaks Mandarin and a server who speaks French can both use the same system seamlessly.",
+    "q6_q": "Do I need to train my staff?",
+    "q6_a": "Rive is designed to be intuitive. The interface is minimal and task-oriented — your team can start using it immediately. We also provide onboarding guides and our support team is available via chat for any questions."
   }
 }

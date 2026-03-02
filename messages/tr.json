@@ -795,18 +795,18 @@
     "beta_alert": "Direct integration with Instagram and TikTok is currently under development and platform approval (Private Beta). The feature will be rolled out publicly soon."
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "Belirsizliğin maliyeti nedir?",
+    "subtitle": "Gıda israfınızı tahmin etmek için kendi rakamlarınızı girin",
+    "covers_week": "Haftalık kuver sayısı",
+    "avg_ticket": "Ortalama hesap tutarı",
+    "food_cost_ratio": "Gıda maliyet oranınız",
+    "overproduction_rate": "Tahmini fazla üretim oranınız",
+    "weekly_purchases": "Haftalık gıda alımları:",
+    "weekly_loss": "/hafta fazla üretim",
+    "yearly_loss": "yani yalnızca fazla üretimden <value>{val}</value>/yıl kayıp",
+    "potential_reduction": "Verilerinize dayalı tahmin yönetimi bu kaybı <value>{val}</value>/yıl azaltabilir",
+    "disclaimer": "Veri odaklı tahmin yönetimi çalışmalarıyla (WRAP, NRA) uyumlu {percent}% israf azaltmasına dayanan tahmindir. Gerçek sonuçlar operasyonel bağlamınıza bağlıdır.",
+    "cta": "Tasarruf etmeye başlayın"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

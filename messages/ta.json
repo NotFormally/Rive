@@ -795,18 +795,18 @@
     "beta_alert": "Direct integration with Instagram and TikTok is currently under development and platform approval (Private Beta). The feature will be rolled out publicly soon."
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "நிச்சயமின்மையின் விலை என்ன?",
+    "subtitle": "உங்கள் உணவு விரையத்தை மதிப்பிட உங்கள் எண்களை உள்ளிடுங்கள்",
+    "covers_week": "வாரத்திற்கு உணவு இடங்கள்",
+    "avg_ticket": "சராசரி டிக்கெட் விலை",
+    "food_cost_ratio": "உங்கள் உணவுச் செலவு விகிதம்",
+    "overproduction_rate": "உங்கள் மதிப்பிடப்பட்ட அதிக உற்பத்தி விகிதம்",
+    "weekly_purchases": "வாராந்திர உணவு கொள்முதல்:",
+    "weekly_loss": "/வாரம் அதிக உற்பத்தி",
+    "yearly_loss": "அதாவது அதிக உற்பத்தியால் மட்டும் <value>{val}</value>/ஆண்டு இழப்பு",
+    "potential_reduction": "உங்கள் தரவின் அடிப்படையிலான முன்கணிப்பு மேலாண்மை இந்த இழப்பை <value>{val}</value>/ஆண்டு குறைக்க முடியும்",
+    "disclaimer": "{percent}% கழிவுக் குறைப்பின் அடிப்படையிலான மதிப்பீடு, தரவு சார்ந்த முன்கணிப்பு மேலாண்மை ஆய்வுகளுடன் (WRAP, NRA) ஒத்துள்ளது. உண்மையான முடிவுகள் உங்கள் செயல்பாட்டுச் சூழலைப் பொறுத்தது.",
+    "cta": "சேமிக்கத் தொடங்குங்கள்"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

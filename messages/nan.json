@@ -800,18 +800,18 @@
     "success_default": "邀請接受好矣！"
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "無確定的代價是偌濟？",
+    "subtitle": "輸入你家己的數字來估算食物的浪費",
+    "covers_week": "逐禮拜的客數",
+    "avg_ticket": "平均客單價",
+    "food_cost_ratio": "你的食材成本比例",
+    "overproduction_rate": "你估算的超額生產率",
+    "weekly_purchases": "逐禮拜食材採購額：",
+    "weekly_loss": "/禮拜超額生產",
+    "yearly_loss": "就是講干焦超額生產就損失 <value>{val}</value>/年",
+    "potential_reduction": "根據你的資料做預測管理，會當減少這个損失 <value>{val}</value>/年",
+    "disclaimer": "這个估算是根據 {percent}% 的浪費減少，佮資料驅動的預測管理研究（WRAP、NRA）一致。實際結果看你的營運情況。",
+    "cta": "開始節省"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

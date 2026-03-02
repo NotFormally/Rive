@@ -392,6 +392,7 @@
     "empty_state": "Aucune note pour le moment. Ajoutez votre première observation."
   },
   "Common": {
+    "loading": "Chargement...",
     "error_unknown": "Inconnue",
     "error_payment": "Erreur lors de la redirection vers le paiement.",
     "btn_close": "Fermer"

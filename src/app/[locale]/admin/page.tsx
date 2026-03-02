@@ -6,7 +6,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, Globe, Clock, Search, ShieldCheck } from "lucide-react";
+import { Users, Globe, Clock, Search, ShieldCheck, MapPin } from "lucide-react";
 
 const ADMIN_EMAIL = "nassim.saighi@gmail.com";
 
@@ -19,6 +19,7 @@ type UserRecord = {
   // From signup_notifications join
   email?: string;
   locale?: string;
+  country?: string;
   // From restaurant_settings join
   subscription_tier?: string;
   trial_ends_at?: string;
@@ -85,6 +86,7 @@ export default function AdminPage() {
         ...p,
         email: notifByEmail?.email || notif?.email || "—",
         locale: notifByEmail?.locale || notif?.locale || "fr",
+        country: notifByEmail?.country || notif?.country || "—",
         subscription_tier: setting?.subscription_tier || "trial",
         trial_ends_at: setting?.trial_ends_at || null,
       };
@@ -108,13 +110,19 @@ export default function AdminPage() {
     (u) =>
       u.restaurant_name?.toLowerCase().includes(search.toLowerCase()) ||
       u.email?.toLowerCase().includes(search.toLowerCase()) ||
-      u.locale?.toLowerCase().includes(search.toLowerCase())
+      u.locale?.toLowerCase().includes(search.toLowerCase()) ||
+      u.country?.toLowerCase().includes(search.toLowerCase())
   );
 
   const totalUsers = users.length;
   const localeBreakdown = users.reduce((acc: Record<string, number>, u) => {
     const locale = u.locale || "fr";
     acc[locale] = (acc[locale] || 0) + 1;
+    return acc;
+  }, {});
+  const countryBreakdown = users.reduce((acc: Record<string, number>, u) => {
+    const country = u.country || "—";
+    if (country !== "—") acc[country] = (acc[country] || 0) + 1;
     return acc;
   }, {});
 
@@ -141,7 +149,7 @@ export default function AdminPage() {
 
       <main className="max-w-6xl mx-auto p-4 md:p-6 space-y-6">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm text-slate-500 flex items-center gap-2">
@@ -166,6 +174,26 @@ export default function AdminPage() {
                   .map(([locale, count]) => (
                     <Badge key={locale} variant="secondary" className="text-[10px] font-plex-mono">
                       {locale.toUpperCase()}: {count}
+                    </Badge>
+                  ))}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm text-slate-500 flex items-center gap-2">
+                <MapPin className="w-4 h-4" /> Pays
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold">{Object.keys(countryBreakdown).length}</div>
+              <div className="flex flex-wrap gap-1 mt-2">
+                {Object.entries(countryBreakdown)
+                  .sort(([, a], [, b]) => b - a)
+                  .slice(0, 5)
+                  .map(([country, count]) => (
+                    <Badge key={country} variant="secondary" className="text-[10px] font-plex-mono">
+                      {country}: {count}
                     </Badge>
                   ))}
               </div>
@@ -216,6 +244,7 @@ export default function AdminPage() {
                   <th className="px-4 py-3 font-medium">Restaurant</th>
                   <th className="px-4 py-3 font-medium">Email</th>
                   <th className="px-4 py-3 font-medium">Langue</th>
+                  <th className="px-4 py-3 font-medium">Pays</th>
                   <th className="px-4 py-3 font-medium">Plan</th>
                   <th className="px-4 py-3 font-medium">Inscription</th>
                 </tr>
@@ -255,6 +284,9 @@ export default function AdminPage() {
                           {u.locale}
                         </Badge>
                       </td>
+                      <td className="px-4 py-3 text-slate-500 text-xs">
+                        {u.country || "—"}
+                      </td>
                       <td className="px-4 py-3">
                         <Badge
                           variant={
@@ -285,7 +317,7 @@ export default function AdminPage() {
                 })}
                 {filteredUsers.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-4 py-8 text-center text-slate-400">
+                    <td colSpan={7} className="px-4 py-8 text-center text-slate-400">
                       Aucun utilisateur trouvé.
                     </td>
                   </tr>

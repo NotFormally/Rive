@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS public.social_connections (
 -- RLS Policies
 ALTER TABLE public.social_connections ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view own social connections" ON public.social_connections;
 CREATE POLICY "Users can view own social connections"
     ON public.social_connections FOR SELECT
     USING (
@@ -25,6 +26,7 @@ CREATE POLICY "Users can view own social connections"
         )
     );
 
+DROP POLICY IF EXISTS "Users can insert own social connections" ON public.social_connections;
 CREATE POLICY "Users can insert own social connections"
     ON public.social_connections FOR INSERT
     WITH CHECK (
@@ -34,6 +36,7 @@ CREATE POLICY "Users can insert own social connections"
         )
     );
 
+DROP POLICY IF EXISTS "Users can update own social connections" ON public.social_connections;
 CREATE POLICY "Users can update own social connections"
     ON public.social_connections FOR UPDATE
     USING (
@@ -43,6 +46,7 @@ CREATE POLICY "Users can update own social connections"
         )
     );
 
+DROP POLICY IF EXISTS "Users can delete own social connections" ON public.social_connections;
 CREATE POLICY "Users can delete own social connections"
     ON public.social_connections FOR DELETE
     USING (
@@ -54,7 +58,17 @@ CREATE POLICY "Users can delete own social connections"
 
 -- Index for fast lookup by restaurant
 CREATE INDEX IF NOT EXISTS idx_social_connections_restr_id ON public.social_connections(restaurant_id);
+-- Create the updated_at trigger function if it doesn't exist
+CREATE OR REPLACE FUNCTION public.handle_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
 -- Timestamp trigger
+DROP TRIGGER IF EXISTS handle_updated_at_social_conn ON public.social_connections;
 CREATE TRIGGER handle_updated_at_social_conn
   BEFORE UPDATE ON public.social_connections
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();

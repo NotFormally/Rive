@@ -42,7 +42,7 @@ export function RadarLogo({ className = "" }: { className?: string }) {
         duration: sweepDuration,
         repeat: -1,
         ease: "none",
-        transformOrigin: "0 0",
+        svgOrigin: "0 0",
       });
 
       // Afterglow trail — follows sweep with slight delay, fades
@@ -51,7 +51,7 @@ export function RadarLogo({ className = "" }: { className?: string }) {
         duration: sweepDuration,
         repeat: -1,
         ease: "none",
-        transformOrigin: "0 0",
+        svgOrigin: "0 0",
         delay: 0.05,
       });
 

@@ -392,6 +392,7 @@
     "empty_state": "No notes yet. Add your first observation."
   },
   "Common": {
+    "loading": "Loading...",
     "error_unknown": "Unknown",
     "error_payment": "Error during payment redirection.",
     "btn_close": "Close"

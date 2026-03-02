@@ -639,12 +639,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — AI 기반 레스토랑 운영 플랫폼",
-    "home_description": "규정 준수, AI 로그북, Food Cost 분석, 19개 언어 번역, OCR 송장 스캐너, 메뉴 엔지니어링. 무료 버전 사용 가능.",
-    "pricing_title": "요금제 — Rive",
-    "pricing_description": "월 $59부터 시작하는 Rive 구독. AI 로그북, 규정 준수, Food Cost, 19개 언어 번역. 무료 버전 사용 가능, 신용카드 불필요.",
+    "home_title": "Rive — AI 기반 레스토랑 관리 소프트웨어",
+    "home_description": "AI 레스토랑 관리 플랫폼: HACCP 준수, 지능형 로그북, 푸드 코스트 분석, OCR 송장 스캐너, 메뉴 엔지니어링, POS 연동, 25개 언어 번역. 무료 버전 사용 가능.",
+    "pricing_title": "요금제 및 플랜 — Rive 레스토랑 관리 소프트웨어",
+    "pricing_description": "월 $59부터 시작하는 Rive 구독. AI 로그북, HACCP 준수, 푸드 코스트 추적, POS 연동 (Toast, Square, Lightspeed), 25개 언어 번역. 무료 플랜, 신용카드 불필요.",
     "cgu_title": "서비스 이용약관 — Rive",
-    "cgu_description": "서비스 이용약관, AI 정책 및 데이터 개인정보 보호 서약을 확인하십시오."
+    "cgu_description": "AI 기반 레스토랑 관리 플랫폼 Rive의 서비스 이용약관. AI 정책, 데이터 보호 및 개인정보 보호 서약."
   },
   "Settings": {
     "title": "설정",

@@ -634,12 +634,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — แพลตฟอร์มจัดการร้านอาหารด้วย AI",
-    "home_description": "การปฏิบัติตามกฎระเบียบ สมุดบันทึก AI การวิเคราะห์ Food Cost การแปล 19 ภาษา เครื่องสแกนใบแจ้งหนี้ OCR วิศวกรรมเมนู เวอร์ชันฟรีพร้อมใช้งาน",
-    "pricing_title": "ราคา — Rive",
-    "pricing_description": "สมัครสมาชิก Rive เริ่มต้น 59$/เดือน สมุดบันทึก AI ความปฏิบัติตาม Food Cost การแปล 19 ภาษา เวอร์ชันฟรี ไม่ต้องใช้บัตรเครดิต",
+    "home_title": "Rive — ซอฟต์แวร์บริหารจัดการร้านอาหารด้วย AI",
+    "home_description": "แพลตฟอร์มบริหารจัดการร้านอาหารด้วย AI: ความสอดคล้อง HACCP, สมุดบันทึกอัจฉริยะ, การวิเคราะห์ Food Cost, เครื่องสแกนใบแจ้งหนี้ OCR, วิศวกรรมเมนู, เชื่อมต่อ POS, แปล 25 ภาษา เวอร์ชันฟรีพร้อมใช้งาน",
+    "pricing_title": "ราคาและแพ็กเกจ — Rive ซอฟต์แวร์บริหารจัดการร้านอาหาร",
+    "pricing_description": "สมัครสมาชิก Rive เริ่มต้น $59/เดือน สมุดบันทึก AI, ความสอดคล้อง HACCP, Food Cost, เชื่อมต่อ POS (Toast, Square, Lightspeed), แปล 25 ภาษา เวอร์ชันฟรี ไม่ต้องใช้บัตรเครดิต",
     "cgu_title": "เงื่อนไขการให้บริการ — Rive",
-    "cgu_description": "อ่านเงื่อนไขการให้บริการ นโยบาย AI และคำมั่นสัญญาด้านความเป็นส่วนตัวของข้อมูล"
+    "cgu_description": "เงื่อนไขการให้บริการของ Rive แพลตฟอร์มบริหารจัดการร้านอาหารด้วย AI นโยบาย AI การปกป้องข้อมูลและความมุ่งมั่นด้านความเป็นส่วนตัว"
   },
   "Settings": {
     "title": "การตั้งค่า",

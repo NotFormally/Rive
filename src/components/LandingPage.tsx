@@ -157,8 +157,10 @@ export function LandingPage() {
       {/* B. HERO SECTION — "The Opening Shot" */}
       <section className="hero-section relative min-h-[100dvh] w-full flex flex-col justify-center pb-24 px-8 md:px-24">
         {/* Background Image with Global CSS Noise */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center z-0"
+          role="img"
+          aria-label={t('hero_bg_alt')}
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542401886-65d6c61db217?q=80&w=2048&auto=format&fit=crop')" }}
         >
           {/* Dune 2049 heavy amber/obsidian gradient overlay */}
@@ -169,6 +171,7 @@ export function LandingPage() {
         <div className="relative z-10 w-full pt-32 md:pt-40 max-w-screen-xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
           <div className="text-[#F2F0E9] flex-1 max-w-2xl">
             <h1 className="flex flex-col gap-3">
+              <span className="sr-only">{t('hero_h1_seo')}</span>
               <span className="hero-text font-jakarta font-bold text-xl md:text-2xl tracking-widest uppercase text-[#CC5833] opacity-90">
                 {t('hero_subtitle')}
               </span>
@@ -637,8 +640,10 @@ export function LandingPage() {
       {/* D. PHILOSOPHY — "The Manifesto" */}
       <section id="philosophy" className="relative py-0 bg-[#1A1A1A] text-[#F2F0E9] overflow-hidden">
         {/* Parallax Organic Texture */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center opacity-[0.07]"
+          role="img"
+          aria-label={t('philosophy_bg_alt')}
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542841791-d3fa1b439f03?q=80&w=2000&auto=format&fit=crop')" }}
         ></div>
 

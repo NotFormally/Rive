@@ -31,7 +31,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rivehub.com'
-const allLocales = ['fr', 'en', 'ar', 'es', 'it', 'hi', 'pa', 'ta', 'bn', 'ru', 'pt', 'zh-HK', 'zh-CN', 'tr']
+const allLocales = ['fr', 'en', 'ar', 'es', 'it', 'hi', 'pa', 'ta', 'bn', 'ru', 'pt', 'zh-HK', 'zh-CN', 'tr', 'ms', 'ja', 'ko', 'id', 'nan', 'vi', 'de', 'th', 'pl', 'tl', 'nl']
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = (await params).locale;
@@ -66,11 +66,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Rive',
       locale,
       type: 'website',
+      images: [{
+        url: `${SITE_URL}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: 'Rive — AI-Powered Restaurant Operations Platform',
+      }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      site: '@rivehub',
+      images: [`${SITE_URL}/opengraph-image`],
     },
     robots: {
       index: true,

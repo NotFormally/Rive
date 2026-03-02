@@ -21,7 +21,9 @@
     "nav_cta": "Créer votre quai",
     "hero_subtitle": "L'algorithme est",
     "hero_title": "prêt.",
+    "hero_h1_seo": "Rive — Logiciel de gestion de restaurant propulsé par l'IA",
     "hero_description": "L'intelligence algorithmique au service de votre tranquillité d'esprit. Facilitez votre conformité réglementaire et laissez l'Écosystème IA Rive anticiper vos opérations, scanner vos factures et surveiller votre Food Cost.",
+    "hero_bg_alt": "Cuisine gastronomique professionnelle avec équipe en service",
     "hero_cta": "Déployer Rive",
     "features_card1_title": "Assistant Conformité & Actions Correctives",
     "features_card1_desc": "L'IA analyse vos relevés et propose des suggestions en cas d'anomalie, à valider par votre équipe.",
@@ -30,6 +32,7 @@
     "features_card2_live": "Live Feed",
     "features_card3_title": "Multilingue Natif (19 Langues)",
     "features_card3_desc": "L'interface s'adapte instantanément à la langue maternelle de votre brigade.",
+    "philosophy_bg_alt": "Texture organique de restaurant gastronomique",
     "philosophy_intro": "Diriger un restaurant aujourd'hui revient souvent à naviguer dans une tempête sans instruments fiables.",
     "philosophy_vision": "Plus qu'un simple outil, Rive est votre boussole essentielle pour optimiser chaque décision.",
     "philosophy_pillar1_title": "Amplifier votre savoir",
@@ -633,12 +636,12 @@
     "contact_p1": "Pour toute question, préoccupation ou demande concernant les présentes Conditions d'utilisation, votre compte, vos données ou tout aspect du service Rive, veuillez nous contacter à **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — Intelligence algorithmique pour la restauration",
-    "home_description": "Conformité réglementaire, journal de bord IA, food cost, traduction 19 langues, scanner de reçus, marketing IA. Version gratuite disponible.",
-    "pricing_title": "Tarifs — Rive",
-    "pricing_description": "Abonnements Rive à partir de 59$/mois. Journal de bord IA, conformité, food cost, traduction 19 langues. Version gratuite disponible, sans carte de crédit.",
+    "home_title": "Rive — Logiciel de gestion de restaurant propulsé par l'IA",
+    "home_description": "Plateforme de gestion de restaurant avec IA : conformité HACCP, journal de bord intelligent, analyse food cost, scanner de factures OCR, ingénierie de menu, traduction 25 langues. Version gratuite disponible.",
+    "pricing_title": "Tarifs et abonnements — Rive, logiciel de gestion de restaurant",
+    "pricing_description": "Abonnements Rive à partir de 59$/mois. Journal de bord IA, conformité HACCP, food cost, intégration POS (Toast, Square, Lightspeed), traduction 25 langues. Version gratuite sans carte de crédit.",
     "cgu_title": "Conditions Générales d'Utilisation — Rive",
-    "cgu_description": "Lisez nos conditions d'utilisation, notre politique IA, et nos engagements de confidentialité des données."
+    "cgu_description": "Conditions d'utilisation de Rive, plateforme de gestion de restaurant. Politique IA, protection des données et engagements de confidentialité."
   },
   "Settings": {
     "title": "Paramètres",

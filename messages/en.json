@@ -775,7 +775,21 @@
     "module_variance_label": "Variance & Spoilage",
     "module_variance_desc": "Spot discrepancies between POS expectations and physical inventory.",
     "module_production_label": "Brewery Production",
-    "module_production_desc": "Track your beer batches from fermentation to kegs."
+    "module_production_desc": "Track your beer batches from fermentation to kegs.",
+    "cancel_sub_btn": "Cancel subscription",
+    "cancel_dialog_title": "Cancel Subscription",
+    "cancel_dialog_desc": "Please let us know why you are leaving. Your feedback is very important to us.",
+    "reason_label": "Reason for cancellation",
+    "comments_label": "Additional comments (optional)",
+    "btn_confirm_cancel": "Confirm Cancellation",
+    "btn_keep_sub": "Keep my subscription",
+    "reason_too_expensive": "Too expensive",
+    "reason_missing_features": "Missing features",
+    "reason_closing": "Closing business",
+    "reason_competitor": "Switching to competitor",
+    "reason_other": "Other",
+    "cancel_success": "Your subscription has been cancelled. You will still have access until the end of your billing period.",
+    "cancel_error": "An error occurred while cancelling your subscription. Please contact support."
   },
   "WasteCalculator": {
     "title": "What's the cost of uncertainty?",

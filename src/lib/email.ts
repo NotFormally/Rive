@@ -17,7 +17,8 @@ export type EmailPayload =
   | { type: 'churn_alert'; to: string; restaurantName: string; daysSinceLastFeedback: number; calibrationCount: number; feedbackDays: number }
   | { type: 'admin_signup_notification'; to: string; restaurantName: string; email: string; locale: string }
   | { type: 'admin_subscription_notification'; to: string; restaurantName: string; email: string; tier: string }
-  | { type: 'support_report'; to: string; restaurantName: string; email: string; errorDetails: string; messageCount: number };
+  | { type: 'support_report'; to: string; restaurantName: string; email: string; errorDetails: string; messageCount: number }
+  | { type: 'churn_feedback'; to: string; restaurantName: string; email: string; reason: string; comments: string };
 
 const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => string)> = {
   welcome: 'Bienvenue sur Rive \u{1F30A}',
@@ -46,6 +47,10 @@ const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => stri
   support_report: (p) =>
     p.type === 'support_report'
       ? `🛟 Support Report: ${p.restaurantName}`
+      : '',
+  churn_feedback: (p) =>
+    p.type === 'churn_feedback'
+      ? `⚠️ Cancelled Subscription: ${p.restaurantName}`
       : '',
 };
 
@@ -81,6 +86,7 @@ function getReactComponent(payload: EmailPayload) {
     case 'admin_signup_notification':
     case 'admin_subscription_notification':
     case 'support_report':
+    case 'churn_feedback':
       // Simple text email — no dedicated template needed
       return null;
   }
@@ -136,6 +142,20 @@ function getTextBody(payload: EmailPayload): string | null {
       ``,
       `The full chat log has been saved in the support_reports table.`,
       `Check the admin dashboard for details.`,
+    ].join('\n');
+  }
+  if (payload.type === 'churn_feedback') {
+    return [
+      `⚠️ Cancellation Feedback Received:`,
+      ``,
+      `Restaurant: ${payload.restaurantName}`,
+      `Email: ${payload.email}`,
+      `Reason: ${payload.reason}`,
+      ``,
+      `Additional Comments:`,
+      payload.comments || 'No comments provided.',
+      ``,
+      `Action required: Reach out to the user if applicable.`,
     ].join('\n');
   }
   return null;

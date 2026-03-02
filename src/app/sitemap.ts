@@ -7,6 +7,7 @@ const locales = ['fr', 'en', 'ar', 'es', 'it', 'hi', 'pa', 'ta', 'bn', 'ru', 'pt
 const publicRoutes = [
   { path: '', changeFrequency: 'weekly' as const, priority: 1.0 },
   { path: '/pricing', changeFrequency: 'weekly' as const, priority: 0.9 },
+  { path: '/ai-restaurant-management', changeFrequency: 'weekly' as const, priority: 0.9 },
   { path: '/signup', changeFrequency: 'monthly' as const, priority: 0.5 },
   { path: '/login', changeFrequency: 'monthly' as const, priority: 0.4 },
   { path: '/cgu', changeFrequency: 'yearly' as const, priority: 0.3 },

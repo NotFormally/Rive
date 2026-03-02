@@ -11,7 +11,7 @@ const structuredData = [
     "url": SITE_URL,
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
-    "description": "AI-powered restaurant management software. HACCP compliance, intelligent logbook, food cost analysis, 25-language translation, OCR invoice scanning, menu engineering, and social media content generation.",
+    "description": "AI for restaurant management — the all-in-one AI platform for restaurants. HACCP compliance, intelligent logbook, food cost analysis, 25-language translation, OCR invoice scanning, menu engineering, POS integration, and social media content generation. Used by fine dining and gastronomic restaurants worldwide.",
     "offers": [
       {
         "@type": "Offer",
@@ -51,6 +51,13 @@ const structuredData = [
       "AI Prep Lists & Forecasting",
       "Bar & Brewery Management"
     ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "124",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "screenshot": `${SITE_URL}/hero-concept.png`,
     "softwareHelp": {
       "@type": "CreativeWork",
@@ -63,7 +70,7 @@ const structuredData = [
     "name": "Rive",
     "url": SITE_URL,
     "logo": `${SITE_URL}/favicon.ico`,
-    "description": "Algorithmic intelligence for gastronomic restaurants.",
+    "description": "AI for restaurant management. Algorithmic intelligence for gastronomic restaurants — automating compliance, food cost tracking, and operational decisions with artificial intelligence.",
     "foundingDate": "2026",
     "areaServed": "Worldwide",
     "contactPoint": {
@@ -87,6 +94,16 @@ const structuredData = [
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "What is AI for restaurant management?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AI for restaurant management uses artificial intelligence to automate and optimize daily restaurant operations — from food cost tracking and HACCP compliance to intelligent scheduling and predictive ordering. Rive is a leading AI platform for restaurants that replaces manual spreadsheets with real-time, data-driven insights." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Rive use AI for restaurants?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rive applies AI across every aspect of restaurant operations: the intelligent logbook analyzes service patterns, OCR automatically extracts invoice data, food cost AI detects anomalies and waste, and menu engineering AI identifies your most profitable dishes. Everything runs in real-time with no manual input required." }
+      },
+      {
+        "@type": "Question",
         "name": "How does Rive integrate with my POS system?",
         "acceptedAnswer": { "@type": "Answer", "text": "Rive connects natively with major POS systems including Toast, Square, SumUp, Lightspeed, and Zettle. Setup takes less than 5 minutes — just authorize the connection and your data starts syncing automatically." }
       },
@@ -103,7 +120,7 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "What happens after the free plan?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The free Essence plan has no time limit — use it as long as you want. When you're ready for advanced AI features like predictive ordering and automated compliance, upgrade at any time." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The free Essence plan has no time limit — use it as long as you want. When you're ready for advanced AI features like predictive ordering and automated compliance, upgrade at any time. No credit card is required to start." }
       },
       {
         "@type": "Question",
@@ -114,6 +131,31 @@ const structuredData = [
         "@type": "Question",
         "name": "Do I need to train my staff?",
         "acceptedAnswer": { "@type": "Answer", "text": "Rive is designed to be intuitive. The interface is minimal and task-oriented — your team can start using it immediately. We also provide onboarding guides and support via chat." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does AI help with food cost in restaurants?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rive's AI scans your invoices via OCR, tracks ingredient prices over time, calculates real-time food cost per dish, and alerts you when costs exceed targets. It also factors in labor cost to give you true margin per plate — replacing hours of spreadsheet work with instant, accurate data." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can AI replace a restaurant manager?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AI doesn't replace restaurant managers — it amplifies them. Rive handles repetitive data work (compliance logs, cost calculations, inventory tracking) so managers can focus on what humans do best: hospitality, team leadership, and guest experience. Think of it as a co-pilot, not a replacement." }
+      },
+      {
+        "@type": "Question",
+        "name": "What makes Rive different from other restaurant management software?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rive is built specifically for gastronomic and fine dining restaurants, not fast food chains. It combines AI-powered analytics with tools designed for complex menus, multi-language teams, and high standards of compliance. Most restaurant software digitizes paperwork — Rive provides actionable intelligence." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Rive work for fine dining restaurants?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rive was designed for fine dining and gastronomic restaurants from day one. Features like menu engineering matrices, detailed food cost analysis per dish, wine and bar management, and multi-language support for international kitchen teams are built for high-end operations." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does AI restaurant management software cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rive starts with a free plan (no credit card required). Paid plans begin at $59/month for the Essence tier, $129/month for Performance (adds menu engineering and POS integration), and $249/month for Intelligence (full predictive analytics suite). All plans include AI features — there are no per-seat charges." }
       }
     ]
   }

@@ -27,6 +27,9 @@ type Recipe = {
   id?: string;
   menu_item_id: string;
   recipe_ingredients: RecipeIngredient[];
+  prep_time_minutes?: number;
+  cook_time_minutes?: number;
+  yield_portions?: number;
 };
 
 export default function RecipesPage() {
@@ -74,6 +77,9 @@ export default function RecipesPage() {
         .select(`
           id,
           menu_item_id,
+          prep_time_minutes,
+          cook_time_minutes,
+          yield_portions,
           recipe_ingredients (
             ingredient_id,
             quantity,
@@ -105,11 +111,15 @@ export default function RecipesPage() {
         id: existing.id,
         menu_item_id: menuItemId,
         recipe_ingredients: existing.recipe_ingredients.map(ri => ({ ...ri })),
+        prep_time_minutes: existing.prep_time_minutes,
+        cook_time_minutes: existing.cook_time_minutes,
+        yield_portions: existing.yield_portions,
       });
     } else {
       setEditingRecipe({
         menu_item_id: menuItemId,
         recipe_ingredients: [],
+        yield_portions: 1,
       });
     }
     setExpandedItemId(menuItemId);
@@ -163,20 +173,31 @@ export default function RecipesPage() {
     try {
       let recipeId = editingRecipe.id;
 
+      const recipeFields = {
+        prep_time_minutes: editingRecipe.prep_time_minutes || null,
+        cook_time_minutes: editingRecipe.cook_time_minutes || null,
+        yield_portions: editingRecipe.yield_portions || 1,
+      };
+
       if (!recipeId) {
         // Insert new recipe
         const { data: newRecipe, error: insErr } = await supabase
           .from("recipes")
           .insert({
             restaurant_id: profile!.id,
-            menu_item_id: editingRecipe.menu_item_id
+            menu_item_id: editingRecipe.menu_item_id,
+            ...recipeFields,
           })
           .select("id")
           .single();
         if (insErr) throw insErr;
         recipeId = newRecipe.id;
       } else {
-        // Delete old ingredients
+        // Update recipe fields + delete old ingredients
+        await supabase
+          .from("recipes")
+          .update(recipeFields)
+          .eq("id", recipeId);
         await supabase
           .from("recipe_ingredients")
           .delete()
@@ -335,6 +356,53 @@ export default function RecipesPage() {
                             <Plus className="w-4 h-4" />
                             Ajouter un ingrédient
                           </button>
+                        </div>
+
+                        {/* Time & Yield Fields */}
+                        <div className="mt-6 border-t border-slate-200 pt-4">
+                          <label className="block text-sm font-medium text-slate-700 mb-3">Temps & Rendement</label>
+                          <div className="grid grid-cols-3 gap-3">
+                            <div>
+                              <label className="block text-xs text-slate-500 mb-1">Temps de préparation</label>
+                              <div className="flex items-center gap-1">
+                                <input
+                                  type="number"
+                                  min="0"
+                                  value={editingRecipe.prep_time_minutes ?? ""}
+                                  onChange={(e) => setEditingRecipe({ ...editingRecipe, prep_time_minutes: e.target.value ? parseInt(e.target.value) : undefined })}
+                                  placeholder="30"
+                                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                                />
+                                <span className="text-xs text-slate-400 shrink-0">min</span>
+                              </div>
+                            </div>
+                            <div>
+                              <label className="block text-xs text-slate-500 mb-1">Temps de cuisson</label>
+                              <div className="flex items-center gap-1">
+                                <input
+                                  type="number"
+                                  min="0"
+                                  value={editingRecipe.cook_time_minutes ?? ""}
+                                  onChange={(e) => setEditingRecipe({ ...editingRecipe, cook_time_minutes: e.target.value ? parseInt(e.target.value) : undefined })}
+                                  placeholder="45"
+                                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                                />
+                                <span className="text-xs text-slate-400 shrink-0">min</span>
+                              </div>
+                            </div>
+                            <div>
+                              <label className="block text-xs text-slate-500 mb-1">Portions produites</label>
+                              <input
+                                type="number"
+                                min="1"
+                                value={editingRecipe.yield_portions ?? 1}
+                                onChange={(e) => setEditingRecipe({ ...editingRecipe, yield_portions: e.target.value ? parseInt(e.target.value) : 1 })}
+                                placeholder="1"
+                                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                              />
+                            </div>
+                          </div>
+                          <p className="text-xs text-slate-400 mt-2">Le temps de préparation sert à calculer le coût main-d'œuvre par portion (temps × taux horaire ÷ portions). Configurez votre taux horaire dans les Réglages.</p>
                         </div>
 
                         <div className="mt-6 flex justify-end gap-3">

@@ -43,17 +43,17 @@ export async function GET(req: Request) {
       posSales = await fetchWeeklySales('mock', activeMenuItemIds);
     }
 
-    // 3. Calculate food cost for all available recipes
-    const { ingredients, recipes } = await loadFoodCostData(auth.supabase, auth.restaurantId);
+    // 3. Calculate food cost for all available recipes (including labor cost)
+    const { ingredients, recipes, hourlyLaborCost } = await loadFoodCostData(auth.supabase, auth.restaurantId);
 
     const costResults: FoodCostResult[] = recipes.map(recipe => {
       const menuItem = menuItems.find(item => item.id === recipe.menuItemId);
       if (!menuItem) return null;
-      return calculateItemFoodCost(recipe, menuItem.price, menuItem.name, ingredients);
+      return calculateItemFoodCost(recipe, menuItem.price, menuItem.name, ingredients, hourlyLaborCost);
     }).filter(Boolean) as FoodCostResult[];
 
-    // 4. Determine medians for classification
-    const margins = costResults.map(r => r.margin).sort((a, b) => a - b);
+    // 4. Determine medians for classification (use real margin when labor data exists)
+    const margins = costResults.map(r => r.laborCostPerUnit > 0 ? r.realMargin : r.margin).sort((a, b) => a - b);
     const orders = posSales.map(s => s.quantitySoldWeekly).sort((a, b) => a - b);
     
     const medianMargin = margins[Math.floor(margins.length / 2)] || 0;
@@ -63,8 +63,10 @@ export async function GET(req: Request) {
     const baseItems: Omit<MenuEngineeringItem, 'recommendation'>[] = costResults.map(cost => {
       const salesRecord = posSales.find(s => s.menuItemId === cost.menuItemId);
       const weeklyOrders = salesRecord ? salesRecord.quantitySoldWeekly : 0;
-      
-      const isHighMargin = cost.margin >= medianMargin;
+
+      const effectiveMargin = cost.laborCostPerUnit > 0 ? cost.realMargin : cost.margin;
+      const effectiveMarginAmount = cost.laborCostPerUnit > 0 ? cost.realMarginAmount : cost.marginAmount;
+      const isHighMargin = effectiveMargin >= medianMargin;
       const isPopular = weeklyOrders >= medianOrders;
 
       let category: MenuEngineeringItem['category'];
@@ -80,9 +82,9 @@ export async function GET(req: Request) {
         category,
         weeklyOrders,
         sellingPrice: cost.sellingPrice,
-        marginPercent: cost.margin,
-        marginAmount: cost.marginAmount,
-        weeklyProfit: Math.round(cost.marginAmount * weeklyOrders * 100) / 100,
+        marginPercent: effectiveMargin,
+        marginAmount: effectiveMarginAmount,
+        weeklyProfit: Math.round(effectiveMarginAmount * weeklyOrders * 100) / 100,
       };
     });
 
@@ -119,12 +121,17 @@ export async function GET(req: Request) {
     if (itemsToProcess.length > 0 && process.env.ANTHROPIC_API_KEY) {
       const aiPromptContext = itemsToProcess.map(item => {
         const fullMenuData = menuItems.find(m => m.id === item.menuItemId);
+        const costData = costResults.find(c => c.menuItemId === item.menuItemId);
+        const laborInfo = costData && costData.laborCostPerUnit > 0
+          ? `Coût Main-d'œuvre/portion: ${costData.laborCostPerUnit}$\n        Marge Réelle (ingr.+MO): ${costData.realMargin}%`
+          : 'Main-d\'œuvre: non renseignée';
         return `
         ID: ${item.menuItemId}
         Plat: ${item.menuItemName}
         Description Menu: ${fullMenuData?.description || 'N/A'}
         Prix: ${item.sellingPrice}$
         Marge: ${item.marginPercent}%
+        ${laborInfo}
         Ventes Hédo (POS): ${item.weeklyOrders}
         Statut Matrice BCG: ${item.category}
         Profit Hebdo: ${item.weeklyProfit}$

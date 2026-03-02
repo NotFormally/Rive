@@ -19,6 +19,7 @@ export type RestaurantProfile = {
   hours: string;
   logo_url: string | null;
   social_media_context?: string;
+  hourly_labor_cost?: number;
 };
 
 export type ModuleSettings = TierModules;

@@ -567,8 +567,8 @@ export async function generatePrepList(
       modifierMap[m.menu_item_id] = { modifier: m.modifier, feedbackCount: m.feedback_count };
     }
 
-    // Load food cost data for margin calculation and BCG
-    const { ingredients: ingredientMap, recipes } = await loadFoodCostData(supabase, restaurantId);
+    // Load food cost data for margin calculation and BCG (including labor cost)
+    const { ingredients: ingredientMap, recipes, hourlyLaborCost } = await loadFoodCostData(supabase, restaurantId);
 
     // Load POS sales for BCG classification (reuse menu-engineering logic)
     const { data: posSales } = await supabase
@@ -582,10 +582,10 @@ export async function generatePrepList(
     for (const recipe of recipes) {
       const menuItem = activeItems.find(i => i.id === recipe.menuItemId);
       if (!menuItem) continue;
-      costResults.push(calculateItemFoodCost(recipe, menuItem.price, menuItem.name, ingredientMap));
+      costResults.push(calculateItemFoodCost(recipe, menuItem.price, menuItem.name, ingredientMap, hourlyLaborCost));
     }
 
-    const margins = costResults.map(r => r.margin).sort((a, b) => a - b);
+    const margins = costResults.map(r => r.laborCostPerUnit > 0 ? r.realMargin : r.margin).sort((a, b) => a - b);
     const medianMargin = margins[Math.floor(margins.length / 2)] || 65;
 
     const salesMap: Record<string, number> = {};
@@ -606,10 +606,14 @@ export async function generatePrepList(
         coverEstimation.estimatedTotal * share * confidenceModifier
       ));
 
-      // Food cost for this item
+      // Food cost for this item (use real margin when labor data exists)
       const costResult = costResults.find(c => c.menuItemId === menuItem.id);
-      const marginPercent = costResult?.margin || 0;
-      const ingredientCostPerUnit = costResult?.ingredientCost || 0;
+      const marginPercent = costResult
+        ? (costResult.laborCostPerUnit > 0 ? costResult.realMargin : costResult.margin)
+        : 0;
+      const costPerUnit = costResult
+        ? (costResult.laborCostPerUnit > 0 ? costResult.totalCost : costResult.ingredientCost)
+        : 0;
 
       // BCG category
       const isHighMargin = marginPercent >= medianMargin;
@@ -639,7 +643,7 @@ export async function generatePrepList(
         priorityScore: 50,
         bcgCategory,
         marginPercent,
-        estimatedCost: Math.round(ingredientCostPerUnit * predictedPortions * 100) / 100,
+        estimatedCost: Math.round(costPerUnit * predictedPortions * 100) / 100,
       };
     });
 

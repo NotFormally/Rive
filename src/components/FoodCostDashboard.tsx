@@ -10,11 +10,16 @@ type FoodCostItem = {
   ingredientCost: number;
   margin: number;
   marginAmount: number;
+  laborCostPerUnit: number;
+  totalCost: number;
+  realMargin: number;
+  realMarginAmount: number;
   status: 'healthy' | 'warning' | 'critical';
 };
 
 type FoodCostSummary = {
   avgMargin: number;
+  avgIngredientMargin: number;
   totalMenuCost: number;
   totalMenuRevenue: number;
   criticalItems: number;
@@ -25,6 +30,7 @@ type FoodCostSummary = {
 export function FoodCostDashboard() {
   const [items, setItems] = useState<FoodCostItem[]>([]);
   const [summary, setSummary] = useState<FoodCostSummary | null>(null);
+  const [hasLaborData, setHasLaborData] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,12 +43,16 @@ export function FoodCostDashboard() {
       const data = await res.json();
       setItems(data.items || []);
       setSummary(data.summary || null);
+      setHasLaborData(data.hasLaborData || false);
     } catch (err) {
       console.error('Failed to load food cost data:', err);
     } finally {
       setLoading(false);
     }
   };
+
+  // Check if any item actually has labor cost filled in
+  const anyItemHasLabor = items.some(item => item.laborCostPerUnit > 0);
 
   const statusConfig = {
     healthy:  { label: 'Saine',   color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-900/20', ring: 'ring-emerald-200' , icon: '✅' },
@@ -67,15 +77,35 @@ export function FoodCostDashboard() {
       {/* Header */}
       <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-4 sm:p-6">
         <h2 className="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-1">💰 Food Cost — Analyse des Marges</h2>
-        <p className="text-xs sm:text-sm text-zinc-500">Marges calculées en temps réel à partir de vos recettes et du coût de vos ingrédients.</p>
+        <p className="text-xs sm:text-sm text-zinc-500">
+          {anyItemHasLabor
+            ? "Marges réelles calculées avec le coût des ingrédients et de la main-d'œuvre."
+            : "Marges calculées en temps réel à partir de vos recettes et du coût de vos ingrédients."}
+        </p>
       </div>
+
+      {/* Labor cost banner */}
+      {!hasLaborData && (
+        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 flex items-start gap-3">
+          <span className="text-lg">💡</span>
+          <div>
+            <p className="text-sm font-medium text-amber-800 dark:text-amber-200">Calculez votre marge réelle</p>
+            <p className="text-xs text-amber-600 dark:text-amber-400 mt-0.5">
+              Configurez votre taux horaire dans <a href="/dashboard/settings" className="underline font-medium">Réglages</a> et ajoutez le temps de préparation à vos recettes pour voir le coût main-d'œuvre inclus dans vos marges.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Summary Cards */}
       {summary && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
           <div className="bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 p-3 sm:p-4 text-center">
             <div className="text-xl sm:text-2xl font-bold text-indigo-600 dark:text-indigo-400">{summary.avgMargin}%</div>
-            <div className="text-[10px] sm:text-xs text-zinc-500 mt-1">Marge Moyenne</div>
+            <div className="text-[10px] sm:text-xs text-zinc-500 mt-1">{anyItemHasLabor ? 'Marge Réelle Moy.' : 'Marge Moyenne'}</div>
+            {anyItemHasLabor && summary.avgIngredientMargin !== summary.avgMargin && (
+              <div className="text-[10px] text-zinc-400 mt-0.5">Ingr. seuls : {summary.avgIngredientMargin}%</div>
+            )}
           </div>
           <div className="bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 p-3 sm:p-4 text-center">
             <div className="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400">{summary.healthyItems}</div>
@@ -101,6 +131,12 @@ export function FoodCostDashboard() {
                 <th className="px-4 py-3 text-left font-medium text-zinc-600 dark:text-zinc-400">Plat</th>
                 <th className="px-4 py-3 text-right font-medium text-zinc-600 dark:text-zinc-400">Prix Vente</th>
                 <th className="px-4 py-3 text-right font-medium text-zinc-600 dark:text-zinc-400">Coût Ingr.</th>
+                {anyItemHasLabor && (
+                  <th className="px-4 py-3 text-right font-medium text-zinc-600 dark:text-zinc-400">Main-d&apos;œuvre</th>
+                )}
+                {anyItemHasLabor && (
+                  <th className="px-4 py-3 text-right font-medium text-zinc-600 dark:text-zinc-400">Coût Réel</th>
+                )}
                 <th className="px-4 py-3 text-right font-medium text-zinc-600 dark:text-zinc-400">Profit</th>
                 <th className="px-4 py-3 text-right font-medium text-zinc-600 dark:text-zinc-400">Marge</th>
                 <th className="px-4 py-3 text-center font-medium text-zinc-600 dark:text-zinc-400">Statut</th>
@@ -109,14 +145,29 @@ export function FoodCostDashboard() {
             <tbody>
               {items.map((item, idx) => {
                 const cfg = statusConfig[item.status];
+                const displayMargin = item.laborCostPerUnit > 0 ? item.realMargin : item.margin;
+                const displayProfit = item.laborCostPerUnit > 0 ? item.realMarginAmount : item.marginAmount;
                 return (
                   <tr key={item.menuItemId} className={`border-b border-zinc-100 dark:border-zinc-800 ${idx % 2 === 0 ? '' : 'bg-zinc-50/50 dark:bg-zinc-800/20'}`}>
                     <td className="px-4 py-3 font-medium text-zinc-900 dark:text-zinc-100">{item.menuItemName}</td>
                     <td className="px-4 py-3 text-right tabular-nums text-zinc-700 dark:text-zinc-300">{item.sellingPrice.toFixed(2)}$</td>
                     <td className="px-4 py-3 text-right tabular-nums text-zinc-700 dark:text-zinc-300">{item.ingredientCost.toFixed(2)}$</td>
-                    <td className="px-4 py-3 text-right tabular-nums font-medium text-emerald-600 dark:text-emerald-400">+{item.marginAmount.toFixed(2)}$</td>
+                    {anyItemHasLabor && (
+                      <td className="px-4 py-3 text-right tabular-nums text-zinc-500">
+                        {item.laborCostPerUnit > 0 ? `${item.laborCostPerUnit.toFixed(2)}$` : '—'}
+                      </td>
+                    )}
+                    {anyItemHasLabor && (
+                      <td className="px-4 py-3 text-right tabular-nums font-medium text-zinc-700 dark:text-zinc-300">
+                        {item.laborCostPerUnit > 0 ? `${item.totalCost.toFixed(2)}$` : `${item.ingredientCost.toFixed(2)}$`}
+                      </td>
+                    )}
+                    <td className="px-4 py-3 text-right tabular-nums font-medium text-emerald-600 dark:text-emerald-400">+{displayProfit.toFixed(2)}$</td>
                     <td className="px-4 py-3 text-right">
-                      <span className={`font-bold tabular-nums ${cfg.color}`}>{item.margin}%</span>
+                      <span className={`font-bold tabular-nums ${cfg.color}`}>{displayMargin}%</span>
+                      {anyItemHasLabor && item.laborCostPerUnit > 0 && (
+                        <span className="block text-[10px] text-zinc-400 tabular-nums">ingr. {item.margin}%</span>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-center">
                       <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${cfg.bg} ${cfg.color} ring-1 ring-inset ${cfg.ring}`}>
@@ -136,7 +187,7 @@ export function FoodCostDashboard() {
         <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-4">Visualisation des Marges</h3>
         <div className="space-y-3">
           {items.map(item => {
-            const cfg = statusConfig[item.status];
+            const displayMargin = item.laborCostPerUnit > 0 ? item.realMargin : item.margin;
             const barColor = item.status === 'healthy' ? 'bg-emerald-500' : item.status === 'warning' ? 'bg-amber-500' : 'bg-red-500';
             return (
               <div key={item.menuItemId} className="flex items-center gap-2 sm:gap-3">
@@ -144,9 +195,9 @@ export function FoodCostDashboard() {
                 <div className="flex-1 bg-zinc-100 dark:bg-zinc-800 rounded-full h-5 overflow-hidden">
                   <div
                     className={`h-full ${barColor} rounded-full transition-all duration-500 flex items-center justify-end pr-2`}
-                    style={{ width: `${Math.min(item.margin, 100)}%` }}
+                    style={{ width: `${Math.min(displayMargin, 100)}%` }}
                   >
-                    <span className="text-[10px] font-bold text-white">{item.margin}%</span>
+                    <span className="text-[10px] font-bold text-white">{displayMargin}%</span>
                   </div>
                 </div>
               </div>

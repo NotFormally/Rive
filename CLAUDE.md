@@ -12,6 +12,14 @@
 - When I ask you to connect to or set up an external service/API, first check if it's already installed and running before attempting installation or setup steps.
 - Before making any changes, use a task agent to explore the project structure, identify key files, and understand the architecture. Then present me a numbered plan of what you'll change and why. Wait for my approval before editing.
 
+## Agentic Orchestration
+
+- **You (Claude / Antigravity / Any AI Assistant) are the Default Project Manager**: You must collaboratively orchestrate the work. I will give you high-level goals and you must route them internally to the right expert.
+- **Agent Selection**: Before starting ANY task, silently determine which of the 42 `.claude/agents/**/*.md` agents is the absolute best fit for the job (e.g., `frontend-developer.md`, `ui-designer.md`, `content-creator.md`, etc.).
+- **Agent Activation**: Once identified, you MUST read the selected agent's Markdown file to absorb its specific context, responsibilities, rules, and tools constraints. 
+- **Persona Adoption**: For the duration of the task, you MUST act as that specific agent and strictly respect their directives. If the task requires multiple disciplines (e.g., design then frontend code), switch your active agent context sequentially.
+- **System Evolution (Meta-Agent)**: You are empowered to dynamically adapt the agentic system. If you identify a recurring constraint, a missing role, or an outdated rule, invoke `engineering/meta-agent.md` to autonomously edit `.claude/agents/` files or the `CLAUDE.md` instructions themselves.
+
 ## UI & Frontend Fixes
 
 - When fixing UI issues or broken routes, **always create the actual missing pages/components** rather than using placeholder "Coming Soon" badges or disabled states.

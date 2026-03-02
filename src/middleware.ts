@@ -45,8 +45,19 @@ export default async function middleware(request: NextRequest) {
     }
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
-  const isAuthenticated = !!user;
+  // Race getUser() against a 5-second timeout to prevent middleware from hanging
+  // when Supabase auth is slow (cold start, rate limit, network issues)
+  let isAuthenticated = false;
+  try {
+    const result = await Promise.race([
+      supabase.auth.getUser(),
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000)),
+    ]);
+    isAuthenticated = !!(result && 'data' in result && result.data?.user);
+  } catch {
+    // Auth check failed — treat as unauthenticated for protected routes
+    isAuthenticated = false;
+  }
 
   // Get the applied locale
   const activeLocale = response.headers.get('x-middleware-request-x-next-intl-locale') || routing.defaultLocale;

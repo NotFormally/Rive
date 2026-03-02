@@ -48,28 +48,17 @@ export default function DashboardPage() {
     setLoadingStats(true);
 
     try {
-      // Fetch menu items count
-      const { count: menuCount } = await supabase
-        .from('menu_items')
-        .select('*', { count: 'exact', head: true })
-        .eq('restaurant_id', profile.id);
-
-      // Fetch team members count
-      const { count: teamCount } = await supabase
-        .from('restaurant_members')
-        .select('*', { count: 'exact', head: true })
-        .eq('restaurant_id', profile.id);
-
-      // Fetch integrations
-      const { count: intCount } = await supabase
-        .from('restaurant_integrations')
-        .select('*', { count: 'exact', head: true })
-        .eq('restaurant_id', profile.id);
+      // Run all 3 count queries in parallel instead of sequentially
+      const [menuResult, teamResult, intResult] = await Promise.all([
+        supabase.from('menu_items').select('*', { count: 'exact', head: true }).eq('restaurant_id', profile.id),
+        supabase.from('restaurant_members').select('*', { count: 'exact', head: true }).eq('restaurant_id', profile.id),
+        supabase.from('restaurant_integrations').select('*', { count: 'exact', head: true }).eq('restaurant_id', profile.id),
+      ]);
 
       setStats({
-        menuItems: menuCount || 0,
-        teamMembers: teamCount || 1,
-        integrations: intCount || 0
+        menuItems: menuResult.count || 0,
+        teamMembers: teamResult.count || 1,
+        integrations: intResult.count || 0
       });
     } catch (e) {
       console.error("Error fetching dashboard stats", e);

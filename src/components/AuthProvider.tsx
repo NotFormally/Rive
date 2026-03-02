@@ -131,14 +131,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (profileData) {
         setProfile(profileData);
 
-        const { data: settingsData } = await supabase
-          .from("restaurant_settings")
-          .select("*")
-          .eq("restaurant_id", profileData.id)
-          .single();
+        // 3 & 4. Load settings + intelligence score in parallel (not sequentially)
+        const [settingsResult, scoreResult] = await Promise.all([
+          supabase
+            .from("restaurant_settings")
+            .select("*")
+            .eq("restaurant_id", profileData.id)
+            .single(),
+          supabase
+            .from("restaurant_intelligence_score")
+            .select("score, level")
+            .eq("restaurant_id", profileData.id)
+            .single(),
+        ]);
 
+        const { data: settingsData } = settingsResult;
         if (settingsData) {
-          // Compute effective modules based on subscription tier
           const { modules, tier } = computeEffectiveModules(settingsData);
           setSettings(modules);
           setUsage(settingsData.usage_metrics || null);
@@ -149,13 +157,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setSubscription({ tier: 'free', stripeCustomerId: null });
         }
 
-        // 4. Load intelligence score
-        const { data: scoreData } = await supabase
-          .from("restaurant_intelligence_score")
-          .select("score, level")
-          .eq("restaurant_id", profileData.id)
-          .single();
-
+        const { data: scoreData } = scoreResult;
         if (scoreData) {
           setIntelligenceScore(scoreData.score);
           setIntelligenceLevel(scoreData.level as IntelligenceLevel);

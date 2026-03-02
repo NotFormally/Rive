@@ -1,0 +1,15 @@
+# Rive — https://rivehub.com
+# Allow all public pages, block internal/dashboard routes
+
+User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /invite/
+Disallow: /checklist/
+Disallow: /login
+Disallow: /signup
+
+# Sitemap
+Sitemap: https://rivehub.com/sitemap.xml

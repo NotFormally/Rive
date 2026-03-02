@@ -6,10 +6,9 @@ import { sendEmail } from '@/lib/email';
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const PRICE_TO_TIER: Record<string, string> = {
-  [process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL!]: 'essential',
+  [process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL!]: 'essence',
   [process.env.NEXT_PUBLIC_STRIPE_PRICE_PERFORMANCE!]: 'performance',
-  [process.env.NEXT_PUBLIC_STRIPE_PRICE_INTELLIGENCE!]: 'intelligence',
-  [process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE!]: 'enterprise',
+  [process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE!]: 'intelligence',
 };
 
 function resolveTierFromPriceId(priceId: string): string | null {

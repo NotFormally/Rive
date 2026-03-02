@@ -1,7 +1,7 @@
 // Rive — Subscription Tier Configuration
 // Maps each tier to the modules it includes
 
-export type SubscriptionTier = 'free' | 'essential' | 'performance' | 'intelligence' | 'enterprise';
+export type SubscriptionTier = 'free' | 'essence' | 'performance' | 'intelligence';
 
 export type TierModules = {
   module_logbook: boolean;
@@ -35,8 +35,8 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_production: false,
     },
   },
-  essential: {
-    label: 'Essentiel',
+  essence: {
+    label: 'Essence',
     modules: {
       module_logbook: true,
       module_menu_editor: true,
@@ -78,22 +78,6 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: Tie
       module_receipt_scanner: true,
       module_reservations: true,   // ✅ Tier 3: Libro, Resy, Zenchef
       module_smart_prep: true,     // ✅ Smart Prep Lists (data-level degradation, not tier-gated)
-      module_deposits: true,
-      module_variance: true,
-      module_production: true,
-    },
-  },
-  enterprise: {
-    label: 'Entreprise',
-    modules: {
-      module_logbook: true,
-      module_menu_editor: true,
-      module_food_cost: true,
-      module_menu_engineering: true,
-      module_instagram: true,
-      module_receipt_scanner: true,
-      module_reservations: true,
-      module_smart_prep: true,
       module_deposits: true,
       module_variance: true,
       module_production: true,

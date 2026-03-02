@@ -44,3 +44,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# archive (one-off scripts, old mockups, brainstorm assets)
+/_archive/
+
+# caches
+.mypy_cache/
+*.log

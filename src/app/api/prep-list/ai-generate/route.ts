@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
+import { MODEL_CREATE } from '@/lib/ai-models';
 
 export const maxDuration = 60; // Allow enough time for LLM
 
@@ -72,7 +73,7 @@ Produis le JSON pour ajuster ces quantités.
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || 'claude-3-7-sonnet-latest',
+        model: MODEL_CREATE,
         max_tokens: 2000,
         temperature: 0.2, // Low temperature for deterministic output
         system: systemPrompt,

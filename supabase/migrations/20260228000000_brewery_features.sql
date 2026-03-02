@@ -12,9 +12,13 @@ CREATE TABLE IF NOT EXISTS unit_conversions (
 );
 
 ALTER TABLE unit_conversions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Tenant select unit_conversions" ON unit_conversions;
 CREATE POLICY "Tenant select unit_conversions" ON unit_conversions FOR SELECT USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant insert unit_conversions" ON unit_conversions;
 CREATE POLICY "Tenant insert unit_conversions" ON unit_conversions FOR INSERT WITH CHECK (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant update unit_conversions" ON unit_conversions;
 CREATE POLICY "Tenant update unit_conversions" ON unit_conversions FOR UPDATE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant delete unit_conversions" ON unit_conversions;
 CREATE POLICY "Tenant delete unit_conversions" ON unit_conversions FOR DELETE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
 
 -- 2. Micro-recipes and Sub-recipes
@@ -40,9 +44,13 @@ CREATE TABLE IF NOT EXISTS deposits_ledger (
 );
 
 ALTER TABLE deposits_ledger ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Tenant select deposits_ledger" ON deposits_ledger;
 CREATE POLICY "Tenant select deposits_ledger" ON deposits_ledger FOR SELECT USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant insert deposits_ledger" ON deposits_ledger;
 CREATE POLICY "Tenant insert deposits_ledger" ON deposits_ledger FOR INSERT WITH CHECK (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant update deposits_ledger" ON deposits_ledger;
 CREATE POLICY "Tenant update deposits_ledger" ON deposits_ledger FOR UPDATE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant delete deposits_ledger" ON deposits_ledger;
 CREATE POLICY "Tenant delete deposits_ledger" ON deposits_ledger FOR DELETE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
 
 -- 5. Kickbacks & Freebies
@@ -74,15 +82,23 @@ CREATE TABLE IF NOT EXISTS spoilage_reports (
 );
 
 ALTER TABLE variance_logs ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Tenant select variance" ON variance_logs;
 CREATE POLICY "Tenant select variance" ON variance_logs FOR SELECT USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant insert variance" ON variance_logs;
 CREATE POLICY "Tenant insert variance" ON variance_logs FOR INSERT WITH CHECK (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant update variance" ON variance_logs;
 CREATE POLICY "Tenant update variance" ON variance_logs FOR UPDATE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant delete variance" ON variance_logs;
 CREATE POLICY "Tenant delete variance" ON variance_logs FOR DELETE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
 
 ALTER TABLE spoilage_reports ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Tenant select spoilage" ON spoilage_reports;
 CREATE POLICY "Tenant select spoilage" ON spoilage_reports FOR SELECT USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant insert spoilage" ON spoilage_reports;
 CREATE POLICY "Tenant insert spoilage" ON spoilage_reports FOR INSERT WITH CHECK (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant update spoilage" ON spoilage_reports;
 CREATE POLICY "Tenant update spoilage" ON spoilage_reports FOR UPDATE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant delete spoilage" ON spoilage_reports;
 CREATE POLICY "Tenant delete spoilage" ON spoilage_reports FOR DELETE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
 
 -- 7. Dynamic Prices on Menu Items
@@ -105,7 +121,11 @@ CREATE TABLE IF NOT EXISTS production_batches (
 );
 
 ALTER TABLE production_batches ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Tenant select prod_batches" ON production_batches;
 CREATE POLICY "Tenant select prod_batches" ON production_batches FOR SELECT USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant insert prod_batches" ON production_batches;
 CREATE POLICY "Tenant insert prod_batches" ON production_batches FOR INSERT WITH CHECK (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant update prod_batches" ON production_batches;
 CREATE POLICY "Tenant update prod_batches" ON production_batches FOR UPDATE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));
+DROP POLICY IF EXISTS "Tenant delete prod_batches" ON production_batches;
 CREATE POLICY "Tenant delete prod_batches" ON production_batches FOR DELETE USING (restaurant_id IN (SELECT id FROM restaurant_profiles WHERE user_id = auth.uid()));

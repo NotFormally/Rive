@@ -7,7 +7,7 @@ const ADMIN_EMAIL = "dock@rivehub.com";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { restaurant_name, email, locale } = body;
+    const { restaurant_name, email, locale, country } = body;
 
     if (!restaurant_name || !email) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
@@ -23,12 +23,13 @@ export async function POST(request: Request) {
       restaurant_name,
       email,
       locale: locale || "fr",
+      country: country || null,
       notified: false,
     });
 
     // Log to server console for immediate visibility in Vercel logs
     console.log(
-      `🆕 NEW SIGNUP | ${restaurant_name} | ${email} | locale: ${locale || "fr"} | ${new Date().toISOString()}`
+      `🆕 NEW SIGNUP | ${restaurant_name} | ${email} | locale: ${locale || "fr"} | country: ${country || "—"} | ${new Date().toISOString()}`
     );
 
     // Send welcome email (fire and forget — never blocks signup)

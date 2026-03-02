@@ -10,6 +10,36 @@ type AuthResult =
   | null;
 
 /**
+ * Decode a Supabase cookie value, handling both legacy JSON and new base64- format.
+ */
+function decodeSupabaseCookie(raw: string): unknown {
+  let value = decodeURIComponent(raw);
+  // @supabase/ssr >= 0.5 encodes cookies with a "base64-" prefix
+  if (value.startsWith('base64-')) {
+    value = Buffer.from(value.slice(7), 'base64').toString();
+  }
+  return JSON.parse(value);
+}
+
+/**
+ * Extract the access_token from a parsed Supabase session cookie.
+ */
+function extractAccessToken(parsed: unknown): string | null {
+  if (!parsed) return null;
+  // New format: { access_token, refresh_token, ... }
+  if (typeof parsed === 'object' && !Array.isArray(parsed) && (parsed as Record<string, unknown>).access_token) {
+    return (parsed as Record<string, string>).access_token;
+  }
+  // Legacy format: ["access_token", "refresh_token"]
+  if (Array.isArray(parsed) && parsed.length > 0) {
+    return parsed[0];
+  }
+  // Direct token string
+  if (typeof parsed === 'string') return parsed;
+  return null;
+}
+
+/**
  * Extract and verify the Supabase auth token from an API request.
  * Returns user, restaurantId, role, and the authenticated supabase client, or null if not authenticated.
  */
@@ -28,15 +58,15 @@ export async function requireAuth(req: Request): Promise<AuthResult> {
       })
     );
 
-    // Try exact match first (legacy single cookie)
-    let authCookieKey = Object.keys(cookies).find(
+    // Try exact match first (single cookie — supports both legacy JSON and base64- format)
+    const authCookieKey = Object.keys(cookies).find(
       k => k.startsWith('sb-') && k.endsWith('-auth-token')
     );
 
     if (authCookieKey) {
       try {
-        const parsed = JSON.parse(decodeURIComponent(cookies[authCookieKey]));
-        accessToken = Array.isArray(parsed) ? parsed[0] : parsed;
+        const parsed = decodeSupabaseCookie(cookies[authCookieKey]);
+        accessToken = extractAccessToken(parsed);
       } catch {
         // fall through to chunked approach
       }
@@ -55,8 +85,8 @@ export async function requireAuth(req: Request): Promise<AuthResult> {
       if (chunkedKeys.length > 0) {
         try {
           const combined = chunkedKeys.map(k => cookies[k]).join('');
-          const parsed = JSON.parse(decodeURIComponent(combined));
-          accessToken = Array.isArray(parsed) ? parsed[0] : parsed;
+          const parsed = decodeSupabaseCookie(combined);
+          accessToken = extractAccessToken(parsed);
         } catch (e) {
           console.error('[requireAuth] Failed to parse chunked cookies:', e);
         }

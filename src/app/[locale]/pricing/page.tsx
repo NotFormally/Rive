@@ -22,7 +22,7 @@ export default function PricingPage() {
   const tiers = [
     {
       name: "Essence",
-      priceId: "Essence_mensuel",
+      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ESSENTIEL,
       price: 59,
       description: t('tier_essential_desc'),
       features: [
@@ -39,7 +39,7 @@ export default function PricingPage() {
     },
     {
       name: "Performance",
-      priceId: "Performance_mensuel",
+      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PERFORMANCE,
       price: 129,
       description: t('tier_performance_desc'),
       includesFrom: "Essence",
@@ -58,7 +58,7 @@ export default function PricingPage() {
     },
     {
       name: "Intelligence",
-      priceId: "Intelligence_mensuel",
+      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTREPRISE,
       price: 249,
       description: t('tier_intelligence_desc'),
       includesFrom: "Performance",

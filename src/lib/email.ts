@@ -16,7 +16,8 @@ export type EmailPayload =
   | { type: 'monthly_report'; to: string; restaurantName: string; month: string; learnings: string[]; feedbackCount: number; accuracyImprovement: number; siteUrl: string }
   | { type: 'churn_alert'; to: string; restaurantName: string; daysSinceLastFeedback: number; calibrationCount: number; feedbackDays: number }
   | { type: 'admin_signup_notification'; to: string; restaurantName: string; email: string; locale: string }
-  | { type: 'admin_subscription_notification'; to: string; restaurantName: string; email: string; tier: string };
+  | { type: 'admin_subscription_notification'; to: string; restaurantName: string; email: string; tier: string }
+  | { type: 'support_report'; to: string; restaurantName: string; email: string; errorDetails: string; messageCount: number };
 
 const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => string)> = {
   welcome: 'Bienvenue sur Rive \u{1F30A}',
@@ -41,6 +42,10 @@ const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => stri
   admin_subscription_notification: (p) =>
     p.type === 'admin_subscription_notification'
       ? `💸 New Subscription: ${p.restaurantName} (${p.tier})`
+      : '',
+  support_report: (p) =>
+    p.type === 'support_report'
+      ? `🛟 Support Report: ${p.restaurantName}`
       : '',
 };
 
@@ -75,6 +80,7 @@ function getReactComponent(payload: EmailPayload) {
     case 'churn_alert':
     case 'admin_signup_notification':
     case 'admin_subscription_notification':
+    case 'support_report':
       // Simple text email — no dedicated template needed
       return null;
   }
@@ -115,6 +121,21 @@ function getTextBody(payload: EmailPayload): string | null {
       `Tier: ${payload.tier}`,
       ``,
       `Action required: None. This is an automated notification.`,
+    ].join('\n');
+  }
+  if (payload.type === 'support_report') {
+    return [
+      `Support Report from Rive user:`,
+      ``,
+      `Restaurant: ${payload.restaurantName}`,
+      `Email: ${payload.email}`,
+      `Messages in chat: ${payload.messageCount}`,
+      ``,
+      `Error details:`,
+      payload.errorDetails || 'No specific error captured.',
+      ``,
+      `The full chat log has been saved in the support_reports table.`,
+      `Check the admin dashboard for details.`,
     ].join('\n');
   }
   return null;

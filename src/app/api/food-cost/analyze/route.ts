@@ -3,6 +3,7 @@ import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { loadFoodCostData, calculateItemFoodCost } from '@/lib/food-cost';
 import { loadMenuFromSupabase } from '@/lib/menu-store';
+import { MODEL_CREATE } from '@/lib/ai-models';
 
 export const maxDuration = 60; // Allow enough time for LLM
 
@@ -104,7 +105,7 @@ Ne donne que le JSON, aucun commentaire additionnel.`;
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || 'claude-3-7-sonnet-latest',
+        model: MODEL_CREATE,
         max_tokens: 1500,
         temperature: 0.2, // Be deterministic for JSON
         system: systemPrompt,

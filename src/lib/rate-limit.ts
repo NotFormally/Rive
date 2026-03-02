@@ -3,12 +3,12 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 // Lazy initialization — only created on first API call, not at build time
 let _supabaseAdmin: SupabaseClient | null = null;
 
-function getSupabaseAdmin() {
+function getSupabaseAdmin(): SupabaseClient | null {
   if (!_supabaseAdmin) {
-    _supabaseAdmin = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) return null;
+    _supabaseAdmin = createClient(url, key);
   }
   return _supabaseAdmin;
 }
@@ -30,8 +30,14 @@ export async function checkRateLimit(
     Date.now() - RATE_LIMIT_WINDOW_SECONDS * 1000
   ).toISOString();
 
+  const admin = getSupabaseAdmin();
+  if (!admin) {
+    // No service role key — skip rate limiting (fail open)
+    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS };
+  }
+
   // Count recent requests
-  const { count, error } = await getSupabaseAdmin()
+  const { count, error } = await admin
     .from('ai_usage_log')
     .select('id', { count: 'exact', head: true })
     .eq('restaurant_id', restaurantId)
@@ -51,7 +57,7 @@ export async function checkRateLimit(
   }
 
   // Log this usage
-  await getSupabaseAdmin().from('ai_usage_log').insert({
+  await admin.from('ai_usage_log').insert({
     restaurant_id: restaurantId,
     route,
   });

@@ -77,15 +77,20 @@ function SignupForm() {
       return;
     }
 
-    // 4. Create default module settings — free tier
+    // 4. Create default module settings — must match TIER_CONFIG.free.modules
     await supabase.from("restaurant_settings").insert({
       restaurant_id: profileData.id,
       module_logbook: true,
       module_menu_editor: true,
       module_food_cost: false,
-      module_menu_engineering: false,
-      module_instagram: false,
-      module_receipt_scanner: false,
+      module_menu_engineering: true,
+      module_instagram: true,
+      module_receipt_scanner: true,
+      module_reservations: false,
+      module_smart_prep: false,
+      module_deposits: false,
+      module_variance: false,
+      module_production: false,
       subscription_tier: 'free',
     });
 
@@ -97,7 +102,16 @@ function SignupForm() {
       accepted_at: new Date().toISOString(),
     });
 
-    // 6. Notify admin of new signup (fire and forget)
+    // 6. Detect country from timezone and notify admin (fire and forget)
+    let country = '';
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // Extract region from timezone (e.g., "America/Montreal" → "CA", "Europe/Paris" → "FR")
+      const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+      const regionCode = new Intl.Locale(navigator.language).region;
+      country = regionCode ? `${regionNames.of(regionCode)} (${regionCode})` : tz;
+    } catch { /* fallback: empty */ }
+
     fetch('/api/notify-signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -105,6 +119,7 @@ function SignupForm() {
         restaurant_name: restaurantName,
         email,
         locale: currentLocale,
+        country,
       }),
     }).catch(() => {}); // non-blocking
 

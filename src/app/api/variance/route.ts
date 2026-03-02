@@ -7,7 +7,7 @@ export async function GET(req: Request) {
 
     const { data, error } = await auth.supabase
       .from('variance_logs')
-      .select('*, ingredients(name, category, unit)')
+      .select('*, ingredients(name, unit)')
       .eq('restaurant_id', auth.restaurantId)
       .order('created_at', { ascending: false })
       .limit(100);
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
         variance_amount: body.variance_amount,
         variance_cost: body.variance_cost,
       })
-      .select('*, ingredients(name, category, unit)')
+      .select('*, ingredients(name, unit)')
       .single();
 
     if (error) {

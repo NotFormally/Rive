@@ -21,7 +21,9 @@
     "nav_cta": "Build your dock",
     "hero_subtitle": "The algorithm is",
     "hero_title": "ready.",
+    "hero_h1_seo": "Rive — AI-Powered Restaurant Management Software",
     "hero_description": "Algorithmic intelligence for your peace of mind. Facilitate regulatory compliance and let the Rive AI Ecosystem anticipate your operations, scan invoices, and track your Food Cost.",
+    "hero_bg_alt": "Professional fine dining kitchen with team in service",
     "hero_cta": "Deploy Rive",
     "features_card1_title": "Compliance Assistant & Corrective Actions",
     "features_card1_desc": "AI analyzes your temperature logs and proposes suggestions for anomalies, to be validated by your team.",
@@ -30,6 +32,7 @@
     "features_card2_live": "Live Feed",
     "features_card3_title": "Native Multilingual (19 Languages)",
     "features_card3_desc": "The interface instantly adapts to the native language of your kitchen brigade.",
+    "philosophy_bg_alt": "Organic texture of a fine dining restaurant interior",
     "philosophy_intro": "Running a restaurant today often means navigating an unpredictable storm without reliable instruments.",
     "philosophy_vision": "More than just a tool, Rive is your essential compass to optimize every decision.",
     "philosophy_pillar1_title": "Amplify your expertise",
@@ -633,12 +636,12 @@
     "contact_p1": "For any questions, concerns, or requests regarding these Terms of Service, your account, your data, or any aspect of the Rive service, please contact us at **dock@rivehub.com**."
   },
   "Meta": {
-    "home_title": "Rive — AI-Powered Restaurant Operations Platform",
-    "home_description": "Regulatory compliance, AI logbook, food cost analysis, 19-language translation, OCR invoice scanner, menu engineering. Free version available.",
-    "pricing_title": "Pricing — Rive",
-    "pricing_description": "Rive subscriptions from $59/month. AI logbook, compliance, food cost, 19-language translation. Free version available, no credit card required.",
+    "home_title": "Rive — AI-Powered Restaurant Management Software",
+    "home_description": "Restaurant management platform with AI: HACCP compliance, intelligent logbook, food cost analysis, OCR invoice scanner, menu engineering, POS integration, 25-language translation. Free version available.",
+    "pricing_title": "Pricing & Plans — Rive Restaurant Management Software",
+    "pricing_description": "Rive subscriptions from $59/month. AI logbook, HACCP compliance, food cost tracking, POS integration (Toast, Square, Lightspeed), 25-language translation. Free plan, no credit card required.",
     "cgu_title": "Terms of Service — Rive",
-    "cgu_description": "Read our terms of service, AI policy, and data privacy commitments."
+    "cgu_description": "Terms of service for Rive, the AI-powered restaurant management platform. AI policy, data protection and privacy commitments."
   },
   "Settings": {
     "title": "Settings",

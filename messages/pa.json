@@ -795,18 +795,18 @@
     "beta_alert": "Direct integration with Instagram and TikTok is currently under development and platform approval (Private Beta). The feature will be rolled out publicly soon."
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "ਅਨਿਸ਼ਚਿਤਤਾ ਦੀ ਕੀਮਤ ਕੀ ਹੈ?",
+    "subtitle": "ਆਪਣੇ ਖੁਰਾਕੀ ਨੁਕਸਾਨ ਦਾ ਅੰਦਾਜ਼ਾ ਲਗਾਉਣ ਲਈ ਆਪਣੇ ਅੰਕੜੇ ਦਾਖਲ ਕਰੋ",
+    "covers_week": "ਪ੍ਰਤੀ ਹਫ਼ਤਾ ਕਵਰ",
+    "avg_ticket": "ਔਸਤ ਟਿਕਟ ਕੀਮਤ",
+    "food_cost_ratio": "ਤੁਹਾਡਾ ਖੁਰਾਕ ਲਾਗਤ ਅਨੁਪਾਤ",
+    "overproduction_rate": "ਤੁਹਾਡੀ ਅੰਦਾਜ਼ਨ ਵਾਧੂ ਉਤਪਾਦਨ ਦਰ",
+    "weekly_purchases": "ਹਫ਼ਤਾਵਾਰੀ ਖੁਰਾਕ ਖਰੀਦਦਾਰੀ:",
+    "weekly_loss": "/ਹਫ਼ਤਾ ਵਾਧੂ ਉਤਪਾਦਨ",
+    "yearly_loss": "ਭਾਵ ਸਿਰਫ਼ ਵਾਧੂ ਉਤਪਾਦਨ ਤੇ <value>{val}</value>/ਸਾਲ ਦਾ ਨੁਕਸਾਨ",
+    "potential_reduction": "ਤੁਹਾਡੇ ਡੇਟਾ ਤੇ ਅਧਾਰਤ ਪੂਰਵ-ਅਨੁਮਾਨ ਪ੍ਰਬੰਧਨ ਇਸ ਨੁਕਸਾਨ ਨੂੰ <value>{val}</value>/ਸਾਲ ਤੱਕ ਘਟਾ ਸਕਦਾ ਹੈ",
+    "disclaimer": "{percent}% ਬਰਬਾਦੀ ਘਟਾਉਣ ਦੇ ਅਧਾਰ ਤੇ ਅੰਦਾਜ਼ਾ, ਜੋ ਡੇਟਾ-ਅਧਾਰਤ ਪੂਰਵ-ਅਨੁਮਾਨ ਪ੍ਰਬੰਧਨ ਅਧਿਐਨਾਂ (WRAP, NRA) ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਹੈ। ਅਸਲ ਨਤੀਜੇ ਤੁਹਾਡੇ ਸੰਚਾਲਨ ਸੰਦਰਭ ਤੇ ਨਿਰਭਰ ਕਰਦੇ ਹਨ।",
+    "cta": "ਬੱਚਤ ਸ਼ੁਰੂ ਕਰੋ"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

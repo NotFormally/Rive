@@ -67,6 +67,7 @@
     "features_card3_target_text": "Limpiar la zona fría de las neveras",
     "footer_privacy": "Confidentialité",
     "footer_terms": "CGU",
+    "sticky_cta": "Commencer gratuitement",
     "features_title": "Tous les instruments nautiques réunis sur la passerelle.",
     "f1_title": "Le Journal de Bord",
     "f1_desc": "Oubliez la paperasse. Les relèves d'équipage, avaries matérielles et incidents passagers sont consignés et cartographiés par l'IA.",
@@ -1107,5 +1108,52 @@
     "hint_predictive": "Donnez du feedback quotidien pour passer à Calibré",
     "hint_calibrated": "4 semaines consécutives pour atteindre Expert",
     "hint_expert": "Score maximal atteint"
+  },
+  "HowItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Trois étapes pour reprendre le contrôle de vos opérations",
+    "step1_title": "Connectez vos outils",
+    "step1_desc": "Reliez votre caisse, vos fournisseurs et vos factures. Rive s'intègre nativement avec Toast, Square, Lightspeed et plus.",
+    "step2_title": "L'IA analyse tout",
+    "step2_desc": "Nos algorithmes croisent vos ventes, stocks et coûts en temps réel pour détecter les anomalies et anticiper les besoins.",
+    "step3_title": "Recevez des alertes actionnables",
+    "step3_desc": "Obtenez des recommandations précises avant que les problèmes surviennent : baisses de marge, écarts de conformité, risques de surproduction."
+  },
+  "DemoVideo": {
+    "title": "Voyez Rive en action",
+    "subtitle": "Un aperçu de comment vos opérations quotidiennes deviennent fluides",
+    "play_label": "Regarder la démo"
+  },
+  "BeforeAfter": {
+    "title": "Avant et après Rive",
+    "subtitle": "La différence que fait une gestion pilotée par les données dans votre restaurant",
+    "without_title": "Sans Rive",
+    "with_title": "Avec Rive",
+    "without_inventory": "Inventaires manuels, tableurs et approximations",
+    "with_inventory": "Suivi des stocks en temps réel avec alertes automatiques sur les niveaux bas",
+    "without_orders": "Commandes au feeling, achats fréquemment en trop ou insuffisants",
+    "with_orders": "Suggestions de commandes par l'IA basées sur la demande prévisionnelle",
+    "without_compliance": "Registres HACCP papier, course de dernière minute avant les audits",
+    "with_compliance": "Registres de conformité numériques automatisés, toujours prêts pour l'audit",
+    "without_management": "Réactif : problèmes découverts trop tard, après les dégâts",
+    "with_management": "Proactif : alertes avant les baisses de marge, pics de gaspillage ou écarts de conformité",
+    "without_waste": "Aucune visibilité sur la surproduction, fuites de profit silencieuses",
+    "with_waste": "Suivi précis du gaspillage avec stratégies de réduction basées sur les données"
+  },
+  "FAQ": {
+    "title": "Questions fréquentes",
+    "subtitle": "Tout ce que vous devez savoir avant de commencer",
+    "q1_q": "Comment Rive s'intègre-t-il avec mon système de caisse ?",
+    "q1_a": "Rive se connecte nativement avec les principaux systèmes de caisse dont Toast, Square, SumUp, Lightspeed et Zettle. La configuration prend moins de 5 minutes — autorisez la connexion et vos données se synchronisent automatiquement.",
+    "q2_q": "Mes données de restaurant sont-elles sécurisées ?",
+    "q2_a": "Absolument. Toutes les données sont chiffrées en transit et au repos. Nous utilisons l'infrastructure Supabase avec sécurité au niveau des lignes, ce qui signifie que vos données sont isolées et accessibles uniquement par votre équipe. Nous ne partageons ni ne vendons jamais vos données.",
+    "q3_q": "Combien de temps prend la mise en place ?",
+    "q3_a": "La plupart des restaurants sont pleinement opérationnels en 15 minutes. Connectez votre caisse, invitez votre équipe, et Rive commence à apprendre vos habitudes immédiatement. Vous recevrez vos premières recommandations actionnables sous 48 heures.",
+    "q4_q": "Que se passe-t-il après le plan gratuit ?",
+    "q4_a": "Le plan gratuit Essence n'a pas de limite de temps — utilisez-le aussi longtemps que vous voulez. Quand vous êtes prêt pour les fonctionnalités IA avancées comme les commandes prédictives et la conformité automatisée, passez à Horizon ou Intelligence à tout moment.",
+    "q5_q": "Mon équipe peut-elle utiliser Rive dans sa propre langue ?",
+    "q5_a": "Oui. Rive supporte plus de 25 langues et traduit automatiquement les instructions de tâches pour chaque membre de l'équipe. Un chef qui parle mandarin et un serveur qui parle français peuvent utiliser le même système sans friction.",
+    "q6_q": "Dois-je former mon personnel ?",
+    "q6_a": "Rive est conçu pour être intuitif. L'interface est minimale et orientée tâches — votre équipe peut commencer à l'utiliser immédiatement. Nous fournissons également des guides d'intégration et notre équipe support est disponible par chat pour toute question."
   }
 }

@@ -795,18 +795,18 @@
     "beta_alert": "Direct integration with Instagram and TikTok is currently under development and platform approval (Private Beta). The feature will be rolled out publicly soon."
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "不确定性的代价是多少？",
+    "subtitle": "输入您的数据来估算食物浪费",
+    "covers_week": "每周客位数",
+    "avg_ticket": "平均客单价",
+    "food_cost_ratio": "您的食材成本比率",
+    "overproduction_rate": "您的预估超额生产率",
+    "weekly_purchases": "每周食材采购额：",
+    "weekly_loss": "/周超额生产",
+    "yearly_loss": "即仅超额生产就造成 <value>{val}</value>/年的损失",
+    "potential_reduction": "基于您的数据进行预测管理，可将该损失减少 <value>{val}</value>/年",
+    "disclaimer": "基于 {percent}% 的浪费减少进行估算，与数据驱动的预测管理研究（WRAP、NRA）一致。实际结果取决于您的运营环境。",
+    "cta": "开始节省"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

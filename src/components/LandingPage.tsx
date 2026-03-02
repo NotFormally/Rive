@@ -10,6 +10,12 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { WasteCostCalculator } from "@/components/WasteCostCalculator";
 import { RadarLogo, DataMatrix } from "@/components/TelemetryScanner";
 import RiveLogo from "@/components/RiveLogo";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import { StickyCTA } from "@/components/StickyCTA";
+import { HowItWorks } from "@/components/HowItWorks";
+// import { DemoVideoSection } from "@/components/DemoVideoSection"; // Suspended until real video is ready
+import { BeforeAfterComparison } from "@/components/BeforeAfterComparison";
+import { FAQSection } from "@/components/FAQSection";
 
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
@@ -66,7 +72,22 @@ export function LandingPage() {
           { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)" }
         );
       }, 3000);
-      // 4. Protocol Stacking Cards Animation
+      // 4. Scroll-reveal micro-animations
+      gsap.utils.toArray<HTMLElement>('.scroll-reveal').forEach((el) => {
+        gsap.from(el, {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            once: true,
+          }
+        });
+      });
+
+      // 5. Protocol Stacking Cards Animation
       const stackCards = gsap.utils.toArray<HTMLElement>('.stack-card');
       stackCards.forEach((card, i) => {
         if (i === stackCards.length - 1) {
@@ -109,7 +130,9 @@ export function LandingPage() {
 
   return (
     <div ref={container} className="noise-bg min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
-      
+      <ScrollProgressBar />
+      <StickyCTA />
+
       {/* A. NAVBAR — "The Floating Island" */}
       <nav className="navbar fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full flex items-center gap-8 text-[#F2F0E9] transition-colors">
         <Link href="/" className="group">
@@ -149,8 +172,17 @@ export function LandingPage() {
               <span className="hero-text font-jakarta font-bold text-xl md:text-2xl tracking-widest uppercase text-[#CC5833] opacity-90">
                 {t('hero_subtitle')}
               </span>
-              <span className="hero-text font-cormorant italic text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.95] max-w-2xl">
-                {t('hero_title')}
+              <span className="hero-text hero-hot-word relative inline-block font-cormorant italic text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.95] max-w-2xl">
+                {/* Animated gradient text */}
+                <span className="hero-hot-text relative z-10">{t('hero_title')}</span>
+                {/* Warm glow duplicate behind */}
+                <span className="hero-hot-glow absolute inset-0 z-0 pointer-events-none select-none" aria-hidden="true">{t('hero_title')}</span>
+                {/* Steam wisps */}
+                <span className="hero-steam absolute -top-6 left-0 right-0 h-10 pointer-events-none z-20" aria-hidden="true">
+                  <span className="steam-wisp" style={{ left: '15%', animationDelay: '0s' }} />
+                  <span className="steam-wisp" style={{ left: '45%', animationDelay: '0.8s' }} />
+                  <span className="steam-wisp" style={{ left: '70%', animationDelay: '1.5s' }} />
+                </span>
               </span>
             </h1>
             <p className="hero-text font-outfit text-lg md:text-xl mt-8 max-w-xl opacity-90 leading-relaxed tracking-wide">
@@ -191,6 +223,27 @@ export function LandingPage() {
           <span>{t('integrations_banner')}</span>
         </div>
       </div>
+
+      {/* WASTE COST CALCULATOR — Behavioral Lever (high position for conversion) */}
+      <section className="py-20 md:py-32 px-8 md:px-24 bg-[#1A1A1A]">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-jakarta text-3xl md:text-4xl font-bold text-[#F2F0E9]">
+              {t('calculator_title')}
+            </h2>
+            <p className="font-outfit text-lg text-[#F2F0E9]/60 mt-4">
+              {t('calculator_subtitle')}
+            </p>
+          </div>
+          <WasteCostCalculator variant="landing" />
+        </div>
+      </section>
+
+      {/* HOW IT WORKS — 3 Steps */}
+      <HowItWorks />
+
+      {/* DEMO VIDEO — Suspended until real video is ready */}
+      {/* <DemoVideoSection /> */}
 
       {/* C. THE 6 PILLARS — "Explicit Features & Use Cases" */}
       <section id="features" className="py-32 px-8 md:px-24 max-w-screen-2xl mx-auto bg-[#F2F0E9]">
@@ -578,20 +631,8 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* WASTE COST CALCULATOR — Behavioral Lever */}
-      <section className="py-20 md:py-32 px-8 md:px-24 bg-[#1A1A1A]">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-jakarta text-3xl md:text-4xl font-bold text-[#F2F0E9]">
-              {t('calculator_title')}
-            </h2>
-            <p className="font-outfit text-lg text-[#F2F0E9]/60 mt-4">
-              {t('calculator_subtitle')}
-            </p>
-          </div>
-          <WasteCostCalculator variant="landing" />
-        </div>
-      </section>
+      {/* BEFORE/AFTER COMPARISON */}
+      <BeforeAfterComparison />
 
       {/* D. PHILOSOPHY — "The Manifesto" */}
       <section id="philosophy" className="relative py-0 bg-[#1A1A1A] text-[#F2F0E9] overflow-hidden">
@@ -728,6 +769,9 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FAQSection />
 
       {/* G. FOOTER */}
       <footer className="bg-[#1A1A1A] text-[#F2F0E9] rounded-t-[4rem] px-8 md:px-24 pt-16 pb-12 mt-24">

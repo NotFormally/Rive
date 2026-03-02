@@ -795,18 +795,18 @@
     "beta_alert": "Direct integration with Instagram and TikTok is currently under development and platform approval (Private Beta). The feature will be rolled out publicly soon."
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "¿Cuál es el costo de la incertidumbre?",
+    "subtitle": "Ingrese sus propios datos para estimar su desperdicio alimentario",
+    "covers_week": "Cubiertos por semana",
+    "avg_ticket": "Precio promedio del ticket",
+    "food_cost_ratio": "Su ratio de costo alimentario",
+    "overproduction_rate": "Su tasa estimada de sobreproducción",
+    "weekly_purchases": "Compras semanales de alimentos:",
+    "weekly_loss": "/semana de sobreproducción",
+    "yearly_loss": "es decir, <value>{val}</value>/año perdidos solo en sobreproducción",
+    "potential_reduction": "La gestión predictiva basada en sus datos podría reducir esta pérdida en <value>{val}</value>/año",
+    "disclaimer": "Estimación basada en una reducción del {percent}% del desperdicio, coherente con estudios de gestión predictiva basados en datos (WRAP, NRA). Los resultados reales dependen de su contexto operativo.",
+    "cta": "Empiece a ahorrar"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

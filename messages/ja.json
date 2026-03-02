@@ -800,18 +800,18 @@
     "success_default": "招待を受け入れました！"
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "不確実性のコストはいくらですか？",
+    "subtitle": "ご自身の数値を入力して食品ロスを試算してください",
+    "covers_week": "週あたりのカバー数",
+    "avg_ticket": "平均客単価",
+    "food_cost_ratio": "食材原価率",
+    "overproduction_rate": "推定過剰生産率",
+    "weekly_purchases": "週間食材仕入額：",
+    "weekly_loss": "/週の過剰生産",
+    "yearly_loss": "過剰生産だけで年間<value>{val}</value>の損失",
+    "potential_reduction": "データに基づく需要予測管理により、この損失を年間<value>{val}</value>削減できる可能性があります",
+    "disclaimer": "データ駆動型需要予測管理の研究（WRAP、NRA）に基づく{percent}%の廃棄削減を前提とした試算です。実際の結果は運用状況により異なります。",
+    "cta": "コスト削減を始める"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

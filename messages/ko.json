@@ -800,18 +800,18 @@
     "success_default": "초대가 수락되었습니다!"
   },
   "WasteCalculator": {
-    "title": "What's the cost of uncertainty?",
-    "subtitle": "Enter your own numbers to estimate your food waste",
-    "covers_week": "Covers per week",
-    "avg_ticket": "Average ticket price",
-    "food_cost_ratio": "Your food cost ratio",
-    "overproduction_rate": "Your estimated overproduction rate",
-    "weekly_purchases": "Weekly food purchases:",
-    "weekly_loss": "/week of overproduction",
-    "yearly_loss": "meaning <value>{val}</value>/year lost on overproduction alone",
-    "potential_reduction": "Forecast management based on your data could reduce this loss by <value>{val}</value>/year",
-    "disclaimer": "Estimate based on a {percent}% waste reduction, consistent with data-driven forecast management studies (WRAP, NRA). Actual results depend on your operational context.",
-    "cta": "Start saving"
+    "title": "불확실성의 비용은 얼마입니까?",
+    "subtitle": "직접 숫자를 입력하여 식재료 낭비를 추정해 보세요",
+    "covers_week": "주당 커버 수",
+    "avg_ticket": "평균 객단가",
+    "food_cost_ratio": "식재료 원가율",
+    "overproduction_rate": "예상 과잉 생산율",
+    "weekly_purchases": "주간 식재료 구매액:",
+    "weekly_loss": "/주 과잉 생산",
+    "yearly_loss": "과잉 생산만으로 연간 <value>{val}</value> 손실 발생",
+    "potential_reduction": "데이터 기반 수요 예측 관리로 이 손실을 연간 <value>{val}</value> 절감할 수 있습니다",
+    "disclaimer": "데이터 기반 수요 예측 관리 연구(WRAP, NRA)에 부합하는 {percent}% 폐기물 감소를 기준으로 한 추정치입니다. 실제 결과는 운영 환경에 따라 다를 수 있습니다.",
+    "cta": "절약 시작하기"
   },
   "LandingMockups": {
     "alert_title": "AI Alert - Margin Drop",

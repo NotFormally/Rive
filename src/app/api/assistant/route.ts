@@ -1,13 +1,6 @@
 import { anthropic } from '@ai-sdk/anthropic';
-import { streamText, tool, convertToModelMessages, jsonSchema } from 'ai';
+import { streamText, tool, convertToModelMessages, stepCountIs } from 'ai';
 import { z } from 'zod';
-
-// Helper: Zod 4 → JSON Schema for AI SDK tool definitions
-function zs(schema: z.ZodObject<any>) {
-  const js = z.toJSONSchema(schema);
-  delete js['$schema'];
-  return jsonSchema(js);
-}
 import { MODEL_CREATE } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
@@ -138,15 +131,15 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
       model: anthropic(MODEL_CREATE),
       system: systemPrompt,
       messages,
-      maxTokens: 4096,
+      maxOutputTokens: 4096,
       temperature: 0.7,
-      maxSteps: 5,
+      stopWhen: stepCountIs(5),
       tools: {
         get_menu_items: tool({
           description: "Récupérer les plats du menu avec prix, catégorie et food cost. Utiliser quand le chef pose une question sur le menu, les prix, ou les marges.",
-          inputSchema: zs(z.object({
+          inputSchema: z.object({
             category: z.string().optional().describe("Filtrer par catégorie (entrée, plat, dessert...)"),
-          })),
+          }),
           execute: async ({ category }) => {
             let query = auth.supabase
               .from('menu_items')
@@ -161,10 +154,10 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
 
         get_logbook_entries: tool({
           description: "Lire les notes récentes du journal de bord. Utiliser pour consulter l'historique opérationnel, les problèmes signalés, ou les tendances.",
-          inputSchema: zs(z.object({
+          inputSchema: z.object({
             limit: z.number().optional().describe("Nombre de notes (défaut: 10, max: 30)"),
             urgent_only: z.boolean().optional().describe("Ne retourner que les notes urgentes"),
-          })),
+          }),
           execute: async ({ limit = 10, urgent_only = false }) => {
             let query = auth.supabase
               .from('smartlogbook_entries')
@@ -180,11 +173,11 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
 
         create_logbook_entry: tool({
           description: "Écrire une nouvelle note dans le journal de bord. Utiliser quand le chef demande de noter quelque chose, ou pour consigner une observation importante.",
-          inputSchema: zs(z.object({
+          inputSchema: z.object({
             text: z.string().describe("Le contenu de la note à enregistrer"),
             tags: z.array(z.string()).optional().describe("Tags catégorisant la note (ex: ['Équipement', 'Urgent'])"),
             is_urgent: z.boolean().optional().describe("Marquer comme urgent"),
-          })),
+          }),
           execute: async ({ text, tags = ['Sous-Chef IA'], is_urgent = false }) => {
             const { data, error } = await auth.supabase
               .from('smartlogbook_entries')
@@ -206,7 +199,7 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
 
         get_reservations_today: tool({
           description: "Voir les réservations du jour avec détails (couverts, heure, notes client, statut VIP). Utiliser pour planifier le service.",
-          inputSchema: zs(z.object({})),
+          inputSchema: z.object({}),
           execute: async () => {
             const { data } = await auth.supabase
               .from('reservations')
@@ -225,9 +218,9 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
 
         mark_alert_read: tool({
           description: "Marquer une alerte food cost comme lue/traitée. Utiliser quand le chef confirme avoir pris connaissance d'une alerte.",
-          inputSchema: zs(z.object({
+          inputSchema: z.object({
             alert_id: z.string().describe("L'ID de l'alerte à marquer comme lue"),
-          })),
+          }),
           execute: async ({ alert_id }) => {
             const { error } = await auth.supabase
               .from('food_cost_alerts')
@@ -241,9 +234,9 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
 
         get_sales_trend: tool({
           description: "Analyser les tendances de ventes sur une période. Utiliser pour des analyses de chiffre d'affaires.",
-          inputSchema: zs(z.object({
+          inputSchema: z.object({
             days: z.number().optional().describe("Nombre de jours à analyser (défaut: 14, max: 30)"),
-          })),
+          }),
           execute: async ({ days = 14 }) => {
             const since = new Date();
             since.setDate(since.getDate() - Math.min(days, 30));
@@ -266,9 +259,9 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
 
         get_recent_invoices: tool({
           description: "Consulter les factures fournisseurs récentes. Utiliser pour des questions sur les achats, les fournisseurs ou les coûts.",
-          inputSchema: zs(z.object({
+          inputSchema: z.object({
             limit: z.number().optional().describe("Nombre de factures (défaut: 5)"),
-          })),
+          }),
           execute: async ({ limit = 5 }) => {
             const { data } = await auth.supabase
               .from('invoices')

@@ -18,7 +18,7 @@ export default function EngineeringPage() {
     <>
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="px-4 sm:px-8 py-4">
-          <h1 className="text-xl font-bold">Carte Marine</h1>
+          <h1 className="text-xl font-bold">Performance du Menu</h1>
           <p className="text-sm text-slate-500">Classification BCG et optimisation IA de votre menu</p>
         </div>
         <div className="px-4 sm:px-8 flex items-center gap-6 text-sm font-medium overflow-x-auto">

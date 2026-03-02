@@ -235,7 +235,7 @@ export default function SalesPage() {
         <div className="px-8 py-4 flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 mb-1 text-sm text-slate-500">
-              <a href="/dashboard/engineering" className="hover:text-indigo-600">Carte Marine</a>
+              <a href="/dashboard/engineering" className="hover:text-indigo-600">Performance du Menu</a>
               <span>/</span>
               <span className="text-slate-900 font-medium">Ventes POS</span>
             </div>

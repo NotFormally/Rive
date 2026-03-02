@@ -196,12 +196,12 @@ export default function VirtualSousChef() {
               <div
                 key={msg.id}
                 className={`flex ${
-                  msg.role === "user" ? "justify-end" : "justify-start"
+                  (msg.role as string) === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 <div
                   className={`max-w-[85%] rounded-2xl p-3 text-sm ${
-                    msg.role === "user"
+                    (msg.role as string) === "user"
                       ? "bg-slate-900 text-white rounded-tr-sm"
                       : "bg-white border border-slate-200 text-slate-800 rounded-tl-sm shadow-sm"
                   }`}

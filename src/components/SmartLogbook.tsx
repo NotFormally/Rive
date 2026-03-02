@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
@@ -69,7 +70,7 @@ export function SmartLogbook() {
   // Load entries from database on mount
   const loadEntries = useCallback(async () => {
     try {
-      const response = await fetch('/api/logbook');
+      const response = await fetchWithTimeout('/api/logbook');
       if (!response.ok) throw new Error('Failed to load entries');
       const data = await response.json();
       const mapped: LogEntry[] = data.map((row: Record<string, unknown>) => ({

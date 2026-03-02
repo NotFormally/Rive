@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
 import { InvoiceScanner } from "@/components/food-cost/InvoiceScanner";
 import { Receipt, Calendar, Store, ArrowRight } from "lucide-react";
@@ -14,7 +15,7 @@ export default function InvoicesPage() {
   const fetchInvoices = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/food-cost/invoices');
+      const res = await fetchWithTimeout('/api/food-cost/invoices');
       const data = await res.json();
       setInvoices(data.invoices || []);
     } catch (err) {

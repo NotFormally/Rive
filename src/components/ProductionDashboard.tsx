@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useTranslations } from 'next-intl';
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -31,7 +32,7 @@ export function ProductionDashboard() {
   const loadBatches = useCallback(async () => {
     if (!profile?.id) return;
     try {
-      const res = await fetch('/api/production');
+      const res = await fetchWithTimeout('/api/production');
       if (!res.ok) throw new Error('Failed to load');
       const data = await res.json();
       const mapped: ProductionBatch[] = data.map((b: Record<string, unknown>) => ({

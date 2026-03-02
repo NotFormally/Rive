@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { AlertTriangle, Sparkles, Check, X, Loader2, ArrowRight } from "lucide-react";
 
 type Alert = {
@@ -26,7 +27,7 @@ export function DynamicFoodCostAlerts() {
   const fetchAlerts = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/food-cost/alerts');
+      const res = await fetchWithTimeout('/api/food-cost/alerts');
       const data = await res.json();
       setAlerts(data.alerts || []);
     } catch (err) {

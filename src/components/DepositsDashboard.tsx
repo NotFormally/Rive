@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useTranslations } from 'next-intl';
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -32,7 +33,7 @@ export function DepositsDashboard() {
   const loadDeposits = useCallback(async () => {
     if (!profile?.id) return;
     try {
-      const res = await fetch('/api/deposits');
+      const res = await fetchWithTimeout('/api/deposits');
       if (!res.ok) throw new Error('Failed to load');
       const data = await res.json();
       setDeposits(data.map((d: DepositItem) => ({

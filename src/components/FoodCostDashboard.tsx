@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { DynamicFoodCostAlerts } from "./food-cost/DynamicFoodCostAlerts";
 
 type FoodCostItem = {
@@ -39,7 +40,7 @@ export function FoodCostDashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('/api/food-cost');
+      const res = await fetchWithTimeout('/api/food-cost');
       const data = await res.json();
       setItems(data.items || []);
       setSummary(data.summary || null);

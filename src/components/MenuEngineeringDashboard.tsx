@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
@@ -50,7 +51,7 @@ export function MenuEngineeringDashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('/api/menu-engineering');
+      const res = await fetchWithTimeout('/api/menu-engineering');
       if (!res.ok) {
         throw new Error(`API returned ${res.status}`);
       }

@@ -8,15 +8,15 @@ interface PaymentConfirmationEmailProps {
 }
 
 const TIER_LABELS: Record<string, string> = {
-  essential: 'Essentiel',
+  essence: 'Essence',
   performance: 'Performance',
-  enterprise: 'Entreprise',
+  intelligence: 'Intelligence',
 };
 
 const TIER_FEATURES: Record<string, string[]> = {
-  essential: ['Carnet de bord illimité', 'Éditeur de menu & QR code'],
+  essence: ['Carnet de bord illimité', 'Éditeur de menu & QR code'],
   performance: ['Carnet de bord illimité', 'Éditeur de menu & QR code', 'Analyse des coûts alimentaires', 'Ingénierie de menu IA', 'Générateur de posts Instagram'],
-  enterprise: ['Tout le forfait Performance', 'Scanner de reçus IA', 'Support prioritaire'],
+  intelligence: ['Tout le forfait Performance', 'Scanner de reçus IA', 'Support prioritaire'],
 };
 
 export function PaymentConfirmationEmail({ restaurantName, tier }: PaymentConfirmationEmailProps) {

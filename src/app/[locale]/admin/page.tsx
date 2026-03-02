@@ -297,7 +297,7 @@ export default function AdminPage() {
                           className={
                             u.subscription_tier === "performance"
                               ? "bg-[#CC5833]"
-                              : u.subscription_tier === "enterprise"
+                              : u.subscription_tier === "intelligence"
                               ? "bg-[#2E4036] text-white"
                               : ""
                           }

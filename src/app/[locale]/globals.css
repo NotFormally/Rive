@@ -48,44 +48,44 @@
 }
 
 :root {
-  --radius: 2rem;
+  --radius: 1.5rem;
   
-  /* Preset A: Organic Tech */
-  --background: #F2F0E9;
-  --foreground: #1A1A1A;
+  /* New Aesthetic: Dark Glassmorphic & Neon Accents */
+  --background: #0B1120;
+  --foreground: #F8FAFC;
   
-  --primary: #2E4036;
-  --primary-foreground: #F2F0E9;
+  --primary: #00E5FF; /* Cyan / Teal glow */
+  --primary-foreground: #0B1120;
   
-  --accent: #CC5833;
-  --accent-foreground: #F2F0E9;
+  --accent: #FF007A; /* Magenta / Pink */
+  --accent-foreground: #FFFFFF;
   
-  --card: #FFFFFF;
-  --card-foreground: #1A1A1A;
+  --card: rgba(17, 24, 39, 0.4);
+  --card-foreground: #F8FAFC;
   
-  --popover: #FFFFFF;
-  --popover-foreground: #1A1A1A;
+  --popover: #0B1120;
+  --popover-foreground: #F8FAFC;
   
-  --secondary: #EBE8DE;
-  --secondary-foreground: #1A1A1A;
+  --secondary: rgba(255, 255, 255, 0.05);
+  --secondary-foreground: #F8FAFC;
   
-  --muted: #EBE8DE;
-  --muted-foreground: #6B7280;
+  --muted: rgba(255, 255, 255, 0.05);
+  --muted-foreground: #94A3B8;
   
-  --destructive: #ef4444;
-  --border: #E5E7EB;
-  --input: #E5E7EB;
-  --ring: #2E4036;
+  --destructive: #EF4444;
+  --border: rgba(255, 255, 255, 0.05);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #00E5FF;
 
-  /* Sidebar Colors (Dashboard: Moss Palette) */
-  --sidebar: #2E4036;
-  --sidebar-foreground: #F2F0E9;
-  --sidebar-primary: #CC5833;
-  --sidebar-primary-foreground: #F2F0E9;
-  --sidebar-accent: #3A4F43;
-  --sidebar-accent-foreground: #F2F0E9;
-  --sidebar-border: rgba(242, 240, 233, 0.1);
-  --sidebar-ring: #CC5833;
+  /* Sidebar Colors (Glassmorphic) */
+  --sidebar: rgba(11, 19, 36, 0.65); /* Translucent dark navy */
+  --sidebar-foreground: #94A3B8;
+  --sidebar-primary: rgba(0, 229, 255, 0.15); /* Active state bg */
+  --sidebar-primary-foreground: #00E5FF; /* Active state text/icon */
+  --sidebar-accent: rgba(255, 255, 255, 0.05);
+  --sidebar-accent-foreground: #F8FAFC;
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-ring: #00E5FF;
 }
 
 .noise-bg {

@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, Link } from "@/i18n/routing";
 import { useTranslations, useLocale } from 'next-intl';
 import { useAuth, type MemberRole } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { Copy, Upload, Trash2, CheckCircle2 } from "lucide-react";
 
 const MODULE_EMOJIS: Record<string, string> = {
   module_logbook: "📋",
@@ -39,17 +41,28 @@ type TeamMember = {
 };
 
 export default function SettingsPage() {
-  const { user, profile, role, settings, subscription, loading: authLoading, refreshSettings } = useAuth();
+  const { user, profile, role, settings, subscription, loading: authLoading, refreshSettings, refreshProfile } = useAuth();
   const t = useTranslations("Settings");
   const locale = useLocale();
   const [localSettings, setLocalSettings] = useState<Record<string, boolean>>({});
+  
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profileTagline, setProfileTagline] = useState("");
   const [socialContext, setSocialContext] = useState("");
+  
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [portalLoading, setPortalLoading] = useState(false);
   const [hourlyLaborCost, setHourlyLaborCost] = useState<string>("");
   const [savingLabor, setSavingLabor] = useState(false);
+  const [monthlyElectricity, setMonthlyElectricity] = useState<string>("");
+  const [electricityPrice, setElectricityPrice] = useState<string>("");
+  const [monthlyWater, setMonthlyWater] = useState<string>("");
+  const [waterPrice, setWaterPrice] = useState<string>("");
+  const [savingUtilities, setSavingUtilities] = useState(false);
   const router = useRouter();
 
   // Team state
@@ -102,7 +115,13 @@ export default function SettingsPage() {
       setProfileName(profile.restaurant_name);
       setProfileTagline(profile.tagline || "");
       setSocialContext(profile.social_media_context || "");
+      setLogoUrl(profile.logo_url || null);
       setHourlyLaborCost(profile.hourly_labor_cost ? String(profile.hourly_labor_cost) : "");
+      
+      setMonthlyElectricity((profile as any).monthly_electricity_usage_kwh ?? 7350);
+      setElectricityPrice((profile as any).electricity_price_kwh ?? 0.15);
+      setMonthlyWater((profile as any).monthly_water_usage_l ?? 126000);
+      setWaterPrice((profile as any).water_price_l ?? 0.003);
     }
   }, [settings, profile]);
 
@@ -158,15 +177,59 @@ export default function SettingsPage() {
   const handleSaveProfile = async () => {
     if (!profile) return;
     setSaving(true);
+    setSaved(false);
+    
     await supabase
       .from("restaurant_profiles")
       .update({
         restaurant_name: profileName,
         tagline: profileTagline,
         social_media_context: socialContext,
+        logo_url: logoUrl,
       })
       .eq("id", profile.id);
+      
+    await refreshProfile();
+    
     setSaving(false);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 3000);
+  };
+
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      if (!e.target.files || e.target.files.length === 0 || !profile) return;
+      
+      const file = e.target.files[0];
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${profile.id}-${Math.random()}.${fileExt}`;
+      const filePath = `${fileName}`;
+      
+      setUploadingLogo(true);
+      
+      const { error: uploadError } = await supabase.storage
+        .from('restaurant-logos')
+        .upload(filePath, file, { upsert: true });
+        
+      if (uploadError) {
+        throw uploadError;
+      }
+      
+      const { data } = supabase.storage
+        .from('restaurant-logos')
+        .getPublicUrl(filePath);
+        
+      setLogoUrl(data.publicUrl);
+    } catch (error) {
+      console.error("Error uploading logo: ", error);
+      alert(t("error_generic"));
+    } finally {
+      setUploadingLogo(false);
+    }
+  };
+
+  const removeLogo = () => {
+    setLogoUrl(null);
   };
 
   const handleSaveLaborCost = async () => {
@@ -178,6 +241,21 @@ export default function SettingsPage() {
       .update({ hourly_labor_cost: value })
       .eq("id", profile.id);
     setSavingLabor(false);
+  };
+
+  const handleSaveUtilities = async () => {
+    if (!profile) return;
+    setSavingUtilities(true);
+    await supabase
+      .from("restaurant_profiles")
+      .update({
+        monthly_electricity_usage_kwh: parseFloat(monthlyElectricity) || 0,
+        electricity_price_kwh: parseFloat(electricityPrice) || 0,
+        monthly_water_usage_l: parseFloat(monthlyWater) || 0,
+        water_price_l: parseFloat(waterPrice) || 0,
+      })
+      .eq("id", profile.id);
+    setSavingUtilities(false);
   };
 
   const handleInvite = async () => {
@@ -343,9 +421,63 @@ export default function SettingsPage() {
               />
               <p className="text-xs text-muted-foreground mt-1">{t("desc_social_context")}</p>
             </div>
-            <Button onClick={handleSaveProfile} disabled={saving} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
-              {saving ? t("btn_saving") : t("btn_save")}
-            </Button>
+            
+            {/* Logo Upload Section */}
+            <div>
+              <label className="block text-sm font-medium font-outfit text-foreground/70 mb-3">{t("label_logo")}</label>
+              <div className="flex items-center gap-6">
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  className="hidden" 
+                  ref={fileInputRef} 
+                  onChange={handleLogoUpload}
+                />
+                
+                <div 
+                  className="w-20 h-20 rounded-2xl border-2 border-dashed border-border flex items-center justify-center bg-secondary/30 overflow-hidden shrink-0 group hover:border-primary/50 transition-colors cursor-pointer relative"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  {logoUrl ? (
+                    <Image src={logoUrl} alt="Logo" fill className="object-cover" />
+                  ) : (
+                    <Upload className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                  )}
+                  {uploadingLogo && (
+                    <div className="absolute inset-0 bg-background/80 flex items-center justify-center backdrop-blur-sm">
+                      <span className="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full" />
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex flex-col gap-2">
+                  <Button 
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()} 
+                    disabled={uploadingLogo}
+                    className="rounded-xl w-fit"
+                  >
+                    {uploadingLogo ? t("uploading") : t("btn_upload_logo")}
+                  </Button>
+                  {logoUrl && (
+                    <button 
+                      onClick={removeLogo}
+                      className="text-xs text-red-500 hover:text-red-700 font-outfit text-left px-1 flex items-center gap-1"
+                    >
+                      <Trash2 className="w-3 h-3" /> Remove
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            <div className="pt-2">
+              <Button onClick={handleSaveProfile} disabled={saving} className={`rounded-xl transition-all ${saved ? "bg-emerald-600 hover:bg-emerald-700 text-white" : "bg-primary hover:bg-[#3A4F43] text-primary-foreground"}`}>
+                {saving ? t("btn_saving") : saved ? (
+                  <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t("btn_saved")}</span>
+                ) : t("btn_save")}
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
@@ -374,6 +506,77 @@ export default function SettingsPage() {
             </div>
             <Button onClick={handleSaveLaborCost} disabled={savingLabor} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl">
               {savingLabor ? t("btn_saving") : t("btn_save")}
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Utilities */}
+        <Card className="rounded-[2rem] border-border/50 shadow-sm overflow-hidden">
+          <CardHeader className="bg-card p-6 md:p-8 pb-4">
+            <CardTitle className="text-lg font-jakarta font-bold text-foreground">{t("section_utilities")}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 p-6 md:p-8 pt-2">
+            <p className="text-sm font-outfit text-muted-foreground">{t("utilities_desc")}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_monthly_electricity")}</label>
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="number"
+                    step="0.1"
+                    min="0"
+                    value={monthlyElectricity}
+                    onChange={(e) => setMonthlyElectricity(e.target.value)}
+                    placeholder="7350"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_electricity_price")}</label>
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={electricityPrice}
+                    onChange={(e) => setElectricityPrice(e.target.value)}
+                    placeholder="0.15"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_monthly_water")}</label>
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="number"
+                    step="1"
+                    min="0"
+                    value={monthlyWater}
+                    onChange={(e) => setMonthlyWater(e.target.value)}
+                    placeholder="126000"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium font-outfit text-foreground/70 mb-1">{t("label_water_price")}</label>
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="number"
+                    step="0.001"
+                    min="0"
+                    value={waterPrice}
+                    onChange={(e) => setWaterPrice(e.target.value)}
+                    placeholder="0.003"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
+                  />
+                </div>
+              </div>
+            </div>
+            <Button onClick={handleSaveUtilities} disabled={savingUtilities} className="bg-primary hover:bg-[#3A4F43] text-primary-foreground rounded-xl mt-2">
+              {savingUtilities ? t("btn_saving") : t("btn_save")}
             </Button>
           </CardContent>
         </Card>

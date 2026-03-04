@@ -58,9 +58,56 @@
 - Before starting a task, **list your assumptions** about the environment, file structure, and approach. Let the user confirm or correct them before proceeding — this prevents costly wrong-approach cycles.
 - Do NOT use placeholder/coming-soon states — implement real functionality.
 
+## Higgs Bot — Telegram Notifications
+
+When you need user authorization, are blocked, or reach a significant milestone, **always notify via the Higgs Bot** so Nassim receives a push notification on Telegram.
+
+- **Config**: `~/.antigravity/comms/config.json`
+- **Bot token**: `8342871478:AAGeoHSxSBIXkFnn2DI2OnAdq6sI-g-98RI`
+- **Chat ID**: `8540065936`
+- **Notify script**: `~/.antigravity/comms/notify.py`
+- **Outbox directory**: `~/.antigravity/comms/outbox/` (bot polls every 3s)
+- **LaunchAgent**: `~/Library/LaunchAgents/com.antigravity.higgs-bot.plist`
+
+### Commands
+
+| Action | Command |
+|---|---|
+| Simple message | `python3 ~/.antigravity/comms/notify.py "message"` |
+| Need authorization | `python3 ~/.antigravity/comms/notify.py --blocked "rivehub" "what you need"` |
+| Task started | `python3 ~/.antigravity/comms/notify.py --task-start "rivehub" "description"` |
+| Progress update | `python3 ~/.antigravity/comms/notify.py -p "rivehub" --progress 50 "summary"` |
+| Task completed | `python3 ~/.antigravity/comms/notify.py --task-done "rivehub" "summary"` |
+| Error | `python3 ~/.antigravity/comms/notify.py --error "rivehub" "error details"` |
+
+| Approval request | `python3 ~/.antigravity/comms/approve.py "question?" -p "rivehub"` |
+
+### Approval Flow
+For operations requiring user authorization (deploys, destructive actions, architectural decisions), use the **approval script** instead of `--blocked`:
+```bash
+python3 ~/.antigravity/comms/approve.py "Deploy to production?" --project rivehub --timeout 120
+```
+- Sends a Telegram message with **Approve / Deny** buttons
+- Polls the inbox for the response (default timeout: 120s)
+- Exit code `0` = approved, `1` = denied/timeout
+- Can be imported: `from approve import request_approval`
+
+### Rules
+- **Always** use `approve.py` when you need user approval before proceeding with risky operations.
+- Use `--blocked` for open-ended questions that need a text response.
+- Send `--task-start` and `--task-done` for significant tasks.
+- Don't over-notify: only meaningful updates, not every file edit.
+- Check bot is running: `pgrep -f higgs_bot` or `launchctl list | grep higgs`.
+
 ## Environment & Config
 
 - **OS**: macOS (Darwin, Apple Silicon arm64)
 - **Shell**: zsh
 - For environment variable and shell config changes: after modifying one config file (e.g., ~/.zshrc), always check for other sourced files (~/.zprofile, ~/.bash_profile, ~/.config/environment.d/, etc.) that might override or re-set the same variable.
 - Do not use deprecated macOS flags (e.g., `-kill` for `lsregister`). Verify flag compatibility before running system commands.
+
+## RiveHub Specifics (March 2026 Context)
+
+- **UI/UX Guidelines**: Respect the Phase 3 restructuring for sidebar navigation (mobile stacking/z-index issues) and maintain the nautical "Command Center" aesthetic for dashboards. Keep cognitive load low.
+- **Incremental Verification**: Make small, verifiable changes. Use the available testing infrastructure to validate your work continuously.
+- **Avoid Regressions**: Pay attention to the established i18n structure (25 locales) and multi-tenant RLS (Supabase persistence patterns) to avoid silently breaking them.

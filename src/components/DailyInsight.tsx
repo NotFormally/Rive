@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Lightbulb } from "lucide-react";
@@ -15,6 +16,7 @@ export function DailyInsight() {
   const { profile } = useAuth();
   const [insight, setInsight] = useState<DailyInsightRow | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     if (!profile) {
@@ -57,7 +59,10 @@ export function DailyInsight() {
   if (loading || !insight) return null;
 
   return (
-    <div className="rounded-2xl bg-gradient-to-r from-amber-50/50 to-orange-50/50 border border-amber-200/50 p-4 sm:p-5">
+    <div 
+      onClick={() => router.push("/dashboard/my-intelligence")}
+      className="rounded-2xl bg-gradient-to-r from-amber-50/50 to-orange-50/50 border border-amber-200/50 p-4 sm:p-5 cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md hover:border-amber-300"
+    >
       <div className="flex gap-3">
         <Lightbulb className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
         <div className="space-y-1.5">

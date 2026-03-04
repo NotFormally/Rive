@@ -90,22 +90,26 @@ export function WasteCostCalculator({
     ? (calculations.potentialSavings / calculations.yearlyWaste) * 100
     : 0;
 
+  const isLightMode = variant === "pricing";
+  
+  // Adjusted slider styles to look good on both dark and light modes
   const sliderTrackStyle = (value: number, min: number, max: number) => {
     const percent = ((value - min) / (max - min)) * 100;
+    const trackColor = isLightMode ? "rgba(204, 88, 51, 0.15)" : "rgba(204, 88, 51, 0.12)";
     return {
-      background: `linear-gradient(to right, #CC5833 0%, #CC5833 ${percent}%, rgba(204, 88, 51, 0.12) ${percent}%, rgba(204, 88, 51, 0.12) 100%)`,
+      background: `linear-gradient(to right, #CC5833 0%, #CC5833 ${percent}%, ${trackColor} ${percent}%, ${trackColor} 100%)`,
     };
   };
 
   const content = (
-    <div className="space-y-8">
+    <div className={`space-y-8 ${isLightMode ? 'text-[#1A1A1A]' : 'text-[#F2F0E9]'}`}>
       {/* Slider: Covers per week */}
       <div>
-        <div className="flex items-baseline justify-between mb-3">
-          <label className="font-outfit text-sm text-inherit opacity-70">
+        <div className="flex items-baseline justify-between mb-4">
+          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
             {t("covers_week")}
           </label>
-          <span className="font-plex-mono text-xl font-bold tabular-nums tracking-tight">
+          <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
             {covers}
           </span>
         </div>
@@ -119,19 +123,19 @@ export function WasteCostCalculator({
           className="waste-slider w-full h-1.5 rounded-full appearance-none cursor-pointer"
           style={sliderTrackStyle(covers, 50, 500)}
         />
-        <div className="flex justify-between mt-1.5">
-          <span className="font-plex-mono text-[11px] opacity-30">50</span>
-          <span className="font-plex-mono text-[11px] opacity-30">500</span>
+        <div className="flex justify-between mt-2">
+          <span className="font-plex-mono text-xs opacity-40">50</span>
+          <span className="font-plex-mono text-xs opacity-40">500</span>
         </div>
       </div>
 
       {/* Slider: Average ticket */}
       <div>
-        <div className="flex items-baseline justify-between mb-3">
-          <label className="font-outfit text-sm text-inherit opacity-70">
+        <div className="flex items-baseline justify-between mb-4">
+          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
             {t("avg_ticket")}
           </label>
-          <span className="font-plex-mono text-xl font-bold tabular-nums tracking-tight">
+          <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
             {ticket}$
           </span>
         </div>
@@ -145,19 +149,19 @@ export function WasteCostCalculator({
           className="waste-slider w-full h-1.5 rounded-full appearance-none cursor-pointer"
           style={sliderTrackStyle(ticket, 30, 150)}
         />
-        <div className="flex justify-between mt-1.5">
-          <span className="font-plex-mono text-[11px] opacity-30">30$</span>
-          <span className="font-plex-mono text-[11px] opacity-30">150$</span>
+        <div className="flex justify-between mt-2">
+          <span className="font-plex-mono text-xs opacity-40">30$</span>
+          <span className="font-plex-mono text-xs opacity-40">150$</span>
         </div>
       </div>
 
       {/* Slider: Food cost ratio */}
       <div>
-        <div className="flex items-baseline justify-between mb-3">
-          <label className="font-outfit text-sm text-inherit opacity-70">
+        <div className="flex items-baseline justify-between mb-4">
+          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
             {t("food_cost_ratio")}
           </label>
-          <span className="font-plex-mono text-xl font-bold tabular-nums tracking-tight">
+          <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
             {foodCostPercent}%
           </span>
         </div>
@@ -171,19 +175,19 @@ export function WasteCostCalculator({
           className="waste-slider w-full h-1.5 rounded-full appearance-none cursor-pointer"
           style={sliderTrackStyle(foodCostPercent, 25, 40)}
         />
-        <div className="flex justify-between mt-1.5">
-          <span className="font-plex-mono text-[11px] opacity-30">25%</span>
-          <span className="font-plex-mono text-[11px] opacity-30">40%</span>
+        <div className="flex justify-between mt-2">
+          <span className="font-plex-mono text-xs opacity-40">25%</span>
+          <span className="font-plex-mono text-xs opacity-40">40%</span>
         </div>
       </div>
 
       {/* Slider: Overproduction rate */}
       <div>
-        <div className="flex items-baseline justify-between mb-3">
-          <label className="font-outfit text-sm text-inherit opacity-70">
+        <div className="flex items-baseline justify-between mb-4">
+          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
             {t("overproduction_rate")}
           </label>
-          <span className="font-plex-mono text-xl font-bold tabular-nums tracking-tight">
+          <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
             {wastePercent}%
           </span>
         </div>
@@ -197,9 +201,9 @@ export function WasteCostCalculator({
           className="waste-slider w-full h-1.5 rounded-full appearance-none cursor-pointer"
           style={sliderTrackStyle(wastePercent, 4, 20)}
         />
-        <div className="flex justify-between mt-1.5">
-          <span className="font-plex-mono text-[11px] opacity-30">4%</span>
-          <span className="font-plex-mono text-[11px] opacity-30">20%</span>
+        <div className="flex justify-between mt-2">
+          <span className="font-plex-mono text-xs opacity-40">4%</span>
+          <span className="font-plex-mono text-xs opacity-40">20%</span>
         </div>
       </div>
 
@@ -207,34 +211,34 @@ export function WasteCostCalculator({
       <div className="border-t border-white/[0.06]" />
 
       {/* Results */}
-      <div className="space-y-5">
+      <div className="space-y-6">
         {/* Weekly food purchases */}
-        <div className="flex items-baseline justify-between">
-          <span className="font-outfit text-sm opacity-50">
+        <div className="flex items-baseline justify-between mt-4">
+          <span className="font-outfit text-base opacity-60">
             {t("weekly_purchases")}
           </span>
-          <span className="font-plex-mono text-lg font-semibold tabular-nums tracking-tight">
+          <span className="font-plex-mono text-xl md:text-2xl font-semibold tabular-nums tracking-tight">
             {formatCurrency(animWeeklySpend)}$
           </span>
         </div>
 
         {/* Weekly waste — hero number */}
-        <div className="py-2">
-          <span className="font-plex-mono text-4xl sm:text-5xl font-black text-[#CC5833] tabular-nums tracking-tighter">
+        <div className="py-3">
+          <span className="font-plex-mono text-5xl sm:text-6xl md:text-7xl font-black text-[#CC5833] tabular-nums tracking-tighter">
             ~{formatCurrency(animWeeklyWaste)}$
           </span>
-          <span className="font-outfit text-base opacity-50 ml-2">
+          <span className="font-outfit text-lg opacity-70 ml-3">
             {t("weekly_loss")}
           </span>
         </div>
 
         {/* Yearly waste — prominent */}
-        <div className="rounded-lg bg-white/[0.04] px-5 py-4">
-          <p className="font-outfit text-sm opacity-50">
+        <div className={`rounded-xl px-6 py-5 ${isLightMode ? 'bg-slate-100/60' : 'bg-white/[0.04]'}`}>
+          <p className="font-outfit text-base opacity-70">
             {t.rich("yearly_loss", {
               val: `${formatCurrency(animYearlyWaste)}$`,
               value: (chunks) => (
-                <span className="font-plex-mono text-2xl sm:text-3xl font-bold tabular-nums tracking-tight text-red-400 block mt-1">
+                <span className={`font-plex-mono text-3xl sm:text-4xl md:text-5xl font-bold tabular-nums tracking-tight block mt-2 ${isLightMode ? 'text-red-600' : 'text-red-400'}`}>
                   {chunks}
                 </span>
               )
@@ -243,21 +247,21 @@ export function WasteCostCalculator({
         </div>
 
         {/* Potential savings — with progress bar */}
-        <div className="rounded-xl bg-emerald-500/[0.08] border border-emerald-500/20 px-5 py-4 space-y-3">
-          <p className="font-outfit text-sm text-emerald-400/80">
+        <div className={`rounded-xl border px-6 py-5 space-y-4 ${isLightMode ? 'bg-emerald-500/5 border-emerald-500/10' : 'bg-emerald-500/[0.08] border-emerald-500/20'}`}>
+          <p className={`font-outfit text-base ${isLightMode ? 'text-emerald-700' : 'text-emerald-400/80'}`}>
             {t.rich("potential_reduction", {
               val: `~${formatCurrency(animSavings)}$`,
               value: (chunks) => (
-                <span className="font-plex-mono text-lg font-black tabular-nums text-emerald-400">
+                <span className={`font-plex-mono text-xl md:text-2xl font-black tabular-nums block mt-1 ${isLightMode ? 'text-emerald-600' : 'text-emerald-400'}`}>
                   {chunks}
                 </span>
               )
             })}
           </p>
           {/* Savings bar */}
-          <div className="h-1.5 rounded-full bg-emerald-500/10 overflow-hidden">
+          <div className={`h-2 rounded-full overflow-hidden ${isLightMode ? 'bg-emerald-500/10' : 'bg-emerald-500/10'}`}>
             <div
-              className="h-full rounded-full bg-emerald-500/60 transition-all duration-500 ease-out"
+              className={`h-full rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_rgba(16,185,129,0.5)] ${isLightMode ? 'bg-emerald-500' : 'bg-emerald-400'}`}
               style={{ width: `${savingsBarPercent}%` }}
             />
           </div>
@@ -271,13 +275,15 @@ export function WasteCostCalculator({
 
       {/* CTA (landing only) */}
       {variant === "landing" && (
-        <Link
-          href="/signup"
-          className="group inline-flex items-center gap-2.5 rounded-xl bg-[#CC5833] px-7 py-3.5 font-jakarta text-sm font-semibold text-white transition-all duration-200 hover:bg-[#CC5833]/90 hover:gap-3.5"
-        >
-          {t("cta")}
-          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-        </Link>
+        <div className="pt-4">
+          <Link
+            href="/signup"
+            className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-[#CC5833] px-8 py-5 font-jakarta text-lg font-bold text-white transition-all duration-300 hover:bg-[#CC5833]/90 hover:gap-4 shadow-[0_10px_30px_-10px_rgba(204,88,51,0.5)]"
+          >
+            {t("cta")}
+            <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
+        </div>
       )}
 
       {/* Slider custom styles */}

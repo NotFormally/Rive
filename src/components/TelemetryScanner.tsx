@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useMemo, useState } from "react";
 import gsap from "gsap";
+import { useTranslations } from "next-intl";
 
 /**
  * RadarLogo — Realistic sonar display with phosphor green sweep,
@@ -231,6 +232,7 @@ export function RadarLogo({ className = "" }: { className?: string }) {
  * Standalone SVG, no dependencies on RadarLogo.
  */
 export function DataMatrix({ className = "" }: { className?: string }) {
+  const t = useTranslations("LandingPage");
   const containerRef = useRef<HTMLDivElement>(null);
   const dataGridRef = useRef<SVGGElement>(null);
 
@@ -315,16 +317,16 @@ export function DataMatrix({ className = "" }: { className?: string }) {
         <g className="dm-hud">
           <rect x="52" y="-57" width="16" height="16" fill="none" stroke="#FFFFFF" strokeWidth="1" />
           <line x1="68" y1="-49" x2="110" y2="-70" stroke="#FFFFFF" strokeWidth="0.5" />
-          <text x="115" y="-70" fill="#FFFFFF" fontSize="8" fontFamily="'Space Mono', monospace" dominantBaseline="middle">YIELD_OPT</text>
+          <text x="115" y="-70" fill="#FFFFFF" fontSize="8" fontFamily="'Space Mono', monospace" dominantBaseline="middle">{t('widget_yield')}</text>
           <text x="115" y="-60" fill="#00FFAA" fontSize="7" fontFamily="'Space Mono', monospace" opacity="0.8">Δ 1.514</text>
         </g>
         <g className="dm-hud" opacity="0.8">
           <circle cx="0" cy="0" r="10" fill="none" stroke="#FFFFFF" strokeWidth="0.5" strokeDasharray="2 2" />
           <line x1="-7" y1="7" x2="-40" y2="40" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.5" />
-          <text x="-45" y="45" fill="#FFFFFF" fontSize="8" fontFamily="'Space Mono', monospace" textAnchor="end">CORE</text>
+          <text x="-45" y="45" fill="#FFFFFF" fontSize="8" fontFamily="'Space Mono', monospace" textAnchor="end">{t('widget_core')}</text>
         </g>
         <text x="0" y="120" className="dm-hud" fontFamily="'Space Mono', monospace" fontSize="12" fill="#00FFAA" textAnchor="middle" opacity="0.6">
-          [ RUNNING PROTOCOL ]
+          [ {t('widget_running')} ]
         </text>
       </svg>
     </div>

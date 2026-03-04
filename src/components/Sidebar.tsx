@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Link, usePathname } from "@/i18n/routing";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import {
   LayoutDashboard,
   MenuSquare,
@@ -29,6 +30,7 @@ import {
 export function Sidebar() {
   const t = useTranslations("Sidebar");
   const pathname = usePathname();
+  const router = useRouter();
   const { profile, settings, signOut } = useAuth();
   
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -73,22 +75,42 @@ export function Sidebar() {
         onClick={handleNavClick}
         className={`flex items-center gap-3 px-4 py-2.5 rounded-2xl transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] text-sm font-outfit ${
           isActive
-            ? "bg-[--sidebar-primary] text-[--sidebar-primary-foreground] shadow-lg shadow-black/20 font-bold"
-            : "text-[--sidebar-foreground] opacity-90 hover:opacity-100 hover:bg-[--sidebar-accent] hover:-translate-y-[1px]"
+            ? "bg-[--sidebar-primary] text-[--sidebar-primary-foreground] shadow-[0_0_20px_rgba(0,229,255,0.15)] border border-[--sidebar-primary-foreground]/30 font-bold"
+            : "text-[--sidebar-foreground] opacity-70 hover:opacity-100 hover:bg-[--sidebar-accent] hover:-translate-y-[1px]"
         }`}
       >
-        <item.icon className={`w-4 h-4 ${isActive ? "opacity-100" : "opacity-80"}`} />
-        {item.name}
+        <item.icon className={`w-4 h-4 shrink-0 ${isActive ? "opacity-100 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" : "opacity-70"}`} />
+        <span className="truncate">{item.name}</span>
       </Link>
     );
   });
 
   const sidebarContent = (
     <>
-      <div className="p-8">
-        <h1 className="text-2xl font-outfit font-semibold text-[--sidebar-foreground] tracking-[0.3em] uppercase">RIVE</h1>
-        <div className="h-px w-12 bg-[--sidebar-primary] mt-2 opacity-80"></div>
-        <p className="text-[10px] text-[--sidebar-foreground] opacity-70 mt-4 uppercase tracking-[0.2em] font-plex-mono font-bold">
+      <div 
+        onClick={() => {
+          handleNavClick();
+          router.push("/dashboard/settings");
+        }}
+        className="p-8 cursor-pointer group flex flex-col items-center sm:items-start"
+      >
+        {profile?.logo_url ? (
+          <div className="relative w-full max-w-[140px] aspect-[3/2] mb-2 shadow-[0_0_15px_rgba(34,211,238,0.15)] group-hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all overflow-hidden rounded-lg bg-white/5 p-2">
+            <Image 
+              src={profile.logo_url} 
+              alt={profile?.restaurant_name || "Restaurant Logo"} 
+              fill 
+              className="object-contain drop-shadow-md"
+              priority
+            />
+          </div>
+        ) : (
+          <>
+            <h1 className="text-2xl font-outfit font-semibold text-[--sidebar-foreground] tracking-[0.3em] uppercase drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] group-hover:text-primary transition-colors text-center sm:text-left">RIVE</h1>
+            <div className="h-px w-12 bg-[--sidebar-primary] mt-2 opacity-80 shadow-[0_0_10px_rgba(34,211,238,0.8)] group-hover:w-full transition-all duration-300 mx-auto sm:mx-0"></div>
+          </>
+        )}
+        <p className="text-[10px] text-[--sidebar-foreground] opacity-70 mt-4 uppercase tracking-[0.2em] font-plex-mono font-bold group-hover:opacity-100 transition-opacity text-center sm:text-left w-full truncate">
           {profile?.restaurant_name || t("restaurant_space")}
         </p>
       </div>
@@ -126,7 +148,10 @@ export function Sidebar() {
               </button>
               {openSection === "finance" && (
                 <div className="mt-1 ml-4 pl-4 border-l border-[--sidebar-border] space-y-1">
-                  {renderNavGroup(navFinance)}
+                  {renderNavGroup([
+                    ...navFinance,
+                    { name: "Le Nid", href: "/dashboard/accounting", icon: Calculator }
+                  ])}
                 </div>
               )}
             </div>
@@ -206,17 +231,17 @@ export function Sidebar() {
         />
       )}
 
-      {/* Mobile Slide-over Sidebar (bg-slate-900 enforced for dark contrast) */}
+      {/* Mobile Slide-over Sidebar (bg-[#0B131E] enforced for oceanic dark contrast) */}
       <aside
-        className={`md:hidden fixed inset-y-0 left-0 z-[60] w-72 bg-slate-900 border-r border-white/10 [color-scheme:dark] text-slate-100 flex flex-col transform transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+        className={`md:hidden fixed inset-y-0 left-0 z-[60] w-72 bg-[#0B131E] border-r border-cyan-500/10 [color-scheme:dark] text-slate-100 flex flex-col transform transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
-        } shadow-2xl`}
+        } shadow-[0_0_40px_rgba(0,0,0,0.8)]`}
         style={{
-          "--sidebar-primary": "#CC5833",
-          "--sidebar-primary-foreground": "#F2F0E9",
-          "--sidebar-foreground": "#F8FAFC",
-          "--sidebar-accent": "rgba(255,255,255,0.05)",
-          "--sidebar-border": "rgba(255,255,255,0.1)",
+          "--sidebar-primary": "#06b6d4",
+          "--sidebar-primary-foreground": "#ffffff",
+          "--sidebar-foreground": "#e2e8f0",
+          "--sidebar-accent": "rgba(34,211,238,0.1)",
+          "--sidebar-border": "rgba(34,211,238,0.15)",
         } as React.CSSProperties}
       >
         <button
@@ -230,7 +255,7 @@ export function Sidebar() {
       </aside>
 
       {/* Desktop Fixed Sidebar */}
-      <aside className="hidden md:flex w-64 bg-[--sidebar] min-h-screen text-[--sidebar-foreground] flex-col fixed left-0 top-0 border-r border-[--sidebar-border] shadow-2xl z-30">
+      <aside className="hidden md:flex w-64 bg-[--sidebar] backdrop-blur-3xl min-h-screen text-[--sidebar-foreground] flex-col fixed left-0 top-0 border-r border-[--sidebar-border] shadow-[0_0_40px_rgba(0,0,0,0.5)] z-30">
         {sidebarContent}
       </aside>
       

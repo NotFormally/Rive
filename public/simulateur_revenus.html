@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulateur de Croissance - RiveHub Inc.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top left, #0e0e16, #161625, #0a0a10);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --accent: #6C5CE7;
+      --accent-hover: #8073eb;
+      --text: #F1F2F6;
+      --text-muted: #A4B0BE;
+      --positive: #00E676;
+      --negative: #FF5252;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    
+    body {
+      background: var(--bg-gradient);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 350px 1fr; gap: 30px; }
+    @media (max-width: 1024px) { .container { grid-template-columns: 1fr; } }
+    
+    .glass-panel {
+      background: var(--glass-bg); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border);
+      border-radius: 24px; padding: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #fff, #aab2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    p.subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+
+    .input-group { margin-bottom: 20px; }
+    .input-group label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: var(--text-muted); }
+    .input-group label span { color: var(--accent); font-weight: 700; }
+    
+    input[type=range] {
+      width: 100%; -webkit-appearance: none; background: transparent; margin: 8px 0;
+    }
+    input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: rgba(255,255,255,0.1); border-radius: 4px; border: none; }
+    input[type=range]::-webkit-slider-thumb { border: 2px solid #fff; height: 18px; width: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; -webkit-appearance: none; margin-top: -6px; box-shadow: 0 0 10px rgba(108,92,231,0.5); transition: 0.2s; }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+    .number-input { display: flex; flex-direction: column; }
+    .number-input label { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.3;}
+    .number-input input[type=number] { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; padding: 8px 12px; color: #fff; font-family: 'Outfit'; font-size: 14px; outline: none; transition: 0.3s; }
+    .number-input input[type=number]:focus { border-color: var(--accent); }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+    @media (max-width: 768px) { .metrics-grid { grid-template-columns: 1fr; } }
+    
+    .metric-card { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; text-align: center; transition: 0.3s; }
+    .metric-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.15); }
+    .metric-title { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 500;}
+    .metric-value { font-size: 32px; font-weight: 700; }
+    .metric-sub { font-size: 13px; margin-top: 6px; opacity: 0.7;}
+    
+    .val-positive { color: var(--positive); }
+    .val-negative { color: var(--negative); }
+    .val-neutral { color: #fff; }
+    
+    .chart-container { position: relative; height: 500px; width: 100%; margin-top: 10px; }
+    
+    hr { border: 0; border-top: 1px solid var(--glass-border); margin: 25px 0; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Sidebar Variables -->
+  <div class="glass-panel">
+    <h1>RiveHub Inc.</h1>
+    <p class="subtitle">Simulateur de Modèle d'Affaires SaaS</p>
+    
+    <div class="input-group">
+      <label>Utilisateurs Totaux Annuels <span id="lbl-users" style="font-size: 16px;">10,000</span></label>
+      <input type="range" id="users" min="0" max="100000" step="500" value="10000">
+    </div>
+
+    <div class="input-group">
+      <label>Taux de Conversion (Gratuit -> Payant) <span id="lbl-cv" style="font-size: 14px;">5%</span></label>
+      <input type="range" id="cv" min="0" max="30" step="0.5" value="5">
+    </div>
+    
+    <hr>
+    
+    <div class="grid-2">
+      <div class="number-input">
+        <label>Prix Abonnement <br>Mensuel ($)</label>
+        <input type="number" id="price" value="15" step="1">
+      </div>
+      <div class="number-input">
+        <label>Coûts Fixes Opérationnels<br>Mensuels ($)</label>
+        <input type="number" id="fixed_m" value="150" step="10">
+      </div>
+    </div>
+    
+    <div class="grid-2">
+      <div class="number-input">
+        <label>Coût / U. Gratuit / Mois ($) <br>(Requêtes Bases, Hosting)</label>
+        <input type="number" id="cost_free" value="0.05" step="0.01">
+      </div>
+      <div class="number-input">
+        <label>Coût / U. Payant / Mois ($) <br>(LLM API, Tokens, DB)</label>
+        <input type="number" id="cost_paid" value="1.50" step="0.10">
+      </div>
+    </div>
+    
+    <div class="grid-2">
+      <div class="number-input">
+        <label>Frais Fixe Stripe par Tr. ($)</label>
+        <input type="number" id="stripe_fix" value="0.30" step="0.05">
+      </div>
+      <div class="number-input">
+        <label>Comission Stripe (%)</label>
+        <input type="number" id="stripe_pct" value="2.90" step="0.10">
+      </div>
+    </div>
+
+    <div class="number-input" style="margin-top: 10px;">
+        <label>Coûts Annuels Setup & Services (REQ, Domaines, Juridique) ($)</label>
+        <input type="number" id="annual" value="450" step="50">
+    </div>
+    
+  </div>
+  
+  <!-- Main Display -->
+  <div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">Chiffre d'Affaires Annuel (ARR)</div>
+        <div class="metric-value val-neutral" id="out-arr">$0</div>
+        <div class="metric-sub" id="out-mrr">MRR Mensuel: $0</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-title">Dépenses Annuelles</div>
+        <div class="metric-value val-negative" id="out-aexp">$0</div>
+        <div class="metric-sub" id="out-mexp">Moyenne Mensuelle: $0</div>
+      </div>
+      
+      <div class="metric-card glass-panel" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2);">
+        <div class="metric-title">Profit Net Annuel</div>
+        <div class="metric-value" id="out-aprofit">$0</div>
+        <div class="metric-sub" id="out-margin" style="font-weight: 600;">Marge Opérationnelle: 0%</div>
+      </div>
+    </div>
+    
+    <div class="glass-panel">
+      <h2 style="font-size: 18px; margin-bottom: 25px; font-weight: 500; color: #fff;">Points Morts et Projection sur 100,000 Utilisateurs</h2>
+      <div class="chart-container">
+        <canvas id="growthChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let chartInstance = null;
+  
+  const F = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+  function getVals() {
+    return {
+      u: Number(document.getElementById('users').value),
+      cv: Number(document.getElementById('cv').value) / 100,
+      p: Number(document.getElementById('price').value),
+      f: Number(document.getElementById('fixed_m').value),
+      cf: Number(document.getElementById('cost_free').value),
+      cp: Number(document.getElementById('cost_paid').value),
+      sf: Number(document.getElementById('stripe_fix').value),
+      sp: Number(document.getElementById('stripe_pct').value) / 100,
+      a: Number(document.getElementById('annual').value)
+    }
+  }
+  
+  function calcMetrics(v, usersOverride = null) {
+    const users = usersOverride !== null ? usersOverride : v.u;
+    const paid = users * v.cv;
+    const free = users - paid;
+    
+    // Revenue
+    const mrr = paid * v.p;
+    const arr = mrr * 12; // Formule simplifiée annualisée au snapshot
+    
+    // Expenses (Monthly averages)
+    // Hypothèse: 1 transaction par mois par utilsateur payant
+    const stripeM = paid > 0 ? paid * (v.p * v.sp + v.sf) : 0;
+    const varM = (free * v.cf) + (paid * v.cp);
+    const mExp = v.f + stripeM + varM;
+    const aExp = (mExp * 12) + v.a;
+    
+    // Profit
+    const aProfit = arr - aExp;
+    const margin = arr > 0 ? (aProfit / arr) * 100 : 0;
+    
+    return { arr, mrr, aExp, mExp, aProfit, margin };
+  }
+
+  function updateUI() {
+    const v = getVals();
+    
+    document.getElementById('lbl-users').innerText = v.u.toLocaleString();
+    document.getElementById('lbl-cv').innerText = (v.cv * 100).toFixed(1) + '%';
+    
+    const m = calcMetrics(v);
+    
+    document.getElementById('out-arr').innerText = F.format(m.arr);
+    document.getElementById('out-mrr').innerText = 'MRR: ' + F.format(m.mrr);
+    document.getElementById('out-aexp').innerText = '-' + F.format(m.aExp);
+    document.getElementById('out-mexp').innerText = 'Mensuel: -' + F.format(m.mExp);
+    
+    const elP = document.getElementById('out-aprofit');
+    elP.innerText = F.format(m.aProfit);
+    elP.className = 'metric-value ' + (m.aProfit >= 0 ? 'val-positive' : 'val-negative');
+    
+    const elM = document.getElementById('out-margin');
+    elM.innerText = `Marge Opérat: ${m.margin.toFixed(1)}%`;
+    elM.style.color = m.margin >= 0 ? 'inherit' : '#FF5252';
+    
+    updateChart(v);
+  }
+  
+  function updateChart(v) {
+    // Calcul dynamic limit X based on slider
+    const maxU = Math.max(v.u * 2, 25000);
+    const step = maxU / 50; 
+    
+    const labels = [];
+    const dRev = [];
+    const dExp = [];
+    const dPro = [];
+    
+    for(let i=0; i<=maxU; i+=step) {
+      labels.push(i >= 1000 ? (i/1000).toFixed(1)+'k' : i);
+      const m = calcMetrics(v, i);
+      dRev.push(m.arr);
+      dExp.push(m.aExp);
+      dPro.push(m.aProfit);
+    }
+    
+    if(chartInstance) {
+      chartInstance.data.labels = labels;
+      chartInstance.data.datasets[0].data = dRev;
+      chartInstance.data.datasets[1].data = dExp;
+      chartInstance.data.datasets[2].data = dPro;
+      chartInstance.update();
+    } else {
+      const ctx = document.getElementById('growthChart').getContext('2d');
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            { label: 'Revenus Annuels (ARR)', data: dRev, borderColor: '#00E676', backgroundColor: 'rgba(0, 230, 118, 0.05)', fill: true, tension: 0.3 },
+            { label: 'Dépenses Annuelles', data: dExp, borderColor: '#FF5252', backgroundColor: 'transparent', borderDash: [4, 4], tension: 0.3, pointRadius: 0 },
+            { label: 'Profit Net', data: dPro, borderColor: '#6C5CE7', backgroundColor: 'transparent', tension: 0.3, borderWidth: 3, pointRadius: 1 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { labels: { color: '#F1F2F6', font: { family: 'Outfit', size: 13 } }, position: 'top' },
+            tooltip: {
+              backgroundColor: 'rgba(0,0,0,0.85)', padding: 12, titleFont: { family: 'Outfit', size: 14}, bodyFont: { family:'Outfit', size: 13},
+              callbacks: { label: function(c) { return c.dataset.label + ': ' + F.format(c.parsed.y); } }
+            }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#A4B0BE', font: {family:'Outfit'} } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#A4B0BE', font: {family:'Outfit'}, callback: function(v) { return '$'+(v>=1000? (v/1000).toFixed(0)+'k' : v); } } }
+          }
+        }
+      });
+    }
+  }
+
+  // Bind Input Change Events
+  document.querySelectorAll('input').forEach(el => {
+    el.addEventListener('input', updateUI);
+  });
+  
+  // Init
+  updateUI();
+</script>
+</body>
+</html>

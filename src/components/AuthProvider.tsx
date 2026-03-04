@@ -50,6 +50,7 @@ type AuthContextType = {
   loading: boolean;
   signOut: () => Promise<void>;
   refreshSettings: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
 };
 
 const defaultSettings: ModuleSettings = {
@@ -78,6 +79,7 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   signOut: async () => {},
   refreshSettings: async () => {},
+  refreshProfile: async () => {},
 });
 
 export function useAuth() {
@@ -190,6 +192,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const refreshProfile = async () => {
+    if (!profile) return;
+    const { data, error } = await supabase
+      .from("restaurant_profiles")
+      .select("*")
+      .eq("id", profile.id)
+      .single();
+      
+    if (!error && data) {
+      setProfile(data);
+    }
+  };
+
   useEffect(() => {
     let isMounted = true;
 
@@ -264,7 +279,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, role, settings, usage, subscription, intelligenceScore, intelligenceLevel, loading, signOut, refreshSettings }}>
+    <AuthContext.Provider value={{ user, profile, role, settings, usage, subscription, intelligenceScore, intelligenceLevel, loading, signOut, refreshSettings, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );

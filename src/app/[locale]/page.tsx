@@ -78,7 +78,28 @@ const structuredData = [
       "email": "dock@rivehub.com",
       "contactType": "customer support"
     },
-    "knowsLanguage": ["fr", "en", "ar", "es", "it", "hi", "pa", "ta", "bn", "ru", "pt", "zh-HK", "zh-CN", "tr", "ja", "ko", "ms", "id", "nan", "vi", "de", "th", "pl", "tl", "nl"]
+    "knowsLanguage": [
+      // Major
+      "fr", "en", "es", "it", "de", "pt", "ru", "pl", "tr", "da", "sv",
+      // MENA
+      "ar", "ar-AE", "ar-LB", "ar-EG", "kab",
+      // Asia
+      "hi", "ur", "pa", "ta", "bn", "zh-CN", "zh-HK", "nan", "ja", "ko",
+      // Indo-Oceania
+      "id", "ms", "jv", "th", "vi", "tl",
+      // Africa
+      "sw", "am", "yo", "ha", "zu", "om",
+      // ANZ
+      "en-AU", "en-NZ",
+      // Celtic
+      "br", "cy", "gd", "ga",
+      // Romance/Isolates
+      "eu", "co",
+      // Germanic Regional
+      "nds", "gsw", "frk-mos", "nl-BE",
+      // Others/Creoles
+      "hsb", "rom", "ht"
+    ]
   },
   {
     "@context": "https://schema.org",

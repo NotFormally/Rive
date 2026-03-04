@@ -21,7 +21,9 @@ import {
   Beer,
   Gauge,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Globe,
+  Sparkles
 } from "lucide-react";
 
 export function Sidebar() {
@@ -57,6 +59,7 @@ export function Sidebar() {
 
   // Group III. Système
   const navSystem = [
+    { name: t("nav_multilingual_team") || "Équipe Multilingue", href: "/dashboard/multilingual", icon: Globe },
     { name: t("nav_my_intelligence"), href: "/dashboard/my-intelligence", icon: Gauge },
     { name: t("nav_settings"), href: "/dashboard/settings", icon: Settings }
   ];
@@ -162,7 +165,17 @@ export function Sidebar() {
         
       </div>
 
-      <div className="p-6 border-t border-[--sidebar-border] shrink-0">
+      <div className="p-4 border-t border-[--sidebar-border] shrink-0 flex flex-col gap-2">
+        <div className="bg-[#1A1A1A]/40 border border-white/5 p-3 rounded-2xl flex items-center justify-between shadow-inner">
+          <div className="flex flex-col">
+             <span className="font-plex-mono text-[9px] uppercase tracking-wider text-[--sidebar-foreground] opacity-50">{t("active_language") || "Langue Active"}</span>
+             <span className="font-jakarta text-xs font-bold text-[--sidebar-foreground] mt-0.5">Français (FR)</span>
+          </div>
+          <div className="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
+             <Sparkles className="w-4 h-4 text-indigo-400" />
+          </div>
+        </div>
+
         <button
           onClick={signOut}
           className="flex items-center gap-3 px-4 py-3 w-full rounded-2xl text-sm font-outfit text-[--sidebar-foreground] opacity-80 hover:opacity-100 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300"

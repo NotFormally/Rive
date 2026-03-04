@@ -25,6 +25,7 @@ import {
   DollarSign,
   Percent,
   Send,
+  Globe,
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,8 @@ import { Badge } from "@/components/ui/badge";
 import { InsightAttribution } from "@/components/InsightAttribution";
 import { ChefCalibrationBadge } from "@/components/ChefCalibrationBadge";
 import { UpgradeNudge } from "@/components/UpgradeNudge";
+import { useAITranslation } from "@/hooks/useAITranslation";
+import { APP_LANGUAGES } from "@/lib/languages";
 
 // =============================================================================
 // Types
@@ -163,6 +166,7 @@ export default function SmartPrepDashboard() {
   const [regenerating, setRegenerating] = useState(false);
   const [aiGenerating, setAiGenerating] = useState(false);
   const [activeTab, setActiveTab] = useState<'prep' | 'ingredients' | 'feedback'>('prep');
+  const [targetLanguage, setTargetLanguage] = useState("original");
 
   // Date picker
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
@@ -437,16 +441,31 @@ export default function SmartPrepDashboard() {
               </Card>
             </div>
 
-            {/* Level Badge + Date */}
-            <div className="flex items-center justify-between">
+            {/* Level Badge + Date + Language */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-slate-700 capitalize">{dayLabel} — {serviceLabel}</p>
                 <LevelBadge level={prepList.generation_level} />
               </div>
-              <Badge variant={prepList.status === 'completed' ? 'default' : 'secondary'}
-                className={prepList.status === 'completed' ? 'bg-emerald-500' : ''}>
-                {prepList.status === 'completed' ? t('status_feedback_received') : prepList.status === 'confirmed' ? t('status_confirmed') : t('status_draft')}
-              </Badge>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-slate-400" />
+                  <select
+                    value={targetLanguage}
+                    onChange={(e) => setTargetLanguage(e.target.value)}
+                    className="text-xs rounded-lg border-slate-200 py-1 pl-2 pr-6 text-slate-700 focus:ring-1 focus:ring-indigo-500 bg-white shadow-sm"
+                  >
+                    <option value="original">{t('lang_original') || 'Original'}</option>
+                    {APP_LANGUAGES.map((lang) => (
+                      <option key={lang.code} value={lang.code}>{lang.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <Badge variant={prepList.status === 'completed' ? 'default' : 'secondary'}
+                  className={prepList.status === 'completed' ? 'bg-emerald-500' : ''}>
+                  {prepList.status === 'completed' ? t('status_feedback_received') : prepList.status === 'confirmed' ? t('status_confirmed') : t('status_draft')}
+                </Badge>
+              </div>
             </div>
 
             {/* Alerts */}
@@ -492,7 +511,7 @@ export default function SmartPrepDashboard() {
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100">
                       {highPriority.map((item) => (
-                        <PrepItemRow key={item.id || item.menu_item_id} item={item} />
+                        <PrepItemRow key={item.id || item.menu_item_id} item={item} targetLanguage={targetLanguage} />
                       ))}
                     </div>
                   </section>
@@ -500,11 +519,11 @@ export default function SmartPrepDashboard() {
                 {medPriority.length > 0 && (
                   <section>
                     <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                      <ChevronUp className="w-4 h-4 text-amber-500" /> {t('priority_medium')}
+                       <ChevronUp className="w-4 h-4 text-amber-500" /> {t('priority_medium')}
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100">
                       {medPriority.map((item) => (
-                        <PrepItemRow key={item.id || item.menu_item_id} item={item} />
+                        <PrepItemRow key={item.id || item.menu_item_id} item={item} targetLanguage={targetLanguage} />
                       ))}
                     </div>
                   </section>
@@ -512,11 +531,11 @@ export default function SmartPrepDashboard() {
                 {lowPriority.length > 0 && (
                   <section>
                     <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                      <ChevronDown className="w-4 h-4 text-emerald-500" /> {t('priority_low')}
+                       <ChevronDown className="w-4 h-4 text-emerald-500" /> {t('priority_low')}
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100">
                       {lowPriority.map((item) => (
-                        <PrepItemRow key={item.id || item.menu_item_id} item={item} />
+                        <PrepItemRow key={item.id || item.menu_item_id} item={item} targetLanguage={targetLanguage} />
                       ))}
                     </div>
                   </section>
@@ -713,7 +732,7 @@ export default function SmartPrepDashboard() {
 // Prep Item Row
 // =============================================================================
 
-function PrepItemRow({ item }: { item: PrepItem }) {
+function PrepItemRow({ item, targetLanguage }: { item: PrepItem, targetLanguage: string }) {
   const t = useTranslations('SmartPrep');
   const bcgLabels: Record<string, string> = {
     phare: t('bcg_phare'), ancre: t('bcg_ancre'), derive: t('bcg_derive'), ecueil: t('bcg_ecueil'),
@@ -724,6 +743,20 @@ function PrepItemRow({ item }: { item: PrepItem }) {
     derive: 'bg-amber-100 text-amber-700',
     ecueil: 'bg-slate-100 text-slate-600',
   };
+
+  const { translate, isTranslating, translationsCache } = useAITranslation();
+  const [translatedReasoning, setTranslatedReasoning] = useState<string | null>(null);
+
+  const handleTranslate = async () => {
+    if (targetLanguage === 'original' || !item.ai_reasoning) return;
+    const txt = await translate(item.ai_reasoning, targetLanguage);
+    if (txt) setTranslatedReasoning(txt);
+  };
+  
+  // Reset translation if language goes back to original
+  useEffect(() => {
+    if (targetLanguage === 'original') setTranslatedReasoning(null);
+  }, [targetLanguage]);
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-4 sm:px-5 py-3 sm:py-3.5 hover:bg-slate-50/50 transition-colors">
@@ -750,9 +783,26 @@ function PrepItemRow({ item }: { item: PrepItem }) {
             )}
           </div>
           {item.ai_reasoning && (
-            <span className="text-xs text-indigo-500 flex items-center gap-1 mt-1 bg-indigo-50 px-2 py-0.5 rounded-md w-fit">
-              <Sparkles className="w-3 h-3 shrink-0" /> <span className="truncate">{item.ai_reasoning}</span>
-            </span>
+            <div className="mt-1.5">
+               <span className="text-xs text-indigo-500 inline-flex flex-wrap items-center gap-1.5 bg-indigo-50 px-2 py-1 rounded-md">
+                 <Sparkles className="w-3.5 h-3.5 shrink-0" /> 
+                 <span className="break-words">
+                   {translatedReasoning || item.ai_reasoning}
+                 </span>
+                 {translatedReasoning && (
+                   <span className="text-[10px] font-semibold ml-1 bg-indigo-100 px-1 rounded">Traduit</span>
+                 )}
+               </span>
+               {targetLanguage !== 'original' && !translatedReasoning && (
+                 <button 
+                    onClick={handleTranslate}
+                    disabled={isTranslating}
+                    className="text-[11px] underline text-slate-400 hover:text-indigo-600 block mt-1 transition-colors"
+                 >
+                    {isTranslating ? 'Traduction en cours...' : `Traduire en ${APP_LANGUAGES.find(l => l.code === targetLanguage)?.label || targetLanguage.toUpperCase()}`}
+                 </button>
+               )}
+            </div>
           )}
         </div>
       </div>

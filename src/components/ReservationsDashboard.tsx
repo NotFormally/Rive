@@ -19,7 +19,11 @@ import {
   XCircle,
   UserCheck,
   ChevronRight,
+  Sparkles,
+  Globe,
 } from "lucide-react";
+import { useAITranslation } from "@/hooks/useAITranslation";
+import { APP_LANGUAGES } from "@/lib/languages";
 
 // ============================================================================
 // Types
@@ -81,6 +85,7 @@ export default function ReservationsDashboard() {
   const [showSetup, setShowSetup] = useState(false);
   const [newProviderName, setNewProviderName] = useState<string>('');
   const [dateFilter, setDateFilter] = useState<'today' | 'tomorrow' | 'week' | 'all'>('today');
+  const [targetLanguage, setTargetLanguage] = useState("original");
 
   // Translated labels for providers
   const PROVIDER_LABELS: Record<string, string> = {
@@ -220,6 +225,19 @@ export default function ReservationsDashboard() {
             </p>
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-2 mr-2">
+              <Globe className="w-4 h-4 text-slate-400" />
+              <select
+                value={targetLanguage}
+                onChange={(e) => setTargetLanguage(e.target.value)}
+                className="text-xs rounded-lg border-slate-200 py-1 pl-2 pr-6 text-slate-700 focus:ring-1 focus:ring-indigo-500 bg-white shadow-sm"
+              >
+                <option value="original">{t('lang_original') || 'Original'}</option>
+                {APP_LANGUAGES.map((lang) => (
+                  <option key={lang.code} value={lang.code}>{lang.label}</option>
+                ))}
+              </select>
+            </div>
             <button
               onClick={() => loadData()}
               className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
@@ -374,68 +392,15 @@ export default function ReservationsDashboard() {
                 <span>{t('table_source')}</span>
                 <span>{t('table_status')}</span>
               </div>
-              {reservations.map((r) => {
-                const sc = STATUS_CONFIG[r.status] || STATUS_CONFIG.booked;
-                const StatusIcon = sc.icon;
-                const statusLabel = STATUS_LABELS[r.status] || STATUS_LABELS.booked;
-                const provName = getProviderForReservation(r.provider_id);
-                const pm = PROVIDER_META[provName] || PROVIDER_META.unknown;
-                const provLabel = PROVIDER_LABELS[provName] || PROVIDER_LABELS.unknown;
-                const time = new Date(r.reservation_time);
-
-                return (
-                  <div key={r.id} className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50 transition-colors">
-                    {/* Desktop row */}
-                    <div className="hidden md:grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3.5 items-center">
-                      <div>
-                        <p className="text-sm font-medium text-slate-900">{r.customer_name || t('unknown_client')}</p>
-                        {r.customer_notes && (
-                          <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{r.customer_notes}</p>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <Users className="w-3.5 h-3.5 text-slate-400" />
-                        <span className="text-sm text-slate-700 font-medium">{r.guest_count}</span>
-                      </div>
-                      <span className="text-sm text-slate-700 font-mono">
-                        {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
-                      </span>
-                      <span className={`inline-flex w-fit px-2 py-0.5 rounded-full text-xs font-medium ${pm.color} ${pm.bg}`}>
-                        {provLabel}
-                      </span>
-                      <span className={`inline-flex items-center gap-1 text-xs font-medium ${sc.color}`}>
-                        <StatusIcon className="w-3 h-3" />
-                        {statusLabel}
-                      </span>
-                    </div>
-                    {/* Mobile card */}
-                    <div className="md:hidden px-4 py-3">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <p className="text-sm font-medium text-slate-900">{r.customer_name || t('unknown_client')}</p>
-                        <span className="text-sm text-slate-700 font-mono">
-                          {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <div className="flex items-center gap-1">
-                          <Users className="w-3 h-3 text-slate-400" />
-                          <span className="text-xs text-slate-600">{r.guest_count}</span>
-                        </div>
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${pm.color} ${pm.bg}`}>
-                          {provLabel}
-                        </span>
-                        <span className={`inline-flex items-center gap-1 text-[10px] font-medium ${sc.color}`}>
-                          <StatusIcon className="w-3 h-3" />
-                          {statusLabel}
-                        </span>
-                      </div>
-                      {r.customer_notes && (
-                        <p className="text-xs text-slate-400 mt-1 truncate">{r.customer_notes}</p>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+              {reservations.map((r) => (
+                <ReservationRow 
+                  key={r.id} 
+                  r={r} 
+                  targetLanguage={targetLanguage} 
+                  providers={providers}
+                  providerLabels={PROVIDER_LABELS}
+                />
+              ))}
             </div>
           )}
         </section>
@@ -512,6 +477,130 @@ export default function ReservationsDashboard() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ============================================================================
+// Reservation Row (with Translation support)
+// ============================================================================
+function ReservationRow({ r, targetLanguage, providers, providerLabels }: { r: Reservation, targetLanguage: string, providers: Provider[], providerLabels: Record<string, string> }) {
+  const t = useTranslations('Reservations');
+  const sc = STATUS_CONFIG[r.status] || STATUS_CONFIG.booked;
+  const StatusIcon = sc.icon;
+  
+  const STATUS_LABELS: Record<string, string> = {
+    booked: t('status_booked'),
+    seated: t('status_seated'),
+    completed: t('status_completed'),
+    cancelled: t('status_cancelled'),
+    no_show: t('status_no_show'),
+  };
+  const statusLabel = STATUS_LABELS[r.status] || STATUS_LABELS.booked;
+  
+  const provName = providers.find(p => p.id === r.provider_id)?.provider_name || 'unknown';
+  const pm = PROVIDER_META[provName] || PROVIDER_META.unknown;
+  const provLabel = providerLabels[provName] || providerLabels.unknown;
+  const time = new Date(r.reservation_time);
+
+  const { translate, isTranslating } = useAITranslation();
+  const [translatedNotes, setTranslatedNotes] = useState<string | null>(null);
+
+  const handleTranslate = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (targetLanguage === 'original' || !r.customer_notes) return;
+    const txt = await translate(r.customer_notes, targetLanguage);
+    if (txt) setTranslatedNotes(txt);
+  };
+
+  useEffect(() => {
+    if (targetLanguage === 'original') setTranslatedNotes(null);
+  }, [targetLanguage]);
+
+  return (
+    <div className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50 transition-colors">
+      {/* Desktop row */}
+      <div className="hidden md:grid grid-cols-[1fr_100px_100px_120px_80px] gap-2 px-5 py-3.5 items-center">
+        <div>
+          <p className="text-sm font-medium text-slate-900">{r.customer_name || t('unknown_client')}</p>
+          {r.customer_notes && (
+            <div className="mt-0.5 max-w-sm">
+              <span className="text-xs text-slate-400 break-words">
+                {translatedNotes || r.customer_notes}
+              </span>
+              {translatedNotes && (
+                 <span className="text-[10px] font-semibold ml-1 text-indigo-500 bg-indigo-50 px-1 rounded inline-flex items-center gap-1">
+                   <Sparkles className="w-2.5 h-2.5" /> Traduit
+                 </span>
+               )}
+               {targetLanguage !== 'original' && !translatedNotes && (
+                 <button 
+                    onClick={handleTranslate}
+                    disabled={isTranslating}
+                    className="text-[10px] underline text-indigo-400 hover:text-indigo-600 block transition-colors"
+                 >
+                    {isTranslating ? 'Traduction en cours...' : `Traduire en ${APP_LANGUAGES.find(l => l.code === targetLanguage)?.label || targetLanguage}`}
+                 </button>
+               )}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-1.5">
+          <Users className="w-3.5 h-3.5 text-slate-400" />
+          <span className="text-sm text-slate-700 font-medium">{r.guest_count}</span>
+        </div>
+        <span className="text-sm text-slate-700 font-mono">
+          {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
+        </span>
+        <span className={`inline-flex w-fit px-2 py-0.5 rounded-full text-xs font-medium ${pm.color} ${pm.bg}`}>
+          {provLabel}
+        </span>
+        <span className={`inline-flex items-center gap-1 text-xs font-medium ${sc.color}`}>
+          <StatusIcon className="w-3 h-3" />
+          {statusLabel}
+        </span>
+      </div>
+      {/* Mobile card */}
+      <div className="md:hidden px-4 py-3">
+        <div className="flex items-center justify-between mb-1.5">
+          <p className="text-sm font-medium text-slate-900">{r.customer_name || t('unknown_client')}</p>
+          <span className="text-sm text-slate-700 font-mono">
+            {time.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })}
+          </span>
+        </div>
+        <div className="flex items-center gap-2 flex-wrap mb-1">
+          <div className="flex items-center gap-1">
+            <Users className="w-3 h-3 text-slate-400" />
+            <span className="text-xs text-slate-600">{r.guest_count}</span>
+          </div>
+          <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${pm.color} ${pm.bg}`}>
+            {provLabel}
+          </span>
+          <span className={`inline-flex items-center gap-1 text-[10px] font-medium ${sc.color}`}>
+            <StatusIcon className="w-3 h-3" />
+            {statusLabel}
+          </span>
+        </div>
+        {r.customer_notes && (
+          <div className="mt-1">
+            <span className="text-xs text-slate-500 break-words">{translatedNotes || r.customer_notes}</span>
+            {translatedNotes && (
+               <span className="text-[10px] font-semibold ml-1 text-indigo-500 bg-indigo-50 px-1 rounded inline-flex items-center gap-1 mt-1">
+                 <Sparkles className="w-2.5 h-2.5" /> Traduit
+               </span>
+             )}
+            {targetLanguage !== 'original' && !translatedNotes && (
+               <button 
+                  onClick={handleTranslate}
+                  disabled={isTranslating}
+                  className="text-[10px] underline text-indigo-400 hover:text-indigo-600 block transition-colors mt-0.5"
+               >
+                  {isTranslating ? 'Traduction en cours...' : `Traduire`}
+               </button>
+             )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

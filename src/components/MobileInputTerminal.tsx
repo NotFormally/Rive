@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
-import { Flame, Wrench, UtensilsCrossed, MessageSquare, Mic, Send, CheckCircle2, Eye, Clock } from "lucide-react";
+import { Flame, Wrench, UtensilsCrossed, MessageSquare, Mic, Send, CheckCircle2, Eye, Clock, Sparkles } from "lucide-react";
 
 type MessageStatus = "unseen" | "seen" | "resolved";
 
@@ -247,9 +247,15 @@ export function MobileInputTerminal() {
                
                {/* Translation Bridge */}
                {msg.translatedText && (
-                 <p className="font-outfit text-[11px] text-muted-foreground italic pl-2 border-l-2 border-border ml-2 mb-3">
-                   {msg.translatedText}
-                 </p>
+                 <div className="mt-2 pl-2">
+                   <div className="inline-flex items-center gap-1.5 px-2 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-md mb-1">
+                      <Sparkles className="w-3 h-3 text-indigo-400" />
+                      <span className="font-outfit text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Traduit par l'IA</span>
+                   </div>
+                   <p className="font-outfit text-xs text-muted-foreground italic border-l-2 border-indigo-500/30 pl-2 py-1">
+                     {msg.translatedText}
+                   </p>
+                 </div>
                )}
 
                {/* Closing the Loop Indicators */}

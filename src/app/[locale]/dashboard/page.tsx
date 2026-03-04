@@ -142,19 +142,22 @@ export default function DashboardPage() {
         <div className="space-y-8 md:space-y-10">
           
           {/* WEEKLY SCHEDULE WIDGET */}
-          <section className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] overflow-hidden p-6 md:p-8 relative transition-all duration-500">
+          <section 
+            onClick={() => router.push("/dashboard/settings?tab=team")}
+            className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] overflow-hidden p-6 md:p-8 relative transition-all duration-300 cursor-pointer hover:border-primary/40 hover:shadow-[0_8px_40px_rgba(0,229,255,0.15)] group"
+          >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
+              <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2 group-hover:text-primary/80 transition-colors">
                 Weekly Schedule
               </h2>
-              <div className="bg-secondary/40 text-xs px-3 py-1 rounded-full text-muted-foreground border border-white/5">
+              <div className="bg-secondary/40 text-xs px-3 py-1 rounded-full text-muted-foreground border border-white/5 group-hover:border-primary/20 transition-colors">
                 All Months <span className="ml-1 text-[9px]">▼</span>
               </div>
             </div>
 
             <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar-hidden items-end">
               {/* Active Day */}
-              <div className="relative group shrink-0 w-32 bg-[--sidebar-primary] border border-primary/40 rounded-3xl p-4 shadow-[0_0_25px_rgba(0,229,255,0.15)] overflow-hidden">
+              <div className="relative shrink-0 w-32 bg-[--sidebar-primary] border border-primary/40 rounded-3xl p-4 shadow-[0_0_25px_rgba(0,229,255,0.15)] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent pointer-events-none"></div>
                 <div className="relative z-10">
                   <span className="text-primary text-sm font-jakarta font-medium">Wed</span>
@@ -173,7 +176,7 @@ export default function DashboardPage() {
                 { day: "Fri", date: "28", start: "10:00 PM", role: "Bartender", active: true },
                 { day: "Sat", date: "29", role: "Server" },
               ].map((d, i) => (
-                <div key={i} className="flex flex-col items-center gap-2 shrink-0 w-16 opacity-90 hover:opacity-100 transition-opacity cursor-pointer">
+                <div key={i} className="flex flex-col items-center gap-2 shrink-0 w-16 opacity-90 transition-opacity">
                   <div className="text-xs text-slate-400 font-medium">{d.day}</div>
                   <div className="text-lg font-jakarta font-bold text-slate-100">{d.date}</div>
                   {d.start && (
@@ -187,22 +190,25 @@ export default function DashboardPage() {
             </div>
 
             <div className="mt-6 flex justify-end">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 shadow-[0_0_15px_rgba(0,229,255,0.3)] font-bold">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 shadow-[0_0_15px_rgba(0,229,255,0.3)] font-bold pointer-events-none">
                 Add Availability
               </Button>
             </div>
           </section>
 
           {/* TASK PREP LISTS WIDGET */}
-          <section className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 md:p-8 relative">
+          <section 
+            onClick={() => router.push("/dashboard/prep-list")}
+            className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 md:p-8 relative transition-all duration-300 cursor-pointer hover:border-primary/40 hover:shadow-[0_8px_40px_rgba(0,229,255,0.15)] group"
+          >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground group-hover:text-primary/80 transition-colors">
                 Task Prep Lists
               </h2>
-              <span className="text-[12px] opacity-50 cursor-pointer">▲</span>
+              <span className="text-[12px] opacity-50 group-hover:text-primary transition-colors">▲</span>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 pointer-events-none">
               {[
                 { id: "1", text: "Prepare smoothie bases", color: "bg-emerald-400", shadow: "shadow-[0_0_10px_rgba(52,211,153,0.5)]" },
                 { id: "2", text: "Restock front-of-house", color: "bg-yellow-400", shadow: "shadow-[0_0_10px_rgba(250,204,21,0.5)]" },

@@ -14,7 +14,7 @@ type CheckoutButtonProps = {
 
 export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "" }: CheckoutButtonProps) {
   const [loading, setLoading] = useState(false);
-  const { profile, loading: authLoading } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const tCommon = useTranslations('Common');
 
   const handleCheckout = async () => {
@@ -25,8 +25,13 @@ export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "
 
     if (authLoading) return;
 
-    if (!profile) {
+    if (!user) {
       window.location.assign(`/signup?plan=${priceId}`);
+      return;
+    }
+
+    if (!profile) {
+      alert(tCommon('error_unknown'));
       return;
     }
 

@@ -51,6 +51,16 @@
 
 - Before running interactive CLI tools (e.g., `npx create-*`, interactive installers, `supabase login` without `--token`), warn the user that Claude Code cannot operate interactive prompts and ask them to run it in their terminal instead, or provide the non-interactive flag.
 
+## Session Discipline
+
+- Keep sessions focused on **1-2 goals** maximum. Multi-goal sessions degrade from context overload and rate limits.
+- If scope creep is detected (user adds unrelated tasks mid-session), flag it and suggest a separate session.
+- Before starting a task, **list your assumptions** about the environment, file structure, and approach. Let the user confirm or correct them before proceeding — this prevents costly wrong-approach cycles.
+- Do NOT use placeholder/coming-soon states — implement real functionality.
+
 ## Environment & Config
 
+- **OS**: macOS (Darwin, Apple Silicon arm64)
+- **Shell**: zsh
 - For environment variable and shell config changes: after modifying one config file (e.g., ~/.zshrc), always check for other sourced files (~/.zprofile, ~/.bash_profile, ~/.config/environment.d/, etc.) that might override or re-set the same variable.
+- Do not use deprecated macOS flags (e.g., `-kill` for `lsregister`). Verify flag compatibility before running system commands.

@@ -6,6 +6,8 @@ import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
+import { Sparkles, Trash2, Globe } from "lucide-react";
+import { APP_LANGUAGES } from "@/lib/languages";
 
 type LogEntry = {
   id: string;
@@ -25,27 +27,7 @@ type LogEntry = {
   };
 };
 
-const LOGBOOK_LANGUAGES = [
-  { code: 'fr', label: 'Français' },
-  { code: 'en', label: 'English' },
-  { code: 'ar', label: 'العربية' },
-  { code: 'es', label: 'Español' },
-  { code: 'it', label: 'Italiano' },
-  { code: 'hi', label: 'हिन्दी' },
-  { code: 'pa', label: 'ਪੰਜਾਬੀ' },
-  { code: 'ta', label: 'தமிழ்' },
-  { code: 'bn', label: 'বাংলা' },
-  { code: 'ru', label: 'Русский' },
-  { code: 'pt', label: 'Português' },
-  { code: 'zh-HK', label: '粵語' },
-  { code: 'zh-CN', label: '中文' },
-  { code: 'tr', label: 'Türkçe' },
-  { code: 'ms', label: 'Bahasa Melayu' },
-  { code: 'ja', label: '日本語' },
-  { code: 'ko', label: '한국어' },
-  { code: 'id', label: 'Bahasa Indonesia' },
-  { code: 'nan', label: '閩南語' },
-];
+
 
 export function SmartLogbook() {
   const [note, setNote] = useState("");
@@ -408,7 +390,7 @@ export function SmartLogbook() {
               className="text-sm rounded-xl border-0 py-1.5 pl-3 pr-8 text-foreground ring-1 ring-inset ring-border focus:ring-2 focus:ring-primary/50 font-outfit bg-card"
             >
               <option value="original">{t('lang_original')}</option>
-              {LOGBOOK_LANGUAGES.map((lang) => (
+              {APP_LANGUAGES.map((lang) => (
                 <option key={lang.code} value={lang.code}>{lang.label}</option>
               ))}
             </select>
@@ -438,6 +420,16 @@ export function SmartLogbook() {
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex-1">
                     <p className="text-foreground/90 text-sm font-outfit whitespace-pre-wrap">{displayText}</p>
+                    
+                    {needsTranslation && hasTranslationForCurrentView && (
+                       <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-lg">
+                          <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                          <span className="font-outfit text-xs font-semibold text-indigo-400">
+                             Traduit par l'IA (Langue source: {entry.originalLanguage.toUpperCase()})
+                          </span>
+                       </div>
+                    )}
+
                     {needsTranslation && !hasTranslationForCurrentView && (
                       <div className="mt-2">
                         {transQuotaReached ? (
@@ -449,7 +441,7 @@ export function SmartLogbook() {
                             disabled={isTranslating === entry.id}
                             className="text-xs font-medium font-outfit text-primary hover:text-[#3A4F43] underline disabled:opacity-50"
                           >
-                            {isTranslating === entry.id ? 'Traduction en cours...' : `Traduire en ${LOGBOOK_LANGUAGES.find(l => l.code === viewingLanguage)?.label || viewingLanguage.toUpperCase()}`}
+                            {isTranslating === entry.id ? 'Traduction en cours...' : `Traduire en ${APP_LANGUAGES.find(l => l.code === viewingLanguage)?.label || viewingLanguage.toUpperCase()}`}
                           </button>
                         )}
                       </div>
@@ -458,12 +450,10 @@ export function SmartLogbook() {
                   <button
                     type="button"
                     onClick={() => removeEntry(entry.id)}
-                    className="ml-2 text-muted-foreground hover:text-red-500 transition-colors shrink-0"
+                    className="ml-2 text-muted-foreground hover:text-red-500 transition-colors shrink-0 p-1 rounded-md hover:bg-red-50/10"
                     title="Supprimer"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
 

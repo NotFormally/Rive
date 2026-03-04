@@ -191,8 +191,9 @@ export function LandingPage() {
             <p className="hero-text font-outfit text-lg md:text-xl mt-8 max-w-xl opacity-90 leading-relaxed tracking-wide">
               {t('hero_description')}
             </p>
-            <p className="hero-text font-plex-mono text-xs tracking-widest uppercase opacity-60 mt-4">
-              {t('hero_loss_hook')}
+            <p className="hero-text font-plex-mono text-xs tracking-widest uppercase opacity-60 mt-4 flex items-center gap-2">
+              <Globe className="w-4 h-4 text-indigo-400" />
+              {t('hero_loss_hook')} &bull; {t('hero_borderless_hook')}
             </p>
             <div className="hero-text mt-12 w-full flex">
               <Link
@@ -258,7 +259,47 @@ export function LandingPage() {
 
         <div className="flex flex-col gap-12 lg:gap-24">
           
-          {/* Feature 1: Logbook */}
+          {/* Feature 0 (Promoted to Top, Full-Width): Translations */}
+          <div className="feature-row bg-[#1A1A1A] text-[#F2F0E9] rounded-[3rem] p-8 lg:p-12 shadow-2xl border border-white/5 flex flex-col items-center text-center relative overflow-hidden">
+             {/* Background glow */}
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+             
+             <div className="relative z-10 flex flex-col items-center gap-6 w-full max-w-4xl">
+                <div className="bg-indigo-500/20 w-20 h-20 rounded-3xl flex items-center justify-center border border-indigo-500/30">
+                  <Globe className="w-10 h-10 text-indigo-400" />
+                </div>
+                <h3 className="font-cormorant italic font-bold text-5xl md:text-6xl text-white mt-4 leading-tight">
+                  {t('f3_title')}
+                </h3>
+                <p className="font-outfit text-xl text-slate-300 leading-relaxed max-w-2xl px-4">
+                  {t('f3_desc')}
+                </p>
+
+                {/* Animated Interactive Translation Bar */}
+                <div className="mt-12 w-full bg-[#121212] rounded-[2rem] border border-white/10 p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
+                   <div className="flex-1 flex flex-col items-start gap-4 w-full">
+                     <span className="font-plex-mono text-xs text-indigo-400 font-bold uppercase tracking-widest bg-indigo-500/10 px-3 py-1 rounded-full">{t('language_english')}</span>
+                     <p className="font-jakarta text-2xl md:text-3xl text-white font-medium">"Clean the floor thoroughly tonight."</p>
+                   </div>
+                   
+                   <div className="shrink-0 flex items-center justify-center bg-indigo-600/20 w-12 h-12 rounded-full border border-indigo-500/30">
+                     <ArrowRight className="w-6 h-6 text-indigo-400" />
+                   </div>
+
+                   <div className="flex-1 flex flex-col items-end gap-4 w-full text-right bg-white/5 p-6 rounded-2xl border border-white/5 relative overflow-hidden">
+                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent translate-x-[-100%] animate-[shimmer_3s_infinite]"></div>
+                     <span className="font-plex-mono text-xs text-[#CC5833] font-bold uppercase tracking-widest bg-[#CC5833]/10 px-3 py-1 rounded-full relative z-10">{t('language_spanish')}</span>
+                     <p className="font-jakarta text-2xl md:text-3xl text-indigo-100 font-medium relative z-10">"Limpia el suelo a fondo esta noche."</p>
+                   </div>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-4 mt-8">
+                  <span className="bg-white/5 px-4 py-2 rounded-xl border border-white/5 font-outfit text-sm text-slate-300 flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-indigo-400"></div> {t('f3_ex1')}</span>
+                  <span className="bg-white/5 px-4 py-2 rounded-xl border border-white/5 font-outfit text-sm text-slate-300 flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-indigo-400"></div> {t('f3_ex2')}</span>
+                  <span className="bg-white/5 px-4 py-2 rounded-xl border border-white/5 font-outfit text-sm text-slate-300 flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-indigo-400"></div> {t('f3_ex3')}</span>
+                </div>
+             </div>
+          </div>
           <div className="feature-row bg-white rounded-[3rem] p-8 lg:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex flex-col gap-6">
@@ -343,31 +384,7 @@ export function LandingPage() {
             </div>
           </div>
 
-          {/* Feature 3: Translations */}
-          <div className="feature-row bg-white rounded-[3rem] p-8 lg:p-12 shadow-sm border border-slate-200/60 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <div className="flex flex-col gap-6">
-                <div className="bg-indigo-50 w-16 h-16 rounded-2xl flex items-center justify-center"><Globe className="w-8 h-8 text-indigo-600" /></div>
-                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#1A1A1A]">{t('f3_title')}</h3>
-                <p className="font-outfit text-lg text-slate-600 leading-relaxed">{t('f3_desc')}</p>
-                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-50 mt-4">
-                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">{t('examples_title')}</h4>
-                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-700">
-                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex1')}</li>
-                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex2')}</li>
-                    <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f3_ex3')}</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="order-1 md:order-2 bg-indigo-950 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden">
-               <div className="text-center flex flex-col gap-3 px-6">
-                 <div className="text-indigo-300 font-cormorant italic text-2xl md:text-3xl opacity-40 transition-opacity">{tMockups('trans_fr')}</div>
-                 <div className="text-indigo-200 font-cormorant italic text-3xl md:text-4xl opacity-75">{tMockups('trans_es')}</div>
-                 <div className="text-white font-jakarta text-2xl md:text-3xl font-medium mt-2">"আজ রাতে মেঝে পরিষ্কার করুন"</div>
-               </div>
-            </div>
-          </div>
+
 
           {/* Feature 4: Food Cost & Menu Engineering */}
           <div className="feature-row bg-slate-50 border border-slate-200/60 rounded-[3rem] p-8 lg:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

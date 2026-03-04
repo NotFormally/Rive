@@ -48,6 +48,9 @@ next-env.d.ts
 # archive (one-off scripts, old mockups, brainstorm assets)
 /_archive/
 
+# test/debug scripts with potential secrets
+scripts/test_*.js
+
 # caches
 .mypy_cache/
 *.log

@@ -62,9 +62,9 @@
 
 When you need user authorization, are blocked, or reach a significant milestone, **always notify via the Higgs Bot** so Nassim receives a push notification on Telegram.
 
-- **Config**: `~/.antigravity/comms/config.json`
-- **Bot token**: `8342871478:AAGeoHSxSBIXkFnn2DI2OnAdq6sI-g-98RI`
-- **Chat ID**: `8540065936`
+- **Config**: `~/.antigravity/comms/config.json` (contains bot token and chat ID — never commit these values)
+- **Bot token**: stored in config file above (DO NOT hardcode)
+- **Chat ID**: stored in config file above (DO NOT hardcode)
 - **Notify script**: `~/.antigravity/comms/notify.py`
 - **Outbox directory**: `~/.antigravity/comms/outbox/` (bot polls every 3s)
 - **LaunchAgent**: `~/Library/LaunchAgents/com.antigravity.higgs-bot.plist`

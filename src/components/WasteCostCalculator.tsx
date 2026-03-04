@@ -90,23 +90,22 @@ export function WasteCostCalculator({
     ? (calculations.potentialSavings / calculations.yearlyWaste) * 100
     : 0;
 
-  const isLightMode = variant === "pricing";
+  const trackColor = "rgba(204, 88, 51, 0.12)";
   
   // Adjusted slider styles to look good on both dark and light modes
   const sliderTrackStyle = (value: number, min: number, max: number) => {
     const percent = ((value - min) / (max - min)) * 100;
-    const trackColor = isLightMode ? "rgba(204, 88, 51, 0.15)" : "rgba(204, 88, 51, 0.12)";
     return {
       background: `linear-gradient(to right, #CC5833 0%, #CC5833 ${percent}%, ${trackColor} ${percent}%, ${trackColor} 100%)`,
     };
   };
 
   const content = (
-    <div className={`space-y-8 ${isLightMode ? 'text-[#1A1A1A]' : 'text-[#F2F0E9]'}`}>
+    <div className="space-y-8 text-foreground">
       {/* Slider: Covers per week */}
       <div>
         <div className="flex items-baseline justify-between mb-4">
-          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
+          <label className="font-outfit text-base md:text-lg font-medium opacity-90">
             {t("covers_week")}
           </label>
           <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
@@ -132,7 +131,7 @@ export function WasteCostCalculator({
       {/* Slider: Average ticket */}
       <div>
         <div className="flex items-baseline justify-between mb-4">
-          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
+          <label className="font-outfit text-base md:text-lg font-medium opacity-90">
             {t("avg_ticket")}
           </label>
           <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
@@ -158,7 +157,7 @@ export function WasteCostCalculator({
       {/* Slider: Food cost ratio */}
       <div>
         <div className="flex items-baseline justify-between mb-4">
-          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
+          <label className="font-outfit text-base md:text-lg font-medium opacity-90">
             {t("food_cost_ratio")}
           </label>
           <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
@@ -184,7 +183,7 @@ export function WasteCostCalculator({
       {/* Slider: Overproduction rate */}
       <div>
         <div className="flex items-baseline justify-between mb-4">
-          <label className="font-outfit text-base md:text-lg font-medium text-inherit opacity-90">
+          <label className="font-outfit text-base md:text-lg font-medium opacity-90">
             {t("overproduction_rate")}
           </label>
           <span className="font-plex-mono text-2xl md:text-3xl font-bold tabular-nums tracking-tight">
@@ -208,7 +207,7 @@ export function WasteCostCalculator({
       </div>
 
       {/* Divider */}
-      <div className="border-t border-white/[0.06]" />
+      <div className="border-t border-border/50" />
 
       {/* Results */}
       <div className="space-y-6">
@@ -233,12 +232,12 @@ export function WasteCostCalculator({
         </div>
 
         {/* Yearly waste — prominent */}
-        <div className={`rounded-xl px-6 py-5 ${isLightMode ? 'bg-slate-100/60' : 'bg-white/[0.04]'}`}>
+        <div className="rounded-xl px-6 py-5 bg-card border border-border/30">
           <p className="font-outfit text-base opacity-70">
             {t.rich("yearly_loss", {
               val: `${formatCurrency(animYearlyWaste)}$`,
               value: (chunks) => (
-                <span className={`font-plex-mono text-3xl sm:text-4xl md:text-5xl font-bold tabular-nums tracking-tight block mt-2 ${isLightMode ? 'text-red-600' : 'text-red-400'}`}>
+                <span className="font-plex-mono text-3xl sm:text-4xl md:text-5xl font-bold tabular-nums tracking-tight block mt-2 text-destructive">
                   {chunks}
                 </span>
               )
@@ -247,21 +246,21 @@ export function WasteCostCalculator({
         </div>
 
         {/* Potential savings — with progress bar */}
-        <div className={`rounded-xl border px-6 py-5 space-y-4 ${isLightMode ? 'bg-emerald-500/5 border-emerald-500/10' : 'bg-emerald-500/[0.08] border-emerald-500/20'}`}>
-          <p className={`font-outfit text-base ${isLightMode ? 'text-emerald-700' : 'text-emerald-400/80'}`}>
+        <div className="rounded-xl border px-6 py-5 space-y-4 bg-emerald-500/10 border-emerald-500/20">
+          <p className="font-outfit text-base text-emerald-400">
             {t.rich("potential_reduction", {
               val: `~${formatCurrency(animSavings)}$`,
               value: (chunks) => (
-                <span className={`font-plex-mono text-xl md:text-2xl font-black tabular-nums block mt-1 ${isLightMode ? 'text-emerald-600' : 'text-emerald-400'}`}>
+                <span className="font-plex-mono text-xl md:text-2xl font-black tabular-nums block mt-1 text-emerald-500">
                   {chunks}
                 </span>
               )
             })}
           </p>
           {/* Savings bar */}
-          <div className={`h-2 rounded-full overflow-hidden ${isLightMode ? 'bg-emerald-500/10' : 'bg-emerald-500/10'}`}>
+          <div className="h-2 rounded-full overflow-hidden bg-emerald-500/20">
             <div
-              className={`h-full rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_rgba(16,185,129,0.5)] ${isLightMode ? 'bg-emerald-500' : 'bg-emerald-400'}`}
+              className="h-full rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_rgba(16,185,129,0.5)] bg-emerald-500"
               style={{ width: `${savingsBarPercent}%` }}
             />
           </div>

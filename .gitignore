@@ -51,6 +51,14 @@ next-env.d.ts
 # test/debug scripts with potential secrets
 scripts/test_*.js
 
+# secrets and credentials (belt + suspenders)
+*.key
+*.secret
+credentials.json
+service-account*.json
+*_secret*
+token.json
+
 # caches
 .mypy_cache/
 *.log

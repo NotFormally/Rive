@@ -1,0 +1,51 @@
+# Gitleaks configuration for RiveHub
+# https://github.com/gitleaks/gitleaks
+
+title = "RiveHub Secret Scanning"
+
+# ─── Custom rules for our stack ──────────────────────────────────────────────
+
+[[rules]]
+  id = "supabase-service-role"
+  description = "Supabase Service Role Key (JWT with service_role)"
+  regex = '''eyJ[a-zA-Z0-9_-]{20,}\.eyJ[a-zA-Z0-9_-]{20,}\.[a-zA-Z0-9_-]{20,}'''
+  keywords = ["supabase", "service_role", "supabaseKey", "SERVICE_ROLE"]
+
+[[rules]]
+  id = "telegram-bot-token"
+  description = "Telegram Bot Token"
+  regex = '''[0-9]{8,10}:[A-Za-z0-9_-]{35,}'''
+  keywords = ["bot_token", "telegram", "BOT_TOKEN"]
+
+[[rules]]
+  id = "anthropic-api-key"
+  description = "Anthropic API Key"
+  regex = '''sk-ant-api[a-zA-Z0-9_-]{20,}'''
+  keywords = ["anthropic", "ANTHROPIC_API_KEY", "claude"]
+
+[[rules]]
+  id = "stripe-secret-key"
+  description = "Stripe Secret Key"
+  regex = '''sk_live_[a-zA-Z0-9]{20,}'''
+  keywords = ["stripe", "STRIPE_SECRET"]
+
+[[rules]]
+  id = "stripe-webhook-secret"
+  description = "Stripe Webhook Secret"
+  regex = '''whsec_[a-zA-Z0-9]{20,}'''
+  keywords = ["stripe", "webhook"]
+
+[[rules]]
+  id = "generic-high-entropy-assignment"
+  description = "High-entropy string assigned to key/token/secret variable"
+  regex = '''(?i)(key|token|secret|password|credential)\s*[=:]\s*['"][a-zA-Z0-9/+_-]{32,}['"]'''
+
+# ─── Allowlist ────────────────────────────────────────────────────────────────
+
+[allowlist]
+  description = "Known safe patterns"
+  paths = [
+    '''\.env\.example$''',
+    '''docs/integrations/resy-setup-guide\.md''',
+    '''node_modules/''',
+  ]

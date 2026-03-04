@@ -30,11 +30,6 @@ export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "
       return;
     }
 
-    if (!profile) {
-      alert(tCommon('error_unknown'));
-      return;
-    }
-
     try {
       setLoading(true);
       const res = await fetch('/api/stripe/checkout', {
@@ -44,7 +39,8 @@ export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "
         },
         body: JSON.stringify({
           priceId: priceId,
-          restaurantId: profile.id
+          restaurantId: profile?.id || null,
+          userId: user.id
         })
       });
       const data = await res.json();

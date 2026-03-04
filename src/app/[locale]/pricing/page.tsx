@@ -25,7 +25,7 @@ function EssencePattern() {
   return (
     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 380 380" fill="none" preserveAspectRatio="xMidYMid slice">
       {dots.map((d, i) => (
-        <circle key={i} cx={d.cx} cy={d.cy} r={d.r} fill="#A8C5A0" opacity={d.opacity} />
+        <circle key={i} cx={d.cx} cy={d.cy} r={d.r} fill="rgba(255, 255, 255, 0.15)" opacity={d.opacity} />
       ))}
     </svg>
   );
@@ -51,10 +51,10 @@ function PerformancePattern() {
   return (
     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" fill="none" preserveAspectRatio="xMidYMid slice">
       {lines.map((l, i) => (
-        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#CC5833" strokeWidth="0.5" opacity={l.opacity} />
+        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="rgba(0, 229, 255, 0.4)" strokeWidth="0.5" opacity={l.opacity} />
       ))}
       {crosses.map((c, i) => (
-        <circle key={`c${i}`} cx={c.cx} cy={c.cy} r="2" fill="#CC5833" opacity={c.opacity} />
+        <circle key={`c${i}`} cx={c.cx} cy={c.cy} r="2" fill="rgba(0, 229, 255, 0.7)" opacity={c.opacity} />
       ))}
     </svg>
   );
@@ -92,10 +92,10 @@ function IntelligencePattern() {
   return (
     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400" fill="none" preserveAspectRatio="xMidYMid slice">
       {edges.map((e, i) => (
-        <line key={i} x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} stroke="#F2F0E9" strokeWidth="0.5" opacity={e.opacity} />
+        <line key={i} x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} stroke="rgba(255, 0, 122, 0.3)" strokeWidth="0.5" opacity={e.opacity} />
       ))}
       {nodes.map((n, i) => (
-        <circle key={`n${i}`} cx={n.x} cy={n.y} r={n.r} fill="#F2F0E9" opacity={0.15} />
+        <circle key={`n${i}`} cx={n.x} cy={n.y} r={n.r} fill="rgba(255, 0, 122, 0.2)" opacity={0.15} />
       ))}
     </svg>
   );
@@ -126,12 +126,12 @@ export default function PricingPage() {
         t('feature_logbook'),
         t('feature_i18n'),
       ],
-      color: "bg-[#2E4036]",
-      textColor: "text-[#F2F0E9]",
-      borderColor: "border-[#2E4036]",
-      ctaColor: "bg-[#F2F0E9] text-[#2E4036] hover:bg-white",
-      iconColor: "text-[#A8C5A0]",
-      featured: true,
+      color: "bg-card backdrop-blur-md",
+      textColor: "text-foreground",
+      borderColor: "border-white/10 hover:border-white/30 shadow-[0_0_30px_rgba(255,255,255,0.03)] hover:shadow-[0_0_30px_rgba(255,255,255,0.08)]",
+      ctaColor: "bg-foreground text-background hover:bg-foreground/90",
+      iconColor: "text-white/60",
+      featured: false,
       pattern: "essence" as const,
     },
     {
@@ -146,11 +146,11 @@ export default function PricingPage() {
         t('feature_insta'),
         t('feature_ocr'),
       ],
-      color: "bg-white",
-      textColor: "text-[#1A1A1A]",
-      borderColor: "border-[#CC5833]/20",
-      ctaColor: "bg-[#CC5833] text-white hover:bg-[#b84d2d]",
-      iconColor: "text-[#CC5833]",
+      color: "bg-card backdrop-blur-md",
+      textColor: "text-foreground",
+      borderColor: "border-primary/50 shadow-[0_0_30px_rgba(0,229,255,0.15)]",
+      ctaColor: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_15px_rgba(0,229,255,0.4)]",
+      iconColor: "text-primary",
       featured: false,
       pattern: "performance" as const,
     },
@@ -165,11 +165,11 @@ export default function PricingPage() {
         t('feature_preplists'),
         t('feature_support'),
       ],
-      color: "bg-[#0F0F0F]",
-      textColor: "text-[#F2F0E9]",
-      borderColor: "border-[#F2F0E9]/10",
-      ctaColor: "bg-[#F2F0E9] text-[#0F0F0F] hover:bg-white",
-      iconColor: "text-[#F2F0E9]/50",
+      color: "bg-card/40 backdrop-blur-md",
+      textColor: "text-foreground",
+      borderColor: "border-accent/30 hover:border-accent/50 shadow-[0_0_30px_rgba(255,0,122,0.05)] hover:shadow-[0_0_30px_rgba(255,0,122,0.15)]",
+      ctaColor: "bg-foreground text-background hover:bg-foreground/90",
+      iconColor: "text-foreground/50",
       featured: false,
       pattern: "intelligence" as const,
     },
@@ -182,15 +182,15 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F2F0E9] noise-bg">
+    <div className="min-h-screen bg-background noise-bg text-foreground">
       {/* Minimal Navbar */}
       <nav className="flex items-center justify-between px-8 md:px-24 py-6 max-w-screen-xl mx-auto">
-        <Link href="/" className="font-outfit font-semibold text-xl text-[#1A1A1A] tracking-[0.3em] uppercase">
+        <Link href="/" className="font-outfit font-semibold text-xl text-foreground tracking-[0.3em] uppercase">
           RIVE
         </Link>
         <Link
           href="/login"
-          className="text-sm font-medium text-[#2E4036] hover:-translate-y-[1px] transition-transform"
+          className="text-sm font-medium text-foreground/80 hover:text-foreground hover:-translate-y-[1px] transition-all"
         >
           {t('nav_login')}
         </Link>
@@ -198,14 +198,14 @@ export default function PricingPage() {
 
       {/* Header */}
       <div className="text-center pt-16 pb-8 px-8">
-        <h1 className="font-jakarta font-bold text-5xl md:text-6xl text-[#1A1A1A] tracking-tight mb-6">
+        <h1 className="font-jakarta font-bold text-5xl md:text-6xl text-foreground tracking-tight mb-6">
           {t('title')}
         </h1>
-        <p className="font-outfit text-xl text-slate-500 max-w-xl mx-auto mb-6">
+        <p className="font-outfit text-xl text-muted-foreground max-w-xl mx-auto mb-6">
           {t('subtitle')}
         </p>
-        <div className="inline-flex items-center gap-2 bg-[#2E4036] text-[#F2F0E9] font-outfit text-sm font-medium px-5 py-2 rounded-full">
-          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+        <div className="inline-flex items-center gap-2 bg-card border border-border/50 text-foreground font-outfit text-sm font-medium px-5 py-2 rounded-full">
+          <span className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
           {t('badge_free')}
         </div>
       </div>
@@ -213,10 +213,10 @@ export default function PricingPage() {
       {/* Waste Cost Calculator Section */}
       <div className="max-w-screen-xl mx-auto px-8 md:px-24 pb-16 pt-8">
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-jakarta font-bold text-2xl md:text-3xl text-[#1A1A1A] text-center mb-3">
+          <h2 className="font-jakarta font-bold text-2xl md:text-3xl text-foreground text-center mb-3">
             {t('waste_calculator_title')}
           </h2>
-          <p className="font-outfit text-sm text-slate-500 text-center mb-8">
+          <p className="font-outfit text-sm text-muted-foreground text-center mb-8">
             {t('waste_calculator_subtitle')}
           </p>
           <WasteCostCalculator variant="pricing" />
@@ -235,13 +235,6 @@ export default function PricingPage() {
               <div className="pointer-events-none absolute inset-0 z-0">
                 {patternComponents[tier.pattern]}
               </div>
-
-              {/* Featured badge */}
-              {tier.featured && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 border border-[#A8C5A0]/30 bg-[#2E4036] text-[#F2F0E9] font-plex-mono text-[10px] font-medium uppercase tracking-[0.2em] px-4 py-1.5 rounded-full whitespace-nowrap shadow-lg">
-                  {t('pricing_popular')}
-                </div>
-              )}
 
               {/* Name + Price */}
               <div className="mb-8 pt-4 relative z-10">
@@ -300,18 +293,18 @@ export default function PricingPage() {
 
         {/* Customized / Groups Tier */}
         <div className="mt-20 w-full max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl p-8 md:p-12 border border-black/10 relative flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="bg-card backdrop-blur-md rounded-2xl p-8 md:p-12 border border-border/50 relative flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
             <div className="flex-1 text-center md:text-left">
-              <h2 className="font-jakarta font-bold text-3xl mb-3 text-[#1A1A1A]">
+              <h2 className="font-jakarta font-bold text-3xl mb-3 text-foreground">
                 {t('enterprise_custom_title')}
               </h2>
-              <p className="font-outfit text-slate-500 text-lg">
+              <p className="font-outfit text-muted-foreground text-lg">
                 {t('enterprise_custom_desc')}
               </p>
             </div>
             <a
               href="mailto:dock@rivehub.com"
-              className="px-8 py-4 bg-[#1A1A1A] text-[#F2F0E9] font-outfit font-medium rounded-full hover:bg-[#333] transition-colors whitespace-nowrap flex-shrink-0"
+              className="px-8 py-4 bg-foreground text-background font-outfit font-medium rounded-full hover:bg-foreground/90 transition-colors whitespace-nowrap flex-shrink-0"
             >
               {t('enterprise_custom_cta')}
             </a>
@@ -320,14 +313,14 @@ export default function PricingPage() {
 
         {/* Trust Elements */}
         <div className="mt-24 text-center">
-          <p className="font-plex-mono text-xs text-slate-400 uppercase tracking-widest mb-4">
+          <p className="font-plex-mono text-xs text-muted-foreground uppercase tracking-widest mb-4">
             {t('powered_by')}
           </p>
-          <div className="flex items-center justify-center gap-8 text-slate-400 font-outfit text-sm">
+          <div className="flex items-center justify-center gap-8 text-muted-foreground font-outfit text-sm">
             <span>Anthropic AI</span>
-            <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+            <span className="w-1 h-1 bg-muted-foreground/30 rounded-full"></span>
             <span>Supabase</span>
-            <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+            <span className="w-1 h-1 bg-muted-foreground/30 rounded-full"></span>
             <span>Next.js</span>
           </div>
         </div>

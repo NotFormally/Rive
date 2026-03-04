@@ -18,6 +18,17 @@ function Li({ children }: { children: string }) {
   return <li dangerouslySetInnerHTML={{ __html: md(children) }} />;
 }
 
+/** Definition list item: bold term + description */
+function Def({ term, def }: { term: string; def: string }) {
+  return (
+    <li>
+      <span dangerouslySetInnerHTML={{ __html: md(term) }} className="font-semibold text-slate-800" />
+      {" — "}
+      <span dangerouslySetInnerHTML={{ __html: md(def) }} />
+    </li>
+  );
+}
+
 // Reusable style constants
 const h2 = "text-xl font-semibold text-slate-800 mt-8 mb-4 border-b pb-2";
 const h3 = "text-lg font-medium text-slate-800 mt-6 mb-3";
@@ -48,7 +59,7 @@ export default function CGUPage() {
         <div className="prose prose-slate prose-blue max-w-none">
 
           {/* ============================================================= */}
-          {/* 1. Purpose of the Service                                     */}
+          {/* 1. Objet du Service                                           */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s1_title")}</h2>
           <P className={p}>{t("s1_p1")}</P>
@@ -66,58 +77,36 @@ export default function CGUPage() {
             <Li>{t("s1_l10")}</Li>
             <Li>{t("s1_l11")}</Li>
             <Li>{t("s1_l12")}</Li>
+            <Li>{t("s1_l13")}</Li>
           </ul>
           <P className={pLast}>{t("s1_p3")}</P>
 
           {/* ============================================================= */}
-          {/* 2. Access and Registration                                    */}
+          {/* 2. Définitions                                                */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s2_title")}</h2>
           <P className={p}>{t("s2_p1")}</P>
-          <P className={p}>{t("s2_p2")}</P>
-          <P className={p}>{t("s2_p3")}</P>
-          <P className={p}>{t("s2_p4")}</P>
-
-          <h3 className={h3}>{t("s2_s1_title")}</h3>
-          <P className={p}>{t("s2_s1_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s2_s1_l1")}</Li>
-            <Li>{t("s2_s1_l2")}</Li>
-            <Li>{t("s2_s1_l3")}</Li>
-            <Li>{t("s2_s1_l4")}</Li>
-            <Li>{t("s2_s1_l5")}</Li>
-            <Li>{t("s2_s1_l6")}</Li>
-            <Li>{t("s2_s1_l7")}</Li>
+          <ul className={`${ul} space-y-3`}>
+            <Def term={t("s2_d1_term")} def={t("s2_d1_def")} />
+            <Def term={t("s2_d2_term")} def={t("s2_d2_def")} />
+            <Def term={t("s2_d3_term")} def={t("s2_d3_def")} />
+            <Def term={t("s2_d4_term")} def={t("s2_d4_def")} />
+            <Def term={t("s2_d5_term")} def={t("s2_d5_def")} />
+            <Def term={t("s2_d6_term")} def={t("s2_d6_def")} />
+            <Def term={t("s2_d7_term")} def={t("s2_d7_def")} />
+            <Def term={t("s2_d8_term")} def={t("s2_d8_def")} />
           </ul>
 
           {/* ============================================================= */}
-          {/* 3. AI and Liability                                           */}
+          {/* 3. Accès, Inscription et Gestion d'Équipe                     */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s3_title")}</h2>
 
           <h3 className={h3}>{t("s3_s1_title")}</h3>
-          <P className={p}>{t("s3_s1_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s3_l1")}</Li>
-            <Li>{t("s3_l2")}</Li>
-            <Li>{t("s3_l3")}</Li>
-            <Li>{t("s3_l4")}</Li>
-            <Li>{t("s3_l5")}</Li>
-            <Li>{t("s3_l6")}</Li>
-            <Li>{t("s3_l7")}</Li>
-            <Li>{t("s3_l8")}</Li>
-            <Li>{t("s3_l9")}</Li>
-          </ul>
+          <P className={pLast}>{t("s3_s1_p1")}</P>
 
           <h3 className={h3}>{t("s3_s2_title")}</h3>
-          <P className="mb-4 text-slate-900 font-medium leading-relaxed">{t("s3_s2_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s3_s2_l1")}</Li>
-            <Li>{t("s3_s2_l2")}</Li>
-            <Li>{t("s3_s2_l3")}</Li>
-            <Li>{t("s3_s2_l4")}</Li>
-            <Li>{t("s3_s2_l5")}</Li>
-          </ul>
+          <P className={pLast}>{t("s3_s2_p1")}</P>
 
           <h3 className={h3}>{t("s3_s3_title")}</h3>
           <P className={p}>{t("s3_s3_p1")}</P>
@@ -125,131 +114,113 @@ export default function CGUPage() {
             <Li>{t("s3_s3_l1")}</Li>
             <Li>{t("s3_s3_l2")}</Li>
             <Li>{t("s3_s3_l3")}</Li>
-            <Li>{t("s3_s3_l4")}</Li>
           </ul>
+          <P className={pLast}>{t("s3_s3_p2")}</P>
 
           <h3 className={h3}>{t("s3_s4_title")}</h3>
           <P className={pLast}>{t("s3_s4_p1")}</P>
 
-          <h3 className={h3}>{t("s3_s5_title")}</h3>
-          <P className={pLast}>{t("s3_s5_p1")}</P>
-
-          <h3 className={h3}>{t("s3_s6_title")}</h3>
-          <P className={p}>{t("s3_s6_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s3_s6_l1")}</Li>
-            <Li>{t("s3_s6_l2")}</Li>
-            <Li>{t("s3_s6_l3")}</Li>
-            <Li>{t("s3_s6_l4")}</Li>
-            <Li>{t("s3_s6_l5")}</Li>
-          </ul>
-
-          <h3 className={h3}>{t("s3_s7_title")}</h3>
-          <P className={pLast}>{t("s3_s7_p1")}</P>
-
           {/* ============================================================= */}
-          {/* 4. Data Protection and Privacy                                */}
+          {/* 4. Intégrations Tierces                                       */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s4_title")}</h2>
+          <P className={p}>{t("s4_p1")}</P>
 
           <h3 className={h3}>{t("s4_s1_title")}</h3>
-          <P className={pLast}>{t("s4_s1_p1")}</P>
+          <P className={p}>{t("s4_s1_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s4_s1_l1")}</Li>
+            <Li>{t("s4_s1_l2")}</Li>
+            <Li>{t("s4_s1_l3")}</Li>
+            <Li>{t("s4_s1_l4")}</Li>
+            <Li>{t("s4_s1_l5")}</Li>
+            <Li>{t("s4_s1_l6")}</Li>
+            <Li>{t("s4_s1_l7")}</Li>
+          </ul>
+          <P className={pLast}>{t("s4_s1_p2")}</P>
 
           <h3 className={h3}>{t("s4_s2_title")}</h3>
-          <P className={pLast}>{t("s4_s2_p1")}</P>
+          <P className={p}>{t("s4_s2_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s4_s2_l1")}</Li>
+            <Li>{t("s4_s2_l2")}</Li>
+            <Li>{t("s4_s2_l3")}</Li>
+          </ul>
+          <P className={pLast}>{t("s4_s2_p2")}</P>
 
           <h3 className={h3}>{t("s4_s3_title")}</h3>
-          <P className={pLast}>{t("s4_s3_p1")}</P>
+          <P className={p}>{t("s4_s3_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s4_s3_l1")}</Li>
+            <Li>{t("s4_s3_l2")}</Li>
+          </ul>
+          <P className={pLast}>{t("s4_s3_p2")}</P>
 
           <h3 className={h3}>{t("s4_s4_title")}</h3>
           <P className={pLast}>{t("s4_s4_p1")}</P>
 
-          <h3 className={h3}>{t("s4_s5_title")}</h3>
-          <P className={p}>{t("s4_s5_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s4_s5_l1")}</Li>
-            <Li>{t("s4_s5_l2")}</Li>
-            <Li>{t("s4_s5_l3")}</Li>
-            <Li>{t("s4_s5_l4")}</Li>
-            <Li>{t("s4_s5_l5")}</Li>
-            <Li>{t("s4_s5_l6")}</Li>
-            <Li>{t("s4_s5_l7")}</Li>
-          </ul>
-          <P className={pLast}>{t("s4_s5_p2")}</P>
-
-          <h3 className={h3}>{t("s4_s6_title")}</h3>
-          <P className={p}>{t("s4_s6_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s4_s6_l1")}</Li>
-            <Li>{t("s4_s6_l2")}</Li>
-            <Li>{t("s4_s6_l3")}</Li>
-            <Li>{t("s4_s6_l4")}</Li>
-            <Li>{t("s4_s6_l5")}</Li>
-            <Li>{t("s4_s6_l6")}</Li>
-          </ul>
-          <P className={pLast}>{t("s4_s6_p2")}</P>
-
-          <h3 className={h3}>{t("s4_s7_title")}</h3>
-          <P className={pLast}>{t("s4_s7_p1")}</P>
-
-          <h3 className={h3}>{t("s4_s8_title")}</h3>
-          <P className={p}>{t("s4_s8_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s4_s8_l1")}</Li>
-            <Li>{t("s4_s8_l2")}</Li>
-            <Li>{t("s4_s8_l3")}</Li>
-            <Li>{t("s4_s8_l4")}</Li>
-          </ul>
-
-          <h3 className={h3}>{t("s4_s9_title")}</h3>
-          <P className={pLast}>{t("s4_s9_p1")}</P>
-
           {/* ============================================================= */}
-          {/* 5. Limitation of Liability                                    */}
+          {/* 5. Intelligence Artificielle et Responsabilité                */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s5_title")}</h2>
 
           <h3 className={h3}>{t("s5_s1_title")}</h3>
-          <P className={pLast}>{t("s5_s1_p1")}</P>
+          <P className={p}>{t("s5_s1_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s5_s1_l1")}</Li>
+            <Li>{t("s5_s1_l2")}</Li>
+            <Li>{t("s5_s1_l3")}</Li>
+            <Li>{t("s5_s1_l4")}</Li>
+            <Li>{t("s5_s1_l5")}</Li>
+            <Li>{t("s5_s1_l6")}</Li>
+            <Li>{t("s5_s1_l7")}</Li>
+            <Li>{t("s5_s1_l8")}</Li>
+            <Li>{t("s5_s1_l9")}</Li>
+          </ul>
 
           <h3 className={h3}>{t("s5_s2_title")}</h3>
-          <P className={p}>{t("s5_s2_p1")}</P>
+          <P className="mb-4 text-slate-900 font-medium leading-relaxed">{t("s5_s2_p1")}</P>
           <ul className={ul}>
             <Li>{t("s5_s2_l1")}</Li>
             <Li>{t("s5_s2_l2")}</Li>
             <Li>{t("s5_s2_l3")}</Li>
             <Li>{t("s5_s2_l4")}</Li>
             <Li>{t("s5_s2_l5")}</Li>
-            <Li>{t("s5_s2_l6")}</Li>
           </ul>
 
           <h3 className={h3}>{t("s5_s3_title")}</h3>
-          <P className={pLast}>{t("s5_s3_p1")}</P>
+          <P className={p}>{t("s5_s3_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s5_s3_l1")}</Li>
+            <Li>{t("s5_s3_l2")}</Li>
+            <Li>{t("s5_s3_l3")}</Li>
+            <Li>{t("s5_s3_l4")}</Li>
+          </ul>
 
           <h3 className={h3}>{t("s5_s4_title")}</h3>
-          <P className={p}>{t("s5_s4_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s5_s4_l1")}</Li>
-            <Li>{t("s5_s4_l2")}</Li>
-            <Li>{t("s5_s4_l3")}</Li>
-            <Li>{t("s5_s4_l4")}</Li>
-            <Li>{t("s5_s4_l5")}</Li>
-          </ul>
+          <P className={pLast}>{t("s5_s4_p1")}</P>
 
           <h3 className={h3}>{t("s5_s5_title")}</h3>
           <P className={pLast}>{t("s5_s5_p1")}</P>
 
           <h3 className={h3}>{t("s5_s6_title")}</h3>
-          <P className={p}>{t("s5_s6_p1")}</P>
+          <P className={pLast}>{t("s5_s6_p1")}</P>
+
+          <h3 className={h3}>{t("s5_s7_title")}</h3>
+          <P className={p}>{t("s5_s7_p1")}</P>
           <ul className={ul}>
-            <Li>{t("s5_s6_l1")}</Li>
-            <Li>{t("s5_s6_l2")}</Li>
-            <Li>{t("s5_s6_l3")}</Li>
-            <Li>{t("s5_s6_l4")}</Li>
+            <Li>{t("s5_s7_l1")}</Li>
+            <Li>{t("s5_s7_l2")}</Li>
+            <Li>{t("s5_s7_l3")}</Li>
+            <Li>{t("s5_s7_l4")}</Li>
           </ul>
+          <P className={pLast}>{t("s5_s7_p2")}</P>
+
+          <h3 className={h3}>{t("s5_s8_title")}</h3>
+          <P className={pLast}>{t("s5_s8_p1")}</P>
 
           {/* ============================================================= */}
-          {/* 6. Intellectual Property                                      */}
+          {/* 6. Protection des Données et Vie Privée                       */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s6_title")}</h2>
 
@@ -257,73 +228,148 @@ export default function CGUPage() {
           <P className={pLast}>{t("s6_s1_p1")}</P>
 
           <h3 className={h3}>{t("s6_s2_title")}</h3>
-          <P className={pLast}>{t("s6_s2_p1")}</P>
+          <P className={p}>{t("s6_s2_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s6_s2_l1")}</Li>
+            <Li>{t("s6_s2_l2")}</Li>
+            <Li>{t("s6_s2_l3")}</Li>
+            <Li>{t("s6_s2_l4")}</Li>
+            <Li>{t("s6_s2_l5")}</Li>
+            <Li>{t("s6_s2_l6")}</Li>
+            <Li>{t("s6_s2_l7")}</Li>
+            <Li>{t("s6_s2_l8")}</Li>
+            <Li>{t("s6_s2_l9")}</Li>
+          </ul>
 
           <h3 className={h3}>{t("s6_s3_title")}</h3>
-          <P className={p}>{t("s6_s3_p1")}</P>
-          <ul className={ul}>
-            <Li>{t("s6_s3_l1")}</Li>
-            <Li>{t("s6_s3_l2")}</Li>
-          </ul>
+          <P className={pLast}>{t("s6_s3_p1")}</P>
 
           <h3 className={h3}>{t("s6_s4_title")}</h3>
           <P className={pLast}>{t("s6_s4_p1")}</P>
 
           <h3 className={h3}>{t("s6_s5_title")}</h3>
-          <P className={p}>{t("s6_s5_p1")}</P>
+          <P className={pLast}>{t("s6_s5_p1")}</P>
+
+          <h3 className={h3}>{t("s6_s6_title")}</h3>
+          <P className={p}>{t("s6_s6_p1")}</P>
           <ul className={ul}>
-            <Li>{t("s6_s5_l1")}</Li>
-            <Li>{t("s6_s5_l2")}</Li>
-            <Li>{t("s6_s5_l3")}</Li>
-            <Li>{t("s6_s5_l4")}</Li>
+            <Li>{t("s6_s6_l1")}</Li>
+            <Li>{t("s6_s6_l2")}</Li>
+            <Li>{t("s6_s6_l3")}</Li>
+            <Li>{t("s6_s6_l4")}</Li>
+            <Li>{t("s6_s6_l5")}</Li>
+            <Li>{t("s6_s6_l6")}</Li>
           </ul>
+          <P className={pLast}>{t("s6_s6_p2")}</P>
+
+          <h3 className={h3}>{t("s6_s7_title")}</h3>
+          <P className={pLast}>{t("s6_s7_p1")}</P>
+
+          <h3 className={h3}>{t("s6_s8_title")}</h3>
+          <P className={pLast}>{t("s6_s8_p1")}</P>
 
           {/* ============================================================= */}
-          {/* 7. Termination                                                */}
+          {/* 7. Propriété Intellectuelle                                   */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s7_title")}</h2>
-          <P className={p}>{t("s7_p1")}</P>
-          <P className={p}>{t("s7_p2")}</P>
-          <P className={p}>{t("s7_p3")}</P>
 
           <h3 className={h3}>{t("s7_s1_title")}</h3>
-          <P className={p}>{t("s7_s1_p1")}</P>
-          <P className={pLast}>{t("s7_s1_p2")}</P>
+          <P className={pLast}>{t("s7_s1_p1")}</P>
+
+          <h3 className={h3}>{t("s7_s2_title")}</h3>
+          <P className={pLast}>{t("s7_s2_p1")}</P>
+
+          <h3 className={h3}>{t("s7_s3_title")}</h3>
+          <P className={pLast}>{t("s7_s3_p1")}</P>
 
           {/* ============================================================= */}
-          {/* 8. Modifications to these Terms                               */}
+          {/* 8. Abonnement, Facturation et Niveaux de Service              */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s8_title")}</h2>
-          <P className={p}>{t("s8_p1")}</P>
-          <P className={p}>{t("s8_p2")}</P>
-          <P className={p}>{t("s8_p3")}</P>
-          <P className={p}>{t("s8_p4")}</P>
-          <P className={pLast}>{t("s8_p5")}</P>
+
+          <h3 className={h3}>{t("s8_s1_title")}</h3>
+          <P className={p}>{t("s8_s1_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s8_s1_l1")}</Li>
+            <Li>{t("s8_s1_l2")}</Li>
+            <Li>{t("s8_s1_l3")}</Li>
+            <Li>{t("s8_s1_l4")}</Li>
+            <Li>{t("s8_s1_l5")}</Li>
+          </ul>
+          <P className={pLast}>{t("s8_s1_p2")}</P>
+
+          <h3 className={h3}>{t("s8_s2_title")}</h3>
+          <P className={pLast}>{t("s8_s2_p1")}</P>
+
+          <h3 className={h3}>{t("s8_s3_title")}</h3>
+          <P className={pLast}>{t("s8_s3_p1")}</P>
+
+          <h3 className={h3}>{t("s8_s4_title")}</h3>
+          <P className={pLast}>{t("s8_s4_p1")}</P>
 
           {/* ============================================================= */}
-          {/* 9. Governing Law and Disputes                                 */}
+          {/* 9. Limitation de Responsabilité                               */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s9_title")}</h2>
-          <P className={p}>{t("s9_p1")}</P>
-          <P className={p}>{t("s9_p2")}</P>
-          <P className={p}>{t("s9_p3")}</P>
-          <P className={pLast}>{t("s9_p4")}</P>
+
+          <h3 className={h3}>{t("s9_s1_title")}</h3>
+          <P className={pLast}>{t("s9_s1_p1")}</P>
+
+          <h3 className={h3}>{t("s9_s2_title")}</h3>
+          <P className={p}>{t("s9_s2_p1")}</P>
+          <ul className={ul}>
+            <Li>{t("s9_s2_l1")}</Li>
+            <Li>{t("s9_s2_l2")}</Li>
+            <Li>{t("s9_s2_l3")}</Li>
+            <Li>{t("s9_s2_l4")}</Li>
+            <Li>{t("s9_s2_l5")}</Li>
+            <Li>{t("s9_s2_l6")}</Li>
+          </ul>
+
+          <h3 className={h3}>{t("s9_s3_title")}</h3>
+          <P className={pLast}>{t("s9_s3_p1")}</P>
+
+          <h3 className={h3}>{t("s9_s4_title")}</h3>
+          <P className={pLast}>{t("s9_s4_p1")}</P>
 
           {/* ============================================================= */}
-          {/* 10. Subscription and Billing                                  */}
+          {/* 10. Résiliation et Portabilité des Données                    */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s10_title")}</h2>
-          <P className={p}>{t("s10_p1")}</P>
-          <P className={p}>{t("s10_p2")}</P>
-          <P className={p}>{t("s10_p3")}</P>
-          <P className={p}>{t("s10_p4")}</P>
-          <P className={pLast}>{t("s10_p5")}</P>
+
+          <h3 className={h3}>{t("s10_s1_title")}</h3>
+          <P className={pLast}>{t("s10_s1_p1")}</P>
+
+          <h3 className={h3}>{t("s10_s2_title")}</h3>
+          <P className={pLast}>{t("s10_s2_p1")}</P>
+
+          <h3 className={h3}>{t("s10_s3_title")}</h3>
+          <P className={pLast}>{t("s10_s3_p1")}</P>
+
+          <h3 className={h3}>{t("s10_s4_title")}</h3>
+          <P className={pLast}>{t("s10_s4_p1")}</P>
 
           {/* ============================================================= */}
-          {/* 11. Contact                                                   */}
+          {/* 11. Modifications des Conditions                              */}
           {/* ============================================================= */}
           <h2 className={h2}>{t("s11_title")}</h2>
-          <P className={pLast}>{t("contact_p1")}</P>
+          <P className={p}>{t("s11_p1")}</P>
+          <P className={p}>{t("s11_p2")}</P>
+          <P className={pLast}>{t("s11_p3")}</P>
+
+          {/* ============================================================= */}
+          {/* 12. Droit Applicable et Juridiction                           */}
+          {/* ============================================================= */}
+          <h2 className={h2}>{t("s12_title")}</h2>
+          <P className={p}>{t("s12_p1")}</P>
+          <P className={p}>{t("s12_p2")}</P>
+          <P className={pLast}>{t("s12_p3")}</P>
+
+          {/* ============================================================= */}
+          {/* 13. Contact                                                   */}
+          {/* ============================================================= */}
+          <h2 className={h2}>{t("s13_title")}</h2>
+          <P className={pLast}>{t("s13_p1")}</P>
         </div>
 
         <div className="mt-12 pt-8 border-t border-slate-200 text-center">

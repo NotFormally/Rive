@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
+import { useRouter } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import {
   getLevelColor,
@@ -27,6 +28,7 @@ const MILESTONES = [
 export function IntelligenceGauge() {
   const { intelligenceScore, intelligenceLevel } = useAuth();
   const t = useTranslations("Intelligence");
+  const router = useRouter();
 
   // Nothing to render until the score is loaded
   if (intelligenceScore === null || intelligenceLevel === null) {
@@ -39,7 +41,10 @@ export function IntelligenceGauge() {
   const hint = t(`hint_${intelligenceLevel}` as any);
 
   return (
-    <div className="bg-card border-b border-border/50 px-4 sm:px-8 py-2">
+    <div 
+      onClick={() => router.push("/dashboard/my-intelligence")}
+      className="bg-card border-b border-border/50 px-4 sm:px-8 py-2 cursor-pointer hover:bg-muted/30 transition-colors"
+    >
       {/* ---------------------------------------------------------------- */}
       {/* Desktop layout (md+): full bar with label, percentage, and hint */}
       {/* ---------------------------------------------------------------- */}

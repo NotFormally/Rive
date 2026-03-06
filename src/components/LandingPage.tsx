@@ -16,6 +16,7 @@ import { HowItWorks } from "@/components/HowItWorks";
 // import { DemoVideoSection } from "@/components/DemoVideoSection"; // Suspended until real video is ready
 import { BeforeAfterComparison } from "@/components/BeforeAfterComparison";
 import { FAQSection } from "@/components/FAQSection";
+import { NanoBananaPromo } from "@/components/NanoBananaPromo";
 
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
@@ -253,6 +254,8 @@ export function LandingPage() {
 
       {/* HOW IT WORKS — 3 Steps */}
       <HowItWorks />
+
+      <NanoBananaPromo />
 
       {/* DEMO VIDEO — Suspended until real video is ready */}
       {/* <DemoVideoSection /> */}

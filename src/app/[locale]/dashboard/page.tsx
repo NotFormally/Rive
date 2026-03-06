@@ -23,13 +23,14 @@ import {
   Award,
   ArrowRight,
   Zap,
-  Droplets
+  Droplets,
+  HeartPulse
 } from "lucide-react";
 
 export default function DashboardPage() {
   const t = useTranslations("Dashboard");
   const locale = useLocale();
-  const { user, profile, settings, usage, subscription, intelligenceScore, loading: authLoading } = useAuth();
+  const { user, profile, settings, usage, subscription, intelligenceScore, healthScore, healthGrade, loading: authLoading } = useAuth();
   const router = useRouter();
 
   const [stats, setStats] = useState({
@@ -42,6 +43,7 @@ export default function DashboardPage() {
     monthly_water: 126000
   });
   const [loadingStats, setLoadingStats] = useState(true);
+  const [checkedTasks, setCheckedTasks] = useState<string[]>([]);
 
   useEffect(() => {
     if (profile) {
@@ -197,37 +199,98 @@ export default function DashboardPage() {
           </section>
 
           {/* TASK PREP LISTS WIDGET */}
-          <section 
-            onClick={() => router.push("/dashboard/prep-list")}
-            className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 md:p-8 relative transition-all duration-300 cursor-pointer hover:border-primary/40 hover:shadow-[0_8px_40px_rgba(0,229,255,0.15)] group"
+          <section
+            className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 md:p-8 relative transition-all duration-300 hover:border-primary/40 hover:shadow-[0_8px_40px_rgba(0,229,255,0.15)] group"
           >
-            <div className="flex items-center justify-between mb-6">
+            <div
+              onClick={() => router.push("/dashboard/prep-list")}
+              className="flex items-center justify-between mb-6 cursor-pointer"
+            >
               <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground group-hover:text-primary/80 transition-colors">
                 Task Prep Lists
               </h2>
               <span className="text-[12px] opacity-50 group-hover:text-primary transition-colors">▲</span>
             </div>
 
-            <div className="space-y-4 pointer-events-none">
+            <div className="space-y-4">
               {[
                 { id: "1", text: "Prepare smoothie bases", color: "bg-emerald-400", shadow: "shadow-[0_0_10px_rgba(52,211,153,0.5)]" },
                 { id: "2", text: "Restock front-of-house", color: "bg-yellow-400", shadow: "shadow-[0_0_10px_rgba(250,204,21,0.5)]" },
                 { id: "3", text: "Check ambient temps", color: "bg-pink-500", shadow: "shadow-[0_0_10px_rgba(255,0,122,0.5)]" },
                 { id: "4", text: "Add availability tasks", color: "bg-white/20", shadow: "" },
-              ].map((task) => (
-                <label key={task.id} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 cursor-pointer transition-colors group">
-                  <div className="flex items-center gap-4">
-                    <div className="w-5 h-5 rounded-[0.4rem] border border-white/20 flex items-center justify-center group-hover:border-white/40">
-                      {/* empty checkbox */}
+              ].map((task) => {
+                const isChecked = checkedTasks.includes(task.id);
+                return (
+                  <button
+                    key={task.id}
+                    type="button"
+                    onClick={() => setCheckedTasks(prev =>
+                      prev.includes(task.id) ? prev.filter(id => id !== task.id) : [...prev, task.id]
+                    )}
+                    className="w-full flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 active:scale-[0.98] cursor-pointer transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`w-5 h-5 rounded-[0.4rem] border flex items-center justify-center transition-all duration-200 ${
+                        isChecked
+                          ? "bg-emerald-500/20 border-emerald-500/60"
+                          : "border-white/20 hover:border-white/40"
+                      }`}>
+                        {isChecked && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
+                      </div>
+                      <span className={`font-outfit text-sm transition-all duration-200 ${
+                        isChecked ? "text-foreground/40 line-through" : "text-foreground/80"
+                      }`}>{task.text}</span>
                     </div>
-                    <span className="text-foreground/80 font-outfit text-sm">{task.text}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                     <div className={`w-8 h-1.5 rounded-full ${task.color} opacity-80 ${task.shadow}`}></div>
-                     <div className={`w-1.5 h-1.5 rounded-full ${task.color} ${task.shadow}`}></div>
-                  </div>
-                </label>
-              ))}
+                    <div className={`flex items-center gap-2 transition-opacity duration-200 ${isChecked ? "opacity-30" : ""}`}>
+                       <div className={`w-8 h-1.5 rounded-full ${task.color} opacity-80 ${task.shadow}`}></div>
+                       <div className={`w-1.5 h-1.5 rounded-full ${task.color} ${task.shadow}`}></div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* HEALTH SCORE WIDGET */}
+          <section
+            onClick={() => router.push("/dashboard/health-score")}
+            className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 md:p-8 relative transition-all duration-300 cursor-pointer hover:border-primary/40 hover:shadow-[0_8px_40px_rgba(0,229,255,0.15)] group"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground group-hover:text-primary/80 transition-colors flex items-center gap-2">
+                <HeartPulse className="w-4 h-4" />
+                Health Score
+              </h2>
+              <span className="text-[12px] opacity-50 group-hover:text-primary transition-colors">▲</span>
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="flex items-end gap-1">
+                <span className={`text-4xl font-bold ${
+                  healthScore === null ? 'text-muted-foreground' :
+                  (healthScore ?? 0) >= 85 ? 'text-emerald-500' :
+                  (healthScore ?? 0) >= 70 ? 'text-cyan-500' :
+                  (healthScore ?? 0) >= 55 ? 'text-amber-500' :
+                  (healthScore ?? 0) >= 40 ? 'text-orange-500' : 'text-red-500'
+                }`}>
+                  {healthScore ?? '—'}
+                </span>
+                <span className="text-sm text-muted-foreground mb-1">/100</span>
+              </div>
+              {healthGrade && (
+                <div className={`text-2xl font-bold ${
+                  healthGrade === 'A' ? 'text-emerald-500' :
+                  healthGrade === 'B' ? 'text-cyan-500' :
+                  healthGrade === 'C' ? 'text-amber-500' :
+                  healthGrade === 'D' ? 'text-orange-500' : 'text-red-500'
+                }`}>
+                  {healthGrade}
+                </div>
+              )}
+              <div className="flex-1 text-right">
+                <span className="text-xs text-muted-foreground">
+                  {healthScore === null ? 'Not calculated yet' : 'View details →'}
+                </span>
+              </div>
             </div>
           </section>
 

@@ -21,10 +21,15 @@ import {
   Droplets,
   Beer,
   Gauge,
-  ChevronDown,
-  ChevronRight,
   Globe,
-  Sparkles
+  Sparkles,
+  Navigation2,
+  Anchor,
+  Clock,
+  BookOpen,
+  Wrench,
+  Flag,
+  CloudRain
 } from "lucide-react";
 
 export function Sidebar() {
@@ -34,40 +39,47 @@ export function Sidebar() {
   const { profile, settings, signOut } = useAuth();
   
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openSection, setOpenSection] = useState<string | null>("finance");
 
   const handleNavClick = () => setMobileOpen(false);
 
-  // Group I. Le Quotidien (Opérations)
-  const navDaily = [
+  // Zone I. La Passerelle (The Bridge — Command & Overview)
+  const navPasserelle = [
     { name: t("nav_overview"), href: "/dashboard", icon: LayoutDashboard },
-    { name: t("nav_menu"), href: "/dashboard/menu", icon: MenuSquare },
-    { name: t("nav_reservations"), href: "/dashboard/reservations", icon: CalendarDays },
-    { name: t("nav_social"), href: "/dashboard/social", icon: Share2 }
+    { name: t("nav_carte"), href: "/dashboard/carte", icon: Compass },
+    { name: t("nav_pavillon"), href: "/dashboard/pavillon", icon: Flag },
+    { name: t("nav_compas"), href: "/dashboard/compas", icon: Gauge },
+    { name: t("nav_estime"), href: "/dashboard/estime", icon: Sparkles },
   ];
 
-  // Group II. Cuisine & Performance
-  const navFinance = [
-    { name: t("nav_foodcost"), href: "/dashboard/food-cost", icon: Calculator },
-    { name: t("nav_engineering"), href: "/dashboard/engineering", icon: Compass },
-    { name: t("nav_variance"), href: "/dashboard/variance", icon: Droplets }
-  ];
-  
-  const navProduction = [
-    { name: t("nav_smartprep"), href: "/dashboard/prep-list", icon: Brain },
-    { name: t("nav_production"), href: "/dashboard/production", icon: Beer },
-    { name: t("nav_deposits"), href: "/dashboard/deposits", icon: Recycle }
+  // Zone II. La Réserve (The Hold — Inventory & Cost)
+  const navRéserve = [
+    { name: t("nav_foodcost"), href: "/dashboard/reserve", icon: Calculator },
+    { name: t("nav_variance"), href: "/dashboard/reserve/tirant", icon: Droplets },
+    { name: t("nav_deposits"), href: "/dashboard/reserve/lest", icon: Recycle },
+    { name: t("nav_production"), href: "/dashboard/reserve/production", icon: Beer },
   ];
 
-  // Group III. Système
-  const navSystem = [
+  // Zone III. Le Quart (The Watch — Service & Prep)
+  const navQuart = [
+    { name: t("nav_appareillage"), href: "/dashboard/quart/appareillage", icon: Brain },
+    { name: t("nav_mouillage"), href: "/dashboard/quart/mouillage", icon: CalendarDays },
+    { name: t("nav_menu"), href: "/dashboard/carte/editeur", icon: MenuSquare },
+  ];
+
+  // Zone IV. Le Journal de Bord (The Ship's Log — Analytics & Finance)
+  const navJournal = [
+    { name: t("nav_nid"), href: "/dashboard/journal", icon: BookOpen },
+    { name: t("nav_barometre"), href: "/dashboard/journal/barometre", icon: CloudRain },
+  ];
+
+  // Zone V. Le Radoub (Dry Dock — Settings & Config)
+  const navRadoub = [
+    { name: t("nav_greement"), href: "/dashboard/radoub", icon: Settings },
     { name: t("nav_multilingual_team") || "Équipe Multilingue", href: "/dashboard/multilingual", icon: Globe },
-    { name: t("nav_my_intelligence"), href: "/dashboard/my-intelligence", icon: Gauge },
-    { name: t("nav_settings"), href: "/dashboard/settings", icon: Settings }
   ];
 
-  const renderNavGroup = (items: typeof navDaily) => items.map((item) => {
-    const isActive = pathname === item.href;
+  const renderNavGroup = (items: typeof navPasserelle) => items.map((item) => {
+    const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href + "/"));
     return (
       <Link
         key={item.href}
@@ -115,79 +127,63 @@ export function Sidebar() {
         </p>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 space-y-6 pb-6 custom-scrollbar-hidden">
-        
-        {/* I. Le Quotidien */}
+      <div className="flex-1 overflow-y-auto px-4 space-y-5 pb-6 custom-scrollbar-hidden">
+
+        {/* I. La Passerelle */}
         <section>
-          <div className="px-4 mb-2">
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Quotidien</span>
+          <div className="px-4 mb-2 flex items-center gap-2">
+            <Navigation2 className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Passerelle</span>
           </div>
           <nav className="space-y-1">
-            {renderNavGroup(navDaily)}
+            {renderNavGroup(navPasserelle)}
           </nav>
         </section>
 
-        {/* II. L'Arrière-Boutique */}
+        {/* II. La Réserve */}
         <section>
-          <div className="px-4 mb-2">
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">L'Arrière-Boutique</span>
-          </div>
-          <div className="space-y-2">
-            
-            {/* Accordion Finance */}
-            <div>
-              <button 
-                onClick={() => setOpenSection(openSection === "finance" ? null : "finance")}
-                className="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-[--sidebar-foreground] opacity-90 hover:opacity-100 hover:bg-[--sidebar-accent] transition-all duration-300 text-sm font-outfit"
-              >
-                <div className="flex items-center gap-3">
-                  <Calculator className="w-4 h-4 opacity-80" />
-                  <span>Intelligence Financière</span>
-                </div>
-                {openSection === "finance" ? <ChevronDown className="w-4 h-4 opacity-50" /> : <ChevronRight className="w-4 h-4 opacity-50" />}
-              </button>
-              {openSection === "finance" && (
-                <div className="mt-1 ml-4 pl-4 border-l border-[--sidebar-border] space-y-1">
-                  {renderNavGroup([
-                    ...navFinance,
-                    { name: "Le Nid", href: "/dashboard/accounting", icon: Calculator }
-                  ])}
-                </div>
-              )}
-            </div>
-
-            {/* Accordion Production */}
-            <div>
-              <button 
-                onClick={() => setOpenSection(openSection === "production" ? null : "production")}
-                className="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-[--sidebar-foreground] opacity-90 hover:opacity-100 hover:bg-[--sidebar-accent] transition-all duration-300 text-sm font-outfit"
-              >
-                <div className="flex items-center gap-3">
-                  <Brain className="w-4 h-4 opacity-80" />
-                  <span>Production & Suivi</span>
-                </div>
-                {openSection === "production" ? <ChevronDown className="w-4 h-4 opacity-50" /> : <ChevronRight className="w-4 h-4 opacity-50" />}
-              </button>
-              {openSection === "production" && (
-                <div className="mt-1 ml-4 pl-4 border-l border-[--sidebar-border] space-y-1">
-                  {renderNavGroup(navProduction)}
-                </div>
-              )}
-            </div>
-
-          </div>
-        </section>
-
-        {/* III. Système */}
-        <section>
-          <div className="px-4 mb-2">
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Système</span>
+          <div className="px-4 mb-2 flex items-center gap-2">
+            <Anchor className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Réserve</span>
           </div>
           <nav className="space-y-1">
-            {renderNavGroup(navSystem)}
+            {renderNavGroup(navRéserve)}
           </nav>
         </section>
-        
+
+        {/* III. Le Quart */}
+        <section>
+          <div className="px-4 mb-2 flex items-center gap-2">
+            <Clock className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Quart</span>
+          </div>
+          <nav className="space-y-1">
+            {renderNavGroup(navQuart)}
+          </nav>
+        </section>
+
+        {/* IV. Le Journal de Bord */}
+        <section>
+          <div className="px-4 mb-2 flex items-center gap-2">
+            <BookOpen className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Journal de Bord</span>
+          </div>
+          <nav className="space-y-1">
+            {renderNavGroup(navJournal)}
+          </nav>
+        </section>
+
+        {/* V. Le Radoub */}
+        <section>
+          <div className="px-4 mb-2 flex items-center gap-2">
+            <Wrench className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Radoub</span>
+          </div>
+          <nav className="space-y-1">
+            {renderNavGroup(navRadoub)}
+          </nav>
+        </section>
+
       </div>
 
       <div className="p-4 border-t border-[--sidebar-border] shrink-0 flex flex-col gap-2">

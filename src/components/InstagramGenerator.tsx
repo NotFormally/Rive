@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
-import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
+import { hasReachedQuota, TIER_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
 
 type InstagramPost = {
@@ -57,8 +57,9 @@ export function InstagramGenerator({
   const tCommon = useTranslations('Common');
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
-  const isfree = subscription?.tier === 'free';
-  const instaQuotaReached = hasReachedQuota(usage, 'instagram_posts', isfree);
+  const currentTier = subscription?.tier || 'free';
+  const hasQuota = currentTier !== 'intelligence';
+  const instaQuotaReached = hasReachedQuota(usage, 'instagram_posts', currentTier);
 
   useEffect(() => {
     if (profile) {
@@ -162,7 +163,7 @@ export function InstagramGenerator({
                 <div className="rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800 mb-4">
                   <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">{t('quota_reached')}</h3>
                   <p className="text-sm text-blue-700 dark:text-blue-200">
-                    {t('quota_desc', { count: free_QUOTAS.instagram_posts })}
+                    {t('quota_desc', { count: TIER_QUOTAS[currentTier].instagram_posts })}
                   </p>
                 </div>
               ) : (
@@ -170,7 +171,7 @@ export function InstagramGenerator({
                   <Button onClick={generatePost} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
                     {t('btn_generate')}
                   </Button>
-                  {isfree && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {free_QUOTAS.instagram_posts} posts</p>}
+                  {hasQuota && <p className="text-xs text-slate-500 mt-3">{usage?.instagram_posts || 0} / {TIER_QUOTAS[currentTier].instagram_posts} posts</p>}
                 </>
               )}
             </div>

@@ -206,12 +206,17 @@
     "cta_trial": "Start saving",
     "cta_contact": "Contact sales",
     "feature_editor": "Menu Editor + QR Code",
-    "feature_logbook": "Smart Logbook",
-    "feature_i18n": "Multilingual Translation",
+    "feature_logbook": "Smart Logbook (Unlimited)",
+    "feature_i18n": "Multilingual Translation (54 Languages)",
     "feature_foodcost": "Food Cost Analyzer",
-    "feature_bcg": "Menu Optimization",
-    "feature_insta": "Instagram Generator",
-    "feature_ocr": "Receipt Scanner",
+    "feature_bcg": "Menu Engineering (BCG Matrix)",
+    "feature_insta": "Instagram Generator (Unlimited)",
+    "feature_ocr": "Receipt Scanner (OCR)",
+    "feature_deposits": "Deposits & Consignment Tracking",
+    "feature_variance": "Variance Monitoring",
+    "feature_production": "Production Management",
+    "feature_unlimited_financial": "All Financial Tools — Unlimited",
+    "feature_unlimited_all": "All Quotas Removed — Unlimited",
     "feature_support": "Priority Support",
     "month": "/month",
     "powered_by": "Powered by",
@@ -323,7 +328,18 @@
     "nav_deposits": "Deposits Tracker",
     "nav_variance": "Variance Hub",
     "nav_production": "Brewery Prod.",
-    "nav_multilingual_team": "Multilingual Team"
+    "nav_multilingual_team": "Multilingual Team",
+    "nav_carte": "La Carte",
+    "nav_pavillon": "Le Pavillon",
+    "nav_compas": "Le Compas",
+    "nav_estime": "L'Estime",
+    "nav_appareillage": "L'Appareillage",
+    "nav_mouillage": "Le Mouillage",
+    "nav_nid": "Le Nid",
+    "nav_barometre": "Le Baromètre",
+    "nav_greement": "Le Gréement",
+    "nav_health_score": "Le Compas",
+    "active_language": "Active Language"
   },
   "Dashboard": {
     "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
@@ -465,14 +481,14 @@
     "margin_label": "Margin {percent}%",
     "axis_pop": "← Popular",
     "axis_impop": "Unpopular →",
-    "cat_phare": "🏮 Stars",
-    "cat_phare_desc": "Popular + Profitable",
-    "cat_ancre": "⚓ Anchors",
-    "cat_ancre_desc": "Popular + Low profit",
-    "cat_derive": "🧭 Drifts",
-    "cat_derive_desc": "Unpopular + Profitable",
-    "cat_ecueil": "🪸 Rocks",
-    "cat_ecueil_desc": "Unpopular + Low profit"
+    "cat_phare": "🌬️ Trade Winds",
+    "cat_phare_desc": "Popular + Profitable — Steady course",
+    "cat_ancre": "⚓ Safe Anchorage",
+    "cat_ancre_desc": "Popular + Low profit — Stable harbor",
+    "cat_derive": "🧭 Finding Wind",
+    "cat_derive_desc": "Unpopular + Profitable — Adjusting sails",
+    "cat_ecueil": "⚠️ Damage Report",
+    "cat_ecueil_desc": "Unpopular + Low profit — Needs repair"
   },
   "CGU": {
     "title": "Terms of Service — Rive",
@@ -845,7 +861,11 @@
     "reason_competitor": "Switching to competitor",
     "reason_other": "Other",
     "cancel_success": "Your subscription has been cancelled. You will still have access until the end of your billing period.",
-    "cancel_error": "An error occurred while cancelling your subscription. Please contact support."
+    "cancel_error": "An error occurred while cancelling your subscription. Please contact support.",
+    "section_visibility": "Online Visibility",
+    "visibility_desc": "Link your Google Business Profile to enable visibility scoring and competitor analysis in your Health Score.",
+    "google_place_id_label": "Google Place ID",
+    "google_place_id_help": "Find your Place ID at developers.google.com/maps/documentation/places/web-service/place-id"
   },
   "WasteCalculator": {
     "title": "What's the cost of uncertainty?",
@@ -1033,6 +1053,19 @@
     "btn_creating": "Creating...",
     "btn_generate_webhook": "Generate Webhook"
   },
+  "Barometre": {
+    "page_title": "Le Baromètre",
+    "page_subtitle": "Predictive alerts — weather pressure & margins",
+    "loading": "Reading weather conditions…",
+    "add_address_hint": "Add your restaurant address in Le Gréement to activate the barometer.",
+    "forecast_title": "7-Day Forecast",
+    "today": "Today",
+    "alerts_title": "Operational Alerts",
+    "severity_critical": "Mayday",
+    "severity_warning": "Distress",
+    "severity_advisory": "Advisory",
+    "cost_alerts_title": "AI Profitability Alerts"
+  },
   "FoodCostAlerts": {
     "title": "Rive AI: Profitability Alerts",
     "btn_analyzing": "Analyzing...",
@@ -1044,7 +1077,8 @@
     "ai_recommendation_label": "AI Sous-Chef Recommendation",
     "btn_resolved": "Resolved",
     "btn_ignore": "Ignore",
-    "error_analysis": "Error during AI analysis"
+    "error_analysis": "Error during AI analysis",
+    "lang_original": "Original"
   },
   "Deposits": {
     "loading": "Loading deposits...",

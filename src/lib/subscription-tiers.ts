@@ -1,5 +1,11 @@
 // Rive — Subscription Tier Configuration
 // Maps each tier to the modules it includes
+//
+// La Traversée — Progressive unlock model:
+//   Free:         Core sampling with quotas (La Passerelle basics)
+//   Essence:      Daily operations unlimited (Le Navire)
+//   Performance:  + Financial intelligence (La Boussole)
+//   Intelligence: + Predictive AI & integrations (Le Sonar)
 
 export type SubscriptionTier = 'free' | 'essence' | 'performance' | 'intelligence';
 
@@ -12,75 +18,79 @@ export type TierModules = {
   module_receipt_scanner: boolean;
   module_reservations: boolean;
   module_smart_prep: boolean;
-  // Nouvelles fonctionnalités Bar/Brasserie
+  // Bar & Brasserie
   module_deposits: boolean;
   module_variance: boolean;
   module_production: boolean;
 };
 
-export const TIER_CONFIG: Record<SubscriptionTier, { label: string; modules: TierModules }> = {
+export const TIER_CONFIG: Record<SubscriptionTier, { label: string; labelFr: string; modules: TierModules }> = {
   free: {
-    label: 'Gratuit',
+    label: 'Free',
+    labelFr: 'Gratuit',
     modules: {
-      module_logbook: true,           // Carnet de bord (quotas IA)
-      module_menu_editor: true,       // Éditeur de recettes (accès de base)
-      module_food_cost: true,         // Accès avec quotas IA
-      module_menu_engineering: true,  // Accès limité par quota
-      module_instagram: true,         // Accès limité par quota
-      module_receipt_scanner: true,   // Accès limité par quota
-      module_reservations: true,      // Accès de base
-      module_smart_prep: true,        // Accès avec quotas IA
-      module_deposits: true,          // Accès de base
-      module_variance: true,          // Accès de base
-      module_production: true,        // Accès de base
+      module_logbook: true,           // Le Journal de Quart — quota-limited
+      module_menu_editor: true,       // La Carte — basic access
+      module_food_cost: true,         // La Réserve — quota-limited
+      module_menu_engineering: true,  // Les Allures — quota-limited
+      module_instagram: true,         // Le Pavillon — quota-limited
+      module_receipt_scanner: true,   // Les Provisions — quota-limited
+      module_reservations: false,     // ❌ Le Mouillage — Performance+
+      module_smart_prep: false,       // ❌ L'Appareillage — Intelligence only
+      module_deposits: false,         // ❌ Le Lest — Essence+
+      module_variance: false,         // ❌ Le Tirant d'Eau — Performance+
+      module_production: false,       // ❌ Production — Performance+
     },
   },
   essence: {
     label: 'Essence',
+    labelFr: 'Essence',
     modules: {
-      module_logbook: true,
-      module_menu_editor: true,
-      module_food_cost: true,
-      module_menu_engineering: true,
-      module_instagram: true,
-      module_receipt_scanner: true,
-      module_reservations: true,
-      module_smart_prep: true,
-      module_deposits: true,
-      module_variance: true,
-      module_production: true,
+      module_logbook: true,           // ✅ Unlimited
+      module_menu_editor: true,       // ✅ Full access
+      module_food_cost: true,         // ✅ Higher quotas
+      module_menu_engineering: true,  // ✅ Higher quotas
+      module_instagram: true,         // ✅ Unlimited
+      module_receipt_scanner: true,   // ✅ Higher quotas
+      module_reservations: false,     // ❌ Le Mouillage — Performance+
+      module_smart_prep: false,       // ❌ L'Appareillage — Intelligence only
+      module_deposits: true,          // ✅ Le Lest — unlocked
+      module_variance: false,         // ❌ Le Tirant d'Eau — Performance+
+      module_production: false,       // ❌ Production — Performance+
     },
   },
   performance: {
     label: 'Performance',
+    labelFr: 'Performance',
     modules: {
-      module_logbook: true,
-      module_menu_editor: true,
-      module_food_cost: true,
-      module_menu_engineering: true,
-      module_instagram: true,
-      module_receipt_scanner: true,
-      module_reservations: true,
-      module_smart_prep: true,
-      module_deposits: true,
-      module_variance: true,
-      module_production: true,
+      module_logbook: true,           // ✅ Unlimited
+      module_menu_editor: true,       // ✅ Full access
+      module_food_cost: true,         // ✅ Unlimited
+      module_menu_engineering: true,  // ✅ Unlimited
+      module_instagram: true,         // ✅ Unlimited
+      module_receipt_scanner: true,   // ✅ Unlimited
+      module_reservations: true,      // ✅ Le Mouillage — unlocked
+      module_smart_prep: false,       // ❌ L'Appareillage — Intelligence only
+      module_deposits: true,          // ✅ Le Lest
+      module_variance: true,          // ✅ Le Tirant d'Eau — unlocked
+      module_production: true,        // ✅ Production — unlocked
     },
   },
   intelligence: {
     label: 'Intelligence',
+    labelFr: 'Intelligence',
     modules: {
-      module_logbook: true,
-      module_menu_editor: true,
-      module_food_cost: true,
-      module_menu_engineering: true,
-      module_instagram: true,
-      module_receipt_scanner: true,
-      module_reservations: true,   // ✅ Tier 3: Libro, Resy, Zenchef
-      module_smart_prep: true,     // ✅ Smart Prep Lists (data-level degradation, not tier-gated)
-      module_deposits: true,
-      module_variance: true,
-      module_production: true,
+      module_logbook: true,           // ✅ Unlimited
+      module_menu_editor: true,       // ✅ Full access
+      module_food_cost: true,         // ✅ Unlimited
+      module_menu_engineering: true,  // ✅ Unlimited
+      module_instagram: true,         // ✅ Unlimited
+      module_receipt_scanner: true,   // ✅ Unlimited
+      module_reservations: true,      // ✅ Le Mouillage — Resy, Libro, Zenchef
+      module_smart_prep: true,        // ✅ L'Appareillage — Predictive AI
+      module_deposits: true,          // ✅ Le Lest
+      module_variance: true,          // ✅ Le Tirant d'Eau
+      module_production: true,        // ✅ Production
     },
   },
 };
@@ -103,7 +113,7 @@ export function computeEffectiveModules(
   const modules: TierModules = {
     module_logbook: tierModules.module_logbook && (dbSettings.module_logbook ?? true),
     module_menu_editor: tierModules.module_menu_editor && (dbSettings.module_menu_editor ?? true),
-    module_food_cost: tierModules.module_food_cost && dbSettings.module_food_cost,
+    module_food_cost: tierModules.module_food_cost && (dbSettings.module_food_cost ?? true),
     module_menu_engineering: tierModules.module_menu_engineering && (dbSettings.module_menu_engineering ?? true),
     module_instagram: tierModules.module_instagram && (dbSettings.module_instagram ?? true),
     module_receipt_scanner: tierModules.module_receipt_scanner && (dbSettings.module_receipt_scanner ?? true),
@@ -116,4 +126,3 @@ export function computeEffectiveModules(
 
   return { modules, tier: effectiveTier };
 }
-

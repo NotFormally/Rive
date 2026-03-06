@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -115,9 +116,11 @@ export default async function RootLayout({
         className={`${jakarta.variable} ${outfit.variable} ${cormorant.variable} ${plexMono.variable} antialiased bg-[#F2F0E9] text-[#1A1A1A]`}
       >
         <NextIntlClientProvider messages={messages}>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+          <SmoothScroll>
+            <AuthProvider>
+              {children}
+            </AuthProvider>
+          </SmoothScroll>
         </NextIntlClientProvider>
       </body>
     </html>

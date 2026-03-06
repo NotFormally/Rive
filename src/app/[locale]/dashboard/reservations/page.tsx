@@ -1,6 +1,5 @@
-import ReservationsDashboard from '@/components/ReservationsDashboard';
+import { redirect } from "next/navigation";
 
-export default function ReservationsPage() {
-  return <ReservationsDashboard />;
+export default function RedirectPage() {
+  redirect("/dashboard/quart/mouillage");
 }
-

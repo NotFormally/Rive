@@ -8,7 +8,7 @@ import {
   getLevelBgColor,
   type IntelligenceLevel,
 } from "@/lib/intelligence-score";
-import { Brain } from "lucide-react";
+import { Navigation2 } from "lucide-react";
 
 // =============================================================================
 // Milestone positions on the track (percent thresholds from intelligence-score)
@@ -22,10 +22,10 @@ const MILESTONES = [
 ];
 
 // =============================================================================
-// IntelligenceGauge
+// CompasGauge — Le Compas (La Traversée)
 // =============================================================================
 
-export function IntelligenceGauge() {
+export function CompasGauge() {
   const { intelligenceScore, intelligenceLevel } = useAuth();
   const t = useTranslations("Intelligence");
   const router = useRouter();
@@ -42,7 +42,7 @@ export function IntelligenceGauge() {
 
   return (
     <div 
-      onClick={() => router.push("/dashboard/my-intelligence")}
+      onClick={() => router.push("/dashboard/estime")}
       className="bg-card border-b border-border/50 px-4 sm:px-8 py-2 cursor-pointer hover:bg-muted/30 transition-colors"
     >
       {/* ---------------------------------------------------------------- */}
@@ -51,7 +51,7 @@ export function IntelligenceGauge() {
       <div className="hidden md:flex items-center gap-4">
         {/* Level badge */}
         <div className="flex items-center gap-2 shrink-0">
-          <Brain className={`h-4 w-4 ${levelColor}`} />
+          <Navigation2 className={`h-4 w-4 ${levelColor}`} />
           <span className={`font-outfit text-sm font-medium ${levelColor}`}>
             {levelLabel}
           </span>
@@ -98,7 +98,7 @@ export function IntelligenceGauge() {
       {/* Mobile layout (<md): compact icon + percentage                   */}
       {/* ---------------------------------------------------------------- */}
       <div className="flex md:hidden items-center gap-2">
-        <Brain className={`h-4 w-4 ${levelColor}`} />
+        <Navigation2 className={`h-4 w-4 ${levelColor}`} />
         <span className="font-plex-mono text-sm font-semibold text-foreground tabular-nums">
           {intelligenceScore}%
         </span>

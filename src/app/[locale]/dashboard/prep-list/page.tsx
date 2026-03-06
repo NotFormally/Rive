@@ -1,5 +1,5 @@
-import SmartPrepDashboard from '@/components/SmartPrepDashboard';
+import { redirect } from "next/navigation";
 
-export default function PrepListPage() {
-  return <SmartPrepDashboard />;
+export default function RedirectPage() {
+  redirect("/dashboard/quart/appareillage");
 }

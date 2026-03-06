@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { supabase } from "@/lib/supabase";
 import { computeEffectiveModules, type SubscriptionTier, type TierModules } from "@/lib/subscription-tiers";
 import type { IntelligenceLevel } from "@/lib/intelligence-score";
+import type { HealthGrade } from "@/lib/health-score";
 import type { User } from "@supabase/supabase-js";
 
 export type MemberRole = 'owner' | 'admin' | 'editor';
@@ -31,6 +32,13 @@ export type UsageMetrics = {
   menu_engineering: number;
   instagram_posts: number;
   receipt_scans: number;
+  // Extended metrics (La Traversée)
+  food_cost_reports: number;
+  deposit_entries: number;
+  variance_reports: number;
+  production_batches: number;
+  smart_prep_generations: number;
+  reservation_syncs: number;
 };
 
 type SubscriptionInfo = {
@@ -47,6 +55,8 @@ type AuthContextType = {
   subscription: SubscriptionInfo | null;
   intelligenceScore: number | null;
   intelligenceLevel: IntelligenceLevel | null;
+  healthScore: number | null;
+  healthGrade: HealthGrade | null;
   loading: boolean;
   signOut: () => Promise<void>;
   refreshSettings: () => Promise<void>;
@@ -76,6 +86,8 @@ const AuthContext = createContext<AuthContextType>({
   subscription: null,
   intelligenceScore: null,
   intelligenceLevel: null,
+  healthScore: null,
+  healthGrade: null,
   loading: true,
   signOut: async () => {},
   refreshSettings: async () => {},
@@ -95,6 +107,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [subscription, setSubscription] = useState<SubscriptionInfo | null>(null);
   const [intelligenceScore, setIntelligenceScore] = useState<number | null>(null);
   const [intelligenceLevel, setIntelligenceLevel] = useState<IntelligenceLevel | null>(null);
+  const [healthScore, setHealthScore] = useState<number | null>(null);
+  const [healthGrade, setHealthGrade] = useState<HealthGrade | null>(null);
   const [loading, setLoading] = useState(true);
 
   const loadProfile = async (userId: string) => {
@@ -133,8 +147,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (profileData) {
         setProfile(profileData);
 
-        // 3 & 4. Load settings + intelligence score in parallel (not sequentially)
-        const [settingsResult, scoreResult] = await Promise.all([
+        // 3, 4 & 5. Load settings + intelligence score + health score in parallel
+        const [settingsResult, scoreResult, healthResult] = await Promise.all([
           supabase
             .from("restaurant_settings")
             .select("*")
@@ -145,6 +159,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             .select("score, level")
             .eq("restaurant_id", profileData.id)
             .single(),
+          supabase
+            .from("restaurant_health_scores")
+            .select("total_score, grade")
+            .eq("restaurant_id", profileData.id)
+            .maybeSingle(),
         ]);
 
         const { data: settingsData } = settingsResult;
@@ -166,6 +185,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           setIntelligenceScore(0);
           setIntelligenceLevel('discovery');
+        }
+
+        const { data: healthData } = healthResult;
+        if (healthData) {
+          setHealthScore(healthData.total_score);
+          setHealthGrade(healthData.grade as HealthGrade);
         }
       }
     } catch (err) {
@@ -249,6 +274,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               setSubscription(null);
               setIntelligenceScore(null);
               setIntelligenceLevel(null);
+              setHealthScore(null);
+              setHealthGrade(null);
             }
           }
         } catch (e) {
@@ -276,10 +303,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setSubscription(null);
     setIntelligenceScore(null);
     setIntelligenceLevel(null);
+    setHealthScore(null);
+    setHealthGrade(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, role, settings, usage, subscription, intelligenceScore, intelligenceLevel, loading, signOut, refreshSettings, refreshProfile }}>
+    <AuthContext.Provider value={{ user, profile, role, settings, usage, subscription, intelligenceScore, intelligenceLevel, healthScore, healthGrade, loading, signOut, refreshSettings, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );

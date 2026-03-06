@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
-import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
+import { hasReachedQuota, TIER_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
 
 type EngineeringItem = {
@@ -42,8 +42,9 @@ export function MenuEngineeringDashboard() {
   };
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
-  const isfree = subscription?.tier === 'free';
-  const engQuotaReached = hasReachedQuota(usage, 'menu_engineering', isfree);
+  const currentTier = subscription?.tier || 'free';
+  const hasQuota = currentTier !== 'intelligence';
+  const engQuotaReached = hasReachedQuota(usage, 'menu_engineering', currentTier);
 
   useEffect(() => {
     fetchData();
@@ -103,7 +104,7 @@ export function MenuEngineeringDashboard() {
             <div className="rounded-md bg-blue-50 dark:bg-blue-900/30 p-4 border border-blue-200 dark:border-blue-800 max-w-md">
               <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">{t('quota_reached')}</h3>
               <p className="text-sm text-blue-700 dark:text-blue-200 mb-4">
-                {t('quota_desc', { count: free_QUOTAS.menu_engineering })}
+                {t('quota_desc', { count: TIER_QUOTAS[currentTier].menu_engineering })}
               </p>
             </div>
           ) : (
@@ -115,9 +116,9 @@ export function MenuEngineeringDashboard() {
               >
                 {analyzing ? t('btn_generating') : t('btn_generate')}
               </button>
-              {isfree && (
+              {hasQuota && (
                 <p className="text-xs text-zinc-500 mt-4">
-                  {t('quota_usage', { used: usage?.menu_engineering || 0, total: free_QUOTAS.menu_engineering })}
+                  {t('quota_usage', { used: usage?.menu_engineering || 0, total: TIER_QUOTAS[currentTier].menu_engineering })}
                 </p>
               )}
             </>

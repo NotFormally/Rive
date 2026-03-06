@@ -3,11 +3,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { X, Send, Sparkles, ChefHat, LifeBuoy, Check } from "lucide-react";
+import { X, Send, Sparkles, Navigation2, LifeBuoy, Check } from "lucide-react";
 
 const transport = new DefaultChatTransport({ api: "/api/assistant" });
 
-export default function VirtualSousChef() {
+export default function Pilote() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [errorCount, setErrorCount] = useState(0);
@@ -24,7 +24,7 @@ export default function VirtualSousChef() {
         parts: [
           {
             type: "text" as const,
-            text: "Bonjour Chef. Comment puis-je vous aider avec le service d'aujourd'hui ?",
+            text: "Pilote à bord. Quelle cap prenons-nous aujourd'hui ?",
           },
         ],
       },
@@ -139,7 +139,7 @@ export default function VirtualSousChef() {
         >
           <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
           <span className="font-semibold text-sm mr-1 hidden sm:block">
-            Sous-Chef IA
+            Le Pilote
           </span>
         </button>
       )}
@@ -151,14 +151,14 @@ export default function VirtualSousChef() {
           <div className="bg-indigo-600 p-4 flex items-center justify-between shadow-sm z-10">
             <div className="flex items-center gap-3 text-white">
               <div className="bg-white/20 p-2 rounded-full">
-                <ChefHat className="w-5 h-5 text-white" />
+                <Navigation2 className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h3 className="font-bold text-sm leading-tight">
-                  Virtual Sous-Chef
+                  Le Pilote
                 </h3>
                 <p className="text-xs text-indigo-100/80">
-                  Support Opérationnel Rive
+                  Navigation Opérationnelle
                 </p>
               </div>
             </div>

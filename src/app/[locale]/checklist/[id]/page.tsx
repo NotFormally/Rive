@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { TaskItem } from "@/lib/types";
 import { useAuth } from "@/components/AuthProvider";
-import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
+import { hasReachedQuota, TIER_QUOTAS } from "@/lib/quotas";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -28,8 +28,8 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
   const [correctiveActions, setCorrectiveActions] = useState<Record<string, string>>({});
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
-  const isfree = subscription?.tier === 'free';
-  const caQuotaReached = hasReachedQuota(usage, 'corrective_actions', isfree);
+  const currentTier = subscription?.tier || 'free';
+  const caQuotaReached = hasReachedQuota(usage, 'corrective_actions', currentTier);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -254,7 +254,7 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
                         ) : caQuotaReached ? (
                             <div className="flex flex-col gap-2 p-2 bg-white/50 rounded-lg">
                                 <p className="text-sm font-medium text-slate-700">Quota d'actions correctives IA atteint</p>
-                                <p className="text-xs text-slate-500">Vous avez atteint votre limite de {free_QUOTAS.corrective_actions} suggestions gratuites.</p>
+                                <p className="text-xs text-slate-500">Vous avez atteint votre limite de {TIER_QUOTAS[currentTier].corrective_actions} suggestions.</p>
                             </div>
                         ) : null}
                       </div>

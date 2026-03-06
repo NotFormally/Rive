@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
-import { hasReachedQuota, free_QUOTAS } from "@/lib/quotas";
+import { hasReachedQuota, TIER_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
 import { Sparkles, Trash2, Globe } from "lucide-react";
 import { APP_LANGUAGES } from "@/lib/languages";
@@ -42,12 +42,12 @@ export function SmartLogbook() {
   const tCommon = useTranslations('Common');
 
   const { profile, subscription, usage, refreshSettings } = useAuth();
-  const isfree = subscription?.tier === 'free';
-  const hasQuota = isfree;
+  const currentTier = subscription?.tier || 'free';
+  const hasQuota = currentTier !== 'intelligence';
 
-  const notesQuotaReached = hasReachedQuota(usage, 'logbook_notes', isfree);
-  const scansQuotaReached = hasReachedQuota(usage, 'receipt_scans', isfree);
-  const transQuotaReached = hasReachedQuota(usage, 'translations', isfree);
+  const notesQuotaReached = hasReachedQuota(usage, 'logbook_notes', currentTier);
+  const scansQuotaReached = hasReachedQuota(usage, 'receipt_scans', currentTier);
+  const transQuotaReached = hasReachedQuota(usage, 'translations', currentTier);
 
   // Load entries from database on mount
   const loadEntries = useCallback(async () => {
@@ -317,7 +317,7 @@ export function SmartLogbook() {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium font-jakarta text-accent">{t('quota_reached')}</h3>
                   <div className="mt-2 text-sm font-outfit text-foreground/60">
-                    <p>{t('quota_desc', { count: free_QUOTAS.logbook_notes })}</p>
+                    <p>{t('quota_desc', { count: TIER_QUOTAS[currentTier].logbook_notes })}</p>
                   </div>
                 </div>
               </div>
@@ -326,7 +326,7 @@ export function SmartLogbook() {
 
           <div className="flex flex-col-reverse md:flex-row justify-between md:items-center gap-3 md:gap-0 mt-2">
             <span className="text-[10px] md:text-xs text-muted-foreground font-plex-mono uppercase tracking-wider text-center md:text-left">
-              {hasQuota && !notesQuotaReached && `${usage?.logbook_notes || 0} / ${free_QUOTAS.logbook_notes} notes IA utilisées`}
+              {hasQuota && !notesQuotaReached && `${usage?.logbook_notes || 0} / ${TIER_QUOTAS[currentTier].logbook_notes} notes IA utilisées`}
             </span>
             <button
               type="submit"
@@ -362,7 +362,7 @@ export function SmartLogbook() {
           {scansQuotaReached && selectedImage && (
             <div className="mt-4 rounded-2xl bg-accent/5 p-4 border border-accent/20">
               <p className="text-sm font-outfit text-accent">
-                {t('scan_quota_desc', { count: free_QUOTAS.receipt_scans })}
+                {t('scan_quota_desc', { count: TIER_QUOTAS[currentTier].receipt_scans })}
               </p>
             </div>
           )}
@@ -372,7 +372,7 @@ export function SmartLogbook() {
                <div className="text-xs font-outfit text-muted-foreground">Image prête à être scannée par l'IA.</div>
             )}
             {!selectedImage && hasQuota && (
-               <div className="text-xs font-outfit text-muted-foreground ml-auto">{usage?.receipt_scans || 0} / {free_QUOTAS.receipt_scans} scans utilisés</div>
+               <div className="text-xs font-outfit text-muted-foreground ml-auto">{usage?.receipt_scans || 0} / {TIER_QUOTAS[currentTier].receipt_scans} scans utilisés</div>
             )}
           </div>
         </div>

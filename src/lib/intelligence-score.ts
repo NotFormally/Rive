@@ -2,7 +2,7 @@
 // Intelligence Score — Goal Gradient Engine
 //
 // Calculates a restaurant's "intelligence level" based on connected data sources
-// and calibration activity. This score drives the <IntelligenceGauge> component
+// and calibration activity. This score drives the <CompasGauge> component
 // and contextualizes nudges throughout the app.
 // =============================================================================
 

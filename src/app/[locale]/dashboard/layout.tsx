@@ -5,8 +5,8 @@ import { useRouter, usePathname } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { useTranslations } from "next-intl";
 import { Sidebar } from "@/components/Sidebar";
-import { IntelligenceGauge } from "@/components/IntelligenceGauge";
-import VirtualSousChef from "@/components/VirtualSousChef";
+import { CompasGauge } from "@/components/CompasGauge";
+import Pilote from "@/components/Pilote";
 
 export default function DashboardLayout({
   children,
@@ -44,11 +44,11 @@ export default function DashboardLayout({
     <div className="flex min-h-[100dvh] bg-background noise-bg text-foreground selection:bg-[--accent]/30 relative z-0">
       <Sidebar />
       <main className="flex-1 md:ml-64 flex flex-col pt-24 md:pt-0 relative z-10">
-        <IntelligenceGauge />
+        <CompasGauge />
         <div className="flex-1 p-4 md:p-10">
           {children}
         </div>
-        <VirtualSousChef />
+        <Pilote />
       </main>
     </div>
   );

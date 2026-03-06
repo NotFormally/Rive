@@ -29,7 +29,11 @@ import {
   BookOpen,
   Wrench,
   Flag,
-  CloudRain
+  CloudRain,
+  Radar,
+  ClipboardList,
+  Camera,
+  Mic
 } from "lucide-react";
 
 export function Sidebar() {
@@ -42,43 +46,64 @@ export function Sidebar() {
 
   const handleNavClick = () => setMobileOpen(false);
 
+  const s = settings || {
+    module_logbook: true,
+    module_menu_editor: true,
+    module_food_cost: true,
+    module_menu_engineering: true,
+    module_instagram: false,
+    module_receipt_scanner: true,
+    module_reservations: true,
+    module_smart_prep: true,
+    module_deposits: true,
+    module_variance: true,
+    module_production: true,
+  };
+
   // Zone I. La Passerelle (The Bridge — Command & Overview)
   const navPasserelle = [
     { name: t("nav_overview"), href: "/dashboard", icon: LayoutDashboard },
-    { name: t("nav_carte"), href: "/dashboard/carte", icon: Compass },
-    { name: t("nav_pavillon"), href: "/dashboard/pavillon", icon: Flag },
-    { name: t("nav_compas"), href: "/dashboard/compas", icon: Gauge },
+    ...(s.module_menu_editor ? [{ name: t("nav_carte"), href: "/dashboard/carte", icon: Compass }] : []),
+    ...(s.module_instagram ? [{ name: t("nav_pavillon"), href: "/dashboard/pavillon", icon: Flag }] : []),
+    ...(s.module_menu_engineering ? [{ name: t("nav_compas"), href: "/dashboard/compas", icon: Gauge }] : []),
     { name: t("nav_estime"), href: "/dashboard/estime", icon: Sparkles },
   ];
 
   // Zone II. La Réserve (The Hold — Inventory & Cost)
   const navRéserve = [
-    { name: t("nav_foodcost"), href: "/dashboard/reserve", icon: Calculator },
-    { name: t("nav_variance"), href: "/dashboard/reserve/tirant", icon: Droplets },
-    { name: t("nav_deposits"), href: "/dashboard/reserve/lest", icon: Recycle },
-    { name: t("nav_production"), href: "/dashboard/reserve/production", icon: Beer },
+    ...(s.module_receipt_scanner ? [{ name: "Réception (OCR)", href: "/dashboard/reserve/reception", icon: Camera }] : []),
+    ...(s.module_food_cost ? [{ name: t("nav_foodcost"), href: "/dashboard/reserve", icon: Calculator }] : []),
+    ...(s.module_variance ? [{ name: t("nav_variance"), href: "/dashboard/reserve/tirant", icon: Droplets }] : []),
+    ...(s.module_deposits ? [{ name: t("nav_deposits"), href: "/dashboard/reserve/lest", icon: Recycle }] : []),
+    ...(s.module_production ? [{ name: t("nav_production"), href: "/dashboard/reserve/production", icon: Beer }] : []),
   ];
 
   // Zone III. Le Quart (The Watch — Service & Prep)
   const navQuart = [
-    { name: t("nav_appareillage"), href: "/dashboard/quart/appareillage", icon: Brain },
-    { name: t("nav_mouillage"), href: "/dashboard/quart/mouillage", icon: CalendarDays },
-    { name: t("nav_menu"), href: "/dashboard/carte/editeur", icon: MenuSquare },
+    ...(s.module_smart_prep ? [
+      { name: t("nav_appareillage"), href: "/dashboard/quart/appareillage", icon: Brain },
+      { name: "Dictée (Vocale IA)", href: "/dashboard/atelier/production/voice", icon: Mic }
+    ] : []),
+    ...(s.module_reservations ? [{ name: t("nav_mouillage"), href: "/dashboard/quart/mouillage", icon: CalendarDays }] : []),
+    { name: "Sonar (Audits)", href: "/dashboard/quart/sonar", icon: Radar },
+    { name: "HACCP Runner (Demo)", href: "/dashboard/quart/sonar/audit-demo", icon: ClipboardList },
+    ...(s.module_menu_editor ? [{ name: t("nav_menu"), href: "/dashboard/carte/editeur", icon: MenuSquare }] : []),
   ];
 
   // Zone IV. Le Journal de Bord (The Ship's Log — Analytics & Finance)
   const navJournal = [
-    { name: t("nav_nid"), href: "/dashboard/journal", icon: BookOpen },
+    ...(s.module_logbook ? [{ name: t("nav_nid"), href: "/dashboard/journal", icon: BookOpen }] : []),
     { name: t("nav_barometre"), href: "/dashboard/journal/barometre", icon: CloudRain },
   ];
 
-  // Zone V. Le Radoub (Dry Dock — Settings & Config)
-  const navRadoub = [
-    { name: t("nav_greement"), href: "/dashboard/radoub", icon: Settings },
+  // Zone V. Le Gouvernail (Dry Dock — Settings & Config)
+  const navGouvernail = [
+    { name: t("nav_greement"), href: "/dashboard/gouvernail", icon: Settings },
+    { name: "HACCP Builder (Forms)", href: "/dashboard/gouvernail/haccp-builder", icon: ClipboardList },
     { name: t("nav_multilingual_team") || "Équipe Multilingue", href: "/dashboard/multilingual", icon: Globe },
   ];
 
-  const renderNavGroup = (items: typeof navPasserelle) => items.map((item) => {
+  const renderNavGroup = (items: any[]) => items.map((item) => {
     const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href + "/"));
     return (
       <Link
@@ -140,7 +165,7 @@ export function Sidebar() {
           </nav>
         </section>
 
-        {/* II. La Réserve */}
+        {navRéserve.length > 0 && (
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
             <Anchor className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
@@ -150,6 +175,7 @@ export function Sidebar() {
             {renderNavGroup(navRéserve)}
           </nav>
         </section>
+        )}
 
         {/* III. Le Quart */}
         <section>
@@ -173,14 +199,13 @@ export function Sidebar() {
           </nav>
         </section>
 
-        {/* V. Le Radoub */}
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
             <Wrench className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Radoub</span>
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Gouvernail</span>
           </div>
           <nav className="space-y-1">
-            {renderNavGroup(navRadoub)}
+            {renderNavGroup(navGouvernail)}
           </nav>
         </section>
 

@@ -82,8 +82,15 @@ export default function DashboardPage() {
   const s = settings || {
     module_logbook: true,
     module_menu_editor: true,
+    module_food_cost: true,
+    module_menu_engineering: true,
     module_instagram: false,
     module_receipt_scanner: true,
+    module_reservations: true,
+    module_smart_prep: true,
+    module_deposits: true,
+    module_variance: true,
+    module_production: true,
   };
 
   const setupProgress = [
@@ -199,6 +206,7 @@ export default function DashboardPage() {
           </section>
 
           {/* TASK PREP LISTS WIDGET */}
+          {s.module_smart_prep && (
           <section
             className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 md:p-8 relative transition-all duration-300 hover:border-primary/40 hover:shadow-[0_8px_40px_rgba(0,229,255,0.15)] group"
           >
@@ -250,6 +258,7 @@ export default function DashboardPage() {
               })}
             </div>
           </section>
+          )}
 
           {/* HEALTH SCORE WIDGET */}
           <section

@@ -9,37 +9,54 @@ import {
   CalendarCheck,
   Globe,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { SubScoreKey, SubScoreDetail } from '@/lib/health-score';
 
 type Props = {
   subScores: Record<SubScoreKey, SubScoreDetail>;
 };
 
-const CATEGORY_CONFIG: Record<SubScoreKey, { label: string; icon: React.ElementType }> = {
-  food_cost: { label: 'Food Cost', icon: UtensilsCrossed },
-  menu_completeness: { label: 'Menu', icon: BookOpen },
-  prep_accuracy: { label: 'Prep Accuracy', icon: Target },
-  variance: { label: 'Waste', icon: Trash2 },
-  team_engagement: { label: 'Team', icon: Users },
-  reservations: { label: 'Reservations', icon: CalendarCheck },
-  visibility: { label: 'Visibility', icon: Globe },
+const CATEGORY_ICONS: Record<SubScoreKey, React.ElementType> = {
+  food_cost: UtensilsCrossed,
+  menu_completeness: BookOpen,
+  prep_accuracy: Target,
+  variance: Trash2,
+  team_engagement: Users,
+  reservations: CalendarCheck,
+  visibility: Globe,
 };
 
 const STATUS_COLORS = {
-  healthy: { bar: 'bg-emerald-500', badge: 'text-emerald-400 bg-emerald-500/10', label: 'Healthy' },
-  warning: { bar: 'bg-amber-500', badge: 'text-amber-400 bg-amber-500/10', label: 'Warning' },
-  critical: { bar: 'bg-red-500', badge: 'text-red-400 bg-red-500/10', label: 'Critical' },
+  healthy: { bar: 'bg-emerald-500', badge: 'text-emerald-400 bg-emerald-500/10' },
+  warning: { bar: 'bg-amber-500', badge: 'text-amber-400 bg-amber-500/10' },
+  critical: { bar: 'bg-red-500', badge: 'text-red-400 bg-red-500/10' },
 };
 
 export default function HealthScoreBreakdown({ subScores }: Props) {
+  const t = useTranslations('HealthScore');
   const entries = Object.entries(subScores) as [SubScoreKey, SubScoreDetail][];
+
+  const CATEGORY_LABELS: Record<SubScoreKey, string> = {
+    food_cost: t('cat_food_cost'),
+    menu_completeness: t('cat_menu_completeness'),
+    prep_accuracy: t('cat_prep_accuracy'),
+    variance: t('cat_variance'),
+    team_engagement: t('cat_team_engagement'),
+    reservations: t('cat_reservations'),
+    visibility: t('cat_visibility'),
+  };
+
+  const STATUS_LABELS: Record<string, string> = {
+    healthy: t('status_healthy'),
+    warning: t('status_warning'),
+    critical: t('status_critical'),
+  };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
       {entries.map(([key, detail]) => {
-        const config = CATEGORY_CONFIG[key];
+        const Icon = CATEGORY_ICONS[key];
         const status = STATUS_COLORS[detail.status];
-        const Icon = config.icon;
 
         return (
           <div
@@ -54,12 +71,12 @@ export default function HealthScoreBreakdown({ subScores }: Props) {
               <div className="flex items-center gap-2">
                 <Icon className="w-4 h-4 text-muted-foreground" />
                 <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  {config.label}
+                  {CATEGORY_LABELS[key]}
                 </span>
               </div>
               {detail.active && (
                 <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${status.badge}`}>
-                  {status.label}
+                  {STATUS_LABELS[detail.status]}
                 </span>
               )}
             </div>

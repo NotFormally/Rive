@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { 
   Radar, 
   Activity, 
@@ -34,6 +35,7 @@ type BrigadeMember = {
 };
 
 export function SonarDashboard() {
+  const t = useTranslations("Sonar");
   const [activeTab, setActiveTab] = useState<"radar" | "matrix">("radar");
 
   // Mock Data: Recent Audits
@@ -104,7 +106,7 @@ export function SonarDashboard() {
               <Radar className="w-6 h-6 text-blue-400 animate-[spin_4s_linear_infinite]" />
               <div className="absolute top-1 right-1 w-2 h-2 bg-blue-400 rounded-full animate-ping" />
             </div>
-            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight">Sonar Dashboard</h1>
+            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight">{t("title")}</h1>
           </div>
           <p className="text-white/60 text-sm max-w-2xl leading-relaxed">
             Vue tactique de la production. Surveillez la conformité HACCP en temps réel et anticipez les goulots 
@@ -123,7 +125,7 @@ export function SonarDashboard() {
             }`}
           >
             <Activity className="w-4 h-4" />
-            Audit Radar
+            {t("tab_radar")}
           </button>
           <button
             onClick={() => setActiveTab("matrix")}
@@ -134,7 +136,7 @@ export function SonarDashboard() {
             }`}
           >
             <UserCircle2 className="w-4 h-4" />
-            Skills Matrix
+            {t("tab_matrix")}
           </button>
         </div>
       </div>

@@ -187,7 +187,7 @@
     "cta_contact": "영업팀에 문의",
     "feature_editor": "메뉴 에디터 + QR Code",
     "feature_logbook": "스마트 로그북 (Unlimited)",
-    "feature_i18n": "다국어 번역 (54 Languages)",
+    "feature_i18n": "다국어 번역 (25 Languages)",
     "feature_foodcost": "Food Cost 분석기",
     "feature_bcg": "메뉴 최적화",
     "feature_insta": "Instagram 생성기 (Unlimited)",
@@ -267,7 +267,12 @@
     "beta_badge": "개발 중",
     "cta_start": "절약 시작하기",
     "pricing_popular": "가장 인기",
-    "pricing_includes": "{tier}의 모든 것 +"
+    "pricing_includes": "{tier}의 모든 것 +",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

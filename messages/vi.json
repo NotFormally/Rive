@@ -187,7 +187,7 @@
     "cta_contact": "Liên hệ bán hàng",
     "feature_editor": "Trình biên tập Thực đơn + Mã QR",
     "feature_logbook": "Smart Logbook (Unlimited)",
-    "feature_i18n": "Dịch Đa ngôn ngữ (54 Languages)",
+    "feature_i18n": "Dịch Đa ngôn ngữ (25 Languages)",
     "feature_foodcost": "Food Cost Analyzer",
     "feature_bcg": "Tối ưu Thực đơn",
     "feature_insta": "Instagram Generator (Unlimited)",
@@ -262,7 +262,12 @@
     "f9_ex1": "Tách biệt tiền cọc chai và thùng khỏi Food Cost thực sự ngay lập tức.",
     "f9_ex2": "Theo dõi chính xác hao hụt rót (variance) giữa doanh số POS và kiểm kê thực tế.",
     "f9_ex3": "Quản lý mẻ bia từ lên men đến đóng thùng với sản lượng cụ thể.",
-    "beta_badge": "Đang phát triển"
+    "beta_badge": "Đang phát triển",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

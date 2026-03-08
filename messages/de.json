@@ -187,7 +187,7 @@
     "cta_contact": "Vertrieb kontaktieren",
     "feature_editor": "Menü-Editor + QR-Code",
     "feature_logbook": "Smart Logbook (Unlimited)",
-    "feature_i18n": "Mehrsprachige Übersetzung (54 Languages)",
+    "feature_i18n": "Mehrsprachige Übersetzung (25 Languages)",
     "feature_foodcost": "Food Cost Analyzer",
     "feature_bcg": "Menü-Optimierung",
     "feature_insta": "Instagram Generator (Unlimited)",
@@ -262,7 +262,12 @@
     "f9_ex1": "Isolieren Sie Flaschen- und Fass-Pfand sofort von Ihrem wahren Food Cost.",
     "f9_ex2": "Verfolgen Sie exakte Ausschankverluste (Varianz) zwischen POS-Verkäufen und physischer Inventur.",
     "f9_ex3": "Verwalten Sie Ihre Bierchargen von der Gärung bis zur Abfüllung mit spezifischen Erträgen.",
-    "beta_badge": "In Entwicklung"
+    "beta_badge": "In Entwicklung",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

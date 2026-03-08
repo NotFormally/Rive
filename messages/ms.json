@@ -187,7 +187,7 @@
     "cta_contact": "Hubungi jualan",
     "feature_editor": "Editor Menu + QR Code",
     "feature_logbook": "Buku Log Pintar (Unlimited)",
-    "feature_i18n": "Terjemahan Pelbagai Bahasa (54 Languages)",
+    "feature_i18n": "Terjemahan Pelbagai Bahasa (25 Languages)",
     "feature_foodcost": "Penganalisis Food Cost",
     "feature_bcg": "Pengoptimuman Menu",
     "feature_insta": "Penjana Instagram (Unlimited)",
@@ -267,7 +267,12 @@
     "beta_badge": "Dalam Pembangunan",
     "cta_start": "Mula berjimat",
     "pricing_popular": "Paling popular",
-    "pricing_includes": "Semua dari {tier} +"
+    "pricing_includes": "Semua dari {tier} +",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

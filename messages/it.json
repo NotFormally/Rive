@@ -177,7 +177,7 @@
     "cta_contact": "Contatta vendite",
     "feature_editor": "Editor Menu + QR Code",
     "feature_logbook": "Logbook Intelligente (Unlimited)",
-    "feature_i18n": "Traduzione Multilingue (54 Languages)",
+    "feature_i18n": "Traduzione Multilingue (25 Languages)",
     "feature_foodcost": "Analisi Costi Alimentari",
     "feature_bcg": "Ottimizzazione del Menu",
     "feature_insta": "Generatore Instagram (Unlimited)",
@@ -252,7 +252,12 @@
     "waste_calculator_title": "How much is your current waste costing you?",
     "waste_calculator_subtitle": "Estimate overproduction without reliable data.",
     "section_get": "Included",
-    "philosophy_approach": "Our Navigation"
+    "philosophy_approach": "Our Navigation",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

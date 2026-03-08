@@ -11,7 +11,7 @@ const structuredData = [
     "url": SITE_URL,
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
-    "description": "AI for restaurant management — the all-in-one AI platform for restaurants. HACCP compliance, intelligent logbook, food cost analysis, instant translation in 54 languages, OCR invoice scanning, menu engineering, POS integration, and social media content generation. No language barriers aboard — used by multilingual teams worldwide.",
+    "description": "AI for restaurant management — the all-in-one AI platform for restaurants. HACCP compliance, intelligent logbook, food cost analysis, instant translation in 25 languages, OCR invoice scanning, menu engineering, POS integration, and social media content generation. No language barriers aboard — used by multilingual teams worldwide.",
     "offers": [
       {
         "@type": "Offer",
@@ -146,7 +146,7 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "Can my team use Rive in their own language?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Rive supports 54 languages and dialects — from French and English to Bengali, Kabyle and Cantonese. Every task, recipe card and safety procedure is automatically translated for each team member. No language barrier aboard." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Rive supports 25 languages and dialects — from French and English to Bengali, Kabyle and Cantonese. Every task, recipe card and safety procedure is automatically translated for each team member. No language barrier aboard." }
       },
       {
         "@type": "Question",

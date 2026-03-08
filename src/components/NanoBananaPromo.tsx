@@ -41,7 +41,7 @@ export function NanoBananaPromo() {
         <div className="text-center mb-16 flex flex-col items-center">
           <div className="inline-flex items-center gap-2 bg-[#FACC15]/10 text-[#FACC15] border border-[#FACC15]/20 px-4 py-1.5 rounded-full text-xs font-plex-mono font-bold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(250,204,21,0.2)]">
             <Sparkles className="w-4 h-4" />
-             NEW CAPABILITIES 2026
+             {t('nano_banana_badge')}
           </div>
           <h2 className="font-cormorant italic text-4xl md:text-6xl font-bold text-[#F2F0E9] mb-4">
             {t('nano_banana_title')}

@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { CheckoutButton } from "@/components/CheckoutButton";
 import { WasteCostCalculator } from "@/components/WasteCostCalculator";
 import { SocialProofBanner } from "@/components/SocialProofBanner";
+import { RadarLogo } from "@/components/TelemetryScanner";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
@@ -330,6 +331,34 @@ export default function PricingPage() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-[#1A1A1A] text-[#F2F0E9] rounded-t-[4rem] px-8 md:px-24 pt-16 pb-12 mt-24">
+        <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-12">
+          <div className="flex items-start gap-6">
+            <RadarLogo className="w-[80px] md:w-[100px] h-auto shrink-0 -mt-1" />
+            <div>
+              <p className="font-plex-mono text-sm text-slate-400 mb-3">
+                {t('footer_desc')}
+              </p>
+              <a href="mailto:dock@rivehub.com" className="font-outfit text-sm text-[#CC5833] inline-block hover:text-[#F2F0E9] transition-colors tracking-wide">
+                dock@rivehub.com
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 bg-[#2E4036]/30 border border-[#2E4036] px-4 py-2 rounded-full animate-pulse transition-opacity">
+            <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+            <span className="font-plex-mono text-sm uppercase tracking-wider text-green-400">{t('footer_status')}</span>
+          </div>
+        </div>
+        <div className="max-w-screen-xl mx-auto mt-16 pt-8 border-t border-slate-800 text-slate-400 text-sm font-outfit flex justify-between">
+          <p>{t('footer_rights')}</p>
+          <div className="flex gap-6">
+            <Link href="/cgu" className="hover:text-[#F2F0E9] transition-colors">{t('footer_privacy')}</Link>
+            <Link href="/cgu" className="hover:text-[#F2F0E9] transition-colors">{t('footer_terms')}</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -187,7 +187,7 @@
     "cta_contact": "ติดต่อฝ่ายขาย",
     "feature_editor": "ตัวแก้ไขเมนู + QR Code",
     "feature_logbook": "Smart Logbook (Unlimited)",
-    "feature_i18n": "การแปลหลายภาษา (54 Languages)",
+    "feature_i18n": "การแปลหลายภาษา (25 Languages)",
     "feature_foodcost": "Food Cost Analyzer",
     "feature_bcg": "การเพิ่มประสิทธิภาพเมนู",
     "feature_insta": "Instagram Generator (Unlimited)",
@@ -262,7 +262,12 @@
     "f9_ex1": "แยกมัดจำขวดและถังออกจาก Food Cost จริงทันที",
     "f9_ex2": "ติดตามการสูญเสียการเท (variance) ที่แน่นอนระหว่างยอดขาย POS และสต็อกจริง",
     "f9_ex3": "จัดการชุดเบียร์ตั้งแต่การหมักจนถึงการบรรจุถังพร้อมผลผลิตเฉพาะ",
-    "beta_badge": "กำลังพัฒนา"
+    "beta_badge": "กำลังพัฒนา",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

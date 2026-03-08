@@ -276,14 +276,14 @@ export function LandingPage() {
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
              
              <div className="relative z-10 flex flex-col items-center gap-6 w-full max-w-4xl">
-                {/* Big 54 Counter — Hero stat */}
+                {/* Big 25 Counter — Hero stat */}
                 <div className="flex flex-col items-center gap-2">
                   <div className="relative">
                     <span className="font-cormorant font-bold text-[8rem] md:text-[10rem] lg:text-[12rem] leading-none text-transparent bg-clip-text bg-gradient-to-b from-indigo-300 via-white to-indigo-400 select-none tracking-tighter">
-                      54
+                      25
                     </span>
                     <div className="absolute inset-0 font-cormorant font-bold text-[8rem] md:text-[10rem] lg:text-[12rem] leading-none text-indigo-400/20 blur-2xl select-none pointer-events-none tracking-tighter" aria-hidden="true">
-                      54
+                      25
                     </div>
                   </div>
                   <span className="font-plex-mono text-xs md:text-sm tracking-[0.25em] uppercase text-indigo-300/80">
@@ -853,7 +853,7 @@ export function LandingPage() {
                       <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30">
                         <span className="text-emerald-400 font-bold text-xs">$</span>
                       </div>
-                      <span className="text-sm font-outfit text-white/80 font-medium tracking-wide">Net Profit</span>
+                      <span className="text-sm font-outfit text-white/80 font-medium tracking-wide">{t('nest_net_profit')}</span>
                     </div>
                     <span className="text-[10px] font-plex-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.2)]">+18.4%</span>
                   </div>
@@ -866,7 +866,7 @@ export function LandingPage() {
                 {/* Mini Cash Flow Chart */}
                 <div className="bg-[#121A26]/80 backdrop-blur-xl rounded-[24px] border border-white/5 shadow-xl p-5 relative hover:scale-[1.02] transition-transform duration-300 delay-100">
                   <div className="flex justify-between items-center mb-6">
-                    <span className="text-xs font-outfit text-white/60 tracking-wider uppercase">Cash Flow Dynamics</span>
+                    <span className="text-xs font-outfit text-white/60 tracking-wider uppercase">{t('nest_cash_flow')}</span>
                     <Activity className="w-4 h-4 text-emerald-400/80" />
                   </div>
                   <div className="h-[80px] flex items-end justify-between gap-[3px] px-1 relative">

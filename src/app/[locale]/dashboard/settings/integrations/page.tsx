@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function RedirectPage() {
-  redirect("/dashboard/habitacle/greement");
+  redirect("/dashboard/gouvernail/greement");
 }

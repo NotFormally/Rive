@@ -71,7 +71,7 @@ export function Sidebar() {
 
   // Zone II. La Réserve (The Hold — Inventory & Cost)
   const navRéserve = [
-    ...(s.module_receipt_scanner ? [{ name: "Réception (OCR)", href: "/dashboard/reserve/reception", icon: Camera }] : []),
+    ...(s.module_receipt_scanner ? [{ name: t("nav_reception_ocr"), href: "/dashboard/reserve/reception", icon: Camera }] : []),
     ...(s.module_food_cost ? [{ name: t("nav_foodcost"), href: "/dashboard/reserve", icon: Calculator }] : []),
     ...(s.module_variance ? [{ name: t("nav_variance"), href: "/dashboard/reserve/tirant", icon: Droplets }] : []),
     ...(s.module_deposits ? [{ name: t("nav_deposits"), href: "/dashboard/reserve/lest", icon: Recycle }] : []),
@@ -82,11 +82,11 @@ export function Sidebar() {
   const navQuart = [
     ...(s.module_smart_prep ? [
       { name: t("nav_appareillage"), href: "/dashboard/quart/appareillage", icon: Brain },
-      { name: "Dictée (Vocale IA)", href: "/dashboard/atelier/production/voice", icon: Mic }
+      { name: t("nav_dictee_voice"), href: "/dashboard/atelier/production/voice", icon: Mic }
     ] : []),
     ...(s.module_reservations ? [{ name: t("nav_mouillage"), href: "/dashboard/quart/mouillage", icon: CalendarDays }] : []),
-    { name: "Sonar (Audits)", href: "/dashboard/quart/sonar", icon: Radar },
-    { name: "HACCP Runner (Demo)", href: "/dashboard/quart/sonar/audit-demo", icon: ClipboardList },
+    { name: t("nav_sonar"), href: "/dashboard/quart/sonar", icon: Radar },
+    { name: t("nav_haccp_runner"), href: "/dashboard/quart/sonar/audit-demo", icon: ClipboardList },
     ...(s.module_menu_editor ? [{ name: t("nav_menu"), href: "/dashboard/carte/editeur", icon: MenuSquare }] : []),
   ];
 
@@ -99,7 +99,7 @@ export function Sidebar() {
   // Zone V. Le Gouvernail (Dry Dock — Settings & Config)
   const navGouvernail = [
     { name: t("nav_greement"), href: "/dashboard/gouvernail", icon: Settings },
-    { name: "HACCP Builder (Forms)", href: "/dashboard/gouvernail/haccp-builder", icon: ClipboardList },
+    { name: t("nav_haccp_builder"), href: "/dashboard/gouvernail/haccp-builder", icon: ClipboardList },
     { name: t("nav_multilingual_team") || "Équipe Multilingue", href: "/dashboard/multilingual", icon: Globe },
   ];
 
@@ -127,7 +127,7 @@ export function Sidebar() {
       <div 
         onClick={() => {
           handleNavClick();
-          router.push("/dashboard/settings");
+          router.push("/dashboard/gouvernail");
         }}
         className="p-8 cursor-pointer group flex flex-col items-center sm:items-start"
       >

@@ -321,7 +321,12 @@
     "nav_mouillage": "Le Mouillage",
     "nav_nid": "Le Nid",
     "nav_greement": "Le Gréement",
-    "nav_health_score": "Le Compas"
+    "nav_health_score": "Le Compas",
+    "nav_reception_ocr": "Reception (OCR)",
+    "nav_dictee_voice": "Voice Dictation (AI)",
+    "nav_sonar": "Sonar (Audits)",
+    "nav_haccp_runner": "HACCP Runner",
+    "nav_haccp_builder": "HACCP Builder"
   },
   "Dashboard": {
     "header_title": "Tổng quan",
@@ -350,7 +355,18 @@
     "setup_team_title": "Mời đội ngũ",
     "setup_team_desc": "Chia sẻ quyền truy cập Nhật ký và kết nối đội ngũ.",
     "setup_completed": "Triển khai ban đầu hoàn tất. Tất cả hệ thống hoạt động.",
-    "stat_intelligence": "Điểm Trí tuệ"
+    "stat_intelligence": "Điểm Trí tuệ",
+    "weekly_schedule": "Weekly Schedule",
+    "all_months": "All Months",
+    "add_availability": "Add Availability",
+    "task_prep_lists": "Task Prep Lists",
+    "health_score": "Health Score",
+    "not_calculated": "Not calculated yet",
+    "view_details": "View details",
+    "live_utility_costs": "Live Utility Costs",
+    "monthly_energy": "Monthly Energy Usage",
+    "monthly_water": "Monthly Water Consumption",
+    "last_30_days": "Last 30 Days"
   },
   "TrialModal": {
     "title": "Dùng thử Miễn phí 100%",

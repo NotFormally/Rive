@@ -88,7 +88,7 @@
     "nb_sonar_title": "2. Sonar & Matrice de Compétences",
     "nb_sonar_desc": "Le tableau de bord du Chef. Suivez les audits, identifiez les failles en cuisine et optimisez la formation de votre brigade en un coup d'œil.",
     "nb_ocr_title": "3. One-Click Compliance (OCR)",
-    "nb_ocr_desc": "Une facture ? Prenez une photo. Claude Sonnet 3.5 extrait instantanément quantités, prix et denrées. Fini la saisie manuelle et les heures perdues.",
+    "nb_ocr_desc": "Une facture ? Prenez une photo. Claude AI extrait instantanément quantités, prix et denrées. Fini la saisie manuelle et les heures perdues.",
     "nb_voice_title": "4. Smart Prep par Dictée Vocale",
     "nb_voice_desc": "Dictez vos notes et consignes de préparation. L'IA Whisper V3 Turbo (ultra rapide, bilingue) s'occupe de transcrire et catégoriser pour le reste de l'équipe.",
     "features_title": "Tous les instruments réunis sur la passerelle.",
@@ -357,7 +357,12 @@
     "nav_barometre": "Le Baromètre",
     "nav_greement": "Le Gréement",
     "nav_health_score": "Le Compas",
-    "active_language": "Langue Active"
+    "active_language": "Langue Active",
+    "nav_reception_ocr": "Réception (OCR)",
+    "nav_dictee_voice": "Dictée Vocale (IA)",
+    "nav_sonar": "Sonar (Audits)",
+    "nav_haccp_runner": "HACCP Runner",
+    "nav_haccp_builder": "HACCP Builder"
   },
   "Dashboard": {
     "system_operational": "DASHBOARD.SYSTÈME_OPÉRATIONNEL",
@@ -387,7 +392,18 @@
     "setup_team_title": "Inviter votre brigade",
     "setup_team_desc": "Partagez l'accès au Journal de Bord et connectez vos équipes.",
     "setup_completed": "Déploiement initial terminé. Tous les systèmes sont opérationnels.",
-    "stat_intelligence": "Score d'Intelligence"
+    "stat_intelligence": "Score d'Intelligence",
+    "weekly_schedule": "Planning Hebdomadaire",
+    "all_months": "Tous les Mois",
+    "add_availability": "Ajouter Disponibilité",
+    "task_prep_lists": "Listes de Préparation",
+    "health_score": "Score de Santé",
+    "not_calculated": "Pas encore calculé",
+    "view_details": "Voir les détails",
+    "live_utility_costs": "Coûts Énergétiques",
+    "monthly_energy": "Consommation Électrique Mensuelle",
+    "monthly_water": "Consommation d'Eau Mensuelle",
+    "last_30_days": "30 Derniers Jours"
   },
   "TrialModal": {
     "title": "Essai 100% gratuit",

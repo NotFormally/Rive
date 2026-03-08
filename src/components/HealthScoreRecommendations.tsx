@@ -1,6 +1,7 @@
 'use client';
 
 import { Lightbulb, ArrowUpRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { Recommendation, SubScoreKey } from '@/lib/health-score';
 
 type Props = {
@@ -23,22 +24,30 @@ const IMPACT_COLORS = {
   low: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
 };
 
-const CATEGORY_LABELS: Record<SubScoreKey, string> = {
-  food_cost: 'Food Cost',
-  menu_completeness: 'Menu',
-  prep_accuracy: 'Prep',
-  variance: 'Waste',
-  team_engagement: 'Team',
-  reservations: 'Reservations',
-  visibility: 'Visibility',
-};
-
 export default function HealthScoreRecommendations({ recommendations }: Props) {
+  const t = useTranslations('HealthScore');
+
+  const CATEGORY_LABELS: Record<SubScoreKey, string> = {
+    food_cost: t('cat_food_cost'),
+    menu_completeness: t('cat_menu_completeness'),
+    prep_accuracy: t('cat_prep_accuracy'),
+    variance: t('cat_variance'),
+    team_engagement: t('cat_team_engagement'),
+    reservations: t('cat_reservations'),
+    visibility: t('cat_visibility'),
+  };
+
+  const IMPACT_LABELS: Record<string, string> = {
+    high: t('impact_high'),
+    medium: t('impact_medium'),
+    low: t('impact_low'),
+  };
+
   if (recommendations.length === 0) {
     return (
       <div className="text-center py-8 text-muted-foreground text-sm">
         <Lightbulb className="w-8 h-8 mx-auto mb-2 opacity-30" />
-        No recommendations yet
+        {t('no_recommendations')}
       </div>
     );
   }
@@ -56,7 +65,7 @@ export default function HealthScoreRecommendations({ recommendations }: Props) {
                 <span
                   className={`text-[10px] px-2 py-0.5 rounded-full font-medium border ${IMPACT_COLORS[rec.impact]}`}
                 >
-                  {rec.impact.toUpperCase()}
+                  {IMPACT_LABELS[rec.impact] ?? rec.impact.toUpperCase()}
                 </span>
                 <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
                   {CATEGORY_LABELS[rec.category]}

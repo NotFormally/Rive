@@ -1017,7 +1017,8 @@
     "provider_other_desc": "Hindi nakalista na platform (auto-detection)",
     "btn_cancel": "Kanselahin",
     "btn_creating": "Ginagawa...",
-    "btn_generate_webhook": "Mag-generate ng Webhook"
+    "btn_generate_webhook": "Mag-generate ng Webhook",
+    "lang_original": "Original language"
   },
   "FoodCostAlerts": {
     "title": "Rive AI: Mga Alert sa Profitability",
@@ -1209,7 +1210,8 @@
     "level_3_hint": "Lahat ng data source ay nakakonekta",
     "level_unknown": "Hindi kilalang level",
     "error_ai": "AI Error",
-    "error_unknown": "Hindi kilala"
+    "error_unknown": "Hindi kilala",
+    "lang_original": "Original language"
   },
   "Invite": {
     "processing": "Processing your invitation...",
@@ -1224,5 +1226,42 @@
     "error_accept": "Error while accepting.",
     "error_network": "Network error. Please try again later.",
     "success_default": "Invitation accepted!"
+  },
+  "HealthScore": {
+    "title": "Health Score",
+    "recalculate": "Recalculate",
+    "calculating": "Recalculating...",
+    "loading": "Loading...",
+    "trend_forecast": "Trend & Forecast",
+    "score_breakdown": "Score Breakdown",
+    "recommendations": "Recommendations",
+    "no_score_title": "Restaurant Health Score",
+    "no_score_desc": "Get a comprehensive view of your restaurant's operational health and online visibility in a single score.",
+    "calculate": "Calculate My Score",
+    "last_calculated": "Last calculated:",
+    "unlock_visibility_title": "Unlock Visibility Score & Competitor Analysis",
+    "unlock_visibility_desc": "Link your Google Business Profile to see your online visibility, review sentiment, and how you compare to nearby competitors.",
+    "competitors": "Competitors",
+    "review_sentiment": "Review Sentiment",
+    "my_restaurant": "My Restaurant",
+    "no_recommendations": "No recommendations yet",
+    "cat_food_cost": "Food Cost",
+    "cat_menu_completeness": "Menu",
+    "cat_prep_accuracy": "Prep Accuracy",
+    "cat_variance": "Waste",
+    "cat_team_engagement": "Team",
+    "cat_reservations": "Reservations",
+    "cat_visibility": "Visibility",
+    "status_healthy": "Healthy",
+    "status_warning": "Warning",
+    "status_critical": "Critical",
+    "impact_high": "HIGH",
+    "impact_medium": "MEDIUM",
+    "impact_low": "LOW"
+  },
+  "Sonar": {
+    "title": "Sonar Dashboard",
+    "tab_radar": "Audit Radar",
+    "tab_matrix": "Skills Matrix"
   }
 }

@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/AuthProvider";
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { supabase } from "@/lib/supabase";
 import { RefreshCw, HeartPulse, TrendingUp, Lightbulb, BarChart3, MessageSquareText, ExternalLink } from "lucide-react";
 import { Link } from "@/i18n/routing";
@@ -42,6 +43,7 @@ type HistoryPoint = {
 
 export default function HealthScorePage() {
   const { profile } = useAuth();
+  const t = useTranslations("HealthScore");
   const [data, setData] = useState<HealthScoreData | null>(null);
   const [history, setHistory] = useState<HistoryPoint[]>([]);
   const [loading, setLoading] = useState(true);
@@ -93,7 +95,7 @@ export default function HealthScorePage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Loading...</div>
+        <div className="animate-pulse text-muted-foreground">{t("loading")}</div>
       </div>
     );
   }
@@ -103,10 +105,9 @@ export default function HealthScorePage() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
         <HeartPulse className="w-16 h-16 mx-auto mb-6 text-primary opacity-50" />
-        <h1 className="text-2xl font-bold mb-3">Restaurant Health Score</h1>
+        <h1 className="text-2xl font-bold mb-3">{t("no_score_title")}</h1>
         <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-          Get a comprehensive view of your restaurant&apos;s operational health and online visibility
-          in a single score.
+          {t("no_score_desc")}
         </p>
         <button
           onClick={handleRecalculate}
@@ -114,7 +115,7 @@ export default function HealthScorePage() {
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`w-4 h-4 ${recalculating ? "animate-spin" : ""}`} />
-          {recalculating ? "Calculating..." : "Calculate My Score"}
+          {recalculating ? t("calculating") : t("calculate")}
         </button>
       </div>
     );
@@ -129,7 +130,7 @@ export default function HealthScorePage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <HeartPulse className="w-6 h-6 text-primary" />
-          <h1 className="text-xl font-bold">Health Score</h1>
+          <h1 className="text-xl font-bold">{t("title")}</h1>
         </div>
         <button
           onClick={handleRecalculate}
@@ -137,7 +138,7 @@ export default function HealthScorePage() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50 text-sm hover:border-primary/40 transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${recalculating ? "animate-spin" : ""}`} />
-          {recalculating ? "Recalculating..." : "Recalculate"}
+          {recalculating ? t("calculating") : t("recalculate")}
         </button>
       </div>
 
@@ -152,7 +153,7 @@ export default function HealthScorePage() {
           />
           {data.calculated_at && (
             <p className="text-[10px] text-muted-foreground mt-4">
-              Last calculated: {new Date(data.calculated_at).toLocaleDateString("fr-FR", {
+              {t("last_calculated")} {new Date(data.calculated_at).toLocaleDateString("fr-FR", {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
@@ -168,7 +169,7 @@ export default function HealthScorePage() {
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp className="w-4 h-4 text-muted-foreground" />
             <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-              Trend & Forecast
+              {t("trend_forecast")}
             </h2>
           </div>
           <HealthScoreTrend history={history} forecast={data.trend_forecast || []} />
@@ -178,7 +179,7 @@ export default function HealthScorePage() {
       {/* Category Breakdown */}
       <div className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 md:p-8">
         <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">
-          Score Breakdown
+          {t("score_breakdown")}
         </h2>
         <HealthScoreBreakdown subScores={data.sub_score_details} />
       </div>
@@ -188,7 +189,7 @@ export default function HealthScorePage() {
         <div className="flex items-center gap-2 mb-4">
           <Lightbulb className="w-4 h-4 text-muted-foreground" />
           <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-            Recommendations
+            {t("recommendations")}
           </h2>
         </div>
         <HealthScoreRecommendations recommendations={data.recommendations || []} />
@@ -206,9 +207,9 @@ export default function HealthScorePage() {
                 <BarChart3 className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold text-sm">Unlock Visibility Score & Competitor Analysis</h3>
+                <h3 className="font-bold text-sm">{t("unlock_visibility_title")}</h3>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Link your Google Business Profile to see your online visibility, review sentiment, and how you compare to nearby competitors.
+                  {t("unlock_visibility_desc")}
                 </p>
               </div>
             </div>
@@ -225,11 +226,11 @@ export default function HealthScorePage() {
             <div className="flex items-center gap-2 mb-4">
               <BarChart3 className="w-4 h-4 text-muted-foreground" />
               <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                Competitors
+                {t("competitors")}
               </h2>
             </div>
             <CompetitorSnapshot
-              myName={profile?.restaurant_name || "My Restaurant"}
+              myName={profile?.restaurant_name || t("my_restaurant")}
               myRating={data.google_rating || 0}
               myReviewCount={data.google_review_count || 0}
               competitors={data.competitor_data || []}
@@ -242,7 +243,7 @@ export default function HealthScorePage() {
               <div className="flex items-center gap-2 mb-4">
                 <MessageSquareText className="w-4 h-4 text-muted-foreground" />
                 <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                  Review Sentiment
+                  {t("review_sentiment")}
                 </h2>
               </div>
               <SentimentBreakdown sentiment={data.review_sentiment!} />

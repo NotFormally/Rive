@@ -321,7 +321,12 @@
     "nav_mouillage": "Le Mouillage",
     "nav_nid": "Le Nid",
     "nav_greement": "Le Gréement",
-    "nav_health_score": "Le Compas"
+    "nav_health_score": "Le Compas",
+    "nav_reception_ocr": "Reception (OCR)",
+    "nav_dictee_voice": "Voice Dictation (AI)",
+    "nav_sonar": "Sonar (Audits)",
+    "nav_haccp_runner": "HACCP Runner",
+    "nav_haccp_builder": "HACCP Builder"
   },
   "Dashboard": {
     "header_title": "Overzicht",
@@ -350,7 +355,18 @@
     "setup_team_title": "Nodig uw bemanning uit",
     "setup_team_desc": "Deel toegang tot het Logboek en verbind uw teams.",
     "setup_completed": "Initiële implementatie voltooid. Alle systemen operationeel.",
-    "stat_intelligence": "Intelligentiescore"
+    "stat_intelligence": "Intelligentiescore",
+    "weekly_schedule": "Weekly Schedule",
+    "all_months": "All Months",
+    "add_availability": "Add Availability",
+    "task_prep_lists": "Task Prep Lists",
+    "health_score": "Health Score",
+    "not_calculated": "Not calculated yet",
+    "view_details": "View details",
+    "live_utility_costs": "Live Utility Costs",
+    "monthly_energy": "Monthly Energy Usage",
+    "monthly_water": "Monthly Water Consumption",
+    "last_30_days": "Last 30 Days"
   },
   "TrialModal": {
     "title": "100% Gratis Proefperiode",

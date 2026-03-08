@@ -157,10 +157,10 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2 group-hover:text-primary/80 transition-colors">
-                Weekly Schedule
+                {t("weekly_schedule")}
               </h2>
               <div className="bg-secondary/40 text-xs px-3 py-1 rounded-full text-muted-foreground border border-white/5 group-hover:border-primary/20 transition-colors">
-                All Months <span className="ml-1 text-[9px]">▼</span>
+                {t("all_months")} <span className="ml-1 text-[9px]">▼</span>
               </div>
             </div>
 
@@ -200,7 +200,7 @@ export default function DashboardPage() {
 
             <div className="mt-6 flex justify-end">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 shadow-[0_0_15px_rgba(0,229,255,0.3)] font-bold pointer-events-none">
-                Add Availability
+                {t("add_availability")}
               </Button>
             </div>
           </section>
@@ -215,7 +215,7 @@ export default function DashboardPage() {
               className="flex items-center justify-between mb-6 cursor-pointer"
             >
               <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground group-hover:text-primary/80 transition-colors">
-                Task Prep Lists
+                {t("task_prep_lists")}
               </h2>
               <span className="text-[12px] opacity-50 group-hover:text-primary transition-colors">▲</span>
             </div>
@@ -268,7 +268,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground group-hover:text-primary/80 transition-colors flex items-center gap-2">
                 <HeartPulse className="w-4 h-4" />
-                Health Score
+                {t("health_score")}
               </h2>
               <span className="text-[12px] opacity-50 group-hover:text-primary transition-colors">▲</span>
             </div>
@@ -297,7 +297,7 @@ export default function DashboardPage() {
               )}
               <div className="flex-1 text-right">
                 <span className="text-xs text-muted-foreground">
-                  {healthScore === null ? 'Not calculated yet' : 'View details →'}
+                  {healthScore === null ? t("not_calculated") : `${t("view_details")} →`}
                 </span>
               </div>
             </div>
@@ -333,14 +333,14 @@ export default function DashboardPage() {
           
           <div className="flex items-center gap-4 mb-2">
             <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
-              Live Utility Costs
+              {t("live_utility_costs")}
             </h2>
           </div>
 
           {/* Monthly Energy Usage Widget */}
           <section className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 relative group overflow-hidden">
              <div className="flex justify-between items-start mb-6">
-                <h3 className="text-sm font-outfit font-medium text-foreground">Monthly Energy Usage</h3>
+                <h3 className="text-sm font-outfit font-medium text-foreground">{t("monthly_energy")}</h3>
                 <span className="text-muted-foreground opacity-50 tracking-widest leading-none">...</span>
              </div>
              
@@ -364,7 +364,7 @@ export default function DashboardPage() {
                 
                 {/* Tooltip mockup */}
                 <div className="absolute right-0 top-4 bg-white/10 backdrop-blur-md border border-white/10 p-2 rounded-lg text-[9px] font-plex-mono z-10 shadow-lg">
-                   <div>Last 30 Days</div>
+                   <div>{t("last_30_days")}</div>
                    <div className="text-primary font-bold">Monthly: {stats.monthly_electricity} kWh</div>
                    <div className="text-pink-400">Current: {Math.floor(stats.monthly_electricity * 0.75)} kWh</div>
                 </div>
@@ -394,7 +394,7 @@ export default function DashboardPage() {
           {/* Monthly Water Consumption Widget */}
           <section className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 relative group overflow-hidden mt-4 md:mt-6">
              <div className="flex justify-between items-start mb-6">
-                <h3 className="text-sm font-outfit font-medium text-foreground">Monthly Water Consumption</h3>
+                <h3 className="text-sm font-outfit font-medium text-foreground">{t("monthly_water")}</h3>
                 <span className="text-muted-foreground opacity-50 tracking-widest leading-none">...</span>
              </div>
              
@@ -417,7 +417,7 @@ export default function DashboardPage() {
                 
                 {/* Tooltip mockup */}
                 <div className="absolute right-0 top-2 bg-white/10 backdrop-blur-md border border-white/10 p-2 rounded-lg text-[9px] font-plex-mono z-10 shadow-lg">
-                   <div>Last 30 Days</div>
+                   <div>{t("last_30_days")}</div>
                    <div className="text-primary font-bold">Water: {(stats.monthly_water / 1000).toFixed(1)} kL</div>
                    <div className="text-pink-400">Current: {Math.floor((stats.monthly_water / 1000) * 0.81)} kL</div>
                 </div>

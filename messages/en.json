@@ -88,7 +88,7 @@
     "nb_sonar_title": "2. Sonar & Skills Matrix",
     "nb_sonar_desc": "The Chef dashboard. Track audits, identify kitchen bottlenecks and optimize your brigade training at a glance.",
     "nb_ocr_title": "3. One-Click Compliance (OCR)",
-    "nb_ocr_desc": "Got an invoice? Snap a photo. Claude Sonnet 3.5 instantly extracts quantities, pricing and ingredients. Goodbye manual data entry.",
+    "nb_ocr_desc": "Got an invoice? Snap a photo. Claude AI instantly extracts quantities, pricing and ingredients. Goodbye manual data entry.",
     "nb_voice_title": "4. Smart Prep Voice AI",
     "nb_voice_desc": "Dictate your prep notes and instructions. Whisper V3 Turbo AI (blazing fast, bilingual) transcribes and categorizes for the entire team.",
     "features_title": "All the instruments you need to navigate, in one place.",
@@ -260,7 +260,7 @@
     "nb_sonar_title": "2. Sonar & Skills Matrix",
     "nb_sonar_desc": "The Chef dashboard. Track audits, identify kitchen bottlenecks and optimize your brigade training at a glance.",
     "nb_ocr_title": "3. One-Click Compliance (OCR)",
-    "nb_ocr_desc": "Got an invoice? Snap a photo. Claude Sonnet 3.5 instantly extracts quantities, pricing and ingredients. Goodbye manual data entry.",
+    "nb_ocr_desc": "Got an invoice? Snap a photo. Claude AI instantly extracts quantities, pricing and ingredients. Goodbye manual data entry.",
     "nb_voice_title": "4. Smart Prep Voice AI",
     "nb_voice_desc": "Dictate your prep notes and instructions. Whisper V3 Turbo AI (blazing fast, bilingual) transcribes and categorizes for the entire team.",
     "features_title": "All the instruments you need to navigate, in one place.",
@@ -367,7 +367,12 @@
     "nav_barometre": "Le Baromètre",
     "nav_greement": "Le Gréement",
     "nav_health_score": "Le Compas",
-    "active_language": "Active Language"
+    "active_language": "Active Language",
+    "nav_reception_ocr": "Reception (OCR)",
+    "nav_dictee_voice": "Voice Dictation (AI)",
+    "nav_sonar": "Sonar (Audits)",
+    "nav_haccp_runner": "HACCP Runner",
+    "nav_haccp_builder": "HACCP Builder"
   },
   "Dashboard": {
     "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
@@ -397,7 +402,18 @@
     "setup_team_title": "Invite your crew",
     "setup_team_desc": "Share access to the Logbook and connect your teams.",
     "setup_completed": "Initial deployment complete. All systems operational.",
-    "stat_intelligence": "Intelligence Score"
+    "stat_intelligence": "Intelligence Score",
+    "weekly_schedule": "Weekly Schedule",
+    "all_months": "All Months",
+    "add_availability": "Add Availability",
+    "task_prep_lists": "Task Prep Lists",
+    "health_score": "Health Score",
+    "not_calculated": "Not calculated yet",
+    "view_details": "View details",
+    "live_utility_costs": "Live Utility Costs",
+    "monthly_energy": "Monthly Energy Usage",
+    "monthly_water": "Monthly Water Consumption",
+    "last_30_days": "Last 30 Days"
   },
   "TrialModal": {
     "title": "100% Free Trial",

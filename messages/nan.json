@@ -187,7 +187,7 @@
     "cta_contact": "聯絡業務",
     "feature_editor": "菜單編輯器 + QR Code",
     "feature_logbook": "智能航海日誌 (Unlimited)",
-    "feature_i18n": "多語言翻譯 (54 Languages)",
+    "feature_i18n": "多語言翻譯 (25 Languages)",
     "feature_foodcost": "Food Cost 分析器",
     "feature_bcg": "菜單優化",
     "feature_insta": "Instagram 生成器 (Unlimited)",
@@ -267,7 +267,12 @@
     "beta_badge": "開發中",
     "cta_start": "開始節省",
     "pricing_popular": "上蓋受歡迎",
-    "pricing_includes": "{tier}的全部 +"
+    "pricing_includes": "{tier}的全部 +",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

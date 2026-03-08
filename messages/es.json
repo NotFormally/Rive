@@ -172,7 +172,7 @@
     "cta_contact": "Contactar ventas",
     "feature_editor": "Editor de Menú + QR Code",
     "feature_logbook": "Bitácora Inteligente (Unlimited)",
-    "feature_i18n": "Traducción Multilingüe (54 Languages)",
+    "feature_i18n": "Traducción Multilingüe (25 Languages)",
     "feature_foodcost": "Analizador de Costos",
     "feature_bcg": "Optimización del Menú",
     "feature_insta": "Generador Instagram (Unlimited)",
@@ -247,7 +247,12 @@
     "f9_ex1": "Instantly isolate bottle and keg deposits from your true Food Cost.",
     "f9_ex2": "Track exact pour losses (variance) between POS sales and inventory physical counts.",
     "f9_ex3": "Manage your beer batches from fermentation to kegging with specific yields.",
-    "beta_badge": "In Development"
+    "beta_badge": "In Development",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

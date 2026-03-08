@@ -187,7 +187,7 @@
     "cta_contact": "営業に問い合わせる",
     "feature_editor": "メニューエディター + QR Code",
     "feature_logbook": "スマートログブック (Unlimited)",
-    "feature_i18n": "多言語翻訳 (54 Languages)",
+    "feature_i18n": "多言語翻訳 (25 Languages)",
     "feature_foodcost": "Food Costアナライザー",
     "feature_bcg": "メニュー最適化",
     "feature_insta": "Instagramジェネレーター (Unlimited)",
@@ -267,7 +267,12 @@
     "beta_badge": "開発中",
     "cta_start": "節約を始める",
     "pricing_popular": "一番人気",
-    "pricing_includes": "{tier}のすべて +"
+    "pricing_includes": "{tier}のすべて +",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

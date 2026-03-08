@@ -187,7 +187,7 @@
     "cta_contact": "Skontaktuj się z działem sprzedaży",
     "feature_editor": "Edytor menu + Kod QR",
     "feature_logbook": "Smart Logbook (Unlimited)",
-    "feature_i18n": "Tłumaczenie wielojęzyczne (54 Languages)",
+    "feature_i18n": "Tłumaczenie wielojęzyczne (25 Languages)",
     "feature_foodcost": "Food Cost Analyzer",
     "feature_bcg": "Optymalizacja menu",
     "feature_insta": "Instagram Generator (Unlimited)",
@@ -262,7 +262,12 @@
     "f9_ex1": "Natychmiast oddziel kaucje za butelki i beczki od prawdziwego Food Cost.",
     "f9_ex2": "Śledź dokładne straty nalewania (wariancja) między POS a inwentaryzacją.",
     "f9_ex3": "Zarządzaj warkami piwa od fermentacji do rozlewu z określoną wydajnością.",
-    "beta_badge": "W trakcie rozwoju"
+    "beta_badge": "W trakcie rozwoju",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

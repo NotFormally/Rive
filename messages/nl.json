@@ -187,7 +187,7 @@
     "cta_contact": "Neem contact op met verkoop",
     "feature_editor": "Menu Editor + QR-code",
     "feature_logbook": "Smart Logboek (Unlimited)",
-    "feature_i18n": "Meertalige vertaling (54 Languages)",
+    "feature_i18n": "Meertalige vertaling (25 Languages)",
     "feature_foodcost": "Food Cost Analyzer",
     "feature_bcg": "Menu-optimalisatie",
     "feature_insta": "Instagram Generator (Unlimited)",
@@ -262,7 +262,12 @@
     "f9_ex1": "Scheid fles- en vatstatiegeld direct van werkelijke Food Cost.",
     "f9_ex2": "Volg exacte tapverliezen (variantie) tussen POS-verkoop en fysieke inventaris.",
     "f9_ex3": "Beheer uw brouwbatches van fermentatie tot afvullen met vastgelegde opbrengst.",
-    "beta_badge": "In ontwikkeling"
+    "beta_badge": "In ontwikkeling",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

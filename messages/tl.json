@@ -187,7 +187,7 @@
     "cta_contact": "Kontakin ang sales",
     "feature_editor": "Menu Editor + QR Code",
     "feature_logbook": "Smart Logbook (Unlimited)",
-    "feature_i18n": "Multilingual na Pagsasalin (54 Languages)",
+    "feature_i18n": "Multilingual na Pagsasalin (25 Languages)",
     "feature_foodcost": "Food Cost Analyzer",
     "feature_bcg": "Menu Optimization",
     "feature_insta": "Instagram Generator (Unlimited)",
@@ -262,7 +262,12 @@
     "f9_ex1": "Agad na ihiwalay ang bottle at keg deposit mula sa iyong tunay na Food Cost.",
     "f9_ex2": "I-track ang eksaktong pour loss (variance) sa pagitan ng POS sales at physical inventory count.",
     "f9_ex3": "Pamahalaan ang iyong mga beer batch mula sa fermentation hanggang kegging na may specific na yield.",
-    "beta_badge": "Nasa Development"
+    "beta_badge": "Nasa Development",
+    "footer_desc": "Algorithmic intelligence for gastronomic restaurants.",
+    "footer_status": "System Operational",
+    "footer_rights": "© 2026 Rive. All rights reserved.",
+    "footer_privacy": "Privacy",
+    "footer_terms": "Terms"
   },
   "Auth": {
     "login_title": "Rive",

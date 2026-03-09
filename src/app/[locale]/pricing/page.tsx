@@ -191,8 +191,8 @@ export default function PricingPage() {
     <div className="min-h-screen bg-background noise-bg text-foreground">
       {/* Minimal Navbar */}
       <nav className="flex items-center justify-between px-8 md:px-24 py-6 max-w-screen-xl mx-auto">
-        <Link href="/" className="font-outfit font-semibold text-xl text-foreground tracking-[0.3em] uppercase">
-          RIVE
+        <Link href="/" className="font-outfit text-xl text-foreground tracking-[0.05em]">
+          <span className="font-semibold">Rive</span><span className="font-bold">Hub</span>
         </Link>
         <Link
           href="/login"

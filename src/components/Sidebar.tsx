@@ -143,7 +143,7 @@ export function Sidebar() {
           </div>
         ) : (
           <>
-            <h1 className="text-2xl font-outfit font-semibold text-[--sidebar-foreground] tracking-[0.3em] uppercase drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] group-hover:text-primary transition-colors text-center sm:text-left">RIVE</h1>
+            <h1 className="text-2xl font-outfit tracking-[0.05em] text-[--sidebar-foreground] drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] group-hover:text-primary transition-colors text-center sm:text-left"><span className="font-semibold">Rive</span><span className="font-bold">Hub</span></h1>
             <div className="h-px w-12 bg-[--sidebar-primary] mt-2 opacity-80 shadow-[0_0_10px_rgba(34,211,238,0.8)] group-hover:w-full transition-all duration-300 mx-auto sm:mx-0"></div>
           </>
         )}

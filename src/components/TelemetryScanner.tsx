@@ -221,8 +221,8 @@ export function RadarLogo({ className = "" }: { className?: string }) {
       {/* CRT vignette overlay */}
       <circle cx="0" cy="0" r="92" fill="url(#screenVignette)" />
 
-      {/* RIVE text below */}
-      <text x="0" y="120" fontFamily="'Space Grotesk', sans-serif" fontSize="24" fontWeight="400" letterSpacing="0.35em" fill="#FFFFFF" textAnchor="middle" opacity="0.8">RIVE</text>
+      {/* RiveHub text below */}
+      <text x="0" y="120" fontFamily="'Space Grotesk', sans-serif" fontSize="24" letterSpacing="0.05em" fill="#FFFFFF" textAnchor="middle" opacity="0.8"><tspan fontWeight="600">Rive</tspan><tspan fontWeight="700">Hub</tspan></text>
     </svg>
   );
 }

@@ -23,9 +23,9 @@ export default function AIRestaurantManagementPage() {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "AI for Restaurant Management — How Artificial Intelligence is Transforming Restaurant Operations",
-    "description": "Discover how AI for restaurant management automates food cost tracking, HACCP compliance, menu engineering, and operational decisions. Learn why restaurants worldwide are switching to AI-powered platforms like Rive.",
-    "author": { "@type": "Organization", "name": "Rive", "url": SITE_URL },
-    "publisher": { "@type": "Organization", "name": "Rive", "url": SITE_URL, "logo": { "@type": "ImageObject", "url": `${SITE_URL}/favicon.ico` } },
+    "description": "Discover how AI for restaurant management automates food cost tracking, HACCP compliance, menu engineering, and operational decisions. Learn why restaurants worldwide are switching to AI-powered platforms like RiveHub.",
+    "author": { "@type": "Organization", "name": "RiveHub", "url": SITE_URL },
+    "publisher": { "@type": "Organization", "name": "RiveHub", "url": SITE_URL, "logo": { "@type": "ImageObject", "url": `${SITE_URL}/favicon.ico` } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": `${SITE_URL}/en/ai-restaurant-management` },
     "datePublished": "2026-03-01",
     "dateModified": new Date().toISOString().split('T')[0],
@@ -53,8 +53,8 @@ export default function AIRestaurantManagementPage() {
 
       {/* Navbar */}
       <nav className="flex items-center justify-between px-8 md:px-24 py-6 max-w-screen-xl mx-auto">
-        <Link href="/" className="font-outfit font-semibold text-xl text-[#1A1A1A] tracking-[0.3em] uppercase">
-          RIVE
+        <Link href="/" className="font-outfit text-xl text-[#1A1A1A] tracking-[0.05em]">
+          <span className="font-semibold">Rive</span><span className="font-bold">Hub</span>
         </Link>
         <div className="flex items-center gap-6">
           <Link href="/pricing" className="text-sm font-medium text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors">
@@ -183,8 +183,8 @@ export default function AIRestaurantManagementPage() {
       {/* Footer */}
       <footer className="border-t border-[#1A1A1A]/10 py-8 px-8 md:px-24">
         <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-          <Link href="/" className="font-outfit font-semibold text-sm text-[#1A1A1A] tracking-[0.3em] uppercase">RIVE</Link>
-          <p className="font-outfit text-xs text-[#1A1A1A]/40">&copy; {new Date().getFullYear()} Rive. All rights reserved.</p>
+          <Link href="/" className="font-outfit text-sm text-[#1A1A1A] tracking-[0.05em]"><span className="font-semibold">Rive</span><span className="font-bold">Hub</span></Link>
+          <p className="font-outfit text-xs text-[#1A1A1A]/40">&copy; {new Date().getFullYear()} RiveHub. All rights reserved.</p>
         </div>
       </footer>
     </div>

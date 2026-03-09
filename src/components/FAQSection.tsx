@@ -39,7 +39,7 @@ export function FAQSection() {
   const t = useTranslations("FAQ");
 
   return (
-    <section className="py-24 md:py-32 px-8 md:px-24 bg-[#F2F0E9]">
+    <section className="py-16 md:py-20 px-8 md:px-24 bg-[#F2F0E9]">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="scroll-reveal font-jakarta text-3xl md:text-4xl font-bold text-[#1A1A1A]">

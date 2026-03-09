@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Rive — AI-Powered Restaurant Operations Platform';
+export const alt = 'RiveHub — AI-Powered Restaurant Operations Platform';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -36,14 +36,15 @@ export default async function Image() {
         {/* Logo */}
         <div
           style={{
+            display: 'flex',
             fontSize: 72,
-            fontWeight: 700,
-            letterSpacing: '0.3em',
+            letterSpacing: '0.05em',
             color: '#F2F0E9',
             marginBottom: 24,
           }}
         >
-          RIVE
+          <span style={{ fontWeight: 600 }}>Rive</span>
+          <span style={{ fontWeight: 700 }}>Hub</span>
         </div>
 
         {/* Tagline */}

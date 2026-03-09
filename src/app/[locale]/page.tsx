@@ -7,7 +7,7 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Rive",
+    "name": "RiveHub",
     "url": SITE_URL,
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
@@ -67,7 +67,7 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Rive",
+    "name": "RiveHub",
     "url": SITE_URL,
     "logo": `${SITE_URL}/favicon.ico`,
     "description": "AI for restaurant management. Algorithmic intelligence for gastronomic restaurants — automating compliance, food cost tracking, and operational decisions with artificial intelligence.",
@@ -116,17 +116,17 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "What is AI for restaurant management?",
-        "acceptedAnswer": { "@type": "Answer", "text": "AI for restaurant management uses artificial intelligence to automate and optimize daily restaurant operations — from food cost tracking and HACCP compliance to intelligent scheduling and predictive ordering. Rive is a leading AI platform for restaurants that replaces manual spreadsheets with real-time, data-driven insights." }
+        "acceptedAnswer": { "@type": "Answer", "text": "AI for restaurant management uses artificial intelligence to automate and optimize daily restaurant operations — from food cost tracking and HACCP compliance to intelligent scheduling and predictive ordering. RiveHub is a leading AI platform for restaurants that replaces manual spreadsheets with real-time, data-driven insights." }
       },
       {
         "@type": "Question",
-        "name": "How does Rive use AI for restaurants?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Rive applies AI across every aspect of restaurant operations: the intelligent logbook analyzes service patterns, OCR automatically extracts invoice data, food cost AI detects anomalies and waste, and menu engineering AI identifies your most profitable dishes. Everything runs in real-time with no manual input required." }
+        "name": "How does RiveHub use AI for restaurants?",
+        "acceptedAnswer": { "@type": "Answer", "text": "RiveHub applies AI across every aspect of restaurant operations: the intelligent logbook analyzes service patterns, OCR automatically extracts invoice data, food cost AI detects anomalies and waste, and menu engineering AI identifies your most profitable dishes. Everything runs in real-time with no manual input required." }
       },
       {
         "@type": "Question",
-        "name": "How does Rive integrate with my POS system?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Rive connects natively with major POS systems including Toast, Square, SumUp, Lightspeed, and Zettle. Setup takes less than 5 minutes — just authorize the connection and your data starts syncing automatically." }
+        "name": "How does RiveHub integrate with my POS system?",
+        "acceptedAnswer": { "@type": "Answer", "text": "RiveHub connects natively with major POS systems including Toast, Square, SumUp, Lightspeed, and Zettle. Setup takes less than 5 minutes — just authorize the connection and your data starts syncing automatically." }
       },
       {
         "@type": "Question",
@@ -136,7 +136,7 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "How long does it take to set up?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Most restaurants are fully operational within 15 minutes. Connect your POS, invite your team, and Rive starts learning your patterns immediately. You'll receive your first actionable insights within 48 hours." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Most restaurants are fully operational within 15 minutes. Connect your POS, invite your team, and RiveHub starts learning your patterns immediately. You'll receive your first actionable insights within 48 hours." }
       },
       {
         "@type": "Question",
@@ -145,38 +145,38 @@ const structuredData = [
       },
       {
         "@type": "Question",
-        "name": "Can my team use Rive in their own language?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Rive supports 25 languages and dialects — from French and English to Bengali, Kabyle and Cantonese. Every task, recipe card and safety procedure is automatically translated for each team member. No language barrier aboard." }
+        "name": "Can my team use RiveHub in their own language?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. RiveHub supports 25 languages and dialects — from French and English to Bengali, Kabyle and Cantonese. Every task, recipe card and safety procedure is automatically translated for each team member. No language barrier aboard." }
       },
       {
         "@type": "Question",
         "name": "Do I need to train my staff?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Rive is designed to be intuitive. The interface is minimal and task-oriented — your team can start using it immediately. We also provide onboarding guides and support via chat." }
+        "acceptedAnswer": { "@type": "Answer", "text": "RiveHub is designed to be intuitive. The interface is minimal and task-oriented — your team can start using it immediately. We also provide onboarding guides and support via chat." }
       },
       {
         "@type": "Question",
         "name": "How does AI help with food cost in restaurants?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Rive's AI scans your invoices via OCR, tracks ingredient prices over time, calculates real-time food cost per dish, and alerts you when costs exceed targets. It also factors in labor cost to give you true margin per plate — replacing hours of spreadsheet work with instant, accurate data." }
+        "acceptedAnswer": { "@type": "Answer", "text": "RiveHub's AI scans your invoices via OCR, tracks ingredient prices over time, calculates real-time food cost per dish, and alerts you when costs exceed targets. It also factors in labor cost to give you true margin per plate — replacing hours of spreadsheet work with instant, accurate data." }
       },
       {
         "@type": "Question",
         "name": "Can AI replace a restaurant manager?",
-        "acceptedAnswer": { "@type": "Answer", "text": "AI doesn't replace restaurant managers — it amplifies them. Rive handles repetitive data work (compliance logs, cost calculations, inventory tracking) so managers can focus on what humans do best: hospitality, team leadership, and guest experience. Think of it as a co-pilot, not a replacement." }
+        "acceptedAnswer": { "@type": "Answer", "text": "AI doesn't replace restaurant managers — it amplifies them. RiveHub handles repetitive data work (compliance logs, cost calculations, inventory tracking) so managers can focus on what humans do best: hospitality, team leadership, and guest experience. Think of it as a co-pilot, not a replacement." }
       },
       {
         "@type": "Question",
-        "name": "What makes Rive different from other restaurant management software?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Rive is built specifically for gastronomic and fine dining restaurants, not fast food chains. It combines AI-powered analytics with tools designed for complex menus, multi-language teams, and high standards of compliance. Most restaurant software digitizes paperwork — Rive provides actionable intelligence." }
+        "name": "What makes RiveHub different from other restaurant management software?",
+        "acceptedAnswer": { "@type": "Answer", "text": "RiveHub is built specifically for gastronomic and fine dining restaurants, not fast food chains. It combines AI-powered analytics with tools designed for complex menus, multi-language teams, and high standards of compliance. Most restaurant software digitizes paperwork — RiveHub provides actionable intelligence." }
       },
       {
         "@type": "Question",
-        "name": "Does Rive work for fine dining restaurants?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Rive was designed for fine dining and gastronomic restaurants from day one. Features like menu engineering matrices, detailed food cost analysis per dish, wine and bar management, and multi-language support for international kitchen teams are built for high-end operations." }
+        "name": "Does RiveHub work for fine dining restaurants?",
+        "acceptedAnswer": { "@type": "Answer", "text": "RiveHub was designed for fine dining and gastronomic restaurants from day one. Features like menu engineering matrices, detailed food cost analysis per dish, wine and bar management, and multi-language support for international kitchen teams are built for high-end operations." }
       },
       {
         "@type": "Question",
         "name": "How much does AI restaurant management software cost?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Rive starts with a free plan (no credit card required). Paid plans begin at $59/month for the Essence tier, $129/month for Performance (adds menu engineering and POS integration), and $249/month for Intelligence (full predictive analytics suite). All plans include AI features — there are no per-seat charges." }
+        "acceptedAnswer": { "@type": "Answer", "text": "RiveHub starts with a free plan (no credit card required). Paid plans begin at $59/month for the Essence tier, $129/month for Performance (adds menu engineering and POS integration), and $249/month for Intelligence (full predictive analytics suite). All plans include AI features — there are no per-seat charges." }
       }
     ]
   }

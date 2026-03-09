@@ -16,19 +16,26 @@ export function NanoBananaPromo() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Simple stagger animation for the cards
-      gsap.from(".nb-card", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "back.out(1.2)",
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 75%",
+      gsap.fromTo(".nb-card",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: container.current,
+            start: "top 90%",
+            once: true,
+          }
         }
-      });
+      );
     }, container);
+
+    // Refresh after mount to handle cases where section is already in viewport
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+
     return () => ctx.revert();
   }, []);
 
@@ -39,10 +46,7 @@ export function NanoBananaPromo() {
       
       <div className="max-w-screen-xl mx-auto relative z-10">
         <div className="text-center mb-16 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 bg-[#FACC15]/10 text-[#FACC15] border border-[#FACC15]/20 px-4 py-1.5 rounded-full text-xs font-plex-mono font-bold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(250,204,21,0.2)]">
-            <Sparkles className="w-4 h-4" />
-             {t('nano_banana_badge')}
-          </div>
+
           <h2 className="font-cormorant italic text-4xl md:text-6xl font-bold text-[#F2F0E9] mb-4">
             {t('nano_banana_title')}
           </h2>

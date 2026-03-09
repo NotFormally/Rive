@@ -114,7 +114,7 @@ export async function POST(req: Request) {
       .eq('id', auth.restaurantId)
       .single();
 
-    const restaurantName = profile?.restaurant_name || 'Rive';
+    const restaurantName = profile?.restaurant_name || 'RiveHub';
 
     // Send email
     await sendEmail({

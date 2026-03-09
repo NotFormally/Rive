@@ -844,14 +844,14 @@ export default function SettingsPage() {
                  <p className="text-xs font-outfit text-muted-foreground mb-2">{t("webhook_desc")}</p>
                  <div className="flex gap-2 items-center">
                     <code className="flex-1 bg-background px-3 py-2 rounded-lg text-xs overflow-hidden text-ellipsis whitespace-nowrap font-plex-mono text-foreground/70 border border-border">
-                      https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_{profile?.id?.slice(0,8) || 'XXXX'}
+                      https://app.rivehub.com/api/webhooks/reservations?token=RIVE_SEC_{profile?.id?.slice(0,8) || 'XXXX'}
                     </code>
                     <Button
                       variant="outline"
                       size="sm"
                       className="rounded-lg"
                       onClick={() => {
-                        navigator.clipboard.writeText(`https://app.rive.com/api/webhooks/reservations?token=RIVE_SEC_${profile?.id?.slice(0,8)}`);
+                        navigator.clipboard.writeText(`https://app.rivehub.com/api/webhooks/reservations?token=RIVE_SEC_${profile?.id?.slice(0,8)}`);
                         alert(t("copied_alert"));
                       }}
                     >

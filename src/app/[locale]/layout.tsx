@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(SITE_URL),
     title: {
       default: title,
-      template: `%s | Rive`,
+      template: `%s | RiveHub`,
     },
     description,
     alternates: {
@@ -64,14 +64,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title,
       description,
       url,
-      siteName: 'Rive',
+      siteName: 'RiveHub',
       locale,
       type: 'website',
       images: [{
         url: `${SITE_URL}/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: 'Rive — AI-Powered Restaurant Operations Platform',
+        alt: 'RiveHub — AI-Powered Restaurant Operations Platform',
       }],
     },
     twitter: {

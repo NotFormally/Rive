@@ -210,7 +210,7 @@ export function WasteCostCalculator({
       <div className="border-t border-border/50" />
 
       {/* Results */}
-      <div className="space-y-6">
+      <div className="space-y-6 text-center">
         {/* Weekly food purchases */}
         <div className="flex items-baseline justify-between mt-4">
           <span className="font-outfit text-base opacity-60">

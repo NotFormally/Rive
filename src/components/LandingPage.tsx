@@ -576,7 +576,7 @@ export function LandingPage() {
                 <div className="bg-indigo-50 w-16 h-16 rounded-2xl flex items-center justify-center"><CalendarCheck className="w-8 h-8 text-indigo-600" /></div>
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#F2F0E9]">{t('f7_title')}</h3>
                 <p className="font-outfit text-lg text-slate-300 leading-relaxed">{t('f7_desc')}</p>
-                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100/60 mt-4">
+                <div className="bg-indigo-500/10 p-6 rounded-2xl border border-indigo-500/20 mt-4">
                   <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-indigo-300 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-200">
                     <li className="flex gap-3"><span className="text-indigo-500">✦</span> {t('f7_ex1')}</li>
@@ -667,7 +667,7 @@ export function LandingPage() {
                 <div className="bg-emerald-50 w-16 h-16 rounded-2xl flex items-center justify-center"><Beer className="w-8 h-8 text-emerald-600" /></div>
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#F2F0E9]">{t('f9_title')}</h3>
                 <p className="font-outfit text-lg text-slate-300 leading-relaxed">{t('f9_desc')}</p>
-                <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-50 mt-4">
+                <div className="bg-emerald-500/10 p-6 rounded-2xl border border-emerald-500/20 mt-4">
                   <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-emerald-400 mb-4">{t('examples_title')}</h4>
                   <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-200">
                     <li className="flex gap-3"><span className="text-emerald-500">✦</span> {t('f9_ex1')}</li>
@@ -942,7 +942,7 @@ export function LandingPage() {
 
         {/* Bottom Pillars — Horizontal numbered cards */}
         <div className="relative z-10 border-t border-white/[0.06]">
-          <div className="max-w-6xl mx-auto px-8 md:px-24 py-24">
+          <div className="max-w-6xl mx-auto px-8 md:px-24 pt-16 pb-10">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 md:gap-0">
               
               {/* Pillar 1 */}
@@ -983,7 +983,7 @@ export function LandingPage() {
           <p className="font-outfit text-lg md:text-xl text-slate-400 max-w-2xl">{t('protocol_desc')}</p>
         </div>
 
-        <div className="protocol-container relative pb-32">
+        <div className="protocol-container relative pb-16">
           {/* Card 1 */}
           <div className="sticky top-24 z-10 bg-gradient-to-br from-[#2E4036] to-[#18231d] border border-white/10 text-[#F2F0E9] p-10 md:p-16 rounded-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.3)] mb-8 flex flex-col lg:flex-row items-center gap-12 min-h-[50vh] backdrop-blur-xl">
             <div className="flex-1 w-full relative z-10">

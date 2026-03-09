@@ -218,7 +218,7 @@ export default function AuditPage() {
               Want the full picture?
             </h3>
             <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-              RIVE combines online visibility with your actual operational data — food costs,
+              RiveHub combines online visibility with your actual operational data — food costs,
               prep accuracy, waste tracking, team engagement — into a single Health Score.
             </p>
             <a

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 
-const FAQ_KEYS = ["q1", "q2", "q3", "q4", "q5", "q6"] as const;
+const FAQ_KEYS = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
 
 function FAQItem({ questionKey, t }: { questionKey: string; t: ReturnType<typeof useTranslations> }) {
   const [open, setOpen] = useState(false);

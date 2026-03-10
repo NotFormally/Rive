@@ -5,33 +5,72 @@ import { usePathname, useRouter } from "@/i18n/routing";
 import { useTransition, useState, useEffect, useRef } from "react";
 import { Globe } from "lucide-react";
 
-// Ordered by descending number of native speakers
+// Ordered by region, then by number of speakers
 const LANGUAGES = [
-  { code: 'zh-CN', label: '中文' },          // Mandarin — 920M
-  { code: 'es',    label: 'Español' },        // Spanish — 475M
-  { code: 'en',    label: 'English' },         // English — 373M
-  { code: 'hi',    label: 'हिन्दी' },            // Hindi — 345M
-  { code: 'ar',    label: 'العربية' },          // Arabic — 310M
-  { code: 'bn',    label: 'বাংলা' },            // Bengali — 230M
-  { code: 'pt',    label: 'Português' },       // Portuguese — 220M
-  { code: 'ru',    label: 'Русский' },         // Russian — 154M
-  { code: 'ja',    label: '日本語' },           // Japanese — 125M
-  { code: 'zh-HK', label: '粵語' },            // Cantonese — 85M
-  { code: 'vi',    label: 'Tiếng Việt' },     // Vietnamese — 85M
-  { code: 'tr',    label: 'Türkçe' },         // Turkish — 80M
-  { code: 'ko',    label: '한국어' },           // Korean — 77M
-  { code: 'fr',    label: 'Français' },        // French — 77M
-  { code: 'de',    label: 'Deutsch' },         // German — 76M
-  { code: 'ta',    label: 'தமிழ்' },            // Tamil — 75M
-  { code: 'it',    label: 'Italiano' },        // Italian — 68M
-  { code: 'th',    label: 'ไทย' },              // Thai — 60M
-  { code: 'nan',   label: '閩南語' },           // Min Nan — 49M
-  { code: 'pl',    label: 'Polski' },          // Polish — 45M
-  { code: 'id',    label: 'Indonesia' },       // Indonesian — 43M
-  { code: 'pa',    label: 'ਪੰਜਾਬੀ' },          // Punjabi — 33M
-  { code: 'tl',    label: 'Filipino' },        // Tagalog — 28M
-  { code: 'nl',    label: 'Nederlands' },      // Dutch — 25M
-  { code: 'ms',    label: 'Melayu' },          // Malay — 25M
+  // Major
+  { code: 'en',    label: 'English' },
+  { code: 'fr',    label: 'Français' },
+  { code: 'es',    label: 'Español' },
+  { code: 'it',    label: 'Italiano' },
+  { code: 'de',    label: 'Deutsch' },
+  { code: 'pt',    label: 'Português' },
+  { code: 'ru',    label: 'Русский' },
+  { code: 'pl',    label: 'Polski' },
+  { code: 'tr',    label: 'Türkçe' },
+  { code: 'da',    label: 'Dansk' },
+  { code: 'sv',    label: 'Svenska' },
+  // MENA
+  { code: 'ar',    label: 'العربية' },
+  { code: 'ar-AE', label: 'العربية (الإمارات)' },
+  { code: 'ar-LB', label: 'العربية (لبنان)' },
+  { code: 'ar-EG', label: 'العربية (مصر)' },
+  { code: 'kab',   label: 'Taqbaylit' },
+  // Asia
+  { code: 'zh-CN', label: '中文' },
+  { code: 'zh-HK', label: '粵語' },
+  { code: 'nan',   label: '閩南語' },
+  { code: 'ja',    label: '日本語' },
+  { code: 'ko',    label: '한국어' },
+  { code: 'hi',    label: 'हिन्दी' },
+  { code: 'ur',    label: 'اردو' },
+  { code: 'pa',    label: 'ਪੰਜਾਬੀ' },
+  { code: 'ta',    label: 'தமிழ்' },
+  { code: 'bn',    label: 'বাংলা' },
+  // Indo-Oceania
+  { code: 'id',    label: 'Indonesia' },
+  { code: 'ms',    label: 'Melayu' },
+  { code: 'jv',    label: 'Jawa' },
+  { code: 'th',    label: 'ไทย' },
+  { code: 'vi',    label: 'Tiếng Việt' },
+  { code: 'tl',    label: 'Filipino' },
+  // Africa
+  { code: 'sw',    label: 'Kiswahili' },
+  { code: 'am',    label: 'አማርኛ' },
+  { code: 'yo',    label: 'Yorùbá' },
+  { code: 'ha',    label: 'Hausa' },
+  { code: 'zu',    label: 'isiZulu' },
+  { code: 'om',    label: 'Oromoo' },
+  // ANZ
+  { code: 'en-AU', label: 'English (AU)' },
+  { code: 'en-NZ', label: 'English (NZ)' },
+  // Celtic
+  { code: 'br',    label: 'Brezhoneg' },
+  { code: 'cy',    label: 'Cymraeg' },
+  { code: 'gd',    label: 'Gàidhlig' },
+  { code: 'ga',    label: 'Gaeilge' },
+  // Romance/Isolates
+  { code: 'eu',    label: 'Euskara' },
+  { code: 'co',    label: 'Corsu' },
+  // Germanic Regional
+  { code: 'nl',    label: 'Nederlands' },
+  { code: 'nl-BE', label: 'Vlaams' },
+  { code: 'nds',   label: 'Plattdüütsch' },
+  { code: 'gsw',   label: 'Schwyzerdütsch' },
+  { code: 'frk-mos', label: 'Fränkisch (Mosel)' },
+  // Others/Creoles
+  { code: 'hsb',   label: 'Hornjoserbšćina' },
+  { code: 'rom',   label: 'Romani' },
+  { code: 'ht',    label: 'Kreyòl Ayisyen' },
 ];
 
 export function LanguageSelector() {

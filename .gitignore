@@ -62,3 +62,6 @@ token.json
 # caches
 .mypy_cache/
 *.log
+
+# i18n translation cache (auto-generated snapshots)
+messages/.i18n-cache/

@@ -24,16 +24,17 @@ import {
   Globe,
   Sparkles,
   Navigation2,
-  Anchor,
-  Clock,
   BookOpen,
-  Wrench,
   Flag,
   CloudRain,
   Radar,
   ClipboardList,
-  Camera,
-  Mic
+  Mic,
+  Telescope,
+  Boxes,
+  Waypoints,
+  SlidersHorizontal,
+  ScanLine,
 } from "lucide-react";
 
 export function Sidebar() {
@@ -71,15 +72,15 @@ export function Sidebar() {
 
   // Zone II. La Réserve (The Hold — Inventory & Cost)
   const navRéserve = [
-    ...(s.module_receipt_scanner ? [{ name: t("nav_reception_ocr"), href: "/dashboard/reserve/reception", icon: Camera }] : []),
+    ...(s.module_receipt_scanner ? [{ name: t("nav_reception_ocr"), href: "/dashboard/reserve/reception", icon: ScanLine }] : []),
     ...(s.module_food_cost ? [{ name: t("nav_foodcost"), href: "/dashboard/reserve", icon: Calculator }] : []),
     ...(s.module_variance ? [{ name: t("nav_variance"), href: "/dashboard/reserve/tirant", icon: Droplets }] : []),
     ...(s.module_deposits ? [{ name: t("nav_deposits"), href: "/dashboard/reserve/lest", icon: Recycle }] : []),
     ...(s.module_production ? [{ name: t("nav_production"), href: "/dashboard/reserve/production", icon: Beer }] : []),
   ];
 
-  // Zone III. Le Quart (The Watch — Service & Prep)
-  const navQuart = [
+  // Zone III. La Manœuvre (Operations — Service & Prep)
+  const navManoeuvre = [
     ...(s.module_smart_prep ? [
       { name: t("nav_appareillage"), href: "/dashboard/quart/appareillage", icon: Brain },
       { name: t("nav_dictee_voice"), href: "/dashboard/atelier/production/voice", icon: Mic }
@@ -157,7 +158,7 @@ export function Sidebar() {
         {/* I. La Passerelle */}
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
-            <Navigation2 className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <Telescope className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
             <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Passerelle</span>
           </div>
           <nav className="space-y-1">
@@ -168,7 +169,7 @@ export function Sidebar() {
         {navRéserve.length > 0 && (
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
-            <Anchor className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <Boxes className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
             <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Réserve</span>
           </div>
           <nav className="space-y-1">
@@ -177,14 +178,14 @@ export function Sidebar() {
         </section>
         )}
 
-        {/* III. Le Quart */}
+        {/* III. La Manœuvre */}
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
-            <Clock className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Quart</span>
+            <Waypoints className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Manœuvre</span>
           </div>
           <nav className="space-y-1">
-            {renderNavGroup(navQuart)}
+            {renderNavGroup(navManoeuvre)}
           </nav>
         </section>
 
@@ -201,7 +202,7 @@ export function Sidebar() {
 
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
-            <Wrench className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
+            <SlidersHorizontal className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
             <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Gouvernail</span>
           </div>
           <nav className="space-y-1">

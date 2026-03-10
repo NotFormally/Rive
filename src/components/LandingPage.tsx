@@ -14,9 +14,11 @@ import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { StickyCTA } from "@/components/StickyCTA";
 import { HowItWorks } from "@/components/HowItWorks";
 // import { DemoVideoSection } from "@/components/DemoVideoSection"; // Suspended until real video is ready
-import { BeforeAfterComparison } from "@/components/BeforeAfterComparison";
 import { FAQSection } from "@/components/FAQSection";
 import { NanoBananaPromo } from "@/components/NanoBananaPromo";
+import { NauticalCommandCenter } from "@/components/NauticalCommandCenter";
+import { ThreePillarsDemo } from "@/components/ThreePillarsDemo";
+import { BeforeAfterComparison } from "@/components/BeforeAfterComparison";
 
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
@@ -250,6 +252,16 @@ export function LandingPage() {
             <WasteCostCalculator variant="landing" />
           </div>
         </div>
+      </section>
+
+      {/* NAUTICAL COMMAND CENTER NARRATIVE */}
+      <section className="relative px-4 md:px-12 lg:px-24">
+        <NauticalCommandCenter />
+      </section>
+
+      {/* THREE PILLARS (OWNER, CHEF, COMPLIANCE) */}
+      <section className="relative px-4 md:px-12 lg:px-24">
+        <ThreePillarsDemo />
       </section>
 
       {/* HOW IT WORKS — 3 Steps */}

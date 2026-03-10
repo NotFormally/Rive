@@ -31,7 +31,38 @@ export async function POST(req: Request) {
       return new Response('Text and target language are required', { status: 400 });
     }
 
-    const langMap: Record<string, string> = { en: 'English', es: 'Spanish', fr: 'French' };
+    const langMap: Record<string, string> = {
+      // Major
+      en: 'English', fr: 'French', es: 'Spanish', it: 'Italian',
+      de: 'German', pt: 'Portuguese (Brazilian)', ru: 'Russian',
+      pl: 'Polish', tr: 'Turkish', da: 'Danish', sv: 'Swedish',
+      // MENA
+      ar: 'Arabic (Modern Standard)', 'ar-AE': 'Arabic (UAE Khaleeji dialect)',
+      'ar-LB': 'Arabic (Lebanese Levantine dialect)', 'ar-EG': 'Arabic (Egyptian dialect)',
+      kab: 'Kabyle (Taqbaylit)',
+      // Asia
+      hi: 'Hindi', ur: 'Urdu', pa: 'Punjabi', ta: 'Tamil', bn: 'Bengali',
+      'zh-CN': 'Simplified Chinese', 'zh-HK': 'Traditional Chinese (Cantonese)',
+      nan: 'Min Nan Chinese (Taiwanese Hokkien)', ja: 'Japanese', ko: 'Korean',
+      // Indo-Oceania
+      id: 'Indonesian', ms: 'Malay', jv: 'Javanese', th: 'Thai',
+      vi: 'Vietnamese', tl: 'Tagalog / Filipino',
+      // Africa
+      sw: 'Swahili', am: 'Amharic', yo: 'Yoruba', ha: 'Hausa',
+      zu: 'Zulu (isiZulu)', om: 'Oromo',
+      // ANZ
+      'en-AU': 'English (Australian)', 'en-NZ': 'English (New Zealand)',
+      // Celtic
+      br: 'Breton', cy: 'Welsh', gd: 'Scottish Gaelic', ga: 'Irish (Gaeilge)',
+      // Romance/Isolates
+      eu: 'Basque (Euskara)', co: 'Corsican',
+      // Germanic Regional
+      nl: 'Dutch', 'nl-BE': 'Flemish (Belgian Dutch)',
+      nds: 'Low German (Plattdeutsch)', gsw: 'Swiss German (Alemannic)',
+      'frk-mos': 'Moselle Franconian',
+      // Others/Creoles
+      hsb: 'Upper Sorbian', rom: 'Romani', ht: 'Haitian Creole',
+    };
     const langName = langMap[targetLanguage] || targetLanguage;
 
     try {

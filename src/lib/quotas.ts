@@ -23,7 +23,7 @@ export type MetricName =
   | 'deposit_entries'
   | 'variance_reports'
   | 'production_batches'
-  // Predictive (Le Quart)
+  // Predictive (La Manœuvre)
   | 'smart_prep_generations'
   | 'reservation_syncs';
 

@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next'
+import { routing } from '@/i18n/routing'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rivehub.com'
 
-const locales = ['fr', 'en', 'ar', 'es', 'it', 'hi', 'pa', 'ta', 'bn', 'ru', 'pt', 'zh-HK', 'zh-CN', 'tr', 'ms', 'ja', 'ko', 'id', 'nan', 'vi', 'de', 'th', 'pl', 'tl', 'nl']
+const locales = routing.locales
 
 const publicRoutes = [
   { path: '', changeFrequency: 'weekly' as const, priority: 1.0 },

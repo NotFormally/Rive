@@ -2,7 +2,28 @@ import { defineRouting } from 'next-intl/routing';
 import { createNavigation } from 'next-intl/navigation';
 
 export const routing = defineRouting({
-  locales: ['zh-CN', 'es', 'en', 'hi', 'ar', 'bn', 'pt', 'ru', 'ja', 'zh-HK', 'vi', 'tr', 'ko', 'fr', 'de', 'ta', 'it', 'th', 'nan', 'pl', 'id', 'pa', 'tl', 'nl', 'ms'],
+  locales: [
+    // Major
+    'fr', 'en', 'es', 'it', 'de', 'pt', 'ru', 'pl', 'tr', 'da', 'sv',
+    // MENA
+    'ar', 'ar-AE', 'ar-LB', 'ar-EG', 'kab',
+    // Asia
+    'hi', 'ur', 'pa', 'ta', 'bn', 'zh-CN', 'zh-HK', 'nan', 'ja', 'ko',
+    // Indo-Oceania
+    'id', 'ms', 'jv', 'th', 'vi', 'tl',
+    // Africa
+    'sw', 'am', 'yo', 'ha', 'zu', 'om',
+    // ANZ
+    'en-AU', 'en-NZ',
+    // Celtic
+    'br', 'cy', 'gd', 'ga',
+    // Romance/Isolates
+    'eu', 'co',
+    // Germanic Regional
+    'nds', 'gsw', 'frk-mos', 'nl-BE',
+    // Others
+    'nl', 'hsb', 'rom', 'ht',
+  ],
   defaultLocale: 'en',
 });
 

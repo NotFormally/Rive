@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
+import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
 import type { Metadata } from "next";
 
 /** Convert markdown bold/italic in legal text to HTML (safe — content is ours, not user input) */
@@ -169,7 +170,7 @@ export default function CGUPage() {
           <ul className={ul}>
             <Li>{t("s5_s1_l1")}</Li>
             <Li>{t("s5_s1_l2")}</Li>
-            <Li>{t("s5_s1_l3")}</Li>
+            <Li>{t("s5_s1_l3", { count: SUPPORTED_LANGUAGE_COUNT })}</Li>
             <Li>{t("s5_s1_l4")}</Li>
             <Li>{t("s5_s1_l5")}</Li>
             <Li>{t("s5_s1_l6")}</Li>

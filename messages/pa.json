@@ -62,7 +62,7 @@
     "f2_ex1": "Le frigo passe à 8°C : suggestion d'une action corrective \"Isoler ou jeter les denrées à risque\".",
     "f2_ex2": "Rappel automatique pour la vérification des huiles de friture.",
     "f2_ex3": "Procédures HACCP documentées en cas d'inspection.",
-    "f3_title": "Traduction Instantanée en 25 Langues",
+    "f3_title": "Traduction Instantanée en {count} Langues",
     "f3_desc": "ਬੋਰਡ ਉੱਤੇ ਕੋਈ ਭਾਸ਼ਾ ਰੁਕਾਵਟ ਨਹੀਂ। ਹਰ ਕ੍ਰੂ ਮੈਂਬਰ ਬ੍ਰਿਜ ਅਤੇ ਲੌਗ ਐਂਟਰੀਆਂ ਤੱਕ ਆਪਣੀ ਮਾਤ੍ਰਭਾਸ਼ਾ ਵਿੱਚ ਪਹੁੰਚ ਕਰਦਾ ਹੈ।",
     "f3_ex1": "Le chef écrit en espagnol, le plongeur lit en bengali.",
     "f3_ex2": "Fiches de recettes immédiatement comprises par tous les nouveaux arrivants.",
@@ -186,7 +186,9 @@
     "f11_ex2": "ਇੰਟਰੈਕਟਿਵ ਡਾਈਨੇਮਿਕਸ ਆਫ ਇਨਫਲੋਜ ਐਂਡ ਆਉਟਫਲੋਜ।",
     "f11_ex3": "ਲਾਗਤਾਂ ਦੀ ਮੇਜ਼ਬਾਨੀ ਵਿਸ਼ਲੇਸ਼ਣ ਨੂੰ ਪਛਾਣਣ ਲਈ.",
     "utility_mock_energy": "ਮਹੀਨਾਵਾਰ ਊਰਜਾ",
-    "utility_mock_water": "ਮਹੀਨਾਵਾਰ ਪਾਣੀ"
+    "utility_mock_water": "ਮਹੀਨਾਵਾਰ ਪਾਣੀ",
+    "f3_source_example": "ਅੱਜ ਰਾਤ ਫ਼ਰਸ਼ ਨੂੰ ਚੰਗੀ ਤਰ੍ਹਾਂ ਸਾਫ਼ ਕਰੋ।",
+    "f3_target_example": "Limpia el suelo a fondo esta noche."
   },
   "Pricing": {
     "title": "ਸਪੱਸ਼ਟ ਕੀਮਤਾਂ, ਅਸਲ ਪ੍ਰਭਾਵ।",
@@ -205,7 +207,7 @@
     "cta_contact": "ਵਿਕਰੀ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
     "feature_editor": "ਮੀਨੂ ਐਡੀਟਰ + QR ਕੋਡ",
     "feature_logbook": "ਸਮਾਰਟ ਲੌਗਬੁੱਕ (Unlimited)",
-    "feature_i18n": "ਬਹੁ-ਭਾਸ਼ੀ ਅਨੁਵਾਦ (25 Languages)",
+    "feature_i18n": "ਬਹੁ-ਭਾਸ਼ੀ ਅਨੁਵਾਦ ({count} Languages)",
     "feature_foodcost": "ਖੁਰਾਕ ਲਾਗਤ ਵਿਸ਼ਲੇਸ਼ਕ",
     "feature_bcg": "ਮੀਨੂ ਅਨੁਕੂਲਨ",
     "feature_insta": "Instagram ਜਨਰੇਟਰ (Unlimited)",
@@ -244,7 +246,7 @@
     "f2_ex1": "Fridge hits 8°C: suggestion for corrective action \"Isolate or discard high-risk food\".",
     "f2_ex2": "Automatic reminder for fryer oil checks.",
     "f2_ex3": "Documented HACCP procedures in case of inspection.",
-    "f3_title": "Traduction Instantanée en 25 Langues",
+    "f3_title": "Traduction Instantanée en {count} Langues",
     "f3_desc": "The language barrier no longer exists. Every member accesses the app and notes in their native language.",
     "f3_ex1": "The chef writes in Spanish, the dishwasher reads in Bengali.",
     "f3_ex2": "Recipe cards immediately understood by all new hires.",
@@ -361,7 +363,15 @@
     "nav_haccp_builder": "HACCP Builder",
     "nav_multilingual_team": "ਬਹੁਭਾਸ਼ੀ ਟੀਮ",
     "nav_barometre": "ਲੇ ਬੇਰੋਮੇਟਰ",
-    "active_language": "ਸਰਗਰਮ ਭਾਸ਼ਾ"
+    "active_language": "ਸਰਗਰਮ ਭਾਸ਼ਾ",
+    "section_passerelle": "The Bridge",
+    "section_reserve": "The Hold",
+    "section_manoeuvre": "Operations",
+    "section_journal": "Ship's Log",
+    "section_gouvernail": "Helm",
+    "current_language": "Current Language",
+    "aria_open_menu": "Open menu",
+    "aria_close_menu": "Close menu"
   },
   "Dashboard": {
     "header_title": "ਸੰਖੇਪ ਜਾਣਕਾਰੀ",
@@ -463,7 +473,16 @@
     "supplier": "Supplier",
     "amount": "Total Amount",
     "items": "Items",
-    "empty_state": "No notes yet. Add your first observation."
+    "empty_state": "No notes yet. Add your first observation.",
+    "image_ready": "Image ready to be scanned by AI.",
+    "notes_used": "{used} / {total} AI notes used",
+    "scans_used": "{used} / {total} scans used",
+    "translated_badge": "AI translated (Source: {lang})",
+    "translation_quota_reached": "Translation quota reached. Upgrade to a higher plan.",
+    "translating": "Translating...",
+    "translate_to": "Translate to {lang}",
+    "btn_delete_title": "Delete",
+    "label_date": "Date"
   },
   "Common": {
     "error_unknown": "Unknown",
@@ -605,7 +624,7 @@
     "s5_s1_p1": "The Service integrates artificial intelligence technologies (LLM and vision models) provided by third-party suppliers (Anthropic / Claude). These technologies are used to:",
     "s5_s1_l1": "Analyze and categorize logbook service notes",
     "s5_s1_l2": "Suggest corrective actions when anomalies are detected (temperatures, operations)",
-    "s5_s1_l3": "Translate content across supported languages (25 languages)",
+    "s5_s1_l3": "Translate content across supported languages ({count} languages)",
     "s5_s1_l4": "Extract data from receipt and invoice images (OCR)",
     "s5_s1_l5": "Generate text content and captions for social media",
     "s5_s1_l6": "Produce menu engineering recommendations",
@@ -1537,6 +1556,42 @@
     "adv_manifesto_end": " ਜਿੱਥੇ ਮਾਰਜਿਨ ਡਾਟਾ, ਕਰੂ ਸੰਚਾਰ ਅਤੇ ਅਨੁਪਾਲਨ ਦਸਤਾਵੇਜ਼ ਨਾਲ ਸੁਚਾਰੂ ਤਰੀਕੇ ਨਾਲ ਇਕੱਠੇ ਆਉਂਦੇ ਹਨ।",
     "cta_title": "ਡਾਟਾ ਨਾਲ ਨੇਵੀਗੇਟ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ?",
     "cta_desc": "ਆਪਣਾ ਰਾਹ ਚੁਣੋ। ਆਪਣੀ ਮੌਜੂਦਾ ਇੰਟੈਲੀਜੈਂਸ ਸਕੋਰ ਤੋਂ ਸ਼ੁਰੂ ਕਰੋ। ਧੀਰੇ-ਧੀਰੇ ਬਣਾਓ। RiveHub ਤੁਹਾਡੀ ਕਿਚਨ ਦੀ ਡਾਟਾ ਪਰਿਪੱਕਤਾ ਨਾਲ ਵਧਦਾ ਹੈ।",
-    "cta_btn": "ਆਪਣੇ ਕਮਾਂਡ ਸੈਂਟਰ ਦਾ ਨਿਰਮਾਣ ਕਰੋ"
+    "cta_btn": "ਆਪਣੇ ਕਮਾਂਡ ਸੈਂਟਰ ਦਾ ਨਿਰਮਾਣ ਕਰੋ",
+    "is1_label": "ਕਨੈਕਟਡ",
+    "is1_desc": "ਰਿਜ਼ਰਵੇਸ਼ਨ ਸਿੰਕ ਐਕਟਿਵ",
+    "is2_label": "ਵਧਾਇਆ",
+    "is2_desc": "POS + ਫੂਡ ਕਾਸਟ ਦਿਖਾਈ ਦਿੰਦੀ ਹੈ",
+    "is3_label": "ਭਵਿੱਖਬਾਣੀ",
+    "is3_desc": "AI ਪੈਟਰਨ ਦੇਖਦਾ ਹੈ",
+    "is4_label": "ਕੈਲੀਬ੍ਰੇਟਡ",
+    "is4_desc": "ਮਾਹਿਰ-ਪੱਧਰ ਦੀ ਸ਼ੁੱਧਤਾ"
+  },
+  "Pilote": {
+    "btn_label": "The Pilot",
+    "title": "The Pilot",
+    "subtitle": "Operational Navigation",
+    "welcome": "Pilot aboard. What course shall we chart today?",
+    "placeholder": "Ask a question about the service...",
+    "quick_prompts_title": "Quick Requests",
+    "qp1_label": "Analyze today's Food Cost",
+    "qp1_prompt": "Give me a summary of current Food Cost alerts.",
+    "qp2_label": "Check my Prep List",
+    "qp2_prompt": "Review the AI-generated quantities for today's Prep List.",
+    "qp3_label": "Summarize recent sales",
+    "qp3_prompt": "What has been the revenue over the last few days and what is the trend?",
+    "qp4_label": "Today's reservations",
+    "qp4_prompt": "How many covers are expected today? Detail the reservations.",
+    "qp5_label": "Latest logbook notes",
+    "qp5_prompt": "Show me the latest logbook notes, especially urgent ones.",
+    "error_message": "An error occurred. Please try again or report the issue.",
+    "error_count": "{count} error(s) encountered during the session.",
+    "btn_sending": "Sending...",
+    "btn_report": "Report to the Rive team",
+    "report_sent": "Report sent",
+    "report_sent_confirm": "Report sent to the team.",
+    "tooltip_report": "Report an issue"
+  },
+  "DailyInsight": {
+    "section_title": "insight of the day"
   }
 }

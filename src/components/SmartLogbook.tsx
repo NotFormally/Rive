@@ -299,7 +299,7 @@ export function SmartLogbook() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="log-entry" className="sr-only">Nouvelle note</label>
+            <label htmlFor="log-entry" className="sr-only">{t('title')}</label>
             <textarea
               id="log-entry"
               rows={3}
@@ -326,7 +326,7 @@ export function SmartLogbook() {
 
           <div className="flex flex-col-reverse md:flex-row justify-between md:items-center gap-3 md:gap-0 mt-2">
             <span className="text-[10px] md:text-xs text-muted-foreground font-plex-mono uppercase tracking-wider text-center md:text-left">
-              {hasQuota && !notesQuotaReached && `${usage?.logbook_notes || 0} / ${TIER_QUOTAS[currentTier].logbook_notes} notes IA utilisées`}
+              {hasQuota && !notesQuotaReached && t('notes_used', { used: usage?.logbook_notes || 0, total: TIER_QUOTAS[currentTier].logbook_notes })}
             </span>
             <button
               type="submit"
@@ -369,10 +369,10 @@ export function SmartLogbook() {
 
           <div className="mt-2 flex justify-between items-center">
             {selectedImage && !scansQuotaReached && (
-               <div className="text-xs font-outfit text-muted-foreground">Image prête à être scannée par l'IA.</div>
+               <div className="text-xs font-outfit text-muted-foreground">{t('image_ready')}</div>
             )}
             {!selectedImage && hasQuota && (
-               <div className="text-xs font-outfit text-muted-foreground ml-auto">{usage?.receipt_scans || 0} / {TIER_QUOTAS[currentTier].receipt_scans} scans utilisés</div>
+               <div className="text-xs font-outfit text-muted-foreground ml-auto">{t('scans_used', { used: usage?.receipt_scans || 0, total: TIER_QUOTAS[currentTier].receipt_scans })}</div>
             )}
           </div>
         </div>
@@ -404,7 +404,7 @@ export function SmartLogbook() {
           </div>
         ) : entries.length === 0 ? (
           <div className="text-center py-12 bg-card rounded-2xl border border-border/50">
-            <p className="text-muted-foreground font-outfit text-sm">{t('empty_state') || 'Aucune note pour le moment. Ajoutez votre première observation.'}</p>
+            <p className="text-muted-foreground font-outfit text-sm">{t('empty_state')}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -425,7 +425,7 @@ export function SmartLogbook() {
                        <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-lg">
                           <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
                           <span className="font-outfit text-xs font-semibold text-indigo-400">
-                             Traduit par l'IA (Langue source: {entry.originalLanguage.toUpperCase()})
+                             {t('translated_badge', { lang: entry.originalLanguage.toUpperCase() })}
                           </span>
                        </div>
                     )}
@@ -433,7 +433,7 @@ export function SmartLogbook() {
                     {needsTranslation && !hasTranslationForCurrentView && (
                       <div className="mt-2">
                         {transQuotaReached ? (
-                          <p className="text-xs font-medium font-outfit text-accent">Quota de traductions atteint. Passez au forfait supérieur.</p>
+                          <p className="text-xs font-medium font-outfit text-accent">{t('translation_quota_reached')}</p>
                         ) : (
                           <button
                             type="button"
@@ -441,7 +441,7 @@ export function SmartLogbook() {
                             disabled={isTranslating === entry.id}
                             className="text-xs font-medium font-outfit text-primary hover:text-[#3A4F43] underline disabled:opacity-50"
                           >
-                            {isTranslating === entry.id ? 'Traduction en cours...' : `Traduire en ${APP_LANGUAGES.find(l => l.code === viewingLanguage)?.label || viewingLanguage.toUpperCase()}`}
+                            {isTranslating === entry.id ? t('translating') : t('translate_to', { lang: APP_LANGUAGES.find(l => l.code === viewingLanguage)?.label || viewingLanguage.toUpperCase() })}
                           </button>
                         )}
                       </div>
@@ -451,7 +451,7 @@ export function SmartLogbook() {
                     type="button"
                     onClick={() => removeEntry(entry.id)}
                     className="ml-2 text-muted-foreground hover:text-red-500 transition-colors shrink-0 p-1 rounded-md hover:bg-red-50/10"
-                    title="Supprimer"
+                    title={t('btn_delete_title')}
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -462,7 +462,7 @@ export function SmartLogbook() {
                     <h4 className="font-jakarta font-bold text-sm mb-1 text-foreground">{t('extracted_data')}</h4>
                     <ul className="text-xs font-outfit text-foreground/60 space-y-1">
                       <li><span className="font-medium text-foreground/80">{t('supplier')} :</span> {entry.receiptData.supplierName}</li>
-                      <li><span className="font-medium text-foreground/80">Date :</span> {entry.receiptData.date}</li>
+                      <li><span className="font-medium text-foreground/80">{t('label_date')} :</span> {entry.receiptData.date}</li>
                       <li><span className="font-medium text-foreground/80">{t('amount')} :</span> <span className="text-green-700 font-semibold">{entry.receiptData.totalAmount}</span></li>
                       <li><span className="font-medium text-foreground/80">{t('items')} :</span> {entry.receiptData.topItems.join(', ')}</li>
                     </ul>

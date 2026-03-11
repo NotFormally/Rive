@@ -1,5 +1,6 @@
 import { LandingPage } from "@/components/LandingPage";
 import { JsonLd } from "@/components/JsonLd";
+import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rivehub.com'
 
@@ -11,7 +12,7 @@ const structuredData = [
     "url": SITE_URL,
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
-    "description": "AI for restaurant management — the all-in-one AI platform for restaurants. HACCP compliance, intelligent logbook, food cost analysis, instant translation in 25 languages, OCR invoice scanning, menu engineering, POS integration, and social media content generation. No language barriers aboard — used by multilingual teams worldwide.",
+    "description": `AI for restaurant management — the all-in-one AI platform for restaurants. HACCP compliance, intelligent logbook, food cost analysis, instant translation in ${SUPPORTED_LANGUAGE_COUNT} languages, OCR invoice scanning, menu engineering, POS integration, and social media content generation. No language barriers aboard — used by multilingual teams worldwide.`,
     "offers": [
       {
         "@type": "Offer",
@@ -42,7 +43,7 @@ const structuredData = [
       "AI-Powered Logbook",
       "HACCP Compliance Assistant",
       "Food Cost Analysis",
-      "25-Language Translation",
+      `${SUPPORTED_LANGUAGE_COUNT}-Language Translation`,
       "OCR Invoice Scanner",
       "Menu Engineering Matrix",
       "POS Integration (Toast, Square, SumUp, Lightspeed, Zettle)",
@@ -146,7 +147,7 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "Can my team use RiveHub in their own language?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. RiveHub supports 25 languages and dialects — from French and English to Bengali, Kabyle and Cantonese. Every task, recipe card and safety procedure is automatically translated for each team member. No language barrier aboard." }
+        "acceptedAnswer": { "@type": "Answer", "text": `Yes. RiveHub supports ${SUPPORTED_LANGUAGE_COUNT} languages and dialects — from French and English to Bengali, Kabyle and Cantonese. Every task, recipe card and safety procedure is automatically translated for each team member. No language barrier aboard.` }
       },
       {
         "@type": "Question",

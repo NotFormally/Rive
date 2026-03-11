@@ -3,11 +3,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
+import { useTranslations } from "next-intl";
 import { X, Send, Sparkles, Navigation2, LifeBuoy, Check } from "lucide-react";
 
 const transport = new DefaultChatTransport({ api: "/api/assistant" });
 
 export default function Pilote() {
+  const t = useTranslations("Pilote");
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [errorCount, setErrorCount] = useState(0);
@@ -24,7 +26,7 @@ export default function Pilote() {
         parts: [
           {
             type: "text" as const,
-            text: "Pilote à bord. Quelle cap prenons-nous aujourd'hui ?",
+            text: t("welcome"),
           },
         ],
       },
@@ -77,7 +79,7 @@ export default function Pilote() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           chat_log: chatLog,
-          error_details: error?.message || `${errorCount} erreur(s) rencontrée(s) durant la session.`,
+          error_details: error?.message || t("error_count", { count: errorCount }),
         }),
       });
 
@@ -90,35 +92,11 @@ export default function Pilote() {
   };
 
   const quickPrompts = [
-    {
-      icon: "\u{1F4B0}",
-      label: "Analyse mon Food Cost du jour",
-      prompt: "Fais-moi un r\u00e9capitulatif des alertes Food Cost en cours.",
-    },
-    {
-      icon: "\u{1F4CB}",
-      label: "V\u00e9rifier ma Prep List",
-      prompt:
-        "Fais un point sur les quantit\u00e9s g\u00e9n\u00e9r\u00e9es par l'IA pour la Prep List d'aujourd'hui.",
-    },
-    {
-      icon: "\u{1F4C8}",
-      label: "R\u00e9sume mes ventes r\u00e9centes",
-      prompt:
-        "Quel a \u00e9t\u00e9 le chiffre d'affaires des derniers jours et quelle est la tendance ?",
-    },
-    {
-      icon: "\u{1F37D}\uFE0F",
-      label: "R\u00e9servations du jour",
-      prompt:
-        "Combien de couverts sont attendus aujourd'hui ? D\u00e9taille les r\u00e9servations.",
-    },
-    {
-      icon: "\u{1F4DD}",
-      label: "Derni\u00e8res notes du logbook",
-      prompt:
-        "Montre-moi les derni\u00e8res notes du journal de bord, surtout les urgentes.",
-    },
+    { icon: "\u{1F4B0}", label: t("qp1_label"), prompt: t("qp1_prompt") },
+    { icon: "\u{1F4CB}", label: t("qp2_label"), prompt: t("qp2_prompt") },
+    { icon: "\u{1F4C8}", label: t("qp3_label"), prompt: t("qp3_prompt") },
+    { icon: "\u{1F37D}\uFE0F", label: t("qp4_label"), prompt: t("qp4_prompt") },
+    { icon: "\u{1F4DD}", label: t("qp5_label"), prompt: t("qp5_prompt") },
   ];
 
   const handleQuickPrompt = (prompt: string) => {
@@ -139,7 +117,7 @@ export default function Pilote() {
         >
           <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
           <span className="font-semibold text-sm mr-1 hidden sm:block">
-            Le Pilote
+            {t("btn_label")}
           </span>
         </button>
       )}
@@ -155,10 +133,10 @@ export default function Pilote() {
               </div>
               <div>
                 <h3 className="font-bold text-sm leading-tight">
-                  Le Pilote
+                  {t("title")}
                 </h3>
                 <p className="text-xs text-indigo-100/80">
-                  Navigation Opérationnelle
+                  {t("subtitle")}
                 </p>
               </div>
             </div>
@@ -167,7 +145,7 @@ export default function Pilote() {
                 <button
                   onClick={handleSendReport}
                   disabled={sendingReport || reportSent}
-                  title={reportSent ? "Rapport envoy\u00e9" : "Signaler un probl\u00e8me"}
+                  title={reportSent ? t("report_sent") : t("tooltip_report")}
                   className={`p-1.5 rounded-full transition-colors ${
                     reportSent
                       ? "bg-green-500/30 text-green-200"
@@ -215,7 +193,7 @@ export default function Pilote() {
             {/* Error banner */}
             {error && !isLoading && (
               <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700 space-y-2">
-                <p>Une erreur est survenue. Réessayez ou signalez le problème.</p>
+                <p>{t("error_message")}</p>
                 {!reportSent && (
                   <button
                     onClick={handleSendReport}
@@ -223,12 +201,12 @@ export default function Pilote() {
                     className="flex items-center gap-1.5 text-red-600 hover:text-red-800 font-medium"
                   >
                     <LifeBuoy className="w-3.5 h-3.5" />
-                    {sendingReport ? "Envoi..." : "Signaler \u00e0 l'\u00e9quipe Rive"}
+                    {sendingReport ? t("btn_sending") : t("btn_report")}
                   </button>
                 )}
                 {reportSent && (
                   <p className="text-green-700 flex items-center gap-1">
-                    <Check className="w-3.5 h-3.5" /> Rapport envoyé à l'équipe.
+                    <Check className="w-3.5 h-3.5" /> {t("report_sent_confirm")}
                   </p>
                 )}
               </div>
@@ -238,7 +216,7 @@ export default function Pilote() {
             {messages.length === 1 && !isLoading && (
               <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-slate-200/60">
                 <p className="text-xs font-semibold text-slate-500 px-1 uppercase tracking-wider">
-                  Demandes rapides
+                  {t("quick_prompts_title")}
                 </p>
                 <div className="flex flex-col gap-2">
                   {quickPrompts.map((qp) => (
@@ -285,7 +263,7 @@ export default function Pilote() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Posez une question sur le service..."
+              placeholder={t("placeholder")}
               className="flex-1 bg-slate-100 border-transparent focus:bg-white focus:border-indigo-500 text-sm px-4 py-2.5 rounded-full outline-none transition-all shadow-sm"
               disabled={isLoading}
             />

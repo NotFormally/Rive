@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
+import { useTranslations } from "next-intl";
 import { supabase } from "@/lib/supabase";
 import { Lightbulb } from "lucide-react";
 
@@ -13,6 +14,7 @@ type DailyInsightRow = {
 };
 
 export function DailyInsight() {
+  const t = useTranslations("DailyInsight");
   const { profile } = useAuth();
   const [insight, setInsight] = useState<DailyInsightRow | null>(null);
   const [loading, setLoading] = useState(true);
@@ -67,7 +69,7 @@ export function DailyInsight() {
         <Lightbulb className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
         <div className="space-y-1.5">
           <span className="font-plex-mono text-[10px] uppercase tracking-widest text-amber-500/70">
-            insight du jour
+            {t("section_title")}
           </span>
           <p className="font-outfit text-sm text-foreground leading-relaxed">
             {insight.insight_text}

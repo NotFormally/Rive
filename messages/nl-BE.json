@@ -201,7 +201,9 @@
     "f11_ex2": "Interactieve dynamiek van in- en uitstromen.",
     "f11_ex3": "Gedetailleerde uitsplitsing van de kosten om knelpunten te identificeren.",
     "utility_mock_energy": "Maandelijkse Energie",
-    "utility_mock_water": "Maandelijks Water"
+    "utility_mock_water": "Maandelijks Water",
+    "f3_source_example": "Maak de vloer vanavond grondig schoon.",
+    "f3_target_example": "Limpia el suelo a fondo esta noche."
   },
   "Pricing": {
     "title": "Duidelijke prijzen, echte impact.",
@@ -376,7 +378,15 @@
     "nav_dictee_voice": "Spraakdictatie (AI)",
     "nav_sonar": "Sonar (Audits)",
     "nav_haccp_runner": "HACCP Runner",
-    "nav_haccp_builder": "HACCP Builder"
+    "nav_haccp_builder": "HACCP Builder",
+    "section_passerelle": "The Bridge",
+    "section_reserve": "The Hold",
+    "section_manoeuvre": "Operations",
+    "section_journal": "Ship's Log",
+    "section_gouvernail": "Helm",
+    "current_language": "Current Language",
+    "aria_open_menu": "Open menu",
+    "aria_close_menu": "Close menu"
   },
   "Dashboard": {
     "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
@@ -478,7 +488,16 @@
     "supplier": "Leverancier",
     "amount": "Totaalbedrag",
     "items": "Artikelen",
-    "empty_state": "Nog geen notities. Voeg uw eerste observatie toe."
+    "empty_state": "Nog geen notities. Voeg uw eerste observatie toe.",
+    "image_ready": "Image ready to be scanned by AI.",
+    "notes_used": "{used} / {total} AI notes used",
+    "scans_used": "{used} / {total} scans used",
+    "translated_badge": "AI translated (Source: {lang})",
+    "translation_quota_reached": "Translation quota reached. Upgrade to a higher plan.",
+    "translating": "Translating...",
+    "translate_to": "Translate to {lang}",
+    "btn_delete_title": "Delete",
+    "label_date": "Date"
   },
   "Common": {
     "loading": "Laden...",
@@ -1537,6 +1556,42 @@
     "adv_manifesto_end": "waar margegegevens, bemanningscommunicatie en compliance-documentatie op natuurlijke wijze samenkomen.",
     "cta_title": "Klaar om te navigeren met data?",
     "cta_desc": "Kies je route. Begin bij je huidige Intelligentie Score. Bouw progressief. RiveHub groeit mee met de datavolwassenheid van je keuken.",
-    "cta_btn": "Bouw je Commandocentrum"
+    "cta_btn": "Bouw je Commandocentrum",
+    "is1_label": "Verbonden",
+    "is1_desc": "Reserveringssynchronisatie actief",
+    "is2_label": "Verbeterd",
+    "is2_desc": "POS + Voedselkosten zichtbaar",
+    "is3_label": "Voorspellend",
+    "is3_desc": "AI ziet patronen",
+    "is4_label": "Gekalibreerd",
+    "is4_desc": "Nauwkeurigheid op expertniveau"
+  },
+  "Pilote": {
+    "btn_label": "The Pilot",
+    "title": "The Pilot",
+    "subtitle": "Operational Navigation",
+    "welcome": "Pilot aboard. What course shall we chart today?",
+    "placeholder": "Ask a question about the service...",
+    "quick_prompts_title": "Quick Requests",
+    "qp1_label": "Analyze today's Food Cost",
+    "qp1_prompt": "Give me a summary of current Food Cost alerts.",
+    "qp2_label": "Check my Prep List",
+    "qp2_prompt": "Review the AI-generated quantities for today's Prep List.",
+    "qp3_label": "Summarize recent sales",
+    "qp3_prompt": "What has been the revenue over the last few days and what is the trend?",
+    "qp4_label": "Today's reservations",
+    "qp4_prompt": "How many covers are expected today? Detail the reservations.",
+    "qp5_label": "Latest logbook notes",
+    "qp5_prompt": "Show me the latest logbook notes, especially urgent ones.",
+    "error_message": "An error occurred. Please try again or report the issue.",
+    "error_count": "{count} error(s) encountered during the session.",
+    "btn_sending": "Sending...",
+    "btn_report": "Report to the Rive team",
+    "report_sent": "Report sent",
+    "report_sent_confirm": "Report sent to the team.",
+    "tooltip_report": "Report an issue"
+  },
+  "DailyInsight": {
+    "section_title": "insight of the day"
   }
 }

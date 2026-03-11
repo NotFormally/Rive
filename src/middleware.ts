@@ -7,8 +7,8 @@ import { createServerClient } from "@supabase/ssr";
 // plugin alias → request.ts → all 54 message JSON files into the Edge bundle)
 // ---------------------------------------------------------------------------
 const LOCALES = [
-  'fr', 'en', 'es', 'it', 'de', 'pt', 'ru', 'pl', 'tr', 'da', 'sv',
-  'ar', 'ar-AE', 'ar-LB', 'ar-EG', 'kab',
+  'fr', 'en', 'es', 'it', 'de', 'pt', 'ru', 'pl', 'tr', 'da', 'sv', 'ro', 'el', 'hu', 'cs',
+  'fa', 'ar', 'ar-AE', 'ar-LB', 'ar-EG', 'kab',
   'hi', 'ur', 'pa', 'ta', 'bn', 'zh-CN', 'zh-HK', 'nan', 'ja', 'ko',
   'id', 'ms', 'jv', 'th', 'vi', 'tl',
   'sw', 'am', 'yo', 'ha', 'zu', 'om',

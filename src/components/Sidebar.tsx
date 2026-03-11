@@ -101,7 +101,7 @@ export function Sidebar() {
   const navGouvernail = [
     { name: t("nav_greement"), href: "/dashboard/gouvernail", icon: Settings },
     { name: t("nav_haccp_builder"), href: "/dashboard/gouvernail/haccp-builder", icon: ClipboardList },
-    { name: t("nav_multilingual_team") || "Équipe Multilingue", href: "/dashboard/multilingual", icon: Globe },
+    { name: t("nav_multilingual_team"), href: "/dashboard/multilingual", icon: Globe },
   ];
 
   const renderNavGroup = (items: any[]) => items.map((item) => {
@@ -159,7 +159,7 @@ export function Sidebar() {
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
             <Telescope className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Passerelle</span>
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">{t("section_passerelle")}</span>
           </div>
           <nav className="space-y-1">
             {renderNavGroup(navPasserelle)}
@@ -170,7 +170,7 @@ export function Sidebar() {
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
             <Boxes className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Réserve</span>
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">{t("section_reserve")}</span>
           </div>
           <nav className="space-y-1">
             {renderNavGroup(navRéserve)}
@@ -182,7 +182,7 @@ export function Sidebar() {
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
             <Waypoints className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">La Manœuvre</span>
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">{t("section_manoeuvre")}</span>
           </div>
           <nav className="space-y-1">
             {renderNavGroup(navManoeuvre)}
@@ -193,7 +193,7 @@ export function Sidebar() {
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
             <BookOpen className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Journal de Bord</span>
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">{t("section_journal")}</span>
           </div>
           <nav className="space-y-1">
             {renderNavGroup(navJournal)}
@@ -203,7 +203,7 @@ export function Sidebar() {
         <section>
           <div className="px-4 mb-2 flex items-center gap-2">
             <SlidersHorizontal className="w-3 h-3 text-[--sidebar-foreground] opacity-40" />
-            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">Le Gouvernail</span>
+            <span className="text-[10px] font-plex-mono text-[--sidebar-foreground] opacity-50 uppercase tracking-[0.15em]">{t("section_gouvernail")}</span>
           </div>
           <nav className="space-y-1">
             {renderNavGroup(navGouvernail)}
@@ -215,8 +215,8 @@ export function Sidebar() {
       <div className="p-4 border-t border-[--sidebar-border] shrink-0 flex flex-col gap-2">
         <div className="bg-[#1A1A1A]/40 border border-white/5 p-3 rounded-2xl flex items-center justify-between shadow-inner">
           <div className="flex flex-col">
-             <span className="font-plex-mono text-[9px] uppercase tracking-wider text-[--sidebar-foreground] opacity-50">{t("active_language") || "Langue Active"}</span>
-             <span className="font-jakarta text-xs font-bold text-[--sidebar-foreground] mt-0.5">Français (FR)</span>
+             <span className="font-plex-mono text-[9px] uppercase tracking-wider text-[--sidebar-foreground] opacity-50">{t("current_language")}</span>
+             <span className="font-jakarta text-xs font-bold text-[--sidebar-foreground] mt-0.5">{t("active_language")}</span>
           </div>
           <div className="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
              <Sparkles className="w-4 h-4 text-indigo-400" />
@@ -240,7 +240,7 @@ export function Sidebar() {
       <button
         onClick={() => setMobileOpen(true)}
         className="md:hidden fixed top-6 left-6 z-[60] bg-[--primary] text-white p-3 rounded-2xl shadow-2xl border border-white/10"
-        aria-label="Ouvrir le menu"
+        aria-label={t("aria_open_menu")}
       >
         <Menu className="w-5 h-5" />
       </button>
@@ -269,7 +269,7 @@ export function Sidebar() {
         <button
           onClick={() => setMobileOpen(false)}
           className="absolute top-6 right-6 text-[--sidebar-foreground] opacity-50 hover:opacity-100"
-          aria-label="Fermer le menu"
+          aria-label={t("aria_close_menu")}
         >
           <X className="w-6 h-6" />
         </button>

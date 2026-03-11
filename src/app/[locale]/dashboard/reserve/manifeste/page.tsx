@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Plus, Pencil, Trash2, Check, X, AlertCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Ingredient = {
   id: string;
@@ -14,6 +15,8 @@ type Ingredient = {
 
 export default function IngredientsPage() {
   const { profile, settings } = useAuth();
+  const t = useTranslations("Reserve");
+  const tc = useTranslations("Common");
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -49,7 +52,7 @@ export default function IngredientsPage() {
 
   const handleSave = async () => {
     if (!formData.name || !formData.unit_cost || !formData.unit) {
-      setError("Tous les champs sont requis.");
+      setError(t("all_fields_required"));
       return;
     }
 
@@ -93,7 +96,7 @@ export default function IngredientsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Voulez-vous vraiment supprimer cet ingrédient ?")) return;
+    if (!confirm(t("delete_ingredient_confirm"))) return;
 
     try {
       const { error } = await supabase
@@ -130,7 +133,7 @@ export default function IngredientsPage() {
   if (!settings?.module_food_cost) {
     return (
       <div className="p-8 text-center text-slate-500">
-        Ce module est désactivé. Vous pouvez l'activer dans les Paramètres.
+        {tc("module_disabled")}
       </div>
     );
   }
@@ -140,8 +143,8 @@ export default function IngredientsPage() {
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="px-8 py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-slate-900">Food Cost</h1>
-            <p className="text-sm text-slate-500">Catalogue des Ingrédients</p>
+            <h1 className="text-xl font-bold text-slate-900">{t("food_cost_title")}</h1>
+            <p className="text-sm text-slate-500">{t("ingredients_catalog")}</p>
           </div>
           {!isAdding && !editingId && (
             <button
@@ -152,14 +155,14 @@ export default function IngredientsPage() {
               className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
             >
               <Plus className="w-4 h-4" />
-              Nouveau
+              {tc("new_item")}
             </button>
           )}
         </div>
         <div className="px-8 flex items-center gap-6 text-sm font-medium">
-          <a href="/dashboard/food-cost" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Vue Globale</a>
-          <a href="/dashboard/food-cost/ingredients" className="py-3 border-b-2 border-indigo-600 text-indigo-600">Ingrédients</a>
-          <a href="/dashboard/food-cost/recipes" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Recettes</a>
+          <a href="/dashboard/food-cost" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">{t("tab_overview")}</a>
+          <a href="/dashboard/food-cost/ingredients" className="py-3 border-b-2 border-indigo-600 text-indigo-600">{t("tab_ingredients")}</a>
+          <a href="/dashboard/food-cost/recipes" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">{t("tab_recipes")}</a>
         </div>
       </header>
 
@@ -175,10 +178,10 @@ export default function IngredientsPage() {
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-medium">
               <tr>
-                <th className="px-6 py-4">Nom de l'ingrédient</th>
-                <th className="px-6 py-4">Coût</th>
-                <th className="px-6 py-4">Unité</th>
-                <th className="px-6 py-4 text-right">Actions</th>
+                <th className="px-6 py-4">{t("ingredient_name")}</th>
+                <th className="px-6 py-4">{t("cost")}</th>
+                <th className="px-6 py-4">{t("unit")}</th>
+                <th className="px-6 py-4 text-right">{tc("actions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -187,7 +190,7 @@ export default function IngredientsPage() {
                   <td className="px-6 py-3">
                     <input
                       type="text"
-                      placeholder="Ex: Saumon frais"
+                      placeholder={t("placeholder_ingredient")}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
@@ -207,7 +210,7 @@ export default function IngredientsPage() {
                   <td className="px-6 py-3">
                     <input
                       type="text"
-                      placeholder="kg, L, unité..."
+                      placeholder={t("placeholder_unit")}
                       value={formData.unit}
                       onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
                       className="w-full max-w-[120px] px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
@@ -228,12 +231,12 @@ export default function IngredientsPage() {
 
               {loading ? (
                 <tr>
-                  <td colSpan={4} className="px-6 py-8 text-center text-slate-500">Chargement...</td>
+                  <td colSpan={4} className="px-6 py-8 text-center text-slate-500">{tc("loading")}</td>
                 </tr>
               ) : ingredients.length === 0 && !isAdding ? (
                 <tr>
                   <td colSpan={4} className="px-6 py-12 text-center">
-                    <p className="text-slate-500 mb-4">Aucun ingrédient configuré.</p>
+                    <p className="text-slate-500 mb-4">{t("no_ingredients")}</p>
                   </td>
                 </tr>
               ) : (

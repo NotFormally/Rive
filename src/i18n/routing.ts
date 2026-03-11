@@ -4,9 +4,9 @@ import { createNavigation } from 'next-intl/navigation';
 export const routing = defineRouting({
   locales: [
     // Major
-    'fr', 'en', 'es', 'it', 'de', 'pt', 'ru', 'pl', 'tr', 'da', 'sv',
-    // MENA
-    'ar', 'ar-AE', 'ar-LB', 'ar-EG', 'kab',
+    'fr', 'en', 'es', 'it', 'de', 'pt', 'ru', 'pl', 'tr', 'da', 'sv', 'ro', 'el', 'hu', 'cs',
+    // MENA + Iran
+    'fa', 'ar', 'ar-AE', 'ar-LB', 'ar-EG', 'kab',
     // Asia
     'hi', 'ur', 'pa', 'ta', 'bn', 'zh-CN', 'zh-HK', 'nan', 'ja', 'ko',
     // Indo-Oceania

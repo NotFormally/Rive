@@ -186,7 +186,9 @@
     "f11_ex2": "Dinâmica interativa de entradas e saídas.",
     "f11_ex3": "Detalhamento granular dos custos para identificar gargalos.",
     "utility_mock_energy": "Energia Mensal",
-    "utility_mock_water": "Água Mensal"
+    "utility_mock_water": "Água Mensal",
+    "f3_source_example": "Limpe o chão completamente esta noite.",
+    "f3_target_example": "Limpia el suelo a fondo esta noche."
   },
   "Pricing": {
     "title": "Preços claros, impacto real.",
@@ -205,7 +207,7 @@
     "cta_contact": "Contatar vendas",
     "feature_editor": "Editor de Menu + QR Code",
     "feature_logbook": "Diário Inteligente (Unlimited)",
-    "feature_i18n": "Tradução Multilíngue (25 Languages)",
+    "feature_i18n": "Tradução Multilíngue ({count} Languages)",
     "feature_foodcost": "Analisador de Custos",
     "feature_bcg": "Otimização do Menu",
     "feature_insta": "Gerador Instagram (Unlimited)",
@@ -361,7 +363,15 @@
     "nav_haccp_builder": "HACCP Builder",
     "nav_multilingual_team": "Equipe Multilíngue",
     "nav_barometre": "O Barômetro",
-    "active_language": "Idioma Ativo"
+    "active_language": "Idioma Ativo",
+    "section_passerelle": "The Bridge",
+    "section_reserve": "The Hold",
+    "section_manoeuvre": "Operations",
+    "section_journal": "Ship's Log",
+    "section_gouvernail": "Helm",
+    "current_language": "Current Language",
+    "aria_open_menu": "Open menu",
+    "aria_close_menu": "Close menu"
   },
   "Dashboard": {
     "header_title": "Visão geral",
@@ -463,7 +473,16 @@
     "supplier": "Supplier",
     "amount": "Total Amount",
     "items": "Items",
-    "empty_state": "No notes yet. Add your first observation."
+    "empty_state": "No notes yet. Add your first observation.",
+    "image_ready": "Image ready to be scanned by AI.",
+    "notes_used": "{used} / {total} AI notes used",
+    "scans_used": "{used} / {total} scans used",
+    "translated_badge": "AI translated (Source: {lang})",
+    "translation_quota_reached": "Translation quota reached. Upgrade to a higher plan.",
+    "translating": "Translating...",
+    "translate_to": "Translate to {lang}",
+    "btn_delete_title": "Delete",
+    "label_date": "Date"
   },
   "Common": {
     "error_unknown": "Unknown",
@@ -605,7 +624,7 @@
     "s5_s1_p1": "The Service integrates artificial intelligence technologies (LLM and vision models) provided by third-party suppliers (Anthropic / Claude). These technologies are used to:",
     "s5_s1_l1": "Analyze and categorize logbook service notes",
     "s5_s1_l2": "Suggest corrective actions when anomalies are detected (temperatures, operations)",
-    "s5_s1_l3": "Translate content across supported languages (25 languages)",
+    "s5_s1_l3": "Translate content across supported languages ({count} languages)",
     "s5_s1_l4": "Extract data from receipt and invoice images (OCR)",
     "s5_s1_l5": "Generate text content and captions for social media",
     "s5_s1_l6": "Produce menu engineering recommendations",
@@ -1537,6 +1556,42 @@
     "adv_manifesto_end": " onde os dados de margem, a comunicação da equipe e a documentação de conformidade fluem naturalmente.",
     "cta_title": "Pronto para navegar com dados?",
     "cta_desc": "Escolha seu caminho. Comece no seu Índice de Inteligência atual. Construa progressivamente. O RiveHub cresce com a maturidade de dados da sua cozinha.",
-    "cta_btn": "Construa seu Centro de Comando"
+    "cta_btn": "Construa seu Centro de Comando",
+    "is1_label": "Conectado",
+    "is1_desc": "Sincronização de reservas ativa",
+    "is2_label": "Aprimorado",
+    "is2_desc": "POS + Custo alimentar visível",
+    "is3_label": "Preditivo",
+    "is3_desc": "IA detecta padrões",
+    "is4_label": "Calibrado",
+    "is4_desc": "Precisão de nível especialista"
+  },
+  "Pilote": {
+    "btn_label": "The Pilot",
+    "title": "The Pilot",
+    "subtitle": "Operational Navigation",
+    "welcome": "Pilot aboard. What course shall we chart today?",
+    "placeholder": "Ask a question about the service...",
+    "quick_prompts_title": "Quick Requests",
+    "qp1_label": "Analyze today's Food Cost",
+    "qp1_prompt": "Give me a summary of current Food Cost alerts.",
+    "qp2_label": "Check my Prep List",
+    "qp2_prompt": "Review the AI-generated quantities for today's Prep List.",
+    "qp3_label": "Summarize recent sales",
+    "qp3_prompt": "What has been the revenue over the last few days and what is the trend?",
+    "qp4_label": "Today's reservations",
+    "qp4_prompt": "How many covers are expected today? Detail the reservations.",
+    "qp5_label": "Latest logbook notes",
+    "qp5_prompt": "Show me the latest logbook notes, especially urgent ones.",
+    "error_message": "An error occurred. Please try again or report the issue.",
+    "error_count": "{count} error(s) encountered during the session.",
+    "btn_sending": "Sending...",
+    "btn_report": "Report to the Rive team",
+    "report_sent": "Report sent",
+    "report_sent_confirm": "Report sent to the team.",
+    "tooltip_report": "Report an issue"
+  },
+  "DailyInsight": {
+    "section_title": "insight of the day"
   }
 }

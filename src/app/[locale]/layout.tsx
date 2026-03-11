@@ -7,6 +7,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Meta' });
 
   const title = t('home_title');
-  const description = t('home_description');
+  const description = t('home_description', { count: SUPPORTED_LANGUAGE_COUNT });
   const url = `${SITE_URL}/${locale}`;
 
   // Build hreflang alternates

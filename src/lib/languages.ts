@@ -11,6 +11,10 @@ export const APP_LANGUAGES = [
   { code: 'tr', label: 'Türkçe' },
   { code: 'da', label: 'Dansk (Danois)' },
   { code: 'sv', label: 'Svenska (Suédois)' },
+  { code: 'ro', label: 'Română (Roumain)' },
+  { code: 'el', label: 'Ελληνικά (Grec)' },
+  { code: 'hu', label: 'Magyar (Hongrois)' },
+  { code: 'cs', label: 'Čeština (Tchèque)' },
   
   // Langues Celtiques (Goidélique & Brittonique)
   { code: 'br', label: 'Brezhoneg (Breton)' },
@@ -33,7 +37,8 @@ export const APP_LANGUAGES = [
   { code: 'rom', label: 'Romaničib (Romani)' },
   { code: 'ht', label: 'Kreyòl Ayisyen (Créole haïtien)' },
   
-  // Moyen-Orient & dialectes arabes
+  // Moyen-Orient & Iran
+  { code: 'fa', label: 'فارسی (Persan)' },
   { code: 'ar', label: 'العربية (Fusha)' },
   { code: 'ar-AE', label: 'العربية (Khaleeji)' },
   { code: 'ar-LB', label: 'العربية (Levantin)' },
@@ -72,3 +77,6 @@ export const APP_LANGUAGES = [
   { code: 'en-AU', label: 'English (Australian)' },
   { code: 'en-NZ', label: 'English (New Zealand)' },
 ];
+
+/** Number of supported languages — derived from the canonical list above. */
+export const SUPPORTED_LANGUAGE_COUNT = APP_LANGUAGES.length;

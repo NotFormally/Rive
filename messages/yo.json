@@ -201,7 +201,9 @@
     "f11_ex2": "Awọn agbara ibaraenisọrọ ti awọn ṣiṣan wọle ati awọn ṣiṣan jade.",
     "f11_ex3": "Pinpin granular ti awọn idiyele lati ṣe idanimọ awọn idiwọ.",
     "utility_mock_energy": "Agbara Oṣooṣu (Monthly Energy)",
-    "utility_mock_water": "Omi Oṣooṣu (Monthly Water)"
+    "utility_mock_water": "Omi Oṣooṣu (Monthly Water)",
+    "f3_source_example": "Clean the floor thoroughly tonight.",
+    "f3_target_example": "Limpia el suelo a fondo esta noche."
   },
   "Pricing": {
     "title": "Ìdíyelé tí ó ṣe kedere, ipa gidi.",
@@ -376,7 +378,15 @@
     "nav_dictee_voice": "Aṣẹ ohun (AI)",
     "nav_sonar": "Sonar (Ayewo)",
     "nav_haccp_runner": "Olúsáré HACCP",
-    "nav_haccp_builder": "Akọ́lé HACCP"
+    "nav_haccp_builder": "Akọ́lé HACCP",
+    "section_passerelle": "The Bridge",
+    "section_reserve": "The Hold",
+    "section_manoeuvre": "Operations",
+    "section_journal": "Ship's Log",
+    "section_gouvernail": "Helm",
+    "current_language": "Current Language",
+    "aria_open_menu": "Open menu",
+    "aria_close_menu": "Close menu"
   },
   "Dashboard": {
     "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
@@ -478,7 +488,16 @@
     "supplier": "Olùpèsè",
     "amount": "Iye Apapọ̀",
     "items": "Àwọn ohun èlò",
-    "empty_state": "Kò sí àkọsílẹ́ kankan síbẹ̀. Fi àkíyèsí àkọ́kọ́ rẹ kún."
+    "empty_state": "Kò sí àkọsílẹ́ kankan síbẹ̀. Fi àkíyèsí àkọ́kọ́ rẹ kún.",
+    "image_ready": "Image ready to be scanned by AI.",
+    "notes_used": "{used} / {total} AI notes used",
+    "scans_used": "{used} / {total} scans used",
+    "translated_badge": "AI translated (Source: {lang})",
+    "translation_quota_reached": "Translation quota reached. Upgrade to a higher plan.",
+    "translating": "Translating...",
+    "translate_to": "Translate to {lang}",
+    "btn_delete_title": "Delete",
+    "label_date": "Date"
   },
   "Common": {
     "loading": "Ń ṣẹlẹ̀ lọ́wọ́...",
@@ -1537,6 +1556,42 @@
     "adv_manifesto_end": "níbi tí ìsọfúnni èrè, ìbáraẹnisọ̀rọ̀ àwọn òṣìṣẹ́, àti ìwé àkọsílẹ ìbámu ti ń ṣàn pọ̀ mọ́ra ní ti ẹ̀dá.",
     "cta_title": "Ṣé o ṣe tán láti ṣọkọ̀ pẹ̀lú data?",
     "cta_desc": "Yan ọ̀nà rẹ. Bẹ̀rẹ̀ ní Ipò Òye rẹ lọ́wọ́lọ́wọ́. Kọ́ lẹ́sẹ̀kẹsẹ̀. RiveHub ń dàgbà pẹ̀lú ìdàgbàsókè data ilé oúnjẹ rẹ.",
-    "cta_btn": "Kọ́ Ibùdó Àṣẹ Rẹ"
+    "cta_btn": "Kọ́ Ibùdó Àṣẹ Rẹ",
+    "is1_label": "Connected",
+    "is1_desc": "Reservations sync active",
+    "is2_label": "Enhanced",
+    "is2_desc": "POS + Food Cost visible",
+    "is3_label": "Predictive",
+    "is3_desc": "AI sees patterns",
+    "is4_label": "Calibrated",
+    "is4_desc": "Expert-level accuracy"
+  },
+  "Pilote": {
+    "btn_label": "The Pilot",
+    "title": "The Pilot",
+    "subtitle": "Operational Navigation",
+    "welcome": "Pilot aboard. What course shall we chart today?",
+    "placeholder": "Ask a question about the service...",
+    "quick_prompts_title": "Quick Requests",
+    "qp1_label": "Analyze today's Food Cost",
+    "qp1_prompt": "Give me a summary of current Food Cost alerts.",
+    "qp2_label": "Check my Prep List",
+    "qp2_prompt": "Review the AI-generated quantities for today's Prep List.",
+    "qp3_label": "Summarize recent sales",
+    "qp3_prompt": "What has been the revenue over the last few days and what is the trend?",
+    "qp4_label": "Today's reservations",
+    "qp4_prompt": "How many covers are expected today? Detail the reservations.",
+    "qp5_label": "Latest logbook notes",
+    "qp5_prompt": "Show me the latest logbook notes, especially urgent ones.",
+    "error_message": "An error occurred. Please try again or report the issue.",
+    "error_count": "{count} error(s) encountered during the session.",
+    "btn_sending": "Sending...",
+    "btn_report": "Report to the Rive team",
+    "report_sent": "Report sent",
+    "report_sent_confirm": "Report sent to the team.",
+    "tooltip_report": "Report an issue"
+  },
+  "DailyInsight": {
+    "section_title": "insight of the day"
   }
 }

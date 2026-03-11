@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
+import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
 
 const FAQ_KEYS = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
 
@@ -27,7 +28,7 @@ function FAQItem({ questionKey, t }: { questionKey: string; t: ReturnType<typeof
       >
         <div className="overflow-hidden">
           <p className="font-outfit text-[#1A1A1A]/60 text-sm md:text-base leading-relaxed max-w-3xl">
-            {t(`${questionKey}_a`)}
+            {t(`${questionKey}_a`, { count: SUPPORTED_LANGUAGE_COUNT })}
           </p>
         </div>
       </div>

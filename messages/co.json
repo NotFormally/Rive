@@ -201,7 +201,9 @@
     "f11_ex2": "Dinamica interattiva di afflussi è deflussi.",
     "f11_ex3": "Analisi granulare di i costi per identificà i colli di bottiglia.",
     "utility_mock_energy": "Energia Mensile",
-    "utility_mock_water": "Acqua Mensile"
+    "utility_mock_water": "Acqua Mensile",
+    "f3_source_example": "Clean the floor thoroughly tonight.",
+    "f3_target_example": "Limpia el suelo a fondo esta noche."
   },
   "Pricing": {
     "title": "Prezzi chjari, impattu veru.",
@@ -376,7 +378,15 @@
     "nav_dictee_voice": "Dettatura Vocale (AI)",
     "nav_sonar": "Sonar (Auditi)",
     "nav_haccp_runner": "HACCP Runner",
-    "nav_haccp_builder": "HACCP Builder"
+    "nav_haccp_builder": "HACCP Builder",
+    "section_passerelle": "The Bridge",
+    "section_reserve": "The Hold",
+    "section_manoeuvre": "Operations",
+    "section_journal": "Ship's Log",
+    "section_gouvernail": "Helm",
+    "current_language": "Current Language",
+    "aria_open_menu": "Open menu",
+    "aria_close_menu": "Close menu"
   },
   "Dashboard": {
     "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
@@ -478,7 +488,16 @@
     "supplier": "Fornitore",
     "amount": "Quantità Totale",
     "items": "Articuli",
-    "empty_state": "Nisuna nota ancu. Aghjunghje a vostra prima osservazione."
+    "empty_state": "Nisuna nota ancu. Aghjunghje a vostra prima osservazione.",
+    "image_ready": "Image ready to be scanned by AI.",
+    "notes_used": "{used} / {total} AI notes used",
+    "scans_used": "{used} / {total} scans used",
+    "translated_badge": "AI translated (Source: {lang})",
+    "translation_quota_reached": "Translation quota reached. Upgrade to a higher plan.",
+    "translating": "Translating...",
+    "translate_to": "Translate to {lang}",
+    "btn_delete_title": "Delete",
+    "label_date": "Date"
   },
   "Common": {
     "loading": "Caricamentu...",
@@ -1537,6 +1556,42 @@
     "adv_manifesto_end": " induve i dati di u margine, a cumunicazione di l'equipaggiu è a documentazione di cunfurmità scorri inseme naturalmente.",
     "cta_title": "Pronti à navigà cù i dati?",
     "cta_desc": "Sceglite u vostru percorsu. Cuminciate cù u vostru attuale Punteghju di Intelligenza. Custruisce prugressivamente. RiveHub cresce cù a maturità di i dati di a vostra cucina.",
-    "cta_btn": "Custruisce u vostru Centru di Cumanda"
+    "cta_btn": "Custruisce u vostru Centru di Cumanda",
+    "is1_label": "Connected",
+    "is1_desc": "Reservations sync active",
+    "is2_label": "Enhanced",
+    "is2_desc": "POS + Food Cost visible",
+    "is3_label": "Predictive",
+    "is3_desc": "AI sees patterns",
+    "is4_label": "Calibrated",
+    "is4_desc": "Expert-level accuracy"
+  },
+  "Pilote": {
+    "btn_label": "The Pilot",
+    "title": "The Pilot",
+    "subtitle": "Operational Navigation",
+    "welcome": "Pilot aboard. What course shall we chart today?",
+    "placeholder": "Ask a question about the service...",
+    "quick_prompts_title": "Quick Requests",
+    "qp1_label": "Analyze today's Food Cost",
+    "qp1_prompt": "Give me a summary of current Food Cost alerts.",
+    "qp2_label": "Check my Prep List",
+    "qp2_prompt": "Review the AI-generated quantities for today's Prep List.",
+    "qp3_label": "Summarize recent sales",
+    "qp3_prompt": "What has been the revenue over the last few days and what is the trend?",
+    "qp4_label": "Today's reservations",
+    "qp4_prompt": "How many covers are expected today? Detail the reservations.",
+    "qp5_label": "Latest logbook notes",
+    "qp5_prompt": "Show me the latest logbook notes, especially urgent ones.",
+    "error_message": "An error occurred. Please try again or report the issue.",
+    "error_count": "{count} error(s) encountered during the session.",
+    "btn_sending": "Sending...",
+    "btn_report": "Report to the Rive team",
+    "report_sent": "Report sent",
+    "report_sent_confirm": "Report sent to the team.",
+    "tooltip_report": "Report an issue"
+  },
+  "DailyInsight": {
+    "section_title": "insight of the day"
   }
 }

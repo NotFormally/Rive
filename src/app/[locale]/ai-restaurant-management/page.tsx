@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Brain, ShieldCheck, BarChart3, ScanLine, ChefHat, Globe, Zap, TrendingUp } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
@@ -109,7 +110,7 @@ export default function AIRestaurantManagementPage() {
             {features.map((f, i) => (
               <div key={i} className="bg-[#F2F0E9]/5 rounded-2xl p-8 border border-[#F2F0E9]/10">
                 <f.icon className="w-8 h-8 text-[#CC5833] mb-4" />
-                <h3 className="font-jakarta font-bold text-lg text-[#F2F0E9] mb-3">{t(f.titleKey)}</h3>
+                <h3 className="font-jakarta font-bold text-lg text-[#F2F0E9] mb-3">{t(f.titleKey, { count: SUPPORTED_LANGUAGE_COUNT })}</h3>
                 <p className="font-outfit text-sm text-[#F2F0E9]/50 leading-relaxed">{t(f.descKey)}</p>
               </div>
             ))}

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { SUPPORTED_LANGUAGE_COUNT } from '@/lib/languages';
 
 export function ThreePillarsDemo() {
   const t = useTranslations('ThreePillarsDemo');
@@ -37,7 +38,7 @@ export function ThreePillarsDemo() {
       problem: t('chef_prob'),
       solution: t('chef_sol'),
       benefits: [
-        `🌍 ${t('chef_b1')}`,
+        `🌍 ${t('chef_b1', { count: SUPPORTED_LANGUAGE_COUNT })}`,
         `📋 ${t('chef_b2')}`,
         `👥 ${t('chef_b3')}`,
         `✅ ${t('chef_b4')}`
@@ -74,10 +75,10 @@ export function ThreePillarsDemo() {
   const current = personas[selectedPersona];
 
   const intelligenceScore = [
-    { stage: '40%', label: 'Connected', desc: 'Reservations sync active', progress: 40 },
-    { stage: '65%', label: 'Enhanced', desc: 'POS + Food Cost visible', progress: 65 },
-    { stage: '95%', label: 'Predictive', desc: 'AI sees patterns', progress: 95 },
-    { stage: '100%', label: 'Calibrated', desc: 'Expert-level accuracy', progress: 100 }
+    { stage: '40%', label: t('is1_label'), desc: t('is1_desc'), progress: 40 },
+    { stage: '65%', label: t('is2_label'), desc: t('is2_desc'), progress: 65 },
+    { stage: '95%', label: t('is3_label'), desc: t('is3_desc'), progress: 95 },
+    { stage: '100%', label: t('is4_label'), desc: t('is4_desc'), progress: 100 }
   ];
 
   return (

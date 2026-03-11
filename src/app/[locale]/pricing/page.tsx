@@ -6,6 +6,7 @@ import { SocialProofBanner } from "@/components/SocialProofBanner";
 import { RadarLogo } from "@/components/TelemetryScanner";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
 import type { Metadata } from "next";
 
 /* ── Algorithmic SVG Art ─────────────────────────────────────────────── */
@@ -109,7 +110,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Meta' });
   return {
     title: t('pricing_title'),
-    description: t('pricing_description'),
+    description: t('pricing_description', { count: SUPPORTED_LANGUAGE_COUNT }),
   };
 }
 
@@ -125,7 +126,7 @@ export default function PricingPage() {
       features: [
         t('feature_logbook'),
         t('feature_editor'),
-        t('feature_i18n'),
+        t('feature_i18n', { count: SUPPORTED_LANGUAGE_COUNT }),
         t('feature_insta'),
         t('feature_foodcost'),
         t('feature_ocr'),

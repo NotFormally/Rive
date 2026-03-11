@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Check, AlertCircle, RefreshCw, Upload } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type MenuItem = {
   id: string;
@@ -19,6 +20,8 @@ type SaleRecord = {
 
 export default function SalesPage() {
   const { profile, settings } = useAuth();
+  const t = useTranslations("Carte");
+  const tc = useTranslations("Common");
   
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [sales, setSales] = useState<Record<string, SaleRecord>>({});
@@ -160,14 +163,14 @@ export default function SalesPage() {
         
         const data = await response.json();
         if (!response.ok) {
-          throw new Error(`Erreur ${provider}: ${data.error || 'Erreur inconnue'}`);
+          throw new Error(`${t("error_provider", { provider, error: data.error || t("error_unknown") })}`);
         }
         
         totalSynced += (data.matchedItems || 0);
         syncMessages.push(data.message || `${data.matchedItems} items via ${provider}`);
       }
 
-      setSuccess(`Synchronisation réussie. ${totalSynced} correspondances trouvées.`);
+      setSuccess(t("sync_success", { count: totalSynced }));
       setTimeout(() => setSuccess(false), 5000);
       loadData();
     } catch (err: any) {
@@ -199,10 +202,10 @@ export default function SalesPage() {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || 'Erreur lors du traitement du CSV');
+        throw new Error(data.error || t("csv_error"));
       }
 
-      setSuccess(data.message || `Import CSV réussi. ${data.matchedItems} plats mis à jour.`);
+      setSuccess(data.message || t("csv_success", { count: data.matchedItems }));
       setTimeout(() => setSuccess(false), 5000);
       loadData();
     } catch (err: any) {
@@ -217,7 +220,7 @@ export default function SalesPage() {
   if (!settings?.module_menu_engineering) {
     return (
       <div className="p-8 text-center text-slate-500">
-        Ce module est désactivé. Vous pouvez l'activer dans les Paramètres.
+        {tc("module_disabled")}
       </div>
     );
   }
@@ -235,11 +238,11 @@ export default function SalesPage() {
         <div className="px-8 py-4 flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 mb-1 text-sm text-slate-500">
-              <a href="/dashboard/engineering" className="hover:text-indigo-600">Performance du Menu</a>
+              <a href="/dashboard/engineering" className="hover:text-indigo-600">{t("performance_title")}</a>
               <span>/</span>
-              <span className="text-slate-900 font-medium">Ventes POS</span>
+              <span className="text-slate-900 font-medium">{t("tab_sales")}</span>
             </div>
-            <h1 className="text-xl font-bold text-slate-900">Saisie des volumes de vente</h1>
+            <h1 className="text-xl font-bold text-slate-900">{t("sales_entry_title")}</h1>
           </div>
           <div className="flex items-center gap-3">
             <div className="relative">
@@ -256,7 +259,7 @@ export default function SalesPage() {
                 className={`flex items-center gap-2 bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors cursor-pointer ${(uploadingCsv || loading || saving || syncing) ? 'opacity-50 pointer-events-none' : ''}`}
               >
                 <Upload className={`w-4 h-4 ${uploadingCsv ? 'animate-bounce' : ''}`} />
-                {uploadingCsv ? "Analyse IA..." : "Importer CSV"}
+                {uploadingCsv ? t("analyzing_ai") : t("import_csv")}
               </label>
             </div>
             
@@ -267,7 +270,7 @@ export default function SalesPage() {
                 className="flex items-center gap-2 bg-white border border-indigo-200 text-indigo-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-50 transition-colors disabled:opacity-50"
               >
                 <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-                {syncing ? "Synchro..." : "Synchroniser POS"}
+                {syncing ? t("syncing") : t("sync_pos")}
               </button>
             )}
             <button
@@ -275,18 +278,18 @@ export default function SalesPage() {
               disabled={saving || loading || syncing || uploadingCsv}
               className="flex items-center gap-2 bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50"
             >
-              {saving ? "Sauvegarde..." : (
+              {saving ? t("saving") : (
                 <>
                   <Check className="w-4 h-4" />
-                  Enregistrer les ventes
+                  {t("save_sales")}
                 </>
               )}
             </button>
           </div>
         </div>
         <div className="px-8 flex items-center gap-6 text-sm font-medium">
-          <a href="/dashboard/engineering" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Matrice</a>
-          <a href="/dashboard/engineering/sales" className="py-3 border-b-2 border-indigo-600 text-indigo-600">Ventes POS</a>
+          <a href="/dashboard/engineering" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">{t("tab_matrix")}</a>
+          <a href="/dashboard/engineering/sales" className="py-3 border-b-2 border-indigo-600 text-indigo-600">{t("tab_sales")}</a>
         </div>
       </header>
 
@@ -301,18 +304,18 @@ export default function SalesPage() {
           <div className="mb-6 bg-green-50 text-green-700 p-4 rounded-lg flex items-center gap-3">
             <Check className="w-5 h-5 flex-shrink-0" />
             <p className="text-sm font-medium">
-              {typeof success === 'string' ? success : "Volumes de ventes mis à jour avec succès."}
+              {typeof success === 'string' ? success : t("sales_updated")}
             </p>
           </div>
         )}
 
         <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
           {loading ? (
-            <div className="p-8 text-center text-slate-500">Chargement...</div>
+            <div className="p-8 text-center text-slate-500">{tc("loading")}</div>
           ) : menuItems.length === 0 ? (
             <div className="p-12 text-center text-slate-500">
-              <p>Aucun plat trouvé dans le menu.</p>
-              <p className="text-sm mt-2">Ajoutez des plats via l'éditeur de menu pour saisir leurs ventes.</p>
+              <p>{t("no_items")}</p>
+              <p className="text-sm mt-2">{t("add_items_hint")}</p>
             </div>
           ) : (
             Object.entries(groupedItems).map(([category, items]) => (
@@ -327,7 +330,7 @@ export default function SalesPage() {
                         <span className="text-slate-900 font-medium">{item.name}</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <label className="text-sm text-slate-500">Ventes hebdo:</label>
+                        <label className="text-sm text-slate-500">{t("weekly_sales")}</label>
                         <input
                           type="number"
                           min="0"

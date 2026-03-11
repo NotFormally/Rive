@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { SUPPORTED_LANGUAGE_COUNT } from '@/lib/languages'
 
 export async function GET() {
   const content = `# RiveHub
@@ -15,7 +16,7 @@ and food service businesses worldwide.
 - Prep List Generator: Automated daily preparation lists based on forecasted demand
 - Health Score: Operational health dashboard with 8 scoring dimensions
 - Smart Logbook: AI-assisted daily operational notes and trend detection
-- Multilingual Menus: Automatic menu translation in 25+ languages
+- Multilingual Menus: Automatic menu translation in ${SUPPORTED_LANGUAGE_COUNT}+ languages
 - Invoice Scanner: OCR-powered receipt and invoice processing
 - POS Integration: Lightspeed, Square, Toast, and more
 

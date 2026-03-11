@@ -169,21 +169,21 @@ export default function DashboardPage() {
               <div className="relative shrink-0 w-32 bg-[--sidebar-primary] border border-primary/40 rounded-3xl p-4 shadow-[0_0_25px_rgba(0,229,255,0.15)] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent pointer-events-none"></div>
                 <div className="relative z-10">
-                  <span className="text-primary text-sm font-jakarta font-medium">Wed</span>
+                  <span className="text-primary text-sm font-jakarta font-medium">{t("schedule_day_wed")}</span>
                   <div className="w-8 h-px bg-primary/30 my-2"></div>
                   <div className="text-[10px] text-primary/80 mb-2">10:00 AM - 6:00 PM</div>
-                  <div className="bg-primary/20 text-primary text-[10px] w-fit px-2 py-0.5 rounded-md mt-1 backdrop-blur-md border border-primary/20">Server</div>
+                  <div className="bg-primary/20 text-primary text-[10px] w-fit px-2 py-0.5 rounded-md mt-1 backdrop-blur-md border border-primary/20">{t("schedule_role_server")}</div>
                 </div>
               </div>
 
               {/* Inactive Days */}
               {[
-                { day: "Wed", date: "18", start: "10:00 AM", role: "Server" },
-                { day: "Tue", date: "19" },
-                { day: "Wed", date: "20", start: "10:00 AM", role: "Server" },
-                { day: "Thu", date: "27", start: "10:00 AM", role: "Server" },
-                { day: "Fri", date: "28", start: "10:00 PM", role: "Bartender", active: true },
-                { day: "Sat", date: "29", role: "Server" },
+                { day: t("schedule_day_wed"), date: "18", start: "10:00 AM", role: t("schedule_role_server") },
+                { day: t("schedule_day_tue"), date: "19" },
+                { day: t("schedule_day_wed"), date: "20", start: "10:00 AM", role: t("schedule_role_server") },
+                { day: t("schedule_day_thu"), date: "27", start: "10:00 AM", role: t("schedule_role_server") },
+                { day: t("schedule_day_fri"), date: "28", start: "10:00 PM", role: t("schedule_role_bartender"), active: true },
+                { day: t("schedule_day_sat"), date: "29", role: t("schedule_role_server") },
               ].map((d, i) => (
                 <div key={i} className="flex flex-col items-center gap-2 shrink-0 w-16 opacity-90 transition-opacity">
                   <div className="text-xs text-slate-400 font-medium">{d.day}</div>
@@ -222,10 +222,10 @@ export default function DashboardPage() {
 
             <div className="space-y-4">
               {[
-                { id: "1", text: "Prepare smoothie bases", color: "bg-emerald-400", shadow: "shadow-[0_0_10px_rgba(52,211,153,0.5)]" },
-                { id: "2", text: "Restock front-of-house", color: "bg-yellow-400", shadow: "shadow-[0_0_10px_rgba(250,204,21,0.5)]" },
-                { id: "3", text: "Check ambient temps", color: "bg-pink-500", shadow: "shadow-[0_0_10px_rgba(255,0,122,0.5)]" },
-                { id: "4", text: "Add availability tasks", color: "bg-white/20", shadow: "" },
+                { id: "1", text: t("task_smoothie"), color: "bg-emerald-400", shadow: "shadow-[0_0_10px_rgba(52,211,153,0.5)]" },
+                { id: "2", text: t("task_restock"), color: "bg-yellow-400", shadow: "shadow-[0_0_10px_rgba(250,204,21,0.5)]" },
+                { id: "3", text: t("task_temps"), color: "bg-pink-500", shadow: "shadow-[0_0_10px_rgba(255,0,122,0.5)]" },
+                { id: "4", text: t("task_availability"), color: "bg-white/20", shadow: "" },
               ].map((task) => {
                 const isChecked = checkedTasks.includes(task.id);
                 return (
@@ -365,20 +365,20 @@ export default function DashboardPage() {
                 {/* Tooltip mockup */}
                 <div className="absolute right-0 top-4 bg-white/10 backdrop-blur-md border border-white/10 p-2 rounded-lg text-[9px] font-plex-mono z-10 shadow-lg">
                    <div>{t("last_30_days")}</div>
-                   <div className="text-primary font-bold">Monthly: {stats.monthly_electricity} kWh</div>
-                   <div className="text-pink-400">Current: {Math.floor(stats.monthly_electricity * 0.75)} kWh</div>
+                   <div className="text-primary font-bold">{t("chart_monthly_label")} {stats.monthly_electricity} kWh</div>
+                   <div className="text-pink-400">{t("chart_current_label")} {Math.floor(stats.monthly_electricity * 0.75)} kWh</div>
                 </div>
 
                 {/* Bars */}
                 {/* We map 6 generic months, showing cyan/pink split */}
                 <div className="w-6 shrink-0 ml-8"></div> {/* Spacer for Y axis */}
                 {[
-                  { d: "Jul", cyan: 30, pink: 60 },
-                  { d: "Aug", cyan: 60, pink: 20 },
-                  { d: "Sep", cyan: 50, pink: 50 },
-                  { d: "Oct", cyan: 40, pink: 30 },
-                  { d: "Nov", cyan: 70, pink: 40 },
-                  { d: "Dec", cyan: 90, pink: 30 },
+                  { d: t("month_jul"), cyan: 30, pink: 60 },
+                  { d: t("month_aug"), cyan: 60, pink: 20 },
+                  { d: t("month_sep"), cyan: 50, pink: 50 },
+                  { d: t("month_oct"), cyan: 40, pink: 30 },
+                  { d: t("month_nov"), cyan: 70, pink: 40 },
+                  { d: t("month_dec"), cyan: 90, pink: 30 },
                 ].map((bar, i) => (
                   <div key={i} className="flex-1 flex flex-col justify-end items-center gap-1 z-0 group-hover:opacity-90 transition-opacity">
                     <div className="w-full max-w-[24px] flex flex-col justify-end gap-[1px] rounded-t-sm overflow-hidden h-[150px]">
@@ -418,8 +418,8 @@ export default function DashboardPage() {
                 {/* Tooltip mockup */}
                 <div className="absolute right-0 top-2 bg-white/10 backdrop-blur-md border border-white/10 p-2 rounded-lg text-[9px] font-plex-mono z-10 shadow-lg">
                    <div>{t("last_30_days")}</div>
-                   <div className="text-primary font-bold">Water: {(stats.monthly_water / 1000).toFixed(1)} kL</div>
-                   <div className="text-pink-400">Current: {Math.floor((stats.monthly_water / 1000) * 0.81)} kL</div>
+                   <div className="text-primary font-bold">{t("chart_water_label")} {(stats.monthly_water / 1000).toFixed(1)} kL</div>
+                   <div className="text-pink-400">{t("chart_current_label")} {Math.floor((stats.monthly_water / 1000) * 0.81)} kL</div>
                 </div>
 
                 {/* SVG Line Graph Overlay */}
@@ -444,7 +444,7 @@ export default function DashboardPage() {
 
                 {/* X Axis Labels */}
                 <div className="w-6 shrink-0 ml-8"></div>
-                {["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"].map((month, i) => (
+                {[t("month_jul"), t("month_aug"), t("month_sep"), t("month_oct"), t("month_nov"), t("month_dec"), t("month_jan")].map((month, i) => (
                   <div key={i} className="flex-1 flex justify-center mt-auto mb-[-24px] z-10">
                     <span className="text-[9px] text-muted-foreground">{month}</span>
                   </div>

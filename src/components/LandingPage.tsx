@@ -10,6 +10,7 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { WasteCostCalculator } from "@/components/WasteCostCalculator";
 import { RadarLogo, DataMatrix } from "@/components/TelemetryScanner";
 import RiveLogo from "@/components/RiveLogo";
+import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { StickyCTA } from "@/components/StickyCTA";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -196,7 +197,7 @@ export function LandingPage() {
             </p>
             <p className="hero-text font-plex-mono text-xs tracking-widest uppercase opacity-60 mt-4 flex items-center gap-2">
               <Globe className="w-4 h-4 text-indigo-400" />
-              {t('hero_loss_hook')} &bull; {t('hero_borderless_hook') || ''}
+              {t('hero_loss_hook')} &bull; {t('hero_borderless_hook', { count: SUPPORTED_LANGUAGE_COUNT }) || ''}
             </p>
             <div className="hero-text mt-12 w-full flex">
               <Link
@@ -292,10 +293,10 @@ export function LandingPage() {
                 <div className="flex flex-col items-center gap-2">
                   <div className="relative">
                     <span className="font-cormorant font-bold text-[8rem] md:text-[10rem] lg:text-[12rem] leading-none text-transparent bg-clip-text bg-gradient-to-b from-indigo-300 via-white to-indigo-400 select-none tracking-tighter">
-                      25
+                      {SUPPORTED_LANGUAGE_COUNT}
                     </span>
                     <div className="absolute inset-0 font-cormorant font-bold text-[8rem] md:text-[10rem] lg:text-[12rem] leading-none text-indigo-400/20 blur-2xl select-none pointer-events-none tracking-tighter" aria-hidden="true">
-                      25
+                      {SUPPORTED_LANGUAGE_COUNT}
                     </div>
                   </div>
                   <span className="font-plex-mono text-xs md:text-sm tracking-[0.25em] uppercase text-indigo-300/80">
@@ -312,7 +313,7 @@ export function LandingPage() {
                 </div>
 
                 <h3 className="font-cormorant italic font-bold text-4xl md:text-5xl text-white leading-tight">
-                  {t('f3_title')}
+                  {t('f3_title', { count: SUPPORTED_LANGUAGE_COUNT })}
                 </h3>
                 <p className="font-outfit text-xl text-slate-300 leading-relaxed max-w-2xl px-4">
                   {t('f3_desc')}
@@ -322,7 +323,7 @@ export function LandingPage() {
                 <div className="mt-12 w-full bg-[#121212] rounded-[2rem] border border-white/10 p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
                    <div className="flex-1 flex flex-col items-start gap-4 w-full">
                      <span className="font-plex-mono text-xs text-indigo-400 font-bold uppercase tracking-widest bg-indigo-500/10 px-3 py-1 rounded-full">{t('language_english')}</span>
-                     <p className="font-jakarta text-2xl md:text-3xl text-white font-medium">"Clean the floor thoroughly tonight."</p>
+                     <p className="font-jakarta text-2xl md:text-3xl text-white font-medium">"{t('f3_source_example')}"</p>
                    </div>
                    
                    <div className="shrink-0 flex items-center justify-center bg-indigo-600/20 w-12 h-12 rounded-full border border-indigo-500/30">
@@ -332,7 +333,7 @@ export function LandingPage() {
                    <div className="flex-1 flex flex-col items-end gap-4 w-full text-right bg-[#1A2332]/5 p-6 rounded-2xl border border-white/5 relative overflow-hidden">
                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent translate-x-[-100%] animate-[shimmer_3s_infinite]"></div>
                      <span className="font-plex-mono text-xs text-[#CC5833] font-bold uppercase tracking-widest bg-[#CC5833]/10 px-3 py-1 rounded-full relative z-10">{t('language_spanish')}</span>
-                     <p className="font-jakarta text-2xl md:text-3xl text-indigo-100 font-medium relative z-10">"Limpia el suelo a fondo esta noche."</p>
+                     <p className="font-jakarta text-2xl md:text-3xl text-indigo-100 font-medium relative z-10">"{t('f3_target_example')}"</p>
                    </div>
                 </div>
 
@@ -564,7 +565,7 @@ export function LandingPage() {
               <div className="flex flex-col gap-6">
                 <div className="bg-emerald-500/10 w-16 h-16 rounded-2xl flex items-center justify-center"><Activity className="w-8 h-8 text-emerald-600" /></div>
                 <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#F2F0E9] flex items-center flex-wrap gap-3">
-                  {t('f6_title')}
+                  {t('f6_title', { count: SUPPORTED_LANGUAGE_COUNT })}
                   <span className="text-[10px] bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-1 rounded-full font-bold tracking-widest uppercase align-middle shrink-0 whitespace-nowrap">{t('beta_badge')}</span>
                 </h3>
                 <p className="font-outfit text-lg text-slate-300 leading-relaxed">{t('f6_desc')}</p>
@@ -961,7 +962,7 @@ export function LandingPage() {
               <div className="group relative py-10 md:py-12 md:px-10 lg:border-r border-white/[0.06] border-b lg:border-b-0 transition-colors duration-500 hover:bg-[#1A2332]/[0.02]">
                 <span className="font-plex-mono text-[#CC5833] text-xs font-bold tracking-widest block mb-6">01</span>
                 <h3 className="font-jakarta font-bold text-xl md:text-2xl mb-4 group-hover:translate-x-1 transition-transform duration-500">{t('philosophy_pillar1_title')}</h3>
-                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar1_desc')}</p>
+                <p className="font-outfit text-[#6B7280] text-base leading-relaxed">{t('philosophy_pillar1_desc', { count: SUPPORTED_LANGUAGE_COUNT })}</p>
               </div>
 
               {/* Pillar 2 */}

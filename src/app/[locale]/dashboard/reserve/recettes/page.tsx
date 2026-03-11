@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Plus, Trash2, Check, X, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type MenuItem = {
   id: string;
@@ -34,7 +35,9 @@ type Recipe = {
 
 export default function RecipesPage() {
   const { profile, settings } = useAuth();
-  
+  const t = useTranslations("Reserve");
+  const tc = useTranslations("Common");
+
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [recipes, setRecipes] = useState<Record<string, Recipe>>({});
@@ -166,7 +169,7 @@ export default function RecipesPage() {
     // Validation
     const invalidRows = editingRecipe.recipe_ingredients.filter(ri => !ri.ingredient_id || ri.quantity <= 0);
     if (invalidRows.length > 0) {
-      setError("Veuillez sélectionner un ingrédient et définir une quantité valide pour chaque ligne.");
+      setError(t("validation_error"));
       return;
     }
 

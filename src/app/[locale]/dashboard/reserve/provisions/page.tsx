@@ -3,11 +3,15 @@
 import { useState, useEffect } from "react";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { useAuth } from "@/components/AuthProvider";
+import { useTranslations } from "next-intl";
 import { InvoiceScanner } from "@/components/food-cost/InvoiceScanner";
 import { Receipt, Calendar, Store, ArrowRight } from "lucide-react";
 
 export default function InvoicesPage() {
   const { settings, user } = useAuth();
+  const t = useTranslations("Provisions");
+  const tc = useTranslations("Common");
+  const tr = useTranslations("Reserve");
   const [invoices, setInvoices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { SUPPORTED_LANGUAGE_COUNT } from '@/lib/languages';
 
 export function NauticalCommandCenter() {
   const t = useTranslations('NauticalCommandCenter');
@@ -34,7 +35,7 @@ export function NauticalCommandCenter() {
       instruments: [
         { name: t('i1_name'), desc: t('i1_desc'), color: "#CC5833" },
         { name: t('i2_name'), desc: t('i2_desc'), color: "#2E4036" },
-        { name: t('i3_name'), desc: t('i3_desc'), color: "#F2F0E9" }
+        { name: t('i3_name'), desc: t('i3_desc', { count: SUPPORTED_LANGUAGE_COUNT }), color: "#F2F0E9" }
       ]
     },
     {

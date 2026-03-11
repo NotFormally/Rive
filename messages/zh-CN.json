@@ -62,7 +62,7 @@
     "f2_ex1": "Le frigo passe à 8°C : suggestion d'une action corrective \"Isoler ou jeter les denrées à risque\".",
     "f2_ex2": "Rappel automatique pour la vérification des huiles de friture.",
     "f2_ex3": "Procédures HACCP documentées en cas d'inspection.",
-    "f3_title": "Traduction Instantanée en 25 Langues",
+    "f3_title": "Traduction Instantanée en {count} Langues",
     "f3_desc": "船上没有语言障碍。每一位船员都可以用他们的母语访问船桥和日志条目。",
     "f3_ex1": "Le chef écrit en espagnol, le plongeur lit en bengali.",
     "f3_ex2": "Fiches de recettes immédiatement comprises par tous les nouveaux arrivants.",
@@ -186,7 +186,9 @@
     "f11_ex2": "流入和流出的互动动态。",
     "f11_ex3": "成本的细粒度分解以确定瓶颈。",
     "utility_mock_energy": "月度能源",
-    "utility_mock_water": "月度用水"
+    "utility_mock_water": "月度用水",
+    "f3_source_example": "今晚把地板彻底打扫干净。",
+    "f3_target_example": "Limpia el suelo a fondo esta noche."
   },
   "Pricing": {
     "title": "清晰定价，真实影响。",
@@ -205,7 +207,7 @@
     "cta_contact": "联系销售",
     "feature_editor": "菜单编辑器 + 二维码",
     "feature_logbook": "智能日志 (Unlimited)",
-    "feature_i18n": "多语言翻译 (25 Languages)",
+    "feature_i18n": "多语言翻译 ({count} Languages)",
     "feature_foodcost": "食品成本分析器",
     "feature_bcg": "菜单优化",
     "feature_insta": "Instagram 生成器 (Unlimited)",
@@ -244,7 +246,7 @@
     "f2_ex1": "Fridge hits 8°C: suggestion for corrective action \"Isolate or discard high-risk food\".",
     "f2_ex2": "Automatic reminder for fryer oil checks.",
     "f2_ex3": "Documented HACCP procedures in case of inspection.",
-    "f3_title": "Traduction Instantanée en 25 Langues",
+    "f3_title": "Traduction Instantanée en {count} Langues",
     "f3_desc": "The language barrier no longer exists. Every member accesses the app and notes in their native language.",
     "f3_ex1": "The chef writes in Spanish, the dishwasher reads in Bengali.",
     "f3_ex2": "Recipe cards immediately understood by all new hires.",
@@ -361,7 +363,15 @@
     "nav_haccp_builder": "HACCP Builder",
     "nav_multilingual_team": "多语言团队",
     "nav_barometre": "晴雨表",
-    "active_language": "当前语言"
+    "active_language": "当前语言",
+    "section_passerelle": "The Bridge",
+    "section_reserve": "The Hold",
+    "section_manoeuvre": "Operations",
+    "section_journal": "Ship's Log",
+    "section_gouvernail": "Helm",
+    "current_language": "Current Language",
+    "aria_open_menu": "Open menu",
+    "aria_close_menu": "Close menu"
   },
   "Dashboard": {
     "header_title": "总览",
@@ -463,7 +473,16 @@
     "supplier": "Supplier",
     "amount": "Total Amount",
     "items": "Items",
-    "empty_state": "No notes yet. Add your first observation."
+    "empty_state": "No notes yet. Add your first observation.",
+    "image_ready": "Image ready to be scanned by AI.",
+    "notes_used": "{used} / {total} AI notes used",
+    "scans_used": "{used} / {total} scans used",
+    "translated_badge": "AI translated (Source: {lang})",
+    "translation_quota_reached": "Translation quota reached. Upgrade to a higher plan.",
+    "translating": "Translating...",
+    "translate_to": "Translate to {lang}",
+    "btn_delete_title": "Delete",
+    "label_date": "Date"
   },
   "Common": {
     "error_unknown": "Unknown",
@@ -605,7 +624,7 @@
     "s5_s1_p1": "The Service integrates artificial intelligence technologies (LLM and vision models) provided by third-party suppliers (Anthropic / Claude). These technologies are used to:",
     "s5_s1_l1": "Analyze and categorize logbook service notes",
     "s5_s1_l2": "Suggest corrective actions when anomalies are detected (temperatures, operations)",
-    "s5_s1_l3": "Translate content across supported languages (25 languages)",
+    "s5_s1_l3": "Translate content across supported languages ({count} languages)",
     "s5_s1_l4": "Extract data from receipt and invoice images (OCR)",
     "s5_s1_l5": "Generate text content and captions for social media",
     "s5_s1_l6": "Produce menu engineering recommendations",
@@ -1537,6 +1556,42 @@
     "adv_manifesto_end": "其中边际数据、船员通信和合规文档自然地融合在一起。",
     "cta_title": "准备好用数据导航了吗？",
     "cta_desc": "选择你的路径。从你当前的智能评分开始。逐步构建。RiveHub随着你厨房数据成熟度的提高而成长。",
-    "cta_btn": "构建您的指挥中心"
+    "cta_btn": "构建您的指挥中心",
+    "is1_label": "已连接",
+    "is1_desc": "预订同步已激活",
+    "is2_label": "已增强",
+    "is2_desc": "POS + 食材成本可见",
+    "is3_label": "预测性",
+    "is3_desc": "AI识别模式",
+    "is4_label": "已校准",
+    "is4_desc": "专家级精度"
+  },
+  "Pilote": {
+    "btn_label": "The Pilot",
+    "title": "The Pilot",
+    "subtitle": "Operational Navigation",
+    "welcome": "Pilot aboard. What course shall we chart today?",
+    "placeholder": "Ask a question about the service...",
+    "quick_prompts_title": "Quick Requests",
+    "qp1_label": "Analyze today's Food Cost",
+    "qp1_prompt": "Give me a summary of current Food Cost alerts.",
+    "qp2_label": "Check my Prep List",
+    "qp2_prompt": "Review the AI-generated quantities for today's Prep List.",
+    "qp3_label": "Summarize recent sales",
+    "qp3_prompt": "What has been the revenue over the last few days and what is the trend?",
+    "qp4_label": "Today's reservations",
+    "qp4_prompt": "How many covers are expected today? Detail the reservations.",
+    "qp5_label": "Latest logbook notes",
+    "qp5_prompt": "Show me the latest logbook notes, especially urgent ones.",
+    "error_message": "An error occurred. Please try again or report the issue.",
+    "error_count": "{count} error(s) encountered during the session.",
+    "btn_sending": "Sending...",
+    "btn_report": "Report to the Rive team",
+    "report_sent": "Report sent",
+    "report_sent_confirm": "Report sent to the team.",
+    "tooltip_report": "Report an issue"
+  },
+  "DailyInsight": {
+    "section_title": "insight of the day"
   }
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { MenuItem, MenuCategory, RestaurantInfo, loadMenuFromSupabase } from "@/lib/menu-store";
+import { RestaurantJsonLd } from "@/components/RestaurantJsonLd";
 
 const LANG_LABELS: Record<string, string> = {
   original: '🇫🇷 FR',
@@ -29,6 +30,8 @@ export default function PublicMenuPage() {
 
   if (!restaurant) return null;
 
+  const jsonLd = <RestaurantJsonLd restaurant={restaurant} categories={categories} items={items} />;
+
   const getItemDisplay = (item: MenuItem) => {
     if (lang !== 'original' && item.translations?.[lang]) {
       return { name: item.translations[lang].name, description: item.translations[lang].description };
@@ -40,6 +43,7 @@ export default function PublicMenuPage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      {jsonLd}
       {/* Hero Header */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-zinc-900 to-zinc-950" />

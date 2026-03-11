@@ -59,6 +59,9 @@ service-account*.json
 *_secret*
 token.json
 
+# supabase temp/cache
+supabase/.temp/
+
 # caches
 .mypy_cache/
 *.log

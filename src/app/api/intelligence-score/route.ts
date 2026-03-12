@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import type { Database } from '@/types/supabase';
 import { calculateIntelligenceScore, IntelligenceScoreData } from '@/lib/intelligence-score';
 
 // =============================================================================
@@ -16,21 +17,21 @@ export async function PATCH(req: NextRequest) {
   if (!auth) return unauthorized();
 
   const { restaurantId } = auth;
-  const admin = supabaseAdmin();
+  const admin = supabaseAdmin<Database>();
 
   try {
     // 1. Check integration connections (Libro / POS)
     const { data: integrations } = await admin
-      .from('integration_configs' as any)
+      .from('integration_configs')
       .select('provider, status')
-      .eq('restaurant_id', restaurantId) as { data: any[] | null; error: any };
+      .eq('restaurant_id', restaurantId) as unknown as { data: Array<{ provider: string; status: string }> | null; error: Error | null };
 
     const libroConnected = integrations?.some(
-      (i: any) => i.provider === 'libro' && i.status === 'connected'
+      (i) => i.provider === 'libro' && i.status === 'connected'
     ) ?? false;
 
     const posConnected = integrations?.some(
-      (i: any) => i.provider === 'pos' && i.status === 'connected'
+      (i) => i.provider === 'pos' && i.status === 'connected'
     ) ?? false;
 
     // 2. Count recipes
@@ -44,7 +45,7 @@ export async function PATCH(req: NextRequest) {
       .from('chef_streaks')
       .select('feedback_days, current_streak')
       .eq('restaurant_id', restaurantId)
-      .maybeSingle() as { data: any; error: any };
+      .maybeSingle() as unknown as { data: { feedback_days: number; current_streak: number } | null; error: Error | null };
 
     const feedbackDays = streakData?.feedback_days ?? 0;
     const feedbackStreak = streakData?.current_streak ?? 0;
@@ -62,7 +63,7 @@ export async function PATCH(req: NextRequest) {
 
     // 5. Upsert into restaurant_intelligence_score
     const { error: upsertError } = await admin
-      .from('restaurant_intelligence_score' as any)
+      .from('restaurant_intelligence_score')
       .upsert(
         {
           restaurant_id: restaurantId,
@@ -76,7 +77,7 @@ export async function PATCH(req: NextRequest) {
           feedback_days: feedbackDays,
           feedback_streak: feedbackStreak,
           updated_at: new Date().toISOString(),
-        } as any,
+        } as never,
         { onConflict: 'restaurant_id' }
       );
 
@@ -94,10 +95,10 @@ export async function PATCH(req: NextRequest) {
       nextMilestone: result.nextMilestone,
       nextMilestoneScore: result.nextMilestoneScore,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('[IntelligenceScore] Error:', error);
     return NextResponse.json(
-      { error: 'Internal server error', detail: error.message },
+      { error: 'Internal server error', detail: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

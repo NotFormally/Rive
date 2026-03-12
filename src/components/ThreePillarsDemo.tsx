@@ -2,8 +2,19 @@
 
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import { SUPPORTED_LANGUAGE_COUNT } from '@/lib/languages';
 
+/**
+ * The `ThreePillarsDemo` component showcases the core value propositions of RiveHub
+ * tailored dynamically to different user personas (Owner, Chef, Compliance).
+ * 
+ * It manages state for the selected persona and conditionally renders 
+ * different benefits, descriptions, and call-to-actions based on the selection.
+ * Fully internationalized using `next-intl`.
+ * 
+ * @returns {JSX.Element} Interactive tabbed hero or section component block.
+ */
 export function ThreePillarsDemo() {
   const t = useTranslations('ThreePillarsDemo');
   const [selectedPersona, setSelectedPersona] = useState<string>('owner');
@@ -167,16 +178,14 @@ export function ThreePillarsDemo() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                className="px-6 py-4 rounded-xl font-bold text-white transition-transform hover:-translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.4)] relative overflow-hidden font-jakarta"
+              <Link
+                href={selectedPersona === 'compliance' ? '/demo/haccp' : '/signup'}
+                className="px-6 py-4 rounded-xl font-bold text-white transition-transform hover:-translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.4)] relative overflow-hidden font-jakarta inline-block text-center"
                 style={{backgroundColor: current.color}}
               >
                 <span className="relative z-10">{current.ctaText}</span>
                 <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full hover:animate-[shimmer_1s_forwards]"></div>
-              </button>
-              <button className="px-6 py-4 rounded-xl font-bold border border-white/20 text-slate-300 hover:text-white hover:border-white/40 transition-colors font-jakarta flex items-center justify-center gap-2">
-                <span className="bg-white/10 px-2 py-0.5 rounded-full text-xs">▶</span> {current.video}
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -258,9 +267,9 @@ export function ThreePillarsDemo() {
           <p className="text-slate-400 mb-10 max-w-2xl mx-auto font-outfit text-lg">
             {t('cta_desc')}
           </p>
-          <button className="px-8 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-black rounded-xl hover:scale-105 transition-transform shadow-[0_15px_30px_rgba(34,211,238,0.3)] font-jakarta text-lg">
+          <Link href="/signup" className="inline-block px-8 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-black rounded-xl hover:scale-105 transition-transform shadow-[0_15px_30px_rgba(34,211,238,0.3)] font-jakarta text-lg">
             {t('cta_btn')}
-          </button>
+          </Link>
         </div>
       </div>
     </div>

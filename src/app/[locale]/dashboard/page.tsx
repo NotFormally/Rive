@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SmartLogbook } from "@/components/SmartLogbook";
+import { WeeklyScheduleWidget } from "@/components/dashboard/WeeklyScheduleWidget";
 import { DailyInsight } from "@/components/DailyInsight";
 import { SocialProofBanner } from "@/components/SocialProofBanner";
 import { useTranslations, useLocale } from "next-intl";
@@ -151,59 +152,7 @@ export default function DashboardPage() {
         <div className="space-y-8 md:space-y-10">
           
           {/* WEEKLY SCHEDULE WIDGET */}
-          <section 
-            onClick={() => router.push("/dashboard/settings?tab=team")}
-            className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] overflow-hidden p-6 md:p-8 relative transition-all duration-300 cursor-pointer hover:border-primary/40 hover:shadow-[0_8px_40px_rgba(0,229,255,0.15)] group"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-[11px] font-plex-mono font-bold uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2 group-hover:text-primary/80 transition-colors">
-                {t("weekly_schedule")}
-              </h2>
-              <div className="bg-secondary/40 text-xs px-3 py-1 rounded-full text-muted-foreground border border-white/5 group-hover:border-primary/20 transition-colors">
-                {t("all_months")} <span className="ml-1 text-[9px]">▼</span>
-              </div>
-            </div>
-
-            <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar-hidden items-end">
-              {/* Active Day */}
-              <div className="relative shrink-0 w-32 bg-[--sidebar-primary] border border-primary/40 rounded-3xl p-4 shadow-[0_0_25px_rgba(0,229,255,0.15)] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent pointer-events-none"></div>
-                <div className="relative z-10">
-                  <span className="text-primary text-sm font-jakarta font-medium">{t("schedule_day_wed")}</span>
-                  <div className="w-8 h-px bg-primary/30 my-2"></div>
-                  <div className="text-[10px] text-primary/80 mb-2">10:00 AM - 6:00 PM</div>
-                  <div className="bg-primary/20 text-primary text-[10px] w-fit px-2 py-0.5 rounded-md mt-1 backdrop-blur-md border border-primary/20">{t("schedule_role_server")}</div>
-                </div>
-              </div>
-
-              {/* Inactive Days */}
-              {[
-                { day: t("schedule_day_wed"), date: "18", start: "10:00 AM", role: t("schedule_role_server") },
-                { day: t("schedule_day_tue"), date: "19" },
-                { day: t("schedule_day_wed"), date: "20", start: "10:00 AM", role: t("schedule_role_server") },
-                { day: t("schedule_day_thu"), date: "27", start: "10:00 AM", role: t("schedule_role_server") },
-                { day: t("schedule_day_fri"), date: "28", start: "10:00 PM", role: t("schedule_role_bartender"), active: true },
-                { day: t("schedule_day_sat"), date: "29", role: t("schedule_role_server") },
-              ].map((d, i) => (
-                <div key={i} className="flex flex-col items-center gap-2 shrink-0 w-16 opacity-90 transition-opacity">
-                  <div className="text-xs text-slate-400 font-medium">{d.day}</div>
-                  <div className="text-lg font-jakarta font-bold text-slate-100">{d.date}</div>
-                  {d.start && (
-                    <div className={`mt-2 p-2 rounded-xl text-[10px] w-full text-center border font-medium ${d.active ? 'bg-pink-500/20 border-pink-400/50 text-pink-300 shadow-[0_0_15px_rgba(255,0,122,0.25)]' : 'bg-slate-800/60 border-slate-600/50 text-slate-200 shadow-sm'}`}>
-                      {d.start}
-                      <div className="mt-1 opacity-80">{d.role}</div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex justify-end">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 shadow-[0_0_15px_rgba(0,229,255,0.3)] font-bold pointer-events-none">
-                {t("add_availability")}
-              </Button>
-            </div>
-          </section>
+          <WeeklyScheduleWidget />
 
           {/* TASK PREP LISTS WIDGET */}
           {s.module_smart_prep && (

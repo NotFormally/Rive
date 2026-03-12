@@ -25,7 +25,7 @@ export async function GET(req: Request) {
 
   try {
     // ---- 1. Fetch completed prep lists with items ----
-    let query = auth.supabase
+    const query = auth.supabase
       .from('prep_lists')
       .select(`
         id, target_date, service_period,
@@ -205,7 +205,7 @@ export async function GET(req: Request) {
       },
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[PrepList/History] Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

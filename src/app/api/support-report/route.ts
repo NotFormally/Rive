@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     }).catch((err) => console.error('[email] support report notification failed:', err));
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error) {
     console.error('[support-report] Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

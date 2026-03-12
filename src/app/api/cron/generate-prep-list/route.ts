@@ -41,14 +41,14 @@ export async function GET(req: Request) {
         default_lookback_weeks,
         restaurants!inner ( name )
       `)
-      .eq('enabled', true) as { data: any[] | null; error: any };
+      .eq('enabled', true) as { data: Array<{ restaurant_id: string; enabled: boolean; service_periods: string[]; default_safety_buffer: number; default_lookback_weeks: number; restaurants: { name: string } }> | null; error: Error | null };
 
     if (error || !restaurants || restaurants.length === 0) {
       // Fallback: check restaurant_settings for legacy flag
       const { data: legacy } = await admin
         .from('restaurant_settings')
         .select('restaurant_id')
-        .eq('module_smart_prep', true) as { data: any[] | null; error: any };
+        .eq('module_smart_prep', true) as { data: Array<{ restaurant_id: string }> | null; error: Error | null };
 
       if (!legacy || legacy.length === 0) {
         return NextResponse.json({
@@ -92,9 +92,9 @@ export async function GET(req: Request) {
       timestamp: new Date().toISOString(),
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Cron/PrepList] Fatal error:', error);
-    return NextResponse.json({ error: 'Internal server error', detail: error.message }, { status: 500 });
+    return NextResponse.json({ error: 'Internal server error', detail: error instanceof Error ? error.message : String(error) }, { status: 500 });
   }
 }
 
@@ -105,7 +105,7 @@ function getTomorrow(): string {
 }
 
 async function processRestaurant(
-  admin: ReturnType<typeof supabaseAdmin>,
+  admin: any,
   restaurantId: string,
   restaurantName: string | undefined,
   settings: { servicePeriod: string; safetyBuffer: number; lookbackWeeks: number } | undefined,
@@ -156,12 +156,12 @@ async function processRestaurant(
         walk_in_ratio: result.coverEstimation.walkInRatio,
         safety_buffer: config.safetyBuffer,
         estimated_food_cost: result.estimatedFoodCost,
-        alerts: result.alerts,
+        alerts: result.alerts as unknown as string[], // Fix for missing DB array string generic
         generation_level: result.generationLevel,
         status: 'draft',
       } as any)
       .select()
-      .single();
+      .single() as { data: { id: string } | null; error: Error | null };
 
     if (insertError || !prepList) {
       throw new Error(`Insert failed: ${insertError?.message || 'unknown'}`);
@@ -170,15 +170,15 @@ async function processRestaurant(
     // Persist items
     if (result.items.length > 0) {
       await admin.from('prep_list_items').insert(
-        result.items.map((item: any) => ({
-          prep_list_id: (prepList as any).id,
+        result.items.map((item) => ({
+          prep_list_id: prepList.id,
           menu_item_id: item.menuItemId,
           menu_item_name: item.menuItemName,
           predicted_portions: item.predictedPortions,
           item_share: item.itemShare,
           confidence_score: item.confidenceScore,
           confidence_modifier: item.confidenceModifier,
-          priority: item.priority,
+          priority: item.priority as string,
           priority_score: item.priorityScore,
           bcg_category: item.bcgCategory,
           margin_percent: item.marginPercent,
@@ -190,8 +190,8 @@ async function processRestaurant(
     // Persist ingredients (Level 3)
     if (result.ingredients.length > 0) {
       await admin.from('prep_list_ingredients').insert(
-        result.ingredients.map((ing: any) => ({
-          prep_list_id: (prepList as any).id,
+        result.ingredients.map((ing) => ({
+          prep_list_id: prepList.id,
           ingredient_id: ing.ingredientId,
           ingredient_name: ing.ingredientName,
           total_quantity: ing.totalQuantity,
@@ -209,13 +209,14 @@ async function processRestaurant(
       detail: `Generated: ${result.items.length} items, ${result.coverEstimation.estimatedTotal} covers, Level ${result.generationLevel} (${servicePeriod})`,
     });
 
-  } catch (err: any) {
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
     console.error(`[Cron/PrepList] Error for ${restaurantId}:`, err);
     results.push({
       restaurant_id: restaurantId,
       restaurant_name: restaurantName,
       status: 'error',
-      detail: err.message,
+      detail: errorMsg,
     });
   }
 }

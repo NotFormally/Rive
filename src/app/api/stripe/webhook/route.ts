@@ -1,7 +1,8 @@
 import { stripe } from '@/lib/stripe';
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { sendEmail } from '@/lib/email';
+import Stripe from 'stripe';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -23,7 +24,7 @@ function getServiceClient() {
   );
 }
 
-async function getRestaurantEmail(supabase: any, restaurantId: string): Promise<{ email: string; restaurantName: string } | null> {
+async function getRestaurantEmail(supabase: SupabaseClient, restaurantId: string): Promise<{ email: string; restaurantName: string } | null> {
   const { data } = await supabase
     .from('restaurant_profiles')
     .select('user_id, restaurant_name')
@@ -52,15 +53,15 @@ export async function POST(req: NextRequest) {
     let event;
     try {
       event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
-    } catch (err: any) {
-      console.error(`Webhook signature verification failed: ${err.message}`);
+    } catch (err) {
+      console.error(`Webhook signature verification failed: ${err instanceof Error ? err.message : String(err)}`);
       return NextResponse.json({ error: 'Webhook signature verification failed' }, { status: 400 });
     }
 
     const supabase = getServiceClient();
 
     if (event.type === 'checkout.session.completed') {
-      const session = event.data.object as any;
+      const session = event.data.object as Stripe.Checkout.Session;
       const restaurantId = session.metadata?.restaurantId;
 
       if (restaurantId && session.subscription) {
@@ -106,7 +107,7 @@ export async function POST(req: NextRequest) {
         }).catch(() => {});
       }
     } else if (event.type === 'customer.subscription.updated') {
-      const subscription = event.data.object as any;
+      const subscription = event.data.object as Stripe.Subscription;
       const priceId = subscription.items.data[0]?.price.id;
 
       if (priceId) {
@@ -136,7 +137,7 @@ export async function POST(req: NextRequest) {
         }
       }
     } else if (event.type === 'customer.subscription.deleted') {
-      const subscription = event.data.object as any;
+      const subscription = event.data.object as Stripe.Subscription;
 
       const { data: settingsData } = await supabase
         .from('restaurant_settings')
@@ -166,7 +167,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ received: true });
-  } catch (err: any) {
+  } catch (err) {
     console.error("Erreur serveur Webhook:", err);
     return NextResponse.json({ error: 'Serveur Erreur' }, { status: 500 });
   }

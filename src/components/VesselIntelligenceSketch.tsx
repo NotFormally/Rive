@@ -59,7 +59,7 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
 
         drawVessel(bobOffset, currentIntelligence);
 
-        for (let boid of boids) {
+        for (const boid of boids) {
           boid.flock(boids, currentIntelligence);
           boid.update();
           boid.borders();
@@ -84,7 +84,7 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         p.beginShape();
         p.vertex(0, 0);
         for (let x = 0; x <= p.width; x += 50) {
-          let y = p.noise(x * 0.005, params.seed) * 200;
+          const y = p.noise(x * 0.005, params.seed) * 200;
           p.vertex(x, y);
         }
         p.vertex(p.width, 0);
@@ -95,7 +95,7 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         p.beginShape();
         p.vertex(0, p.height);
         for (let x = 0; x <= p.width; x += 30) {
-          let y = p.height - 50 - p.pow(p.noise(x * 0.01, params.seed + 100), 2) * 250;
+          const y = p.height - 50 - p.pow(p.noise(x * 0.01, params.seed + 100), 2) * 250;
           p.vertex(x, y);
         }
         p.vertex(p.width, p.height);
@@ -104,11 +104,11 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         // 3. Glowing Crystalline Clusters (Sparse)
         p.randomSeed(params.seed + 50);
         for (let i = 0; i < 6; i++) {
-          let cx = p.random(p.width);
-          let cy = p.random(p.height);
-          let clusterSize = p.random(30, 80);
+          const cx = p.random(p.width);
+          const cy = p.random(p.height);
+          const clusterSize = p.random(30, 80);
           
-          let colorType = p.floor(p.random(3));
+          const colorType = p.floor(p.random(3));
           let glowColor;
           if (colorType === 0) glowColor = p.color(0, 255, 170, 30); // Cyan
           else if (colorType === 1) glowColor = p.color(204, 88, 51, 30); // Amber
@@ -118,18 +118,18 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
           p.fill(glowColor);
           p.ellipse(cx, cy, clusterSize * 2.5);
           
-          let crystalGlow = p.color(p.red(glowColor), p.green(glowColor), p.blue(glowColor), 150);
-          let coreColor = p.color(255, 255, 255, 200);
+          const crystalGlow = p.color(p.red(glowColor), p.green(glowColor), p.blue(glowColor), 150);
+          const coreColor = p.color(255, 255, 255, 200);
 
-          let numCrystals = p.floor(p.random(3, 8));
+          const numCrystals = p.floor(p.random(3, 8));
           for (let j = 0; j < numCrystals; j++) {
-            let angle = p.random(p.TWO_PI);
-            let dist = p.random(clusterSize * 0.5);
-            let x = cx + p.cos(angle) * dist;
-            let y = cy + p.sin(angle) * dist;
-            let w = p.random(4, 12);
-            let h = p.random(15, 40);
-            let rot = angle + p.random(-0.5, 0.5);
+            const angle = p.random(p.TWO_PI);
+            const dist = p.random(clusterSize * 0.5);
+            const x = cx + p.cos(angle) * dist;
+            const y = cy + p.sin(angle) * dist;
+            const w = p.random(4, 12);
+            const h = p.random(15, 40);
+            const rot = angle + p.random(-0.5, 0.5);
 
             p.push();
             p.translate(x, y);
@@ -145,17 +145,17 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
       }
 
       function drawVessel(bobOffset: number, intel: number) {
-        let coreX = vesselPos.x;
-        let coreY = vesselPos.y + bobOffset;
-        let intelFactor = p.map(intel, 40, 100, 0, 1);
+        const coreX = vesselPos.x;
+        const coreY = vesselPos.y + bobOffset;
+        const intelFactor = p.map(intel, 40, 100, 0, 1);
 
         // Sonar / Field Effect based on Intelligence
         p.noStroke();
-        let glowRadius = 150 + (intelFactor * 300);
-        let glowIntensity = 20 + (intelFactor * 40);
+        const glowRadius = 150 + (intelFactor * 300);
+        const glowIntensity = 20 + (intelFactor * 40);
         
-        let ctx = p.drawingContext as CanvasRenderingContext2D;
-        let gradient = ctx.createRadialGradient(coreX, coreY, 0, coreX, coreY, glowRadius);
+        const ctx = p.drawingContext as CanvasRenderingContext2D;
+        const gradient = ctx.createRadialGradient(coreX, coreY, 0, coreX, coreY, glowRadius);
         gradient.addColorStop(0, `rgba(204, 88, 51, ${glowIntensity / 255})`);
         gradient.addColorStop(0.4, `rgba(204, 88, 51, ${glowIntensity * 0.3 / 255})`);
         gradient.addColorStop(1, 'rgba(10, 20, 40, 0)');
@@ -171,7 +171,7 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         p.noFill();
         p.strokeWeight(1);
         p.stroke(204, 88, 51, 100 + intelFactor * 100);
-        let time = p.millis() * 0.001;
+        const time = p.millis() * 0.001;
         p.arc(0, 0, 100, 100, time, time + p.PI);
         p.arc(0, 0, 120, 120, -time * 1.5, -time * 1.5 + p.HALF_PI);
 
@@ -209,8 +209,8 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         trailPoints: p5.Vector[];
 
         constructor() {
-          let angle = p.random(p.TWO_PI);
-          let distance = p.random(50, p.width / 2);
+          const angle = p.random(p.TWO_PI);
+          const distance = p.random(50, p.width / 2);
           this.pos = p.createVector(
               vesselPos.x + p.cos(angle) * distance,
               vesselPos.y + p.sin(angle) * distance
@@ -220,7 +220,7 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
           this.vel.setMag(p.random(2, 4));
           this.acc = p.createVector(0, 0);
           
-          let r = p.random(100);
+          const r = p.random(100);
           if (r < 70) {
               this.species = 'minnow';
               this.maxForce = 0.15; 
@@ -251,13 +251,13 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         flock(boids: Boid[], intel: number) {
-          let intelFactor = p.map(intel, 40, 100, 0.0, 1.0);
+          const intelFactor = p.map(intel, 40, 100, 0.0, 1.0);
           
-          let sep = this.separate(boids);
-          let ali = this.align(boids);
-          let coh = this.cohesion(boids);
-          let center = this.attractToVessel();
-          let noiseForce = this.calculateNoiseForce();
+          const sep = this.separate(boids);
+          const ali = this.align(boids);
+          const coh = this.cohesion(boids);
+          const center = this.attractToVessel();
+          const noiseForce = this.calculateNoiseForce();
 
           if (this.species === 'minnow') {
               sep.mult(1.8);
@@ -287,13 +287,13 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         calculateNoiseForce() {
-          let noiseVal = p.noise(
+          const noiseVal = p.noise(
               this.pos.x * params.fieldScale,
               this.pos.y * params.fieldScale,
               params.seed * 0.001
           );
-          let angle = noiseVal * p.TWO_PI * 4;
-          let force = p5.Vector.fromAngle(angle);
+          const angle = noiseVal * p.TWO_PI * 4;
+          const force = p5.Vector.fromAngle(angle);
           force.mult(params.velocityFactor);
           return force;
         }
@@ -303,30 +303,30 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         attractToVessel() {
-          let target = p.createVector(vesselPos.x, vesselPos.y);
-          let desired = p5.Vector.sub(target, this.pos);
-          let d = desired.mag();
+          const target = p.createVector(vesselPos.x, vesselPos.y);
+          const desired = p5.Vector.sub(target, this.pos);
+          const d = desired.mag();
           
           if (d < 150) {
-              let m = p.map(d, 0, 150, 0, this.maxSpeed);
+              const m = p.map(d, 0, 150, 0, this.maxSpeed);
               desired.setMag(m);
           } else {
               desired.setMag(this.maxSpeed);
           }
           
-          let steer = p5.Vector.sub(desired, this.vel);
+          const steer = p5.Vector.sub(desired, this.vel);
           steer.limit(this.maxForce);
           return steer;
         }
 
         separate(boids: Boid[]) {
-          let desiredseparation = this.sizeBase * 4.0;
-          let steer = p.createVector(0, 0);
+          const desiredseparation = this.sizeBase * 4.0;
+          const steer = p.createVector(0, 0);
           let count = 0;
-          for (let other of boids) {
-              let d = p5.Vector.dist(this.pos, other.pos);
+          for (const other of boids) {
+              const d = p5.Vector.dist(this.pos, other.pos);
               if ((d > 0) && (d < desiredseparation)) {
-                  let diff = p5.Vector.sub(this.pos, other.pos);
+                  const diff = p5.Vector.sub(this.pos, other.pos);
                   diff.normalize();
                   diff.div(d);
                   steer.add(diff);
@@ -346,11 +346,11 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         align(boids: Boid[]) {
-          let neighbordist = 60;
-          let sum = p.createVector(0, 0);
+          const neighbordist = 60;
+          const sum = p.createVector(0, 0);
           let count = 0;
-          for (let other of boids) {
-              let d = p5.Vector.dist(this.pos, other.pos);
+          for (const other of boids) {
+              const d = p5.Vector.dist(this.pos, other.pos);
               if ((d > 0) && (d < neighbordist) && (other.species === this.species)) {
                   sum.add(other.vel);
                   count++;
@@ -360,7 +360,7 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
               sum.div(count);
               sum.normalize();
               sum.mult(this.maxSpeed);
-              let steer = p5.Vector.sub(sum, this.vel);
+              const steer = p5.Vector.sub(sum, this.vel);
               steer.limit(this.maxForce);
               return steer;
           } else {
@@ -369,11 +369,11 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         cohesion(boids: Boid[]) {
-          let neighbordist = 60;
-          let sum = p.createVector(0, 0);
+          const neighbordist = 60;
+          const sum = p.createVector(0, 0);
           let count = 0;
-          for (let other of boids) {
-              let d = p5.Vector.dist(this.pos, other.pos);
+          for (const other of boids) {
+              const d = p5.Vector.dist(this.pos, other.pos);
               if ((d > 0) && (d < neighbordist) && (other.species === this.species)) {
                   sum.add(other.pos);
                   count++;
@@ -388,10 +388,10 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         seek(target: p5.Vector) {
-          let desired = p5.Vector.sub(target, this.pos);
+          const desired = p5.Vector.sub(target, this.pos);
           desired.normalize();
           desired.mult(this.maxSpeed);
-          let steer = p5.Vector.sub(desired, this.vel);
+          const steer = p5.Vector.sub(desired, this.vel);
           steer.limit(this.maxForce);
           return steer;
         }
@@ -416,7 +416,7 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         borders() {
-          let margin = -50;
+          const margin = -50;
           if (this.pos.x < margin) this.pos.x = p.width - margin;
           if (this.pos.y < margin) this.pos.y = p.height - margin;
           if (this.pos.x > p.width - margin) this.pos.x = margin;
@@ -428,19 +428,19 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
         }
 
         display(intel: number) {
-          let intelFactor = p.map(intel, 40, 100, 0.0, 1.0);
+          const intelFactor = p.map(intel, 40, 100, 0.0, 1.0);
           
-          let maxFadeDistance = 300; 
-          let d = p5.Vector.dist(this.pos, vesselPos);
+          const maxFadeDistance = 300; 
+          const d = p5.Vector.dist(this.pos, vesselPos);
           
-          let distanceFade = p.map(d, 0, maxFadeDistance, 1.0, 0.0, true);
-          let baseOpacity = 20 + (intelFactor * 200); 
+          const distanceFade = p.map(d, 0, maxFadeDistance, 1.0, 0.0, true);
+          const baseOpacity = 20 + (intelFactor * 200); 
           
           let opacityMultiplier = 1.0;
           if (this.species === 'minnow') opacityMultiplier = 0.6;
           else if (this.species === 'whale') opacityMultiplier = 0.9;
           
-          let currentOpacity = baseOpacity * distanceFade * opacityMultiplier;
+          const currentOpacity = baseOpacity * distanceFade * opacityMultiplier;
 
           p.push();
           p.noFill();
@@ -450,11 +450,11 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
           
           p.beginShape();
           for (let i = 0; i < this.trailPoints.length; i++) {
-              let pt = this.trailPoints[i];
-              let progressOpacity = (i / this.trailPoints.length);
+              const pt = this.trailPoints[i];
+              const progressOpacity = (i / this.trailPoints.length);
               // Steep fade curve for ephemerality
-              let trailFade = p.pow(progressOpacity, 3); 
-              let alpha = currentOpacity * trailFade * 0.4;
+              const trailFade = p.pow(progressOpacity, 3); 
+              const alpha = currentOpacity * trailFade * 0.4;
               p.stroke(0 + this.rOffset, 200 + this.gOffset, 255 + this.bOffset, alpha);
               p.vertex(pt.x, pt.y);
           }
@@ -464,13 +464,13 @@ export default function VesselIntelligenceSketch({ intelligenceRef }: VesselInte
           if (currentOpacity > 5) {
               p.push();
               p.translate(this.pos.x, this.pos.y);
-              let theta = this.vel.heading();
+              const theta = this.vel.heading();
               p.rotate(theta);
               
               p.noStroke();
               p.fill(0 + this.rOffset, 200 + this.gOffset, 255 + this.bOffset, currentOpacity);
               
-              let r = this.sizeBase + (intel - 40) * (this.species === 'whale' ? 0.08 : 0.03);
+              const r = this.sizeBase + (intel - 40) * (this.species === 'whale' ? 0.08 : 0.03);
               
               if (this.species === 'whale') {
                   p.ellipse(0, 0, r * 2.5, r * 1.5);

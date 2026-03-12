@@ -69,6 +69,7 @@ export async function POST(req: Request) {
       : null;
 
     // Persist to public_audit_results
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const admin: any = supabaseAdmin();
     await admin.from('public_audit_results').insert({
       place_id: place.placeId,

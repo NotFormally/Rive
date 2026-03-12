@@ -8,6 +8,8 @@
 import { rating, rate, ordinal } from 'openskill';
 import ARIMA from 'arima';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import type { Database } from '@/types/supabase';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { getPlaceDetails, findNearbyCompetitors, calculateVisibilityScore } from '@/lib/google-places';
 import { aggregateReviews, sentimentToScore } from '@/lib/review-sentiment';
 
@@ -91,8 +93,7 @@ const GRADE_THRESHOLDS: Array<{ min: number; grade: HealthGrade }> = [
 // ---------------------------------------------------------------------------
 
 export async function calculateHealthScore(restaurantId: string): Promise<HealthScoreResult> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const admin: any = supabaseAdmin();
+  const admin = supabaseAdmin<Database>();
 
   // Parallel fetch all operational data
   const [
@@ -111,8 +112,8 @@ export async function calculateHealthScore(restaurantId: string): Promise<Health
     fetchVarianceData(admin, restaurantId),
     fetchTeamEngagementData(admin, restaurantId),
     fetchReservationData(admin, restaurantId),
-    admin.from('restaurant_health_scores').select('*').eq('restaurant_id', restaurantId).maybeSingle(),
-    admin.from('health_score_history').select('total_score').eq('restaurant_id', restaurantId).order('recorded_at', { ascending: true }).limit(52),
+    admin.from('restaurant_health_scores').select('*').eq('restaurant_id', restaurantId).maybeSingle() as unknown as Promise<{ data: { google_place_id: string | null; bayesian_mu: number | null; bayesian_sigma: number | null } | null }>,
+    admin.from('health_score_history').select('total_score').eq('restaurant_id', restaurantId).order('recorded_at' as never, { ascending: true }).limit(52) as unknown as Promise<{ data: Array<{ total_score: number }> | null }>,
   ]);
 
   // Calculate each sub-score
@@ -127,9 +128,9 @@ export async function calculateHealthScore(restaurantId: string): Promise<Health
   };
 
   // Visibility: fetch Google data if place ID exists
-  let googlePlaceId = existingScore.data?.google_place_id || null;
+  const googlePlaceId = existingScore.data?.google_place_id || null;
   let placeDetails: PlaceDetails | null = null;
-  let competitors: NearbyCompetitor[] = [];
+  const competitors: NearbyCompetitor[] = [];
   let reviewSentiment: AggregatedSentiment | null = null;
 
   if (googlePlaceId) {
@@ -201,7 +202,7 @@ export async function calculateHealthScore(restaurantId: string): Promise<Health
   const confidence = Math.max(0, Math.min(1, 1 - bayesianSigma / 8.333));
 
   // ARIMA forecast
-  const historicalScores = (historyData.data || []).map((h: any) => h.total_score);
+  const historicalScores = (historyData.data || []).map((h: { total_score: number }) => h.total_score);
   historicalScores.push(totalScore);
   let forecast: number[] = [];
   if (historicalScores.length >= 4) {
@@ -243,7 +244,7 @@ export async function calculateHealthScore(restaurantId: string): Promise<Health
 
 type FoodCostRow = { cost: number; price: number };
 
-async function fetchFoodCostData(admin: any, restaurantId: string): Promise<FoodCostRow[]> {
+async function fetchFoodCostData(admin: SupabaseClient<Database>, restaurantId: string): Promise<FoodCostRow[]> {
   const { data } = await admin
     .from('menu_items')
     .select('price, recipe_id')
@@ -259,7 +260,7 @@ async function fetchFoodCostData(admin: any, restaurantId: string): Promise<Food
   const { data: ingredients } = await admin
     .from('recipe_ingredients')
     .select('recipe_id, quantity, ingredient:ingredients(price_per_unit, unit)')
-    .in('recipe_id', recipeIds);
+    .in('recipe_id', recipeIds) as unknown as { data: Array<{ recipe_id: string; quantity: number | null; ingredient: { price_per_unit: number | null; unit: string | null } | null }> | null; error: Error | null };
 
   // Sum cost per recipe
   const recipeCosts: Record<string, number> = {};
@@ -301,7 +302,7 @@ function scoreFoodCost(rows: FoodCostRow[]): { score: number; metric: string; ac
 
 type MenuRow = { recipe_id: string | null; allergens: unknown; image_url: string | null; description: string | null };
 
-async function fetchMenuData(admin: any, restaurantId: string): Promise<MenuRow[]> {
+async function fetchMenuData(admin: SupabaseClient<Database>, restaurantId: string): Promise<MenuRow[]> {
   const { data } = await admin
     .from('menu_items')
     .select('recipe_id, allergens, image_url, description')
@@ -332,7 +333,7 @@ function scoreMenuCompleteness(rows: MenuRow[]): { score: number; metric: string
 
 type PrepRow = { predicted_portions: number; feedback_delta: number };
 
-async function fetchPrepAccuracyData(admin: any, restaurantId: string): Promise<PrepRow[]> {
+async function fetchPrepAccuracyData(admin: SupabaseClient<Database>, restaurantId: string): Promise<PrepRow[]> {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const { data } = await admin
     .from('prep_list_items')
@@ -367,13 +368,13 @@ function scorePrepAccuracy(rows: PrepRow[]): { score: number; metric: string; ac
 
 type VarianceData = { spoilageCost: number; totalIngredientCost: number };
 
-async function fetchVarianceData(admin: any, restaurantId: string): Promise<VarianceData> {
+async function fetchVarianceData(admin: SupabaseClient<Database>, restaurantId: string): Promise<VarianceData> {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const { data: spoilage } = await admin
     .from('spoilage_reports')
     .select('quantity, ingredient:ingredients(price_per_unit)')
     .eq('restaurant_id', restaurantId)
-    .gte('created_at', thirtyDaysAgo);
+    .gte('created_at', thirtyDaysAgo) as unknown as { data: Array<{ quantity: number | null; ingredient: { price_per_unit: number | null } | null }> | null; error: Error | null };
 
   let spoilageCost = 0;
   for (const s of (spoilage || [])) {
@@ -384,10 +385,10 @@ async function fetchVarianceData(admin: any, restaurantId: string): Promise<Vari
   const { data: ingredients } = await admin
     .from('ingredients')
     .select('quantity_in_stock, price_per_unit')
-    .eq('restaurant_id', restaurantId);
+    .eq('restaurant_id', restaurantId) as unknown as { data: Array<{ quantity_in_stock: number | null; price_per_unit: number | null }> | null; error: Error | null };
 
   const totalIngredientCost = (ingredients || []).reduce(
-    (sum: number, i: { quantity_in_stock?: number; price_per_unit?: number }) =>
+    (sum: number, i: { quantity_in_stock: number | null; price_per_unit: number | null }) =>
       sum + (i.quantity_in_stock || 0) * (i.price_per_unit || 0),
     0
   );
@@ -414,7 +415,7 @@ function scoreVariance(data: VarianceData): { score: number; metric: string; act
 
 type EngagementData = { entriesPerWeek: number; corrActionRate: number };
 
-async function fetchTeamEngagementData(admin: any, restaurantId: string): Promise<EngagementData> {
+async function fetchTeamEngagementData(admin: SupabaseClient<Database>, restaurantId: string): Promise<EngagementData> {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
   const [logbook, actions] = await Promise.all([
@@ -466,7 +467,7 @@ function scoreTeamEngagement(data: EngagementData): { score: number; metric: str
 
 type ReservationData = { total: number; noShows: number };
 
-async function fetchReservationData(admin: any, restaurantId: string): Promise<ReservationData> {
+async function fetchReservationData(admin: SupabaseClient<Database>, restaurantId: string): Promise<ReservationData> {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const { data } = await admin
     .from('reservations')
@@ -572,8 +573,7 @@ const RECOMMENDATION_TEMPLATES: Record<SubScoreKey, { title: string; critical: s
 // ---------------------------------------------------------------------------
 
 export async function persistHealthScore(restaurantId: string, result: HealthScoreResult): Promise<void> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const admin: any = supabaseAdmin();
+  const admin = supabaseAdmin<Database>();
 
   // Upsert main score
   await admin.from('restaurant_health_scores').upsert({
@@ -602,7 +602,7 @@ export async function persistHealthScore(restaurantId: string, result: HealthSco
     active_modules: result.activeModules,
     calculated_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
-  }, { onConflict: 'restaurant_id' });
+  } as never, { onConflict: 'restaurant_id' });
 
   // Append history snapshot
   await admin.from('health_score_history').insert({
@@ -615,7 +615,7 @@ export async function persistHealthScore(restaurantId: string, result: HealthSco
     team_engagement_score: result.subScores.team_engagement.score,
     reservation_score: result.subScores.reservations.score,
     visibility_score: result.subScores.visibility.score,
-  });
+  } as never);
 }
 
 // ---------------------------------------------------------------------------

@@ -32,10 +32,18 @@ type NormalizedReservation = {
   customer_notes: string | null;
 };
 
+type ProviderConfig = {
+  api_base_url?: string;
+  location_id?: string;
+  venue_id?: string;
+  restaurant_slug?: string;
+  restaurant_id?: string;
+};
+
 // --- Libro API Client ---
 async function fetchLibroReservations(
   apiKey: string,
-  config: Record<string, any>
+  config: ProviderConfig
 ): Promise<NormalizedReservation[]> {
   // Libro API: GET /api/v2/reservations?location_id=XXX&date_from=YYYY-MM-DD
   const baseUrl = config.api_base_url || 'https://api.libro.app/api/v2';
@@ -61,17 +69,17 @@ async function fetchLibroReservations(
   }
 
   const data = await response.json();
-  const reservations = data.reservations || data.data || [];
+  const reservations: Array<Record<string, unknown>> = data.reservations || data.data || [];
 
-  return reservations.map((r: any) => ({
+  return reservations.map((r) => ({
     external_id: String(r.id || r.booking_id),
-    guest_count: r.party_size || r.covers || 2,
-    reservation_time: r.date_time || r.time || r.start_time,
-    status: mapLibroStatus(r.status),
-    customer_name: r.guest_name || (r.first_name ? `${r.first_name} ${r.last_name || ''}`.trim() : null),
-    customer_email: r.guest_email || r.email || null,
-    customer_phone: r.guest_phone || r.phone || null,
-    customer_notes: r.notes || r.special_requests || null,
+    guest_count: (r.party_size as number) || (r.covers as number) || 2,
+    reservation_time: String(r.date_time || r.time || r.start_time),
+    status: mapLibroStatus(String(r.status)),
+    customer_name: String(r.guest_name || (r.first_name ? `${r.first_name} ${r.last_name || ''}`.trim() : '')),
+    customer_email: String(r.guest_email || r.email || ''),
+    customer_phone: String(r.guest_phone || r.phone || ''),
+    customer_notes: String(r.notes || r.special_requests || ''),
   }));
 }
 
@@ -87,7 +95,7 @@ function mapLibroStatus(status: string): NormalizedReservation['status'] {
 // --- Resy API Client ---
 async function fetchResyReservations(
   apiKey: string,
-  config: Record<string, any>
+  config: ProviderConfig
 ): Promise<NormalizedReservation[]> {
   // Resy API: GET /api/v3/venue/reservations?venue_id=XXX
   const baseUrl = config.api_base_url || 'https://api.resy.com/api/v3';
@@ -111,18 +119,21 @@ async function fetchResyReservations(
   }
 
   const data = await response.json();
-  const reservations = data.reservations || data.results || [];
+  const reservations: Array<Record<string, unknown>> = data.reservations || data.results || [];
 
-  return reservations.map((r: any) => ({
-    external_id: String(r.id || r.resy_token),
-    guest_count: r.party_size || r.num_seats || 2,
-    reservation_time: r.time || (r.day ? `${r.day}T${r.time_slot || '19:00'}` : new Date().toISOString()),
-    status: mapResyStatus(r.status),
-    customer_name: r.client?.first_name ? `${r.client.first_name} ${r.client.last_name || ''}`.trim() : null,
-    customer_email: r.client?.email_address || r.client?.email || null,
-    customer_phone: r.client?.phone_number || null,
-    customer_notes: r.special_request || r.client?.notes || null,
-  }));
+  return reservations.map((r) => {
+    const client = r.client as Record<string, string> | undefined;
+    return {
+      external_id: String(r.id || r.resy_token),
+      guest_count: (r.party_size as number) || (r.num_seats as number) || 2,
+      reservation_time: String(r.time || (r.day ? `${r.day}T${r.time_slot || '19:00'}` : new Date().toISOString())),
+      status: mapResyStatus(String(r.status)),
+      customer_name: client?.first_name ? `${client.first_name} ${client.last_name || ''}`.trim() : null,
+      customer_email: client?.email_address || client?.email || null,
+      customer_phone: client?.phone_number || null,
+      customer_notes: String(r.special_request || client?.notes || ''),
+    };
+  });
 }
 
 function mapResyStatus(status: string): NormalizedReservation['status'] {
@@ -137,7 +148,7 @@ function mapResyStatus(status: string): NormalizedReservation['status'] {
 // --- Zenchef API Client ---
 async function fetchZenchefReservations(
   apiKey: string,
-  config: Record<string, any>
+  config: ProviderConfig
 ): Promise<NormalizedReservation[]> {
   // Zenchef API: GET /api/v1/bookings?restaurant_id=XXX
   const baseUrl = config.api_base_url || 'https://api.zenchef.com/api/v1';
@@ -162,18 +173,21 @@ async function fetchZenchefReservations(
   }
 
   const data = await response.json();
-  const bookings = data.bookings || data.data || [];
+  const bookings: Array<Record<string, unknown>> = data.bookings || data.data || [];
 
-  return bookings.map((b: any) => ({
-    external_id: String(b.id || b.booking_id),
-    guest_count: b.nb_guests || b.party_size || b.pax || 2,
-    reservation_time: b.date_time || b.datetime || (b.date && b.time ? `${b.date}T${b.time}` : b.date),
-    status: mapZenchefStatus(b.status),
-    customer_name: b.client_name || (b.customer?.first_name ? `${b.customer.first_name} ${b.customer.last_name || ''}`.trim() : null),
-    customer_email: b.client_email || b.customer?.email || null,
-    customer_phone: b.client_phone || b.customer?.phone || null,
-    customer_notes: b.comment || b.notes || null,
-  }));
+  return bookings.map((b) => {
+    const customer = b.customer as Record<string, string> | undefined;
+    return {
+      external_id: String(b.id || b.booking_id),
+      guest_count: (b.nb_guests as number) || (b.party_size as number) || (b.pax as number) || 2,
+      reservation_time: String(b.date_time || b.datetime || (b.date && b.time ? `${b.date}T${b.time}` : b.date)),
+      status: mapZenchefStatus(String(b.status)),
+      customer_name: String(b.client_name || (customer?.first_name ? `${customer.first_name} ${customer.last_name || ''}`.trim() : '')),
+      customer_email: String(b.client_email || customer?.email || ''),
+      customer_phone: String(b.client_phone || customer?.phone || ''),
+      customer_notes: String(b.comment || b.notes || ''),
+    };
+  });
 }
 
 function mapZenchefStatus(status: string): NormalizedReservation['status'] {
@@ -191,7 +205,7 @@ function mapZenchefStatus(status: string): NormalizedReservation['status'] {
 async function fetchReservationsForProvider(
   providerName: string,
   apiKey: string,
-  config: Record<string, any>
+  config: ProviderConfig
 ): Promise<NormalizedReservation[]> {
   switch (providerName) {
     case 'libro':   return fetchLibroReservations(apiKey, config);
@@ -272,13 +286,13 @@ export async function GET(req: Request) {
       try {
         // 4. Fetch reservations from the provider API
         const reservations = await fetchReservationsForProvider(
-          provider.provider_name,
-          provider.api_key,
+          providers[0]?.provider_name || provider.provider_name || '',
+          provider.api_key || '',
           provider.provider_config || {}
         );
 
         // 5. Upsert each reservation
-        let created = 0;
+        const created = 0;
         let updated = 0;
         let errors = 0;
 
@@ -338,7 +352,8 @@ export async function GET(req: Request) {
           detail: `Synced ${reservations.length} reservations (${errors} errors) in ${durationMs}ms`,
         });
 
-      } catch (err: any) {
+      } catch (err) {
+        const errorMsg = err instanceof Error ? err.message : String(err);
         const durationMs = Date.now() - startTime;
 
         // Log error to reservation_sync_log
@@ -348,8 +363,8 @@ export async function GET(req: Request) {
           sync_type: 'polling',
           status: 'error',
           errors_count: 1,
-          error_message: err.message,
-          error_details: { stack: err.stack?.substring(0, 500) },
+          error_message: errorMsg,
+          error_details: { stack: err instanceof Error ? err.stack?.substring(0, 500) : '' },
           duration_ms: durationMs,
         });
 
@@ -362,7 +377,7 @@ export async function GET(req: Request) {
         results.push({
           provider_id: provider.id,
           status: 'error',
-          detail: err.message,
+          detail: errorMsg,
         });
       }
     }
@@ -373,7 +388,7 @@ export async function GET(req: Request) {
       timestamp: new Date().toISOString(),
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Cron/Sync] Fatal error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

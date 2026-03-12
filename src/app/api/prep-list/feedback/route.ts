@@ -50,7 +50,7 @@ export async function PATCH(req: Request) {
     }
 
     // Process the feedback: update items + adjust confidence modifiers
-    const feedback = items.map((item: any) => ({
+    const feedback = items.map((item: { menu_item_id: string; actual_portions: number }) => ({
       menuItemId: item.menu_item_id,
       actualPortions: item.actual_portions,
     }));
@@ -65,6 +65,7 @@ export async function PATCH(req: Request) {
     // Update chef streak
     const today = new Date().toISOString().split('T')[0];
     const { data: streak } = await auth.supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .from('chef_streaks' as any)
       .select('*')
       .eq('restaurant_id', auth.restaurantId)
@@ -78,6 +79,7 @@ export async function PATCH(req: Request) {
       const newLongest = Math.max(streak.longest_streak, newStreak);
 
       await auth.supabase
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .from('chef_streaks' as any)
         .update({
           current_streak: newStreak,
@@ -88,6 +90,7 @@ export async function PATCH(req: Request) {
         .eq('restaurant_id', auth.restaurantId);
     } else {
       await auth.supabase
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .from('chef_streaks' as any)
         .insert({
           restaurant_id: auth.restaurantId,
@@ -100,6 +103,7 @@ export async function PATCH(req: Request) {
 
     // Recalculate intelligence score
     const { data: scoreData } = await auth.supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .from('restaurant_intelligence_score' as any)
       .select('*')
       .eq('restaurant_id', auth.restaurantId)
@@ -121,6 +125,7 @@ export async function PATCH(req: Request) {
       });
 
       await auth.supabase
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .from('restaurant_intelligence_score' as any)
         .update({
           score: scoreResult.score,
@@ -141,7 +146,7 @@ export async function PATCH(req: Request) {
       message: `Feedback enregistré pour ${result.updatedItems} items. Précision moyenne: ${result.avgAccuracy}%`,
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[PrepList/Feedback] Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

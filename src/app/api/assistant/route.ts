@@ -81,8 +81,8 @@ export async function POST(req: Request) {
         .eq('prep_list_id', prepList.id)
         .not('ai_suggestion_quantity', 'is', null);
       if (data) {
-        prepItems = data.map((i: any) => ({
-          recipe: i.recipes?.name || '?',
+        prepItems = data.map((i: { recipes?: { name: string }[] | null; ai_suggestion_quantity: number; ai_reasoning: string }) => ({
+          recipe: i.recipes?.[0]?.name || '?',
           qty: i.ai_suggestion_quantity,
           reason: i.ai_reasoning,
         }));
@@ -90,7 +90,7 @@ export async function POST(req: Request) {
     }
 
     // Total expected covers from reservations
-    const totalCovers = reservations.reduce((sum: number, r: any) => sum + (r.guest_count || 0), 0);
+    const totalCovers = reservations.reduce((sum: number, r: { guest_count: number | null }) => sum + (r.guest_count || 0), 0);
 
     // ── Build system prompt ───────────────────────────────────────────
     const systemPrompt = `Tu es **Rive**, le Sous-Chef Exécutif Virtuel d'un logiciel de gestion de restaurant haut de gamme.
@@ -107,13 +107,13 @@ export async function POST(req: Request) {
 ## Données en temps réel
 - **Plats au menu** : ${menuCount} items
 - **Réservations du jour** : ${reservations.length} réservations, ${totalCovers} couverts attendus
-- **Ventes récentes (7j)** : ${sales.length > 0 ? sales.map((s: any) => `${s.sale_date}: ${s.total_amount}$`).join(' | ') : 'Aucune donnée'}
+- **Ventes récentes (7j)** : ${sales.length > 0 ? sales.map((s: { sale_date: string; total_amount: number }) => `${s.sale_date}: ${s.total_amount}$`).join(' | ') : 'Aucune donnée'}
 - **Prep list du jour** : ${prepList ? `${prepList.estimated_covers} couverts estimés, statut: ${prepList.status}` : 'Non générée'}
 ${prepItems.length > 0 ? '- **Suggestions IA prep** :\n' + prepItems.map(i => `  - ${i.recipe}: ${i.qty} portions (${i.reason})`).join('\n') : ''}
 - **Alertes food cost** : ${alerts.length > 0 ? alerts.length + ' alertes non lues' : 'Aucune'}
-${alerts.length > 0 ? alerts.map((a: any) => `  - ${a.recipes?.name || '?'} — ingrédient: ${a.ingredients?.name || '?'}, suggestion: ${a.ai_recommendation}`).join('\n') : ''}
+${alerts.length > 0 ? alerts.map((a: { recipes?: { name: string }[] | null; ingredients?: { name: string }[] | null; ai_recommendation: string }) => `  - ${a.recipes?.[0]?.name || '?'} — ingrédient: ${a.ingredients?.[0]?.name || '?'}, suggestion: ${a.ai_recommendation}`).join('\n') : ''}
 - **Dernières notes du logbook** :
-${logbookEntries.length > 0 ? logbookEntries.map((e: any) => `  - [${e.is_urgent ? 'URGENT' : e.sentiment}] ${e.summary || e.text.substring(0, 80)}`).join('\n') : '  Aucune note récente.'}
+${logbookEntries.length > 0 ? logbookEntries.map((e: { is_urgent: boolean; sentiment: string; summary: string | null; text: string }) => `  - [${e.is_urgent ? 'URGENT' : e.sentiment}] ${e.summary || e.text.substring(0, 80)}`).join('\n') : '  Aucune note récente.'}
 
 ## Outils disponibles
 Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-les quand le chef te le demande ou quand c'est pertinent pour répondre précisément. Ne demande pas la permission d'utiliser un outil — utilise-le directement.
@@ -210,7 +210,7 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
               .order('reservation_time');
             return {
               count: data?.length || 0,
-              total_covers: data?.reduce((sum: number, r: any) => sum + (r.guest_count || 0), 0) || 0,
+              total_covers: data?.reduce((sum: number, r: { guest_count: number | null }) => sum + (r.guest_count || 0), 0) || 0,
               reservations: data || [],
             };
           },
@@ -247,7 +247,7 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
               .gte('sale_date', since.toISOString().split('T')[0])
               .order('sale_date', { ascending: true });
             if (!data || data.length === 0) return { message: 'Aucune donnée de ventes disponible.' };
-            const total = data.reduce((sum: number, s: any) => sum + Number(s.total_amount), 0);
+            const total = data.reduce((sum: number, s: { total_amount: number }) => sum + Number(s.total_amount), 0);
             return {
               period_days: days,
               total_revenue: total,
@@ -276,7 +276,7 @@ Tu disposes d'outils pour **lire et écrire** dans l'application Rive. Utilise-l
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Virtual Sous-Chef API] Error:', error);
     return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
   }

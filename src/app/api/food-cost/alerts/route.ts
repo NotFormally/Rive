@@ -50,7 +50,7 @@ export async function GET(req: Request) {
     }
 
     return NextResponse.json({ alerts: [] });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching alerts:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
@@ -76,7 +76,7 @@ export async function PATCH(req: Request) {
     if (error) throw error;
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error updating alert:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }

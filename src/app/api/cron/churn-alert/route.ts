@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import type { Database } from '@/types/supabase';
 import { sendEmail } from '@/lib/email';
 
 // =============================================================================
@@ -24,7 +25,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const admin = supabaseAdmin();
+  const admin = supabaseAdmin<Database>();
   const fourteenDaysAgo = new Date(Date.now() - 14 * 86400000).toISOString().split('T')[0];
 
   try {
@@ -32,7 +33,7 @@ export async function GET(req: Request) {
     const { data: staleStreaks, error: streakError } = await admin
       .from('chef_streaks')
       .select('restaurant_id, last_feedback_date, current_streak, feedback_days')
-      .lt('last_feedback_date', fourteenDaysAgo) as { data: any[] | null; error: any };
+      .lt('last_feedback_date', fourteenDaysAgo) as unknown as { data: Array<{ restaurant_id: string; last_feedback_date: string; current_streak: number; feedback_days: number }> | null; error: Error | null };
 
     if (streakError) {
       console.error('[Cron/ChurnAlert] Failed to query chef_streaks:', streakError);
@@ -56,7 +57,7 @@ export async function GET(req: Request) {
       try {
         // Count total calibrations for this restaurant
         const { count: calibrationCount } = await admin
-          .from('prep_confidence_modifiers' as any)
+          .from('prep_confidence_modifiers')
           .select('id', { count: 'exact', head: true })
           .eq('restaurant_id', streak.restaurant_id);
 
@@ -65,7 +66,7 @@ export async function GET(req: Request) {
           .from('restaurants')
           .select('name')
           .eq('id', streak.restaurant_id)
-          .single() as { data: any; error: any };
+          .single() as unknown as { data: { name: string } | null; error: Error | null };
 
         const { data: owner } = await admin
           .from('restaurant_members')
@@ -73,7 +74,7 @@ export async function GET(req: Request) {
           .eq('restaurant_id', streak.restaurant_id)
           .eq('role', 'owner')
           .limit(1)
-          .single() as { data: any; error: any };
+          .single() as unknown as { data: { user_id: string } | null; error: Error | null };
 
         if (!owner || !restaurant) continue;
 
@@ -99,10 +100,10 @@ export async function GET(req: Request) {
         });
 
         alertsSent++;
-      } catch (err: any) {
+      } catch (err) {
         console.error(
           `[Cron/ChurnAlert] Error processing ${streak.restaurant_id}:`,
-          err.message
+          err instanceof Error ? err.message : String(err)
         );
       }
     }
@@ -113,10 +114,10 @@ export async function GET(req: Request) {
       totalInactive: staleStreaks.length,
       timestamp: new Date().toISOString(),
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Cron/ChurnAlert] Fatal error:', error);
     return NextResponse.json(
-      { error: 'Internal server error', detail: error.message },
+      { error: 'Internal server error', detail: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

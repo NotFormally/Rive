@@ -24,7 +24,8 @@ type NormalizedReservation = {
 // Each function takes a raw payload and returns a NormalizedReservation
 // ---------------------------------------------------------------------------
 
-function parseLibro(payload: any): NormalizedReservation {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseLibro(payload: Record<string, any>): NormalizedReservation {
   const r = payload.reservation || payload.booking || payload;
   const statusMap: Record<string, NormalizedReservation['status']> = {
     created: 'booked', confirmed: 'booked', cancelled: 'cancelled',
@@ -45,7 +46,8 @@ function parseLibro(payload: any): NormalizedReservation {
   };
 }
 
-function parseResy(payload: any): NormalizedReservation {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseResy(payload: Record<string, any>): NormalizedReservation {
   const r = payload.reservation || payload.booking || payload;
   const statusMap: Record<string, NormalizedReservation['status']> = {
     reservation_created: 'booked', reservation_confirmed: 'booked',
@@ -67,7 +69,8 @@ function parseResy(payload: any): NormalizedReservation {
   };
 }
 
-function parseZenchef(payload: any): NormalizedReservation {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseZenchef(payload: Record<string, any>): NormalizedReservation {
   // Zenchef sends webhooks with a top-level 'event' type and 'data' object.
   // Events: booking.created, booking.updated, booking.cancelled, booking.seated, etc.
   const event = payload.event || payload.type || '';
@@ -99,7 +102,8 @@ function parseZenchef(payload: any): NormalizedReservation {
   };
 }
 
-function parseGeneric(payload: any): NormalizedReservation {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseGeneric(payload: Record<string, any>): NormalizedReservation {
   // Best-effort extraction for unknown providers
   const r = payload.reservation || payload.booking || payload.data || payload;
   return {
@@ -119,7 +123,8 @@ function parseGeneric(payload: any): NormalizedReservation {
 // Provider detection heuristic
 // Uses payload shape to identify which platform sent the webhook
 // ---------------------------------------------------------------------------
-function detectProvider(payload: any): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function detectProvider(payload: Record<string, any>): string {
   // Libro: typically has 'action' field + reservation.id
   if (payload.action && (payload.reservation?.id || payload.booking?.id)) return 'libro';
   // Resy: has event_type starting with 'reservation_'
@@ -144,6 +149,7 @@ export async function POST(req: Request) {
     }
 
     // 1. Verify token against the database
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const admin = supabaseAdmin() as any;
     const { data: provider, error: providerError } = await admin
       .from('reservation_providers')
@@ -171,7 +177,7 @@ export async function POST(req: Request) {
     }
 
     // 4. Update provider status if needed (activate on first webhook)
-    const providerUpdate: Record<string, any> = { last_sync_at: new Date().toISOString() };
+    const providerUpdate: Record<string, string> = { last_sync_at: new Date().toISOString() };
     if (provider.provider_name !== normalized.detected_provider || provider.status === 'pending') {
       providerUpdate.provider_name = normalized.detected_provider;
       providerUpdate.status = 'active';
@@ -205,7 +211,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, provider: normalized.detected_provider }, { status: 200 });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Webhook/Reservations] Handler error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

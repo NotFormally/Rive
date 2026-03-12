@@ -64,12 +64,12 @@ export async function GET(req: Request) {
         walk_in_ratio: result.coverEstimation.walkInRatio,
         safety_buffer: config.safetyBuffer,
         estimated_food_cost: result.estimatedFoodCost,
-        alerts: result.alerts,
+        alerts: result.alerts as unknown as string[],
         generation_level: result.generationLevel,
         status: 'draft',
-      } as any)
+      } as never)
       .select()
-      .single();
+      .single() as { data: { id: string } | null; error: Error | null };
 
     if (insertError || !prepList) {
       console.error('[PrepList] Insert error:', insertError);
@@ -80,7 +80,7 @@ export async function GET(req: Request) {
     if (result.items.length > 0) {
       await auth.supabase.from('prep_list_items').insert(
         result.items.map(item => ({
-          prep_list_id: (prepList as any).id,
+          prep_list_id: prepList.id,
           menu_item_id: item.menuItemId,
           menu_item_name: item.menuItemName,
           predicted_portions: item.predictedPortions,
@@ -92,7 +92,7 @@ export async function GET(req: Request) {
           bcg_category: item.bcgCategory,
           margin_percent: item.marginPercent,
           estimated_cost: item.estimatedCost,
-        })) as any
+        }))
       );
     }
 
@@ -100,14 +100,14 @@ export async function GET(req: Request) {
     if (result.ingredients.length > 0) {
       await auth.supabase.from('prep_list_ingredients').insert(
         result.ingredients.map(ing => ({
-          prep_list_id: (prepList as any).id,
+          prep_list_id: prepList.id,
           ingredient_id: ing.ingredientId,
           ingredient_name: ing.ingredientName,
           total_quantity: ing.totalQuantity,
           unit: ing.unit,
           estimated_cost: ing.estimatedCost,
           used_by_items: ing.usedByItems,
-        })) as any
+        }))
       );
     }
 
@@ -122,7 +122,7 @@ export async function GET(req: Request) {
       source: 'generated',
     }, { status: 201 });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[PrepList] Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
@@ -171,12 +171,12 @@ export async function POST(req: Request) {
         walk_in_ratio: result.coverEstimation.walkInRatio,
         safety_buffer: config.safetyBuffer,
         estimated_food_cost: result.estimatedFoodCost,
-        alerts: result.alerts,
+        alerts: result.alerts as unknown as string[],
         generation_level: result.generationLevel,
         status: 'draft',
-      } as any)
+      } as never)
       .select()
-      .single();
+      .single() as { data: { id: string } | null; error: Error | null };
 
     if (insertError || !prepList) {
       return NextResponse.json({ error: 'Failed to save prep list' }, { status: 500 });
@@ -185,7 +185,7 @@ export async function POST(req: Request) {
     if (result.items.length > 0) {
       await auth.supabase.from('prep_list_items').insert(
         result.items.map(item => ({
-          prep_list_id: (prepList as any).id, menu_item_id: item.menuItemId,
+          prep_list_id: prepList.id, menu_item_id: item.menuItemId,
           menu_item_name: item.menuItemName, predicted_portions: item.predictedPortions,
           item_share: item.itemShare, confidence_score: item.confidenceScore,
           confidence_modifier: item.confidenceModifier, priority: item.priority,
@@ -198,7 +198,7 @@ export async function POST(req: Request) {
     if (result.ingredients.length > 0) {
       await auth.supabase.from('prep_list_ingredients').insert(
         result.ingredients.map(ing => ({
-          prep_list_id: (prepList as any).id, ingredient_id: ing.ingredientId,
+          prep_list_id: prepList.id, ingredient_id: ing.ingredientId,
           ingredient_name: ing.ingredientName, total_quantity: ing.totalQuantity,
           unit: ing.unit, estimated_cost: ing.estimatedCost, used_by_items: ing.usedByItems,
         }))
@@ -212,7 +212,7 @@ export async function POST(req: Request) {
       source: 'regenerated',
     }, { status: 201 });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[PrepList] POST error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

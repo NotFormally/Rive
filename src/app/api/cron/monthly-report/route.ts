@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import type { Database } from '@/types/supabase';
 
 // =============================================================================
 // Cron: Monthly Learning Report — Runs on the 1st of each month
@@ -23,7 +24,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const admin = supabaseAdmin();
+  const admin = supabaseAdmin<Database>();
 
   // Determine the reporting month (previous month)
   const now = new Date();
@@ -36,7 +37,7 @@ export async function GET(req: Request) {
     // Get all restaurants
     const { data: restaurants, error: restError } = await admin
       .from('restaurants')
-      .select('id, name') as { data: any[] | null; error: any };
+      .select('id, name') as { data: Array<{ id: string; name: string }> | null; error: Error | null };
 
     if (restError || !restaurants || restaurants.length === 0) {
       return NextResponse.json({
@@ -64,7 +65,7 @@ export async function GET(req: Request) {
                 .eq('restaurant_id', restaurant.id)
                 .gte('target_date', monthStart)
                 .lte('target_date', monthEnd)
-            ).data?.map((p: any) => p.id) || []
+            ).data?.map((p: { id: string }) => p.id) || []
           );
 
         // 2. Calculate accuracy improvement (first week vs last week)
@@ -93,7 +94,7 @@ export async function GET(req: Request) {
 
         // 3. Count new confidence modifiers updated this month
         const { count: modifiersUpdated } = await admin
-          .from('prep_confidence_modifiers' as any)
+          .from('prep_confidence_modifiers')
           .select('id', { count: 'exact', head: true })
           .eq('restaurant_id', restaurant.id)
           .gte('updated_at', monthStart)
@@ -132,7 +133,7 @@ export async function GET(req: Request) {
 
         // 5. Upsert into monthly_reports
         const { error: upsertError } = await admin
-          .from('monthly_reports' as any)
+          .from('monthly_reports')
           .upsert(
             {
               restaurant_id: restaurant.id,
@@ -143,7 +144,7 @@ export async function GET(req: Request) {
               modifiers_updated: modifiersUpdated ?? 0,
               learnings,
               created_at: new Date().toISOString(),
-            } as any,
+            } as never,
             { onConflict: 'restaurant_id,month' }
           );
 
@@ -156,8 +157,8 @@ export async function GET(req: Request) {
         }
 
         processed++;
-      } catch (err: any) {
-        console.error(`[Cron/MonthlyReport] Error for ${restaurant.id}:`, err.message);
+      } catch (err) {
+        console.error(`[Cron/MonthlyReport] Error for ${restaurant.id}:`, err instanceof Error ? err.message : String(err));
       }
     }
 
@@ -167,10 +168,10 @@ export async function GET(req: Request) {
       total: restaurants.length,
       timestamp: new Date().toISOString(),
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Cron/MonthlyReport] Fatal error:', error);
     return NextResponse.json(
-      { error: 'Internal server error', detail: error.message },
+      { error: 'Internal server error', detail: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }
@@ -179,7 +180,7 @@ export async function GET(req: Request) {
 // --- Helpers -----------------------------------------------------------------
 
 async function getWeekAccuracy(
-  admin: ReturnType<typeof supabaseAdmin>,
+  admin: any,
   restaurantId: string,
   startDate: string,
   endDate: string
@@ -194,14 +195,14 @@ async function getWeekAccuracy(
 
   if (!prepLists || prepLists.length === 0) return null;
 
-  const listIds = prepLists.map((p: any) => p.id);
+  const listIds = prepLists.map((p: { id: string }) => p.id);
 
   const { data: items } = await admin
     .from('prep_list_items')
     .select('predicted_portions, actual_portions')
     .in('prep_list_id', listIds)
     .not('actual_portions', 'is', null)
-    .not('predicted_portions', 'is', null) as { data: any[] | null; error: any };
+    .not('predicted_portions', 'is', null) as { data: Array<{ predicted_portions: number; actual_portions: number }> | null; error: Error | null };
 
   if (!items || items.length === 0) return null;
 

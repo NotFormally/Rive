@@ -4,6 +4,20 @@ import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { SUPPORTED_LANGUAGE_COUNT } from '@/lib/languages';
 
+/**
+ * The `NauticalCommandCenter` component is an interactive, gamified presentation UI
+ * that walks users through the core value propositions of RiveHub using a nautical metaphor.
+ * 
+ * It features a 4-phase journey:
+ * 1. The Problem (Stormy seas / Chaos)
+ * 2. The Three Pillars (Instruments needed for navigation)
+ * 3. Navigate with Data (KPIs and intelligence feeds)
+ * 4. Intelligence Score (Gamified readiness score)
+ * 
+ * Includes complex state-driven transitions, SVG animations, and full internationalization support via `next-intl`.
+ * 
+ * @returns {JSX.Element} A fully interactive multi-step React component.
+ */
 export function NauticalCommandCenter() {
   const t = useTranslations('NauticalCommandCenter');
   const [activePhase, setActivePhase] = useState(0);

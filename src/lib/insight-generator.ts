@@ -43,8 +43,8 @@ const detectRecord: InsightGenerator = async (supabase, restaurantId) => {
 
   if (!todayLists || todayLists.length === 0) return null;
 
-  const todayListIds = new Set(todayLists.map((l: any) => l.id));
-  const todayFiltered = todayItems.filter((i: any) => todayListIds.has(i.prep_list_id));
+  const todayListIds = new Set(todayLists.map((l: { id: string }) => l.id));
+  const todayFiltered = todayItems.filter((i: { prep_list_id: string; menu_item_name: string; actual_portions: number }) => todayListIds.has(i.prep_list_id));
 
   if (todayFiltered.length === 0) return null;
 
@@ -156,9 +156,9 @@ const detectWalkInTrend: InsightGenerator = async (supabase, restaurantId) => {
   const secondHalf = prepLists.slice(mid);
 
   const avgFirst =
-    firstHalf.reduce((sum: number, p: any) => sum + (p.walk_in_ratio || 0), 0) / firstHalf.length;
+    firstHalf.reduce((sum: number, p: { walk_in_ratio: number | null }) => sum + (p.walk_in_ratio || 0), 0) / firstHalf.length;
   const avgSecond =
-    secondHalf.reduce((sum: number, p: any) => sum + (p.walk_in_ratio || 0), 0) / secondHalf.length;
+    secondHalf.reduce((sum: number, p: { walk_in_ratio: number | null }) => sum + (p.walk_in_ratio || 0), 0) / secondHalf.length;
 
   const diff = avgSecond - avgFirst;
   const diffPercent = Math.round(diff * 100);

@@ -122,7 +122,7 @@ export async function GET(req: Request) {
       recent_sync_activity: syncLogs || [],
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Stats] Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

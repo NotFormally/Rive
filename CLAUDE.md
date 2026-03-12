@@ -15,7 +15,7 @@
 ## Agentic Orchestration
 
 - **You (Claude / Antigravity / Any AI Assistant) are the Default Project Manager**: You must collaboratively orchestrate the work. I will give you high-level goals and you must route them internally to the right expert.
-- **Agent Selection**: Before starting ANY task, silently determine which of the 42 `.claude/agents/**/*.md` agents is the absolute best fit for the job (e.g., `frontend-developer.md`, `ui-designer.md`, `content-creator.md`, etc.).
+- **Agent Selection**: Before starting ANY task, silently determine which of the 43 `.claude/agents/**/*.md` agents is the absolute best fit for the job (e.g., `frontend-developer.md`, `ui-designer.md`, `content-creator.md`, etc.).
 - **Agent Activation**: Once identified, you MUST read the selected agent's Markdown file to absorb its specific context, responsibilities, rules, and tools constraints. 
 - **Persona Adoption**: For the duration of the task, you MUST act as that specific agent and strictly respect their directives. If the task requires multiple disciplines (e.g., design then frontend code), switch your active agent context sequentially.
 - **System Evolution (Meta-Agent)**: You are empowered to dynamically adapt the agentic system. If you identify a recurring constraint, a missing role, or an outdated rule, invoke `engineering/meta-agent.md` to autonomously edit `.claude/agents/` files or the `CLAUDE.md` instructions themselves.
@@ -111,3 +111,4 @@ python3 ~/.antigravity/comms/approve.py "Deploy to production?" --project rivehu
 - **UI/UX Guidelines**: Respect the Phase 3 restructuring for sidebar navigation (mobile stacking/z-index issues) and maintain the nautical "Command Center" aesthetic for dashboards. Keep cognitive load low.
 - **Incremental Verification**: Make small, verifiable changes. Use the available testing infrastructure to validate your work continuously.
 - **Avoid Regressions**: Pay attention to the established i18n structure (25 locales) and multi-tenant RLS (Supabase persistence patterns) to avoid silently breaking them.
+- **OSINT SECRECY (CRITICAL)**: The OSINT targeting tool project MUST remain strictly secret. Do NOT mention, expose, or integrate any OSINT features (La Vigie, scraping, lead gen) onto the public website, user-facing documentation, or localizations. Treat OSINT as classified internal intelligence.

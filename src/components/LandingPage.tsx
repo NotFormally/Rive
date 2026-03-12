@@ -20,7 +20,9 @@ import { NanoBananaPromo } from "@/components/NanoBananaPromo";
 import { NauticalCommandCenter } from "@/components/NauticalCommandCenter";
 import { ThreePillarsDemo } from "@/components/ThreePillarsDemo";
 import { BeforeAfterComparison } from "@/components/BeforeAfterComparison";
-
+import { BrigadeRetention } from "@/components/BrigadeRetention";
+import { GamificationTeaser } from "@/components/GamificationTeaser";
+import { IntelligenceJourney } from "@/components/IntelligenceJourney";
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -264,6 +266,9 @@ export function LandingPage() {
       <section className="relative px-4 md:px-12 lg:px-24">
         <ThreePillarsDemo />
       </section>
+
+      {/* CREW HARMONY & BRIGADE RETENTION */}
+      <BrigadeRetention />
 
       {/* HOW IT WORKS — 3 Steps */}
       <HowItWorks />
@@ -1109,6 +1114,11 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* INTELLIGENCE JOURNEY (DATA MATURITY) */}
+      <IntelligenceJourney />
+
+      {/* GAMIFICATION TEASER */}
+      <GamificationTeaser />
       {/* FAQ */}
       <FAQSection />
 

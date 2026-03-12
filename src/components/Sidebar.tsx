@@ -277,7 +277,7 @@ export function Sidebar() {
       </aside>
 
       {/* Desktop Fixed Sidebar */}
-      <aside className="hidden md:flex w-64 bg-[--sidebar] backdrop-blur-3xl min-h-screen text-[--sidebar-foreground] flex-col fixed left-0 top-0 border-r border-[--sidebar-border] shadow-[0_0_40px_rgba(0,0,0,0.5)] z-30">
+      <aside className="hidden md:flex w-64 bg-[--sidebar] backdrop-blur-3xl h-screen text-[--sidebar-foreground] flex-col fixed left-0 top-0 border-r border-[--sidebar-border] shadow-[0_0_40px_rgba(0,0,0,0.5)] z-30">
         {sidebarContent}
       </aside>
       

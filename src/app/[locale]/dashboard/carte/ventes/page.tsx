@@ -154,7 +154,7 @@ export default function SalesPage() {
 
     try {
       let totalSynced = 0;
-      let syncMessages = [];
+      const syncMessages = [];
 
       for (const provider of activeIntegrations) {
         const response = await fetch(`/api/integrations/${provider}/sync`, {

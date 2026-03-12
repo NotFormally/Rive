@@ -89,7 +89,7 @@ export async function POST(req: Request) {
     }
 
     // 4. Match with our internal database and upsert pos_sales
-    const upsertSalesData: any[] = [];
+    const upsertSalesData: Record<string, unknown>[] = [];
     
     for (const item of menuItems || []) {
       const dbProductId = item.pos_item_id;

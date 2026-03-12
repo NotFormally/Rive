@@ -115,7 +115,7 @@ export async function GET(req: Request) {
       results
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Integrations/Sync] Fatal Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

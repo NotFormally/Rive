@@ -84,7 +84,7 @@ Your task:
     }
 
     // 3. Upsert into Supabase pos_sales
-    const upsertSalesData: any[] = [];
+    const upsertSalesData: Record<string, unknown>[] = [];
     
     // Create a map for quick lookup
     const menuItemsMap = new Map(menuItems?.map(m => [m.name, m.id]));

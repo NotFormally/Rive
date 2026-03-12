@@ -154,7 +154,7 @@ Ne donne que le JSON, aucun commentaire additionnel.`;
     if (inserts.length > 0) {
         const { error: insertErr } = await auth.supabase
             .from('food_cost_alerts')
-            .insert(inserts as any); // Cast as any because type wasn't generated yet
+            .insert(inserts as never); // Cast as any because type wasn't generated yet
 
         if (insertErr) {
             console.error('Failed to insert alerts:', insertErr);

@@ -87,7 +87,7 @@ export async function POST(req: Request) {
 // Helper: Build synthetic test payloads mimicking each provider's format
 // ---------------------------------------------------------------------------
 
-function buildTestPayload(providerName: string): any {
+function buildTestPayload(providerName: string): Record<string, unknown> {
   const testId = `test_${Date.now()}`;
   const testTime = new Date(Date.now() + 3600000).toISOString(); // 1 hour from now
 

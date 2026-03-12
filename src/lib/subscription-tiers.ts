@@ -35,11 +35,11 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; labelFr: str
       module_menu_engineering: true,  // Les Allures — quota-limited
       module_instagram: true,         // Le Pavillon — quota-limited
       module_receipt_scanner: true,   // Les Provisions — quota-limited
-      module_reservations: false,     // ❌ Le Mouillage — Performance+
-      module_smart_prep: false,       // ❌ L'Appareillage — Intelligence only
-      module_deposits: false,         // ❌ Le Lest — Essence+
-      module_variance: false,         // ❌ Le Tirant d'Eau — Performance+
-      module_production: false,       // ❌ Production — Performance+
+      module_reservations: true,      // Le Mouillage — quota-limited (freemium)
+      module_smart_prep: true,        // L'Appareillage — quota-limited (freemium)
+      module_deposits: true,          // Le Lest — quota-limited (freemium)
+      module_variance: true,          // Le Tirant d'Eau — quota-limited (freemium)
+      module_production: true,        // Production — quota-limited (freemium)
     },
   },
   essence: {
@@ -52,11 +52,11 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; labelFr: str
       module_menu_engineering: true,  // ✅ Higher quotas
       module_instagram: true,         // ✅ Unlimited
       module_receipt_scanner: true,   // ✅ Higher quotas
-      module_reservations: false,     // ❌ Le Mouillage — Performance+
-      module_smart_prep: false,       // ❌ L'Appareillage — Intelligence only
+      module_reservations: true,      // ✅ Le Mouillage — unlocked
+      module_smart_prep: true,        // ✅ L'Appareillage — unlocked
       module_deposits: true,          // ✅ Le Lest — unlocked
-      module_variance: false,         // ❌ Le Tirant d'Eau — Performance+
-      module_production: false,       // ❌ Production — Performance+
+      module_variance: true,          // ✅ Le Tirant d'Eau — unlocked
+      module_production: true,        // ✅ Production — unlocked
     },
   },
   performance: {
@@ -70,7 +70,7 @@ export const TIER_CONFIG: Record<SubscriptionTier, { label: string; labelFr: str
       module_instagram: true,         // ✅ Unlimited
       module_receipt_scanner: true,   // ✅ Unlimited
       module_reservations: true,      // ✅ Le Mouillage — unlocked
-      module_smart_prep: false,       // ❌ L'Appareillage — Intelligence only
+      module_smart_prep: true,        // ✅ L'Appareillage — unlocked
       module_deposits: true,          // ✅ Le Lest
       module_variance: true,          // ✅ Le Tirant d'Eau — unlocked
       module_production: true,        // ✅ Production — unlocked

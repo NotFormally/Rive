@@ -50,25 +50,31 @@ export default function HealthScorePage() {
   const [recalculating, setRecalculating] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (!profile?.id) return;
+    if (!profile?.id) {
+      setLoading(false);
+      return;
+    }
 
-    const [scoreRes, histRes] = await Promise.all([
-      supabase
-        .from("restaurant_health_scores")
-        .select("*")
-        .eq("restaurant_id", profile.id)
-        .maybeSingle(),
-      supabase
-        .from("health_score_history")
-        .select("total_score, recorded_at")
-        .eq("restaurant_id", profile.id)
-        .order("recorded_at", { ascending: true })
-        .limit(52),
-    ]);
+    try {
+      const [scoreRes, histRes] = await Promise.all([
+        supabase
+          .from("restaurant_health_scores")
+          .select("*")
+          .eq("restaurant_id", profile.id)
+          .maybeSingle(),
+        supabase
+          .from("health_score_history")
+          .select("total_score, recorded_at")
+          .eq("restaurant_id", profile.id)
+          .order("recorded_at", { ascending: true })
+          .limit(52),
+      ]);
 
-    if (scoreRes.data) setData(scoreRes.data as unknown as HealthScoreData);
-    if (histRes.data) setHistory(histRes.data as HistoryPoint[]);
-    setLoading(false);
+      if (scoreRes.data) setData(scoreRes.data as unknown as HealthScoreData);
+      if (histRes.data) setHistory(histRes.data as HistoryPoint[]);
+    } finally {
+      setLoading(false);
+    }
   }, [profile?.id]);
 
   useEffect(() => {

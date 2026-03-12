@@ -38,20 +38,26 @@ export default function ReservationIntegrationsPage() {
 
   useEffect(() => {
     const fetchIntegrations = async () => {
-      if (!profile) return;
-      setLoadingIntegrations(true);
-      const { data, error } = await supabase
-        .from('reservation_providers')
-        .select('id, provider_name, status, last_sync_at')
-        .eq('restaurant_id', profile.id)
-        .in('provider_name', ['libro', 'resy', 'zenchef']);
-        
-      if (!error && data) {
-        setIntegrations(data as IntegrationState[]);
+      if (!profile) {
+        setLoadingIntegrations(false);
+        return;
       }
-      setLoadingIntegrations(false);
+      setLoadingIntegrations(true);
+      try {
+        const { data, error } = await supabase
+          .from('reservation_providers')
+          .select('id, provider_name, status, last_sync_at')
+          .eq('restaurant_id', profile.id)
+          .in('provider_name', ['libro', 'resy', 'zenchef']);
+
+        if (!error && data) {
+          setIntegrations(data as IntegrationState[]);
+        }
+      } finally {
+        setLoadingIntegrations(false);
+      }
     };
-    
+
     fetchIntegrations();
   }, [profile]);
 

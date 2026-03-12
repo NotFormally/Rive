@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
-import { supabase } from "@/lib/supabase";
 import {
   Brain,
   CalendarDays,
@@ -182,8 +181,15 @@ export default function SmartPrepDashboard() {
   // Data loading
   // --------------------------------------------------------------------------
 
+  // Use stable profile ID to avoid re-fetching on every auth token refresh
+  // (onAuthStateChange creates a new profile object reference each time)
+  const profileId = profile?.id;
+
   const loadPrepList = useCallback(async () => {
-    if (!profile) return;
+    if (!profileId) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
 
     try {
@@ -210,7 +216,7 @@ export default function SmartPrepDashboard() {
     } finally {
       setLoading(false);
     }
-  }, [profile, targetDate, servicePeriod]);
+  }, [profileId, targetDate, servicePeriod]);
 
   useEffect(() => { loadPrepList(); }, [loadPrepList]);
 

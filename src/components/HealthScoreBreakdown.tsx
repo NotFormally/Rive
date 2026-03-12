@@ -8,6 +8,7 @@ import {
   Users,
   CalendarCheck,
   Globe,
+  Shield,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { SubScoreKey, SubScoreDetail } from '@/lib/health-score';
@@ -24,6 +25,7 @@ const CATEGORY_ICONS: Record<SubScoreKey, React.ElementType> = {
   team_engagement: Users,
   reservations: CalendarCheck,
   visibility: Globe,
+  haccp_compliance: Shield,
 };
 
 const STATUS_COLORS = {
@@ -44,6 +46,7 @@ export default function HealthScoreBreakdown({ subScores }: Props) {
     team_engagement: t('cat_team_engagement'),
     reservations: t('cat_reservations'),
     visibility: t('cat_visibility'),
+    haccp_compliance: t('cat_haccp_compliance'),
   };
 
   const STATUS_LABELS: Record<string, string> = {

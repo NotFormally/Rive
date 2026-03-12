@@ -35,6 +35,7 @@ export default function HealthScoreRecommendations({ recommendations }: Props) {
     team_engagement: t('cat_team_engagement'),
     reservations: t('cat_reservations'),
     visibility: t('cat_visibility'),
+    haccp_compliance: t('cat_haccp_compliance'),
   };
 
   const IMPACT_LABELS: Record<string, string> = {

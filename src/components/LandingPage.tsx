@@ -20,6 +20,7 @@ import { NanoBananaPromo } from "@/components/NanoBananaPromo";
 import { NauticalCommandCenter } from "@/components/NauticalCommandCenter";
 import { ThreePillarsDemo } from "@/components/ThreePillarsDemo";
 import { BeforeAfterComparison } from "@/components/BeforeAfterComparison";
+import { ComplianceSection } from "@/components/ComplianceSection";
 import { BrigadeRetention } from "@/components/BrigadeRetention";
 import { GamificationTeaser } from "@/components/GamificationTeaser";
 import { IntelligenceJourney } from "@/components/IntelligenceJourney";
@@ -925,6 +926,9 @@ export function LandingPage() {
 
       {/* BEFORE/AFTER COMPARISON */}
       <BeforeAfterComparison />
+
+      {/* HACCP COMPLIANCE SECTION */}
+      <ComplianceSection />
 
       {/* D. PHILOSOPHY — "The Manifesto" */}
       <section id="philosophy" className="relative py-0 bg-[#1A1A1A] text-[#F2F0E9] overflow-hidden">

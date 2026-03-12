@@ -29,7 +29,8 @@ export type SubScoreKey =
   | 'variance'
   | 'team_engagement'
   | 'reservations'
-  | 'visibility';
+  | 'visibility'
+  | 'haccp_compliance';
 
 export type SubScoreDetail = {
   score: number;
@@ -71,13 +72,14 @@ export type Recommendation = {
 // ---------------------------------------------------------------------------
 
 const BASE_WEIGHTS: Record<SubScoreKey, number> = {
-  food_cost: 0.25,
-  menu_completeness: 0.15,
-  prep_accuracy: 0.15,
-  variance: 0.10,
-  team_engagement: 0.10,
-  reservations: 0.10,
-  visibility: 0.15,
+  food_cost: 0.22,
+  menu_completeness: 0.13,
+  prep_accuracy: 0.13,
+  variance: 0.09,
+  team_engagement: 0.09,
+  reservations: 0.09,
+  visibility: 0.13,
+  haccp_compliance: 0.12,
 };
 
 const GRADE_THRESHOLDS: Array<{ min: number; grade: HealthGrade }> = [
@@ -103,6 +105,7 @@ export async function calculateHealthScore(restaurantId: string): Promise<Health
     varianceData,
     engagementData,
     reservationData,
+    haccpData,
     existingScore,
     historyData,
   ] = await Promise.all([
@@ -112,6 +115,7 @@ export async function calculateHealthScore(restaurantId: string): Promise<Health
     fetchVarianceData(admin, restaurantId),
     fetchTeamEngagementData(admin, restaurantId),
     fetchReservationData(admin, restaurantId),
+    fetchHACCPData(admin, restaurantId),
     admin.from('restaurant_health_scores').select('*').eq('restaurant_id', restaurantId).maybeSingle() as unknown as Promise<{ data: { google_place_id: string | null; bayesian_mu: number | null; bayesian_sigma: number | null } | null }>,
     admin.from('health_score_history').select('total_score').eq('restaurant_id', restaurantId).order('recorded_at' as never, { ascending: true }).limit(52) as unknown as Promise<{ data: Array<{ total_score: number }> | null }>,
   ]);
@@ -124,6 +128,7 @@ export async function calculateHealthScore(restaurantId: string): Promise<Health
     variance: scoreVariance(varianceData),
     team_engagement: scoreTeamEngagement(engagementData),
     reservations: scoreReservations(reservationData),
+    haccp_compliance: scoreHACCPCompliance(haccpData),
     visibility: { score: 0, metric: 'No Google data', active: false },
   };
 
@@ -496,6 +501,95 @@ function scoreReservations(data: ReservationData): { score: number; metric: stri
 }
 
 // ---------------------------------------------------------------------------
+// Sub-Score: HACCP Compliance
+// ---------------------------------------------------------------------------
+
+type HACCPData = {
+  checklistCompletionRate: number;
+  temperatureDeviationRate: number;
+  correctiveActionCompletionRate: number;
+  hasData: boolean;
+};
+
+async function fetchHACCPData(admin: SupabaseClient<Database>, restaurantId: string): Promise<HACCPData> {
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+
+  const [checklists, completions, tempLogs, alerts] = await Promise.all([
+    admin
+      .from('haccp_checklists')
+      .select('id', { count: 'exact', head: true })
+      .eq('restaurant_id', restaurantId)
+      .eq('is_active', true),
+    admin
+      .from('checklist_completions')
+      .select('compliance_score')
+      .eq('restaurant_id', restaurantId)
+      .gte('completed_at', thirtyDaysAgo),
+    admin
+      .from('temperature_logs')
+      .select('is_within_limits')
+      .eq('restaurant_id', restaurantId)
+      .gte('created_at', thirtyDaysAgo),
+    admin
+      .from('temperature_alerts')
+      .select('status')
+      .eq('restaurant_id', restaurantId)
+      .gte('created_at', thirtyDaysAgo),
+  ]);
+
+  const totalChecklists = checklists.count || 0;
+  const completionData = completions.data || [];
+  const tempData = tempLogs.data || [];
+  const alertData = alerts.data || [];
+
+  if (totalChecklists === 0 && tempData.length === 0) {
+    return { checklistCompletionRate: 0, temperatureDeviationRate: 0, correctiveActionCompletionRate: 0, hasData: false };
+  }
+
+  // Checklist completion: avg compliance_score of completed checklists
+  const checklistCompletionRate = completionData.length > 0
+    ? completionData.reduce((sum, c: { compliance_score: number | null }) => sum + (c.compliance_score || 0), 0) / completionData.length
+    : 0;
+
+  // Temperature deviation rate: % of readings out of limits
+  const temperatureDeviationRate = tempData.length > 0
+    ? (tempData.filter((t: { is_within_limits: boolean }) => !t.is_within_limits).length / tempData.length) * 100
+    : 0;
+
+  // Corrective action completion: % of alerts resolved
+  const resolvedAlerts = alertData.filter((a: { status: string }) => a.status === 'resolved').length;
+  const correctiveActionCompletionRate = alertData.length > 0
+    ? (resolvedAlerts / alertData.length) * 100
+    : 100; // No alerts = perfect
+
+  return { checklistCompletionRate, temperatureDeviationRate, correctiveActionCompletionRate, hasData: true };
+}
+
+function scoreHACCPCompliance(data: HACCPData): { score: number; metric: string; active: boolean } {
+  if (!data.hasData) return { score: 0, metric: 'No HACCP data', active: false };
+
+  // Checklist completion rate (40% weight)
+  const checklistScore = Math.min(100, data.checklistCompletionRate);
+
+  // Temperature compliance (35% weight) — lower deviation = higher score
+  let tempScore: number;
+  if (data.temperatureDeviationRate === 0) tempScore = 100;
+  else if (data.temperatureDeviationRate < 5) tempScore = 80;
+  else if (data.temperatureDeviationRate < 15) tempScore = 50;
+  else tempScore = 20;
+
+  // Corrective action closure (25% weight)
+  const actionScore = data.correctiveActionCompletionRate;
+
+  const score = Math.round(checklistScore * 0.40 + tempScore * 0.35 + actionScore * 0.25);
+  return {
+    score,
+    metric: `Checklists: ${checklistScore.toFixed(0)}%, Temp dev: ${data.temperatureDeviationRate.toFixed(1)}%, Actions: ${data.correctiveActionCompletionRate.toFixed(0)}%`,
+    active: true,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Recommendations Generator
 // ---------------------------------------------------------------------------
 
@@ -566,6 +660,12 @@ const RECOMMENDATION_TEMPLATES: Record<SubScoreKey, { title: string; critical: s
     warning: 'Visibility can be improved. Focus on getting more reviews and updating your business information.',
     healthy: 'Strong online presence. Keep responding to reviews and posting updates.',
   },
+  haccp_compliance: {
+    title: 'Strengthen HACCP Compliance',
+    critical: 'Multiple temperature deviations and incomplete checklists. Complete daily checklists, resolve open alerts, and ensure corrective actions are documented.',
+    warning: 'Some compliance gaps detected. Focus on completing all daily checklists and resolving temperature alerts promptly.',
+    healthy: 'Excellent compliance. Checklists are up to date, temperatures within limits, and corrective actions closed.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -588,6 +688,7 @@ export async function persistHealthScore(restaurantId: string, result: HealthSco
     team_engagement_score: result.subScores.team_engagement.score,
     reservation_score: result.subScores.reservations.score,
     visibility_score: result.subScores.visibility.score,
+    haccp_compliance_score: result.subScores.haccp_compliance.score,
     sub_score_details: result.subScores,
     recommendations: result.recommendations,
     google_place_id: result.googlePlaceId,
@@ -615,6 +716,7 @@ export async function persistHealthScore(restaurantId: string, result: HealthSco
     team_engagement_score: result.subScores.team_engagement.score,
     reservation_score: result.subScores.reservations.score,
     visibility_score: result.subScores.visibility.score,
+    haccp_compliance_score: result.subScores.haccp_compliance.score,
   } as never);
 }
 

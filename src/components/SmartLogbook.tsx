@@ -6,8 +6,13 @@ import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { hasReachedQuota, TIER_QUOTAS } from "@/lib/quotas";
 import { useTranslations } from "next-intl";
-import { Sparkles, Trash2, Globe } from "lucide-react";
+import { Sparkles, Trash2, Globe, Shield, AlertTriangle, CheckCircle2, Clock, Lock } from "lucide-react";
 import { APP_LANGUAGES } from "@/lib/languages";
+
+type EntryType = 'note' | 'haccp_deviation' | 'corrective_action' | 'temperature_event' | 'inspection_note' | 'incident';
+type HACCPCategory = 'temperature' | 'hygiene' | 'allergen' | 'pest_control' | 'equipment' | 'training' | 'supplier' | 'other';
+type Severity = 'low' | 'medium' | 'high' | 'critical';
+type CorrectiveStatus = 'pending' | 'in_progress' | 'completed' | 'verified';
 
 type LogEntry = {
   id: string;
@@ -25,6 +30,36 @@ type LogEntry = {
     date: string;
     topItems: string[];
   };
+  entryType: EntryType;
+  haccpCategory?: HACCPCategory;
+  severity?: Severity;
+  correctiveAction?: string;
+  correctiveActionStatus?: CorrectiveStatus;
+  correctiveActionDue?: string;
+  isImmutable?: boolean;
+};
+
+const ENTRY_TYPE_CONFIG: Record<EntryType, { label: string; color: string; icon: typeof Shield }> = {
+  note: { label: 'Note', color: 'bg-primary/10 text-primary', icon: Globe },
+  haccp_deviation: { label: 'HACCP Deviation', color: 'bg-red-500/10 text-red-500', icon: AlertTriangle },
+  corrective_action: { label: 'Corrective Action', color: 'bg-amber-500/10 text-amber-500', icon: CheckCircle2 },
+  temperature_event: { label: 'Temperature', color: 'bg-blue-500/10 text-blue-500', icon: AlertTriangle },
+  inspection_note: { label: 'Inspection', color: 'bg-purple-500/10 text-purple-500', icon: Shield },
+  incident: { label: 'Incident', color: 'bg-red-600/10 text-red-600', icon: AlertTriangle },
+};
+
+const SEVERITY_COLORS: Record<Severity, string> = {
+  low: 'bg-green-500/10 text-green-500 ring-green-500/20',
+  medium: 'bg-amber-500/10 text-amber-500 ring-amber-500/20',
+  high: 'bg-orange-500/10 text-orange-500 ring-orange-500/20',
+  critical: 'bg-red-500/10 text-red-500 ring-red-500/20',
+};
+
+const CORRECTIVE_STATUS_COLORS: Record<CorrectiveStatus, string> = {
+  pending: 'bg-amber-500/10 text-amber-500',
+  in_progress: 'bg-blue-500/10 text-blue-500',
+  completed: 'bg-green-500/10 text-green-500',
+  verified: 'bg-emerald-500/10 text-emerald-500',
 };
 
 
@@ -49,6 +84,14 @@ export function SmartLogbook() {
   const scansQuotaReached = hasReachedQuota(usage, 'receipt_scans', currentTier);
   const transQuotaReached = hasReachedQuota(usage, 'translations', currentTier);
 
+  // HACCP form state
+  const [entryType, setEntryType] = useState<EntryType>('note');
+  const [haccpCategory, setHaccpCategory] = useState<HACCPCategory | ''>('');
+  const [severity, setSeverity] = useState<Severity | ''>('');
+  const [correctiveAction, setCorrectiveAction] = useState('');
+  const [showHACCPFields, setShowHACCPFields] = useState(false);
+  const [filterType, setFilterType] = useState<EntryType | 'all'>('all');
+
   // Load entries from database on mount
   const loadEntries = useCallback(async () => {
     try {
@@ -66,6 +109,13 @@ export function SmartLogbook() {
         isUrgent: row.is_urgent as boolean,
         translations: (row.translations as Record<string, { text: string; summary?: string }>) || {},
         receiptData: row.receipt_data as LogEntry['receiptData'] | undefined,
+        entryType: (row.entry_type as EntryType) || 'note',
+        haccpCategory: row.haccp_category as HACCPCategory | undefined,
+        severity: row.severity as Severity | undefined,
+        correctiveAction: row.corrective_action as string | undefined,
+        correctiveActionStatus: row.corrective_action_status as CorrectiveStatus | undefined,
+        correctiveActionDue: row.corrective_action_due as string | undefined,
+        isImmutable: row.is_immutable as boolean | undefined,
       }));
       setEntries(mapped);
     } catch (error) {
@@ -96,14 +146,20 @@ export function SmartLogbook() {
 
       const analysis = await response.json();
 
+      const isHACCP = entryType !== 'note';
       const entryData = {
         text: note,
         tags: analysis.tags || [],
         sentiment: analysis.sentiment || "Neutral",
         originalLanguage: analysis.detectedLanguage || "unknown",
         summary: analysis.summary,
-        isUrgent: analysis.isUrgent,
-        translations: {}
+        isUrgent: analysis.isUrgent || (severity === 'critical' || severity === 'high'),
+        translations: {},
+        entryType,
+        ...(isHACCP && haccpCategory ? { haccpCategory } : {}),
+        ...(isHACCP && severity ? { severity } : {}),
+        ...(isHACCP && correctiveAction ? { correctiveAction } : {}),
+        isImmutable: isHACCP,
       };
 
       // Persist to database
@@ -120,10 +176,16 @@ export function SmartLogbook() {
         id: saved.id,
         ...entryData,
         timestamp: saved.created_at,
+        correctiveActionStatus: isHACCP && correctiveAction ? 'pending' : undefined,
       };
 
       setEntries(prev => [newEntry, ...prev]);
       setNote("");
+      setEntryType('note');
+      setHaccpCategory('');
+      setSeverity('');
+      setCorrectiveAction('');
+      setShowHACCPFields(false);
 
       if (profile) {
         await supabase.rpc('increment_usage', { restaurant_uuid: profile.id, metric_name: 'logbook_notes' });
@@ -137,7 +199,12 @@ export function SmartLogbook() {
         tags: ["Uncategorized"],
         sentiment: "Neutral",
         originalLanguage: "unknown",
-        translations: {}
+        translations: {},
+        entryType: entryType as EntryType,
+        haccpCategory: haccpCategory as HACCPCategory || undefined,
+        severity: severity as Severity || undefined,
+        correctiveAction: correctiveAction || undefined,
+        isImmutable: entryType !== 'note',
       };
 
       try {
@@ -260,7 +327,8 @@ export function SmartLogbook() {
         sentiment: "Neutral",
         originalLanguage: "fr",
         summary: `Reçu scanné : ${data.totalAmount} chez ${data.supplierName}.`,
-        receiptData: data
+        receiptData: data,
+        entryType: 'note' as EntryType,
       };
 
       // Persist to database
@@ -298,13 +366,85 @@ export function SmartLogbook() {
         <h2 className="text-xl font-jakarta font-bold mb-4 text-foreground">{t('title')}</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* HACCP Entry Type Toggle */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              type="button"
+              onClick={() => { setShowHACCPFields(false); setEntryType('note'); }}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-jakarta font-semibold transition-all ${
+                entryType === 'note' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80'
+              }`}
+            >
+              <Globe className="w-3 h-3" /> {t('type_note') || 'Note'}
+            </button>
+            <button
+              type="button"
+              onClick={() => { setShowHACCPFields(true); setEntryType('haccp_deviation'); }}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-jakarta font-semibold transition-all ${
+                entryType !== 'note' ? 'bg-[#CC5833] text-white' : 'bg-muted text-muted-foreground hover:bg-muted/80'
+              }`}
+            >
+              <Shield className="w-3 h-3" /> HACCP
+            </button>
+          </div>
+
+          {/* HACCP-specific fields */}
+          {showHACCPFields && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 p-3 bg-[#CC5833]/5 border border-[#CC5833]/20 rounded-2xl">
+              <select
+                value={entryType}
+                onChange={e => setEntryType(e.target.value as EntryType)}
+                className="text-xs rounded-xl border-0 py-2 px-3 ring-1 ring-inset ring-border font-outfit bg-background text-foreground"
+              >
+                <option value="haccp_deviation">{t('type_deviation') || 'Deviation'}</option>
+                <option value="corrective_action">{t('type_corrective') || 'Corrective Action'}</option>
+                <option value="temperature_event">{t('type_temperature') || 'Temperature Event'}</option>
+                <option value="inspection_note">{t('type_inspection') || 'Inspection Note'}</option>
+                <option value="incident">{t('type_incident') || 'Incident'}</option>
+              </select>
+              <select
+                value={haccpCategory}
+                onChange={e => setHaccpCategory(e.target.value as HACCPCategory)}
+                className="text-xs rounded-xl border-0 py-2 px-3 ring-1 ring-inset ring-border font-outfit bg-background text-foreground"
+              >
+                <option value="">{t('category_select') || 'Category...'}</option>
+                <option value="temperature">{t('cat_temperature') || 'Temperature'}</option>
+                <option value="hygiene">{t('cat_hygiene') || 'Hygiene'}</option>
+                <option value="allergen">{t('cat_allergen') || 'Allergen'}</option>
+                <option value="pest_control">{t('cat_pest') || 'Pest Control'}</option>
+                <option value="equipment">{t('cat_equipment') || 'Equipment'}</option>
+                <option value="training">{t('cat_training') || 'Training'}</option>
+                <option value="supplier">{t('cat_supplier') || 'Supplier'}</option>
+                <option value="other">{t('cat_other') || 'Other'}</option>
+              </select>
+              <select
+                value={severity}
+                onChange={e => setSeverity(e.target.value as Severity)}
+                className="text-xs rounded-xl border-0 py-2 px-3 ring-1 ring-inset ring-border font-outfit bg-background text-foreground"
+              >
+                <option value="">{t('severity_select') || 'Severity...'}</option>
+                <option value="low">{t('severity_low') || 'Low'}</option>
+                <option value="medium">{t('severity_medium') || 'Medium'}</option>
+                <option value="high">{t('severity_high') || 'High'}</option>
+                <option value="critical">{t('severity_critical') || 'Critical'}</option>
+              </select>
+              <input
+                type="text"
+                value={correctiveAction}
+                onChange={e => setCorrectiveAction(e.target.value)}
+                placeholder={t('corrective_placeholder') || 'Corrective action taken...'}
+                className="text-xs rounded-xl border-0 py-2 px-3 ring-1 ring-inset ring-border font-outfit bg-background text-foreground placeholder:text-muted-foreground/50"
+              />
+            </div>
+          )}
+
           <div>
             <label htmlFor="log-entry" className="sr-only">{t('title')}</label>
             <textarea
               id="log-entry"
               rows={3}
               className="block w-full rounded-2xl border-0 py-3 md:py-4 px-4 text-foreground shadow-inner ring-1 ring-inset ring-border placeholder:text-muted-foreground/50 focus:ring-2 focus:ring-inset focus:ring-primary/50 text-sm leading-6 font-outfit bg-background resize-none"
-              placeholder={t('placeholder')}
+              placeholder={showHACCPFields ? (t('haccp_placeholder') || 'Describe the HACCP event in detail...') : t('placeholder')}
               value={note}
               onChange={(e) => setNote(e.target.value)}
               disabled={notesQuotaReached}
@@ -379,6 +519,23 @@ export function SmartLogbook() {
       </div>
 
       <div className="space-y-4">
+        {/* Entry type filter */}
+        <div className="flex items-center gap-2 flex-wrap mb-3">
+          {(['all', 'note', 'haccp_deviation', 'corrective_action', 'incident'] as const).map(type => (
+            <button
+              key={type}
+              onClick={() => setFilterType(type)}
+              className={`px-3 py-1 rounded-xl text-xs font-jakarta font-semibold transition-all ${
+                filterType === type
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted/50 text-muted-foreground hover:bg-muted'
+              }`}
+            >
+              {type === 'all' ? (t('filter_all') || 'All') : ENTRY_TYPE_CONFIG[type]?.label || type}
+            </button>
+          ))}
+        </div>
+
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-jakarta font-bold text-foreground">{t('last_entries')}</h3>
           <div className="flex items-center gap-2">
@@ -408,15 +565,42 @@ export function SmartLogbook() {
           </div>
         ) : (
           <div className="space-y-4">
-            {entries.map((entry) => {
+            {entries.filter(e => filterType === 'all' || e.entryType === filterType).map((entry) => {
               const needsTranslation = viewingLanguage !== 'original' && viewingLanguage !== entry.originalLanguage;
               const hasTranslationForCurrentView = entry.translations && entry.translations[viewingLanguage];
 
               const displayText = hasTranslationForCurrentView ? entry.translations![viewingLanguage].text : entry.text;
               const displaySummary = hasTranslationForCurrentView && entry.summary ? entry.translations![viewingLanguage].summary : entry.summary;
 
+              const isHACCPEntry = entry.entryType !== 'note';
+              const typeConfig = ENTRY_TYPE_CONFIG[entry.entryType] || ENTRY_TYPE_CONFIG.note;
+
               return (
-              <div key={entry.id} className={`bg-card rounded-2xl shadow-sm border p-4 ${entry.isUrgent ? 'border-red-400' : 'border-border/50'}`}>
+              <div key={entry.id} className={`bg-card rounded-2xl shadow-sm border p-4 ${entry.isUrgent ? 'border-red-400' : isHACCPEntry ? 'border-[#CC5833]/30' : 'border-border/50'}`}>
+                {/* HACCP header badges */}
+                {isHACCPEntry && (
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold font-jakarta ring-1 ring-inset ${typeConfig.color}`}>
+                      <typeConfig.icon className="w-3 h-3" />
+                      {typeConfig.label}
+                    </span>
+                    {entry.severity && (
+                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold font-jakarta ring-1 ring-inset ${SEVERITY_COLORS[entry.severity]}`}>
+                        {entry.severity.toUpperCase()}
+                      </span>
+                    )}
+                    {entry.haccpCategory && (
+                      <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium font-plex-mono bg-muted text-muted-foreground ring-1 ring-inset ring-border">
+                        {entry.haccpCategory}
+                      </span>
+                    )}
+                    {entry.isImmutable && (
+                      <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium font-plex-mono bg-slate-500/10 text-slate-400 ring-1 ring-inset ring-slate-500/20" title="Immutable HACCP record">
+                        <Lock className="w-2.5 h-2.5" /> Sealed
+                      </span>
+                    )}
+                  </div>
+                )}
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex-1">
                     <p className="text-foreground/90 text-sm font-outfit whitespace-pre-wrap">{displayText}</p>
@@ -447,15 +631,39 @@ export function SmartLogbook() {
                       </div>
                     )}
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => removeEntry(entry.id)}
-                    className="ml-2 text-muted-foreground hover:text-red-500 transition-colors shrink-0 p-1 rounded-md hover:bg-red-50/10"
-                    title={t('btn_delete_title')}
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  {!entry.isImmutable && (
+                    <button
+                      type="button"
+                      onClick={() => removeEntry(entry.id)}
+                      className="ml-2 text-muted-foreground hover:text-red-500 transition-colors shrink-0 p-1 rounded-md hover:bg-red-50/10"
+                      title={t('btn_delete_title')}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
+
+                {/* Corrective Action block */}
+                {entry.correctiveAction && (
+                  <div className="mt-2 p-2.5 bg-amber-500/5 rounded-xl border border-amber-500/15">
+                    <div className="flex items-center gap-2 mb-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="text-xs font-jakarta font-bold text-amber-500">{t('corrective_action_label') || 'Corrective Action'}</span>
+                      {entry.correctiveActionStatus && (
+                        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold font-jakarta ${CORRECTIVE_STATUS_COLORS[entry.correctiveActionStatus]}`}>
+                          {entry.correctiveActionStatus}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs font-outfit text-foreground/70">{entry.correctiveAction}</p>
+                    {entry.correctiveActionDue && (
+                      <div className="flex items-center gap-1 mt-1 text-[10px] font-plex-mono text-muted-foreground">
+                        <Clock className="w-3 h-3" />
+                        Due: {new Date(entry.correctiveActionDue).toLocaleDateString()}
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {entry.receiptData && (
                   <div className="mt-2 mb-3 bg-secondary/50 rounded-xl p-3 border border-border">

@@ -50,6 +50,14 @@ export async function POST(req: Request) {
         is_urgent: body.isUrgent || false,
         translations: body.translations || {},
         receipt_data: body.receiptData || null,
+        // HACCP fields
+        entry_type: body.entryType || 'note',
+        haccp_category: body.haccpCategory || null,
+        severity: body.severity || null,
+        corrective_action: body.correctiveAction || null,
+        corrective_action_status: body.correctiveAction ? 'pending' : null,
+        is_immutable: body.isImmutable || false,
+        created_by: auth.user.id,
       })
       .select('id, created_at')
       .single();

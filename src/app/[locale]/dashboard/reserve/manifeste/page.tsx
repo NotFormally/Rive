@@ -29,6 +29,8 @@ export default function IngredientsPage() {
   useEffect(() => {
     if (profile) {
       loadIngredients();
+    } else {
+      setLoading(false);
     }
   }, [profile]);
 

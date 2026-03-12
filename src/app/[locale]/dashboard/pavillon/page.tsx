@@ -23,6 +23,8 @@ export default function SocialHubPage() {
   useEffect(() => {
     if (profile) {
       loadConnections();
+    } else {
+      setLoading(false);
     }
   }, [profile]);
 

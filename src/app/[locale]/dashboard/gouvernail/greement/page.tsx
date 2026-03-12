@@ -32,6 +32,7 @@ export default function IntegrationsSettingsPage() {
 
   useEffect(() => {
     if (profile) loadData();
+    else setLoading(false);
   }, [profile]);
 
   const loadData = async () => {

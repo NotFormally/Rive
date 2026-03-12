@@ -38,6 +38,8 @@ export default function SalesPage() {
   useEffect(() => {
     if (profile) {
       loadData();
+    } else {
+      setLoading(false);
     }
   }, [profile]);
 

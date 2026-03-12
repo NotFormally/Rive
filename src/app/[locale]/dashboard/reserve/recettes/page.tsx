@@ -52,6 +52,8 @@ export default function RecipesPage() {
   useEffect(() => {
     if (profile) {
       loadData();
+    } else {
+      setLoading(false);
     }
   }, [profile]);
 

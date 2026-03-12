@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Target, 
-  Search, 
-  Bug, 
-  Mail, 
-  MapPin, 
-  Star, 
+import { useTranslations } from "next-intl";
+import {
+  Target,
+  Search,
+  Bug,
+  Mail,
+  MapPin,
+  Star,
   TrendingDown,
   Sparkles,
   ChevronRight,
@@ -65,6 +66,7 @@ const MOCK_LEADS: Lead[] = [
 ];
 
 export function OSINTDashboard() {
+  const t = useTranslations('OSINTPanel');
   const [isScanning, setIsScanning] = useState(false);
   const [leads, setLeads] = useState<Lead[]>(MOCK_LEADS);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
@@ -100,7 +102,7 @@ export function OSINTDashboard() {
             <div className="p-2.5 bg-orange-500/10 border border-orange-500/20 rounded-xl">
               <Target className="w-6 h-6 text-orange-400" />
             </div>
-            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight">OSINT Vigie</h1>
+            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight">{t('title')}</h1>
           </div>
           <p className="text-white/60 text-sm max-w-2xl leading-relaxed">
             Centre de ciblage automatisé. Les "Spiders" analysent les registres gouvernementaux et les avis en ligne 
@@ -132,7 +134,7 @@ export function OSINTDashboard() {
         {/* CRM Table */}
         <div className="lg:col-span-7 bg-[#1A1A1A] border border-white/5 rounded-2xl overflow-hidden shadow-xl flex flex-col h-[600px]">
           <div className="p-5 border-b border-white/5 bg-white/[0.02] flex justify-between items-center shrink-0">
-            <h3 className="font-semibold text-white/90">Prospects Identifiés (Live Feed)</h3>
+            <h3 className="font-semibold text-white/90">{t('prospectsTitle')}</h3>
             <span className="text-xs font-plex-mono text-orange-400 bg-orange-400/10 px-2 py-1 rounded">
               {leads.length} Cibles Actives
             </span>
@@ -208,7 +210,7 @@ export function OSINTDashboard() {
 
                 {generatedMessage && (
                   <div className="mt-6 flex-1 flex flex-col animate-in fade-in slide-in-from-bottom-2">
-                    <label className="text-xs text-white/40 uppercase tracking-wider font-plex-mono mb-2">Message Brouillon</label>
+                    <label className="text-xs text-white/40 uppercase tracking-wider font-plex-mono mb-2">{t('draftMessage')}</label>
                     <textarea 
                       className="w-full flex-1 bg-black/40 border border-white/10 rounded-xl p-4 text-sm text-white/80 font-inter resize-none focus:outline-none focus:border-indigo-500/50 leading-relaxed"
                       value={generatedMessage}
@@ -231,7 +233,7 @@ export function OSINTDashboard() {
               <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
                 <Target className="w-8 h-8 text-white/20" />
               </div>
-              <h3 className="text-white/60 font-medium">Sélectionnez une cible</h3>
+              <h3 className="text-white/60 font-medium">{t('selectTarget')}</h3>
               <p className="text-sm text-white/40 mt-2 max-w-xs">
                 Cliquez sur un prospect dans la liste pour générer une approche commerciale personnalisée basée sur ses faiblesses.
               </p>

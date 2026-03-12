@@ -47,9 +47,9 @@ export default function SpoilageFormPage() {
                 <Label htmlFor="ingredient">{t("product_label")}</Label>
                 <select id="ingredient" className="w-full border-slate-200 rounded-md p-2 text-sm bg-white border">
                   <option value="">{t("select_product")}</option>
-                  <option value="tequila">Tequila Casamigos Reposado</option>
-                  <option value="fût">Fût IPA Locale 50L</option>
-                  <option value="verre">Verre à vin (Casse)</option>
+                  <option value="tequila">{/* i18n-ignore */}Tequila Casamigos Reposado</option>
+                  <option value="fût">{/* i18n-ignore */}Fût IPA Locale 50L</option>
+                  <option value="verre">{/* i18n-ignore */}Verre à vin (Casse)</option>
                 </select>
               </div>
 
@@ -99,9 +99,9 @@ export default function SpoilageFormPage() {
             </CardContent>
             
             <CardFooter className="bg-slate-50 border-t border-slate-100 flex justify-between rounded-b-lg">
-              <Button type="button" variant="ghost">Annuler</Button>
+              <Button type="button" variant="ghost">{t("cancel")}</Button>
               <Button type="submit" disabled={loading} className="bg-indigo-600 hover:bg-indigo-700">
-                {loading ? "Enregistrement..." : "Enregistrer la perte"}
+                {loading ? t("recording") : t("record_loss")}
               </Button>
             </CardFooter>
           </Card>
@@ -109,7 +109,7 @@ export default function SpoilageFormPage() {
 
         {success && (
           <div className="mt-4 p-4 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md animate-in fade-in slide-in-from-bottom-2 text-sm font-medium">
-            ✅ La perte a bien été enregistrée et déduite de l'inventaire.
+            {t("success")}
           </div>
         )}
       </div>

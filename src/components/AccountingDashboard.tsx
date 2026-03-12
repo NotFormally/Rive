@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  Wallet, 
-  LineChart, 
-  Banknote, 
-  Flame, 
-  Zap, 
+import { useTranslations } from "next-intl";
+import {
+  TrendingUp,
+  TrendingDown,
+  Wallet,
+  LineChart,
+  Banknote,
+  Flame,
+  Zap,
   Droplets,
   PiggyBank,
   Sparkles,
@@ -16,7 +17,8 @@ import {
 } from "lucide-react";
 
 export function AccountingDashboard() {
-  const [timeframe, setTimeframe] = useState("month"); // 'week', 'month', 'year'
+  const t = useTranslations('Accounting');
+  const [timeframe, setTimeframe] = useState("month");
 
   // Mock data
   const kpis = {
@@ -58,7 +60,7 @@ export function AccountingDashboard() {
           
           <div className="shrink-0 flex items-center gap-2 bg-black/40 px-4 py-2 rounded-xl border border-white/5">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></div>
-            <span className="text-xs font-plex-mono uppercase text-emerald-400">Flux Positif</span>
+            <span className="text-xs font-plex-mono uppercase text-emerald-400">{t('positiveFlow')}</span>
           </div>
         </div>
       </section>
@@ -78,7 +80,7 @@ export function AccountingDashboard() {
             </div>
           </div>
           <div>
-            <div className="text-sm font-outfit text-muted-foreground mb-1">Entrées (Revenus)</div>
+            <div className="text-sm font-outfit text-muted-foreground mb-1">{t('inflows')}</div>
             <div className="text-3xl font-jakarta font-bold text-foreground">
               {new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(kpis.revenue)}
             </div>
@@ -96,7 +98,7 @@ export function AccountingDashboard() {
             </div>
           </div>
           <div>
-            <div className="text-sm font-outfit text-muted-foreground mb-1">Sorties: Matière</div>
+            <div className="text-sm font-outfit text-muted-foreground mb-1">{t('outflowsCogs')}</div>
             <div className="text-3xl font-jakarta font-bold text-foreground">
               {new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(kpis.cogs)}
             </div>
@@ -115,7 +117,7 @@ export function AccountingDashboard() {
             </div>
           </div>
           <div>
-            <div className="text-sm font-outfit text-muted-foreground mb-1">Sorties: Utilités</div>
+            <div className="text-sm font-outfit text-muted-foreground mb-1">{t('outflowsUtilities')}</div>
             <div className="text-3xl font-jakarta font-bold text-foreground">
               {new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(kpis.energy)}
             </div>
@@ -134,7 +136,7 @@ export function AccountingDashboard() {
             </div>
           </div>
           <div className="relative z-10">
-            <div className="text-sm font-outfit text-primary/80 mb-1">Bénéfice Net (Est.)</div>
+            <div className="text-sm font-outfit text-primary/80 mb-1">{t('netProfit')}</div>
             <div className="text-4xl font-jakarta font-black text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
               {new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(kpis.netProfit)}
             </div>
@@ -150,8 +152,8 @@ export function AccountingDashboard() {
         <section className="lg:col-span-2 bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 relative">
           <div className="flex justify-between items-center mb-8">
              <div>
-               <h3 className="text-lg font-outfit font-medium text-foreground">Dynamique de Cash Flow</h3>
-               <p className="text-xs font-plex-mono text-muted-foreground opacity-60 uppercase tracking-widest mt-1">Revenus vs Dépenses</p>
+               <h3 className="text-lg font-outfit font-medium text-foreground">{t('cashFlowDynamics')}</h3>
+               <p className="text-xs font-plex-mono text-muted-foreground opacity-60 uppercase tracking-widest mt-1">{t('revenueVsExpenses')}</p>
              </div>
              
              <div className="flex items-center gap-1 bg-black/40 rounded-xl p-1 border border-white/5">
@@ -212,18 +214,18 @@ export function AccountingDashboard() {
           <div className="flex items-center justify-center gap-6 mt-8">
              <div className="flex items-center gap-2">
                <div className="w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(0,229,255,0.8)]"></div>
-               <span className="text-xs font-outfit text-muted-foreground text-white/80">Flux Entrants (Revenus)</span>
+               <span className="text-xs font-outfit text-muted-foreground text-white/80">{t('inflowLegend')}</span>
              </div>
              <div className="flex items-center gap-2">
                <div className="w-3 h-3 rounded-full bg-pink-500 shadow-[0_0_8px_rgba(255,0,122,0.8)]"></div>
-               <span className="text-xs font-outfit text-muted-foreground text-white/80">Flux Sortants (Coûts)</span>
+               <span className="text-xs font-outfit text-muted-foreground text-white/80">{t('outflowLegend')}</span>
              </div>
           </div>
         </section>
 
         {/* Breakdown Panel */}
         <section className="bg-card backdrop-blur-2xl rounded-[2rem] border border-border/50 shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 relative flex flex-col">
-          <h3 className="text-lg font-outfit font-medium text-foreground mb-6">Répartition Dépenses</h3>
+          <h3 className="text-lg font-outfit font-medium text-foreground mb-6">{t('expenseBreakdown')}</h3>
           
           <div className="flex-1 flex flex-col justify-center">
             {/* Donut Chart Mockup */}
@@ -245,8 +247,8 @@ export function AccountingDashboard() {
               </svg>
               
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                 <span className="text-2xl font-jakarta font-bold text-white drop-shadow-md">33.5k</span>
-                 <span className="text-[9px] font-plex-mono text-muted-foreground uppercase">Sorties</span>
+                 <span className="text-2xl font-jakarta font-bold text-white drop-shadow-md">{/* i18n-ignore */}33.5k</span>
+                 <span className="text-[9px] font-plex-mono text-muted-foreground uppercase">{t('outflowsLabel')}</span>
               </div>
             </div>
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { Beaker, Plus, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 type Recipe = {
   id: string;
@@ -27,27 +28,28 @@ const mockRecipes: Recipe[] = [
 
 export default function ProductionRecipesPage() {
   const { settings } = useAuth();
+  const t = useTranslations("Production");
   const [recipes] = useState<Recipe[]>(mockRecipes);
 
   return (
     <>
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="px-4 sm:px-8 py-4">
-          <h1 className="text-xl font-bold">Production Brassicole</h1>
-          <p className="text-sm text-slate-500">Suivi des brassins de la cuve au fût</p>
+          <h1 className="text-xl font-bold">{t("brewingTitle")}</h1>
+          <p className="text-sm text-slate-500">{t("brewingSubtitle")}</p>
         </div>
         <div className="px-4 sm:px-8 flex items-center gap-6 text-sm font-medium overflow-x-auto">
-          <a href="/dashboard/production" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors whitespace-nowrap">Brassins en cours</a>
-          <a href="/dashboard/production/recipes" className="py-3 border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap">Recettes (Malt/Houblon)</a>
+          <a href="/dashboard/production" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors whitespace-nowrap">{t("tabActiveBatches")}</a>
+          <a href="/dashboard/production/recipes" className="py-3 border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap">{t("tabRecipes")}</a>
         </div>
       </header>
 
       <div className="p-4 sm:p-8 max-w-[1600px] w-full mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-          <h2 className="text-lg font-semibold text-slate-800">Catalogue de Recettes</h2>
+          <h2 className="text-lg font-semibold text-slate-800">{t("recipeCatalog")}</h2>
           <Button className="bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto gap-2">
             <Plus className="w-4 h-4" />
-            Nouvelle Recette
+            {t("newRecipeBtn")}
           </Button>
         </div>
 
@@ -94,7 +96,7 @@ export default function ProductionRecipesPage() {
                     {new Date(recipe.last_brewed).toLocaleDateString()}
                   </span>
                 ) : (
-                  <span className="text-amber-600 font-medium">Jamais brassée</span>
+                  <span className="text-amber-600 font-medium">{t("neverBrewed")}</span>
                 )}
               </div>
             </div>

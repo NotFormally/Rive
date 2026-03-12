@@ -21,10 +21,11 @@ export default function GlobalError({
           <h2 className="text-2xl font-bold text-red-600 mb-4">
             Une erreur critique est survenue (Root Layout)
           </h2>
+          {/* i18n-ignore — global-error renders its own <html> outside next-intl provider */}
           <div className="bg-red-50 text-red-800 p-4 rounded-lg text-left text-sm font-mono overflow-auto mb-6 max-h-64">
-            <strong>Erreur :</strong> {error.message}
+            <strong>Erreur :</strong> {error.message} {/* i18n-ignore */}
             <br /><br />
-            <strong>Stack :</strong>
+            <strong>Stack :</strong> {/* i18n-ignore */}
             <pre className="mt-2 text-xs opacity-80 whitespace-pre-wrap">{error.stack}</pre>
           </div>
           <button

@@ -1,33 +1,40 @@
 #!/usr/bin/env node
 
 /**
- * i18n-sync — Automated Translation Agent
- * 
- * Watches en.json and fr.json for changes, detects modified keys,
- * and translates them to all 23 other supported languages using Gemini.
- * 
+ * i18n-sync — Automated Translation Pipeline (Claude API)
+ *
+ * Single source of truth: en.json → all other locales auto-generated.
+ * Uses Claude API (Haiku) for cost-efficient, high-quality translations.
+ *
  * Usage:
- *   npm run i18n:watch   → live watcher (alongside dev server)
- *   npm run i18n:sync    → one-shot sync (CI / pre-commit)
+ *   npm run i18n:watch          → live watcher (alongside dev server)
+ *   npm run i18n:sync           → one-shot sync (CI / pre-commit)
+ *   npm run i18n:sync:force     → nuclear resync — retranslate ALL keys
  */
 
-require('dotenv').config({ path: require('path').resolve(__dirname, '..', '.env.local') });
+require('dotenv').config({ path: require('path').resolve(__dirname, '..', '.env.local'), override: true });
 
 const fs = require('fs');
 const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const crypto = require('crypto');
+const Anthropic = require('@anthropic-ai/sdk').default;
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 
 const MESSAGES_DIR = path.resolve(__dirname, '..', 'messages');
 const CACHE_DIR = path.join(MESSAGES_DIR, '.i18n-cache');
-const SOURCE_FILES = ['en.json', 'fr.json'];
+const HASH_FILE = path.join(CACHE_DIR, 'hashes.json');
+const SOURCE_FILE = 'en.json';
 const CONCURRENCY = 5;
+const CHUNK_SIZE = 50;
+const MAX_RETRIES = 3;
 const DEBOUNCE_MS = 2000;
-const MODEL = 'gemini-2.0-flash';
+const MODEL = 'claude-haiku-4-5-20251001';
 
 const LANG_MAP = {
-  // Major
+  // Source language (French is now a target, auto-generated from English)
+  'fr.json': 'French',
+  // Major European
   'da.json': 'Danish',
   'sv.json': 'Swedish',
   'es.json': 'Spanish',
@@ -37,24 +44,30 @@ const LANG_MAP = {
   'ru.json': 'Russian',
   'pl.json': 'Polish',
   'tr.json': 'Turkish',
+  'ro.json': 'Romanian',
+  'el.json': 'Greek',
+  'hu.json': 'Hungarian',
+  'cs.json': 'Czech',
   // MENA
   'ar.json': 'Arabic (Modern Standard)',
   'ar-AE.json': 'Arabic (UAE dialect)',
   'ar-LB.json': 'Arabic (Lebanese dialect)',
   'ar-EG.json': 'Arabic (Egyptian dialect)',
   'kab.json': 'Kabyle (Taqbaylit)',
-  // Asia
+  'fa.json': 'Persian (Farsi)',
+  // South Asia
   'hi.json': 'Hindi',
   'ur.json': 'Urdu',
   'pa.json': 'Punjabi (Gurmukhi script)',
   'ta.json': 'Tamil',
   'bn.json': 'Bengali',
+  // East Asia
   'zh-CN.json': 'Simplified Chinese',
   'zh-HK.json': 'Traditional Chinese (Hong Kong Cantonese)',
   'nan.json': 'Min Nan Chinese (Taiwanese Hokkien)',
   'ja.json': 'Japanese',
   'ko.json': 'Korean',
-  // Indo-Oceania
+  // Southeast Asia / Oceania
   'id.json': 'Indonesian',
   'ms.json': 'Malay',
   'jv.json': 'Javanese',
@@ -68,7 +81,7 @@ const LANG_MAP = {
   'ha.json': 'Hausa',
   'zu.json': 'Zulu',
   'om.json': 'Oromo',
-  // ANZ
+  // ANZ English Variants
   'en-AU.json': 'English (Australian)',
   'en-NZ.json': 'English (New Zealand)',
   // Celtic
@@ -76,7 +89,7 @@ const LANG_MAP = {
   'cy.json': 'Welsh',
   'gd.json': 'Scottish Gaelic',
   'ga.json': 'Irish (Gaeilge)',
-  // Romance/Isolates
+  // Romance / Isolates
   'eu.json': 'Basque (Euskara)',
   'co.json': 'Corsican',
   // Germanic Regional
@@ -85,16 +98,32 @@ const LANG_MAP = {
   'nds.json': 'Low German (Plattdeutsch)',
   'gsw.json': 'Swiss German (Alemannic)',
   'frk-mos.json': 'Moselle Franconian (Luxembourgish-adjacent)',
-  // Others/Creoles
+  // Others / Creoles
   'hsb.json': 'Upper Sorbian',
   'rom.json': 'Romani',
   'ht.json': 'Haitian Creole',
 };
 
-// ─── Gemini Client ────────────────────────────────────────────────────────────
+// ─── Claude Client ───────────────────────────────────────────────────────────
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: MODEL });
+const anthropic = new Anthropic();
+
+const SYSTEM_PROMPT = `You are a professional translator for RiveHub, a restaurant management SaaS with a nautical/maritime theme.
+
+Domain context — these terms have specific meanings in the app:
+- "bridge" = kitchen command center, "crew" = staff, "passengers" = guests
+- "cargo" = inventory/supplies, "sonar" = predictive analytics
+- "captain" = head chef/owner, "vessel" = the restaurant itself
+- "dock" = onboarding area, "logbook" = operational journal
+
+Rules:
+- Translate JSON values ONLY. Do NOT translate JSON keys.
+- Keep brand names untranslated: RiveHub, HACCP, POS, Toast, Square, SumUp, Lightspeed, Zettle, Resy, Libro, Zenchef, BCG, Stripe, Claude, Whisper
+- Preserve HTML entities, emojis, special characters, and template placeholders like {count}, {val}, {name}, {percent}, {tier}, {date}
+- Adapt nautical metaphors to be culturally natural — don't force literal translations when they sound awkward
+- For RTL languages (Arabic, Hebrew, Urdu, Farsi): maintain logical content order within each value
+- Return ONLY the raw JSON object — no markdown fences, no code blocks, no explanations
+- First character of your response must be { and last must be }`;
 
 // ─── Utility Functions ────────────────────────────────────────────────────────
 
@@ -139,18 +168,43 @@ function saveJSON(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n');
 }
 
-// ─── Diff Engine ──────────────────────────────────────────────────────────────
+function hashValue(val) {
+  return crypto.createHash('md5').update(String(val)).digest('hex').slice(0, 8);
+}
 
-function findChangedKeys(currentJson, cachedJson) {
+// ─── Hash-Based Diff Engine ──────────────────────────────────────────────────
+
+function buildHashes(json) {
+  const hashes = {};
+  const keys = getNestedKeys(json);
+  for (const key of keys) {
+    const val = getNestedValue(json, key);
+    if (val !== undefined) {
+      hashes[key] = hashValue(val);
+    }
+  }
+  return hashes;
+}
+
+function findChangedKeys(currentJson, cachedHashes) {
   const currentKeys = getNestedKeys(currentJson);
   const changed = [];
 
   for (const key of currentKeys) {
     const currentVal = getNestedValue(currentJson, key);
-    const cachedVal = cachedJson ? getNestedValue(cachedJson, key) : undefined;
+    const currentHash = hashValue(currentVal);
+    const cachedHash = cachedHashes ? cachedHashes[key] : undefined;
 
-    if (currentVal !== cachedVal) {
+    if (currentHash !== cachedHash) {
       changed.push(key);
+    }
+  }
+
+  // Log deleted keys (in cache but not in current)
+  if (cachedHashes) {
+    const deletedKeys = Object.keys(cachedHashes).filter(k => !getNestedValue(currentJson, k));
+    if (deletedKeys.length > 0) {
+      console.log(`   🗑️ ${deletedKeys.length} key(s) removed from source`);
     }
   }
 
@@ -168,26 +222,20 @@ function buildTranslationPayload(sourceJson, changedKeys) {
   return payload;
 }
 
-// ─── Gemini Translation ───────────────────────────────────────────────────────
+// ─── Claude Translation ──────────────────────────────────────────────────────
 
-async function translateWithGemini(payload, sourceLang, targetLangName) {
-  const prompt = `You are a professional translator for a restaurant management SaaS called RiveHub that uses a nautical/maritime theme.
+async function translateWithClaude(payload, targetLangName) {
+  const response = await anthropic.messages.create({
+    model: MODEL,
+    max_tokens: 8192,
+    system: SYSTEM_PROMPT,
+    messages: [{
+      role: 'user',
+      content: `Translate the following JSON values from English to ${targetLangName}.\n\n${JSON.stringify(payload, null, 2)}`
+    }]
+  });
 
-Translate the following JSON values from ${sourceLang} to ${targetLangName}.
-
-Rules:
-- Maintain the EXACT JSON structure and keys (do not translate keys)
-- Keep brand names (RiveHub, HACCP, POS, Toast, Square, etc.) untranslated
-- Preserve HTML entities, special characters, emojis, and formatting
-- Keep nautical metaphors culturally appropriate in the target language
-- Return ONLY the raw JSON object — no markdown, no code blocks, no explanations
-- First character must be { and last character must be }
-
-JSON to translate:
-${JSON.stringify(payload, null, 2)}`;
-
-  const result = await model.generateContent(prompt);
-  const text = result.response.text().trim();
+  const text = response.content[0].text.trim();
 
   // Clean potential markdown wrapping
   const cleaned = text
@@ -201,17 +249,15 @@ ${JSON.stringify(payload, null, 2)}`;
 
 // ─── Core Sync Logic ──────────────────────────────────────────────────────────
 
-const CHUNK_SIZE = 50; // Max keys per Gemini API call
-
-async function syncLanguage(targetFile, changedKeys, sourceJson, sourceLang) {
+async function syncLanguage(targetFile, changedKeys, sourceJson) {
   const langName = LANG_MAP[targetFile];
   if (!langName) return;
 
   const targetPath = path.join(MESSAGES_DIR, targetFile);
-  const targetJson = loadJSON(targetPath);
+  let targetJson = loadJSON(targetPath);
   if (!targetJson) {
-    console.error(`  ✗ Could not parse ${targetFile}`);
-    return;
+    // If target file doesn't exist or is empty, start from scratch
+    targetJson = {};
   }
 
   let successCount = 0;
@@ -224,9 +270,9 @@ async function syncLanguage(targetFile, changedKeys, sourceJson, sourceLang) {
     const chunkNum = Math.floor(i / CHUNK_SIZE) + 1;
     const totalChunks = Math.ceil(changedKeys.length / CHUNK_SIZE);
 
-    for (let attempt = 1; attempt <= 2; attempt++) {
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
-        const translated = await translateWithGemini(chunkPayload, sourceLang, langName);
+        const translated = await translateWithClaude(chunkPayload, langName);
 
         // Deep merge translated keys into target
         const allKeys = getNestedKeys(translated);
@@ -240,12 +286,13 @@ async function syncLanguage(targetFile, changedKeys, sourceJson, sourceLang) {
         successCount += chunkKeys.length;
         break; // Success — exit retry loop
       } catch (err) {
-        if (attempt === 2) {
+        const backoff = attempt === 1 ? 0 : attempt === 2 ? 2000 : 5000;
+        if (attempt === MAX_RETRIES) {
           console.error(`  ⚠ ${targetFile} chunk ${chunkNum}/${totalChunks}: ${err.message}`);
           failCount += chunkKeys.length;
+        } else {
+          await new Promise(r => setTimeout(r, backoff));
         }
-        // Brief pause before retry
-        await new Promise(r => setTimeout(r, 1000));
       }
     }
   }
@@ -258,9 +305,11 @@ async function syncLanguage(targetFile, changedKeys, sourceJson, sourceLang) {
   } else {
     console.log(`  ⚠ ${targetFile} (${langName}) — ${successCount} ok, ${failCount} failed`);
   }
+
+  return { success: successCount, fail: failCount };
 }
 
-async function runSync() {
+async function runSync(isForce = false) {
   console.log('\n🔄 i18n-sync — checking for changes...\n');
 
   // Ensure cache dir exists
@@ -268,65 +317,87 @@ async function runSync() {
     fs.mkdirSync(CACHE_DIR, { recursive: true });
   }
 
-  let totalChanged = 0;
-
-  for (const sourceFile of SOURCE_FILES) {
-    const sourcePath = path.join(MESSAGES_DIR, sourceFile);
-    const cachePath = path.join(CACHE_DIR, sourceFile);
-
-    const currentJson = loadJSON(sourcePath);
-    const cachedJson = loadJSON(cachePath);
-
-    if (!currentJson) {
-      console.error(`Could not read ${sourceFile}`);
-      continue;
+  // --force: clear cache to trigger full retranslation
+  if (isForce) {
+    console.log('🔥 Force mode — clearing cache, all keys will be retranslated.\n');
+    if (fs.existsSync(HASH_FILE)) {
+      fs.unlinkSync(HASH_FILE);
     }
-
-    const changedKeys = findChangedKeys(currentJson, cachedJson);
-
-    if (changedKeys.length === 0) {
-      console.log(`📋 ${sourceFile}: no changes detected`);
-      continue;
+    // Also clean up legacy cache files
+    for (const f of ['en.json', 'fr.json']) {
+      const legacy = path.join(CACHE_DIR, f);
+      if (fs.existsSync(legacy)) fs.unlinkSync(legacy);
     }
-
-    console.log(`📝 ${sourceFile}: ${changedKeys.length} key(s) changed`);
-    if (changedKeys.length <= 50) {
-      changedKeys.forEach(k => console.log(`   → ${k}`));
-    } else {
-      changedKeys.slice(0, 10).forEach(k => console.log(`   → ${k}`));
-      console.log(`   ... and ${changedKeys.length - 10} more`);
-    }
-
-    const sourceLang = sourceFile === 'en.json' ? 'English' : 'French';
-
-    // Determine target files (exclude source files)
-    const targetFiles = Object.keys(LANG_MAP).filter(f => !SOURCE_FILES.includes(f));
-
-    // Process languages in batches (CONCURRENCY at a time)
-    console.log(`\n🌐 Translating to ${targetFiles.length} languages...\n`);
-    for (let i = 0; i < targetFiles.length; i += CONCURRENCY) {
-      const batch = targetFiles.slice(i, i + CONCURRENCY);
-      await Promise.all(batch.map(f => syncLanguage(f, changedKeys, currentJson, sourceLang)));
-    }
-
-    totalChanged += changedKeys.length;
-
-    // Update cache
-    saveJSON(cachePath, currentJson);
-    console.log(`\n💾 Cache updated for ${sourceFile}`);
   }
 
-  if (totalChanged === 0) {
+  const sourcePath = path.join(MESSAGES_DIR, SOURCE_FILE);
+  const currentJson = loadJSON(sourcePath);
+
+  if (!currentJson) {
+    console.error(`Could not read ${SOURCE_FILE}`);
+    process.exit(1);
+  }
+
+  const cachedHashes = loadJSON(HASH_FILE);
+  const changedKeys = findChangedKeys(currentJson, cachedHashes);
+
+  if (changedKeys.length === 0) {
+    console.log(`📋 ${SOURCE_FILE}: no changes detected`);
     console.log('\n✅ All languages are in sync.\n');
+    return;
+  }
+
+  console.log(`📝 ${SOURCE_FILE}: ${changedKeys.length} key(s) changed`);
+  if (changedKeys.length <= 50) {
+    changedKeys.forEach(k => console.log(`   → ${k}`));
   } else {
-    console.log(`\n✅ Synced ${totalChanged} key(s) across all languages.\n`);
+    changedKeys.slice(0, 10).forEach(k => console.log(`   → ${k}`));
+    console.log(`   ... and ${changedKeys.length - 10} more`);
+  }
+
+  // Determine target files
+  const targetFiles = Object.keys(LANG_MAP);
+
+  // Process languages in batches (CONCURRENCY at a time)
+  console.log(`\n🌐 Translating to ${targetFiles.length} languages...\n`);
+
+  let totalSuccess = 0;
+  let totalFail = 0;
+  const startTime = Date.now();
+
+  for (let i = 0; i < targetFiles.length; i += CONCURRENCY) {
+    const batch = targetFiles.slice(i, i + CONCURRENCY);
+    const results = await Promise.all(
+      batch.map(f => syncLanguage(f, changedKeys, currentJson))
+    );
+    for (const r of results) {
+      if (r) {
+        totalSuccess += r.success;
+        totalFail += r.fail;
+      }
+    }
+  }
+
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+
+  // Update hash cache
+  const newHashes = buildHashes(currentJson);
+  saveJSON(HASH_FILE, newHashes);
+  console.log(`\n💾 Hash cache updated (${Object.keys(newHashes).length} keys)`);
+
+  // Summary
+  console.log(`\n✅ Synced ${changedKeys.length} key(s) across ${targetFiles.length} languages in ${elapsed}s`);
+  if (totalFail > 0) {
+    console.log(`⚠ ${totalFail} translation(s) failed — re-run to retry.\n`);
+  } else {
+    console.log('');
   }
 }
 
 // ─── Watch Mode ───────────────────────────────────────────────────────────────
 
 function startWatcher() {
-  console.log('👁️  i18n-sync — watching for changes to en.json and fr.json...');
+  console.log('👁️  i18n-sync — watching for changes to en.json...');
   console.log('   Press Ctrl+C to stop.\n');
 
   let debounceTimer = null;
@@ -346,33 +417,30 @@ function startWatcher() {
     }, DEBOUNCE_MS);
   };
 
-  for (const file of SOURCE_FILES) {
-    const filePath = path.join(MESSAGES_DIR, file);
-    fs.watch(filePath, { persistent: true }, (eventType) => {
-      if (eventType === 'change') {
-        console.log(`\n📡 Change detected in ${file}...`);
-        onChange();
-      }
-    });
-  }
+  const filePath = path.join(MESSAGES_DIR, SOURCE_FILE);
+  fs.watch(filePath, { persistent: true }, (eventType) => {
+    if (eventType === 'change') {
+      console.log(`\n📡 Change detected in ${SOURCE_FILE}...`);
+      onChange();
+    }
+  });
 }
 
 // ─── Entry Point ──────────────────────────────────────────────────────────────
 
 async function main() {
-  if (!process.env.GEMINI_API_KEY) {
-    console.error('❌ GEMINI_API_KEY not found in .env.local');
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error('❌ ANTHROPIC_API_KEY not found in .env.local');
     process.exit(1);
   }
 
   const isOnce = process.argv.includes('--once');
+  const isForce = process.argv.includes('--force');
 
   if (isOnce) {
-    // One-shot mode
-    await runSync();
+    await runSync(isForce);
   } else {
-    // Initial sync, then watch
-    await runSync();
+    await runSync(isForce);
     startWatcher();
   }
 }

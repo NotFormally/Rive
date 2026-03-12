@@ -221,7 +221,7 @@ export function MenuEngineeringDashboard() {
                     </span>
                     <span className="font-medium text-sm text-zinc-900 dark:text-zinc-100">{item.menuItemName}</span>
                     {selectedTier === 'happy_hour' && item.hhPrice && (
-                      <span className="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Prix HH</span>
+                      <span className="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">{t('hhPrice')}</span>
                     )}
                   </div>
                   <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">

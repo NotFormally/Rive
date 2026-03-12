@@ -2,14 +2,17 @@
 
 import { useAuth } from "@/components/AuthProvider";
 import { MenuEditor } from "@/components/MenuEditor";
+import { useTranslations } from "next-intl";
 
 export default function MenuEditorPage() {
   const { settings } = useAuth();
-  
+  const t = useTranslations("CartEditor");
+  const tc = useTranslations("Common");
+
   if (!settings?.module_menu_editor) {
     return (
       <div className="p-8 text-center text-slate-500">
-        Ce module est désactivé. Vous pouvez l'activer dans les Paramètres.
+        {tc("module_disabled")}
       </div>
     );
   }
@@ -18,8 +21,8 @@ export default function MenuEditorPage() {
     <>
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4">
         <div>
-          <h1 className="text-xl font-bold">Éditeur de Menu & QR</h1>
-          <p className="text-sm text-slate-500">Gérez votre carte publique et vos prix</p>
+          <h1 className="text-xl font-bold">{t("title")}</h1>
+          <p className="text-sm text-slate-500">{t("subtitle")}</p>
         </div>
       </header>
 

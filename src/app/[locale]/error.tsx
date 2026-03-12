@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ErrorBoundary({
   error,
@@ -9,6 +10,8 @@ export default function ErrorBoundary({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations("Common");
+
   useEffect(() => {
     // Log the error to an error reporting service
     console.error("Client Error Boundary Caught:", error);
@@ -21,9 +24,9 @@ export default function ErrorBoundary({
           Une erreur inattendue est survenue.
         </h2>
         <div className="bg-red-50 text-red-800 p-4 rounded-lg text-left text-sm font-mono overflow-auto mb-6 max-h-64">
-          <strong>Erreur :</strong> {error.message}
+          <strong>{t('error_label')}:</strong> {error.message}
           <br /><br />
-          <strong>Stack :</strong>
+          <strong>{t('stack_label')}:</strong>
           <pre className="mt-2 text-xs opacity-80 whitespace-pre-wrap">{error.stack}</pre>
         </div>
         <p className="text-sm text-slate-500 mb-6">

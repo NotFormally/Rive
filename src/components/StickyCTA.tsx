@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 
 export function StickyCTA() {
   const t = useTranslations("LandingPage");
+  const tc = useTranslations("Common");
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -35,7 +36,7 @@ export function StickyCTA() {
         <button
           onClick={() => setDismissed(true)}
           className="p-2 text-white/40 hover:text-white/70 transition-colors"
-          aria-label="Dismiss"
+          aria-label={tc("aria_dismiss")}
         >
           <X className="h-4 w-4" />
         </button>

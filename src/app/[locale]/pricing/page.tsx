@@ -324,11 +324,11 @@ export default function PricingPage() {
             {t('powered_by')}
           </p>
           <div className="flex items-center justify-center gap-8 text-muted-foreground font-outfit text-sm">
-            <span>Anthropic AI</span>
+            <span>{/* i18n-ignore */}Anthropic AI</span>
             <span className="w-1 h-1 bg-muted-foreground/30 rounded-full"></span>
             <span>Supabase</span>
             <span className="w-1 h-1 bg-muted-foreground/30 rounded-full"></span>
-            <span>Next.js</span>
+            <span>{/* i18n-ignore */}Next.js</span>
           </div>
         </div>
       </div>

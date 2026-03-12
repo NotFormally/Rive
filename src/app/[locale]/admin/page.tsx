@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,6 +33,8 @@ export default function AdminPage() {
   const [search, setSearch] = useState("");
   const [loadingData, setLoadingData] = useState(true);
   const router = useRouter();
+  const t = useTranslations("Admin");
+  const locale = useLocale();
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -99,7 +103,7 @@ export default function AdminPage() {
   if (authLoading || loadingData) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-slate-400 text-sm animate-pulse">Chargement du registre...</div>
+        <div className="text-slate-400 text-sm animate-pulse">{t("loading")}</div>
       </div>
     );
   }
@@ -134,15 +138,15 @@ export default function AdminPage() {
           <div className="flex items-center gap-3">
             <ShieldCheck className="w-5 h-5 text-[#CC5833]" />
             <div>
-              <h1 className="text-lg font-bold font-jakarta">Registre Utilisateurs</h1>
-              <p className="text-xs text-slate-400 font-plex-mono">Admin privé — Rive</p>
+              <h1 className="text-lg font-bold font-jakarta">{t("page_title")}</h1>
+              <p className="text-xs text-slate-400 font-plex-mono">{t("page_subtitle")}</p>
             </div>
           </div>
           <button
             onClick={() => router.push("/dashboard")}
             className="text-sm text-slate-400 hover:text-white transition-colors"
           >
-            ← Dashboard
+            {t("btn_dashboard")}
           </button>
         </div>
       </header>
@@ -153,7 +157,7 @@ export default function AdminPage() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm text-slate-500 flex items-center gap-2">
-                <Users className="w-4 h-4" /> Utilisateurs totaux
+                <Users className="w-4 h-4" /> {t("stat_total_users")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -163,7 +167,7 @@ export default function AdminPage() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm text-slate-500 flex items-center gap-2">
-                <Globe className="w-4 h-4" /> Langues actives
+                <Globe className="w-4 h-4" /> {t("stat_active_languages")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -182,7 +186,7 @@ export default function AdminPage() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm text-slate-500 flex items-center gap-2">
-                <MapPin className="w-4 h-4" /> Pays
+                <MapPin className="w-4 h-4" /> {t("stat_countries")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -202,13 +206,13 @@ export default function AdminPage() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm text-slate-500 flex items-center gap-2">
-                <Clock className="w-4 h-4" /> Dernière inscription
+                <Clock className="w-4 h-4" /> {t("stat_last_signup")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-sm font-medium">
                 {users[0]?.created_at
-                  ? new Date(users[0].created_at).toLocaleDateString("fr-FR", {
+                  ? new Date(users[0].created_at).toLocaleDateString(locale, {
                       day: "numeric",
                       month: "long",
                       year: "numeric",
@@ -227,7 +231,7 @@ export default function AdminPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Rechercher par nom, email, ou langue..."
+            placeholder={t("search_placeholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2E4036]/20 bg-white"
@@ -241,12 +245,12 @@ export default function AdminPage() {
               <thead>
                 <tr className="bg-slate-50 text-left text-xs text-slate-500 uppercase tracking-wider">
                   <th className="px-4 py-3 font-medium">#</th>
-                  <th className="px-4 py-3 font-medium">Restaurant</th>
-                  <th className="px-4 py-3 font-medium">Email</th>
-                  <th className="px-4 py-3 font-medium">Langue</th>
-                  <th className="px-4 py-3 font-medium">Pays</th>
-                  <th className="px-4 py-3 font-medium">Plan</th>
-                  <th className="px-4 py-3 font-medium">Inscription</th>
+                  <th className="px-4 py-3 font-medium">{t("table_header_restaurant")}</th>
+                  <th className="px-4 py-3 font-medium">{t("table_header_email")}</th>
+                  <th className="px-4 py-3 font-medium">{t("table_header_language")}</th>
+                  <th className="px-4 py-3 font-medium">{t("table_header_country")}</th>
+                  <th className="px-4 py-3 font-medium">{t("table_header_plan")}</th>
+                  <th className="px-4 py-3 font-medium">{t("table_header_signup")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -268,7 +272,7 @@ export default function AdminPage() {
                           {u.restaurant_name}
                           {isNew && (
                             <Badge className="bg-green-100 text-green-700 text-[10px] px-1.5">
-                              NEW
+                              {t("badge_new")}
                             </Badge>
                           )}
                         </div>
@@ -306,7 +310,7 @@ export default function AdminPage() {
                         </Badge>
                       </td>
                       <td className="px-4 py-3 text-slate-400 text-xs">
-                        {new Date(u.created_at).toLocaleDateString("fr-FR", {
+                        {new Date(u.created_at).toLocaleDateString(locale, {
                           day: "2-digit",
                           month: "short",
                           year: "numeric",
@@ -318,7 +322,7 @@ export default function AdminPage() {
                 {filteredUsers.length === 0 && (
                   <tr>
                     <td colSpan={7} className="px-4 py-8 text-center text-slate-400">
-                      Aucun utilisateur trouvé.
+                      {t("no_users_found")}
                     </td>
                   </tr>
                 )}

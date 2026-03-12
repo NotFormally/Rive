@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { MenuItem, MenuCategory, RestaurantInfo, loadMenuFromSupabase } from "@/lib/menu-store";
 import { RestaurantJsonLd } from "@/components/RestaurantJsonLd";
+import { useTranslations } from "next-intl";
 
 const LANG_LABELS: Record<string, string> = {
   original: '🇫🇷 FR',
@@ -11,6 +12,7 @@ const LANG_LABELS: Record<string, string> = {
 };
 
 export default function PublicMenuPage() {
+  const t = useTranslations("MenuPublic");
   const [categories, setCategories] = useState<MenuCategory[]>([]);
   const [items, setItems] = useState<MenuItem[]>([]);
   const [restaurant, setRestaurant] = useState<RestaurantInfo | null>(null);
@@ -117,7 +119,7 @@ export default function PublicMenuPage() {
         })}
 
         {filteredItems.length === 0 && (
-          <div className="text-center py-12 text-zinc-500 text-sm">Aucun plat dans cette catégorie.</div>
+          <div className="text-center py-12 text-zinc-500 text-sm">{t("no_items_in_category")}</div>
         )}
       </main>
 

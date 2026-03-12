@@ -236,7 +236,7 @@ export default function RecipesPage() {
   if (!settings?.module_food_cost) {
     return (
       <div className="p-8 text-center text-slate-500">
-        Ce module est désactivé. Vous pouvez l'activer dans les Paramètres.
+        {tc("module_disabled")}
       </div>
     );
   }
@@ -256,14 +256,14 @@ export default function RecipesPage() {
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="px-8 py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-slate-900">Food Cost</h1>
-            <p className="text-sm text-slate-500">Associations Menu / Ingrédients</p>
+            <h1 className="text-xl font-bold text-slate-900">{t("food_cost_title")}</h1>
+            <p className="text-sm text-slate-500">{t("food_cost_desc")}</p>
           </div>
         </div>
         <div className="px-8 flex items-center gap-6 text-sm font-medium">
-          <a href="/dashboard/food-cost" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Vue Globale</a>
-          <a href="/dashboard/food-cost/ingredients" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">Ingrédients</a>
-          <a href="/dashboard/food-cost/recipes" className="py-3 border-b-2 border-indigo-600 text-indigo-600">Recettes</a>
+          <a href="/dashboard/food-cost" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">{t("tab_overview")}</a>
+          <a href="/dashboard/food-cost/ingredients" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors">{t("tab_ingredients")}</a>
+          <a href="/dashboard/food-cost/recipes" className="py-3 border-b-2 border-indigo-600 text-indigo-600">{t("tab_recipes")}</a>
         </div>
       </header>
 
@@ -277,11 +277,11 @@ export default function RecipesPage() {
 
         <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
           {loading ? (
-            <div className="p-8 text-center text-slate-500">Chargement...</div>
+            <div className="p-8 text-center text-slate-500">{tc("loading")}</div>
           ) : menuItems.length === 0 ? (
             <div className="p-12 text-center text-slate-500">
-              <p>Aucun plat trouvé dans le menu.</p>
-              <p className="text-sm mt-2">Ajoutez des plats via l'éditeur de menu (ou attendez la synchro POS) pour configurer leurs recettes.</p>
+              <p>{t("no_items_found")}</p>
+              <p className="text-sm mt-2">{t("add_items_hint")}</p>
             </div>
           ) : (
             <div className="divide-y divide-slate-100">
@@ -300,16 +300,16 @@ export default function RecipesPage() {
                       <div>
                         <h3 className="font-medium text-slate-900">{item.name}</h3>
                         <p className="text-sm text-slate-500 mt-0.5">
-                          {hasRecipe 
-                            ? `${currentRecipe.recipe_ingredients.length} ingrédient(s) — Coût estimé : ${getRecipeCost(currentRecipe)}$`
-                            : "Pas de recette configurée"}
+                          {hasRecipe
+                            ? t("recipe_summary", { count: currentRecipe.recipe_ingredients.length, cost: getRecipeCost(currentRecipe) })
+                            : t("no_recipe")}
                         </p>
                       </div>
                       <div className="flex items-center gap-4">
                         {hasRecipe ? (
-                          <span className="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Configuré</span>
+                          <span className="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">{t("configured")}</span>
                         ) : (
-                          <span className="px-2.5 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">À configurer</span>
+                          <span className="px-2.5 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">{t("to_configure")}</span>
                         )}
                         {isExpanded ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
                       </div>
@@ -319,7 +319,7 @@ export default function RecipesPage() {
                     {isExpanded && editingRecipe && (
                       <div className="px-6 pb-6 bg-slate-50 border-t border-slate-100">
                         <div className="mt-4">
-                          <label className="block text-sm font-medium text-slate-700 mb-2">Ingrédients de la recette</label>
+                          <label className="block text-sm font-medium text-slate-700 mb-2">{t("recipe_ingredients_label")}</label>
                           <div className="space-y-3">
                             {editingRecipe.recipe_ingredients.map((ri, idx) => (
                               <div key={idx} className="flex items-center gap-3">
@@ -328,14 +328,14 @@ export default function RecipesPage() {
                                   onChange={(e) => handleUpdateIngredientRow(idx, 'ingredient_id', e.target.value)}
                                   className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white"
                                 >
-                                  <option value="" disabled>Sélectionner un ingrédient...</option>
+                                  <option value="" disabled>{t("select_ingredient")}</option>
                                   {ingredients.map(ing => (
                                     <option key={ing.id} value={ing.id}>{ing.name} ({ing.unit_cost}$ / {ing.unit})</option>
                                   ))}
                                 </select>
                                 <input
                                   type="number"
-                                  placeholder="Qté"
+                                  placeholder={t("qty_placeholder")}
                                   step="0.01"
                                   value={ri.quantity || ""}
                                   onChange={(e) => handleUpdateIngredientRow(idx, 'quantity', parseFloat(e.target.value))}
@@ -357,16 +357,16 @@ export default function RecipesPage() {
                             className="mt-3 flex items-center gap-2 text-sm text-indigo-600 font-medium hover:text-indigo-700"
                           >
                             <Plus className="w-4 h-4" />
-                            Ajouter un ingrédient
+                            {t("add_ingredient")}
                           </button>
                         </div>
 
                         {/* Time & Yield Fields */}
                         <div className="mt-6 border-t border-slate-200 pt-4">
-                          <label className="block text-sm font-medium text-slate-700 mb-3">Temps & Rendement</label>
+                          <label className="block text-sm font-medium text-slate-700 mb-3">{t("time_yield")}</label>
                           <div className="grid grid-cols-3 gap-3">
                             <div>
-                              <label className="block text-xs text-slate-500 mb-1">Temps de préparation</label>
+                              <label className="block text-xs text-slate-500 mb-1">{t("prep_time")}</label>
                               <div className="flex items-center gap-1">
                                 <input
                                   type="number"
@@ -376,11 +376,11 @@ export default function RecipesPage() {
                                   placeholder="30"
                                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                                 />
-                                <span className="text-xs text-slate-400 shrink-0">min</span>
+                                <span className="text-xs text-slate-400 shrink-0">{/* i18n-ignore */}min</span>
                               </div>
                             </div>
                             <div>
-                              <label className="block text-xs text-slate-500 mb-1">Temps de cuisson</label>
+                              <label className="block text-xs text-slate-500 mb-1">{t("cook_time")}</label>
                               <div className="flex items-center gap-1">
                                 <input
                                   type="number"
@@ -390,11 +390,11 @@ export default function RecipesPage() {
                                   placeholder="45"
                                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                                 />
-                                <span className="text-xs text-slate-400 shrink-0">min</span>
+                                <span className="text-xs text-slate-400 shrink-0">{/* i18n-ignore */}min</span>
                               </div>
                             </div>
                             <div>
-                              <label className="block text-xs text-slate-500 mb-1">Portions produites</label>
+                              <label className="block text-xs text-slate-500 mb-1">{t("yield_portions")}</label>
                               <input
                                 type="number"
                                 min="1"
@@ -405,7 +405,7 @@ export default function RecipesPage() {
                               />
                             </div>
                           </div>
-                          <p className="text-xs text-slate-400 mt-2">Le temps de préparation sert à calculer le coût main-d'œuvre par portion (temps × taux horaire ÷ portions). Configurez votre taux horaire dans les Réglages.</p>
+                          <p className="text-xs text-slate-400 mt-2">{t("prep_time_help")}</p>
                         </div>
 
                         <div className="mt-6 flex justify-end gap-3">
@@ -417,14 +417,14 @@ export default function RecipesPage() {
                             }}
                             className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 bg-slate-100 rounded-lg transition-colors"
                           >
-                            Annuler
+                            {tc("cancel")}
                           </button>
                           <button
                             onClick={handleSaveRecipe}
                             className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
                           >
                             <Check className="w-4 h-4" />
-                            Sauvegarder la recette
+                            {t("save_recipe")}
                           </button>
                         </div>
                       </div>

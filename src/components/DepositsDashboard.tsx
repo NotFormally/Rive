@@ -155,6 +155,7 @@ export function DepositsDashboard() {
           </CardHeader>
           <CardContent className="relative z-10">
             <div className="text-3xl font-bold text-slate-900">{heldCount}</div>
+            {/* i18n-ignore — already uses t(), > is arithmetic not JSX */}
             <p className="text-xs text-slate-500 mt-1">{heldCount > 0 ? t('kpi_return_for_credit') : t('kpi_all_returned')}</p>
           </CardContent>
         </Card>

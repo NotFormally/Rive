@@ -238,7 +238,7 @@ export function InstagramGenerator({
               {/* Native Publishing Actions */}
               {connections.length > 0 && (
                 <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
-                  <p className="text-xs font-semibold text-slate-500 mb-1">Publier directement sur :</p>
+                  <p className="text-xs font-semibold text-slate-500 mb-1">{t('publishDirectlyTo')}</p>
                   {connections.map(c => (
                      <Button 
                        key={c.id} 
@@ -250,7 +250,7 @@ export function InstagramGenerator({
                        {publishing === c.platform ? (
                          <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
                        ) : publishSuccess === c.platform ? (
-                         <span>✅ Envoyé !</span>
+                         <span>{t('sent')}</span>
                        ) : (
                          <span>Publier &rarr;</span>
                        )}

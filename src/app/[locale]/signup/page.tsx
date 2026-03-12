@@ -225,7 +225,7 @@ function SignupForm() {
 
             {/* Honeypot — hidden from humans via CSS, bots auto-fill it */}
             <div className="absolute opacity-0 top-0 left-0 h-0 w-0 -z-10" aria-hidden="true">
-              <label htmlFor="website">Website</label>
+              <label htmlFor="website">{t("honeypot_website")}</label>
               <input
                 type="text"
                 id="website"
@@ -311,9 +311,14 @@ function SignupForm() {
   );
 }
 
+function LoadingFallback() {
+  const t = useTranslations("Common");
+  return <div className="min-h-screen bg-background noise-bg flex items-center justify-center">{t("loading")}</div>;
+}
+
 export default function SignupPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-background noise-bg flex items-center justify-center">Loading...</div>}>
+    <Suspense fallback={<LoadingFallback />}>
       <SignupForm />
     </Suspense>
   );

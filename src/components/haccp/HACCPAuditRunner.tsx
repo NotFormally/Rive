@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { 
+import { useTranslations } from "next-intl";
+import {
   CheckCircle2, 
   Camera, 
   Hash, 
@@ -32,6 +33,7 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = useTranslations("HACCPAudit");
 
   const handleInputChange = (fieldId: string, value: any) => {
     setFormData(prev => ({ ...prev, [fieldId]: value }));
@@ -49,7 +51,7 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
 
     schema.fields.forEach(field => {
       if (field.required && (formData[field.id] === undefined || formData[field.id] === "")) {
-        newErrors[field.id] = "Ce champ est obligatoire";
+        newErrors[field.id] = t("error_required");
         isValid = false;
       }
     });
@@ -87,7 +89,7 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
                 type="text"
                 value={value}
                 onChange={(e) => handleInputChange(field.id, e.target.value)}
-                placeholder="Entrez le texte..."
+                placeholder={t("placeholder_text")}
                 className={`block w-full pl-10 pr-3 py-3 border ${errorMsg ? 'border-red-500' : 'border-gray-700'} rounded-xl bg-[#1A1A1A] text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow transition-colors`}
               />
             </div>
@@ -128,7 +130,7 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
                     onChange={() => handleInputChange(field.id, true)}
                     className="w-5 h-5 text-emerald-500 bg-gray-800 border-gray-600 focus:ring-emerald-500 focus:ring-offset-gray-900"
                   />
-                  <span className="text-white group-hover:text-emerald-400 transition-colors">Oui / Conforme</span>
+                  <span className="text-white group-hover:text-emerald-400 transition-colors">{t("label_yes")}</span>
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <input
@@ -138,7 +140,7 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
                     onChange={() => handleInputChange(field.id, false)}
                     className="w-5 h-5 text-red-500 bg-gray-800 border-gray-600 focus:ring-red-500 focus:ring-offset-gray-900"
                   />
-                  <span className="text-white group-hover:text-red-400 transition-colors">Non / Non-conforme</span>
+                  <span className="text-white group-hover:text-red-400 transition-colors">{t("label_no")}</span>
                 </label>
               </div>
             </div>
@@ -153,8 +155,8 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
                 <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                   <Camera className="w-6 h-6 text-gray-400 group-hover:text-blue-400" />
                 </div>
-                <p className="text-gray-400 font-medium group-hover:text-white transition-colors">Capturer la preuve visuelle</p>
-                <p className="text-gray-500 text-xs mt-1">(La caméra s'ouvrira sur mobile)</p>
+                <p className="text-gray-400 font-medium group-hover:text-white transition-colors">{t("capture_photo")}</p>
+                <p className="text-gray-500 text-xs mt-1">{t("camera_mobile")}</p>
                 {/* Simulated file input for the mockup */}
                 <input 
                   type="file" 
@@ -167,7 +169,7 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
                   }}
                 />
              </div>
-             {value && <p className="text-emerald-400 text-xs flex items-center gap-1.5 mt-2"><CheckCircle2 className="w-4 h-4" /> {value} attaché</p>}
+             {value && <p className="text-emerald-400 text-xs flex items-center gap-1.5 mt-2"><CheckCircle2 className="w-4 h-4" /> {t("file_attached", { name: value })}</p>}
              {errorMsg && <p className="text-red-400 text-xs flex items-center gap-1"><AlertTriangle className="w-3 h-3"/> {errorMsg}</p>}
           </div>
         );
@@ -183,7 +185,7 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
       {/* Header Form */}
       <div className="text-center space-y-2">
         <h2 className="text-2xl font-outfit font-bold text-white tracking-tight">{templateName}</h2>
-        <p className="text-gray-400 text-sm">Veuillez remplir tous les champs obligatoires (*)</p>
+        <p className="text-gray-400 text-sm">{t("instructions")}</p>
       </div>
 
       <div className="space-y-6">
@@ -210,12 +212,12 @@ export function HACCPAuditRunner({ templateName, schema, onSubmit }: HACCPAuditR
           ) : (
              <>
                <CheckCircle2 className="w-6 h-6" />
-               Signer & Soumettre l'Audit
+               {t("btn_submit")}
              </>
           )}
         </button>
         <p className="text-center text-gray-500 text-xs mt-4 font-plex-mono">
-           En soumettant, vous certifiez l'exactitude de ces informations. Ce log sera haché cryptographiquement de façon immuable.
+           {t("disclaimer")}
         </p>
       </div>
 

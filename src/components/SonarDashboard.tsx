@@ -88,10 +88,10 @@ export function SonarDashboard() {
 
   const getSkillLabel = (level: number) => {
     switch (level) {
-      case 3: return "Top Gun";
-      case 2: return "Autonome";
-      case 1: return "En formation";
-      case 0: default: return "Non assigné";
+      case 3: return t("skill_top_gun");
+      case 2: return t("skill_autonome");
+      case 1: return t("skill_en_formation");
+      case 0: default: return t("skill_non_assigne");
     }
   };
 
@@ -151,19 +151,19 @@ export function SonarDashboard() {
                {/* Quick Stats Panel */}
                <div className="bg-[#1A1A1A] border border-white/5 rounded-2xl p-6 flex flex-col justify-center items-center text-center shadow-lg">
                   <span className="text-5xl font-outfit font-bold text-emerald-400 mb-2 drop-shadow-[0_0_15px_rgba(52,211,153,0.3)]">98%</span>
-                  <span className="text-sm font-medium text-white/80">Conformité Globale (7j)</span>
-                  <span className="text-xs text-white/40 mt-1 font-plex-mono">45 audits complétés</span>
+                  <span className="text-sm font-medium text-white/80">{t("global_compliance")}</span>
+                  <span className="text-xs text-white/40 mt-1 font-plex-mono">{/* i18n-ignore */}45 audits complétés</span>
                </div>
                <div className="bg-[#1A1A1A] border border-white/5 rounded-2xl p-6 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-lg">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl -mr-10 -mt-10" />
                   <span className="text-3xl font-outfit font-bold text-amber-400 mb-2 relative z-10">2</span>
-                  <span className="text-sm font-medium text-white/80 relative z-10">Alertes DLUO</span>
-                  <span className="text-xs text-white/40 mt-1 font-plex-mono relative z-10">À vérifier aujourd'hui</span>
+                  <span className="text-sm font-medium text-white/80 relative z-10">{t("dluo_alerts")}</span>
+                  <span className="text-xs text-white/40 mt-1 font-plex-mono relative z-10">{t("to_check_today")}</span>
                </div>
                <div className="bg-gradient-to-br from-blue-900/40 to-indigo-900/20 border border-blue-500/20 rounded-2xl p-6 flex flex-col justify-center items-start shadow-lg">
                   <div className="flex items-center gap-2 mb-2">
                      <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                     <span className="text-xs font-plex-mono text-blue-300 uppercase tracking-widest">IA Insight</span>
+                     <span className="text-xs font-plex-mono text-blue-300 uppercase tracking-widest">{t("ia_insight")}</span>
                   </div>
                   <p className="text-sm text-white/80 leading-relaxed italic">
                     "Les audits de réception poisson sont souvent retardés le jeudi matin. Un renfort au Garde-Manger fluidifierait l'opération."
@@ -174,7 +174,7 @@ export function SonarDashboard() {
             {/* Event Feed */}
             <div className="bg-[#1A1A1A] border border-white/5 rounded-2xl overflow-hidden shadow-xl">
               <div className="p-5 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
-                <h3 className="font-semibold text-white/90">Derniers Contrôles (Live Feed)</h3>
+                <h3 className="font-semibold text-white/90">{t("last_checks_feed")}</h3>
                 <span className="flex h-2 w-2 relative">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -213,13 +213,13 @@ export function SonarDashboard() {
             <div className="p-6 border-b border-white/5 bg-white/[0.02] flex flex-col xl:flex-row xl:items-center justify-between gap-4">
                <div>
                  <h3 className="font-semibold text-white/90 text-lg">Matrice de Vitesse & Compétences</h3>
-                 <p className="text-xs text-white/50 mt-1">Identifiez les manques de polyvalence avant qu'ils ne bloquent la production.</p>
+                 <p className="text-xs text-white/50 mt-1">{t("skills_matrix_subtitle")}</p>
                </div>
                <div className="flex items-center gap-4 text-xs font-medium bg-black/40 px-4 py-2 rounded-xl border border-white/5 overflow-x-auto whitespace-nowrap">
-                  <div className="flex items-center gap-2 text-white/50"><div className="w-2.5 h-2.5 rounded-full bg-white/10" /> Non Assigné</div>
-                  <div className="flex items-center gap-2 text-amber-400"><div className="w-2.5 h-2.5 rounded-full bg-amber-500" /> En formation</div>
-                  <div className="flex items-center gap-2 text-emerald-400"><div className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Autonome</div>
-                  <div className="flex items-center gap-2 text-blue-400"><div className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" /> Top Gun</div>
+                  <div className="flex items-center gap-2 text-white/50"><div className="w-2.5 h-2.5 rounded-full bg-white/10" /> {t("skill_non_assigne")}</div>
+                  <div className="flex items-center gap-2 text-amber-400"><div className="w-2.5 h-2.5 rounded-full bg-amber-500" /> {t("skill_en_formation")}</div>
+                  <div className="flex items-center gap-2 text-emerald-400"><div className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> {t("skill_autonome")}</div>
+                  <div className="flex items-center gap-2 text-blue-400"><div className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" /> {t("skill_top_gun")}</div>
                </div>
             </div>
             
@@ -227,7 +227,7 @@ export function SonarDashboard() {
               <table className="w-full text-left border-collapse min-w-[700px]">
                 <thead>
                   <tr className="bg-black/20 text-xs uppercase tracking-wider font-plex-mono text-white/40">
-                    <th className="p-4 font-medium border-b border-white/5 w-[200px]">Membre de l'Équipe</th>
+                    <th className="p-4 font-medium border-b border-white/5 w-[200px]">{t("team_member")}</th>
                     {stations.map(station => (
                       <th key={station.id} className="p-4 font-medium border-b border-white/5 text-center min-w-[120px]">
                          <div className="flex flex-col items-center gap-2">
@@ -273,7 +273,7 @@ export function SonarDashboard() {
                  <AlertTriangle className="w-5 h-5 text-amber-500" />
                </div>
                <div>
-                  <h4 className="text-sm font-semibold text-amber-500 mb-1">Vulnérabilité Opérationnelle</h4>
+                  <h4 className="text-sm font-semibold text-amber-500 mb-1">{t("operational_vulnerability")}</h4>
                   <p className="text-sm text-amber-500/80 leading-relaxed">
                     Léa T. est la seule personne formée en Pâtisserie (Autonome/Top Gun) pour le service du soir. 
                     Croisement de compétences recommandé urgemment pour **Marc D.**

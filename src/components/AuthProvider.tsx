@@ -58,9 +58,9 @@ type AuthContextType = {
   healthScore: number | null;
   healthGrade: HealthGrade | null;
   loading: boolean;
-  signOut: () => Promise<void>;
-  refreshSettings: () => Promise<void>;
-  refreshProfile: () => Promise<void>;
+  signOut: () => Promise<void>; // i18n-ignore
+  refreshSettings: () => Promise<void>; // i18n-ignore
+  refreshProfile: () => Promise<void>; // i18n-ignore
 };
 
 const defaultSettings: ModuleSettings = {

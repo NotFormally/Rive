@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { Package, Beer, ArrowLeft, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type ReturnRecord = {
   id: string;
@@ -23,6 +24,7 @@ const mockReturns: ReturnRecord[] = [
 
 export default function DepositsHistoryPage() {
   const { settings } = useAuth();
+  const t = useTranslations("Reserve");
   const [returns] = useState<ReturnRecord[]>(mockReturns);
 
   const totalReturned = returns.reduce((sum, r) => sum + r.deposit_amount, 0);
@@ -32,30 +34,30 @@ export default function DepositsHistoryPage() {
     <>
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="px-4 sm:px-8 py-4">
-          <h1 className="text-xl font-bold">Tracker de Consignes</h1>
-          <p className="text-sm text-slate-500">Suivi des fûts, bouteilles et argent immobilisé</p>
+          <h1 className="text-xl font-bold">{t("trackerTitle")}</h1>
+          <p className="text-sm text-slate-500">{t("trackerSubtitle")}</p>
         </div>
         <div className="px-4 sm:px-8 flex items-center gap-6 text-sm font-medium overflow-x-auto">
-          <a href="/dashboard/deposits" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors whitespace-nowrap">Tableau de Bord</a>
-          <a href="/dashboard/deposits/history" className="py-3 border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap">Historique des Retours</a>
+          <a href="/dashboard/deposits" className="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 transition-colors whitespace-nowrap">{t("tabDashboard")}</a>
+          <a href="/dashboard/deposits/history" className="py-3 border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap">{t("tabReturnHistory")}</a>
         </div>
       </header>
 
       <div className="p-4 sm:p-8 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-6 shadow-sm">
-            <p className="text-sm text-slate-500 mb-1">Total Retourné</p>
+            <p className="text-sm text-slate-500 mb-1">{t("statTotalReturned")}</p>
             <p className="text-2xl sm:text-3xl font-bold text-slate-900">${totalReturned.toFixed(2)}</p>
           </div>
           <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-6 shadow-sm">
-            <p className="text-sm text-slate-500 mb-1">Crédits Appliqués</p>
+            <p className="text-sm text-slate-500 mb-1">{t("statCreditsApplied")}</p>
             <p className="text-2xl sm:text-3xl font-bold text-emerald-600">${totalCredited.toFixed(2)}</p>
           </div>
         </div>
 
         <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
           <div className="px-4 sm:px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-            <h2 className="font-semibold text-slate-900">Retours Récents</h2>
+            <h2 className="font-semibold text-slate-900">{t("recentReturns")}</h2>
           </div>
 
           <div className="divide-y divide-slate-100">
@@ -73,7 +75,7 @@ export default function DepositsHistoryPage() {
                 <div className="text-right">
                   <p className="font-medium text-slate-900">${item.deposit_amount.toFixed(2)}</p>
                   <span className={`text-xs font-medium ${item.credit_applied ? "text-emerald-600" : "text-amber-600"}`}>
-                    {item.credit_applied ? "Crédité" : "En attente"}
+                    {item.credit_applied ? t("statusCredited") : t("statusPending")}
                   </span>
                 </div>
               </div>

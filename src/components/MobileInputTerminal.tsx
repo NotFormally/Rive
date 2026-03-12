@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { Flame, Wrench, UtensilsCrossed, MessageSquare, Mic, Send, CheckCircle2, Eye, Clock, Sparkles } from "lucide-react";
 
@@ -49,6 +50,7 @@ const MOCK_MESSAGES: TimelineMessage[] = [
 ];
 
 export function MobileInputTerminal() {
+  const t = useTranslations('MobileTerminal');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [inputText, setInputText] = useState("");
   const [isRecording, setIsRecording] = useState(false);
@@ -127,8 +129,8 @@ export function MobileInputTerminal() {
                EM
              </div>
              <div>
-               <p className="font-jakarta font-bold leading-tight text-sm md:text-base">Terminal Staff</p>
-               <p className="font-plex-mono text-[9px] md:text-[10px] text-[#F2F0E9]/60 uppercase tracking-widest">Connecté</p>
+               <p className="font-jakarta font-bold leading-tight text-sm md:text-base">{t('terminalTitle')}</p>
+               <p className="font-plex-mono text-[9px] md:text-[10px] text-[#F2F0E9]/60 uppercase tracking-widest">{t('connected')}</p>
              </div>
           </div>
           
@@ -162,7 +164,7 @@ export function MobileInputTerminal() {
             className={`flex flex-col items-center justify-center p-3 md:p-4 rounded-2xl md:rounded-3xl border-2 transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] active:scale-95 ${getCategoryTheme('equipment', activeCategory === 'equipment')}`}
           >
             <Wrench className="w-8 h-8 mb-2" />
-            <span className="font-jakarta font-bold text-sm tracking-wide">ÉQUIPEMENT</span>
+            <span className="font-jakarta font-bold text-sm tracking-wide">{t('catEquipment')}</span>
           </button>
           
           <button 
@@ -178,7 +180,7 @@ export function MobileInputTerminal() {
             className={`flex flex-col items-center justify-center p-3 md:p-4 rounded-2xl md:rounded-3xl border-2 transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] active:scale-95 ${getCategoryTheme('general', activeCategory === 'general')}`}
           >
             <MessageSquare className="w-8 h-8 mb-2" />
-            <span className="font-jakarta font-bold text-sm tracking-wide">GÉNÉRAL</span>
+            <span className="font-jakarta font-bold text-sm tracking-wide">{t('catGeneral')}</span>
           </button>
         </div>
       </div>
@@ -250,7 +252,7 @@ export function MobileInputTerminal() {
                  <div className="mt-2 pl-2">
                    <div className="inline-flex items-center gap-1.5 px-2 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-md mb-1">
                       <Sparkles className="w-3 h-3 text-indigo-400" />
-                      <span className="font-outfit text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Traduit par l'IA</span>
+                      <span className="font-outfit text-[10px] font-bold text-indigo-400 uppercase tracking-widest">{t('aiTranslated')}</span>
                    </div>
                    <p className="font-outfit text-xs text-muted-foreground italic border-l-2 border-indigo-500/30 pl-2 py-1">
                      {msg.translatedText}
@@ -282,7 +284,7 @@ export function MobileInputTerminal() {
                      </div>
                      {msg.reply && (
                        <div className="bg-muted p-3 rounded-xl rounded-tl-none ml-4 mt-1 border border-border/50">
-                         <span className="block font-plex-mono text-[9px] text-[#CC5833] font-bold uppercase mb-1">Dernière note (Direction)</span>
+                         <span className="block font-plex-mono text-[9px] text-[#CC5833] font-bold uppercase mb-1">{t('lastNote')}</span>
                          <span className="font-outfit text-xs text-foreground/80">{msg.reply}</span>
                        </div>
                      )}

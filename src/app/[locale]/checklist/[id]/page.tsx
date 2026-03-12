@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { AlertCircle, CheckCircle2, Sparkles, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function ChecklistExecutionPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = use(params);
@@ -32,6 +33,7 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
   const caQuotaReached = hasReachedQuota(usage, 'corrective_actions', currentTier);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = useTranslations("Checklist");
 
   useEffect(() => {
     fetchSessionData();
@@ -73,7 +75,7 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
     if (type === 'temperature') {
       const numValue = parseFloat(value);
       if (!isNaN(numValue) && task.max_temp !== undefined && task.max_temp !== null && numValue > task.max_temp) {
-        setErrors(prev => ({ ...prev, [taskId]: `Doit être ≤ ${task.max_temp}°C` }));
+        setErrors(prev => ({ ...prev, [taskId]: t("error_max_temp", { max: task.max_temp! }) }));
         
         // Auto-fetch AI Suggestions if not existing
         if (!aiSuggestions[taskId] && !isAiLoading[taskId] && !caQuotaReached) {
@@ -163,19 +165,19 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
     }
   };
 
-  if (!session || !template) return <div className="p-8 text-center">Chargement...</div>;
+  if (!session || !template) return <div className="p-8 text-center">{t("loading")}</div>;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-4 py-3 flex items-center gap-4">
         <Button variant="outline" size="sm" onClick={() => router.push('/dashboard')}>
-          ← Retour
+          {t("btn_back")}
         </Button>
         <div className="flex-1">
           <h1 className="text-lg font-bold leading-tight">{template.title}</h1>
-          <p className="text-xs text-slate-500">{template.tasks?.length} tâches</p>
+          <p className="text-xs text-slate-500">{t("tasks_count", { count: template.tasks?.length })}</p>
         </div>
-        {session.status === 'completed' && <Badge className="bg-green-500">Terminé</Badge>}
+        {session.status === 'completed' && <Badge className="bg-green-500">{t("badge_completed")}</Badge>}
       </header>
 
       <main className="max-w-md mx-auto p-4 mt-2 space-y-6">
@@ -197,7 +199,7 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
                     <Label htmlFor={task.id} className="text-base font-medium cursor-pointer leading-snug">
                       {task.description}
                     </Label>
-                    {task.required && <p className="text-xs text-red-500 mt-1">* Requis</p>}
+                    {task.required && <p className="text-xs text-red-500 mt-1">{t("label_required")}</p>}
                   </div>
                 </>
               )}
@@ -212,7 +214,7 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
                       id={task.id}
                       type="number"
                       step="0.1"
-                      placeholder="Ex: 3.5"
+                      placeholder={t("placeholder_temperature")}
                       className="text-lg h-12 w-32 font-mono"
                       value={entries[task.id] || ''}
                       onChange={(e) => handleChange(task.id, e.target.value, 'temperature', task)}
@@ -230,17 +232,17 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
                       <div className="bg-indigo-50/50 rounded-xl p-4 border border-indigo-100">
                         <div className="flex items-center gap-2 mb-3 text-indigo-700">
                           <Sparkles className="h-4 w-4" />
-                          <span className="text-sm font-semibold">Assistant Qualité</span>
+                          <span className="text-sm font-semibold">{t("ai_assistant_title")}</span>
                         </div>
                         
                         {isAiLoading[task.id] ? (
                             <div className="flex items-center gap-2 text-indigo-500 text-sm py-2">
                                 <Loader2 className="h-4 w-4 animate-spin" />
-                                <span>L'IA génère les actions correctives...</span>
+                                <span>{t("ai_generating")}</span>
                             </div>
                         ) : aiSuggestions[task.id] ? (
                             <div className="space-y-2">
-                                <p className="text-xs text-indigo-900/70 mb-2">Sélectionnez l'action entreprise :</p>
+                                <p className="text-xs text-indigo-900/70 mb-2">{t("ai_select_action")}</p>
                                 {aiSuggestions[task.id].map((action, idx) => (
                                     <button
                                         key={idx}
@@ -253,8 +255,8 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
                             </div>
                         ) : caQuotaReached ? (
                             <div className="flex flex-col gap-2 p-2 bg-white/50 rounded-lg">
-                                <p className="text-sm font-medium text-slate-700">Quota d'actions correctives IA atteint</p>
-                                <p className="text-xs text-slate-500">Vous avez atteint votre limite de {TIER_QUOTAS[currentTier].corrective_actions} suggestions.</p>
+                                <p className="text-sm font-medium text-slate-700">{t("ai_quota_reached_title")}</p>
+                                <p className="text-xs text-slate-500">{t("ai_quota_reached_desc", { limit: TIER_QUOTAS[currentTier].corrective_actions })}</p>
                             </div>
                         ) : null}
                       </div>
@@ -264,7 +266,7 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
                   {entries[task.id] && !errors[task.id] && task.required && (
                     <div className="flex items-center gap-2 text-green-600 bg-green-50 p-2 rounded-md text-sm">
                       <CheckCircle2 className="h-4 w-4" />
-                      <span>Température conforme</span>
+                      <span>{t("temperature_ok")}</span>
                     </div>
                   )}
                 </div>
@@ -277,12 +279,12 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
                   </Label>
                   <Input 
                     id={task.id}
-                    placeholder="Notes..."
+                    placeholder={t("placeholder_notes")}
                     className="h-12"
                     value={entries[task.id] || ''}
                     onChange={(e) => handleChange(task.id, e.target.value, 'text', task)}
                   />
-                  {task.required && <p className="text-xs text-red-500 mt-1">* Requis</p>}
+                  {task.required && <p className="text-xs text-red-500 mt-1">{t("label_required")}</p>}
                 </div>
               )}
 
@@ -296,7 +298,7 @@ export default function ChecklistExecutionPage({ params }: { params: Promise<{ i
             disabled={!isFormValid() || session.status === 'completed' || isSubmitting}
             onClick={handleSubmit}
           >
-            {isSubmitting ? 'Sauvegarde...' : session.status === 'completed' ? 'Déjà Soumis' : 'Soumettre le rapport'}
+            {isSubmitting ? t("btn_submitting") : session.status === 'completed' ? t("btn_already_submitted") : t("btn_submit_report")}
           </Button>
         </div>
       </main>

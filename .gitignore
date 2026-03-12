@@ -68,3 +68,4 @@ supabase/.temp/
 
 # i18n translation cache (auto-generated snapshots)
 messages/.i18n-cache/
+.i18n-cache/

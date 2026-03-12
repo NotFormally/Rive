@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Camera, Upload, CheckCircle2, AlertTriangle, FileText, Download, Printer, ChevronRight, Zap } from "lucide-react";
 import Image from "next/image";
 
@@ -46,6 +47,7 @@ const MOCK_INVOICES: InvoiceProcessing[] = [
 ];
 
 export function OneClickComplianceDashboard() {
+  const t = useTranslations('OneClickCompliance');
   const [invoices, setInvoices] = useState<InvoiceProcessing[]>(MOCK_INVOICES);
   const [isDragActive, setIsDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -139,11 +141,11 @@ export function OneClickComplianceDashboard() {
         <div className="flex items-center gap-4">
           <div className="bg-white/5 border border-white/10 rounded-2xl px-5 py-3 flex flex-col items-center">
             <span className="text-2xl font-plex-mono font-bold text-emerald-400">14</span>
-            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">Factures Traitées</span>
+            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">{t('invoicesProcessed')}</span>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-2xl px-5 py-3 flex flex-col items-center shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-            <span className="text-2xl font-plex-mono font-bold text-purple-400">82h</span>
-            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">Temps Gagné (Mois)</span>
+            <span className="text-2xl font-plex-mono font-bold text-purple-400">{/* i18n-ignore */}82h</span>
+            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">{t('timeSavedMonth')}</span>
           </div>
         </div>
       </div>
@@ -183,7 +185,7 @@ export function OneClickComplianceDashboard() {
             </div>
             
             <div className="text-center space-y-1 z-10">
-              <h3 className="text-lg font-outfit font-bold text-white">Glisser une Facture PDF ou Image</h3>
+              <h3 className="text-lg font-outfit font-bold text-white">{t('dropzoneTitle')}</h3>
               <p className="text-sm text-slate-400 max-w-sm">
                 Vous pouvez aussi utiliser l'application mobile RiveHub pour prendre en photo un bon de réception directement sur le quai de déchargement.
               </p>
@@ -274,15 +276,15 @@ export function OneClickComplianceDashboard() {
         {/* Info & Bluetooth Connection Sidebar */}
         <div className="lg:col-span-4 space-y-6">
           <div className="bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-3xl p-6">
-            <h3 className="font-outfit font-bold text-lg text-white mb-4">Connexions Bluetooth</h3>
+            <h3 className="font-outfit font-bold text-lg text-white mb-4">{t('bluetoothConnections')}</h3>
             
             <div className="space-y-3">
               <div className="p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <div>
-                    <p className="text-sm font-bold text-emerald-100">Imprimante DLUO Cuisine</p>
-                    <p className="text-xs text-emerald-400/70 font-plex-mono">Connectée • Prête à imprimer</p>
+                    <p className="text-sm font-bold text-emerald-100">{/* i18n-ignore */}Imprimante DLUO Cuisine</p>
+                    <p className="text-xs text-emerald-400/70 font-plex-mono">{/* i18n-ignore */}Connectée • Prête à imprimer</p>
                   </div>
                 </div>
                 <Printer className="w-5 h-5 text-emerald-400" />
@@ -292,8 +294,8 @@ export function OneClickComplianceDashboard() {
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-slate-500" />
                   <div>
-                    <p className="text-sm font-bold text-slate-300">Balance Connectée (Réception)</p>
-                    <p className="text-xs text-slate-500 font-plex-mono">Déconnectée</p>
+                    <p className="text-sm font-bold text-slate-300">{/* i18n-ignore */}Balance Connectée (Réception)</p>
+                    <p className="text-xs text-slate-500 font-plex-mono">{t('disconnected')}</p>
                   </div>
                 </div>
               </div>

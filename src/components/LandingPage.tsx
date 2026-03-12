@@ -443,7 +443,7 @@ export function LandingPage() {
                     <div className="bg-green-50/80 rounded-tl-xl border border-green-100 flex flex-col items-center justify-center p-3 relative overflow-hidden group">
                       <span className="text-green-700/60 text-[10px] font-bold font-jakarta uppercase tracking-widest mb-1 md:mb-2">{t('bcg_stars')}</span>
                       <div className="bg-[#1A2332] px-2 py-1.5 md:px-3 md:py-2 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.4)] w-[95%] lg:w-[85%] flex justify-between items-center border border-green-200 transition-transform group-hover:scale-105">
-                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Filet Mignon</span>
+                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Filet Mignon</span>  {/* i18n-ignore */}
                         <span className="font-plex-mono text-[9px] md:text-[10px] text-green-700 bg-green-100 px-1.5 py-0.5 rounded font-bold">+$12</span>
                       </div>
                     </div>
@@ -451,14 +451,14 @@ export function LandingPage() {
                     <div className="bg-amber-50/80 rounded-tr-xl border border-amber-100 flex flex-col items-center justify-center p-3 relative overflow-hidden group">
                       <span className="text-amber-700/60 text-[10px] font-bold font-jakarta uppercase tracking-widest mb-1 md:mb-2">{t('bcg_cashcows')}</span>
                       <div className="bg-[#1A2332] px-2 py-1.5 md:px-3 md:py-2 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.4)] w-[95%] lg:w-[85%] flex justify-between items-center border border-amber-200 transition-transform group-hover:scale-105">
-                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Burger Wagyu</span>
+                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Burger Wagyu</span>  {/* i18n-ignore */}
                         <span className="font-plex-mono text-[9px] md:text-[10px] text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded font-bold">+$4</span>
                       </div>
                     </div>
                     
                     <div className="bg-red-50/80 rounded-bl-xl border border-red-100 flex flex-col items-center justify-center p-3 relative overflow-hidden group">
                       <div className="bg-[#1A2332] px-2 py-1.5 md:px-3 md:py-2 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.4)] w-[95%] lg:w-[85%] flex justify-between items-center border border-red-200 mb-1 md:mb-2 transition-transform group-hover:scale-105">
-                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Salade Kale</span>
+                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Salade Kale</span>  {/* i18n-ignore */}
                         <span className="font-plex-mono text-[9px] md:text-[10px] text-red-700 bg-red-100 px-1.5 py-0.5 rounded font-bold">-$2</span>
                       </div>
                       <span className="text-red-700/60 text-[10px] font-bold font-jakarta uppercase tracking-widest">{t('bcg_deadweights')}</span>
@@ -466,7 +466,7 @@ export function LandingPage() {
                     
                     <div className="bg-blue-50/80 rounded-br-xl border border-blue-100 flex flex-col items-center justify-center p-3 relative overflow-hidden group">
                        <div className="bg-[#1A2332] px-2 py-1.5 md:px-3 md:py-2 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.4)] w-[95%] lg:w-[85%] flex justify-between items-center border border-blue-200 mb-1 md:mb-2 transition-transform group-hover:scale-105">
-                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Huîtres (Écaille)</span>
+                        <span className="font-outfit font-semibold text-[10px] md:text-xs text-slate-200 truncate pr-1">Huîtres (Écaille)</span>  {/* i18n-ignore */}
                         <span className="font-plex-mono text-[9px] md:text-[10px] text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded font-bold">+$1</span>
                       </div>
                       <span className="text-blue-700/60 text-[10px] font-bold font-jakarta uppercase tracking-widest">{t('bcg_puzzles')}</span>
@@ -602,20 +602,20 @@ export function LandingPage() {
             <div className="order-1 md:order-2 bg-black/40 rounded-[2rem] h-64 md:h-full min-h-[300px] flex items-center justify-center relative overflow-hidden p-6">
               <div className="w-full max-w-[300px] flex flex-col gap-3">
                 <div className="flex gap-2 mb-1">
-                  <span className="font-plex-mono text-[9px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-1 rounded-full">LIBRO ●</span>
-                  <span className="font-plex-mono text-[9px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-1 rounded-full">RESY ●</span>
-                  <span className="font-plex-mono text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-2 py-1 rounded-full">ZENCHEF ●</span>
+                  <span className="font-plex-mono text-[9px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-1 rounded-full">LIBRO ●</span>  {/* i18n-ignore */}
+                  <span className="font-plex-mono text-[9px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-1 rounded-full">RESY ●</span>  {/* i18n-ignore */}
+                  <span className="font-plex-mono text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/30 px-2 py-1 rounded-full">ZENCHEF ●</span>  {/* i18n-ignore */}
                 </div>
                 <div className="bg-[#1A2332]/5 border border-white/10 rounded-xl p-3 flex justify-between items-center">
-                  <div><p className="font-jakarta font-bold text-white text-xs">Martin, L.</p><p className="font-outfit text-slate-400 text-[10px]">19:30 · 4 pers.</p></div>
+                  <div><p className="font-jakarta font-bold text-white text-xs">Martin, L.</p><p className="font-outfit text-slate-400 text-[10px]">19:30 · 4 pers.</p></div>  {/* i18n-ignore */}
                   <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">{t('res_confirmed')}</span>
                 </div>
                 <div className="bg-[#1A2332]/5 border border-white/10 rounded-xl p-3 flex justify-between items-center">
-                  <div><p className="font-jakarta font-bold text-white text-xs">Dubois, A.</p><p className="font-outfit text-slate-400 text-[10px]">20:00 · 2 pers.</p></div>
+                  <div><p className="font-jakarta font-bold text-white text-xs">Dubois, A.</p><p className="font-outfit text-slate-400 text-[10px]">20:00 · 2 pers.</p></div>  {/* i18n-ignore */}
                   <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full font-bold">{t('res_confirmed')}</span>
                 </div>
                 <div className="bg-[#1A2332]/5 border border-white/10 rounded-xl p-3 flex justify-between items-center opacity-50">
-                  <div><p className="font-jakarta font-bold text-white text-xs">Bernard, S.</p><p className="font-outfit text-slate-400 text-[10px]">21:00 · 6 pers.</p></div>
+                  <div><p className="font-jakarta font-bold text-white text-xs">Bernard, S.</p><p className="font-outfit text-slate-400 text-[10px]">21:00 · 6 pers.</p></div>  {/* i18n-ignore */}
                   <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-bold">{t('res_cancelled')}</span>
                 </div>
                 <div className="mt-1 flex justify-between items-center">
@@ -636,19 +636,19 @@ export function LandingPage() {
                 </div>
                 <div className="bg-[#1A2332] border border-white/10 rounded-lg p-2.5 flex justify-between items-center shadow-[0_8px_30px_rgb(0,0,0,0.4)]">
                   <span className="font-outfit text-slate-200 text-xs font-semibold">{t('prep_item_beef')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">4.8 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-100 text-orange-700">{t('prep_mock_pos')}</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">4.8 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-100 text-orange-700">{t('prep_mock_pos')}</span></div>  {/* i18n-ignore */}
                 </div>
                 <div className="bg-[#1A2332] border border-white/10 rounded-lg p-2.5 flex justify-between items-center shadow-[0_8px_30px_rgb(0,0,0,0.4)]">
                   <span className="font-outfit text-slate-200 text-xs font-semibold">{t('prep_item_salmon')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">3.2 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-indigo-100 text-indigo-700">{t('prep_mock_resa')}</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">3.2 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-indigo-100 text-indigo-700">{t('prep_mock_resa')}</span></div>  {/* i18n-ignore */}
                 </div>
                 <div className="bg-[#1A2332] border border-white/10 rounded-lg p-2.5 flex justify-between items-center shadow-[0_8px_30px_rgb(0,0,0,0.4)]">
                   <span className="font-outfit text-slate-200 text-xs font-semibold">{t('prep_item_potato')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">12 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-green-100 text-green-700">{t('prep_mock_recipe')}</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">12 KG</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-green-100 text-green-700">{t('prep_mock_recipe')}</span></div>  {/* i18n-ignore */}
                 </div>
                 <div className="bg-[#1A2332] border border-white/10 rounded-lg p-2.5 flex justify-between items-center shadow-[0_8px_30px_rgb(0,0,0,0.4)]">
                   <span className="font-outfit text-slate-200 text-xs font-semibold">{t('prep_item_cream')}</span>
-                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">1.5 L</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-100 text-orange-700">{t('prep_mock_pos')}</span></div>
+                  <div className="flex items-center gap-2"><span className="font-plex-mono text-[#F2F0E9] text-xs font-bold">1.5 L</span><span className="text-[9px] px-1.5 py-0.5 rounded font-bold bg-orange-100 text-orange-700">{t('prep_mock_pos')}</span></div>  {/* i18n-ignore */}
                 </div>
                 <div className="mt-2 bg-amber-50 border border-amber-200 rounded-lg p-2.5 flex justify-between">
                   <span className="font-outfit text-amber-800 text-xs font-bold">{t('prep_cost_label')}</span>
@@ -716,7 +716,7 @@ export function LandingPage() {
                       <p className="font-plex-mono text-[10px] text-red-400/70 tracking-widest uppercase mb-1">{t('bar_mock_variance')}</p>
                       <div className="flex justify-between items-end">
                         <p className="font-jakarta font-bold text-white text-base truncate">{tMockups('mock_beer1')}</p>
-                        <p className="font-outfit font-bold text-red-400 text-sm tabular-nums">-1.2L</p>
+                        <p className="font-outfit font-bold text-red-400 text-sm tabular-nums">-1.2L</p>  {/* i18n-ignore */}
                       </div>
                     </div>
                   </div>
@@ -752,7 +752,7 @@ export function LandingPage() {
                      
                      <div className="flex items-end gap-3 mb-2">
                         <span className="font-cormorant font-bold text-3xl text-primary text-cyan-400">1,240</span>
-                        <span className="font-plex-mono text-[9px] text-white/50 mb-1 leading-none">kWh</span>
+                        <span className="font-plex-mono text-[9px] text-white/50 mb-1 leading-none">kWh</span>  {/* i18n-ignore */}
                      </div>
 
                      <div className="mt-auto flex justify-between h-[80px] px-2">
@@ -784,7 +784,7 @@ export function LandingPage() {
                      
                      <div className="flex items-end gap-3 mb-2">
                         <span className="font-cormorant font-bold text-3xl text-primary text-cyan-400">8.5</span>
-                        <span className="font-plex-mono text-[9px] text-white/50 mb-1 leading-none">kL</span>
+                        <span className="font-plex-mono text-[9px] text-white/50 mb-1 leading-none">kL</span>  {/* i18n-ignore */}
                      </div>
 
                      <div className="relative h-[60px] w-full mt-auto">
@@ -1012,21 +1012,21 @@ export function LandingPage() {
             <div className="flex-1 w-full flex justify-center lg:justify-end">
               <div className="w-full max-w-sm h-64 bg-[#1A2332]/5 border border-white/10 rounded-3xl p-6 relative overflow-hidden backdrop-blur-md shadow-2xl">
                  <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
-                    <span className="font-jakarta font-bold text-white text-sm">Synchronisation active</span>
+                    <span className="font-jakarta font-bold text-white text-sm">{tMockups('sync_active')}</span>
                     <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_#4ade80]"></span>
                  </div>
                  <div className="flex flex-col gap-3">
                    <div className="bg-[#1A2332]/5 border border-white/10 p-3 rounded-xl flex items-center justify-between transition-transform duration-500 hover:scale-105">
-                     <span className="font-plex-mono text-xs text-white">Libro</span>
-                     <span className="font-plex-mono text-[10px] text-green-400">Connecté</span>
+                     <span className="font-plex-mono text-xs text-white">Libro</span>  {/* i18n-ignore */}
+                     <span className="font-plex-mono text-[10px] text-green-400">{tMockups('status_connected')}</span>
                    </div>
                    <div className="bg-[#1A2332]/5 border border-white/10 p-3 rounded-xl flex items-center justify-between transition-transform duration-500 hover:scale-105" style={{ transitionDelay: '100ms' }}>
-                     <span className="font-plex-mono text-xs text-white">Resy</span>
-                     <span className="font-plex-mono text-[10px] text-green-400">Connecté</span>
+                     <span className="font-plex-mono text-xs text-white">Resy</span>  {/* i18n-ignore */}
+                     <span className="font-plex-mono text-[10px] text-green-400">{tMockups('status_connected')}</span>
                    </div>
                    <div className="bg-[#1A2332]/5 border border-white/10 p-3 rounded-xl flex items-center justify-between opacity-50">
-                     <span className="font-plex-mono text-xs text-white">Zenchef</span>
-                     <span className="font-plex-mono text-[10px] text-slate-400">En attente</span>
+                     <span className="font-plex-mono text-xs text-white">Zenchef</span>  {/* i18n-ignore */}
+                     <span className="font-plex-mono text-[10px] text-slate-400">{tMockups('status_pending')}</span>
                    </div>
                  </div>
               </div>
@@ -1050,7 +1050,7 @@ export function LandingPage() {
                  {/* Scanner line animation */}
                  <div className="absolute top-0 left-0 w-full h-[1px] bg-[#1A2332]/60 animate-[ping_3s_ease-in-out_infinite] z-20 shadow-[0_0_15px_#ffffff]"></div>
                  
-                 <div className="font-plex-mono text-[10px] text-white/50 uppercase tracking-widest text-center border-b border-white/10 pb-2 mb-2">Extraction Ticket</div>
+                 <div className="font-plex-mono text-[10px] text-white/50 uppercase tracking-widest text-center border-b border-white/10 pb-2 mb-2">{tMockups('ticket_extraction')}</div>
                  
                  {/* Receipt mockup */}
                  <div className="bg-[#1A2332] shadow-xl rounded w-3/4 mx-auto p-4 rotate-2 relative">
@@ -1089,7 +1089,7 @@ export function LandingPage() {
                  <Link href="/signup" className="inline-block bg-[#0B131E] text-[#F2F0E9] px-10 py-5 rounded-full font-bold text-lg hover:bg-[#1A2332] hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                     {t('protocol_cta')}
                  </Link>
-                 <span className="text-white/40 text-sm font-outfit uppercase tracking-wider font-semibold">100% calibré</span>
+                 <span className="text-white/40 text-sm font-outfit uppercase tracking-wider font-semibold">{t('fully_calibrated')}</span>
               </div>
             </div>
             {/* Visual element */}

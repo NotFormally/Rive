@@ -778,7 +778,7 @@ function PrepItemRow({ item, targetLanguage }: { item: PrepItem, targetLanguage:
               <ChefCalibrationBadge
                 feedbackCount={Math.round(Math.abs(item.confidence_modifier - 1) * 50)}
                 modifier={item.confidence_modifier}
-                trend={item.confidence_modifier > 1 ? 'up' : item.confidence_modifier < 1 ? 'down' : 'stable'}
+                trend={item.confidence_modifier > 1 ? 'up' : item.confidence_modifier < 1 ? 'down' : 'stable'} // i18n-ignore
               />
             )}
           </div>
@@ -790,7 +790,7 @@ function PrepItemRow({ item, targetLanguage }: { item: PrepItem, targetLanguage:
                    {translatedReasoning || item.ai_reasoning}
                  </span>
                  {translatedReasoning && (
-                   <span className="text-[10px] font-semibold ml-1 bg-indigo-100 px-1 rounded">Traduit</span>
+                   <span className="text-[10px] font-semibold ml-1 bg-indigo-100 px-1 rounded">{t('translated_badge')}</span>
                  )}
                </span>
                {targetLanguage !== 'original' && !translatedReasoning && (
@@ -799,7 +799,7 @@ function PrepItemRow({ item, targetLanguage }: { item: PrepItem, targetLanguage:
                     disabled={isTranslating}
                     className="text-[11px] underline text-slate-400 hover:text-indigo-600 block mt-1 transition-colors"
                  >
-                    {isTranslating ? 'Traduction en cours...' : `Traduire en ${APP_LANGUAGES.find(l => l.code === targetLanguage)?.label || targetLanguage.toUpperCase()}`}
+                    {isTranslating ? t('translating_in_progress') : t('translate_to', { lang: APP_LANGUAGES.find(l => l.code === targetLanguage)?.label || targetLanguage.toUpperCase() })}
                  </button>
                )}
             </div>

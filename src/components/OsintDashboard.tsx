@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Radar, Play, DownloadCloud, AlertTriangle, Building2, ExternalLink, Sparkles, Mail, CheckCircle2, ChevronRight, MapPin, DollarSign, Activity, Clock } from "lucide-react";
 
 type LeadStatus = "NEW" | "OUTREACH_SENT" | "DEMO_BOOKED" | "CLOSED";
@@ -54,6 +55,7 @@ const MOCK_LEADS: OsintLead[] = [
 ];
 
 export function OsintDashboard() {
+  const t = useTranslations('OsintDashboard');
   const [isScraping, setIsScraping] = useState(false);
   const [leads, setLeads] = useState<OsintLead[]>(MOCK_LEADS);
   const [selectedLead, setSelectedLead] = useState<string | null>(null);
@@ -91,9 +93,9 @@ export function OsintDashboard() {
 
   const getStatusBadge = (status: string) => {
     switch(status) {
-      case "NEW": return <span className="px-2 py-1 text-[10px] uppercase font-bold text-blue-400 bg-blue-400/10 rounded-sm">Nouveau</span>;
-      case "OUTREACH_SENT": return <span className="px-2 py-1 text-[10px] uppercase font-bold text-amber-400 bg-amber-400/10 rounded-sm">Pitch Envoyé</span>;
-      case "DEMO_BOOKED": return <span className="px-2 py-1 text-[10px] uppercase font-bold text-emerald-400 bg-emerald-400/10 rounded-sm">Démo Bookée</span>;
+      case "NEW": return <span className="px-2 py-1 text-[10px] uppercase font-bold text-blue-400 bg-blue-400/10 rounded-sm">{t('statusNew')}</span>;
+      case "OUTREACH_SENT": return <span className="px-2 py-1 text-[10px] uppercase font-bold text-amber-400 bg-amber-400/10 rounded-sm">{t('statusPitchSent')}</span>;
+      case "DEMO_BOOKED": return <span className="px-2 py-1 text-[10px] uppercase font-bold text-emerald-400 bg-emerald-400/10 rounded-sm">{t('statusDemoBooked')}</span>;
       default: return null;
     }
   };
@@ -111,7 +113,7 @@ export function OsintDashboard() {
             <div className="p-2 bg-cyan-500/20 rounded-xl border border-cyan-500/30">
               <Radar className="w-6 h-6 text-cyan-400" />
             </div>
-            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight drop-shadow-sm">La Vigie (OSINT)</h1>
+            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight drop-shadow-sm">{t('title')}</h1>
           </div>
           <p className="text-slate-400 font-jakarta max-w-xl text-sm leading-relaxed">
             Machine de génération de leads automatisée. Scrape les données ouvertes (MAPAQ, Inspections) 
@@ -121,7 +123,7 @@ export function OsintDashboard() {
 
         <div className="flex items-center gap-3 z-10">
           <div className="flex flex-col bg-black/40 border border-white/5 rounded-xl px-4 py-2 text-right">
-             <span className="text-xs text-slate-500 font-plex-mono uppercase tracking-widest">Base de Données</span>
+             <span className="text-xs text-slate-500 font-plex-mono uppercase tracking-widest">{t('database')}</span>
              <span className="text-white font-bold font-outfit">{leads.length} Leads Actifs</span>
           </div>
 
@@ -187,7 +189,7 @@ export function OsintDashboard() {
            {!activeLead ? (
              <div className="flex-1 flex flex-col items-center justify-center text-center opacity-50">
                <Radar className="w-16 h-16 text-cyan-500 mb-6 opacity-40 animate-pulse" />
-               <p className="font-outfit text-white text-lg">Sélectionnez un signal OSINT</p>
+               <p className="font-outfit text-white text-lg">{t('selectSignal')}</p>
                <p className="text-sm text-slate-400 mt-2 max-w-sm">
                  Cliquez sur un prospect dans le flux de gauche pour analyser son infraction et générer un e-mail de vente RiveHub.
                </p>
@@ -222,19 +224,19 @@ export function OsintDashboard() {
                  </h3>
                  <div className="grid grid-cols-2 gap-4">
                    <div className="space-y-1">
-                     <span className="text-[10px] uppercase font-plex-mono text-slate-500 font-bold tracking-widest">Type D'événement</span>
+                     <span className="text-[10px] uppercase font-plex-mono text-slate-500 font-bold tracking-widest">{t('eventType')}</span>
                      <p className="text-white text-sm font-jakarta">{activeLead.triggerEvent}</p>
                    </div>
                    {activeLead.fineAmount && (
                      <div className="space-y-1">
-                       <span className="text-[10px] uppercase font-plex-mono text-slate-500 font-bold tracking-widest">Amende Potentielle</span>
+                       <span className="text-[10px] uppercase font-plex-mono text-slate-500 font-bold tracking-widest">{t('potentialFine')}</span>
                        <p className="text-red-300 text-sm font-jakarta font-bold flex items-center">
                          <DollarSign className="w-4 h-4" /> {activeLead.fineAmount.toLocaleString('fr-CA')} CAD
                        </p>
                      </div>
                    )}
                    <div className="col-span-2 space-y-1 mt-2">
-                     <span className="text-[10px] uppercase font-plex-mono text-slate-500 font-bold tracking-widest">Note d'inspection / Contexte</span>
+                     <span className="text-[10px] uppercase font-plex-mono text-slate-500 font-bold tracking-widest">{t('inspectionNote')}</span>
                      <div className="p-3 bg-black/40 border border-white/5 rounded-xl">
                        <p className="text-slate-300 text-sm italic">"{activeLead.details}"</p>
                      </div>
@@ -264,7 +266,7 @@ export function OsintDashboard() {
                  {generatingPitch ? (
                    <div className="flex-1 flex flex-col items-center justify-center text-center">
                      <Sparkles className="w-8 h-8 text-indigo-400 animate-spin mb-3" />
-                     <p className="text-sm font-plex-mono text-indigo-300">Analyse de l'infraction et construction de l'empathie commerciale...</p>
+                     <p className="text-sm font-plex-mono text-indigo-300">{t('analyzingPitch')}</p>
                    </div>
                  ) : (
                    <div className="flex-1 flex flex-col">

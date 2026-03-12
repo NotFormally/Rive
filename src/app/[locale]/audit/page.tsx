@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Search, MapPin, Star, Image, Globe, MessageSquareText, ArrowRight } from "lucide-react";
 import SentimentBreakdown from "@/components/SentimentBreakdown";
+import { useTranslations } from "next-intl";
 import type { AggregatedSentiment } from "@/lib/review-sentiment";
 
 // =============================================================================
@@ -34,6 +35,7 @@ type AuditResult = {
 };
 
 export default function AuditPage() {
+  const t = useTranslations("Audit");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,22 +58,22 @@ export default function AuditPage() {
       });
 
       if (res.status === 429) {
-        setError("Too many requests. Please try again in an hour.");
+        setError(t("error_rate_limit"));
         return;
       }
       if (res.status === 404) {
-        setError("No restaurant found at this address. Try a more specific search.");
+        setError(t("error_not_found"));
         return;
       }
       if (!res.ok) {
-        setError("Something went wrong. Please try again.");
+        setError(t("error_generic"));
         return;
       }
 
       const data = await res.json();
       setResult(data);
     } catch {
-      setError("Network error. Please check your connection.");
+      setError(t("error_network"));
     } finally {
       setLoading(false);
     }
@@ -83,15 +85,14 @@ export default function AuditPage() {
       <div className="max-w-3xl mx-auto px-4 pt-20 pb-12 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-6">
           <Globe className="w-3.5 h-3.5" />
-          Free Restaurant Visibility Audit
+          {t("badge_title")}
         </div>
 
         <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-          How visible is your restaurant?
+          {t("hero_title")}
         </h1>
         <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-          Enter your restaurant name or address and get an instant visibility score
-          with actionable insights.
+          {t("hero_description")}
         </p>
 
         {/* Search form */}
@@ -102,7 +103,7 @@ export default function AuditPage() {
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="Restaurant name or address..."
+              placeholder={t("placeholder_address")}
               className="w-full pl-12 pr-4 py-4 rounded-2xl bg-card border border-border/50 text-base focus:outline-none focus:border-primary/50 transition-colors"
               required
             />
@@ -112,7 +113,7 @@ export default function AuditPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email (optional — get full report)"
+              placeholder={t("placeholder_email")}
               className="flex-1 px-4 py-3 rounded-xl bg-card border border-border/50 text-sm focus:outline-none focus:border-primary/50 transition-colors"
             />
             <button
@@ -125,7 +126,7 @@ export default function AuditPage() {
               ) : (
                 <Search className="w-4 h-4" />
               )}
-              {loading ? "Analyzing..." : "Analyze"}
+              {loading ? t("btn_analyzing") : t("btn_analyze")}
             </button>
           </div>
         </form>
@@ -166,35 +167,35 @@ export default function AuditPage() {
               </span>
               <span className="text-lg text-muted-foreground">/100</span>
             </div>
-            <p className="text-sm text-muted-foreground">Visibility Score</p>
+            <p className="text-sm text-muted-foreground">{t("score_label")}</p>
           </div>
 
           {/* Score breakdown */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <ScoreCard
               icon={<Globe className="w-5 h-5" />}
-              label="Google Business Profile"
+              label={t("score_gbp")}
               score={result.scores.gbpScore}
               details={[
-                `${result.restaurant.photosCount} photos`,
-                `${Object.values(result.restaurant.attributes).filter(Boolean).length} attributes`,
+                t("photos_count", { count: result.restaurant.photosCount }),
+                t("attributes_count", { count: Object.values(result.restaurant.attributes).filter(Boolean).length }),
               ]}
             />
             <ScoreCard
               icon={<Star className="w-5 h-5" />}
-              label="Reviews"
+              label={t("score_reviews")}
               score={result.scores.reviewScore}
               details={[
-                `${result.restaurant.rating} rating`,
-                `${result.restaurant.reviewCount} reviews`,
+                t("rating_value", { rating: result.restaurant.rating }),
+                t("reviews_count", { count: result.restaurant.reviewCount }),
               ]}
             />
             <ScoreCard
               icon={<Image className="w-5 h-5" />}
-              label="Competitive Position"
+              label={t("score_competitive")}
               score={result.scores.competitiveScore}
               details={[
-                `vs ${result.competitors.length} nearby`,
+                t("competitors_count", { count: result.competitors.length }),
               ]}
             />
           </div>
@@ -205,7 +206,7 @@ export default function AuditPage() {
               <div className="flex items-center gap-2 mb-4">
                 <MessageSquareText className="w-4 h-4 text-muted-foreground" />
                 <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                  Review Sentiment
+                  {t("sentiment_title")}
                 </h2>
               </div>
               <SentimentBreakdown sentiment={result.sentiment} />
@@ -215,17 +216,16 @@ export default function AuditPage() {
           {/* CTA */}
           <div className="bg-gradient-to-r from-primary/10 to-cyan-500/10 rounded-[2rem] border border-primary/20 p-8 text-center">
             <h3 className="text-lg font-bold mb-2">
-              Want the full picture?
+              {t("cta_title")}
             </h3>
             <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-              RiveHub combines online visibility with your actual operational data — food costs,
-              prep accuracy, waste tracking, team engagement — into a single Health Score.
+              {t("cta_description")}
             </p>
             <a
               href="/signup"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
             >
-              Get Your Full Health Score
+              {t("cta_button")}
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

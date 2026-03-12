@@ -139,9 +139,14 @@ function LoginForm() {
   );
 }
 
+function LoadingFallback() {
+  const t = useTranslations("Common");
+  return <div className="min-h-screen bg-background noise-bg flex items-center justify-center">{t("loading")}</div>;
+}
+
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-background noise-bg flex items-center justify-center">Loading...</div>}>
+    <Suspense fallback={<LoadingFallback />}>
       <LoginForm />
     </Suspense>
   );

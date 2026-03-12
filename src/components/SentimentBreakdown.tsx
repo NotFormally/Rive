@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import type { AggregatedSentiment } from '@/lib/review-sentiment';
 
 type Props = {
@@ -14,6 +15,7 @@ const ASPECT_LABELS: Record<string, string> = {
 };
 
 export default function SentimentBreakdown({ sentiment }: Props) {
+  const t = useTranslations('SentimentBreakdown');
   const { aspects, distribution, topPositive, topNegative, averageScore, reviewCount } = sentiment;
 
   if (reviewCount === 0) {
@@ -31,11 +33,12 @@ export default function SentimentBreakdown({ sentiment }: Props) {
       {/* Overall sentiment bar */}
       <div>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-muted-foreground">Overall Sentiment</span>
+          <span className="text-xs text-muted-foreground">{t('overallSentiment')}</span>
           <span className={`text-sm font-semibold ${
-            averageScore > 0.1 ? 'text-emerald-400' : averageScore < -0.1 ? 'text-red-400' : 'text-amber-400'
+            averageScore > 0.1 ? 'text-emerald-400' : averageScore < -0.1 ? 'text-red-400' : 'text-amber-400' // i18n-ignore
           }`}>
-            {averageScore > 0.1 ? 'Positive' : averageScore < -0.1 ? 'Negative' : 'Neutral'}
+            {/* i18n-ignore */}
+            {averageScore > 0.1 ? t('positive') : averageScore < -0.1 ? t('negative') : t('neutral')}
           </span>
         </div>
         {total > 0 && (
@@ -63,7 +66,7 @@ export default function SentimentBreakdown({ sentiment }: Props) {
 
       {/* Aspect scores */}
       <div className="space-y-3">
-        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">By Aspect</p>
+        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{t('byAspect')}</p>
         {(Object.entries(aspects) as [string, number | null][]).map(([key, score]) => {
           if (score === null) return null;
           const pct = ((score + 1) / 2) * 100; // -1..1 → 0..100
@@ -72,7 +75,7 @@ export default function SentimentBreakdown({ sentiment }: Props) {
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs">{ASPECT_LABELS[key] || key}</span>
                 <span className={`text-xs font-mono ${
-                  score > 0.1 ? 'text-emerald-400' : score < -0.1 ? 'text-red-400' : 'text-amber-400'
+                  score > 0.1 ? 'text-emerald-400' : score < -0.1 ? 'text-red-400' : 'text-amber-400' // i18n-ignore
                 }`}>
                   {score > 0 ? '+' : ''}{score.toFixed(2)}
                 </span>
@@ -80,7 +83,7 @@ export default function SentimentBreakdown({ sentiment }: Props) {
               <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
                 <div
                   className={`h-full rounded-full transition-all duration-500 ${
-                    score > 0.1 ? 'bg-emerald-500' : score < -0.1 ? 'bg-red-500' : 'bg-amber-500'
+                    score > 0.1 ? 'bg-emerald-500' : score < -0.1 ? 'bg-red-500' : 'bg-amber-500' // i18n-ignore
                   }`}
                   style={{ width: `${pct}%` }}
                 />
@@ -94,7 +97,7 @@ export default function SentimentBreakdown({ sentiment }: Props) {
       <div className="grid grid-cols-2 gap-4">
         {topPositive.length > 0 && (
           <div>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Top Positive</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">{t('topPositive')}</p>
             <div className="flex flex-wrap gap-1">
               {topPositive.map((w) => (
                 <span key={w} className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">
@@ -106,7 +109,7 @@ export default function SentimentBreakdown({ sentiment }: Props) {
         )}
         {topNegative.length > 0 && (
           <div>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Top Negative</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">{t('topNegative')}</p>
             <div className="flex flex-wrap gap-1">
               {topNegative.map((w) => (
                 <span key={w} className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-400">

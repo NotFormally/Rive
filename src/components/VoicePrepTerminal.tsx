@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Mic, StopCircle, RefreshCw, Send, CheckCircle2, Sparkles, Wand2, Volume2, History, ChefHat, FileText, Settings, AlertTriangle } from "lucide-react";
 import { useAudioRecorder } from "react-use-audio-recorder";
+import { useTranslations } from "next-intl";
 
 type RecordState = "idle" | "listening" | "processing" | "success" | "error";
 
@@ -21,6 +22,7 @@ interface ExtractedRecipe {
 }
 
 export function VoicePrepTerminal() {
+  const t = useTranslations("VoicePrepTerminal");
   const [recordState, setRecordState] = useState<RecordState>("idle");
   const [transcript, setTranscript] = useState("");
   const [extractedData, setExtractedData] = useState<ExtractedRecipe | null>(null);
@@ -112,7 +114,7 @@ export function VoicePrepTerminal() {
             <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
               <Mic className="w-5 h-5 text-orange-400" />
             </div>
-            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight">Dictée Vocale IA</h1>
+            <h1 className="text-3xl font-outfit font-bold text-white tracking-tight">{t("title")}</h1>
           </div>
           <p className="text-slate-400 font-jakarta max-w-xl">
             Dictez vos recettes ou votre liste de prep. L'IA RiveHub (Whisper + Claude 3.5 Sonnet) 
@@ -234,7 +236,7 @@ export function VoicePrepTerminal() {
                             {item.isCCP ? <ChefHat className="w-5 h-5 text-amber-400" /> : <div className="w-2 h-2 rounded-full bg-indigo-400 ml-1.5" />}
                             <span className={`font-semibold ${item.isCCP ? 'text-amber-200' : 'text-slate-200'}`}>{item.name}</span>
                           </div>
-                          {item.isCCP && <span className="text-[10px] inline-block font-bold bg-amber-500 text-amber-950 px-2 py-0.5 mt-1 rounded-sm w-fit">POINT CRITIQUE (CCP)</span>}
+                          {item.isCCP && <span className="text-[10px] inline-block font-bold bg-amber-500 text-amber-950 px-2 py-0.5 mt-1 rounded-sm w-fit">{t("ccp_badge")}</span>}
                         </div>
                         <div className="text-right whitespace-nowrap">
                           <span className="font-plex-mono font-bold text-lg text-white">{item.quantity}</span>
@@ -248,7 +250,7 @@ export function VoicePrepTerminal() {
                 {/* Steps */}
                 {extractedData.steps && extractedData.steps.length > 0 && (
                   <div className="space-y-3 pt-4">
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Étapes de Préparation</h4>
+                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider">{t("prep_steps")}</h4>
                     <div className="space-y-2">
                       {extractedData.steps.map((step, idx) => (
                         <div key={idx} className="p-3 bg-black/20 border border-white/5 rounded-xl text-slate-300 text-sm font-jakarta leading-relaxed">
@@ -269,7 +271,7 @@ export function VoicePrepTerminal() {
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center text-center opacity-40">
                 <Volume2 className="w-12 h-12 text-indigo-300 mb-4" />
-                <p className="text-indigo-200 font-jakarta max-w-xs">En attente de la dictée pour extraire la structure de la recette...</p>
+                <p className="text-indigo-200 font-jakarta max-w-xs">{t("waiting_dictation")}</p>
               </div>
             )}
             

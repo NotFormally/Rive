@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { HACCPAuditRunner, HACCPTemplateSchema } from "@/components/haccp/HACCPAuditRunner";
+import { useTranslations } from "next-intl";
 
 export default function HACCPAuditDemoPage() {
+  const t = useTranslations("SonarAuditDemo");
   const [submittedData, setSubmittedData] = useState<Record<string, any> | null>(null);
 
   // Example schema coming from the `audit_templates` DB table
@@ -49,12 +51,12 @@ export default function HACCPAuditDemoPage() {
               <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-emerald-400 text-3xl">
                  ✓
               </div>
-              <h2 className="text-2xl font-bold text-white font-outfit">Audit Télétransmis</h2>
-              <p className="text-white/70">Le log d'audit a été enregistré de façon immuable dans le journal de bord.</p>
+              <h2 className="text-2xl font-bold text-white font-outfit">{t("auditTransmitted")}</h2>
+              <p className="text-white/70">{t("auditLogImmutable")}</p>
            </div>
 
            <div className="bg-[#1A1A1A] border border-white/10 rounded-2xl p-6">
-              <h3 className="text-sm font-plex-mono text-white/50 uppercase tracking-wider mb-4">Payload (Simulé DB)</h3>
+              <h3 className="text-sm font-plex-mono text-white/50 uppercase tracking-wider mb-4">{t("payloadLabel")}</h3>
               <pre className="bg-black/50 p-4 rounded-xl text-emerald-400 text-sm overflow-x-auto border border-white/5">
                 {JSON.stringify(submittedData, null, 2)}
               </pre>
@@ -62,7 +64,7 @@ export default function HACCPAuditDemoPage() {
                  onClick={() => setSubmittedData(null)}
                  className="mt-6 w-full py-3 bg-white/5 hover:bg-white/10 text-white font-medium rounded-xl transition-colors"
                >
-                 Effectuer un nouveau contrôle
+                 {t("newControlBtn")}
               </button>
            </div>
         </div>

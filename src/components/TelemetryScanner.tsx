@@ -23,6 +23,7 @@ const TARGETS = [
 ];
 
 export function RadarLogo({ className = "" }: { className?: string }) {
+  const t = useTranslations("TelemetryScanner");
   const ref = useRef<SVGSVGElement>(null);
   const sweepRef = useRef<SVGGElement>(null);
   const afterglowRef = useRef<SVGGElement>(null);
@@ -101,7 +102,7 @@ export function RadarLogo({ className = "" }: { className?: string }) {
   });
 
   return (
-    <svg ref={ref} viewBox="-105 -105 210 250" className={className} aria-label="Rive sonar">
+    <svg ref={ref} viewBox="-105 -105 210 250" className={className} aria-label={t("sonarAriaLabel")}>
       <defs>
         {/* Phosphor glow filter */}
         <filter id="phosphorGlow" x="-50%" y="-50%" width="200%" height="200%">

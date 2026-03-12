@@ -30,7 +30,7 @@ export function DemoVideoSection() {
               </div>
               <div className="flex-1 flex justify-center">
                 <div className="bg-white/10 rounded-md px-4 py-1">
-                  <span className="font-plex-mono text-xs text-white/50">app.rivehub.com/dashboard</span>
+                  <span className="font-plex-mono text-xs text-white/50">{/* i18n-ignore */}app.rivehub.com/dashboard</span>
                 </div>
               </div>
             </div>

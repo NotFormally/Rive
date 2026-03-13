@@ -45,9 +45,11 @@ test.describe('Pricing Page', () => {
     const isVisible = await ctaButton.isVisible({ timeout: 5_000 }).catch(() => false);
     if (!isVisible) return;
 
-    // The CheckoutButton calls window.location.assign to /signup when not logged in.
-    // Wait for auth loading to finish before clicking (authLoading guard)
-    await page.waitForTimeout(2_000);
+    // CheckoutButton.handleCheckout bails early when authLoading=true.
+    // Wait for Supabase auth to settle (network idle) so authLoading=false before clicking.
+    await page.waitForLoadState('networkidle', { timeout: 8_000 }).catch(() => {});
+    await page.waitForTimeout(500);
+
     await ctaButton.click({ force: true });
 
     // Should navigate to /signup?plan=... (unauthenticated user flow)

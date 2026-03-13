@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "اتصالات بلوتوث",
     "disconnected": "قطع شده"
   },
-  "OsintDashboard": {
-    "statusNew": "جدید",
-    "statusPitchSent": "پیشنهاد ارسال شد",
-    "statusDemoBooked": "نمایش رزرو شد",
-    "title": "La Vigie (OSINT)",
-    "database": "پایگاه داده",
-    "selectSignal": "یک سیگنال OSINT انتخاب کنید",
-    "eventType": "نوع رویداد",
-    "potentialFine": "جریمه احتمالی",
-    "inspectionNote": "یادداشت بازرسی / متن",
-    "analyzingPitch": "تجزیه نقض و ایجاد همدلی تجاری..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "پیش‌فروش‌های شناسایی‌شده (پخش زنده)",
-    "draftMessage": "پیام پیش‌نویس",
-    "selectTarget": "انتخاب یک هدف"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "احساس کلی",
     "byAspect": "بر اساس جنبه",

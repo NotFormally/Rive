@@ -77,3 +77,40 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# ============================================
+# CONFIDENTIAL — Never commit to public repo
+# ============================================
+
+# OSINT / La Vigie (internal lead gen — STRICTLY SECRET)
+osint_engine/
+scripts/osint/
+
+# Business strategy, planning & fundraising
+docs/business_planning/
+docs/strategy/
+docs/marketing/
+docs/research/
+docs/audit/
+docs/plans/
+docs/psychologie-strategie-shore.docx
+docs/~$*
+
+# Strategic planning documents (root level)
+RiveHub_Plan_Implementation_HACCP_Mars2026.*
+compass_artifact_wf-*
+
+# Public-facing files with sensitive content
+public/project-statement.html
+public/simulateur_revenus.html
+
+# Claude Code internal state & agents
+.claude/SESSION_CHECKPOINT.md
+.claude/agents/
+AGENT_INSTRUCTIONS.md
+
+# Build artifacts from sub-projects
+mapaq-logbook/.next/
+
+# Word temp/lock files
+~$*

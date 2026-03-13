@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Συνδέσεις Bluetooth",
     "disconnected": "Αποσυνδεδεμένο"
   },
-  "OsintDashboard": {
-    "statusNew": "Νέο",
-    "statusPitchSent": "Πρόταση Απεστάλη",
-    "statusDemoBooked": "Demo Κρατήθηκε",
-    "title": "La Vigie (OSINT)",
-    "database": "Βάση Δεδομένων",
-    "selectSignal": "Επιλέξτε ένα OSINT Σήμα",
-    "eventType": "Τύπος Συμβάντος",
-    "potentialFine": "Πιθανό Πρόστιμο",
-    "inspectionNote": "Σημείωση Επιθεώρησης / Πλαίσιο",
-    "analyzingPitch": "Ανάλυση παραβίασης και κατασκευή εμπορικής συμπάθειας..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Αναγνωρισμένες Προοπτικές (Live Feed)",
-    "draftMessage": "Σχέδιο Μηνύματος",
-    "selectTarget": "Επιλέξτε ένα στόχο"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Συνολικό Συναίσθημα",
     "byAspect": "Ανά Πτυχή",

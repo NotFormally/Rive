@@ -2050,24 +2050,6 @@
     "bluetoothConnections": "اتصالات البلوتوث",
     "disconnected": "غير متصل"
   },
-  "OsintDashboard": {
-    "statusNew": "جديد",
-    "statusPitchSent": "العرض مرسل",
-    "statusDemoBooked": "عرض توضيحي مؤجل",
-    "title": "La Vigie (OSINT)",
-    "database": "قاعدة البيانات",
-    "selectSignal": "اختر إشارة OSINT",
-    "eventType": "نوع الحدث",
-    "potentialFine": "الغرامة المحتملة",
-    "inspectionNote": "ملاحظة الفحص / السياق",
-    "analyzingPitch": "جاري تحليل المخالفة وبناء التعاطف التجاري..."
-  },
-  "OSINTPanel": {
-    "title": "مراقبة OSINT",
-    "prospectsTitle": "العملاء المحتملين المحددين (البث المباشر)",
-    "draftMessage": "رسالة مسودة",
-    "selectTarget": "اختر هدفاً"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "المشاعر العامة",
     "byAspect": "حسب الجانب",

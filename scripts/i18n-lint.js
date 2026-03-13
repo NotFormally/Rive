@@ -44,7 +44,7 @@ const IGNORE_PATTERNS = [
   /^(text|number|email|password|file|submit|checkbox|radio|hidden|date|time)$/, // input types
   /^(GET|POST|PUT|DELETE|PATCH)$/, // HTTP methods
   /^(id|name|class|className|style|href|src|alt|type|value|key|ref|onClick|onChange|onSubmit)$/, // React/HTML attrs
-  /^(Rive|Hub|RiveHub|HACCP|POS|Stripe|Toast|Square|Supabase|Vercel|Claude|OSINT|CCP|CSV|PDF|QR|AI|IA)$/, // Brand names & acronyms
+  /^(Rive|Hub|RiveHub|HACCP|POS|Stripe|Toast|Square|Supabase|Vercel|Claude|CCP|CSV|PDF|QR|AI|IA)$/, // Brand names & acronyms
   /^(application\/json|text\/plain|text\/csv|image\/\*)$/, // MIME types
   /^[a-z]{2}(-[A-Z]{2})?$/, // Locale codes
   /^\*$/, // asterisk alone

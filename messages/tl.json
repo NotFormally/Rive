@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth Connections",
     "disconnected": "Hindi Konektado"
   },
-  "OsintDashboard": {
-    "statusNew": "Bago",
-    "statusPitchSent": "Pitch Ipinadala",
-    "statusDemoBooked": "Demo Naka-book",
-    "title": "La Vigie (OSINT)",
-    "database": "Database",
-    "selectSignal": "Pumili ng OSINT Signal",
-    "eventType": "Uri ng Kaganapan",
-    "potentialFine": "Posibleng Multa",
-    "inspectionNote": "Tala sa Inspeksyon / Konteksto",
-    "analyzingPitch": "Sinusuri ang paglabag at binubuo ang commercial empathy..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Mga Natukoy na Prospect (Live Feed)",
-    "draftMessage": "Draft na Mensahe",
-    "selectTarget": "Pumili ng target"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Pangkalahatang Sentimiento",
     "byAspect": "Ayon sa Aspeto",

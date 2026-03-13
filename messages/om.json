@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Walqabii Bluetooth",
     "disconnected": "Walqabii Kutame"
   },
-  "OsintDashboard": {
-    "statusNew": "Haaraa",
-    "statusPitchSent": "Pitch Ergaa Galme",
-    "statusDemoBooked": "Demo Boqde",
-    "title": "La Vigie (OSINT)",
-    "database": "Kuusaa Deetaa",
-    "selectSignal": "OSINT Signal Filachuuf",
-    "eventType": "Gosa Taatee",
-    "potentialFine": "Multa Walaala Ture",
-    "inspectionNote": "Yaadannoo Sakatta / Haala",
-    "analyzingPitch": "Cabsaa xiinxaluu fi miiraa daldala ijaaruu jira..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Prospect Identified (Live Feed)",
-    "draftMessage": "Ergaa Draft",
-    "selectTarget": "Target Filadhu"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Miiraa Gumaachuu Waliigalaa",
     "byAspect": "Facaasuu Hundaan",

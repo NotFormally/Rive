@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Àwọn Ìpẹ̀jẹ̀ Bluetooth",
     "disconnected": "Ti yẹ̀wù"
   },
-  "OsintDashboard": {
-    "statusNew": "Tuntun",
-    "statusPitchSent": "Àsìkò Ti Rán",
-    "statusDemoBooked": "Demo Ti Ṣàkoso",
-    "title": "La Vigie (OSINT)",
-    "database": "Àkójọ̀ Àlàyé",
-    "selectSignal": "Yàn OSINT Signal",
-    "eventType": "Irú Ìsiṣẹ̀",
-    "potentialFine": "Ìjẹ́ Alaigbórán Ti O Lè Ṣe",
-    "inspectionNote": "Àkiyèsi Ìwádìí / Àpẹ̀rẹ",
-    "analyzingPitch": "N ṣe ìwádìí ìdíbo àti ṣíṣe ìfẹ́ràn ajòó..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Ìmọ̀",
-    "prospectsTitle": "Àwọn Olùdájú Tí A Ṣe Àfihàn (Ìfúfú Ìṣẹ̀jú-Àkòkò)",
-    "draftMessage": "Ìròhìn Ajẹ",
-    "selectTarget": "Yan irinṣẹ kan"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Ìfarada Ìmò Inú Gbogbo",
     "byAspect": "Nípasẹ Ẹ̀bẹ̀",

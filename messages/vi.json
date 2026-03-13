@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Kết nối Bluetooth",
     "disconnected": "Đã ngắt kết nối"
   },
-  "OsintDashboard": {
-    "statusNew": "Mới",
-    "statusPitchSent": "Đã gửi đề xuất",
-    "statusDemoBooked": "Đã đặt demo",
-    "title": "La Vigie (OSINT)",
-    "database": "Cơ sở dữ liệu",
-    "selectSignal": "Chọn tín hiệu OSINT",
-    "eventType": "Loại sự kiện",
-    "potentialFine": "Mức phạt tiềm năng",
-    "inspectionNote": "Ghi chú kiểm tra / Ngữ cảnh",
-    "analyzingPitch": "Phân tích vi phạm và xây dựng sự hiểu biết thương mại..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Khách hàng Tiềm năng Được Xác định (Luồng Trực tiếp)",
-    "draftMessage": "Bản Nháp Tin Nhắn",
-    "selectTarget": "Chọn một mục tiêu"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Cảm xúc Tổng thể",
     "byAspect": "Theo Khía cạnh",

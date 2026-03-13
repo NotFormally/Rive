@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "블루투스 연결",
     "disconnected": "연결 해제됨"
   },
-  "OsintDashboard": {
-    "statusNew": "신규",
-    "statusPitchSent": "제안 발송",
-    "statusDemoBooked": "데모 예약됨",
-    "title": "La Vigie (OSINT)",
-    "database": "데이터베이스",
-    "selectSignal": "OSINT 신호 선택",
-    "eventType": "이벤트 유형",
-    "potentialFine": "예상 과태료",
-    "inspectionNote": "점검 메모 / 맥락",
-    "analyzingPitch": "위반 사항을 분석하고 상업적 공감대를 형성 중..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "식별된 잠재 고객 (실시간 피드)",
-    "draftMessage": "임시 메시지",
-    "selectTarget": "대상 선택"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "전체 감정",
     "byAspect": "항목별",

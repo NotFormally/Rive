@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth kapcsolatok",
     "disconnected": "Lecsatlakozva"
   },
-  "OsintDashboard": {
-    "statusNew": "Új",
-    "statusPitchSent": "Ajánlat küldve",
-    "statusDemoBooked": "Bemutató foglalva",
-    "title": "La Vigie (OSINT)",
-    "database": "Adatbázis",
-    "selectSignal": "Válassz OSINT jelet",
-    "eventType": "Esemény típusa",
-    "potentialFine": "Lehetséges bírság",
-    "inspectionNote": "Ellenőrzési megjegyzés / Kontextus",
-    "analyzingPitch": "A szabálysértés elemzése és üzleti empátia kialakítása..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Azonosított Perspektívák (Élő Hírfolyam)",
-    "draftMessage": "Piszkozat Üzenet",
-    "selectTarget": "Válasszon célt"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Összes Hangulat",
     "byAspect": "Aspektus szerint",

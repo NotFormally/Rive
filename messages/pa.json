@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "ਬਲੂਟੁੱਥ ਕਨੈਕਸ਼ਨ",
     "disconnected": "ਡਿਸਕਨਕਟ ਕੀਤਾ ਗਿਆ"
   },
-  "OsintDashboard": {
-    "statusNew": "ਨਵਾਂ",
-    "statusPitchSent": "ਪ੍ਰਸਤਾਵ ਭੇਜਿਆ",
-    "statusDemoBooked": "ਡੇਮੋ ਬੁਕ ਕੀਤਾ",
-    "title": "La Vigie (OSINT)",
-    "database": "ਡਾਟਾ ਬੇਸ",
-    "selectSignal": "ਇੱਕ OSINT ਸਿਗਨਲ ਚੁਣੋ",
-    "eventType": "ਘਟਨਾ ਦੀ ਕਿਸਮ",
-    "potentialFine": "ਸੰਭਾਵੀ ਜੁਰਮਾਨਾ",
-    "inspectionNote": "ਜਾਂਚ ਨੋਟ / ਪ੍ਰਸੰਗ",
-    "analyzingPitch": "ਉਲੰਘਨ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਵਪਾਰਕ ਹਮਦਰਦੀ ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT ਵਿਜੀਲੈਂਸ",
-    "prospectsTitle": "ਪਛਾਣੇ ਗਏ ਸੰਭਾਵਨਾਵਾਂ (ਲਾਈਵ ਫੀਡ)",
-    "draftMessage": "ਡ੍ਰਾਫਟ ਸੁਨੇਹਾ",
-    "selectTarget": "ਨਿਸ਼ਾਨਾ ਚੁਣੋ"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "ਸਮੁੱਚੀ ਭਾਵਨਾ",
     "byAspect": "ਪਹਿਲੂ ਦੇ ਅਨੁਸਾਰ",

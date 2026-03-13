@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Ceanglaichean Bluetooth",
     "disconnected": "Sgaraichte"
   },
-  "OsintDashboard": {
-    "statusNew": "Ùr",
-    "statusPitchSent": "Pitch Air a Chuir",
-    "statusDemoBooked": "Demo air a Chlàradh",
-    "title": "La Vigie (OSINT)",
-    "database": "Stòr-dàta",
-    "selectSignal": "Tagh Comhara OSINT",
-    "eventType": "Seòrsa Tachartas",
-    "potentialFine": "Maol a dh'fhaodar a thairgse",
-    "inspectionNote": "Brath Sgrùdaidh / Co-theacsa",
-    "analyzingPitch": "A' mion-sgrùdadh na bhrisidh agus a' togail co-fhaireachdainn malairteach..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Cleasaichean Aithnichte (Sruth Beò)",
-    "draftMessage": "Dreasachaidh Sgeul",
-    "selectTarget": "Tagh targaid"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Mothachadh Iomlan",
     "byAspect": "A rèir Taobh",

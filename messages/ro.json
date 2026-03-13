@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Conexiuni Bluetooth",
     "disconnected": "Deconectat"
   },
-  "OsintDashboard": {
-    "statusNew": "Nou",
-    "statusPitchSent": "Propunere Trimisă",
-    "statusDemoBooked": "Demo Programată",
-    "title": "La Vigie (OSINT)",
-    "database": "Bază de Date",
-    "selectSignal": "Selectează un Semnal OSINT",
-    "eventType": "Tip Eveniment",
-    "potentialFine": "Amendă Potențială",
-    "inspectionNote": "Notă Inspecție / Context",
-    "analyzingPitch": "Se analizează încălcarea și se construiește empatia comercială..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Perspective Identificate (Feed Live)",
-    "draftMessage": "Mesaj Ciornă",
-    "selectTarget": "Selectați o țintă"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Sentiment General",
     "byAspect": "După Aspect",

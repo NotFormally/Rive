@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "ብሉቱዝ ግንኙነቶች",
     "disconnected": "ገንኙነት ተቋርጧል"
   },
-  "OsintDashboard": {
-    "statusNew": "አዲስ",
-    "statusPitchSent": "ሐሳብ ተላልፏል",
-    "statusDemoBooked": "ማሳያ የተቀዳ",
-    "title": "La Vigie (OSINT)",
-    "database": "ውሂብ ቁጠባ",
-    "selectSignal": "OSINT ምልክት ይምረጡ",
-    "eventType": "ዝርዝር ዓይነት",
-    "potentialFine": "ሊሆን የሚችለው ቅጣት",
-    "inspectionNote": "ምርመራ ማስታወሻ / አውድ",
-    "analyzingPitch": "违法ድንገት ወይም ሚዛን ይተንትን..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT ፍተሻ",
-    "prospectsTitle": "የታወቁ ደንበኞች (ライভ feed)",
-    "draftMessage": "ረቂቅ መልእክት",
-    "selectTarget": "ግብ ይምረጡ"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "አጠቃላይ ስሜት",
     "byAspect": "በገጽታ",

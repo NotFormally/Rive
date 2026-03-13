@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth подключения",
     "disconnected": "Отключено"
   },
-  "OsintDashboard": {
-    "statusNew": "Новое",
-    "statusPitchSent": "Предложение отправлено",
-    "statusDemoBooked": "Демонстрация запланирована",
-    "title": "La Vigie (OSINT)",
-    "database": "База данных",
-    "selectSignal": "Выберите сигнал OSINT",
-    "eventType": "Тип события",
-    "potentialFine": "Потенциальный штраф",
-    "inspectionNote": "Заметка проверки / Контекст",
-    "analyzingPitch": "Анализ нарушения и создание коммерческого сочувствия..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Выявленные перспективы (Прямая трансляция)",
-    "draftMessage": "Черновик сообщения",
-    "selectTarget": "Выберите цель"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Общее настроение",
     "byAspect": "По аспектам",

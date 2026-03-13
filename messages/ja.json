@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth接続",
     "disconnected": "接続解除"
   },
-  "OsintDashboard": {
-    "statusNew": "新規",
-    "statusPitchSent": "提案送信済み",
-    "statusDemoBooked": "デモ予約済み",
-    "title": "La Vigie（OSINT）",
-    "database": "データベース",
-    "selectSignal": "OSINTシグナルを選択",
-    "eventType": "イベントタイプ",
-    "potentialFine": "潜在的な罰金",
-    "inspectionNote": "検査メモ / コンテキスト",
-    "analyzingPitch": "違反を分析し、商業的共感を構築中..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT ヴィジー",
-    "prospectsTitle": "特定された見込み客（ライブフィード）",
-    "draftMessage": "下書きメッセージ",
-    "selectTarget": "ターゲットを選択"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "全体的なセンチメント",
     "byAspect": "側面別",

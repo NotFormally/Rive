@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Cunnessioni Bluetooth",
     "disconnected": "Discunnessa"
   },
-  "OsintDashboard": {
-    "statusNew": "Novu",
-    "statusPitchSent": "Presentazione Mandata",
-    "statusDemoBooked": "Demostrazioni Prenotate",
-    "title": "La Vigie (OSINT)",
-    "database": "Banca di Dati",
-    "selectSignal": "Selezziunate un Signale OSINT",
-    "eventType": "Tipu d'Avvenimentu",
-    "potentialFine": "Multa Putenziale",
-    "inspectionNote": "Nota d'Ispezione / Cuntestu",
-    "analyzingPitch": "Analisa di a viulazione è custruzzione di empatia cummerciale..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Prospettive Identificate (Flussu Vivu)",
-    "draftMessage": "Missaghju Bozza",
-    "selectTarget": "Selezziunate un obiettivu"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Sentimentu Generale",
     "byAspect": "Per Aspettu",

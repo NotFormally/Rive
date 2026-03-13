@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth-verbindingen",
     "disconnected": "Verbroken"
   },
-  "OsintDashboard": {
-    "statusNew": "Nieuw",
-    "statusPitchSent": "Pitch Verzonden",
-    "statusDemoBooked": "Demo Geboekt",
-    "title": "La Vigie (OSINT)",
-    "database": "Database",
-    "selectSignal": "Selecteer een OSINT-signaal",
-    "eventType": "Gebeurtenistype",
-    "potentialFine": "Mogelijke Boete",
-    "inspectionNote": "Inspectienotitie / Context",
-    "analyzingPitch": "Schending analyseren en commerciële empathie opbouwen..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Toezicht",
-    "prospectsTitle": "Geïdentificeerde Prospects (Live Feed)",
-    "draftMessage": "Conceptbericht",
-    "selectTarget": "Selecteer een doel"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Algemeen Sentiment",
     "byAspect": "Per Aspect",

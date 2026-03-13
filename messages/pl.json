@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Połączenia Bluetooth",
     "disconnected": "Rozłączony"
   },
-  "OsintDashboard": {
-    "statusNew": "Nowy",
-    "statusPitchSent": "Wiadomość wysłana",
-    "statusDemoBooked": "Demo zarezerwowane",
-    "title": "La Vigie (OSINT)",
-    "database": "Baza danych",
-    "selectSignal": "Wybierz sygnał OSINT",
-    "eventType": "Typ zdarzenia",
-    "potentialFine": "Potencjalna kara",
-    "inspectionNote": "Notatka inspekcji / Kontekst",
-    "analyzingPitch": "Analiza naruszenia i budowanie empatii handlowej..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Zidentyfikowani Potencjalni Klienci (Transmisja Przesyłana)",
-    "draftMessage": "Wiadomość Robocza",
-    "selectTarget": "Wybierz cel"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Całkowity Sentyment",
     "byAspect": "Według Aspektu",

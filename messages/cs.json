@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth Připojení",
     "disconnected": "Odpojeno"
   },
-  "OsintDashboard": {
-    "statusNew": "Nové",
-    "statusPitchSent": "Nabídka Odeslána",
-    "statusDemoBooked": "Demo Zarezervováno",
-    "title": "La Vigie (OSINT)",
-    "database": "Databáze",
-    "selectSignal": "Vyberte OSINT Signál",
-    "eventType": "Typ Události",
-    "potentialFine": "Možná Pokuta",
-    "inspectionNote": "Poznámka z Inspekce / Kontext",
-    "analyzingPitch": "Analýza porušení a budování obchodní empatie..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Identifikované prospekty (Live Feed)",
-    "draftMessage": "Koncept zprávy",
-    "selectTarget": "Vyberte cíl"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Celkový sentiment",
     "byAspect": "Podle aspektu",

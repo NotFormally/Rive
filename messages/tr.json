@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth Bağlantıları",
     "disconnected": "Bağlantı Kesildi"
   },
-  "OsintDashboard": {
-    "statusNew": "Yeni",
-    "statusPitchSent": "Teklif Gönderildi",
-    "statusDemoBooked": "Demo Rezerve Edildi",
-    "title": "La Vigie (OSINT)",
-    "database": "Veritabanı",
-    "selectSignal": "Bir OSINT Sinyali Seçin",
-    "eventType": "Olay Türü",
-    "potentialFine": "Olası Ceza",
-    "inspectionNote": "Denetim Notu / Bağlam",
-    "analyzingPitch": "İhlal analiz ediliyor ve ticari empati oluşturuluyor..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Tanımlanan Fırsatlar (Canlı Akış)",
-    "draftMessage": "Taslak Mesaj",
-    "selectTarget": "Bir hedef seçin"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Genel Duygu",
     "byAspect": "Yöne Göre",

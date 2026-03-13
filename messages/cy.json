@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Cysylltiadau Bluetooth",
     "disconnected": "Datgysylltiwyd"
   },
-  "OsintDashboard": {
-    "statusNew": "Newydd",
-    "statusPitchSent": "Cynnig Wedi'i Anfon",
-    "statusDemoBooked": "Arddangosiad Wedi'i Archebu",
-    "title": "La Vigie (OSINT)",
-    "database": "Cronfa Ddata",
-    "selectSignal": "Dewis Meddal OSINT",
-    "eventType": "Math o Ddigwyddiad",
-    "potentialFine": "Dirwy Bosib",
-    "inspectionNote": "Nodyn Archwiliad / Cyd-destun",
-    "analyzingPitch": "Yn dadansoddi'r toriad ac yn adeiladu cydymdeimlad masnachol..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Gwyliadwriaeth",
-    "prospectsTitle": "Rhagolygon Adnabyddedig (Ffrwd Fyw)",
-    "draftMessage": "Neges Ddrafft",
-    "selectTarget": "Dewiswch darged"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Teimlad Cyffredinol",
     "byAspect": "Yn ôl Agwedd",

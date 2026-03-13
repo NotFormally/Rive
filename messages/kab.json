@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Zeqṛiwin Bluetooth",
     "disconnected": "Yefreqq"
   },
-  "OsintDashboard": {
-    "statusNew": "Amaynut",
-    "statusPitchSent": "Azen-d Umecwaṛ",
-    "statusDemoBooked": "Demo Yemrawed",
-    "title": "La Vigie (OSINT)",
-    "database": "Asesfer n Talɣut",
-    "selectSignal": "Fren Asignal OSINT",
-    "eventType": "Anaw n Tiddin",
-    "potentialFine": "Tikerḍa Tezmer",
-    "inspectionNote": "Alɣu n Uberkad / Amawal",
-    "analyzingPitch": "Asfeṛsi n lexsara d ussiḥ n tsenselkiḍt tazemmanit..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Izerfan yettwaznazyen (Live Feed)",
-    "draftMessage": "Izen n umussnag",
-    "selectTarget": "Fren isenged"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Ssentiment amatu",
     "byAspect": "S umgal n wemsawal",

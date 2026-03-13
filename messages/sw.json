@@ -2042,24 +2042,6 @@
     "bluetoothConnections": "Unganisho la Bluetooth",
     "disconnected": "Haujeunganishwa"
   },
-  "OsintDashboard": {
-    "statusNew": "Mpya",
-    "statusPitchSent": "Pendekezo Limetumwa",
-    "statusDemoBooked": "Onyesho Limereservishwa",
-    "title": "La Vigie (OSINT)",
-    "database": "Hifadhi ya Data",
-    "selectSignal": "Chagua Ishara ya OSINT",
-    "eventType": "Aina ya Tukio",
-    "potentialFine": "Faini Inayowezekana",
-    "inspectionNote": "Kumbuka ya Ukaguzi / Muktadha",
-    "analyzingPitch": "Kuchanganua uvunjaji na kujenga moyo wa biashara..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Wazimu Waliozingatiwa (Mtiririko Hai)",
-    "draftMessage": "Ujumbe wa Rasimu",
-    "selectTarget": "Chagua lengo"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Hisia ya Jumla",
     "byAspect": "Kwa Mtazamo",

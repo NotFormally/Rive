@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth-zwězanja",
     "disconnected": "Zwězany njeje"
   },
-  "OsintDashboard": {
-    "statusNew": "Nowy",
-    "statusPitchSent": "Předleženje pósłane",
-    "statusDemoBooked": "Demo zastawjene",
-    "title": "La Vigie (OSINT)",
-    "database": "Datowa baza",
-    "selectSignal": "OSINT-signal wubrać",
-    "eventType": "Typ podawka",
-    "potentialFine": "Potencielna pokuta",
-    "inspectionNote": "Notica inspektury / Kontekst",
-    "analyzingPitch": "Narušenje so analyzuje a komercielna sympathija so twori..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Wopazorjenje",
-    "prospectsTitle": "Identificirane Perspektiwje (Žiwy Feed)",
-    "draftMessage": "Nacisk Zdźělenka",
-    "selectTarget": "Wubjerće cil"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Cyła Nastroj",
     "byAspect": "Po Aspekće",

@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth Konexioak",
     "disconnected": "Deskonektatu"
   },
-  "OsintDashboard": {
-    "statusNew": "Berria",
-    "statusPitchSent": "Proposamena Bidalita",
-    "statusDemoBooked": "Demoa Erreserba Egina",
-    "title": "La Vigie (OSINT)",
-    "database": "Datu-basea",
-    "selectSignal": "Hautatu OSINT Seinale bat",
-    "eventType": "Gertaeraren Mota",
-    "potentialFine": "Posiblea Zigorra",
-    "inspectionNote": "Ikuskapearen Ohar / Testuingurua",
-    "analyzingPitch": "Haustura analizatzen eta enpatia komertziala eraikitzen..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Begiraldia",
-    "prospectsTitle": "Identifikatutako Prospektuak (Zuzenean)",
-    "draftMessage": "Zirriborroa",
-    "selectTarget": "Hautatu helburua"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Sentimendua Orokorra",
     "byAspect": "Aspektuaren Arabera",

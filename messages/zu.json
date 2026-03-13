@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Ukuxhumana nge-Bluetooth",
     "disconnected": "Ayikhongi Ixhumile"
   },
-  "OsintDashboard": {
-    "statusNew": "Omusha",
-    "statusPitchSent": "I-Pitch Ithunywe",
-    "statusDemoBooked": "I-Demo Ebhukiwe",
-    "title": "La Vigie (OSINT)",
-    "database": "Ibhanki Yedatha",
-    "selectSignal": "Khetha Isignali se-OSINT",
-    "eventType": "Uhlobo Lwehlelo",
-    "potentialFine": "Isigwebo Esenzeka",
-    "inspectionNote": "Amanothi Okucubungula / Imonakalo",
-    "analyzingPitch": "Kuhlaziywa ukwephulwa komthetho futhi kujambululwa umuzwa wamakhasimende..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Amathuba Akhombisiwe (Live Feed)",
-    "draftMessage": "Umlayezo Osaqalweni",
-    "selectTarget": "Khetha inhlalakusizi"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Imvakalelo Yonke",
     "byAspect": "Ngesigaba",

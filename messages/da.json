@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth-forbindelser",
     "disconnected": "Afbrudt"
   },
-  "OsintDashboard": {
-    "statusNew": "Ny",
-    "statusPitchSent": "Pitch sendt",
-    "statusDemoBooked": "Demo booket",
-    "title": "La Vigie (OSINT)",
-    "database": "Database",
-    "selectSignal": "Vælg et OSINT-signal",
-    "eventType": "Begivenhedstype",
-    "potentialFine": "Potentiel bøde",
-    "inspectionNote": "Inspektionsnotat / Kontekst",
-    "analyzingPitch": "Analyserer overtrædelse og opbygger kommerciel empati..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Identificerede Prospects (Live Feed)",
-    "draftMessage": "Udkast til besked",
-    "selectTarget": "Vælg et mål"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Overordnet stemning",
     "byAspect": "Efter aspekt",

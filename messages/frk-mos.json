@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth-Verbindungen",
     "disconnected": "Getrennt"
   },
-  "OsintDashboard": {
-    "statusNew": "Nei",
-    "statusPitchSent": "Pitch Verschéckt",
-    "statusDemoBooked": "Demo Geboucht",
-    "title": "La Vigie (OSINT)",
-    "database": "Datebank",
-    "selectSignal": "Wielt eng OSINT Signal",
-    "eventType": "Event Typ",
-    "potentialFine": "Méiglech Geldstrof",
-    "inspectionNote": "Inspektiounsnotiz / Kontext",
-    "analyzingPitch": "Verletzung ginn analyseiert a kommerziell Empathe gëtt opgebaut..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Identified Prospects (Live Feed)",
-    "draftMessage": "Brouillon Message",
-    "selectTarget": "Wielt eng Zil aus"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Gesamtstëmmung",
     "byAspect": "No Aspekt",

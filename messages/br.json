@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Kevreadennoù Bluetooth",
     "disconnected": "Dikevredet"
   },
-  "OsintDashboard": {
-    "statusNew": "Nevez",
-    "statusPitchSent": "Prezentadenn Kaset",
-    "statusDemoBooked": "Demo Reizhet",
-    "title": "La Vigie (OSINT)",
-    "database": "Stlennvon",
-    "selectSignal": "Diuzañ ur Sinell OSINT",
-    "eventType": "Seurt an Darvoudenn",
-    "potentialFine": "Peoc'h Edennel",
-    "inspectionNote": "Notenn an Amkannoù / Kunteks",
-    "analyzingPitch": "O zeskaout ar frouadenn ha kasañ an toutig marzel..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Identified Prospects (Live Feed)",
-    "draftMessage": "Gemennoù Draslañ",
-    "selectTarget": "Diuzañ ur pal"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Sentiment Umañ",
     "byAspect": "Dre Aspektenn",

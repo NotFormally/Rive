@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth Juzimaripen",
     "disconnected": "Juzimaripen Thavela"
   },
-  "OsintDashboard": {
-    "statusNew": "Navi",
-    "statusPitchSent": "Vokhanipen Thavela",
-    "statusDemoBooked": "Demo Likhetha",
-    "title": "La Vigie (OSINT)",
-    "database": "Datenasarikanipen",
-    "selectSignal": "Ekh OSINT Signal Dikhel",
-    "eventType": "Ghatikanipen Kher",
-    "potentialFine": "Vazhimatose Dandiarikanipen",
-    "inspectionNote": "Sodipen Chomo / Sambandha",
-    "analyzingPitch": "Kanopena shukar keryarel te vazhale vyavahare dilipen..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Identificate na Perspective (Live Feed)",
-    "draftMessage": "Rastavutno Sanipen",
-    "selectTarget": "Sintesko ek Tumutno"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Saro Dukh/Kshimi",
     "byAspect": "Rai Lakhaipe",

@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "藍牙連接",
     "disconnected": "已斷開連接"
   },
-  "OsintDashboard": {
-    "statusNew": "新增",
-    "statusPitchSent": "已發送提案",
-    "statusDemoBooked": "已預訂演示",
-    "title": "La Vigie (OSINT)",
-    "database": "資料庫",
-    "selectSignal": "選擇 OSINT 信號",
-    "eventType": "事件類型",
-    "potentialFine": "潛在罰款",
-    "inspectionNote": "檢查備註／背景",
-    "analyzingPitch": "分析違規並建立商業同情心..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "已識別的潛在客戶 (實時源)",
-    "draftMessage": "草稿訊息",
-    "selectTarget": "選擇目標"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "整體情感",
     "byAspect": "按方面分類",

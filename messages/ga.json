@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Ceangail Bluetooth",
     "disconnected": "Dícheangailte"
   },
-  "OsintDashboard": {
-    "statusNew": "Nua",
-    "statusPitchSent": "Pitch Seolta",
-    "statusDemoBooked": "Demo Curtha in Áirithe",
-    "title": "La Vigie (OSINT)",
-    "database": "Bunachar Sonraí",
-    "selectSignal": "Roghnaigh Comhartha OSINT",
-    "eventType": "Cineál Imeachta",
-    "potentialFine": "Fíneáil Dhóchúil",
-    "inspectionNote": "Nóta Iniúchta / Comhthéacs",
-    "analyzingPitch": "Ag anailísiú an sháraithe agus ag tógáil mothaitheachta tráchtála..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Prospect Aitheanta (Live Feed)",
-    "draftMessage": "Dréachtúchán",
-    "selectTarget": "Roghnaigh sprioc"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Mothúchán Iomlán",
     "byAspect": "De réir Gné",

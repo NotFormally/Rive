@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth-anslutningar",
     "disconnected": "Frånkopplad"
   },
-  "OsintDashboard": {
-    "statusNew": "Ny",
-    "statusPitchSent": "Pitch Skickad",
-    "statusDemoBooked": "Demo Bokad",
-    "title": "La Vigie (OSINT)",
-    "database": "Databas",
-    "selectSignal": "Välj en OSINT-signal",
-    "eventType": "Händelstyp",
-    "potentialFine": "Potentiell Böter",
-    "inspectionNote": "Inspektionsanteckning / Sammanhang",
-    "analyzingPitch": "Analyserar brott och bygger kommersiell empati..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Identifierade prospekt (Live-flöde)",
-    "draftMessage": "Utkastmeddelande",
-    "selectTarget": "Välj ett mål"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Övergripande stämning",
     "byAspect": "Efter aspekt",

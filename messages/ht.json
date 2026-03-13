@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Koneksyon Bluetooth",
     "disconnected": "Dekonekte"
   },
-  "OsintDashboard": {
-    "statusNew": "Nouvo",
-    "statusPitchSent": "Pwopozisyon Voye",
-    "statusDemoBooked": "Demonstrasyon Rezève",
-    "title": "La Vigie (OSINT)",
-    "database": "Baz Done",
-    "selectSignal": "Chwazi yon Siyal OSINT",
-    "eventType": "Tip Evènman",
-    "potentialFine": "Amand Posib",
-    "inspectionNote": "Nòt Inspeksyon / Kontèks",
-    "analyzingPitch": "Analize vyolasyon epi bati empath komèsyal..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Pwospè Idantifye (Live Feed)",
-    "draftMessage": "Bouyon Mesaj",
-    "selectTarget": "Chwazi yon sib"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Santiman Jeneral",
     "byAspect": "Pa Aspè",

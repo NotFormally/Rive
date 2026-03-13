@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Bluetooth இணைப்புகள்",
     "disconnected": "துண்டிக்கப்பட்டுள்ளது"
   },
-  "OsintDashboard": {
-    "statusNew": "புதியது",
-    "statusPitchSent": "பிच அனுப்பப்பட்டது",
-    "statusDemoBooked": "டெமோ பதிவுசெய்யப்பட்டது",
-    "title": "La Vigie (OSINT)",
-    "database": "தரவுভাண்டம்",
-    "selectSignal": "OSINT சமிக்ஞையைத் தேர்ந்தெடுக்கவும்",
-    "eventType": "நிகழ்வு வகை",
-    "potentialFine": "சாத்தியமான அபராதம்",
-    "inspectionNote": "ஆய்வு குறிப்பு / சூழல்",
-    "analyzingPitch": "மீறல் பகுப்பாய்வு மற்றும் வணிக அனுதாபம் கட்டுமானம்..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT விழிப்புணர்வு",
-    "prospectsTitle": "கண்டறியப்பட்ட வாய்ப்புகள் (நேரடி ஊட்டம்)",
-    "draftMessage": "வரைவு செய்தி",
-    "selectTarget": "ஒரு இலக்கை தேர்ந்தெடுக்கவும்"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "மொத்த உணர்வு",
     "byAspect": "அம்சம் படி",

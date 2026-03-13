@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Haɗin Bluetooth",
     "disconnected": "Ba'an haɗa"
   },
-  "OsintDashboard": {
-    "statusNew": "Sabon",
-    "statusPitchSent": "Nuni An Aika",
-    "statusDemoBooked": "Demo An Buku",
-    "title": "La Vigie (OSINT)",
-    "database": "Gidan Bayanai",
-    "selectSignal": "Zaɓi Sigina OSINT",
-    "eventType": "Nau'in Abubuwa",
-    "potentialFine": "Yuwuwar Karɓi",
-    "inspectionNote": "Sanarwa Bincike / Mahallin",
-    "analyzingPitch": "Ana binciken ƙayyade kuma ana gina tausayin kasuwanci..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Wajen da aka gano (Ranar Live)",
-    "draftMessage": "Saƙon Ƙura",
-    "selectTarget": "Zaɓi bukattu"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Jimillar Ra'ayi",
     "byAspect": "Ta hanyar Gida",

@@ -2041,24 +2041,6 @@
     "bluetoothConnections": "Koneksi Bluetooth",
     "disconnected": "Terputus"
   },
-  "OsintDashboard": {
-    "statusNew": "Baru",
-    "statusPitchSent": "Pitch Dikirim",
-    "statusDemoBooked": "Demo Dijadwalkan",
-    "title": "La Vigie (OSINT)",
-    "database": "Basis Data",
-    "selectSignal": "Pilih Sinyal OSINT",
-    "eventType": "Jenis Acara",
-    "potentialFine": "Denda Potensial",
-    "inspectionNote": "Catatan Inspeksi / Konteks",
-    "analyzingPitch": "Menganalisis pelanggaran dan membangun empati komersial..."
-  },
-  "OSINTPanel": {
-    "title": "OSINT Vigie",
-    "prospectsTitle": "Prospek yang Teridentifikasi (Live Feed)",
-    "draftMessage": "Pesan Draft",
-    "selectTarget": "Pilih target"
-  },
   "SentimentBreakdown": {
     "overallSentiment": "Sentimen Keseluruhan",
     "byAspect": "Berdasarkan Aspek",

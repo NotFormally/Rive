@@ -90,7 +90,10 @@ export function Sidebar() {
     { name: t("nav_haccp_runner"), href: "/dashboard/quart/sonar/audit-demo", icon: ClipboardList },
     { name: t("nav_haccp_checklists"), href: "/dashboard/gouvernail/haccp-checklists", icon: Boxes },
     { name: t("nav_temperature_logs"), href: "/dashboard/gouvernail/temperature-logs", icon: Waypoints },
-    ...(s.module_menu_editor ? [{ name: t("nav_menu"), href: "/dashboard/carte/editeur", icon: MenuSquare }] : []),
+    ...(s.module_menu_editor ? [
+      { name: t("nav_menu"), href: "/dashboard/carte/editeur", icon: MenuSquare },
+      { name: t("nav_menu_import"), href: "/dashboard/carte/import", icon: ScanLine },
+    ] : []),
   ];
 
   // Zone IV. Le Journal de Bord (The Ship's Log — Analytics & Finance)

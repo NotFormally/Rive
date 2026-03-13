@@ -62,6 +62,7 @@ export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "
       onClick={handleCheckout}
       className={`block w-full text-center py-4 rounded-[2rem] font-bold text-sm transition-colors duration-300 ${ctaColor} ${presentationClasses}`}
       disabled={loading}
+      data-auth-loading={String(authLoading)}
     >
       {loading ? <Loader2 className="w-5 h-5 mx-auto animate-spin" /> : cta}
     </button>

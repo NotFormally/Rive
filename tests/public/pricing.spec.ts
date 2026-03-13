@@ -46,9 +46,11 @@ test.describe('Pricing Page', () => {
     if (!isVisible) return;
 
     // CheckoutButton.handleCheckout bails early when authLoading=true.
-    // Wait for Supabase auth to settle (network idle) so authLoading=false before clicking.
-    await page.waitForLoadState('networkidle', { timeout: 8_000 }).catch(() => {});
-    await page.waitForTimeout(500);
+    // Wait for data-auth-loading="false" on the button before clicking (AuthProvider has a 3s fallback).
+    await page.waitForFunction(
+      () => document.querySelector('button[data-auth-loading="false"]') !== null,
+      { timeout: 8_000 }
+    ).catch(() => {});
 
     await ctaButton.click({ force: true });
 

@@ -6,6 +6,8 @@ import { generateText } from 'ai';
 import { MODEL_CREATE } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
+import { hasReachedQuota } from '@/lib/quotas';
+import type { SubscriptionTier } from '@/lib/subscription-tiers';
 
 export const maxDuration = 60; // Allow 60 seconds since we are making Anthropic API calls
 
@@ -30,6 +32,23 @@ export async function GET(req: Request) {
     // Rate limit check
     const rateLimit = await checkRateLimit(auth.restaurantId, 'menu-engineering');
     if (!rateLimit.allowed) return tooManyRequests();
+
+    // Quota check — enforce per-tier usage limits server-side
+    const { data: restaurantSettings } = await auth.supabase
+      .from('restaurant_settings')
+      .select('subscription_tier, usage_metrics')
+      .eq('restaurant_id', auth.restaurantId)
+      .single();
+
+    const tier = ((restaurantSettings?.subscription_tier as SubscriptionTier) || 'free');
+    const usageMetrics = (restaurantSettings?.usage_metrics || {}) as Record<string, number>;
+
+    if (hasReachedQuota(usageMetrics, 'menu_engineering', tier)) {
+      return new Response(JSON.stringify({ error: 'quota_exceeded', upgrade: true }), {
+        status: 402,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     // 1. Fetch menu data from Supabase
     const { items: menuItems } = await loadMenuFromSupabase();

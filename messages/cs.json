@@ -250,7 +250,20 @@
     "gamification_desc": "Jak jasný máte přehled? Absolvujte 2minutový test a zjistěte své skóre operační zralosti a odemkněte cílená zlepšení.",
     "gamification_cta": "Absolvujte bezplatný test →",
     "nb_menu_scan_title": "5. SkenerMenu & Automatické vyplnění",
-    "nb_menu_scan_desc": "Nahrajte foto, PDF nebo adresu URL webu jakéhokoli menu. AI extrahuje každé jídlo, cenu, popis, alergeny a ingredience — poté naplní editor vašeho menu jediným kliknutím."
+    "nb_menu_scan_desc": "Nahrajte foto, PDF nebo adresu URL webu jakéhokoli menu. AI extrahuje každé jídlo, cenu, popis, alergeny a ingredience — poté naplní editor vašeho menu jediným kliknutím.",
+    "fmenu_title": "Skener menu a automatický import",
+    "fmenu_desc": "Nahrajte fotografii, PDF nebo URL adresu libovolného menu. AI extrahuje každý pokrm, cenu, popis, alergeny a ingredience — poté vyplní editor vašeho menu během sekund.",
+    "fmenu_ex1": "Vyfotografujte papírové menu — každá položka se okamžitě extrahuje a strukturuje.",
+    "fmenu_ex2": "Vložte URL adresu z UberEats nebo Deliveroo a synchronizujte své živé online menu.",
+    "fmenu_ex3": "Nahrajte PDF ceník a získáte jej připravený k servírování jedním klikem.",
+    "fmenu_source_photo": "Fotografie / Fotoaparát",
+    "fmenu_source_pdf": "Nahrání PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terasa.jpg",
+    "fmenu_mock_pdf_name": "carte_zima_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Připraveno",
+    "fmenu_mock_items": "Položky detekovány a importovány"
   },
   "Pricing": {
     "title": "Jasné ceny, skutečný dopad.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Jak jasný je váš přehled? Absolvujte 2minutové hodnocení a objev vaš skór operační zralosti a odemkněte cílená zlepšení.",
     "gamification_cta": "Absolvujte bezplatné hodnocení →",
     "nb_menu_scan_title": "5. Skener Menu & Automatické vyplnění",
-    "nb_menu_scan_desc": "Nahrajte foto, PDF nebo adresu URL webu jakéhokoli menu. AI extrahuje každé jídlo, cenu, popis, alergeny a ingredience — poté naplní editor vašeho menu jediným kliknutím."
+    "nb_menu_scan_desc": "Nahrajte foto, PDF nebo adresu URL webu jakéhokoli menu. AI extrahuje každé jídlo, cenu, popis, alergeny a ingredience — poté naplní editor vašeho menu jediným kliknutím.",
+    "fmenu_title": "Skener menu a automatický import",
+    "fmenu_desc": "Nahrajte fotografii, PDF nebo URL adresu libovolného menu. AI extrahuje každý pokrm, cenu, popis, alergeny a ingredience — poté vyplní editor vašeho menu během sekund.",
+    "fmenu_ex1": "Vyfotografujte papírové menu — každá položka se okamžitě extrahuje a strukturuje.",
+    "fmenu_ex2": "Vložte URL adresu z UberEats nebo Deliveroo a synchronizujte své živé online menu.",
+    "fmenu_ex3": "Nahrajte PDF ceník a získáte jej připravený k servírování jedním klikem.",
+    "fmenu_source_photo": "Fotografie / Fotoaparát",
+    "fmenu_source_pdf": "Nahrání PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terasa.jpg",
+    "fmenu_mock_pdf_name": "carte_zima_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Připraveno",
+    "fmenu_mock_items": "Položky detekovány a importovány"
   },
   "Auth": {
     "login_title": "RiveHub",

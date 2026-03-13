@@ -250,7 +250,20 @@
     "gamification_desc": "Ubukhanyi bokukhangela bakho buqala kangakanani? Thatha isikali esingu-2-minit ukuze uthole usikali sakho sokukhuma kokusetshenziswa futhi uvule izinzuzo eziqondile.",
     "gamification_cta": "Thatha ukuhlolwa okusheshe →",
     "nb_menu_scan_title": "5. I-Menu Scanner ne-Auto-Populate",
-    "nb_menu_scan_desc": "Layisha isithombe, i-PDF noma i-URL yewebhusayithi yanoma iyiphi imenyu. I-AI ifuna isitsha ngasinye, intengo, incazelo, izinto ezithinta ukhuni kanye nenzalo — bese ipopulela umhleli wemenyu yakho nokusetshenziswa kwesikhwamane."
+    "nb_menu_scan_desc": "Layisha isithombe, i-PDF noma i-URL yewebhusayithi yanoma iyiphi imenyu. I-AI ifuna isitsha ngasinye, intengo, incazelo, izinto ezithinta ukhuni kanye nenzalo — bese ipopulela umhleli wemenyu yakho nokusetshenziswa kwesikhwamane.",
+    "fmenu_title": "I-Menu Scanner ne-Auto-Import",
+    "fmenu_desc": "Faka isithombe, i-PDF, noma i-URL yewebhusayiti yenoma iyiphi imenu. I-AI iyakwipha lonke idishi, intengo, incazelo, i-allergen, nokuthwali — bese igcwalisa umhleli wakho wemenu ngamasekhondi.",
+    "fmenu_ex1": "Thatha isithombe semenu yephepha — lonke ilayithi elubhalwe kufakwa kancane.",
+    "fmenu_ex2": "Namatiza i-URL ye-UberEats noma ye-Deliveroo ukuze uhlanganise imenu yakho elakele online.",
+    "fmenu_ex3": "Faka ilista yentengo ye-PDF bese ulunganisela ukuthi sibonakale ngasinye ichele.",
+    "fmenu_source_photo": "Isithombe / Ikhamera",
+    "fmenu_source_pdf": "Ukulayiza i-PDF",
+    "fmenu_source_url": "I-URL / Iwebhu",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Kulungile",
+    "fmenu_mock_items": "Izinto ezazwaziwa no-zomiswe"
   },
   "Pricing": {
     "title": "Intengo ebonakalayo, umphumela wangempela.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Ukukhanya kwakho kufanele kube kangakanani? Thatha imineti engu-2 yevalusi ukuthola isikho sakho sobunini bokuphatha nokuvula izilungiselo ezikhethiwe.",
     "gamification_cta": "Thatha ukuhlolwa okugcini →",
     "nb_menu_scan_title": "5. I-Menu Scanner ne-Auto-Populate",
-    "nb_menu_scan_desc": "Layisha isithombe, i-PDF noma i-URL yewebhusayithi yanoma iyiphi imenyu. I-AI ifuna isitsha ngasinye, intengo, incazelo, izinto ezithinta ukhuni kanye nenzalo — bese ipopulela umhleli wemenyu yakho nokusetshenziswa kwesikhwamane."
+    "nb_menu_scan_desc": "Layisha isithombe, i-PDF noma i-URL yewebhusayithi yanoma iyiphi imenyu. I-AI ifuna isitsha ngasinye, intengo, incazelo, izinto ezithinta ukhuni kanye nenzalo — bese ipopulela umhleli wemenyu yakho nokusetshenziswa kwesikhwamane.",
+    "fmenu_title": "I-Menu Scanner ne-Auto-Import",
+    "fmenu_desc": "Faka isithombe, i-PDF, noma i-URL yewebhusayiti yenoma iyiphi imenu. I-AI iyakwipha lonke idishi, intengo, incazelo, i-allergen, nokuthwali — bese igcwalisa umhleli wakho wemenu ngamasekhondi.",
+    "fmenu_ex1": "Thatha isithombe semenu yephepha — lonke ilayithi elubhalwe kufakwa kancane.",
+    "fmenu_ex2": "Namatiza i-URL ye-UberEats noma ye-Deliveroo ukuze uhlanganise imenu yakho elakele online.",
+    "fmenu_ex3": "Faka ilista yentengo ye-PDF bese ulunganisela ukuthi sibonakale ngasinye ichele.",
+    "fmenu_source_photo": "Isithombe / Ikhamera",
+    "fmenu_source_pdf": "Ukulayiza i-PDF",
+    "fmenu_source_url": "I-URL / Iwebhu",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Kulungile",
+    "fmenu_mock_items": "Izinto ezazwaziwa no-zomiswe"
   },
   "Auth": {
     "login_title": "RiveHub",

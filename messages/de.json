@@ -250,7 +250,20 @@
     "gamification_desc": "Wie klar ist Ihre Übersicht? Absolvieren Sie eine 2-minütige Bewertung, um Ihren operativen Reifungsgrad zu ermitteln und gezielte Verbesserungen freizuschalten.",
     "gamification_cta": "Kostenlose Bewertung durchführen →",
     "nb_menu_scan_title": "5. Menü-Scanner & automatisches Ausfüllen",
-    "nb_menu_scan_desc": "Laden Sie ein Foto, eine PDF-Datei oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jedes Gericht, jeden Preis, jede Beschreibung, jeden Allergen und jede Zutat – und füllt dann Ihren Menü-Editor mit einem Klick aus."
+    "nb_menu_scan_desc": "Laden Sie ein Foto, eine PDF-Datei oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jedes Gericht, jeden Preis, jede Beschreibung, jeden Allergen und jede Zutat – und füllt dann Ihren Menü-Editor mit einem Klick aus.",
+    "fmenu_title": "Menü-Scanner & Automatischer Import",
+    "fmenu_desc": "Laden Sie ein Foto, eine PDF oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jeden Dish, Preis, Beschreibung, Allergen und Zutat — und füllt Ihren Menü-Editor in Sekunden.",
+    "fmenu_ex1": "Fotografieren Sie ein Papiermenü — jeder Artikel wird sofort extrahiert und strukturiert.",
+    "fmenu_ex2": "Fügen Sie eine UberEats- oder Deliveroo-URL ein, um Ihr Live-Online-Menü zu synchronisieren.",
+    "fmenu_ex3": "Laden Sie eine PDF-Preisliste hoch und haben Sie sie mit einem Klick servierfertig.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF hochladen",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Bereit",
+    "fmenu_mock_items": "Artikel erkannt und importiert"
   },
   "Pricing": {
     "title": "Transparente Preise mit echter Auswirkung.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Wie klar ist Ihre Sichtbarkeit? Führen Sie eine 2-minütige Bewertung durch, um Ihren operativen Reifescore zu entdecken und gezielte Verbesserungen freizuschalten.",
     "gamification_cta": "Kostenlose Bewertung durchführen →",
     "nb_menu_scan_title": "5. Menü-Scanner & automatisches Ausfüllen",
-    "nb_menu_scan_desc": "Laden Sie ein Foto, eine PDF-Datei oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jedes Gericht, jeden Preis, jede Beschreibung, jeden Allergen und jede Zutat – und füllt dann Ihren Menü-Editor mit einem Klick aus."
+    "nb_menu_scan_desc": "Laden Sie ein Foto, eine PDF-Datei oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jedes Gericht, jeden Preis, jede Beschreibung, jeden Allergen und jede Zutat – und füllt dann Ihren Menü-Editor mit einem Klick aus.",
+    "fmenu_title": "Menü-Scanner & Automatischer Import",
+    "fmenu_desc": "Laden Sie ein Foto, eine PDF oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jeden Dish, Preis, Beschreibung, Allergen und Zutat — und füllt Ihren Menü-Editor in Sekunden.",
+    "fmenu_ex1": "Fotografieren Sie ein Papiermenü — jeder Artikel wird sofort extrahiert und strukturiert.",
+    "fmenu_ex2": "Fügen Sie eine UberEats- oder Deliveroo-URL ein, um Ihr Live-Online-Menü zu synchronisieren.",
+    "fmenu_ex3": "Laden Sie eine PDF-Preisliste hoch und haben Sie sie mit einem Klick servierfertig.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF hochladen",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Bereit",
+    "fmenu_mock_items": "Artikel erkannt und importiert"
   },
   "Auth": {
     "login_title": "RiveHub",

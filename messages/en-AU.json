@@ -250,7 +250,20 @@
     "gamification_desc": "How clear is your visibility? Take a 2-minute assessment to discover your operational maturity score and unlock targeted improvements.",
     "gamification_cta": "Take the free assessment →",
     "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
-    "nb_menu_scan_desc": "Upload a photo, PDF or website URL of any menu. AI extracts every dish, price, description, allergen and ingredient — then populates your menu editor in one click."
+    "nb_menu_scan_desc": "Upload a photo, PDF or website URL of any menu. AI extracts every dish, price, description, allergen and ingredient — then populates your menu editor in one click.",
+    "fmenu_title": "Menu Scanner & Auto-Import",
+    "fmenu_desc": "Upload a photo, PDF, or website URL of any menu. AI extracts every dish, price, description, allergen, and ingredient — then populates your menu editor in seconds.",
+    "fmenu_ex1": "Snap a photo of a paper menu — every item extracted and structured instantly.",
+    "fmenu_ex2": "Paste an UberEats or Deliveroo URL to sync your live online menu.",
+    "fmenu_ex3": "Upload a PDF price list and have it ready to serve in one click.",
+    "fmenu_source_photo": "Photo / Camera",
+    "fmenu_source_pdf": "PDF Upload",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Ready",
+    "fmenu_mock_items": "Items detected & imported"
   },
   "Pricing": {
     "title": "Clear pricing, real impact.",
@@ -405,7 +418,20 @@
     "gamification_desc": "How clear is your visibility? Take a 2-minute assessment to discover your operational maturity score and unlock targeted improvements.",
     "gamification_cta": "Take the free assessment →",
     "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
-    "nb_menu_scan_desc": "Upload a photo, PDF or website URL of any menu. AI extracts every dish, price, description, allergen and ingredient — then populates your menu editor in one click."
+    "nb_menu_scan_desc": "Upload a photo, PDF or website URL of any menu. AI extracts every dish, price, description, allergen and ingredient — then populates your menu editor in one click.",
+    "fmenu_title": "Menu Scanner & Auto-Import",
+    "fmenu_desc": "Upload a photo, PDF, or website URL of any menu. AI extracts every dish, price, description, allergen, and ingredient — then populates your menu editor in seconds.",
+    "fmenu_ex1": "Snap a photo of a paper menu — every item extracted and structured instantly.",
+    "fmenu_ex2": "Paste an UberEats or Deliveroo URL to sync your live online menu.",
+    "fmenu_ex3": "Upload a PDF price list and have it ready to serve in one click.",
+    "fmenu_source_photo": "Photo / Camera",
+    "fmenu_source_pdf": "PDF Upload",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Ready",
+    "fmenu_mock_items": "Items detected & imported"
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -250,7 +250,20 @@
     "gamification_desc": "Khả năng hiển thị của bạn rõ ràng đến mức nào? Thực hiện đánh giá 2 phút để khám phá điểm trưởng thành hoạt động của bạn và mở khóa các cải tiến có mục tiêu.",
     "gamification_cta": "Thực hiện đánh giá miễn phí →",
     "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
-    "nb_menu_scan_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ thực đơn nào. AI trích xuất mọi món ăn, giá cả, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa thực đơn của bạn chỉ với một cú nhấp chuột."
+    "nb_menu_scan_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ thực đơn nào. AI trích xuất mọi món ăn, giá cả, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa thực đơn của bạn chỉ với một cú nhấp chuột.",
+    "fmenu_title": "Quét Menu & Nhập Tự Động",
+    "fmenu_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ menu nào. AI trích xuất từng món ăn, giá, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa menu của bạn trong vài giây.",
+    "fmenu_ex1": "Chụp ảnh menu giấy — mọi mục được trích xuất và cấu trúc ngay lập tức.",
+    "fmenu_ex2": "Dán URL UberEats hoặc Deliveroo để đồng bộ menu trực tuyến của bạn.",
+    "fmenu_ex3": "Tải lên danh sách giá PDF và sẵn sàng phục vụ chỉ với một clic.",
+    "fmenu_source_photo": "Ảnh / Camera",
+    "fmenu_source_pdf": "Tải PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Sẵn sàng",
+    "fmenu_mock_items": "Các mục được phát hiện & nhập"
   },
   "Pricing": {
     "title": "Giá rõ ràng, tác động thực sự.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Tầm nhìn của bạn rõ ràng cỡ nào? Mất 2 phút để hoàn thành bài đánh giá tìm hiểu điểm số trưởng thành hoạt động và mở khóa những cải thiện được nhắm mục tiêu.",
     "gamification_cta": "Thực hiện bài đánh giá miễn phí →",
     "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
-    "nb_menu_scan_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ thực đơn nào. AI trích xuất mọi món ăn, giá cả, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa thực đơn của bạn chỉ với một cú nhấp chuột."
+    "nb_menu_scan_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ thực đơn nào. AI trích xuất mọi món ăn, giá cả, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa thực đơn của bạn chỉ với một cú nhấp chuột.",
+    "fmenu_title": "Quét Menu & Nhập Tự Động",
+    "fmenu_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ menu nào. AI trích xuất từng món ăn, giá, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa menu của bạn trong vài giây.",
+    "fmenu_ex1": "Chụp ảnh menu giấy — mọi mục được trích xuất và cấu trúc ngay lập tức.",
+    "fmenu_ex2": "Dán URL UberEats hoặc Deliveroo để đồng bộ menu trực tuyến của bạn.",
+    "fmenu_ex3": "Tải lên danh sách giá PDF và sẵn sàng phục vụ chỉ với một clic.",
+    "fmenu_source_photo": "Ảnh / Camera",
+    "fmenu_source_pdf": "Tải PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Sẵn sàng",
+    "fmenu_mock_items": "Các mục được phát hiện & nhập"
   },
   "Auth": {
     "login_title": "RiveHub",

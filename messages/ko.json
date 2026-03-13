@@ -250,7 +250,20 @@
     "gamification_desc": "당신의 가시성이 얼마나 명확합니까? 2분 평가를 통해 운영 성숙도 점수를 발견하고 대상화된 개선을 잠금 해제합니다.",
     "gamification_cta": "무료 평가 받기 →",
     "nb_menu_scan_title": "5. 메뉴 스캔 및 자동 채우기",
-    "nb_menu_scan_desc": "메뉴의 사진, PDF 또는 웹사이트 URL을 업로드하세요. AI가 모든 요리, 가격, 설명, 알레르기 정보 및 재료를 추출한 후 한 번의 클릭으로 메뉴 편집기에 자동으로 입력됩니다."
+    "nb_menu_scan_desc": "메뉴의 사진, PDF 또는 웹사이트 URL을 업로드하세요. AI가 모든 요리, 가격, 설명, 알레르기 정보 및 재료를 추출한 후 한 번의 클릭으로 메뉴 편집기에 자동으로 입력됩니다.",
+    "fmenu_title": "메뉴 스캔 및 자동 가져오기",
+    "fmenu_desc": "메뉴의 사진, PDF 또는 웹사이트 URL을 업로드하세요. AI가 모든 요리, 가격, 설명, 알레르기 정보 및 재료를 추출한 후 몇 초 만에 메뉴 편집기를 자동으로 채웁니다.",
+    "fmenu_ex1": "종이 메뉴의 사진을 촬영하면 모든 항목이 즉시 추출되고 정리됩니다.",
+    "fmenu_ex2": "UberEats 또는 Deliveroo URL을 붙여넣어 라이브 온라인 메뉴를 동기화하세요.",
+    "fmenu_ex3": "PDF 가격표를 업로드하고 한 번의 클릭으로 서빙할 준비를 완료하세요.",
+    "fmenu_source_photo": "사진 / 카메라",
+    "fmenu_source_pdf": "PDF 업로드",
+    "fmenu_source_url": "URL / 웹",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "준비 완료",
+    "fmenu_mock_items": "항목 감지 및 가져오기 완료"
   },
   "Pricing": {
     "title": "명확한 가격, 실제 영향.",
@@ -405,7 +418,20 @@
     "gamification_desc": "당신의 가시성이 얼마나 명확한가요? 2분 평가를 통해 운영 성숙도 점수를 발견하고 맞춤형 개선을 잠금 해제하세요.",
     "gamification_cta": "무료 평가 받기 →",
     "nb_menu_scan_title": "5. 메뉴 스캔 및 자동 채우기",
-    "nb_menu_scan_desc": "메뉴의 사진, PDF 또는 웹사이트 URL을 업로드하세요. AI가 모든 요리, 가격, 설명, 알레르기 정보 및 재료를 추출한 후 한 번의 클릭으로 메뉴 편집기에 자동으로 입력됩니다."
+    "nb_menu_scan_desc": "메뉴의 사진, PDF 또는 웹사이트 URL을 업로드하세요. AI가 모든 요리, 가격, 설명, 알레르기 정보 및 재료를 추출한 후 한 번의 클릭으로 메뉴 편집기에 자동으로 입력됩니다.",
+    "fmenu_title": "메뉴 스캔 및 자동 가져오기",
+    "fmenu_desc": "메뉴의 사진, PDF 또는 웹사이트 URL을 업로드하세요. AI가 모든 요리, 가격, 설명, 알레르기 정보 및 재료를 추출한 후 몇 초 만에 메뉴 편집기를 자동으로 채웁니다.",
+    "fmenu_ex1": "종이 메뉴의 사진을 촬영하면 모든 항목이 즉시 추출되고 정리됩니다.",
+    "fmenu_ex2": "UberEats 또는 Deliveroo URL을 붙여넣어 라이브 온라인 메뉴를 동기화하세요.",
+    "fmenu_ex3": "PDF 가격표를 업로드하고 한 번의 클릭으로 서빙할 준비를 완료하세요.",
+    "fmenu_source_photo": "사진 / 카메라",
+    "fmenu_source_pdf": "PDF 업로드",
+    "fmenu_source_url": "URL / 웹",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "준비 완료",
+    "fmenu_mock_items": "항목 감지 및 가져오기 완료"
   },
   "Auth": {
     "login_title": "RiveHub",

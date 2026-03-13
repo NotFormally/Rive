@@ -250,7 +250,20 @@
     "gamification_desc": "Sar chhora si tumo vidimata? Avel 2-minuta assessmenta phenel tumo operacionali maturiti skora agi unlock targeta improveménta.",
     "gamification_cta": "Avel frika assessmenta →",
     "nb_menu_scan_title": "5. Skener Menu a Automatické Vyplnění",
-    "nb_menu_scan_desc": "Nahraj fotografii, PDF nebo URL webové stránky libovolného menu. AI extrahuje každé jídlo, cenu, popis, alergen a ingredienci — poté naplní tvůj editor menu jedním kliknutím."
+    "nb_menu_scan_desc": "Nahraj fotografii, PDF nebo URL webové stránky libovolného menu. AI extrahuje každé jídlo, cenu, popis, alergen a ingredienci — poté naplní tvůj editor menu jedním kliknutím.",
+    "fmenu_title": "Scanner Meniuja & Auto-Importare",
+    "fmenu_desc": "Încaracă o fotografie, PDF, sau URL-ul unui website al oricărui meniu. AI extrage fiecare fel de mâncare, preț, descriere, alergen și ingredient — apoi completează editorul tău de meniu în secunde.",
+    "fmenu_ex1": "Fotografiază un meniu pe hârtie — fiecare articol extras și structurat instant.",
+    "fmenu_ex2": "Lipește o adresă UberEats sau Deliveroo pentru a sincroniza meniul tău online live.",
+    "fmenu_ex3": "Încaracă o listă de prețuri PDF și pregătește-o să fie servită cu un singur clic.",
+    "fmenu_source_photo": "Fotografie / Cameră",
+    "fmenu_source_pdf": "Încarcare PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "meniu_terasa.jpg",
+    "fmenu_mock_pdf_name": "carte_iarna_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Gata",
+    "fmenu_mock_items": "Articole detectate și importate"
   },
   "Pricing": {
     "title": "Jasna cena, pravi uticaj.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Kaj tikno tui vidimo rai? Anil 2-minut asesment panda dikhel tui operacionalo sikhtalipaqo skori rai avilel target sudarqe.",
     "gamification_cta": "Anil basnasqo asesment →",
     "nb_menu_scan_title": "5. Skener Menu a Automatické Vyplnění",
-    "nb_menu_scan_desc": "Nahraj fotografii, PDF nebo URL webové stránky libovolného menu. AI extrahuje každé jídlo, cenu, popis, alergen a ingredienci — poté naplní tvůj editor menu jedním kliknutím."
+    "nb_menu_scan_desc": "Nahraj fotografii, PDF nebo URL webové stránky libovolného menu. AI extrahuje každé jídlo, cenu, popis, alergen a ingredienci — poté naplní tvůj editor menu jedním kliknutím.",
+    "fmenu_title": "Scanner Meniuja & Auto-Importare",
+    "fmenu_desc": "Încaracă o fotografie, PDF, sau URL-ul unui website al oricărui meniu. AI extrage fiecare fel de mâncare, preț, descriere, alergen și ingredient — apoi completează editorul tău de meniu în secunde.",
+    "fmenu_ex1": "Fotografiază un meniu pe hârtie — fiecare articol extras și structurat instant.",
+    "fmenu_ex2": "Lipește o adresă UberEats sau Deliveroo pentru a sincroniza meniul tău online live.",
+    "fmenu_ex3": "Încaracă o listă de prețuri PDF și pregătește-o să fie servită cu un singur clic.",
+    "fmenu_source_photo": "Fotografie / Cameră",
+    "fmenu_source_pdf": "Încarcare PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "meniu_terasa.jpg",
+    "fmenu_mock_pdf_name": "carte_iarna_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Gata",
+    "fmenu_mock_items": "Articole detectate și importate"
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -235,7 +235,20 @@
     "gamification_desc": "Quão clara é sua visibilidade? Faça uma avaliação de 2 minutos para descobrir seu score de maturidade operacional e desbloqueie melhorias direcionadas.",
     "gamification_cta": "Faça a avaliação gratuita →",
     "nb_menu_scan_title": "5. Scanner de Menu e Preenchimento Automático",
-    "nb_menu_scan_desc": "Envie uma foto, PDF ou URL do site de qualquer menu. A IA extrai todos os pratos, preços, descrições, alérgenos e ingredientes — e preenche seu editor de menu em um clique."
+    "nb_menu_scan_desc": "Envie uma foto, PDF ou URL do site de qualquer menu. A IA extrai todos os pratos, preços, descrições, alérgenos e ingredientes — e preenche seu editor de menu em um clique.",
+    "fmenu_title": "Scanner de Menu & Importação Automática",
+    "fmenu_desc": "Envie uma foto, PDF ou URL de site de qualquer cardápio. A IA extrai cada prato, preço, descrição, alérgeno e ingrediente — depois popula seu editor de menu em segundos.",
+    "fmenu_ex1": "Tire uma foto de um cardápio em papel — cada item extraído e estruturado instantaneamente.",
+    "fmenu_ex2": "Cole uma URL do UberEats ou Deliveroo para sincronizar seu cardápio online ativo.",
+    "fmenu_ex3": "Envie uma lista de preços em PDF e tenha-a pronta para servir em um clique.",
+    "fmenu_source_photo": "Foto / Câmera",
+    "fmenu_source_pdf": "Upload de PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Pronto",
+    "fmenu_mock_items": "Itens detectados e importados"
   },
   "Pricing": {
     "title": "Preços claros, impacto real.",
@@ -390,7 +403,20 @@
     "gamification_desc": "Quão clara é sua visibilidade? Faça uma avaliação de 2 minutos para descobrir sua pontuação de maturidade operacional e desbloqueie melhorias direcionadas.",
     "gamification_cta": "Faça a avaliação gratuita →",
     "nb_menu_scan_title": "5. Scanner de Menu e Preenchimento Automático",
-    "nb_menu_scan_desc": "Envie uma foto, PDF ou URL do site de qualquer menu. A IA extrai todos os pratos, preços, descrições, alérgenos e ingredientes — e preenche seu editor de menu em um clique."
+    "nb_menu_scan_desc": "Envie uma foto, PDF ou URL do site de qualquer menu. A IA extrai todos os pratos, preços, descrições, alérgenos e ingredientes — e preenche seu editor de menu em um clique.",
+    "fmenu_title": "Scanner de Menu & Importação Automática",
+    "fmenu_desc": "Envie uma foto, PDF ou URL de site de qualquer cardápio. A IA extrai cada prato, preço, descrição, alérgeno e ingrediente — depois popula seu editor de menu em segundos.",
+    "fmenu_ex1": "Tire uma foto de um cardápio em papel — cada item extraído e estruturado instantaneamente.",
+    "fmenu_ex2": "Cole uma URL do UberEats ou Deliveroo para sincronizar seu cardápio online ativo.",
+    "fmenu_ex3": "Envie uma lista de preços em PDF e tenha-a pronta para servir em um clique.",
+    "fmenu_source_photo": "Foto / Câmera",
+    "fmenu_source_pdf": "Upload de PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Pronto",
+    "fmenu_mock_items": "Itens detectados e importados"
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -250,7 +250,20 @@
     "gamification_desc": "Wie klar isch dini Sichtbarkeit? Mach e 2-Minute-Assessmänt und entdecke din operationali Reifä-Score – entschlüss e zielgerichti Verbesserunge.",
     "gamification_cta": "Mach d'kostenlos Assessmänt →",
     "nb_menu_scan_title": "5. Menükarte Scanner & Automatisch Usfülle",
-    "nb_menu_scan_desc": "Lade ä Foto, PDF oder Website-URL vun ere Menükarte ufe. KI extrahiert all Gricht, Priis, Beschribig, Allerge und Zutate — und füllt dini Menü-Editor mit eim Klick uus."
+    "nb_menu_scan_desc": "Lade ä Foto, PDF oder Website-URL vun ere Menükarte ufe. KI extrahiert all Gricht, Priis, Beschribig, Allerge und Zutate — und füllt dini Menü-Editor mit eim Klick uus.",
+    "fmenu_title": "Menü-Scanner & Automatischi Iibort",
+    "fmenu_desc": "Lade e Foto, PDF oder Website-URL vo äim Menü ufe. D'KI extrahiert jedi Spis, de Priis, d'Beschribig, Allergene und Zuate — und füllt dini Menü-Bearbeitig innerhalb vo Sekundä.",
+    "fmenu_ex1": "Mach e Foto vo äim Papiärmenü — alli Poste wärde sofort extrahiert und strukturiert.",
+    "fmenu_ex2": "Füeg e UberEats oder Deliveroo Link i, um dis Live-Onlinemenü z'synce.",
+    "fmenu_ex3": "Lade e PDF-Priiglischt ufe und han si in äim Klick parat zum Serviere.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF Ufelade",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrasse.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Parat",
+    "fmenu_mock_items": "Poste detektiert und iiborted"
   },
   "Pricing": {
     "title": "Transparente Preise, echte Auswirkung.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Wie klar isch din Überblick? Mach e 2-Minute Bewärtig, um din operationale Reifegrat z entdecke und zielgricheti Verbässrige z entsperre.",
     "gamification_cta": "Mach d koschtenlosi Bewärtig →",
     "nb_menu_scan_title": "5. Menükarte Scanner & Automatisch Usfülle",
-    "nb_menu_scan_desc": "Lade ä Foto, PDF oder Website-URL vun ere Menükarte ufe. KI extrahiert all Gricht, Priis, Beschribig, Allerge und Zutate — und füllt dini Menü-Editor mit eim Klick uus."
+    "nb_menu_scan_desc": "Lade ä Foto, PDF oder Website-URL vun ere Menükarte ufe. KI extrahiert all Gricht, Priis, Beschribig, Allerge und Zutate — und füllt dini Menü-Editor mit eim Klick uus.",
+    "fmenu_title": "Menü-Scanner & Automatischi Iibort",
+    "fmenu_desc": "Lade e Foto, PDF oder Website-URL vo äim Menü ufe. D'KI extrahiert jedi Spis, de Priis, d'Beschribig, Allergene und Zuate — und füllt dini Menü-Bearbeitig innerhalb vo Sekundä.",
+    "fmenu_ex1": "Mach e Foto vo äim Papiärmenü — alli Poste wärde sofort extrahiert und strukturiert.",
+    "fmenu_ex2": "Füeg e UberEats oder Deliveroo Link i, um dis Live-Onlinemenü z'synce.",
+    "fmenu_ex3": "Lade e PDF-Priiglischt ufe und han si in äim Klick parat zum Serviere.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF Ufelade",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrasse.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Parat",
+    "fmenu_mock_items": "Poste detektiert und iiborted"
   },
   "Auth": {
     "login_title": "RiveHub",

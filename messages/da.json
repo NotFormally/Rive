@@ -250,7 +250,20 @@
     "gamification_desc": "Hvor klar er din synlighed? Tag en 2-minutters vurdering for at opdage din operationelle modningsgrad og lås målrettede forbedringer op.",
     "gamification_cta": "Tag den gratis vurdering →",
     "nb_menu_scan_title": "5. Menuscanner og auto-udfyldning",
-    "nb_menu_scan_desc": "Upload et foto, en PDF eller webadresse til enhver menu. AI udtrækker hver ret, pris, beskrivelse, allergen og ingrediens — og udfylder derefter dit menueditor på ét klik."
+    "nb_menu_scan_desc": "Upload et foto, en PDF eller webadresse til enhver menu. AI udtrækker hver ret, pris, beskrivelse, allergen og ingrediens — og udfylder derefter dit menueditor på ét klik.",
+    "fmenu_title": "Menusskanner & Auto-Import",
+    "fmenu_desc": "Upload et foto, en PDF eller et website-link til en menu. AI udtrækker hver ret, pris, beskrivelse, allergen og ingrediens — og udfylder derefter din menu-editor på sekunder.",
+    "fmenu_ex1": "Tag et foto af en papirmenu — alle poster udtrukket og struktureret med det samme.",
+    "fmenu_ex2": "Indsæt et UberEats- eller Deliveroo-link for at synkronisere din live online-menu.",
+    "fmenu_ex3": "Upload en PDF-prisliste og få den klar til servering med et enkelt klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-upload",
+    "fmenu_source_url": "Link / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Klar",
+    "fmenu_mock_items": "Poster detekteret og importeret"
   },
   "Pricing": {
     "title": "Klar prisfastsættelse, reel indvirkning.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Hvor klart er dit overblik? Tag en 2-minutters vurdering for at opdage din operationelle modenhedsscore og lås op for målrettede forbedringer.",
     "gamification_cta": "Tag den gratis vurdering →",
     "nb_menu_scan_title": "5. Menuscanner og auto-udfyldning",
-    "nb_menu_scan_desc": "Upload et foto, en PDF eller webadresse til enhver menu. AI udtrækker hver ret, pris, beskrivelse, allergen og ingrediens — og udfylder derefter dit menueditor på ét klik."
+    "nb_menu_scan_desc": "Upload et foto, en PDF eller webadresse til enhver menu. AI udtrækker hver ret, pris, beskrivelse, allergen og ingrediens — og udfylder derefter dit menueditor på ét klik.",
+    "fmenu_title": "Menusskanner & Auto-Import",
+    "fmenu_desc": "Upload et foto, en PDF eller et website-link til en menu. AI udtrækker hver ret, pris, beskrivelse, allergen og ingrediens — og udfylder derefter din menu-editor på sekunder.",
+    "fmenu_ex1": "Tag et foto af en papirmenu — alle poster udtrukket og struktureret med det samme.",
+    "fmenu_ex2": "Indsæt et UberEats- eller Deliveroo-link for at synkronisere din live online-menu.",
+    "fmenu_ex3": "Upload en PDF-prisliste og få den klar til servering med et enkelt klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-upload",
+    "fmenu_source_url": "Link / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Klar",
+    "fmenu_mock_items": "Poster detekteret og importeret"
   },
   "Auth": {
     "login_title": "RiveHub",

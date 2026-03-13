@@ -250,7 +250,20 @@
     "gamification_desc": "Hur klar är din överblick? Gör en 2-minuters bedömning för att upptäcka din operativa mognadsnivå och låsa upp riktade förbättringar.",
     "gamification_cta": "Gör den kostnadsfria bedömningen →",
     "nb_menu_scan_title": "5. Menyskanner & Automatisk ifyllning",
-    "nb_menu_scan_desc": "Ladda upp ett foto, PDF eller webbadress till en meny. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan i din menyeditor med ett klick."
+    "nb_menu_scan_desc": "Ladda upp ett foto, PDF eller webbadress till en meny. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan i din menyeditor med ett klick.",
+    "fmenu_title": "Menyskanner & automatisk import",
+    "fmenu_desc": "Ladda upp ett foto, PDF eller webbadress för vilken meny som helst. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan din menyeditor på några sekunder.",
+    "fmenu_ex1": "Fotografera en pappersmeny — alla objekt extraheras och struktureras direkt.",
+    "fmenu_ex2": "Klistra in en UberEats- eller Deliveroo-URL för att synkronisera din aktiva onlinmeny.",
+    "fmenu_ex3": "Ladda upp en PDF-prislista och få den klar att servera med ett klick.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-uppladdning",
+    "fmenu_source_url": "URL / Webb",
+    "fmenu_mock_photo_name": "meny_terrass.jpg",
+    "fmenu_mock_pdf_name": "carte_vinter_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Klar",
+    "fmenu_mock_items": "Objekt identifierade & importerade"
   },
   "Pricing": {
     "title": "Tydlig prissättning, verklig effekt.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Hur tydlig är din överblick? Genomför en 2-minuters bedömning för att upptäcka ditt operativa mognadsvärde och låsa upp riktade förbättringar.",
     "gamification_cta": "Gör den kostnadsfria bedömningen →",
     "nb_menu_scan_title": "5. Menyskanner & Automatisk ifyllning",
-    "nb_menu_scan_desc": "Ladda upp ett foto, PDF eller webbadress till en meny. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan i din menyeditor med ett klick."
+    "nb_menu_scan_desc": "Ladda upp ett foto, PDF eller webbadress till en meny. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan i din menyeditor med ett klick.",
+    "fmenu_title": "Menyskanner & automatisk import",
+    "fmenu_desc": "Ladda upp ett foto, PDF eller webbadress för vilken meny som helst. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan din menyeditor på några sekunder.",
+    "fmenu_ex1": "Fotografera en pappersmeny — alla objekt extraheras och struktureras direkt.",
+    "fmenu_ex2": "Klistra in en UberEats- eller Deliveroo-URL för att synkronisera din aktiva onlinmeny.",
+    "fmenu_ex3": "Ladda upp en PDF-prislista och få den klar att servera med ett klick.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-uppladdning",
+    "fmenu_source_url": "URL / Webb",
+    "fmenu_mock_photo_name": "meny_terrass.jpg",
+    "fmenu_mock_pdf_name": "carte_vinter_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Klar",
+    "fmenu_mock_items": "Objekt identifierade & importerade"
   },
   "Auth": {
     "login_title": "RiveHub",

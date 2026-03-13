@@ -250,7 +250,20 @@
     "gamification_desc": "Sejauh manakah visibiliti anda? Ambil penilaian 2 minit untuk menemui skor kematangan operasi anda dan buka penambahbaikan yang disasarkan.",
     "gamification_cta": "Ambil penilaian percuma →",
     "nb_menu_scan_title": "5. Pengimbas Menu & Isi Automatik",
-    "nb_menu_scan_desc": "Muat naik foto, PDF atau URL laman web mana-mana menu. AI mengekstrak setiap hidangan, harga, penerangan, alergen dan bahan — kemudian mengisi editor menu anda dalam satu klik."
+    "nb_menu_scan_desc": "Muat naik foto, PDF atau URL laman web mana-mana menu. AI mengekstrak setiap hidangan, harga, penerangan, alergen dan bahan — kemudian mengisi editor menu anda dalam satu klik.",
+    "fmenu_title": "Pengimbas Menu & Import Automatik",
+    "fmenu_desc": "Muat naik foto, PDF, atau URL laman web mana-mana menu. AI mengeluarkan setiap hidangan, harga, penerangan, alergen, dan bahan — kemudian mengisi editor menu anda dalam beberapa saat.",
+    "fmenu_ex1": "Ambil foto menu kertas — setiap item diekstrak dan berstruktur secara serta-merta.",
+    "fmenu_ex2": "Tampal URL UberEats atau Deliveroo untuk segerakkan menu dalam talian anda yang langsung.",
+    "fmenu_ex3": "Muat naik senarai harga PDF dan sediakan ia untuk disajikan dalam satu klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "Muat Naik PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Siap",
+    "fmenu_mock_items": "Item dikesan & diimport"
   },
   "Pricing": {
     "title": "Harga yang jelas, kesan sebenar.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Berapa jelaskah keterlihatan anda? Ambil penilaian 2 minit untuk menemui skor kematangan operasi anda dan buka penambahbaikan yang disasarkan.",
     "gamification_cta": "Ambil penilaian percuma →",
     "nb_menu_scan_title": "5. Pengimbas Menu & Isi Automatik",
-    "nb_menu_scan_desc": "Muat naik foto, PDF atau URL laman web mana-mana menu. AI mengekstrak setiap hidangan, harga, penerangan, alergen dan bahan — kemudian mengisi editor menu anda dalam satu klik."
+    "nb_menu_scan_desc": "Muat naik foto, PDF atau URL laman web mana-mana menu. AI mengekstrak setiap hidangan, harga, penerangan, alergen dan bahan — kemudian mengisi editor menu anda dalam satu klik.",
+    "fmenu_title": "Pengimbas Menu & Import Automatik",
+    "fmenu_desc": "Muat naik foto, PDF, atau URL laman web mana-mana menu. AI mengeluarkan setiap hidangan, harga, penerangan, alergen, dan bahan — kemudian mengisi editor menu anda dalam beberapa saat.",
+    "fmenu_ex1": "Ambil foto menu kertas — setiap item diekstrak dan berstruktur secara serta-merta.",
+    "fmenu_ex2": "Tampal URL UberEats atau Deliveroo untuk segerakkan menu dalam talian anda yang langsung.",
+    "fmenu_ex3": "Muat naik senarai harga PDF dan sediakan ia untuk disajikan dalam satu klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "Muat Naik PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Siap",
+    "fmenu_mock_items": "Item dikesan & diimport"
   },
   "Auth": {
     "login_title": "RiveHub",

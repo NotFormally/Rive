@@ -235,7 +235,20 @@
     "gamification_desc": "您的可见性有多清晰？参与 2 分钟的评估，发现您的运营成熟度评分，并解锁针对性改进。",
     "gamification_cta": "进行免费评估 →",
     "nb_menu_scan_title": "5. 菜单扫描和自动填充",
-    "nb_menu_scan_desc": "上传任何菜单的照片、PDF 或网站链接。AI 会自动提取每道菜品、价格、描述、过敏原和食材信息 — 然后一键填充到你的菜单编辑器中。"
+    "nb_menu_scan_desc": "上传任何菜单的照片、PDF 或网站链接。AI 会自动提取每道菜品、价格、描述、过敏原和食材信息 — 然后一键填充到你的菜单编辑器中。",
+    "fmenu_title": "菜单扫描与自动导入",
+    "fmenu_desc": "上传任何菜单的照片、PDF 或网址。AI 快速提取每道菜肴、价格、描述、过敏原和食材信息 — 瞬间填充您的菜单编辑器。",
+    "fmenu_ex1": "拍摄纸质菜单的照片 — 每个菜品立即被识别并结构化。",
+    "fmenu_ex2": "粘贴 UberEats 或 Deliveroo 链接以同步您的在线菜单。",
+    "fmenu_ex3": "上传 PDF 价目表，一键即可准备就绪。",
+    "fmenu_source_photo": "照片 / 摄像头",
+    "fmenu_source_pdf": "PDF 上传",
+    "fmenu_source_url": "URL / 网页",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "已就绪",
+    "fmenu_mock_items": "菜品已检测并导入"
   },
   "Pricing": {
     "title": "清晰的定价，真实的价值。",
@@ -390,7 +403,20 @@
     "gamification_desc": "你的可视化程度如何？花 2 分钟进行评估，发现你的运营成熟度得分，并解锁针对性改进方案。",
     "gamification_cta": "进行免费评估 →",
     "nb_menu_scan_title": "5. 菜单扫描和自动填充",
-    "nb_menu_scan_desc": "上传任何菜单的照片、PDF 或网站链接。AI 会自动提取每道菜品、价格、描述、过敏原和食材信息 — 然后一键填充到你的菜单编辑器中。"
+    "nb_menu_scan_desc": "上传任何菜单的照片、PDF 或网站链接。AI 会自动提取每道菜品、价格、描述、过敏原和食材信息 — 然后一键填充到你的菜单编辑器中。",
+    "fmenu_title": "菜单扫描与自动导入",
+    "fmenu_desc": "上传任何菜单的照片、PDF 或网址。AI 快速提取每道菜肴、价格、描述、过敏原和食材信息 — 瞬间填充您的菜单编辑器。",
+    "fmenu_ex1": "拍摄纸质菜单的照片 — 每个菜品立即被识别并结构化。",
+    "fmenu_ex2": "粘贴 UberEats 或 Deliveroo 链接以同步您的在线菜单。",
+    "fmenu_ex3": "上传 PDF 价目表，一键即可准备就绪。",
+    "fmenu_source_photo": "照片 / 摄像头",
+    "fmenu_source_pdf": "PDF 上传",
+    "fmenu_source_url": "URL / 网页",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "已就绪",
+    "fmenu_mock_items": "菜品已检测并导入"
   },
   "Auth": {
     "login_title": "RiveHub",

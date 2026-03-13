@@ -250,7 +250,20 @@
     "gamification_desc": "Amek yella teggalt taḥecṭut-ik? Ger-d asuddes n 2-n tisdatin i d-tessedmert tɣecṭa-ik n tmara d sfelmant n tilisa.",
     "gamification_cta": "Ger-d asuddes d wakal →",
     "nb_menu_scan_title": "5. Ascanar n Udlisen & Azuzew Awezzɣen",
-    "nb_menu_scan_desc": "Sengem tugna, PDF neɣ URL n usivt n yiwen udliss. AI yessaweḍ yal taɣawalt, tafessutt, aglam, taxlitert d isumɛa — yakan yessuzew aglam n usufud inek seg yiwet tektayt."
+    "nb_menu_scan_desc": "Sengem tugna, PDF neɣ URL n usivt n yiwen udliss. AI yessaweḍ yal taɣawalt, tafessutt, aglam, taxlitert d isumɛa — yakan yessuzew aglam n usufud inek seg yiwet tektayt.",
+    "fmenu_title": "Afu n Umusdaf & Asirew Awurman",
+    "fmenu_desc": "Sekcam tugna, PDF, neɣ URL n web n ufus amaynut. AI-inu yessaweḍ yal aǧǧu, tansa, aglam, allergen, d izeglan — dacu akka yettuseǧǧa umusdaf inek ɣef imik kuc.",
+    "fmenu_ex1": "Sekcam tugna n umusdaf n ukaǧaṛ — yal aǧǧu yessaweḍ s uffir.",
+    "fmenu_ex2": "Sikc URL n UberEats neɣ Deliveroo i waseɣti n umusdaf inek s srid.",
+    "fmenu_ex3": "Sekcam taɣawalt n tiksa PDF yerna qqen-itt i tuseggaẓ ɣef taklikt yiwen.",
+    "fmenu_source_photo": "Tugna / Takamirat",
+    "fmenu_source_pdf": "Asirew n PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Tukset",
+    "fmenu_mock_items": "Isawalen ttwasweḍen yerna ttwasiren"
   },
   "Pricing": {
     "title": "Sgayen isselen, tajmaa izummren.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Akken am tameggit tameddit-ik? Rnu tasudewt n 2 n yisen i wakken ad tafem tasadawit n useddu-ik d isnerni n umḍiq.",
     "gamification_cta": "Rnu tasudewt n baṭel →",
     "nb_menu_scan_title": "5. Ascanar n Udlisen & Azuzew Awezzɣen",
-    "nb_menu_scan_desc": "Sengem tugna, PDF neɣ URL n usivt n yiwen udliss. AI yessaweḍ yal taɣawalt, tafessutt, aglam, taxlitert d isumɛa — yakan yessuzew aglam n usufud inek seg yiwet tektayt."
+    "nb_menu_scan_desc": "Sengem tugna, PDF neɣ URL n usivt n yiwen udliss. AI yessaweḍ yal taɣawalt, tafessutt, aglam, taxlitert d isumɛa — yakan yessuzew aglam n usufud inek seg yiwet tektayt.",
+    "fmenu_title": "Afu n Umusdaf & Asirew Awurman",
+    "fmenu_desc": "Sekcam tugna, PDF, neɣ URL n web n ufus amaynut. AI-inu yessaweḍ yal aǧǧu, tansa, aglam, allergen, d izeglan — dacu akka yettuseǧǧa umusdaf inek ɣef imik kuc.",
+    "fmenu_ex1": "Sekcam tugna n umusdaf n ukaǧaṛ — yal aǧǧu yessaweḍ s uffir.",
+    "fmenu_ex2": "Sikc URL n UberEats neɣ Deliveroo i waseɣti n umusdaf inek s srid.",
+    "fmenu_ex3": "Sekcam taɣawalt n tiksa PDF yerna qqen-itt i tuseggaẓ ɣef taklikt yiwen.",
+    "fmenu_source_photo": "Tugna / Takamirat",
+    "fmenu_source_pdf": "Asirew n PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Tukset",
+    "fmenu_mock_items": "Isawalen ttwasweḍen yerna ttwasiren"
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -250,7 +250,20 @@
     "gamification_desc": "Pa mor glir yw eich golwg? Cymerwch asesiad 2 funud i ddarganfod eich sgôr aeddfedrwydd gweithredol a datgloi gwelliannau penodol.",
     "gamification_cta": "Cymerwch yr asesiad am ddim →",
     "nb_menu_scan_title": "5. Sganiwr Menus a Llenwi Yn Awtomatig",
-    "nb_menu_scan_desc": "Llwythwch lun, PDF neu URL gwefan o unrhyw fwydlen. Mae AI yn tynnu pob pryd, pris, disgrifiad, alergen ac cynhwysyn — yna'n llenwi eich golygydd menus mewn un clic."
+    "nb_menu_scan_desc": "Llwythwch lun, PDF neu URL gwefan o unrhyw fwydlen. Mae AI yn tynnu pob pryd, pris, disgrifiad, alergen ac cynhwysyn — yna'n llenwi eich golygydd menus mewn un clic.",
+    "fmenu_title": "Sganiwr Dewislen & Mewnforio Awtomatig",
+    "fmenu_desc": "Llwythwch lun, PDF, neu URL gwefan o unrhyw ddewislen. Mae'r AI yn tynnu pob pryd, pris, disgrifiad, alergen, ac cynhwysyn — yna'n llenwi eich golygydd dewislen mewn eiliadau.",
+    "fmenu_ex1": "Tynnu llun o ddewislen papur — pob eitem wedi'i thynnu a'i strwythuro ar unwaith.",
+    "fmenu_ex2": "Glynwch URL UberEats neu Deliveroo i gydweddu'ch dewislen ar-lein byw.",
+    "fmenu_ex3": "Llwythwch restr brisiau PDF a'i chael yn barod i'w gwein mewn un clic.",
+    "fmenu_source_photo": "Llun / Camera",
+    "fmenu_source_pdf": "Llwytho PDF",
+    "fmenu_source_url": "URL / Gwe",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Parod",
+    "fmenu_mock_items": "Eitemau wedi'u canfod a'u mewnforio"
   },
   "Pricing": {
     "title": "Prisio clir, effaith wirioneddol.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Cyn glired yw eich gweledigaeth? Cymerwch asesiad 2-funud i ddarganfod eich sgôr aeddfeddrwydd gweithredol ac agor gwelliannau wedi'u targedu.",
     "gamification_cta": "Cymerwch yr asesiad am ddim →",
     "nb_menu_scan_title": "5. Sganiwr Menus a Llenwi Yn Awtomatig",
-    "nb_menu_scan_desc": "Llwythwch lun, PDF neu URL gwefan o unrhyw fwydlen. Mae AI yn tynnu pob pryd, pris, disgrifiad, alergen ac cynhwysyn — yna'n llenwi eich golygydd menus mewn un clic."
+    "nb_menu_scan_desc": "Llwythwch lun, PDF neu URL gwefan o unrhyw fwydlen. Mae AI yn tynnu pob pryd, pris, disgrifiad, alergen ac cynhwysyn — yna'n llenwi eich golygydd menus mewn un clic.",
+    "fmenu_title": "Sganiwr Dewislen & Mewnforio Awtomatig",
+    "fmenu_desc": "Llwythwch lun, PDF, neu URL gwefan o unrhyw ddewislen. Mae'r AI yn tynnu pob pryd, pris, disgrifiad, alergen, ac cynhwysyn — yna'n llenwi eich golygydd dewislen mewn eiliadau.",
+    "fmenu_ex1": "Tynnu llun o ddewislen papur — pob eitem wedi'i thynnu a'i strwythuro ar unwaith.",
+    "fmenu_ex2": "Glynwch URL UberEats neu Deliveroo i gydweddu'ch dewislen ar-lein byw.",
+    "fmenu_ex3": "Llwythwch restr brisiau PDF a'i chael yn barod i'w gwein mewn un clic.",
+    "fmenu_source_photo": "Llun / Camera",
+    "fmenu_source_pdf": "Llwytho PDF",
+    "fmenu_source_url": "URL / Gwe",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Parod",
+    "fmenu_mock_items": "Eitemau wedi'u canfod a'u mewnforio"
   },
   "Auth": {
     "login_title": "RiveHub",

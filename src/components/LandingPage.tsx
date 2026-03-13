@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from 'next-intl';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat, TrendingDown, ScanLine, Beer, Droplets, Recycle, Zap, TrendingUp, PiggyBank } from "lucide-react";
+import { ArrowRight, RotateCw, Activity, Calendar, Thermometer, Globe, CalendarCheck, ChefHat, TrendingDown, ScanLine, Beer, Droplets, Recycle, Zap, TrendingUp, PiggyBank, Camera, Link2, FileText } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { WasteCostCalculator } from "@/components/WasteCostCalculator";
 import { RadarLogo, DataMatrix } from "@/components/TelemetryScanner";
@@ -557,6 +557,73 @@ export function LandingPage() {
                     <span className="font-plex-mono text-[10px]">{tMockups('invoice_update')}</span>
                  </div>
                </div>
+            </div>
+          </div>
+
+          {/* Feature 5b: Menu Scanner & Auto-Import */}
+          <div className="feature-row bg-[#1A2332] rounded-[3rem] p-8 lg:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-white/10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Visual LEFT */}
+            <div className="order-1 bg-[#121A26] border border-white/5 rounded-[2rem] h-64 md:h-full min-h-[340px] flex flex-col items-center justify-center relative overflow-hidden p-6">
+              {/* Ambient glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-amber-500/10 blur-3xl rounded-full pointer-events-none" />
+              <div className="relative z-10 w-full max-w-[280px] flex flex-col gap-3">
+                {/* Source Card 1: Photo */}
+                <div className="bg-[#1A2332] border border-amber-500/20 rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-0.5 transition-transform cursor-default">
+                  <div className="bg-amber-500/15 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">
+                    <Camera className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-plex-mono text-[10px] text-slate-500 uppercase tracking-widest mb-0.5">{t('fmenu_source_photo')}</p>
+                    <p className="font-jakarta font-bold text-[#F2F0E9] text-sm truncate">{t('fmenu_mock_photo_name')}</p>
+                  </div>
+                  <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold border border-amber-500/20 shrink-0">{t('fmenu_mock_ready')}</span>
+                </div>
+                {/* Source Card 2: PDF */}
+                <div className="bg-[#1A2332] border border-white/10 rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-0.5 transition-transform cursor-default delay-75">
+                  <div className="bg-rose-500/15 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">
+                    <FileText className="w-5 h-5 text-rose-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-plex-mono text-[10px] text-slate-500 uppercase tracking-widest mb-0.5">{t('fmenu_source_pdf')}</p>
+                    <p className="font-jakarta font-bold text-[#F2F0E9] text-sm truncate">{t('fmenu_mock_pdf_name')}</p>
+                  </div>
+                  <span className="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-full font-bold border border-rose-500/20 shrink-0">{t('fmenu_mock_ready')}</span>
+                </div>
+                {/* Source Card 3: URL */}
+                <div className="bg-[#1A2332] border border-white/10 rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-0.5 transition-transform cursor-default delay-150">
+                  <div className="bg-indigo-500/15 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">
+                    <Link2 className="w-5 h-5 text-indigo-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-plex-mono text-[10px] text-slate-500 uppercase tracking-widest mb-0.5">{t('fmenu_source_url')}</p>
+                    <p className="font-jakarta font-bold text-[#F2F0E9] text-sm truncate">{t('fmenu_mock_url_name')}</p>
+                  </div>
+                  <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full font-bold border border-indigo-500/20 shrink-0">{t('fmenu_mock_ready')}</span>
+                </div>
+                {/* Items detected badge */}
+                <div className="bg-amber-500 text-[#0B131E] text-xs font-bold px-4 py-3 rounded-xl flex items-center justify-between shadow-[0_8px_30px_rgba(251,191,36,0.3)] mt-1">
+                  <span>{t('fmenu_mock_items')}</span>
+                  <span className="font-plex-mono">48 ✓</span>
+                </div>
+              </div>
+            </div>
+            {/* Text RIGHT */}
+            <div className="order-2">
+              <div className="flex flex-col gap-6">
+                <div className="bg-amber-500/10 w-16 h-16 rounded-2xl flex items-center justify-center">
+                  <ChefHat className="w-8 h-8 text-amber-500" />
+                </div>
+                <h3 className="font-jakarta font-bold text-3xl md:text-4xl text-[#F2F0E9]">{t('fmenu_title')}</h3>
+                <p className="font-outfit text-lg text-slate-300 leading-relaxed">{t('fmenu_desc')}</p>
+                <div className="bg-[#121A26] border border-white/5 p-6 rounded-2xl mt-4">
+                  <h4 className="font-jakarta font-bold text-xs uppercase tracking-wider text-slate-400 mb-4">{t('examples_title')}</h4>
+                  <ul className="flex flex-col gap-4 font-outfit text-sm text-slate-200">
+                    <li className="flex gap-3"><span className="text-amber-500">✦</span> {t('fmenu_ex1')}</li>
+                    <li className="flex gap-3"><span className="text-amber-500">✦</span> {t('fmenu_ex2')}</li>
+                    <li className="flex gap-3"><span className="text-amber-500">✦</span> {t('fmenu_ex3')}</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 

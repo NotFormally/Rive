@@ -250,7 +250,20 @@
     "gamification_desc": "Gaano kadali ang iyong visibility? Magsagawa ng 2-minuto assessment upang matuklasan ang iyong operational maturity score at magbukas ng targeted improvements.",
     "gamification_cta": "Gawin ang libreng assessment →",
     "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
-    "nb_menu_scan_desc": "I-upload ang larawan, PDF o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa isang click."
+    "nb_menu_scan_desc": "I-upload ang larawan, PDF o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa isang click.",
+    "fmenu_title": "Menu Scanner & Auto-Import",
+    "fmenu_desc": "Mag-upload ng larawan, PDF, o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen, at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa loob ng ilang segundo.",
+    "fmenu_ex1": "Kumuha ng larawan ng paper menu — bawat item ay nae-extract at structured kaagad.",
+    "fmenu_ex2": "I-paste ang UberEats o Deliveroo URL upang i-sync ang iyong live online menu.",
+    "fmenu_ex3": "Mag-upload ng PDF price list at ihanda itong ihain sa isang click.",
+    "fmenu_source_photo": "Larawan / Kamera",
+    "fmenu_source_pdf": "PDF Upload",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Handa",
+    "fmenu_mock_items": "Mga item na natuklasan at nai-import"
   },
   "Pricing": {
     "title": "Malinaw na presyo, tunay na epekto.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Gaano clear ang iyong visibility? Gumawa ng 2-minuto assessment upang malaman ang iyong operational maturity score at unlock ang targeted improvements.",
     "gamification_cta": "Kunin ang libreng assessment →",
     "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
-    "nb_menu_scan_desc": "I-upload ang larawan, PDF o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa isang click."
+    "nb_menu_scan_desc": "I-upload ang larawan, PDF o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa isang click.",
+    "fmenu_title": "Menu Scanner & Auto-Import",
+    "fmenu_desc": "Mag-upload ng larawan, PDF, o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen, at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa loob ng ilang segundo.",
+    "fmenu_ex1": "Kumuha ng larawan ng paper menu — bawat item ay nae-extract at structured kaagad.",
+    "fmenu_ex2": "I-paste ang UberEats o Deliveroo URL upang i-sync ang iyong live online menu.",
+    "fmenu_ex3": "Mag-upload ng PDF price list at ihanda itong ihain sa isang click.",
+    "fmenu_source_photo": "Larawan / Kamera",
+    "fmenu_source_pdf": "PDF Upload",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Handa",
+    "fmenu_mock_items": "Mga item na natuklasan at nai-import"
   },
   "Auth": {
     "login_title": "RiveHub",

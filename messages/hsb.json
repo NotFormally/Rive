@@ -250,7 +250,20 @@
     "gamification_desc": "Kotre jasna je twoja widomosć? Čin 2-minutowu estimaciju za wotkrywanje swojskeho skora operaciskeje dojěłosćy a wotkrytje zaměrjene polepšenja.",
     "gamification_cta": "Čin hady wotkrywanje →",
     "nb_menu_scan_title": "5. Skenerowanje menow a Awtomatiske Popołnjenje",
-    "nb_menu_scan_desc": "Nahraj fotografiju, PDF abo URL websydła kóždeho menow. KI ekstrahujo kóždu jadłowu, cenu, opisanje, alergeny a ingrediency — potom popołnja twój editor menow z jednym kliknjenjom."
+    "nb_menu_scan_desc": "Nahraj fotografiju, PDF abo URL websydła kóždeho menow. KI ekstrahujo kóždu jadłowu, cenu, opisanje, alergeny a ingrediency — potom popołnja twój editor menow z jednym kliknjenjom.",
+    "fmenu_title": "Skener měnow & awtomatiske importowanje",
+    "fmenu_desc": "Nahraj foto, PDF abo URL websydła kuždeneho měnow. AI wuciń kóždу potrahu, cenu, wopisanje, alergeny a ingrediency — potom dospołni twój editor měnow w sekundach.",
+    "fmenu_ex1": "Fotografuj papierny měnow — kóždу položka wucijena a strukturowana hnydom.",
+    "fmenu_ex2": "Nastaw URL UberEats abo Deliveroo, zo by so twój žiwy online měnow synchronizował.",
+    "fmenu_ex3": "Nahraj PDF-lisćinu cen a maj ju hotowu k serbowanju z jednym klikem.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-nahrAwanje",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Hotowy",
+    "fmenu_mock_items": "Položki namakane a importowane"
   },
   "Pricing": {
     "title": "Jasne zaměřenje, skutkowe wliwy.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Kiž jasna je twoja widźomosć? Przepij 2-minutowy test, zo by twój operaciscy zrelosćowy skóre wutknal a cilene zmoknjenja wothlasował.",
     "gamification_cta": "Wozwólny test přewjesć →",
     "nb_menu_scan_title": "5. Skenerowanje menow a Awtomatiske Popołnjenje",
-    "nb_menu_scan_desc": "Nahraj fotografiju, PDF abo URL websydła kóždeho menow. KI ekstrahujo kóždu jadłowu, cenu, opisanje, alergeny a ingrediency — potom popołnja twój editor menow z jednym kliknjenjom."
+    "nb_menu_scan_desc": "Nahraj fotografiju, PDF abo URL websydła kóždeho menow. KI ekstrahujo kóždu jadłowu, cenu, opisanje, alergeny a ingrediency — potom popołnja twój editor menow z jednym kliknjenjom.",
+    "fmenu_title": "Skener měnow & awtomatiske importowanje",
+    "fmenu_desc": "Nahraj foto, PDF abo URL websydła kuždeneho měnow. AI wuciń kóždу potrahu, cenu, wopisanje, alergeny a ingrediency — potom dospołni twój editor měnow w sekundach.",
+    "fmenu_ex1": "Fotografuj papierny měnow — kóždу položka wucijena a strukturowana hnydom.",
+    "fmenu_ex2": "Nastaw URL UberEats abo Deliveroo, zo by so twój žiwy online měnow synchronizował.",
+    "fmenu_ex3": "Nahraj PDF-lisćinu cen a maj ju hotowu k serbowanju z jednym klikem.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-nahrAwanje",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Hotowy",
+    "fmenu_mock_items": "Položki namakane a importowane"
   },
   "Auth": {
     "login_title": "RiveHub",

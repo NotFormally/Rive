@@ -250,7 +250,20 @@
     "gamification_desc": "Dè cho soilleir a tha do fhradharc? Thoir gnìomh air mèadhan 2 mionaid gus do sgòr abairt obrachaidh fhaighinn a-mach agus bathar-tasgaidh riaraichte a dhì-ghealadh.",
     "gamification_cta": "Gabh thairis air an measadh an-asgaidh →",
     "nb_menu_scan_title": "5. Sganadh Clàr-bìdh & Lionachadh Fèin-ghluasadach",
-    "nb_menu_scan_desc": "Luchdaich suas dealbh, PDF no URL làraich de bhòrd-bidhe sam bith. Tha AI a' tarraing a-mach gach soitheach, prìs, tuairisgeul, allergen agus ingredient — an uairsin a' lionachadh an sgrùdair clàr-bìdh agad ann an aon bhriogadh."
+    "nb_menu_scan_desc": "Luchdaich suas dealbh, PDF no URL làraich de bhòrd-bidhe sam bith. Tha AI a' tarraing a-mach gach soitheach, prìs, tuairisgeul, allergen agus ingredient — an uairsin a' lionachadh an sgrùdair clàr-bìdh agad ann an aon bhriogadh.",
+    "fmenu_title": "Sganadh Clàr-bìdh & Ion-phortachadh Fèin-ghluasadach",
+    "fmenu_desc": "Luchdaich suas dealbh, PDF, no URL làraich de chlàr-bìdh sam bith. Bidh AI a' toirt a-mach gach soitheach, prìs, tuairisgeul, allergen, agus ingredient — agus an uairsin a' cur do bhriogais-dheasachaidh clàr-bìdh ann an diog.",
+    "fmenu_ex1": "Tog dealbh de chlàr-bìdh pàipear — gach nì air a thoirt a-mach agus air a chur ann an òrdugh sa bhad.",
+    "fmenu_ex2": "Cuir URL UberEats no Deliveroo ann gu bhith co-chòrdail ri do chlàr-bìdh beò air-loidhne.",
+    "fmenu_ex3": "Luchdaich suas liosta prìsean PDF agus bidh e deiseil a bhith air a frithealadh ann an aon bhriogais.",
+    "fmenu_source_photo": "Dealbh / Camara",
+    "fmenu_source_pdf": "Luchdachadh PDF",
+    "fmenu_source_url": "URL / Lìon",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Deiseil",
+    "fmenu_mock_items": "Nithean air an lorg agus air an ion-phortachadh"
   },
   "Pricing": {
     "title": "Prìsean soilleir, buaidh fhìor.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Dè cho soilleir sa tha do fhradharc? Thoir gabhail air mion-sgrùdadh 2-mhionaid gus do sgòr abuachd obrachaidh a lorg agus leabhraichean targeted a dhì-ghealadh.",
     "gamification_cta": "Thoir an sgrudadh saor air adhart →",
     "nb_menu_scan_title": "5. Sganadh Clàr-bìdh & Lionachadh Fèin-ghluasadach",
-    "nb_menu_scan_desc": "Luchdaich suas dealbh, PDF no URL làraich de bhòrd-bidhe sam bith. Tha AI a' tarraing a-mach gach soitheach, prìs, tuairisgeul, allergen agus ingredient — an uairsin a' lionachadh an sgrùdair clàr-bìdh agad ann an aon bhriogadh."
+    "nb_menu_scan_desc": "Luchdaich suas dealbh, PDF no URL làraich de bhòrd-bidhe sam bith. Tha AI a' tarraing a-mach gach soitheach, prìs, tuairisgeul, allergen agus ingredient — an uairsin a' lionachadh an sgrùdair clàr-bìdh agad ann an aon bhriogadh.",
+    "fmenu_title": "Sganadh Clàr-bìdh & Ion-phortachadh Fèin-ghluasadach",
+    "fmenu_desc": "Luchdaich suas dealbh, PDF, no URL làraich de chlàr-bìdh sam bith. Bidh AI a' toirt a-mach gach soitheach, prìs, tuairisgeul, allergen, agus ingredient — agus an uairsin a' cur do bhriogais-dheasachaidh clàr-bìdh ann an diog.",
+    "fmenu_ex1": "Tog dealbh de chlàr-bìdh pàipear — gach nì air a thoirt a-mach agus air a chur ann an òrdugh sa bhad.",
+    "fmenu_ex2": "Cuir URL UberEats no Deliveroo ann gu bhith co-chòrdail ri do chlàr-bìdh beò air-loidhne.",
+    "fmenu_ex3": "Luchdaich suas liosta prìsean PDF agus bidh e deiseil a bhith air a frithealadh ann an aon bhriogais.",
+    "fmenu_source_photo": "Dealbh / Camara",
+    "fmenu_source_pdf": "Luchdachadh PDF",
+    "fmenu_source_url": "URL / Lìon",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Deiseil",
+    "fmenu_mock_items": "Nithean air an lorg agus air an ion-phortachadh"
   },
   "Auth": {
     "login_title": "RiveHub",

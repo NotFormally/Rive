@@ -250,7 +250,20 @@
     "gamification_desc": "Quantu è chiara a vosra visibilità? Fate una valutazione di 2 minuti per scuprì u vostru scoru di maturità operaziunale è sblocchì migliurame mirate.",
     "gamification_cta": "Fate a valutazione gratuita →",
     "nb_menu_scan_title": "5. Scanner di Minuta & Auto-Populazione",
-    "nb_menu_scan_desc": "Carica una foto, un PDF o l'URL d'un situ di qualsiasi minuta. L'IA estrae tutti i piatti, prezzi, descrizioni, allergeni è ingredienti — è poi popula l'editor di a minuta in un clic solu."
+    "nb_menu_scan_desc": "Carica una foto, un PDF o l'URL d'un situ di qualsiasi minuta. L'IA estrae tutti i piatti, prezzi, descrizioni, allergeni è ingredienti — è poi popula l'editor di a minuta in un clic solu.",
+    "fmenu_title": "Scanner di Carta & Importazione Automatica",
+    "fmenu_desc": "Carica una foto, PDF o URL di un situ web di qualsiasi carta. L'IA estrae ogni piatthu, prezzu, descrizzione, allergene è ingrediente — dopu popula u vostru editore di carta in pochi secondi.",
+    "fmenu_ex1": "Fà una foto di una carta di carta — ogni articulu estrattu è strutturatu à l'istante.",
+    "fmenu_ex2": "Incolla un URL di UberEats o Deliveroo per sincronizzà a vostra carta in linea.",
+    "fmenu_ex3": "Carica una lista di prezzi PDF è avete prontu à servisce in un clic.",
+    "fmenu_source_photo": "Foto / Fotocamera",
+    "fmenu_source_pdf": "Carica PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrazza.jpg",
+    "fmenu_mock_pdf_name": "carta_ibbiernu_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/u-bistrot",
+    "fmenu_mock_ready": "Prontu",
+    "fmenu_mock_items": "Articuli detectati è importati"
   },
   "Pricing": {
     "title": "Prezzi chiari, impattu reale.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Quantu hè clara a vostra visibilità? Fà una valutazione di 2 minuti per scuprì u vostru scoru di maturità operaziunale è schjappate miglioramenti mirati.",
     "gamification_cta": "Fà a valutazione gratuita →",
     "nb_menu_scan_title": "5. Scanner di Minuta & Auto-Populazione",
-    "nb_menu_scan_desc": "Carica una foto, un PDF o l'URL d'un situ di qualsiasi minuta. L'IA estrae tutti i piatti, prezzi, descrizioni, allergeni è ingredienti — è poi popula l'editor di a minuta in un clic solu."
+    "nb_menu_scan_desc": "Carica una foto, un PDF o l'URL d'un situ di qualsiasi minuta. L'IA estrae tutti i piatti, prezzi, descrizioni, allergeni è ingredienti — è poi popula l'editor di a minuta in un clic solu.",
+    "fmenu_title": "Scanner di Carta & Importazione Automatica",
+    "fmenu_desc": "Carica una foto, PDF o URL di un situ web di qualsiasi carta. L'IA estrae ogni piatthu, prezzu, descrizzione, allergene è ingrediente — dopu popula u vostru editore di carta in pochi secondi.",
+    "fmenu_ex1": "Fà una foto di una carta di carta — ogni articulu estrattu è strutturatu à l'istante.",
+    "fmenu_ex2": "Incolla un URL di UberEats o Deliveroo per sincronizzà a vostra carta in linea.",
+    "fmenu_ex3": "Carica una lista di prezzi PDF è avete prontu à servisce in un clic.",
+    "fmenu_source_photo": "Foto / Fotocamera",
+    "fmenu_source_pdf": "Carica PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrazza.jpg",
+    "fmenu_mock_pdf_name": "carta_ibbiernu_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/u-bistrot",
+    "fmenu_mock_ready": "Prontu",
+    "fmenu_mock_items": "Articuli detectati è importati"
   },
   "Auth": {
     "login_title": "RiveHub",

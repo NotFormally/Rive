@@ -250,7 +250,20 @@
     "gamification_desc": "你的可見性有多清晰？進行 2 分鐘的評估來發現你的營運成熟度分數，並解鎖有針對性的改進。",
     "gamification_cta": "進行免費評估 →",
     "nb_menu_scan_title": "5. 菜单扫描 & 自动填充",
-    "nb_menu_scan_desc": "上传任何菜单的照相、PDF 抑是网站网址。AI 会提掣逐个菜色、价格、说明、过敏原佮材料——随后一膏一声就会填满你的菜单编辑器。"
+    "nb_menu_scan_desc": "上传任何菜单的照相、PDF 抑是网站网址。AI 会提掣逐个菜色、价格、说明、过敏原佮材料——随后一膏一声就会填满你的菜单编辑器。",
+    "fmenu_title": "菜單掃描 & 自動導入",
+    "fmenu_desc": "上傳任何菜單的照片、PDF 或網站連結。AI 會提取每一道菜色、價格、描述、過敏原和食材——然後在幾秒內填入你的菜單編輯器。",
+    "fmenu_ex1": "拍一張紙本菜單的照片——每個項目都會立即被提取和結構化。",
+    "fmenu_ex2": "貼上 UberEats 或 Deliveroo 連結來同步你的線上菜單。",
+    "fmenu_ex3": "上傳 PDF 價目表，一鍵就能準備好上菜。",
+    "fmenu_source_photo": "照片 / 相機",
+    "fmenu_source_pdf": "PDF 上傳",
+    "fmenu_source_url": "連結 / 網頁",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "準備好",
+    "fmenu_mock_items": "項目已偵測並導入"
   },
   "Pricing": {
     "title": "清楚的價格，實在的效果。",
@@ -405,7 +418,20 @@
     "gamification_desc": "你的營運透明度有多高？花 2 分鐘做評估，發現你的營運成熟度分數，並解鎖針對性改進。",
     "gamification_cta": "進行免費評估 →",
     "nb_menu_scan_title": "5. 菜单扫描 & 自动填充",
-    "nb_menu_scan_desc": "上传任何菜单的照相、PDF 抑是网站网址。AI 会提掣逐个菜色、价格、说明、过敏原佮材料——随后一膏一声就会填满你的菜单编辑器。"
+    "nb_menu_scan_desc": "上传任何菜单的照相、PDF 抑是网站网址。AI 会提掣逐个菜色、价格、说明、过敏原佮材料——随后一膏一声就会填满你的菜单编辑器。",
+    "fmenu_title": "菜單掃描 & 自動導入",
+    "fmenu_desc": "上傳任何菜單的照片、PDF 或網站連結。AI 會提取每一道菜色、價格、描述、過敏原和食材——然後在幾秒內填入你的菜單編輯器。",
+    "fmenu_ex1": "拍一張紙本菜單的照片——每個項目都會立即被提取和結構化。",
+    "fmenu_ex2": "貼上 UberEats 或 Deliveroo 連結來同步你的線上菜單。",
+    "fmenu_ex3": "上傳 PDF 價目表，一鍵就能準備好上菜。",
+    "fmenu_source_photo": "照片 / 相機",
+    "fmenu_source_pdf": "PDF 上傳",
+    "fmenu_source_url": "連結 / 網頁",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "準備好",
+    "fmenu_mock_items": "項目已偵測並導入"
   },
   "Auth": {
     "login_title": "RiveHub",

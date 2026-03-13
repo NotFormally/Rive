@@ -250,7 +250,20 @@
     "gamification_desc": "Cé chomh soiléir atá do radharc? Tóg measúnú 2-nóiméad chun do scór aibíochtai oibríochtúil a fháil amach agus feabhsúcháin dhírithe a scaoileadh.",
     "gamification_cta": "Tóg an measúnú saor in aisce →",
     "nb_menu_scan_title": "5. Scanadóir Roghchlár & Líonadh Uathoibríoch",
-    "nb_menu_scan_desc": "Uaslódáil grianghraf, PDF nó URL suíomh de roghchlár ar bith. Baineann AI gach dís, praghas, cur síos, ailéirgín agus comhábhar as — ansin líonann sé d'eagarthóir roghchlár i ngéad amháin."
+    "nb_menu_scan_desc": "Uaslódáil grianghraf, PDF nó URL suíomh de roghchlár ar bith. Baineann AI gach dís, praghas, cur síos, ailéirgín agus comhábhar as — ansin líonann sé d'eagarthóir roghchlár i ngéad amháin.",
+    "fmenu_title": "Scanadh Menus & Iompórtáil Uathoibríoch",
+    "fmenu_desc": "Uaslódáil grianghraf, PDF, nó URL suíomh gréine d'aon bhiachlár. Baineann AI gach seanbhia, praghas, cur síos, allergen, agus comhábhar amach — ansin líonann sé do eagarthóir biachlár in soicind.",
+    "fmenu_ex1": "Tóg grianghraf de bhiachlár páipéir — gach míreanna bhaint amach agus struchtúrtha ar an toirt.",
+    "fmenu_ex2": "Greamaigh URL UberEats nó Deliveroo chun do bhiachlár beo ar líne a shioncronú.",
+    "fmenu_ex3": "Uaslódáil liosta praghsanna PDF agus bheith réidh freastal air i ngéarán amháin.",
+    "fmenu_source_photo": "Grianghraf / Ceamara",
+    "fmenu_source_pdf": "Uaslódáil PDF",
+    "fmenu_source_url": "URL / Gréasán",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Réidh",
+    "fmenu_mock_items": "Míreanna brathaithe agus iompórtáilte"
   },
   "Pricing": {
     "title": "Praghsáil soiléir, tionchar fíor.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Cé chomh soiléir atá do infhaicsinneacht? Tóg an measúnú 2-nóiméad saor in aisce chun do scór aibíochtúlachta oibríochtúil a fhionn agus feabhsúcháin dhírithe a oscailt.",
     "gamification_cta": "Tóg an measúnú saor in aisce →",
     "nb_menu_scan_title": "5. Scanadóir Roghchlár & Líonadh Uathoibríoch",
-    "nb_menu_scan_desc": "Uaslódáil grianghraf, PDF nó URL suíomh de roghchlár ar bith. Baineann AI gach dís, praghas, cur síos, ailéirgín agus comhábhar as — ansin líonann sé d'eagarthóir roghchlár i ngéad amháin."
+    "nb_menu_scan_desc": "Uaslódáil grianghraf, PDF nó URL suíomh de roghchlár ar bith. Baineann AI gach dís, praghas, cur síos, ailéirgín agus comhábhar as — ansin líonann sé d'eagarthóir roghchlár i ngéad amháin.",
+    "fmenu_title": "Scanadh Menus & Iompórtáil Uathoibríoch",
+    "fmenu_desc": "Uaslódáil grianghraf, PDF, nó URL suíomh gréine d'aon bhiachlár. Baineann AI gach seanbhia, praghas, cur síos, allergen, agus comhábhar amach — ansin líonann sé do eagarthóir biachlár in soicind.",
+    "fmenu_ex1": "Tóg grianghraf de bhiachlár páipéir — gach míreanna bhaint amach agus struchtúrtha ar an toirt.",
+    "fmenu_ex2": "Greamaigh URL UberEats nó Deliveroo chun do bhiachlár beo ar líne a shioncronú.",
+    "fmenu_ex3": "Uaslódáil liosta praghsanna PDF agus bheith réidh freastal air i ngéarán amháin.",
+    "fmenu_source_photo": "Grianghraf / Ceamara",
+    "fmenu_source_pdf": "Uaslódáil PDF",
+    "fmenu_source_url": "URL / Gréasán",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Réidh",
+    "fmenu_mock_items": "Míreanna brathaithe agus iompórtáilte"
   },
   "Auth": {
     "login_title": "RiveHub",

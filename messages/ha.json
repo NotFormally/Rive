@@ -250,7 +250,20 @@
     "gamification_desc": "Menene ƙaranƙaryar ku? Dauki bayanan 2-minute don gano matsakaicin shirya na aiki naka da bude ƙarfi na nuni.",
     "gamification_cta": "Dauki bayanan na kyauta →",
     "nb_menu_scan_title": "5. Duba Jerin Abinci & Cikakke Kai Tsaye",
-    "nb_menu_scan_desc": "Kada hoto, PDF ko adreshin gida na jerin abinci. AI yana haifar da kowane jiya, farashin, bayanai, gida masu kauna da sinadari — sannan yana cikakke editon jerin abinci na gida a dambe guda."
+    "nb_menu_scan_desc": "Kada hoto, PDF ko adreshin gida na jerin abinci. AI yana haifar da kowane jiya, farashin, bayanai, gida masu kauna da sinadari — sannan yana cikakke editon jerin abinci na gida a dambe guda.",
+    "fmenu_title": "Menu Scanner & Shiga Jiya Sauri",
+    "fmenu_desc": "Tanna hoto, PDF, ko API na gida mai menu. AI yana fitar da kowane hidima, farashin, bayanin, gida masu cutarki, da kayan halittu — sannan yana cika editon menu din ka a cikin dakika.",
+    "fmenu_ex1": "Ɗauki hoto na kagarki menu — kowane abin ya fito da ya tsari nan takeyi.",
+    "fmenu_ex2": "Pasé URL na UberEats ko Deliveroo don haɗa menu din ka mai taba.",
+    "fmenu_ex3": "Tanna PDF ta farashin kuma yi ta shirya don yi aiki a takwas daya.",
+    "fmenu_source_photo": "Hoto / Kyamira",
+    "fmenu_source_pdf": "Tanna PDF",
+    "fmenu_source_url": "URL / Intanet",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "A shirya",
+    "fmenu_mock_items": "Abubuwan da aka gani & aka shiga"
   },
   "Pricing": {
     "title": "Farashin da aka sarƙa, tasiri na ainihi.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Shin, inane ne duba-dubakak? Karanta abin mintina 2 don gano yankin tsarin ka da buɗe ingantattun mabambanci.",
     "gamification_cta": "Karanta abin mintina kyauta →",
     "nb_menu_scan_title": "5. Duba Jerin Abinci & Cikakke Kai Tsaye",
-    "nb_menu_scan_desc": "Kada hoto, PDF ko adreshin gida na jerin abinci. AI yana haifar da kowane jiya, farashin, bayanai, gida masu kauna da sinadari — sannan yana cikakke editon jerin abinci na gida a dambe guda."
+    "nb_menu_scan_desc": "Kada hoto, PDF ko adreshin gida na jerin abinci. AI yana haifar da kowane jiya, farashin, bayanai, gida masu kauna da sinadari — sannan yana cikakke editon jerin abinci na gida a dambe guda.",
+    "fmenu_title": "Menu Scanner & Shiga Jiya Sauri",
+    "fmenu_desc": "Tanna hoto, PDF, ko API na gida mai menu. AI yana fitar da kowane hidima, farashin, bayanin, gida masu cutarki, da kayan halittu — sannan yana cika editon menu din ka a cikin dakika.",
+    "fmenu_ex1": "Ɗauki hoto na kagarki menu — kowane abin ya fito da ya tsari nan takeyi.",
+    "fmenu_ex2": "Pasé URL na UberEats ko Deliveroo don haɗa menu din ka mai taba.",
+    "fmenu_ex3": "Tanna PDF ta farashin kuma yi ta shirya don yi aiki a takwas daya.",
+    "fmenu_source_photo": "Hoto / Kyamira",
+    "fmenu_source_pdf": "Tanna PDF",
+    "fmenu_source_url": "URL / Intanet",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "A shirya",
+    "fmenu_mock_items": "Abubuwan da aka gani & aka shiga"
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -235,7 +235,20 @@
     "gamification_desc": "Görünürlüğünüz ne kadar net? 2 dakikalık bir değerlendirme yaparak operasyonel olgunluk puanınızı keşfedin ve hedeflenen iyileştirmeleri açın.",
     "gamification_cta": "Ücretsiz değerlendirmeyi al →",
     "nb_menu_scan_title": "5. Menü Tarayıcısı ve Otomatik Doldurma",
-    "nb_menu_scan_desc": "Herhangi bir menünün fotoğrafını, PDF'sini veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamasını, alerjenleri ve malzemeleri çıkarır — ardından menü editörünüzü tek tıklamayla doldurur."
+    "nb_menu_scan_desc": "Herhangi bir menünün fotoğrafını, PDF'sini veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamasını, alerjenleri ve malzemeleri çıkarır — ardından menü editörünüzü tek tıklamayla doldurur.",
+    "fmenu_title": "Menü Tarayıcı & Otomatik İçe Aktarma",
+    "fmenu_desc": "Herhangi bir menünün fotoğrafını, PDF dosyasını veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamayı, alerjeni ve malzemeyi çıkarır — ardından menü düzenleyicinizi saniyeler içinde doldurur.",
+    "fmenu_ex1": "Kağıt bir menünün fotoğrafını çekin — her öğe anında çıkarılıp yapılandırılır.",
+    "fmenu_ex2": "UberEats veya Deliveroo URL'sini yapıştırarak canlı çevrimiçi menünüzü senkronize edin.",
+    "fmenu_ex3": "PDF fiyat listesini yükleyin ve bir tıkla sunmaya hazır hale getirin.",
+    "fmenu_source_photo": "Fotoğraf / Kamera",
+    "fmenu_source_pdf": "PDF Yükleme",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Hazır",
+    "fmenu_mock_items": "Öğeler algılandı ve içe aktarıldı"
   },
   "Pricing": {
     "title": "Net fiyatlandırma, gerçek etki.",
@@ -390,7 +403,20 @@
     "gamification_desc": "Görünürlüğünüz ne kadar net? Operasyonel olgunluk puanınızı keşfetmek ve hedeflenmiş iyileştirmeler kilidini açmak için 2 dakikalık bir değerlendirme yapın.",
     "gamification_cta": "Ücretsiz değerlendirmeyi yapın →",
     "nb_menu_scan_title": "5. Menü Tarayıcısı ve Otomatik Doldurma",
-    "nb_menu_scan_desc": "Herhangi bir menünün fotoğrafını, PDF'sini veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamasını, alerjenleri ve malzemeleri çıkarır — ardından menü editörünüzü tek tıklamayla doldurur."
+    "nb_menu_scan_desc": "Herhangi bir menünün fotoğrafını, PDF'sini veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamasını, alerjenleri ve malzemeleri çıkarır — ardından menü editörünüzü tek tıklamayla doldurur.",
+    "fmenu_title": "Menü Tarayıcı & Otomatik İçe Aktarma",
+    "fmenu_desc": "Herhangi bir menünün fotoğrafını, PDF dosyasını veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamayı, alerjeni ve malzemeyi çıkarır — ardından menü düzenleyicinizi saniyeler içinde doldurur.",
+    "fmenu_ex1": "Kağıt bir menünün fotoğrafını çekin — her öğe anında çıkarılıp yapılandırılır.",
+    "fmenu_ex2": "UberEats veya Deliveroo URL'sini yapıştırarak canlı çevrimiçi menünüzü senkronize edin.",
+    "fmenu_ex3": "PDF fiyat listesini yükleyin ve bir tıkla sunmaya hazır hale getirin.",
+    "fmenu_source_photo": "Fotoğraf / Kamera",
+    "fmenu_source_pdf": "PDF Yükleme",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Hazır",
+    "fmenu_mock_items": "Öğeler algılandı ve içe aktarıldı"
   },
   "Auth": {
     "login_title": "RiveHub",

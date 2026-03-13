@@ -250,7 +250,20 @@
     "gamification_desc": "Macho yako ni wazi kiasi gani? Chukua tathmini ya dakika 2 kupata alama ya ukomavu wa utendaji na kufungua maboresho yenye lengo.",
     "gamification_cta": "Chukua tathmini bila malipo →",
     "nb_menu_scan_title": "5. Skaner ya Menyu na Kujaza Kiotomatiki",
-    "nb_menu_scan_desc": "Pakia picha, PDF au URL ya tovuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, alerjeni na kigeu — kisha inapopiga menyu yako katika gurudumu moja."
+    "nb_menu_scan_desc": "Pakia picha, PDF au URL ya tovuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, alerjeni na kigeu — kisha inapopiga menyu yako katika gurudumu moja.",
+    "fmenu_title": "Skana Menyu & Kuagiza Tena",
+    "fmenu_desc": "Pakia picha, PDF, au URL ya wavuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, allergen, na kuzuza kiharusi chako cha menyu katika sekunde.",
+    "fmenu_ex1": "Piga picha ya menyu ya karatasi — kila bidhaa inatoka na kuandaliwa mara moja.",
+    "fmenu_ex2": "Bandika URL ya UberEats au Deliveroo ili kupatanisha menyu yako halisi ya mtandao.",
+    "fmenu_ex3": "Pakia PDF ya bei na iwe tayari kutumika kwa click moja.",
+    "fmenu_source_photo": "Picha / Kamera",
+    "fmenu_source_pdf": "Kuagiza PDF",
+    "fmenu_source_url": "URL / Wavuti",
+    "fmenu_mock_photo_name": "menyu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Tayari",
+    "fmenu_mock_items": "Bidhaa zilizogundulika na kuagizwa"
   },
   "Pricing": {
     "title": "Bei iliyofafanuliwa, matokeo yenye madhimisho.",
@@ -406,7 +419,20 @@
     "gamification_desc": "Je, macho yako ni wazi kiasi gani? Kamatia tathmini ya dakika 2 ili kugundua alama yako ya kuzaa na fungua maboresho yanayolengana.",
     "gamification_cta": "Kamatia tathmini ya bure →",
     "nb_menu_scan_title": "5. Skaner ya Menyu na Kujaza Kiotomatiki",
-    "nb_menu_scan_desc": "Pakia picha, PDF au URL ya tovuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, alerjeni na kigeu — kisha inapopiga menyu yako katika gurudumu moja."
+    "nb_menu_scan_desc": "Pakia picha, PDF au URL ya tovuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, alerjeni na kigeu — kisha inapopiga menyu yako katika gurudumu moja.",
+    "fmenu_title": "Skana Menyu & Kuagiza Tena",
+    "fmenu_desc": "Pakia picha, PDF, au URL ya wavuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, allergen, na kuzuza kiharusi chako cha menyu katika sekunde.",
+    "fmenu_ex1": "Piga picha ya menyu ya karatasi — kila bidhaa inatoka na kuandaliwa mara moja.",
+    "fmenu_ex2": "Bandika URL ya UberEats au Deliveroo ili kupatanisha menyu yako halisi ya mtandao.",
+    "fmenu_ex3": "Pakia PDF ya bei na iwe tayari kutumika kwa click moja.",
+    "fmenu_source_photo": "Picha / Kamera",
+    "fmenu_source_pdf": "Kuagiza PDF",
+    "fmenu_source_url": "URL / Wavuti",
+    "fmenu_mock_photo_name": "menyu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Tayari",
+    "fmenu_mock_items": "Bidhaa zilizogundulika na kuagizwa"
   },
   "Auth": {
     "login_title": "RiveHub",

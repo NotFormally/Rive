@@ -250,7 +250,20 @@
     "gamification_desc": "Milyen egyértelmű a láthatóságod? Végezz el egy 2 perces felmérést, hogy felfedezd az operatív érettségi pontszámodat és oldj fel célzott fejlesztéseket.",
     "gamification_cta": "Végezd el az ingyenes felmérést →",
     "nb_menu_scan_title": "5. Étlap-szkenner és automatikus kitöltés",
-    "nb_menu_scan_desc": "Töltse fel bármely étlap fotóját, PDF-jét vagy weboldal URL-jét. A mesterséges intelligencia kinyeri az összes ételt, árat, leírást, allergént és összetevőt — majd egyetlen kattintással feltölti az étlap szerkesztőjét."
+    "nb_menu_scan_desc": "Töltse fel bármely étlap fotóját, PDF-jét vagy weboldal URL-jét. A mesterséges intelligencia kinyeri az összes ételt, árat, leírást, allergént és összetevőt — majd egyetlen kattintással feltölti az étlap szerkesztőjét.",
+    "fmenu_title": "Étlap-szkenner és automatikus importálás",
+    "fmenu_desc": "Töltsön fel egy fotót, PDF-et vagy weboldal URL-címet bármely étlapról. A mesterséges intelligencia feldolgozza minden ételt, árat, leírást, allergént és hozzávalót — majd másodpercek alatt feltölti az étlap szerkesztőjét.",
+    "fmenu_ex1": "Készítsen fotót egy papír étlapról — minden tétel azonnal feldolgozva és strukturálva.",
+    "fmenu_ex2": "Illessze be az UberEats vagy Deliveroo URL-címét az élő online étlap szinkronizálásához.",
+    "fmenu_ex3": "Töltsön fel egy PDF árlistát, és egy kattintásra készen áll a felszolgálásra.",
+    "fmenu_source_photo": "Fotó / Kamera",
+    "fmenu_source_pdf": "PDF feltöltés",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Kész",
+    "fmenu_mock_items": "Tételek felismerve és importálva"
   },
   "Pricing": {
     "title": "Tiszta árazás, valódi hatás.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Milyen tiszta az operatív rálátásod? Végezz egy 2 perces felmérést, hogy felfedezd az operatív érettségi pontod és feloldhass célzott fejlesztéseket.",
     "gamification_cta": "Végezd el az ingyenes felmérést →",
     "nb_menu_scan_title": "5. Étlap-szkenner és automatikus kitöltés",
-    "nb_menu_scan_desc": "Töltse fel bármely étlap fotóját, PDF-jét vagy weboldal URL-jét. A mesterséges intelligencia kinyeri az összes ételt, árat, leírást, allergént és összetevőt — majd egyetlen kattintással feltölti az étlap szerkesztőjét."
+    "nb_menu_scan_desc": "Töltse fel bármely étlap fotóját, PDF-jét vagy weboldal URL-jét. A mesterséges intelligencia kinyeri az összes ételt, árat, leírást, allergént és összetevőt — majd egyetlen kattintással feltölti az étlap szerkesztőjét.",
+    "fmenu_title": "Étlap-szkenner és automatikus importálás",
+    "fmenu_desc": "Töltsön fel egy fotót, PDF-et vagy weboldal URL-címet bármely étlapról. A mesterséges intelligencia feldolgozza minden ételt, árat, leírást, allergént és hozzávalót — majd másodpercek alatt feltölti az étlap szerkesztőjét.",
+    "fmenu_ex1": "Készítsen fotót egy papír étlapról — minden tétel azonnal feldolgozva és strukturálva.",
+    "fmenu_ex2": "Illessze be az UberEats vagy Deliveroo URL-címét az élő online étlap szinkronizálásához.",
+    "fmenu_ex3": "Töltsön fel egy PDF árlistát, és egy kattintásra készen áll a felszolgálásra.",
+    "fmenu_source_photo": "Fotó / Kamera",
+    "fmenu_source_pdf": "PDF feltöltés",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Kész",
+    "fmenu_mock_items": "Tételek felismerve és importálva"
   },
   "Auth": {
     "login_title": "RiveHub",

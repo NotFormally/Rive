@@ -250,7 +250,20 @@
     "gamification_desc": "Jak jasna jest Twoja widoczność? Wykonaj 2-minutową ocenę, aby odkryć swój wynik dojrzałości operacyjnej i odblokować ukierunkowane ulepszenia.",
     "gamification_cta": "Weź udział w bezpłatnej ocenie →",
     "nb_menu_scan_title": "5. Skaner menu i automatyczne wypełnianie",
-    "nb_menu_scan_desc": "Prześlij zdjęcie, plik PDF lub adres URL strony internetowej dowolnego menu. Sztuczna inteligencja wyodrębnia wszystkie potrawy, ceny, opisy, alergeny i składniki — a następnie wypełnia edytor menu jednym klikiem."
+    "nb_menu_scan_desc": "Prześlij zdjęcie, plik PDF lub adres URL strony internetowej dowolnego menu. Sztuczna inteligencja wyodrębnia wszystkie potrawy, ceny, opisy, alergeny i składniki — a następnie wypełnia edytor menu jednym klikiem.",
+    "fmenu_title": "Skaner Menu & Automatyczny Import",
+    "fmenu_desc": "Prześlij zdjęcie, PDF lub adres URL dowolnego menu. Sztuczna inteligencja wyodrębnia każde danie, cenę, opis, alergeny i składniki — a następnie wypełnia edytor menu w kilka sekund.",
+    "fmenu_ex1": "Zrób zdjęcie menu papierowego — każdy element wyodrębniany i strukturyzowany natychmiast.",
+    "fmenu_ex2": "Wklej link UberEats lub Deliveroo, aby zsynchronizować Twoje live'owe menu internetowe.",
+    "fmenu_ex3": "Prześlij PDF z listą cen i przygotuj go do serwowania jednym kliknięciem.",
+    "fmenu_source_photo": "Zdjęcie / Kamera",
+    "fmenu_source_pdf": "Przesyłanie PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_taras.jpg",
+    "fmenu_mock_pdf_name": "karta_zima_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Gotowe",
+    "fmenu_mock_items": "Pozycje wykryte i zaimportowane"
   },
   "Pricing": {
     "title": "Przejrzyste ceny, rzeczywisty wpływ.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Jak jasna jest twoja widoczność? Wykonaj 2-minutową ocenę, aby odkryć swój wynik dojrzałości operacyjnej i odblokować ukierunkowane ulepszenia.",
     "gamification_cta": "Wykonaj bezpłatną ocenę →",
     "nb_menu_scan_title": "5. Skaner menu i automatyczne wypełnianie",
-    "nb_menu_scan_desc": "Prześlij zdjęcie, plik PDF lub adres URL strony internetowej dowolnego menu. Sztuczna inteligencja wyodrębnia wszystkie potrawy, ceny, opisy, alergeny i składniki — a następnie wypełnia edytor menu jednym klikiem."
+    "nb_menu_scan_desc": "Prześlij zdjęcie, plik PDF lub adres URL strony internetowej dowolnego menu. Sztuczna inteligencja wyodrębnia wszystkie potrawy, ceny, opisy, alergeny i składniki — a następnie wypełnia edytor menu jednym klikiem.",
+    "fmenu_title": "Skaner Menu & Automatyczny Import",
+    "fmenu_desc": "Prześlij zdjęcie, PDF lub adres URL dowolnego menu. Sztuczna inteligencja wyodrębnia każde danie, cenę, opis, alergeny i składniki — a następnie wypełnia edytor menu w kilka sekund.",
+    "fmenu_ex1": "Zrób zdjęcie menu papierowego — każdy element wyodrębniany i strukturyzowany natychmiast.",
+    "fmenu_ex2": "Wklej link UberEats lub Deliveroo, aby zsynchronizować Twoje live'owe menu internetowe.",
+    "fmenu_ex3": "Prześlij PDF z listą cen i przygotuj go do serwowania jednym kliknięciem.",
+    "fmenu_source_photo": "Zdjęcie / Kamera",
+    "fmenu_source_pdf": "Przesyłanie PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_taras.jpg",
+    "fmenu_mock_pdf_name": "karta_zima_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Gotowe",
+    "fmenu_mock_items": "Pozycje wykryte i zaimportowane"
   },
   "Auth": {
     "login_title": "RiveHub",

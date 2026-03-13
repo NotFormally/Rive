@@ -250,7 +250,20 @@
     "gamification_desc": "የእርስዎ ምስላዊ ግንዛቤ ምን ያህል ግልጽ ነው? የእርስዎን ስራ አቅጣጫ መሠረታዊ ነጥብ ያገኙ እና አቅጦ ማሻሻሊያ ከ 2-ደቂቃ ገምጋሚ ይፈታተውት።",
     "gamification_cta": "ነጻ ገምጋሚ ውሰድ →",
     "nb_menu_scan_title": "5. ምግብ ዝርዝር ስካነር እና ራስ-ሙላት",
-    "nb_menu_scan_desc": "የማንኛውም ምግብ ዝርዝር ፎቶ፣ PDF ወይም ድረ-ገጽ URL ይጫኑ። AI ሁሉንም ምግብ፣ ዋጋ፣ መግለጫ፣ አለርጂ እና ንጥረ ነገር ያወጣል — በአንድ ጠቅታ ምግብ ዝርዝር አርታኢዎን ይሞላል።"
+    "nb_menu_scan_desc": "የማንኛውም ምግብ ዝርዝር ፎቶ፣ PDF ወይም ድረ-ገጽ URL ይጫኑ። AI ሁሉንም ምግብ፣ ዋጋ፣ መግለጫ፣ አለርጂ እና ንጥረ ነገር ያወጣል — በአንድ ጠቅታ ምግብ ዝርዝር አርታኢዎን ይሞላል።",
+    "fmenu_title": "ምናሌ ስካነር እና አውቶ-ማስመጣት",
+    "fmenu_desc": "ማንኛውም ምናሌ ፎቶ፣ PDF ወይም ዌብሳይት URL ያስቀምጡ። AI እያንዳንዱን ምግብ፣ ዋጋ፣ መግለጫ፣ ስነ-ምግባር አፈጣጠር እና ንጥረ ነገር ያወጣ — ከዚያም የእርስዎን ምናሌ አርታኢ በሰከንድ ለውጥ ይሞላል።",
+    "fmenu_ex1": "ወረቀት ምናሌ ፎቶ ይወስዱ — እያንዳንዱ ንጥል በፍጥነት ተወጥረ ተዘጋጅቷል።",
+    "fmenu_ex2": "UberEats ወይም Deliveroo URL ለጋበዙ የእርስዎን ライve ምናሌ ለማመሳሰል።",
+    "fmenu_ex3": "PDF ዋጋ ዝርዝር ያስቀምጡ እና በአንድ ጠቅ ለማገልገል ዝግጁ አድርጉት።",
+    "fmenu_source_photo": "ፎቶ / ካሜራ",
+    "fmenu_source_pdf": "PDF ማስቀመጫ",
+    "fmenu_source_url": "URL / ወብ",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "ዝግጁ",
+    "fmenu_mock_items": "ንጥሎች የተገኙ እና የተወቃወቁ"
   },
   "Pricing": {
     "title": "ግልጽ ዋጋ, ትክክለኛ ምላሽ.",
@@ -405,7 +418,20 @@
     "gamification_desc": "የእርስዎ እይታ ምንም ያህል ግልጽ ነው? 2 ደቂቃ ትንተና ይወስዱ ለሚሚዚ አሠራር ብስጥናት ነጥብ ግኝት አደገ ታለ።",
     "gamification_cta": "ነጻ ታርጋ ዐውላይ →",
     "nb_menu_scan_title": "5. ምግብ ዝርዝር ስካነር እና ራስ-ሙላት",
-    "nb_menu_scan_desc": "የማንኛውም ምግብ ዝርዝር ፎቶ፣ PDF ወይም ድረ-ገጽ URL ይጫኑ። AI ሁሉንም ምግብ፣ ዋጋ፣ መግለጫ፣ አለርጂ እና ንጥረ ነገር ያወጣል — በአንድ ጠቅታ ምግብ ዝርዝር አርታኢዎን ይሞላል።"
+    "nb_menu_scan_desc": "የማንኛውም ምግብ ዝርዝር ፎቶ፣ PDF ወይም ድረ-ገጽ URL ይጫኑ። AI ሁሉንም ምግብ፣ ዋጋ፣ መግለጫ፣ አለርጂ እና ንጥረ ነገር ያወጣል — በአንድ ጠቅታ ምግብ ዝርዝር አርታኢዎን ይሞላል።",
+    "fmenu_title": "ምናሌ ስካነር እና አውቶ-ማስመጣት",
+    "fmenu_desc": "ማንኛውም ምናሌ ፎቶ፣ PDF ወይም ዌብሳይት URL ያስቀምጡ። AI እያንዳንዱን ምግብ፣ ዋጋ፣ መግለጫ፣ ስነ-ምግባር አፈጣጠር እና ንጥረ ነገር ያወጣ — ከዚያም የእርስዎን ምናሌ አርታኢ በሰከንድ ለውጥ ይሞላል።",
+    "fmenu_ex1": "ወረቀት ምናሌ ፎቶ ይወስዱ — እያንዳንዱ ንጥል በፍጥነት ተወጥረ ተዘጋጅቷል።",
+    "fmenu_ex2": "UberEats ወይም Deliveroo URL ለጋበዙ የእርስዎን live ምናሌ ለማመሳሰል።",
+    "fmenu_ex3": "PDF ዋጋ ዝርዝር ያስቀምጡ እና በአንድ ጠቅ ለማገልገል ዝግጁ አድርጉት።",
+    "fmenu_source_photo": "ፎቶ / ካሜራ",
+    "fmenu_source_pdf": "PDF ማስቀመጫ",
+    "fmenu_source_url": "URL / ወብ",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "ዝግጁ",
+    "fmenu_mock_items": "ንጥሎች የተገኙ እና የተወቃወቁ"
   },
   "Auth": {
     "login_title": "RiveHub",

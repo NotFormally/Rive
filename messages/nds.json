@@ -250,7 +250,20 @@
     "gamification_desc": "Wo klear is dien Sicht? Maak en 2-Minuten-Bewürden un dissekover dien operationell Rijp-Puunk un freeschaft målrichtiet Forbeteringen.",
     "gamification_cta": "Maak de frie Bewürden →",
     "nb_menu_scan_title": "5. Speisekort-Scanner & Automaatsch Invüllen",
-    "nb_menu_scan_desc": "Laad en Foto, PDF or Websiet-URL vun jeedeen Speisekort hooch. KI-Systeem extrahiert elk Gericht, Pries, Beschriefung, Allergen un Ingredienten — un fullt denn dien Speisekort-Redetor mit een Klock."
+    "nb_menu_scan_desc": "Laad en Foto, PDF or Websiet-URL vun jeedeen Speisekort hooch. KI-Systeem extrahiert elk Gericht, Pries, Beschriefung, Allergen un Ingredienten — un fullt denn dien Speisekort-Redetor mit een Klock.",
+    "fmenu_title": "Speisekort-Scanner & Auto-Import",
+    "fmenu_desc": "Laad en Foto, PDF oder Website-URL vun en Speisekort hoch. KI ekstrahiert elk Gericht, Pris, Beschrievung, Allergen un Ingredienzien — un füllt dien Speisekort-Editor in Sekunden.",
+    "fmenu_ex1": "Maak en Foto vun en Papier-Speisekort — elk Artikel word direkt ekstrahiert un strukturiert.",
+    "fmenu_ex2": "Paste en UberEats oder Deliveroo-URL to sync dien live Online-Speisekort.",
+    "fmenu_ex3": "Laad en PDF-Priesliste hoch un hev se ready to serve mit een Klick.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-Upload",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terasse.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Ready",
+    "fmenu_mock_items": "Artikels funnen & importiert"
   },
   "Pricing": {
     "title": "Klore Priesing, echte Wirkung.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Wie klaar is dine Siicht? Maak en 2-Minuten-Assesment, üm dinen Bedriefsfälligkeitsscoor to entdecken un gezihlte Verbetern to Freischalten.",
     "gamification_cta": "Neehm de fri Assessment →",
     "nb_menu_scan_title": "5. Speisekort-Scanner & Automaatsch Invüllen",
-    "nb_menu_scan_desc": "Laad en Foto, PDF or Websiet-URL vun jeedeen Speisekort hooch. KI-Systeem extrahiert elk Gericht, Pries, Beschriefung, Allergen un Ingredienten — un fullt denn dien Speisekort-Redetor mit een Klock."
+    "nb_menu_scan_desc": "Laad en Foto, PDF or Websiet-URL vun jeedeen Speisekort hooch. KI-Systeem extrahiert elk Gericht, Pries, Beschriefung, Allergen un Ingredienten — un fullt denn dien Speisekort-Redetor mit een Klock.",
+    "fmenu_title": "Speisekort-Scanner & Auto-Import",
+    "fmenu_desc": "Laad en Foto, PDF oder Website-URL vun en Speisekort hoch. KI ekstrahiert elk Gericht, Pris, Beschrievung, Allergen un Ingredienzien — un füllt dien Speisekort-Editor in Sekunden.",
+    "fmenu_ex1": "Maak en Foto vun en Papier-Speisekort — elk Artikel word direkt ekstrahiert un strukturiert.",
+    "fmenu_ex2": "Paste en UberEats oder Deliveroo-URL to sync dien live Online-Speisekort.",
+    "fmenu_ex3": "Laad en PDF-Priesliste hoch un hev se ready to serve mit een Klick.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "PDF-Upload",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terasse.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Ready",
+    "fmenu_mock_items": "Artikels funnen & importiert"
   },
   "Auth": {
     "login_title": "RiveHub",

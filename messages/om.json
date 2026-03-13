@@ -250,7 +250,20 @@
     "gamification_desc": "Mul'atni kee ol-seenuun qallee ta'a? Haaltura 2-daqiiqaa yeroo ta'ee hubannoo ol-seenuun hojiirra buufata kee argachuu fi fooyyessuu gara ta'e banaadhee.",
     "gamification_cta": "Haaltura bilisaa fudhadhu →",
     "nb_menu_scan_title": "5. Scan Galmeee & Guutuu Ofmeedhaan",
-    "nb_menu_scan_desc": "Murtii, PDF ykn URL webbisaayitii galmee kamiyyuu ol kaasiif. AI midhaan, gatii, ibsa, waan nama hafu fi geeddoo hunduu baasaa galmee gulaleessaa keessan tokko cuqaasaan guutaa."
+    "nb_menu_scan_desc": "Murtii, PDF ykn URL webbisaayitii galmee kamiyyuu ol kaasiif. AI midhaan, gatii, ibsa, waan nama hafu fi geeddoo hunduu baasaa galmee gulaleessaa keessan tokko cuqaasaan guutaa.",
+    "fmenu_title": "Menu Scanner & Keessummaasii Automatikaa",
+    "fmenu_desc": "Suuraa, PDF, ykn URL gabbira menu kamiyyuu ol seequu. AI hidda hunda, gatii, ibsa, allergen, fi wanta jidha guggura — achiir editor menu keessan sekoonaaleetti guutuu.",
+    "fmenu_ex1": "Suuraa menu waraqaa tokko garagaala — hidda hunda gugguruu fi haala sadarkaa ta'ee fallanee akka jiru.",
+    "fmenu_ex2": "URL UberEats ykn Deliveroo keessa galchiisuu menu online jirtuu keessan walsiisuuf.",
+    "fmenu_ex3": "Lakkoofsaa gatii PDF ol seequu fi lakkoofsa lamaafan tajajiluu dandee't.",
+    "fmenu_source_photo": "Suuraa / Kaamiraa",
+    "fmenu_source_pdf": "PDF Ol Seequu",
+    "fmenu_source_url": "URL / Internettii",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Yeroo Barbaadame",
+    "fmenu_mock_items": "Wantoonni argamuu fi keessummaasii galuu"
   },
   "Pricing": {
     "title": "Gatii muldhata, misilii dhugaa.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Calaqqiyan kee malli midhagaa? Tilmaamama yeroo 2-daqiqa fudhachuu murteessaa maturityy hojiiwwaan kee argaa fi raawwii gargaaramuu banaa.",
     "gamification_cta": "Tilmaamama bilisaa fudhachuu →",
     "nb_menu_scan_title": "5. Scan Galmeee & Guutuu Ofmeedhaan",
-    "nb_menu_scan_desc": "Murtii, PDF ykn URL webbisaayitii galmee kamiyyuu ol kaasiif. AI midhaan, gatii, ibsa, waan nama hafu fi geeddoo hunduu baasaa galmee gulaleessaa keessan tokko cuqaasaan guutaa."
+    "nb_menu_scan_desc": "Murtii, PDF ykn URL webbisaayitii galmee kamiyyuu ol kaasiif. AI midhaan, gatii, ibsa, waan nama hafu fi geeddoo hunduu baasaa galmee gulaleessaa keessan tokko cuqaasaan guutaa.",
+    "fmenu_title": "Menu Scanner & Keessummaasii Automatikaa",
+    "fmenu_desc": "Suuraa, PDF, ykn URL gabbira menu kamiyyuu ol seequu. AI hidda hunda, gatii, ibsa, allergen, fi wanta jidha guggura — achiir editor menu keessan sekoonaaleetti guutuu.",
+    "fmenu_ex1": "Suuraa menu waraqaa tokko garagaala — hidda hunda gugguruu fi haala sadarkaa ta'ee fallanee akka jiru.",
+    "fmenu_ex2": "URL UberEats ykn Deliveroo keessa galchiisuu menu online jirtuu keessan walsiisuuf.",
+    "fmenu_ex3": "Lakkoofsaa gatii PDF ol seequu fi lakkoofsa lamaafan tajajiluu dandee't.",
+    "fmenu_source_photo": "Suuraa / Kaamiraa",
+    "fmenu_source_pdf": "PDF Ol Seequu",
+    "fmenu_source_url": "URL / Internettii",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Yeroo Barbaadame",
+    "fmenu_mock_items": "Wantoonni argamuu fi keessummaasii galuu"
   },
   "Auth": {
     "login_title": "RiveHub",

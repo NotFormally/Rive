@@ -250,7 +250,20 @@
     "gamification_desc": "Hoe helder is je inzicht? Doe een 2-minuten-assessment om je operationele volwassenheidsscore te ontdekken en gerichte verbeteringen te ontgrendelen.",
     "gamification_cta": "Neem gratis assessment →",
     "nb_menu_scan_title": "5. Menukaart Scanner & Automatisch Invullen",
-    "nb_menu_scan_desc": "Upload een foto, PDF of website-URL van elke menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingrediënt — en vult vervolgens je menu-editor in één klik in."
+    "nb_menu_scan_desc": "Upload een foto, PDF of website-URL van elke menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingrediënt — en vult vervolgens je menu-editor in één klik in.",
+    "fmenu_title": "Menukaart Scanner & Automatisch Importeren",
+    "fmenu_desc": "Upload een foto, PDF of website-URL van een menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingredient — en vult je menu-editor in seconden in.",
+    "fmenu_ex1": "Maak een foto van een papieren menukaart — elk item direct geëxtraheerd en gestructureerd.",
+    "fmenu_ex2": "Plak een UberEats of Deliveroo URL om je live online menukaart te synchroniseren.",
+    "fmenu_ex3": "Upload een PDF prijslijst en zet deze in één klik klaar.",
+    "fmenu_source_photo": "Foto / Camera",
+    "fmenu_source_pdf": "PDF Uploaden",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terras.jpg",
+    "fmenu_mock_pdf_name": "carte_winter_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Klaar",
+    "fmenu_mock_items": "Items gedetecteerd en geïmporteerd"
   },
   "Pricing": {
     "title": "Helder prijzen, echte impact.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Hoe helder is je zichtbaarheid? Voer een korte beoordeling van 2 minuten uit en ontdek je operationele rijpheidsscore en ontgrendel gerichte verbeteringen.",
     "gamification_cta": "Voltooi de gratis beoordeling →",
     "nb_menu_scan_title": "5. Menukaart Scanner & Automatisch Invullen",
-    "nb_menu_scan_desc": "Upload een foto, PDF of website-URL van elke menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingrediënt — en vult vervolgens je menu-editor in één klik in."
+    "nb_menu_scan_desc": "Upload een foto, PDF of website-URL van elke menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingrediënt — en vult vervolgens je menu-editor in één klik in.",
+    "fmenu_title": "Menukaart Scanner & Automatisch Importeren",
+    "fmenu_desc": "Upload een foto, PDF of website-URL van een menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingredient — en vult je menu-editor in seconden in.",
+    "fmenu_ex1": "Maak een foto van een papieren menukaart — elk item direct geëxtraheerd en gestructureerd.",
+    "fmenu_ex2": "Plak een UberEats of Deliveroo URL om je live online menukaart te synchroniseren.",
+    "fmenu_ex3": "Upload een PDF prijslijst en zet deze in één klik klaar.",
+    "fmenu_source_photo": "Foto / Camera",
+    "fmenu_source_pdf": "PDF Uploaden",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terras.jpg",
+    "fmenu_mock_pdf_name": "carte_winter_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Klaar",
+    "fmenu_mock_items": "Items gedetecteerd en geïmporteerd"
   },
   "Auth": {
     "login_title": "RiveHub",

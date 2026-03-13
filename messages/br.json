@@ -250,7 +250,20 @@
     "gamification_desc": "Ne ziskar eo ar gwelout? Oberañ ur skrammañ 2-munut evit kavout ho skor a vaturieg an opererigerezh ha ruzh an welladur pouezus.",
     "gamification_cta": "Tapout ar gwirtan digoust →",
     "nb_menu_scan_title": "5. Skanniñ Meuziad & Leuniañ Otomatik",
-    "nb_menu_scan_desc": "Enkargañ ur foto, PDF pe URL a website a zivout ebet a meuziad. Ar AI a distro kement a zeod, priz, deskrivadur, allergennoù hag endañsoù — goude-se a leunia eo ar gemennouer meuziad en ur click hepken."
+    "nb_menu_scan_desc": "Enkargañ ur foto, PDF pe URL a website a zivout ebet a meuziad. Ar AI a distro kement a zeod, priz, deskrivadur, allergennoù hag endañsoù — goude-se a leunia eo ar gemennouer meuziad en ur click hepken.",
+    "fmenu_title": "Skaner Karr & Enporzhiañ Otomat",
+    "fmenu_desc": "Pellgargañ ur foto, PDF, pe URL ul lec'hienn eus kement a garr. Ar AI a ziskar bep prederour, prizh, deskrivadur, allergen, ha stokañ — hag a beurc'h eh karr-redaour e eiloù.",
+    "fmenu_ex1": "Taol-foto eus ur c'harr pabier — bep draoñ diskarget ha strukturet just.",
+    "fmenu_ex2": "Pegañ URL UberEats pe Deliveroo evit kenduel ho karr online a-vremañ.",
+    "fmenu_ex3": "Pellgargañ ul listenn prizzañ PDF hag e kaout red d'e servij en unn klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "Pellgargañ PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "karr_terrac'h.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Prest",
+    "fmenu_mock_items": "Draoñ kavet & enporzhiet"
   },
   "Pricing": {
     "title": "Prizout klok, gwelloc'h gwir.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Pet a ze klok ho gwelout? Ober ur bluenn 2-munutenn evit c'hoant graet azgoulennoù ho labour ha lakaet deroù bro stell.",
     "gamification_cta": "Ober ar skouerz-frank →",
     "nb_menu_scan_title": "5. Skanniñ Meuziad & Leuniañ Otomatik",
-    "nb_menu_scan_desc": "Enkargañ ur foto, PDF pe URL a website a zivout ebet a meuziad. Ar AI a distro kement a zeod, priz, deskrivadur, allergennoù hag endañsoù — goude-se a leunia eo ar gemennouer meuziad en ur click hepken."
+    "nb_menu_scan_desc": "Enkargañ ur foto, PDF pe URL a website a zivout ebet a meuziad. Ar AI a distro kement a zeod, priz, deskrivadur, allergennoù hag endañsoù — goude-se a leunia eo ar gemennouer meuziad en ur click hepken.",
+    "fmenu_title": "Skaner Karr & Enporzhiañ Otomat",
+    "fmenu_desc": "Pellgargañ ur foto, PDF, pe URL ul lec'hienn eus kement a garr. Ar AI a ziskar bep prederour, prizh, deskrivadur, allergen, ha stokañ — hag a beurc'h eh karr-redaour e eiloù.",
+    "fmenu_ex1": "Taol-foto eus ur c'harr pabier — bep draoñ diskarget ha strukturet just.",
+    "fmenu_ex2": "Pegañ URL UberEats pe Deliveroo evit kenduel ho karr online a-vremañ.",
+    "fmenu_ex3": "Pellgargañ ul listenn prizzañ PDF hag e kaout red d'e servij en unn klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "Pellgargañ PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "karr_terrac'h.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Prest",
+    "fmenu_mock_items": "Draoñ kavet & enporzhiet"
   },
   "Auth": {
     "login_title": "RiveHub",

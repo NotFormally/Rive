@@ -250,7 +250,20 @@
     "gamification_desc": "可視性はどの程度ですか?2分間の評価に参加して、運営成熟度スコアを発見し、ターゲット化された改善を解除してください。",
     "gamification_cta": "無料評価を受ける →",
     "nb_menu_scan_title": "5. メニュースキャナー & 自動入力",
-    "nb_menu_scan_desc": "メニューの写真、PDF、またはウェブサイトURLをアップロードしてください。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、ワンクリックでメニューエディターに自動入力されます。"
+    "nb_menu_scan_desc": "メニューの写真、PDF、またはウェブサイトURLをアップロードしてください。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、ワンクリックでメニューエディターに自動入力されます。",
+    "fmenu_title": "メニュースキャナー & 自動インポート",
+    "fmenu_desc": "任意のメニューの写真、PDF、またはウェブサイトURLをアップロード。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、数秒でメニューエディターに自動入力します。",
+    "fmenu_ex1": "紙のメニューの写真を撮るだけ — すべての項目が瞬時に抽出・構造化されます。",
+    "fmenu_ex2": "UberEatsやDeliverooのURLを貼り付けて、ライブオンラインメニューを同期。",
+    "fmenu_ex3": "PDF価格表をアップロードして、ワンクリックで提供可能に。",
+    "fmenu_source_photo": "写真 / カメラ",
+    "fmenu_source_pdf": "PDFアップロード",
+    "fmenu_source_url": "URL / ウェブ",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "完了",
+    "fmenu_mock_items": "項目を検出 & インポート完了"
   },
   "Pricing": {
     "title": "明確な価格設定、実質的なインパクト。",
@@ -405,7 +418,20 @@
     "gamification_desc": "可視性はどのくらい明確か?2分間の評価を実施して、運営成熟度スコアを発見し、ターゲット改善をアンロック。",
     "gamification_cta": "無料評価を受ける →",
     "nb_menu_scan_title": "5. メニュースキャナー & 自動入力",
-    "nb_menu_scan_desc": "メニューの写真、PDF、またはウェブサイトURLをアップロードしてください。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、ワンクリックでメニューエディターに自動入力されます。"
+    "nb_menu_scan_desc": "メニューの写真、PDF、またはウェブサイトURLをアップロードしてください。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、ワンクリックでメニューエディターに自動入力されます。",
+    "fmenu_title": "メニュースキャナー & 自動インポート",
+    "fmenu_desc": "任意のメニューの写真、PDF、またはウェブサイトURLをアップロード。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、数秒でメニューエディターに自動入力します。",
+    "fmenu_ex1": "紙のメニューの写真を撮るだけ — すべての項目が瞬時に抽出・構造化されます。",
+    "fmenu_ex2": "UberEatsやDeliverooのURLを貼り付けて、ライブオンラインメニューを同期。",
+    "fmenu_ex3": "PDF価格表をアップロードして、ワンクリックで提供可能に。",
+    "fmenu_source_photo": "写真 / カメラ",
+    "fmenu_source_pdf": "PDFアップロード",
+    "fmenu_source_url": "URL / ウェブ",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "完了",
+    "fmenu_mock_items": "項目を検出 & インポート完了"
   },
   "Auth": {
     "login_title": "RiveHub",

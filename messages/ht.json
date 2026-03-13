@@ -250,7 +250,20 @@
     "gamification_desc": "Konbyen klè vizibilite w ye? Fè yon evalyasyon 2-minit pou dekouvri nòt matirite operasyonèl ou epi debloke amelyorasyon sible.",
     "gamification_cta": "Fè evalyasyon gratis → ",
     "nb_menu_scan_title": "5. Skane Meni & Otomatik Ranpli",
-    "nb_menu_scan_desc": "Telechaje yon foto, PDF oswa URL sit wèb nenpòt meni. AI ekstré chak plat, pri, deskripsyon, alejen ak engredyan — epi ranpli editè meni ou a nan yon klik."
+    "nb_menu_scan_desc": "Telechaje yon foto, PDF oswa URL sit wèb nenpòt meni. AI ekstré chak plat, pri, deskripsyon, alejen ak engredyan — epi ranpli editè meni ou a nan yon klik.",
+    "fmenu_title": "Skanè Meni & Enpòte Otomatik",
+    "fmenu_desc": "Chaje yon foto, PDF, oswa URL sit wèb nan nenpòt meni. AI extrait chak plat, pri, deskripsyon, alerjen, ak engrédyan — epi ranpli editè meni ou a nan segonn.",
+    "fmenu_ex1": "Pran yon foto meni papye — chak atik ekstrè ak estrikti imedyaman.",
+    "fmenu_ex2": "Kolle yon URL UberEats oswa Deliveroo pou senkronize meni online dirèk ou.",
+    "fmenu_ex3": "Chaje yon lis pri PDF e gen li prèt pou sèvi nan yon klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "Chaje PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Prèt",
+    "fmenu_mock_items": "Atik detekte & enpòte"
   },
   "Pricing": {
     "title": "Pri klè, enpak rèyèl.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Konbyen klè vizibilite ou? Fè yon evatyasyon 2-minit pou dekouvri nòt matirite operasyonèl ou ak bloke meliyorasyon siblel.",
     "gamification_cta": "Pran evatyasyon gratis →",
     "nb_menu_scan_title": "5. Skane Meni & Otomatik Ranpli",
-    "nb_menu_scan_desc": "Telechaje yon foto, PDF oswa URL sit wèb nenpòt meni. AI ekstré chak plat, pri, deskripsyon, alejen ak engredyan — epi ranpli editè meni ou a nan yon klik."
+    "nb_menu_scan_desc": "Telechaje yon foto, PDF oswa URL sit wèb nenpòt meni. AI ekstré chak plat, pri, deskripsyon, alejen ak engredyan — epi ranpli editè meni ou a nan yon klik.",
+    "fmenu_title": "Skanè Meni & Enpòte Otomatik",
+    "fmenu_desc": "Chaje yon foto, PDF, oswa URL sit wèb nan nenpòt meni. AI extrait chak plat, pri, deskripsyon, alerjen, ak engrédyan — epi ranpli editè meni ou a nan segonn.",
+    "fmenu_ex1": "Pran yon foto meni papye — chak atik ekstrè ak estrikti imedyaman.",
+    "fmenu_ex2": "Kolle yon URL UberEats oswa Deliveroo pou senkronize meni online dirèk ou.",
+    "fmenu_ex3": "Chaje yon lis pri PDF e gen li prèt pou sèvi nan yon klik.",
+    "fmenu_source_photo": "Foto / Kamera",
+    "fmenu_source_pdf": "Chaje PDF",
+    "fmenu_source_url": "URL / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Prèt",
+    "fmenu_mock_items": "Atik detekte & enpòte"
   },
   "Auth": {
     "login_title": "RiveHub",

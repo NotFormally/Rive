@@ -250,7 +250,20 @@
     "gamification_desc": "Zenbat garbi da zure ikuspegi? Egin 2 minutuko autoebaluazioa zure eragiketa-heldutsasun puntuazioa aurkitzeko eta helburuko hobekuntzak iraunkortu.",
     "gamification_cta": "Egin doan ebaluazioa →",
     "nb_menu_scan_title": "5. Menu Eskaneratzailea eta Automatikoa Betetzea",
-    "nb_menu_scan_desc": "Igo edozein menuaren argazkia, PDF edo webguneko URLa. AI-ak plater bakoitza, prezioa, deskribapena, alergeno eta osagaia ateratzen ditu — gero menu editorea betetzea klik batean."
+    "nb_menu_scan_desc": "Igo edozein menuaren argazkia, PDF edo webguneko URLa. AI-ak plater bakoitza, prezioa, deskribapena, alergeno eta osagaia ateratzen ditu — gero menu editorea betetzea klik batean.",
+    "fmenu_title": "Menu Eskanerra & Inportazio Automatikoa",
+    "fmenu_desc": "Igo edozein menuaren argazki, PDF edo webgunearen URLa. IAs plater, prezo, deskribapen, alergeno eta osagai bakoitza ateratzen du — eta zure menu editorea segundotan betetzen du.",
+    "fmenu_ex1": "Paperaren menu baten argazki bat hartzen du — elementu bakoitza ateratzen eta egituratuak dira berehala.",
+    "fmenu_ex2": "UberEats edo Deliveroo URLa itsatsita zure online menu bizia sinkronizatu.",
+    "fmenu_ex3": "Igo PDF zerrenda bat eta kliko batean zerbitzarako prest.",
+    "fmenu_source_photo": "Argazkia / Kamera",
+    "fmenu_source_pdf": "PDF Igoera",
+    "fmenu_source_url": "URLa / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Prest",
+    "fmenu_mock_items": "Elementuak detektatuak eta inportatuak"
   },
   "Pricing": {
     "title": "Zehatz prezio, benetako eragina.",
@@ -405,7 +418,20 @@
     "gamification_desc": "Zenbatean dago zure ikusgarritasuna? Hartu 2 minutuko ebaluazioa zure operazio garatze mailaren aurreskua aurkitzeko eta desblokeatua hobetzea helburutzeko.",
     "gamification_cta": "Libreko ebaluazioa hartu →",
     "nb_menu_scan_title": "5. Menu Eskaneratzailea eta Automatikoa Betetzea",
-    "nb_menu_scan_desc": "Igo edozein menuaren argazkia, PDF edo webguneko URLa. AI-ak plater bakoitza, prezioa, deskribapena, alergeno eta osagaia ateratzen ditu — gero menu editorea betetzea klik batean."
+    "nb_menu_scan_desc": "Igo edozein menuaren argazkia, PDF edo webguneko URLa. AI-ak plater bakoitza, prezioa, deskribapena, alergeno eta osagaia ateratzen ditu — gero menu editorea betetzea klik batean.",
+    "fmenu_title": "Menu Eskanerra & Inportazio Automatikoa",
+    "fmenu_desc": "Igo edozein menuaren argazki, PDF edo webgunearen URLa. IAs plater, prezo, deskribapen, alergeno eta osagai bakoitza ateratzen du — eta zure menu editorea segundotan betetzen du.",
+    "fmenu_ex1": "Paperaren menu baten argazki bat hartzen du — elementu bakoitza ateratzen eta egituratuak dira berehala.",
+    "fmenu_ex2": "UberEats edo Deliveroo URLa itsatsita zure online menu bizia sinkronizatu.",
+    "fmenu_ex3": "Igo PDF zerrenda bat eta kliko batean zerbitzarako prest.",
+    "fmenu_source_photo": "Argazkia / Kamera",
+    "fmenu_source_pdf": "PDF Igoera",
+    "fmenu_source_url": "URLa / Web",
+    "fmenu_mock_photo_name": "menu_terrace.jpg",
+    "fmenu_mock_pdf_name": "carte_hiver_2025.pdf",
+    "fmenu_mock_url_name": "ubereats.com/le-bistrot",
+    "fmenu_mock_ready": "Prest",
+    "fmenu_mock_items": "Elementuak detektatuak eta inportatuak"
   },
   "Auth": {
     "login_title": "RiveHub",

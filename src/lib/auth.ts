@@ -109,17 +109,29 @@ export async function requireAuth(req: Request): Promise<AuthResult> {
     return null;
   }
 
-  const { data: membership, error: memberErr } = await supabase
+  // Fetch all memberships for this user
+  const { data: memberships, error: memberErr } = await supabase
     .from('restaurant_members')
     .select('restaurant_id, role')
     .eq('user_id', user.id)
-    .not('accepted_at', 'is', null)
-    .limit(1)
-    .single();
+    .not('accepted_at', 'is', null);
 
-  if (!membership) {
+  if (!memberships || memberships.length === 0) {
     console.warn('[requireAuth] No membership found for user:', user.id, memberErr?.message);
     return null;
+  }
+
+  // Check if client sent a preferred restaurant via header
+  const requestedId = req.headers.get('x-restaurant-id');
+  let membership = memberships[0];
+
+  if (requestedId) {
+    const match = memberships.find(m => m.restaurant_id === requestedId);
+    if (match) {
+      membership = match;
+    } else {
+      console.warn('[requireAuth] Requested restaurant', requestedId, 'not in user memberships, falling back to first');
+    }
   }
 
   return { user: { id: user.id }, restaurantId: membership.restaurant_id, role: membership.role as MemberRole, supabase };

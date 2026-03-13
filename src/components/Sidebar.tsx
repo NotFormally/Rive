@@ -5,6 +5,7 @@ import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useAuth } from "@/components/AuthProvider";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { RestaurantSwitcher } from "@/components/RestaurantSwitcher";
 import {
   LayoutDashboard,
   MenuSquare,
@@ -153,9 +154,7 @@ export function Sidebar() {
             <div className="h-px w-12 bg-[--sidebar-primary] mt-2 opacity-80 shadow-[0_0_10px_rgba(34,211,238,0.8)] group-hover:w-full transition-all duration-300 mx-auto sm:mx-0"></div>
           </>
         )}
-        <p className="text-[10px] text-[--sidebar-foreground] opacity-70 mt-4 uppercase tracking-[0.2em] font-plex-mono font-bold group-hover:opacity-100 transition-opacity text-center sm:text-left w-full truncate">
-          {profile?.restaurant_name || t("restaurant_space")}
-        </p>
+        <RestaurantSwitcher />
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 space-y-5 pb-6 custom-scrollbar-hidden">

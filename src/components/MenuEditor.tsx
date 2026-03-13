@@ -6,7 +6,7 @@ import { QRCode } from "react-qrcode-logo";
 import { InstagramGenerator } from "./InstagramGenerator";
 import { useTranslations, useLocale } from "next-intl";
 
-export function MenuEditor() {
+export function MenuEditor({ restaurantId }: { restaurantId?: string }) {
   const [categories, setCategories] = useState<MenuCategory[]>([]);
   const [items, setItems] = useState<MenuItem[]>([]);
   const [restaurant, setRestaurant] = useState<RestaurantInfo>({ name: '', tagline: '', address: '', phone: '', hours: '' });
@@ -95,7 +95,7 @@ export function MenuEditor() {
         {showQR && (
           <div className="mt-4 flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-zinc-200">
             <QRCode
-              value={typeof window !== 'undefined' ? `${window.location.origin}/menu/chez-marcel` : 'https://shore.app/menu/chez-marcel'}
+              value={typeof window !== 'undefined' ? `${window.location.origin}/menu/${restaurantId || 'preview'}` : `https://rivehub.com/menu/${restaurantId || 'preview'}`}
               size={180}
               bgColor="#ffffff"
               fgColor="#1e1b4b"

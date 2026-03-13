@@ -9,9 +9,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function SpoilageFormPage() {
+  const { settings } = useAuth();
   const t = useTranslations("Coulage");
+  const tc = useTranslations("Common");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  if (!settings?.module_variance) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        {tc("module_disabled")}
+      </div>
+    );
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

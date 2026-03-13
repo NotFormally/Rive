@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { hasReachedQuota, TIER_QUOTAS } from "@/lib/quotas";
@@ -124,12 +125,10 @@ export function InstagramGenerator({
         setPublishSuccess(platform);
         setTimeout(() => setPublishSuccess(null), 3000);
       } else {
-        // TODO: replace with toast UI
-        alert(data.error || t('error_conn'));
+        toast.error(data.error || t('error_conn'));
       }
     } catch {
-      // TODO: replace with toast UI
-      alert(t('error_conn'));
+      toast.error(t('error_conn'));
     } finally {
       setPublishing(null);
     }

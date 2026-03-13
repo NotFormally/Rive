@@ -8,7 +8,8 @@ import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Copy, Upload, Trash2, CheckCircle2 } from "lucide-react";
+import { Copy, Upload, Trash2, CheckCircle2, AlertTriangle } from "lucide-react";
+import { toast } from "sonner";
 
 const MODULE_EMOJIS: Record<string, string> = {
   module_logbook: "📋",
@@ -82,6 +83,13 @@ export default function SettingsPage() {
   // Google Place ID for Health Score
   const [googlePlaceId, setGooglePlaceId] = useState("");
   const [savingGooglePlaceId, setSavingGooglePlaceId] = useState(false);
+
+  // Account deletion state
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteConfirmName, setDeleteConfirmName] = useState("");
+  const [deleteReason, setDeleteReason] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   // Helper to get auth headers for API calls
   const getAuthHeaders = async (): Promise<Record<string, string>> => {
@@ -181,7 +189,7 @@ export default function SettingsPage() {
       
     if (error) {
       console.error("Error saving modules:", error);
-      alert(t("error_generic"));
+      toast.error(t("error_generic"));
     } else {
       await refreshSettings();
     }
@@ -236,7 +244,7 @@ export default function SettingsPage() {
       setLogoUrl(data.publicUrl);
     } catch (error) {
       console.error("Error uploading logo: ", error);
-      alert(t("error_generic"));
+      toast.error(t("error_generic"));
     } finally {
       setUploadingLogo(false);
     }
@@ -323,10 +331,10 @@ export default function SettingsPage() {
       if (res.ok) loadMembers();
       else {
         const d = await res.json();
-        alert(d.error || t("error_generic"));
+        toast.error(d.error || t("error_generic"));
       }
     } catch {
-      alert(t("error_network"));
+      toast.error(t("error_network"));
     }
   };
 
@@ -341,10 +349,10 @@ export default function SettingsPage() {
       if (res.ok) loadMembers();
       else {
         const d = await res.json();
-        alert(d.error || t("error_generic"));
+        toast.error(d.error || t("error_generic"));
       }
     } catch {
-      alert(t("error_network"));
+      toast.error(t("error_network"));
     }
   };
 
@@ -363,7 +371,7 @@ export default function SettingsPage() {
       }
     } catch (e) {
       console.error(e);
-      alert(t("portal_error"));
+      toast.error(t("portal_error"));
       setPortalLoading(false);
     }
   };
@@ -379,17 +387,43 @@ export default function SettingsPage() {
         body: JSON.stringify({ reason: cancelReason, comments: cancelComments }),
       });
       if (res.ok) {
-        alert(t("cancel_success"));
+        toast.success(t("cancel_success"));
         setShowCancelModal(false);
         refreshSettings();
       } else {
         const d = await res.json();
-        alert(d.error || t("cancel_error"));
+        toast.error(d.error || t("cancel_error"));
       }
     } catch {
-      alert(t("cancel_error"));
+      toast.error(t("cancel_error"));
     } finally {
       setCancelling(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!profile || deleteConfirmName !== profile.restaurant_name) return;
+    setDeleting(true);
+    setDeleteError(null);
+    try {
+      const headers = await getAuthHeaders();
+      const res = await fetch('/api/account/delete', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ confirmName: deleteConfirmName, reason: deleteReason || undefined }),
+      });
+      if (res.ok) {
+        // Account is gone — sign out and redirect
+        await supabase.auth.signOut();
+        router.push("/");
+      } else {
+        const d = await res.json();
+        setDeleteError(d.error || t("delete_error"));
+      }
+    } catch {
+      setDeleteError(t("delete_error"));
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -852,7 +886,7 @@ export default function SettingsPage() {
                       className="rounded-lg"
                       onClick={() => {
                         navigator.clipboard.writeText(`https://app.rivehub.com/api/webhooks/reservations?token=RIVE_SEC_${profile?.id?.slice(0,8)}`);
-                        alert(t("copied_alert"));
+                        toast.success(t("copied_alert"));
                       }}
                     >
                       {t("btn_copy")}
@@ -905,6 +939,31 @@ export default function SettingsPage() {
         </Card>
 
       </div>
+
+      {/* Danger Zone — Account Deletion */}
+      {role === 'owner' && (
+        <Card className="rounded-3xl border border-red-300/50 dark:border-red-800/30">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg font-jakarta font-bold text-red-600 dark:text-red-400 flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5" />
+              {t("danger_zone_title")}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm font-outfit text-muted-foreground">
+              {t("danger_zone_desc")}
+            </p>
+            <Button
+              onClick={() => { setShowDeleteModal(true); setDeleteConfirmName(""); setDeleteError(null); }}
+              variant="outline"
+              className="text-red-600 hover:text-white hover:bg-red-600 border-red-300 rounded-xl font-medium transition-colors"
+            >
+              <Trash2 className="w-4 h-4 mr-2" />
+              {t("btn_delete_account")}
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Cancellation Modal */}
       {showCancelModal && (
@@ -975,6 +1034,95 @@ export default function SettingsPage() {
                   className="flex-1 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium"
                 >
                   {cancelling ? t("btn_saving") : t("btn_confirm_cancel")}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Account Deletion Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+          <Card className="w-full max-w-md rounded-3xl border-red-200 shadow-2xl overflow-hidden relative">
+            <button
+              onClick={() => setShowDeleteModal(false)}
+              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-secondary/50 text-muted-foreground transition-colors"
+            >
+              ✕
+            </button>
+            <CardHeader className="bg-red-50 dark:bg-red-950/20 p-6 pb-4 border-b border-red-200/50">
+              <CardTitle className="text-xl font-jakarta font-bold text-red-600 dark:text-red-400 flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5" />
+                {t("delete_dialog_title")}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <p className="text-sm font-outfit text-muted-foreground">
+                {t("delete_dialog_desc")}
+              </p>
+
+              <div>
+                <label className="block text-sm font-medium font-outfit text-foreground/70 mb-2">
+                  {t("delete_dialog_confirm_label")}
+                </label>
+                <p className="text-xs font-mono text-muted-foreground mb-2 select-all">
+                  {profile?.restaurant_name}
+                </p>
+                <input
+                  type="text"
+                  value={deleteConfirmName}
+                  onChange={(e) => setDeleteConfirmName(e.target.value)}
+                  placeholder={t("delete_dialog_confirm_placeholder")}
+                  className="w-full px-4 py-3 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                  disabled={deleting}
+                  autoComplete="off"
+                />
+                {deleteConfirmName && deleteConfirmName !== profile?.restaurant_name && (
+                  <p className="text-xs text-red-500 mt-1">{t("delete_dialog_mismatch")}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium font-outfit text-foreground/70 mb-2">
+                  {t("delete_reason_label")}
+                </label>
+                <select
+                  value={deleteReason}
+                  onChange={(e) => setDeleteReason(e.target.value)}
+                  className="w-full px-4 py-3 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                  disabled={deleting}
+                >
+                  <option value="">{t("delete_reason_placeholder")}</option>
+                  <option value="too_expensive">{t("delete_reason_price")}</option>
+                  <option value="not_useful">{t("delete_reason_not_useful")}</option>
+                  <option value="switching">{t("delete_reason_switching")}</option>
+                  <option value="closing">{t("delete_reason_closing")}</option>
+                  <option value="other">{t("delete_reason_other")}</option>
+                </select>
+              </div>
+
+              {deleteError && (
+                <p className="text-sm text-red-500 bg-red-50 dark:bg-red-950/20 p-3 rounded-xl">
+                  {deleteError}
+                </p>
+              )}
+
+              <div className="flex flex-col-reverse sm:flex-row gap-3 pt-2">
+                <Button
+                  onClick={() => setShowDeleteModal(false)}
+                  variant="outline"
+                  className="flex-1 rounded-xl text-foreground font-medium"
+                  disabled={deleting}
+                >
+                  {t("btn_cancel_delete")}
+                </Button>
+                <Button
+                  onClick={handleDeleteAccount}
+                  disabled={deleting || deleteConfirmName !== profile?.restaurant_name}
+                  className="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium"
+                >
+                  {deleting ? t("deleting_account") : t("btn_confirm_delete")}
                 </Button>
               </div>
             </CardContent>

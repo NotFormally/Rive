@@ -18,7 +18,10 @@ export type EmailPayload =
   | { type: 'admin_signup_notification'; to: string; restaurantName: string; email: string; locale: string }
   | { type: 'admin_subscription_notification'; to: string; restaurantName: string; email: string; tier: string }
   | { type: 'support_report'; to: string; restaurantName: string; email: string; errorDetails: string; messageCount: number }
-  | { type: 'churn_feedback'; to: string; restaurantName: string; email: string; reason: string; comments: string };
+  | { type: 'churn_feedback'; to: string; restaurantName: string; email: string; reason: string; comments: string }
+  | { type: 'account_deleted'; to: string; restaurantName: string }
+  | { type: 'admin_account_deleted'; to: string; restaurantName: string; email: string }
+  | { type: 'team_access_revoked'; to: string; restaurantName: string };
 
 const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => string)> = {
   welcome: 'Bienvenue sur Rive \u{1F30A}',
@@ -51,6 +54,15 @@ const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => stri
   churn_feedback: (p) =>
     p.type === 'churn_feedback'
       ? `⚠️ Cancelled Subscription: ${p.restaurantName}`
+      : '',
+  account_deleted: 'Votre compte Rive a été supprimé',
+  admin_account_deleted: (p) =>
+    p.type === 'admin_account_deleted'
+      ? `🗑️ Account Deleted: ${p.restaurantName}`
+      : '',
+  team_access_revoked: (p) =>
+    p.type === 'team_access_revoked'
+      ? `Votre accès à ${p.restaurantName} a été révoqué`
       : '',
 };
 
@@ -87,6 +99,9 @@ function getReactComponent(payload: EmailPayload) {
     case 'admin_subscription_notification':
     case 'support_report':
     case 'churn_feedback':
+    case 'account_deleted':
+    case 'admin_account_deleted':
+    case 'team_access_revoked':
       // Simple text email — no dedicated template needed
       return null;
   }
@@ -156,6 +171,46 @@ function getTextBody(payload: EmailPayload): string | null {
       payload.comments || 'No comments provided.',
       ``,
       `Action required: Reach out to the user if applicable.`,
+    ].join('\n');
+  }
+  if (payload.type === 'account_deleted') {
+    return [
+      `Bonjour,`,
+      ``,
+      `Votre compte Rive pour « ${payload.restaurantName} » a été supprimé avec succès.`,
+      ``,
+      `Toutes les données associées à votre restaurant ont été définitivement effacées de nos serveurs :`,
+      `menus, recettes, journaux, factures, configurations et intégrations.`,
+      ``,
+      `Les membres de votre équipe conservent leur propre compte.`,
+      ``,
+      `Si vous souhaitez revenir un jour, vous êtes toujours le bienvenu : https://rivehub.com`,
+      ``,
+      `— L'équipe Rive`,
+    ].join('\n');
+  }
+  if (payload.type === 'admin_account_deleted') {
+    return [
+      `🗑️ Account Permanently Deleted:`,
+      ``,
+      `Restaurant: ${payload.restaurantName}`,
+      `Email: ${payload.email}`,
+      `Timestamp: ${new Date().toISOString()}`,
+      ``,
+      `All data has been purged (CASCADE). Auth user deleted.`,
+      `Team members retain their accounts.`,
+    ].join('\n');
+  }
+  if (payload.type === 'team_access_revoked') {
+    return [
+      `Bonjour,`,
+      ``,
+      `Le restaurant « ${payload.restaurantName} » a fermé son compte Rive.`,
+      `Votre accès à ce restaurant a été révoqué.`,
+      ``,
+      `Votre propre compte Rive reste actif — vous pouvez toujours vous connecter.`,
+      ``,
+      `— L'équipe Rive`,
     ].join('\n');
   }
   return null;

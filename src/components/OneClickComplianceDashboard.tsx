@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import { Camera, Upload, CheckCircle2, AlertTriangle, FileText, Download, Printer, ChevronRight, Zap } from "lucide-react";
 import Image from "next/image";
 
@@ -55,7 +56,7 @@ export function OneClickComplianceDashboard() {
   const handleUpload = async (file: File) => {
     // Basic validation
     if (!file.type.match('image.*') && file.type !== 'application/pdf') {
-      alert("Format non supporté (image ou pdf uniquement)");
+      toast.error("Format non supporté (image ou pdf uniquement)");
       return;
     }
 

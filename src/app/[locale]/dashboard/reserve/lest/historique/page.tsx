@@ -25,7 +25,16 @@ const mockReturns: ReturnRecord[] = [
 export default function DepositsHistoryPage() {
   const { settings } = useAuth();
   const t = useTranslations("Reserve");
+  const tc = useTranslations("Common");
   const [returns] = useState<ReturnRecord[]>(mockReturns);
+
+  if (!settings?.module_deposits) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        {tc("module_disabled")}
+      </div>
+    );
+  }
 
   const totalReturned = returns.reduce((sum, r) => sum + r.deposit_amount, 0);
   const totalCredited = returns.filter(r => r.credit_applied).reduce((sum, r) => sum + r.deposit_amount, 0);

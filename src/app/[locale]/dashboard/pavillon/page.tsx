@@ -16,7 +16,8 @@ type SocialConnection = {
 
 export default function SocialHubPage() {
   const t = useTranslations("SocialHub");
-  const { profile } = useAuth();
+  const tc = useTranslations("Common");
+  const { profile, settings } = useAuth();
   const [connections, setConnections] = useState<SocialConnection[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,6 +28,14 @@ export default function SocialHubPage() {
       setLoading(false);
     }
   }, [profile]);
+
+  if (!settings?.module_instagram) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        {tc("module_disabled")}
+      </div>
+    );
+  }
 
   const loadConnections = async () => {
     setLoading(true);

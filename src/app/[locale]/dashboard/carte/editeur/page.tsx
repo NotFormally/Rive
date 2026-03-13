@@ -5,7 +5,7 @@ import { MenuEditor } from "@/components/MenuEditor";
 import { useTranslations } from "next-intl";
 
 export default function MenuEditorPage() {
-  const { settings } = useAuth();
+  const { settings, profile } = useAuth();
   const t = useTranslations("CartEditor");
   const tc = useTranslations("Common");
 
@@ -27,7 +27,7 @@ export default function MenuEditorPage() {
       </header>
 
       <div className="p-8 max-w-5xl">
-        <MenuEditor />
+        <MenuEditor restaurantId={profile?.id} />
       </div>
     </>
   );

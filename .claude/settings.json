@@ -9,6 +9,15 @@
             "command": "npx tsc --noEmit --pretty 2>&1 | head -20"
           }
         ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_FILE_PATHS\" | grep -q 'messages/'; then echo '⚠️  Locale file edited — remember to propagate this change to ALL 63 locale files in messages/'; fi"
+          }
+        ]
       }
     ]
   }

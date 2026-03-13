@@ -28,6 +28,15 @@ const mockRecipes: Recipe[] = [
 
 export default function ProductionRecipesPage() {
   const { settings } = useAuth();
+  const tc = useTranslations("Common");
+
+  if (!settings?.module_production) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        {tc("module_disabled")}
+      </div>
+    );
+  }
   const t = useTranslations("Production");
   const [recipes] = useState<Recipe[]>(mockRecipes);
 

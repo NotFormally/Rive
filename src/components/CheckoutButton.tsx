@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { useAuth } from "@/components/AuthProvider";
 import { useTranslations } from "next-intl";
 
@@ -51,7 +52,7 @@ export function CheckoutButton({ priceId, cta, ctaColor, presentationClasses = "
       }
     } catch (error) {
       console.error("Payment error:", error);
-      alert(tCommon('error_payment'));
+      toast.error(tCommon('error_payment'));
       setLoading(false);
     }
   };

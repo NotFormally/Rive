@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 import { AlertTriangle, Sparkles, Check, X, Loader2, ArrowRight, Globe } from "lucide-react";
 import { useAITranslation } from "@/hooks/useAITranslation";
@@ -48,13 +49,11 @@ export function DynamicFoodCostAlerts() {
       if (data.success && data.generatedAlerts > 0) {
         await fetchAlerts();
       } else if (data.message) {
-        // TODO: replace with toast UI
-        alert(data.message);
+        toast.info(data.message);
       }
     } catch (err) {
       console.error('Failed to analyze food cost:', err);
-      // TODO: replace with toast UI
-      alert(t('error_analysis'));
+      toast.error(t('error_analysis'));
     } finally {
       setAnalyzing(false);
     }

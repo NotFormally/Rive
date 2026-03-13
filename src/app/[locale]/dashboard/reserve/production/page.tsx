@@ -7,6 +7,15 @@ import { useTranslations } from "next-intl";
 export default function ProductionPage() {
   const { settings } = useAuth();
   const t = useTranslations("Production");
+  const tc = useTranslations("Common");
+
+  if (!settings?.module_production) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        {tc("module_disabled")}
+      </div>
+    );
+  }
 
   return (
     <>

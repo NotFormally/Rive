@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import {
   Plus, 
   GripVertical, 
@@ -59,7 +60,7 @@ export function HACCPBuilder() {
     // Simulate network delay
     setTimeout(() => {
       setIsSaving(false);
-      alert(t("save_success"));
+      toast.success(t("save_success"));
     }, 1000);
   };
 

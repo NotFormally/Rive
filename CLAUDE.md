@@ -40,12 +40,31 @@
 - When debugging hardware/IoT integrations (lights, speakers, etc.), never assume device capabilities. Always query the device API for its actual features before proceeding.
 - When debugging connectivity issues (APIs, MCP servers, plugins), **first check if the service is already running and reachable** before suggesting installation or configuration steps.
 
-## Deployment & Database
+## i18n & Translations
 
-- After deployment-related changes, always run `npx supabase db push` or equivalent migration commands and verify they succeed.
-- If a migration fails due to missing functions (e.g., `handle_updated_at()`), create the missing function in the migration SQL first, then retry.
-- Migration files MUST follow the naming pattern `<YYYYMMDDHHmmss>_name.sql` or Supabase will skip them.
-- Use `/deploy` skill for the full deploy pipeline, `/migrate` for database-only, `/audit` for pre-deploy checks.
+- **25 active locales** across 63 message files in `messages/*.json` (includes regional variants like ar-AE, ar-EG, etc.)
+- When modifying translation files, **always propagate changes to ALL locale files** — use batch/sub-agent approach for large-scale operations
+- After adding translation keys, verify with lint: `npx next lint` to check for i18n violations
+- Never hardcode user-facing strings — always use `useTranslations()` with translation keys
+- Use `/i18n-audit` skill to scan for hardcoded strings and propagate keys across all locales
+- Key structure: namespaced by component (e.g., `Gouvernail.delete_reason_too_expensive`, `Common.module_disabled`)
+
+## Deployment
+
+- Primary deployment target is **Vercel** (auto-deploys from `main` branch)
+- Always run `npx next build` locally before pushing to catch build errors early
+- After pushing to main, verify deployment at [rivehub.com](https://rivehub.com)
+- If Vercel build fails, check logs via the Vercel MCP tools or `vercel logs`
+- Use `/deploy` for full pipeline, `/audit` for pre-deploy checks
+
+## Database
+
+- Database is **Supabase** (PostgreSQL) with Row-Level Security (RLS) on all tenant tables
+- Before deploying, ensure all migrations are applied: `npx supabase db push`
+- If a migration fails due to missing functions (e.g., `handle_updated_at()`), create the missing function in the migration SQL first, then retry
+- Migration files MUST follow the naming pattern `<YYYYMMDDHHmmss>_name.sql` or Supabase will skip them
+- Always verify Stripe-related columns exist in production before deploying payment features
+- Use `/migrate` skill for database-only operations
 
 ## Tool Limitations
 

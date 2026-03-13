@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import { useAuth } from "@/components/AuthProvider";
 import {
   Brain,
@@ -255,8 +256,7 @@ export default function SmartPrepDashboard() {
         await loadPrepList(); // Reload to get the new AI suggestions
       } else {
         const errData = await res.json();
-        // TODO: replace with toast UI
-        alert(t('error_ai') + ": " + (errData.error || t('error_unknown')));
+        toast.error(t('error_ai') + ": " + (errData.error || t('error_unknown')));
       }
     } catch (err) {
       console.error('Error generating AI:', err);

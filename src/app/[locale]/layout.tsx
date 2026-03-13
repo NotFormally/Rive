@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { SUPPORTED_LANGUAGE_COUNT } from "@/lib/languages";
+import { Toaster } from "sonner";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -120,6 +121,7 @@ export default async function RootLayout({
           <SmoothScroll>
             <AuthProvider>
               {children}
+              <Toaster position="bottom-right" richColors closeButton />
             </AuthProvider>
           </SmoothScroll>
         </NextIntlClientProvider>

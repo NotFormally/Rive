@@ -7,8 +7,15 @@ import { useTranslations } from "next-intl";
 export default function DepositsPage() {
   const { settings } = useAuth();
   const t = useTranslations("Reserve");
+  const tc = useTranslations("Common");
 
-  // We can eventually add a permission check here similar to food_cost, but for now we'll just show it.
+  if (!settings?.module_deposits) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        {tc("module_disabled")}
+      </div>
+    );
+  }
 
   return (
     <>

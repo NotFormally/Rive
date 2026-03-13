@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -98,11 +99,11 @@ export default function ReservationIntegrationsPage() {
       
       setActiveProviderSetup(null);
       setApiKeyInput("");
-      alert(t("success_connected", { name: provider }));
+      toast.success(t("success_connected", { name: provider }));
       
     } catch (error) {
       console.error(error);
-      alert(t("error_connection"));
+      toast.error(t("error_connection"));
     } finally {
       setSavingKey(false);
     }

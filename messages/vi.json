@@ -178,7 +178,7 @@
     "widget_running": "RUNNING PROTOCOL",
     "sticky_cta": "Bắt đầu miễn phí",
     "nano_banana_title": "Bộ công cụ thế hệ tiếp theo. (Được hỗ trợ bởi trí tuệ nhân tạo).",
-    "nano_banana_subtitle": "Khám phá bốn công cụ mới của chúng tôi để quản lý nhà hàng không rắc rối.",
+    "nano_banana_subtitle": "Khám phá năm công cụ mới của chúng tôi để quản lý nhà hàng không có rắc rối.",
     "nano_banana_badge": "KHẢ NĂNG MỚI 2026",
     "nest_net_profit": "Lợi nhuận ròng",
     "nest_cash_flow": "Động học dòng tiền",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Kiểm toán trạm và ký xác nhận ca làm việc không phải là kiểm soát vi mô khi được gamified. Giữ tinh thần cao với một logbook minh bạch.",
     "gamification_title": "Đo Lường Trí Tuệ Của Bạn",
     "gamification_desc": "Khả năng hiển thị của bạn rõ ràng đến mức nào? Thực hiện đánh giá 2 phút để khám phá điểm trưởng thành hoạt động của bạn và mở khóa các cải tiến có mục tiêu.",
-    "gamification_cta": "Thực hiện đánh giá miễn phí →"
+    "gamification_cta": "Thực hiện đánh giá miễn phí →",
+    "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
+    "nb_menu_scan_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ thực đơn nào. AI trích xuất mọi món ăn, giá cả, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa thực đơn của bạn chỉ với một cú nhấp chuột."
   },
   "Pricing": {
     "title": "Giá rõ ràng, tác động thực sự.",
@@ -349,7 +351,7 @@
     "footer_privacy": "Riêng Tư",
     "footer_terms": "Điều Khoản",
     "nano_banana_title": "Bộ Công Cụ Thế Hệ Tiếp Theo. (Được Hỗ Trợ bởi Trí Tuệ).",
-    "nano_banana_subtitle": "Khám phá bốn công cụ mới của chúng tôi để quản lý nhà hàng mượt mà.",
+    "nano_banana_subtitle": "Khám phá năm công cụ mới của chúng tôi để quản lý nhà hàng không có rắc rối.",
     "nb_haccp_title": "1. Trình Xây Dựng HACCP Không Cần Mã",
     "nb_haccp_desc": "Xây dựng các biểu mẫu kiểm toán của riêng bạn bằng một cái vuốt. An toàn thực phẩm tùy chỉnh, ký điện tử và bất biến.",
     "nb_sonar_title": "2. Sonar & Ma trận Kỹ năng",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Kiểm toán vị trí và ký ca làm việc không phải là quản lý vi mô khi được gamification. Giữ tinh thần cao với một nhật ký hoạt động minh bạch.",
     "gamification_title": "Đo Lường Trí Tuệ Của Bạn",
     "gamification_desc": "Tầm nhìn của bạn rõ ràng cỡ nào? Mất 2 phút để hoàn thành bài đánh giá tìm hiểu điểm số trưởng thành hoạt động và mở khóa những cải thiện được nhắm mục tiêu.",
-    "gamification_cta": "Thực hiện bài đánh giá miễn phí →"
+    "gamification_cta": "Thực hiện bài đánh giá miễn phí →",
+    "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
+    "nb_menu_scan_desc": "Tải lên ảnh, PDF hoặc URL trang web của bất kỳ thực đơn nào. AI trích xuất mọi món ăn, giá cả, mô tả, chất gây dị ứng và thành phần — sau đó điền vào trình chỉnh sửa thực đơn của bạn chỉ với một cú nhấp chuột."
   },
   "Auth": {
     "login_title": "RiveHub",

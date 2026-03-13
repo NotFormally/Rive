@@ -79,7 +79,7 @@
     "footer_terms": "Telerau",
     "sticky_cta": "Dechrau am ddim",
     "nano_banana_title": "Y Siwtio Nesaf-Genhedlaeth. (Pŵer Deallusrwydd).",
-    "nano_banana_subtitle": "Darganfyddwch ein pedwar offeryn newydd ar gyfer rheoli bwytai di-rwystr.",
+    "nano_banana_subtitle": "Darganfyddwch ein pump teclyn newydd ar gyfer rheoli bwytai heb rwystredigaeth.",
     "nano_banana_badge": "GALLUOEDD NEWYDD 2026",
     "nest_net_profit": "Elw Net",
     "nest_cash_flow": "Dynameg Llif Arian",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Nid yw archwiliadau gorsaf a llofnodi sifft yn ficroreoli pan gaiff eu gwneud yn chwarae. Cadwch ysbryd uchel gyda logyfr tryloyw.",
     "gamification_title": "Mesurwch Eich Deallusrwydd",
     "gamification_desc": "Pa mor glir yw eich golwg? Cymerwch asesiad 2 funud i ddarganfod eich sgôr aeddfedrwydd gweithredol a datgloi gwelliannau penodol.",
-    "gamification_cta": "Cymerwch yr asesiad am ddim →"
+    "gamification_cta": "Cymerwch yr asesiad am ddim →",
+    "nb_menu_scan_title": "5. Sganiwr Menus a Llenwi Yn Awtomatig",
+    "nb_menu_scan_desc": "Llwythwch lun, PDF neu URL gwefan o unrhyw fwydlen. Mae AI yn tynnu pob pryd, pris, disgrifiad, alergen ac cynhwysyn — yna'n llenwi eich golygydd menus mewn un clic."
   },
   "Pricing": {
     "title": "Prisio clir, effaith wirioneddol.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Preifatrwydd",
     "footer_terms": "Telerau",
     "nano_banana_title": "Y Ystafell Nesaf. (Pŵer gan Deallusrwydd).",
-    "nano_banana_subtitle": "Darganfyddwch ein pedwar offeryn newydd ar gyfer rheolaeth bwyty heb fwndal.",
+    "nano_banana_subtitle": "Darganfyddwch ein pump teclyn newydd ar gyfer rheoli bwytai heb rwystredigaeth.",
     "nb_haccp_title": "1. Adeileddwr HACCP Heb God",
     "nb_haccp_desc": "Adeiladu eich ffurflenni archwilio eich hun gydag un chwip. Diogelwch bwyd addasedig, wedi'i lofnodi'n ddigidol ac yn amnewidiol.",
     "nb_sonar_title": "2. Sonar & Matrics Sgiliau",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Nid yw archwiliad gorsaf a phlicio shifft yn ficroreoli pan gaiff eu chwarae gemau. Cadwch forale uchel gyda logbook tryloyw.",
     "gamification_title": "Mesur Eich Deallusrwydd",
     "gamification_desc": "Cyn glired yw eich gweledigaeth? Cymerwch asesiad 2-funud i ddarganfod eich sgôr aeddfeddrwydd gweithredol ac agor gwelliannau wedi'u targedu.",
-    "gamification_cta": "Cymerwch yr asesiad am ddim →"
+    "gamification_cta": "Cymerwch yr asesiad am ddim →",
+    "nb_menu_scan_title": "5. Sganiwr Menus a Llenwi Yn Awtomatig",
+    "nb_menu_scan_desc": "Llwythwch lun, PDF neu URL gwefan o unrhyw fwydlen. Mae AI yn tynnu pob pryd, pris, disgrifiad, alergen ac cynhwysyn — yna'n llenwi eich golygydd menus mewn un clic."
   },
   "Auth": {
     "login_title": "RiveHub",

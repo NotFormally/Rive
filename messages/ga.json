@@ -79,7 +79,7 @@
     "footer_terms": "Téarmaí",
     "sticky_cta": "Tosú in aisce",
     "nano_banana_title": "An Suíte Chéad Ghlúin Eile. (Cumhachtaithe ag Intuighe).",
-    "nano_banana_subtitle": "Forbair ar ár ceithre uirlis nua do bhainistíocht bharistéarainn gan fhrithchomhaimsir.",
+    "nano_banana_subtitle": "Faigh amach faoinár gcúig uirlis nua le bainistiú bialainne gan fricistint.",
     "nano_banana_badge": "CUMAIS NUA 2026",
     "nest_net_profit": "Glan Bhrabús",
     "nest_cash_flow": "Dinimic Sreabhadh Airgid",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Ní bhíonn iniúchaithe stáisiúin agus síniú malmhaith seo ina míchriostal nuair a bhíonn siad i gceist. Coimeád mothúchán ard le logbook soiléir.",
     "gamification_title": "Tomhais do Leiscéim",
     "gamification_desc": "Cé chomh soiléir atá do radharc? Tóg measúnú 2-nóiméad chun do scór aibíochtai oibríochtúil a fháil amach agus feabhsúcháin dhírithe a scaoileadh.",
-    "gamification_cta": "Tóg an measúnú saor in aisce →"
+    "gamification_cta": "Tóg an measúnú saor in aisce →",
+    "nb_menu_scan_title": "5. Scanadóir Roghchlár & Líonadh Uathoibríoch",
+    "nb_menu_scan_desc": "Uaslódáil grianghraf, PDF nó URL suíomh de roghchlár ar bith. Baineann AI gach dís, praghas, cur síos, ailéirgín agus comhábhar as — ansin líonann sé d'eagarthóir roghchlár i ngéad amháin."
   },
   "Pricing": {
     "title": "Praghsáil soiléir, tionchar fíor.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Príobháideacht",
     "footer_terms": "Téarmaí",
     "nano_banana_title": "An Bhunus Chéad-Ghlúin. (Cumhachtaithe ag Intleacht).",
-    "nano_banana_subtitle": "Faigh amach ár gceithre uirlis nua do bhainistríocht bialainne gan frichinn.",
+    "nano_banana_subtitle": "Faigh amach faoinár gcúig uirlis nua le bainistiú bialainne gan fricistint.",
     "nb_haccp_title": "1. Tógálaí HACCP Gan-Chód",
     "nb_haccp_desc": "Tóg do dhúthain féin foirmeacha audite le scuab. Slándáil bia dhanda, sínilithe go digiteach agus neamh-athraitheach.",
     "nb_sonar_title": "2. Sonar & Maitrís na Scileanna",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Níl stáisiún-iniúchadh agus síniú céimeanna ina micromanagement nuair a bhítear ag imirt cluichí orthu. Coinnigh tógtha ard le logbook geal.",
     "gamification_title": "Tomhais Do Chlíochtúlacht",
     "gamification_desc": "Cé chomh soiléir atá do infhaicsinneacht? Tóg an measúnú 2-nóiméad saor in aisce chun do scór aibíochtúlachta oibríochtúil a fhionn agus feabhsúcháin dhírithe a oscailt.",
-    "gamification_cta": "Tóg an measúnú saor in aisce →"
+    "gamification_cta": "Tóg an measúnú saor in aisce →",
+    "nb_menu_scan_title": "5. Scanadóir Roghchlár & Líonadh Uathoibríoch",
+    "nb_menu_scan_desc": "Uaslódáil grianghraf, PDF nó URL suíomh de roghchlár ar bith. Baineann AI gach dís, praghas, cur síos, ailéirgín agus comhábhar as — ansin líonann sé d'eagarthóir roghchlár i ngéad amháin."
   },
   "Auth": {
     "login_title": "RiveHub",

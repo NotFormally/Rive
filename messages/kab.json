@@ -79,7 +79,7 @@
     "footer_terms": "Tiwaliyin",
     "sticky_cta": "Bdu imyegta",
     "nano_banana_title": "Tajumma Tamaynut. (S ussna tudlent).",
-    "nano_banana_subtitle": "Tali-d arbaɛ ifecka imaynuten i usefru n restaurant bunan.",
+    "nano_banana_subtitle": "Issawel ɣer meṛṛa ifecka imeqqṛanen n uɣezzaf n westtaɣ n tɣacunt.",
     "nano_banana_badge": "IMKALIYEN IMAYNUTEN 2026",
     "nest_net_profit": "Asaɣ n Urar",
     "nest_cash_flow": "Dinamik n Yisegma",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Idukklen n tafecka d usmideg n tawacult ur d izen amawel mi ara sfelmant. Ttzeggel wallen taḥecṭut d tameɣtut.",
     "gamification_title": "Ssedmer Tusniwin-ik",
     "gamification_desc": "Amek yella teggalt taḥecṭut-ik? Ger-d asuddes n 2-n tisdatin i d-tessedmert tɣecṭa-ik n tmara d sfelmant n tilisa.",
-    "gamification_cta": "Ger-d asuddes d wakal →"
+    "gamification_cta": "Ger-d asuddes d wakal →",
+    "nb_menu_scan_title": "5. Ascanar n Udlisen & Azuzew Awezzɣen",
+    "nb_menu_scan_desc": "Sengem tugna, PDF neɣ URL n usivt n yiwen udliss. AI yessaweḍ yal taɣawalt, tafessutt, aglam, taxlitert d isumɛa — yakan yessuzew aglam n usufud inek seg yiwet tektayt."
   },
   "Pricing": {
     "title": "Sgayen isselen, tajmaa izummren.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Tabaḍnit",
     "footer_terms": "Iraten",
     "nano_banana_title": "Tajedwelt n Tnezzut. (Ittufaɣ sɣur Tussna).",
-    "nano_banana_subtitle": "Sken-d akkin ifecka n tnezzut i usmeslay n tɣerfet war amahay.",
+    "nano_banana_subtitle": "Issawel ɣer meṛṛa ifecka imeqqṛanen n uɣezzaf n westtaɣ n tɣacunt.",
     "nb_haccp_title": "1. Amsay n HACCP War Aceddi",
     "nb_haccp_desc": "Smeslay taɣbalyin-ik n uḥsas akken d asecda. Tabaḍnit n ussan asendiq, ittwaḥwisen d ibbwelen.",
     "nb_sonar_title": "2. Sonar & Tamatart n Tsekla",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Tasubaxt n useggaṛ d usmiren n tejga ur d asufɣes mi ara d-ssenqas. Mqel taḥgut timegras s ulogbook ibanen.",
     "gamification_title": "Asuktel n Tignit-ik",
     "gamification_desc": "Akken am tameggit tameddit-ik? Rnu tasudewt n 2 n yisen i wakken ad tafem tasadawit n useddu-ik d isnerni n umḍiq.",
-    "gamification_cta": "Rnu tasudewt n baṭel →"
+    "gamification_cta": "Rnu tasudewt n baṭel →",
+    "nb_menu_scan_title": "5. Ascanar n Udlisen & Azuzew Awezzɣen",
+    "nb_menu_scan_desc": "Sengem tugna, PDF neɣ URL n usivt n yiwen udliss. AI yessaweḍ yal taɣawalt, tafessutt, aglam, taxlitert d isumɛa — yakan yessuzew aglam n usufud inek seg yiwet tektayt."
   },
   "Auth": {
     "login_title": "RiveHub",

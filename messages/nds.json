@@ -79,7 +79,7 @@
     "footer_terms": "Bedingungen",
     "sticky_cta": "Kostenloos anfangen",
     "nano_banana_title": "De Nee-Generatschon Suite. (Driven by Intelligence).",
-    "nano_banana_subtitle": "Entdeck unse veer nee Warktüüch för makkels Restaurantmanagement.",
+    "nano_banana_subtitle": "Entdeck unse fief niegen Warktüüg för problemlosen Restaurantbetrieb.",
     "nano_banana_badge": "NEE MÖGLICHKEITEN 2026",
     "nest_net_profit": "Nettogewinn",
     "nest_cash_flow": "Kassenstroom-Dynamik",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Stationsprüvungen un Schicht-Afmeldingen sind kein Micromanagement, wenn se gamifizert sind. Holl de Moral hoog mit en transparent Logbuk.",
     "gamification_title": "Meter Dien Intelligenz",
     "gamification_desc": "Wo klear is dien Sicht? Maak en 2-Minuten-Bewürden un dissekover dien operationell Rijp-Puunk un freeschaft målrichtiet Forbeteringen.",
-    "gamification_cta": "Maak de frie Bewürden →"
+    "gamification_cta": "Maak de frie Bewürden →",
+    "nb_menu_scan_title": "5. Speisekort-Scanner & Automaatsch Invüllen",
+    "nb_menu_scan_desc": "Laad en Foto, PDF or Websiet-URL vun jeedeen Speisekort hooch. KI-Systeem extrahiert elk Gericht, Pries, Beschriefung, Allergen un Ingredienten — un fullt denn dien Speisekort-Redetor mit een Klock."
   },
   "Pricing": {
     "title": "Klore Priesing, echte Wirkung.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Datenschütz",
     "footer_terms": "Bepalingen",
     "nano_banana_title": "De Next-Gen Suite. (Betrieben döh Intelligenz).",
-    "nano_banana_subtitle": "Entdecke unse veer niewe Werkzügen för reibungslose Restaurant-Management.",
+    "nano_banana_subtitle": "Entdeckk unse fief niegen Warktüüg för problemlosen Restaurantbetrieb.",
     "nb_haccp_title": "1. No-Code HACCP-Builder",
     "nb_haccp_desc": "Bau dien eegen Audit-Formulare mit en Swipe. Custom Levensmiddel-Veilichheid, digital signiert un immutable.",
     "nb_sonar_title": "2. Sonar & Fachkünstler-Matrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Stationsprövungen un Schichtsignierungen sünd keen Mikromanagement, wenn spelifizt. Hool de Stemmung hooch mit een transparente Logbook.",
     "gamification_title": "Miete Dine Intelligenz",
     "gamification_desc": "Wie klaar is dine Siicht? Maak en 2-Minuten-Assesment, üm dinen Bedriefsfälligkeitsscoor to entdecken un gezihlte Verbetern to Freischalten.",
-    "gamification_cta": "Neehm de fri Assessment →"
+    "gamification_cta": "Neehm de fri Assessment →",
+    "nb_menu_scan_title": "5. Speisekort-Scanner & Automaatsch Invüllen",
+    "nb_menu_scan_desc": "Laad en Foto, PDF or Websiet-URL vun jeedeen Speisekort hooch. KI-Systeem extrahiert elk Gericht, Pries, Beschriefung, Allergen un Ingredienten — un fullt denn dien Speisekort-Redetor mit een Klock."
   },
   "Auth": {
     "login_title": "RiveHub",

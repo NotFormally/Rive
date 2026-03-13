@@ -178,7 +178,7 @@
     "widget_running": "RUNNING PROTOCOL",
     "sticky_cta": "Tshuan tsiok Tsiok-bue",
     "nano_banana_title": "Tsiok-bue Tsik-tai. (Tsun-gua tsi-tin Tsiok-bue).",
-    "nano_banana_subtitle": "Khuann tsiok tsiok-bue Tsiok tsua tsiok-bue tsiok tsiok tsiok-bueh buan.",
+    "nano_banana_subtitle": "探索咱五个新的工具，予餐廳管理更加顺利。",
     "nano_banana_badge": "TSIOK-BUE 2026",
     "nest_net_profit": "Tsiok-bue Tsiok-jin",
     "nest_cash_flow": "Tsiok-bue Tsiok-tsiok",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "當工作站稽核和班次簽核遊戲化時，就不是微觀管理。用透明的日誌保持士氣高昂。",
     "gamification_title": "衡量你的智慧",
     "gamification_desc": "你的可見性有多清晰？進行 2 分鐘的評估來發現你的營運成熟度分數，並解鎖有針對性的改進。",
-    "gamification_cta": "進行免費評估 →"
+    "gamification_cta": "進行免費評估 →",
+    "nb_menu_scan_title": "5. 菜单扫描 & 自动填充",
+    "nb_menu_scan_desc": "上传任何菜单的照相、PDF 抑是网站网址。AI 会提掣逐个菜色、价格、说明、过敏原佮材料——随后一膏一声就会填满你的菜单编辑器。"
   },
   "Pricing": {
     "title": "清楚的價格，實在的效果。",
@@ -349,7 +351,7 @@
     "footer_privacy": "隱私政策",
     "footer_terms": "服務條款",
     "nano_banana_title": "下一代套件。(由智能驅動)。",
-    "nano_banana_subtitle": "探索我們四個新工具，讓餐廳管理無縫流暢。",
+    "nano_banana_subtitle": "探索咱五个新的工具，予餐廳管理更加顺利。",
     "nb_haccp_title": "1. 無代碼 HACCP 建構器",
     "nb_haccp_desc": "用一滑就能建構你自己的稽核表單。自訂食品安全，數位簽署且無法竄改。",
     "nb_sonar_title": "2. 聲納 & 廚務矩陣",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "站位稽核和班次簽核經過遊戲化後就不是微觀管理。用透明的工作日誌保持士氣高昂。",
     "gamification_title": "量測你的智慧程度",
     "gamification_desc": "你的營運透明度有多高？花 2 分鐘做評估，發現你的營運成熟度分數，並解鎖針對性改進。",
-    "gamification_cta": "進行免費評估 →"
+    "gamification_cta": "進行免費評估 →",
+    "nb_menu_scan_title": "5. 菜单扫描 & 自动填充",
+    "nb_menu_scan_desc": "上传任何菜单的照相、PDF 抑是网站网址。AI 会提掣逐个菜色、价格、说明、过敏原佮材料——随后一膏一声就会填满你的菜单编辑器。"
   },
   "Auth": {
     "login_title": "RiveHub",

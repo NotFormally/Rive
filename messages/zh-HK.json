@@ -163,7 +163,7 @@
     "widget_running": "運行協議",
     "sticky_cta": "免費開始",
     "nano_banana_title": "新世代套件。（由智能驅動）。",
-    "nano_banana_subtitle": "探索我們為無縫餐廳管理提供的四項新工具。",
+    "nano_banana_subtitle": "探索我們五項嶄新工具，實現無縫餐廳管理。",
     "nano_banana_badge": "新增功能 2026",
     "nest_net_profit": "淨利潤",
     "nest_cash_flow": "現金流動分析",
@@ -233,7 +233,9 @@
     "brigade_f3_desc": "當遊戲化時，工作站審計和班次簽到不是微觀管理。透過透明的操作記錄保持士氣高昂。",
     "gamification_title": "衡量你的智能",
     "gamification_desc": "你的可見性有多清晰？花 2 分鐘進行評估，發現你的營運成熟度得分並解鎖針對性改進。",
-    "gamification_cta": "進行免費評估 →"
+    "gamification_cta": "進行免費評估 →",
+    "nb_menu_scan_title": "5. 菜單掃描及自動填充",
+    "nb_menu_scan_desc": "上傳任何菜單的照片、PDF 或網站連結。AI 會自動提取每道菜式、價格、描述、過敏原及食材資訊 — 然後一鍵填充到您的菜單編輯器。"
   },
   "Pricing": {
     "title": "清晰嘅定價，真實嘅影響。",
@@ -334,7 +336,7 @@
     "footer_privacy": "隱私",
     "footer_terms": "條款",
     "nano_banana_title": "下一代套件。（由智能提供支援）。",
-    "nano_banana_subtitle": "發現我們四款無縫餐廳管理工具。",
+    "nano_banana_subtitle": "探索我們五項嶄新工具，實現無縫餐廳管理。",
     "nb_haccp_title": "1. 無代碼 HACCP 建構器",
     "nb_haccp_desc": "一鍵構建自訂稽核表單。客製化食品安全，數位簽署且不可篡改。",
     "nb_sonar_title": "2. 聲納儀 & 技能矩陣",
@@ -386,7 +388,9 @@
     "brigade_f3_desc": "當站點審計和班次簽核經過遊戲化後，就不再是微觀管理。透過透明的操作日誌保持士氣高漲。",
     "gamification_title": "評估您的智能程度",
     "gamification_desc": "您的可見度有多清晰？花 2 分鐘進行評估，發現您的營運成熟度分數，並解鎖針對性改進。",
-    "gamification_cta": "進行免費評估 →"
+    "gamification_cta": "進行免費評估 →",
+    "nb_menu_scan_title": "5. 菜單掃描及自動填充",
+    "nb_menu_scan_desc": "上傳任何菜單的照片、PDF 或網站連結。AI 會自動提取每道菜式、價格、描述、過敏原及食材資訊 — 然後一鍵填充到您的菜單編輯器。"
   },
   "Auth": {
     "login_title": "RiveHub",

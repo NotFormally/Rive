@@ -79,7 +79,7 @@
     "footer_terms": "Teirmean",
     "sticky_cta": "Tòisich gu saor",
     "nano_banana_title": "An Seata Ath-Nuadh. (Air a chumail suas le Innleachd).",
-    "nano_banana_subtitle": "Lorg ar ceithir innealan ùra airson stiùireadh taighe-bìdh gun draghail.",
+    "nano_banana_subtitle": "Faighinn a-mach air na còig innealan ùra againn airson stiùireadh taigh-bìdh gun bhacadh.",
     "nano_banana_badge": "COMAS ÙR 2026",
     "nest_net_profit": "Prothaid Gheal",
     "nest_cash_flow": "Dinimic Sruth Airgid",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Chan eil sgrùdaidhean stèisean agus sign-offs shift na riarachadh nuair a tha iad air an geama-mhaodhadh. Cùm misneachd àrd le logbook soilleir.",
     "gamification_title": "Tomhais do Dhealrainneachd",
     "gamification_desc": "Dè cho soilleir a tha do fhradharc? Thoir gnìomh air mèadhan 2 mionaid gus do sgòr abairt obrachaidh fhaighinn a-mach agus bathar-tasgaidh riaraichte a dhì-ghealadh.",
-    "gamification_cta": "Gabh thairis air an measadh an-asgaidh →"
+    "gamification_cta": "Gabh thairis air an measadh an-asgaidh →",
+    "nb_menu_scan_title": "5. Sganadh Clàr-bìdh & Lionachadh Fèin-ghluasadach",
+    "nb_menu_scan_desc": "Luchdaich suas dealbh, PDF no URL làraich de bhòrd-bidhe sam bith. Tha AI a' tarraing a-mach gach soitheach, prìs, tuairisgeul, allergen agus ingredient — an uairsin a' lionachadh an sgrùdair clàr-bìdh agad ann an aon bhriogadh."
   },
   "Pricing": {
     "title": "Prìsean soilleir, buaidh fhìor.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Prìobhaideachd",
     "footer_terms": "Teirmean",
     "nano_banana_title": "An Suite Ath-ghinealach. (Cumhachd bho Ghealladh).",
-    "nano_banana_subtitle": "Lorg na ceithir inneal ùr againn airson rianachd taighe-bidh gun suathadh.",
+    "nano_banana_subtitle": "Faighinn a-mach air na còig innealan ùra againn airson stiùireadh taigh-bìdh gun bhacadh.",
     "nb_haccp_title": "1. Togalaiche HACCP Gun Chòd",
     "nb_haccp_desc": "Tog na foirmichean sgrùdaidh agad fhèin le sguab. Sàbhailteachd bìdh gnàthasach, air a shoidhnigeadh gu digiteach agus do-atharrachadh.",
     "nb_sonar_title": "2. Sonar & Matrics Sgìlean",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Chan eil sgrùdaidhean stèisean agus soidhneachadh sgìre na mion-stiùireadh nuair a tha iad air an geama. Cùm moral àrd le logbook soilleir.",
     "gamification_title": "Tomhais do Fhiosrachaidh",
     "gamification_desc": "Dè cho soilleir sa tha do fhradharc? Thoir gabhail air mion-sgrùdadh 2-mhionaid gus do sgòr abuachd obrachaidh a lorg agus leabhraichean targeted a dhì-ghealadh.",
-    "gamification_cta": "Thoir an sgrudadh saor air adhart →"
+    "gamification_cta": "Thoir an sgrudadh saor air adhart →",
+    "nb_menu_scan_title": "5. Sganadh Clàr-bìdh & Lionachadh Fèin-ghluasadach",
+    "nb_menu_scan_desc": "Luchdaich suas dealbh, PDF no URL làraich de bhòrd-bidhe sam bith. Tha AI a' tarraing a-mach gach soitheach, prìs, tuairisgeul, allergen agus ingredient — an uairsin a' lionachadh an sgrùdair clàr-bìdh agad ann an aon bhriogadh."
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -24,7 +24,7 @@ export function MenuImportPreview({ data, onChange }: MenuImportPreviewProps) {
   const totalIngredients = new Set(
     data.categories.flatMap(cat =>
       cat.items.flatMap(item =>
-        (item.inferredIngredients || []).map(ing => ing.name.toLowerCase())
+        (item.ingredients || []).map(ing => ing.name.toLowerCase())
       )
     )
   ).size;
@@ -80,7 +80,7 @@ export function MenuImportPreview({ data, onChange }: MenuImportPreviewProps) {
       ...updated.categories[catIdx],
       items: [
         ...updated.categories[catIdx].items,
-        { name: '', description: '', price: 0, allergens: [], inferredIngredients: [], confidence: 1.0 },
+        { name: '', description: '', price: 0, allergens: [], ingredients: [], confidence: 1.0 },
       ],
     };
     onChange(updated);
@@ -212,18 +212,18 @@ export function MenuImportPreview({ data, onChange }: MenuImportPreviewProps) {
                         </div>
 
                         {/* Ingredients (collapsible) */}
-                        {item.inferredIngredients && item.inferredIngredients.length > 0 && (
+                        {item.ingredients && item.ingredients.length > 0 && (
                           <div>
                             <button
                               onClick={() => toggleIngredients(itemKey)}
                               className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 flex items-center gap-1"
                             >
                               {expandedIngredients.has(itemKey) ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
-                              {item.inferredIngredients.length} {t('item_ingredients')}
+                              {item.ingredients.length} {t('item_ingredients')}
                             </button>
                             {expandedIngredients.has(itemKey) && (
                               <div className="mt-1 pl-4 space-y-1">
-                                {item.inferredIngredients.map((ing, ii) => (
+                                {item.ingredients.map((ing, ii) => (
                                   <div key={ii} className="flex items-center gap-2 text-xs text-zinc-500">
                                     <span className="w-2 h-2 bg-zinc-300 dark:bg-zinc-600 rounded-full shrink-0" />
                                     <span>{ing.name}</span>

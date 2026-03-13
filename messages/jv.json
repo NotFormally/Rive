@@ -79,7 +79,7 @@
     "footer_terms": "Syarat",
     "sticky_cta": "Mulo kanthi gratis",
     "nano_banana_title": "Suite Generasi Sabanjure. (Didukung Intelijen).",
-    "nano_banana_subtitle": "Temokake empat alat anyar kanggo manajemen restoran tanpa gesekan.",
+    "nano_banana_subtitle": "Temokake limang alat anyar kanggo manajemen restoran tanpa alangan.",
     "nano_banana_badge": "KAPABILITAS ANYAR 2026",
     "nest_net_profit": "Untung Bersih",
     "nest_cash_flow": "Dinamika Aliran Kas",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Audit stasi lan tandatangan shift ora dadi manajemen mikro nalika digamifikasi. Jaga morale dhuwur kanthi buku catatan sing transparan.",
     "gamification_title": "Ukur Intelijen Mu",
     "gamification_desc": "Carane jelas visibilitas mu? Gawe penilaian 2 menit kanggo nemokake skor kematangan operasional mu lan buka perbaikan bertarget.",
-    "gamification_cta": "Gawe penilaian gratis →"
+    "gamification_cta": "Gawe penilaian gratis →",
+    "nb_menu_scan_title": "5. Pemindai Menu & Pengisian Otomatis",
+    "nb_menu_scan_desc": "Unggah foto, PDF, utawa URL situs web saka menu apa wae. AI ngekstrak saben hidangan, harga, katrangan, alergen lan bahan — banjur ngisi editor menu mu ing siji klik."
   },
   "Pricing": {
     "title": "Harga jelas, dampak nyata.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Privasi",
     "footer_terms": "Syarat",
     "nano_banana_title": "Suite Generasi Berikutnya. (Didukung oleh Intelijen).",
-    "nano_banana_subtitle": "Temukan empat alat baru kami kanggo manajemen restoran tanpa hambatan.",
+    "nano_banana_subtitle": "Temokake limang alat anyar kanggo manajemen restoran tanpa alangan.",
     "nb_haccp_title": "1. Pembuat HACCP Tanpa Kode",
     "nb_haccp_desc": "Bangun formulir audit mu dhewe kanthi sapuan. Keamanan pangan khusus, ditandatangani digital lan tidak dapat diubah.",
     "nb_sonar_title": "2. Sonar & Matriks Keterampilan",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Audit stasiun dan penandatanganan shift bukan mikromanajemen saat digamifikasi. Pertahankan semangat tinggi dengan logbook transparan.",
     "gamification_title": "Ukur Intelijen Mu",
     "gamification_desc": "Seberapa jelas visibilitas mu? Lakukan penilaian 2 menit untuk menemukan skor kematangan operasional mu dan buka perbaikan yang ditargetkan.",
-    "gamification_cta": "Ambil penilaian gratis →"
+    "gamification_cta": "Ambil penilaian gratis →",
+    "nb_menu_scan_title": "5. Pemindai Menu & Pengisian Otomatis",
+    "nb_menu_scan_desc": "Unggah foto, PDF, utawa URL situs web saka menu apa wae. AI ngekstrak saben hidangan, harga, katrangan, alergen lan bahan — banjur ngisi editor menu mu ing siji klik."
   },
   "Auth": {
     "login_title": "RiveHub",

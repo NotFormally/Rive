@@ -178,7 +178,7 @@
     "widget_running": "PROTOKOL BERJALAN",
     "sticky_cta": "Mulai secara percuma",
     "nano_banana_title": "Suite Generasi Berikutnya. (Didukung oleh Kecerdasan).",
-    "nano_banana_subtitle": "Temui empat alat baru kami untuk pengurusan restoran yang lancar.",
+    "nano_banana_subtitle": "Temukan lima alat baru kami untuk pengurusan restoran tanpa geseran.",
     "nano_banana_badge": "KEUPAYAAN BARU 2026",
     "nest_net_profit": "Untung Bersih",
     "nest_cash_flow": "Dinamik Aliran Tunai",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Audit stesen dan tandatangan syif bukan pengurusan mikro apabila diagamifikasi. Jaga semangat tinggi dengan logbook yang telus.",
     "gamification_title": "Ukur Kecerdasan Anda",
     "gamification_desc": "Sejauh manakah visibiliti anda? Ambil penilaian 2 minit untuk menemui skor kematangan operasi anda dan buka penambahbaikan yang disasarkan.",
-    "gamification_cta": "Ambil penilaian percuma →"
+    "gamification_cta": "Ambil penilaian percuma →",
+    "nb_menu_scan_title": "5. Pengimbas Menu & Isi Automatik",
+    "nb_menu_scan_desc": "Muat naik foto, PDF atau URL laman web mana-mana menu. AI mengekstrak setiap hidangan, harga, penerangan, alergen dan bahan — kemudian mengisi editor menu anda dalam satu klik."
   },
   "Pricing": {
     "title": "Harga yang jelas, kesan sebenar.",
@@ -349,7 +351,7 @@
     "footer_privacy": "Privasi",
     "footer_terms": "Terma",
     "nano_banana_title": "Suite Generasi Seterusnya. (Dikuasakan oleh Kecerdasan).",
-    "nano_banana_subtitle": "Temui empat alat baharu kami untuk pengurusan restoran tanpa geseran.",
+    "nano_banana_subtitle": "Temukan lima alat baru kami untuk pengurusan restoran tanpa geseran.",
     "nb_haccp_title": "1. Pembina HACCP Tanpa Kod",
     "nb_haccp_desc": "Bina borang audit anda sendiri dengan sentuhan. Keselamatan makanan tersuai, ditandatangani secara digital dan kekal.",
     "nb_sonar_title": "2. Sonar & Matriks Kemahiran",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Audit stesen dan tandatangan syif bukan pengurusan mikro apabila digamifikasi. Kekalkan semangat tinggi dengan logbook yang lutsinar.",
     "gamification_title": "Ukur Kepintaran Anda",
     "gamification_desc": "Berapa jelaskah keterlihatan anda? Ambil penilaian 2 minit untuk menemui skor kematangan operasi anda dan buka penambahbaikan yang disasarkan.",
-    "gamification_cta": "Ambil penilaian percuma →"
+    "gamification_cta": "Ambil penilaian percuma →",
+    "nb_menu_scan_title": "5. Pengimbas Menu & Isi Automatik",
+    "nb_menu_scan_desc": "Muat naik foto, PDF atau URL laman web mana-mana menu. AI mengekstrak setiap hidangan, harga, penerangan, alergen dan bahan — kemudian mengisi editor menu anda dalam satu klik."
   },
   "Auth": {
     "login_title": "RiveHub",

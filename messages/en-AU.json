@@ -79,7 +79,7 @@
     "footer_terms": "Terms",
     "sticky_cta": "Start for free",
     "nano_banana_title": "The Next-Gen Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Discover our four new tools for frictionless restaurant management.",
+    "nano_banana_subtitle": "Discover our five new tools for seamless restaurant management.",
     "nano_banana_badge": "NEW CAPABILITIES 2026",
     "nest_net_profit": "Net Profit",
     "nest_cash_flow": "Cash Flow Dynamics",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Station audits and shift sign-offs aren't micromanagement when gamified. Keep morale high with a transparent logbook.",
     "gamification_title": "Measure Your Intelligence",
     "gamification_desc": "How clear is your visibility? Take a 2-minute assessment to discover your operational maturity score and unlock targeted improvements.",
-    "gamification_cta": "Take the free assessment →"
+    "gamification_cta": "Take the free assessment →",
+    "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
+    "nb_menu_scan_desc": "Upload a photo, PDF or website URL of any menu. AI extracts every dish, price, description, allergen and ingredient — then populates your menu editor in one click."
   },
   "Pricing": {
     "title": "Clear pricing, real impact.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Privacy",
     "footer_terms": "Terms",
     "nano_banana_title": "The Next-Gen Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Discover our four new tools for frictionless restaurant management.",
+    "nano_banana_subtitle": "Discover our five new tools for seamless restaurant management.",
     "nb_haccp_title": "1. No-Code HACCP Builder",
     "nb_haccp_desc": "Build your own audit forms with a swipe. Custom food safety, digitally signed and immutable.",
     "nb_sonar_title": "2. Sonar & Skills Matrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Station audits and shift sign-offs aren't micromanagement when gamified. Keep morale high with a transparent logbook.",
     "gamification_title": "Measure Your Intelligence",
     "gamification_desc": "How clear is your visibility? Take a 2-minute assessment to discover your operational maturity score and unlock targeted improvements.",
-    "gamification_cta": "Take the free assessment →"
+    "gamification_cta": "Take the free assessment →",
+    "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
+    "nb_menu_scan_desc": "Upload a photo, PDF or website URL of any menu. AI extracts every dish, price, description, allergen and ingredient — then populates your menu editor in one click."
   },
   "Auth": {
     "login_title": "RiveHub",

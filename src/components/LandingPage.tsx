@@ -24,6 +24,7 @@ import { ComplianceSection } from "@/components/ComplianceSection";
 import { BrigadeRetention } from "@/components/BrigadeRetention";
 import { GamificationTeaser } from "@/components/GamificationTeaser";
 import { IntelligenceJourney } from "@/components/IntelligenceJourney";
+import { IntelligenceQuiz } from "@/components/IntelligenceQuiz";
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -1117,6 +1118,9 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* INTELLIGENCE QUIZ (SELF-ASSESSMENT) */}
+      <IntelligenceQuiz />
 
       {/* INTELLIGENCE JOURNEY (DATA MATURITY) */}
       <IntelligenceJourney />

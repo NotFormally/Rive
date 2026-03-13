@@ -163,7 +163,7 @@
     "widget_running": "RUNNING PROTOCOL",
     "sticky_cta": "Ücretsiz başlayın",
     "nano_banana_title": "Yeni Nesil Suite. (Zeka Tarafından Desteklenmektedir).",
-    "nano_banana_subtitle": "Restoran yönetimi için dört yeni araç keşfedin.",
+    "nano_banana_subtitle": "Restoran yönetimini kolaylaştıran beş yeni aracı keşfedin.",
     "nano_banana_badge": "YENİ YETENEKLER 2026",
     "nest_net_profit": "Net Kâr",
     "nest_cash_flow": "Nakit Akışı Dinamikleri",
@@ -233,7 +233,9 @@
     "brigade_f3_desc": "İstasyon denetimleri ve vardiya check-in'leri gamifikasyon yoluyla mikro yönetim olmaktan çıkar. Şeffaf logbook ile moral yüksek tutun.",
     "gamification_title": "Zekânızı Ölçün",
     "gamification_desc": "Görünürlüğünüz ne kadar net? 2 dakikalık bir değerlendirme yaparak operasyonel olgunluk puanınızı keşfedin ve hedeflenen iyileştirmeleri açın.",
-    "gamification_cta": "Ücretsiz değerlendirmeyi al →"
+    "gamification_cta": "Ücretsiz değerlendirmeyi al →",
+    "nb_menu_scan_title": "5. Menü Tarayıcısı ve Otomatik Doldurma",
+    "nb_menu_scan_desc": "Herhangi bir menünün fotoğrafını, PDF'sini veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamasını, alerjenleri ve malzemeleri çıkarır — ardından menü editörünüzü tek tıklamayla doldurur."
   },
   "Pricing": {
     "title": "Net fiyatlandırma, gerçek etki.",
@@ -334,7 +336,7 @@
     "footer_privacy": "Gizlilik",
     "footer_terms": "Şartlar",
     "nano_banana_title": "Yeni Nesil Paket. (Zeka Tarafından Desteklenmektedir).",
-    "nano_banana_subtitle": "Sürtünsüz restoran yönetimi için dört yeni aracı keşfedin.",
+    "nano_banana_subtitle": "Restoran yönetimini kolaylaştıran beş yeni aracı keşfedin.",
     "nb_haccp_title": "1. Kodsuz HACCP Oluşturucu",
     "nb_haccp_desc": "Bir kaydırmayla kendi denetim formlarını oluşturun. Özel gıda güvenliği, dijital olarak imzalanmış ve değişmez.",
     "nb_sonar_title": "2. Sonar & Beceri Matrisi",
@@ -386,7 +388,9 @@
     "brigade_f3_desc": "İstasyon denetimi ve vardiya imzalaması gamifikasyon yapılırsa mikro yönetim değildir. Şeffaf logbook ile moralini yüksek tutun.",
     "gamification_title": "Zekânızı Ölçün",
     "gamification_desc": "Görünürlüğünüz ne kadar net? Operasyonel olgunluk puanınızı keşfetmek ve hedeflenmiş iyileştirmeler kilidini açmak için 2 dakikalık bir değerlendirme yapın.",
-    "gamification_cta": "Ücretsiz değerlendirmeyi yapın →"
+    "gamification_cta": "Ücretsiz değerlendirmeyi yapın →",
+    "nb_menu_scan_title": "5. Menü Tarayıcısı ve Otomatik Doldurma",
+    "nb_menu_scan_desc": "Herhangi bir menünün fotoğrafını, PDF'sini veya web sitesi URL'sini yükleyin. Yapay zeka her yemeği, fiyatı, açıklamasını, alerjenleri ve malzemeleri çıkarır — ardından menü editörünüzü tek tıklamayla doldurur."
   },
   "Auth": {
     "login_title": "RiveHub",

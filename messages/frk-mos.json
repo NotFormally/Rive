@@ -79,7 +79,7 @@
     "footer_terms": "Bedéngungen",
     "sticky_cta": "Gratis ufänken",
     "nano_banana_title": "D'Next-Gen Suite. (Mat Intelligenz bewéiert).",
-    "nano_banana_subtitle": "Entdeckt eis véier nei Tools fir sämleches Restaurantmanagement.",
+    "nano_banana_subtitle": "Entdeckt eis fënnef nei Tools fir problemlos Restaurantsverwaltung.",
     "nano_banana_badge": "NEI MÖGLECHKEETEN 2026",
     "nest_net_profit": "Nettogewënn",
     "nest_cash_flow": "Cash Flow Dynamik",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Statioun-Auditen an Schicht-Ofzeechnung sinn keng Mikro-Management wann se gamifizéiert sinn. Halt d'Moral héich mat engem transparenten Logbuch.",
     "gamification_title": "Miess Deng Intelligenz",
     "gamification_desc": "Wéi kloer ass deng Sich? Maach eng 2-Minutten-Bewäertung fir deng operationell Reifeschscore z'entdecken a gezielte Verbesserungen z'entsperren.",
-    "gamification_cta": "Maach d'gratis Bewäertung →"
+    "gamification_cta": "Maach d'gratis Bewäertung →",
+    "nb_menu_scan_title": "5. Menüscanner & Automatesch Ausfëllen",
+    "nb_menu_scan_desc": "Lued eng Foto, PDF oder Websäit-URL vun engem Menü rop. AI extrahéiert all Gericht, Präis, Beschreiwung, Allergenen an Ingrediënzen — an fëllt dann äre Menü-Editor mat engem Klick aus."
   },
   "Pricing": {
     "title": "Kloer Präisser, reell Impact.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Datenschutz",
     "footer_terms": "Bedéngungen",
     "nano_banana_title": "De Next-Gen Suite. (Betrieben duerch Intelligence).",
-    "nano_banana_subtitle": "Entdeckt eis véier nei Tools fir frikstiounsfräi Restaurang-Verwaltung.",
+    "nano_banana_subtitle": "Entdeckt eis fënnef nei Tools fir problemlos Restaurantsverwaltung.",
     "nb_haccp_title": "1. No-Code HACCP Builder",
     "nb_haccp_desc": "Baut äer eegent Audit-Formulare mat engem Wësch. Personaliséiert Liewensmëttel-Sécherhheet, digital signéiert a onofrännerbar.",
     "nb_sonar_title": "2. Sonar & Schëff-Matrice",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Staatioun-Audits a Schicht-Ënnerschriftem sinn net Mikro-Management wa se gamifizéiert sinn. Halt d'Moral héich mat engem transparentem Logbuch.",
     "gamification_title": "Miess Deng Intelligenz",
     "gamification_desc": "Wéi kloer ass deng Sichtbarkeet? Maach eng 2-Minutten-Bewäertung ëm deng operationell Reife-Scor ze entdecken a geziilt Verbesserungen freizeschafen.",
-    "gamification_cta": "Maach d'gratis Bewäertung →"
+    "gamification_cta": "Maach d'gratis Bewäertung →",
+    "nb_menu_scan_title": "5. Menüscanner & Automatesch Ausfëllen",
+    "nb_menu_scan_desc": "Lued eng Foto, PDF oder Websäit-URL vun engem Menü rop. AI extrahéiert all Gericht, Präis, Beschreiwung, Allergenen an Ingrediënzen — an fëllt dann äre Menü-Editor mat engem Klick aus."
   },
   "Auth": {
     "login_title": "RiveHub",

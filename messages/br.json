@@ -79,7 +79,7 @@
     "footer_terms": "Terezoù",
     "sticky_cta": "Kuzh evit dieub",
     "nano_banana_title": "An Daol-Skouer Dasrannañ. (Kaozet gant an Spered).",
-    "nano_banana_subtitle": "Diskuziañ hor pevar taol nevez evit ar stummañ restaorantaj hep strafañ.",
+    "nano_banana_subtitle": "Dizoleiñ hor pemp ostilh nevez evit ardoazh restaorant hep stoujennoù.",
     "nano_banana_badge": "GALLOUDOÙ NEVEZ 2026",
     "nest_net_profit": "Gouañv Net",
     "nest_cash_flow": "Dinamikoù an Tachad Kuñv",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Ne vlij ket skrudu an titouroù gant roud pa vez c'hoari-levezon. Kaozañ ar sonajoù uhel gant ur log-oberererezh dister.",
     "gamification_title": "Mesur Ho Skiant",
     "gamification_desc": "Ne ziskar eo ar gwelout? Oberañ ur skrammañ 2-munut evit kavout ho skor a vaturieg an opererigerezh ha ruzh an welladur pouezus.",
-    "gamification_cta": "Tapout ar gwirtan digoust →"
+    "gamification_cta": "Tapout ar gwirtan digoust →",
+    "nb_menu_scan_title": "5. Skanniñ Meuziad & Leuniañ Otomatik",
+    "nb_menu_scan_desc": "Enkargañ ur foto, PDF pe URL a website a zivout ebet a meuziad. Ar AI a distro kement a zeod, priz, deskrivadur, allergennoù hag endañsoù — goude-se a leunia eo ar gemennouer meuziad en ur click hepken."
   },
   "Pricing": {
     "title": "Prizout klok, gwelloc'h gwir.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Prevéerezh",
     "footer_terms": "Teroù",
     "nano_banana_title": "An Suit Aozemp. (Ennomp-kavet gant Spered).",
-    "nano_banana_subtitle": "Degemer hon daolenn gwelloc'h evit reoliadur restoran hep sav.",
+    "nano_banana_subtitle": "Dizoleiñ hor pemp ostilh nevez evit ardoazh restaorant hep stoujennoù.",
     "nb_haccp_title": "1. Binvout HACCP Kodmañs-Nann",
     "nb_haccp_desc": "Sevel ho furmskridoù skrudit gant ur stemp. Surentez boued personelaet, sinelec'h a-zivout.",
     "nb_sonar_title": "2. Sonar & Matrice a-vicher",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "N'eo ket ur reoliadenn-tuz an sevel stourmoù ha singell davenoù pa vez c'hoariet. Klaskoude an hoalvrud gant ur c'huzh digouerz en levennoù.",
     "gamification_title": "Sevel Ho Gaozañ",
     "gamification_desc": "Pet a ze klok ho gwelout? Ober ur bluenn 2-munutenn evit c'hoant graet azgoulennoù ho labour ha lakaet deroù bro stell.",
-    "gamification_cta": "Ober ar skouerz-frank →"
+    "gamification_cta": "Ober ar skouerz-frank →",
+    "nb_menu_scan_title": "5. Skanniñ Meuziad & Leuniañ Otomatik",
+    "nb_menu_scan_desc": "Enkargañ ur foto, PDF pe URL a website a zivout ebet a meuziad. Ar AI a distro kement a zeod, priz, deskrivadur, allergennoù hag endañsoù — goude-se a leunia eo ar gemennouer meuziad en ur click hepken."
   },
   "Auth": {
     "login_title": "RiveHub",

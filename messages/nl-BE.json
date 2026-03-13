@@ -79,7 +79,7 @@
     "footer_terms": "Voorwaarden",
     "sticky_cta": "Gratis starten",
     "nano_banana_title": "De Next-Gen Suite. (Aangestuurd door intelligentie).",
-    "nano_banana_subtitle": "Ontdek onze vier nieuwe tools voor probleemloze restaurantbeheer.",
+    "nano_banana_subtitle": "Ontdek onze vijf nieuwe tools voor probleemloze restaurantbeheer.",
     "nano_banana_badge": "NIEUWE MOGELIJKHEDEN 2026",
     "nest_net_profit": "Nettowinst",
     "nest_cash_flow": "Kasstroomdynamica",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Stationcontroles en dienstafsluiting zijn geen micromanagement wanneer ze gamified zijn. Houd het moreel hoog met een transparant logboek.",
     "gamification_title": "Meet je Intelligentie",
     "gamification_desc": "Hoe helder is je inzicht? Doe een 2-minuten-assessment om je operationele volwassenheidsscore te ontdekken en gerichte verbeteringen te ontgrendelen.",
-    "gamification_cta": "Neem gratis assessment →"
+    "gamification_cta": "Neem gratis assessment →",
+    "nb_menu_scan_title": "5. Menukaart Scanner & Automatisch Invullen",
+    "nb_menu_scan_desc": "Upload een foto, PDF of website-URL van elke menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingrediënt — en vult vervolgens je menu-editor in één klik in."
   },
   "Pricing": {
     "title": "Helder prijzen, echte impact.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Privacy",
     "footer_terms": "Voorwaarden",
     "nano_banana_title": "De Next-Gen Suite. (Mogelijk gemaakt door Intelligence).",
-    "nano_banana_subtitle": "Ontdek onze vier nieuwe hulpmiddelen voor probleemloze restaurantmanagement.",
+    "nano_banana_subtitle": "Ontdek onze vijf nieuwe tools voor probleemloze restaurantbeheer.",
     "nb_haccp_title": "1. No-Code HACCP Builder",
     "nb_haccp_desc": "Bouw je eigen auditformulieren met een zwaai. Aangepaste voedselveiligheid, digitaal ondertekend en onveranderbaar.",
     "nb_sonar_title": "2. Sonar & Vaardigheidsmatrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Stationcontroles en shiftafmeldingen zijn geen micromanagement als ze gamified zijn. Houd het moreel hoog met een transparant logboek.",
     "gamification_title": "Meet je Intelligentie",
     "gamification_desc": "Hoe helder is je zichtbaarheid? Voer een korte beoordeling van 2 minuten uit en ontdek je operationele rijpheidsscore en ontgrendel gerichte verbeteringen.",
-    "gamification_cta": "Voltooi de gratis beoordeling →"
+    "gamification_cta": "Voltooi de gratis beoordeling →",
+    "nb_menu_scan_title": "5. Menukaart Scanner & Automatisch Invullen",
+    "nb_menu_scan_desc": "Upload een foto, PDF of website-URL van elke menukaart. AI extraheert elk gerecht, prijs, beschrijving, allergeen en ingrediënt — en vult vervolgens je menu-editor in één klik in."
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -178,7 +178,7 @@
     "widget_running": "PROTOKOL BERJALAN",
     "sticky_cta": "Mulai gratis",
     "nano_banana_title": "Suite Generasi Berikutnya. (Didukung oleh Kecerdasan).",
-    "nano_banana_subtitle": "Temukan empat alat baru kami untuk manajemen restoran tanpa hambatan.",
+    "nano_banana_subtitle": "Temukan lima alat baru kami untuk manajemen restoran tanpa hambatan.",
     "nano_banana_badge": "KEMAMPUAN BARU 2026",
     "nest_net_profit": "Laba Bersih",
     "nest_cash_flow": "Dinamika Arus Kas",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Audit stasiun dan tanda tangan shift bukan micromanagement ketika gamified. Jaga moril tetap tinggi dengan logbook yang transparan.",
     "gamification_title": "Ukur Intelijen Anda",
     "gamification_desc": "Seberapa jelas visibilitas Anda? Ambil penilaian 2 menit untuk menemukan skor kematangan operasional Anda dan buka perbaikan yang ditargetkan.",
-    "gamification_cta": "Ambil penilaian gratis →"
+    "gamification_cta": "Ambil penilaian gratis →",
+    "nb_menu_scan_title": "5. Pemindai Menu & Auto-Isi",
+    "nb_menu_scan_desc": "Unggah foto, PDF, atau URL situs web menu apa pun. AI mengekstrak setiap hidangan, harga, deskripsi, alergen, dan bahan — kemudian mengisi editor menu Anda dalam satu klik."
   },
   "Pricing": {
     "title": "Harga yang jelas, dampak nyata.",
@@ -349,7 +351,7 @@
     "footer_privacy": "Privasi",
     "footer_terms": "Persyaratan",
     "nano_banana_title": "Suite Generasi Berikutnya. (Diberdayakan oleh Intelligence).",
-    "nano_banana_subtitle": "Temukan empat alat baru kami untuk manajemen restoran tanpa hambatan.",
+    "nano_banana_subtitle": "Temukan lima alat baru kami untuk manajemen restoran tanpa hambatan.",
     "nb_haccp_title": "1. Pembangun HACCP Tanpa Kode",
     "nb_haccp_desc": "Buat formulir audit Anda sendiri dengan sekali geser. Keamanan pangan khusus, ditandatangani secara digital dan tidak dapat diubah.",
     "nb_sonar_title": "2. Sonar & Skills Matrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Audit stasiun dan tanda tangan shift bukan micromanagement saat gamified. Jaga moral tetap tinggi dengan logbook yang transparan.",
     "gamification_title": "Ukur Intelijen Anda",
     "gamification_desc": "Seberapa jelas visibilitas Anda? Lakukan penilaian 2 menit untuk menemukan skor kematangan operasional Anda dan buka perbaikan yang ditargetkan.",
-    "gamification_cta": "Ambil penilaian gratis →"
+    "gamification_cta": "Ambil penilaian gratis →",
+    "nb_menu_scan_title": "5. Pemindai Menu & Auto-Isi",
+    "nb_menu_scan_desc": "Unggah foto, PDF, atau URL situs web menu apa pun. AI mengekstrak setiap hidangan, harga, deskripsi, alergen, dan bahan — kemudian mengisi editor menu Anda dalam satu klik."
   },
   "Auth": {
     "login_title": "RiveHub",

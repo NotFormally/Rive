@@ -79,7 +79,7 @@
     "footer_terms": "Imigomo",
     "sticky_cta": "Qala ngokungenisa phezu kwethuluzi",
     "nano_banana_title": "I-Suite Yesizukulwane Esilandelayo. (Amandla e-Intelligence).",
-    "nano_banana_subtitle": "Thola izinto zethu ezine ezintsha zokuphathwa kwendawo zokudla ngokungenelela.",
+    "nano_banana_subtitle": "Tholakela izinsiza zethu ezinhlanu ezintsha zokuphathwa kwerestiwurenti ngaphandle kokukhubazeka.",
     "nano_banana_badge": "AMANDLA AMASHA 2026",
     "nest_net_profit": "Inzuzo Ehlulekile",
     "nest_cash_flow": "Ukuhamba Kwamali",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Ukulinganisa kwesthesheni nokungenisa okusheshe akubikwa njengokulawula kaphakathi uma kungiliza. Gcinani isipiriti siphakamile ngencwadi enqunyiwe ngokucaca.",
     "gamification_title": "Linganisa Ulwazi Lwakho",
     "gamification_desc": "Ubukhanyi bokukhangela bakho buqala kangakanani? Thatha isikali esingu-2-minit ukuze uthole usikali sakho sokukhuma kokusetshenziswa futhi uvule izinzuzo eziqondile.",
-    "gamification_cta": "Thatha ukuhlolwa okusheshe →"
+    "gamification_cta": "Thatha ukuhlolwa okusheshe →",
+    "nb_menu_scan_title": "5. I-Menu Scanner ne-Auto-Populate",
+    "nb_menu_scan_desc": "Layisha isithombe, i-PDF noma i-URL yewebhusayithi yanoma iyiphi imenyu. I-AI ifuna isitsha ngasinye, intengo, incazelo, izinto ezithinta ukhuni kanye nenzalo — bese ipopulela umhleli wemenyu yakho nokusetshenziswa kwesikhwamane."
   },
   "Pricing": {
     "title": "Intengo ebonakalayo, umphumela wangempela.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Ubumnandi",
     "footer_terms": "Imithetho",
     "nano_banana_title": "Isethi Enemikhakha Emisha. (Amasiko).",
-    "nano_banana_subtitle": "Thola amathuluzi ethu amane amasha okukwazi ukulawula iziteshi zokudla kalula.",
+    "nano_banana_subtitle": "Tholakela izinsiza zethu ezinhlanu ezintsha zokuphathwa kwerestiwurenti ngaphandle kokukhubazeka.",
     "nb_haccp_title": "1. Umakhi we-HACCP Ongenayo-Code",
     "nb_haccp_desc": "Zakha amafomu akho okuhlola ngesithambile. Ukuphepha kokudla okwakhiwe ngokwezifiso, osayiniwe ngokwedijithali futhi akholeleki.",
     "nb_sonar_title": "2. I-Sonar & Imatriki Yesisekelo",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Ukuhlolwa kwesthesha nokusayina keshifti akushiya umsebenzi omkhulu lapho kuhlwehlwe khona. Palelisa umoya ophakeme nge-logbook ebekile.",
     "gamification_title": "Kala Ulwazi Lwakho",
     "gamification_desc": "Ukukhanya kwakho kufanele kube kangakanani? Thatha imineti engu-2 yevalusi ukuthola isikho sakho sobunini bokuphatha nokuvula izilungiselo ezikhethiwe.",
-    "gamification_cta": "Thatha ukuhlolwa okugcini →"
+    "gamification_cta": "Thatha ukuhlolwa okugcini →",
+    "nb_menu_scan_title": "5. I-Menu Scanner ne-Auto-Populate",
+    "nb_menu_scan_desc": "Layisha isithombe, i-PDF noma i-URL yewebhusayithi yanoma iyiphi imenyu. I-AI ifuna isitsha ngasinye, intengo, incazelo, izinto ezithinta ukhuni kanye nenzalo — bese ipopulela umhleli wemenyu yakho nokusetshenziswa kwesikhwamane."
   },
   "Auth": {
     "login_title": "RiveHub",

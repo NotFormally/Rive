@@ -126,7 +126,7 @@ export function MenuImportWizard({ restaurantId }: MenuImportWizardProps) {
             {t('save_confirm_body', {
               categories: extractedData.categories.length,
               items: extractedData.categories.reduce((s, c) => s + c.items.length, 0),
-              ingredients: new Set(extractedData.categories.flatMap(c => c.items.flatMap(i => (i.inferredIngredients || []).map(ing => ing.name.toLowerCase())))).size,
+              ingredients: new Set(extractedData.categories.flatMap(c => c.items.flatMap(i => (i.ingredients || []).map(ing => ing.name.toLowerCase())))).size,
             })}
           </div>
           <button

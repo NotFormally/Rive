@@ -79,7 +79,7 @@
     "footer_terms": "Feltételek",
     "sticky_cta": "Kezdés ingyen",
     "nano_banana_title": "A Következő Generációs Csomag. (Intelligencia által működtetve).",
-    "nano_banana_subtitle": "Fedezze fel négy új eszközünket a zökkenőmentes éttermi menedzsmenthez.",
+    "nano_banana_subtitle": "Fedezze fel öt új eszközünket a zökkenőmentes éttermi irányításhoz.",
     "nano_banana_badge": "ÚJ KÉPESSÉGEK 2026",
     "nest_net_profit": "Nettó Nyereség",
     "nest_cash_flow": "Pénzáramlás Dinamikája",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Az állomási auditok és műszak aláírások nem mikromenedzselés, ha gamifikáltak. Tartsd magas a morált egy transzparens naplóval.",
     "gamification_title": "Mérd a Szellemi Képességeidet",
     "gamification_desc": "Milyen egyértelmű a láthatóságod? Végezz el egy 2 perces felmérést, hogy felfedezd az operatív érettségi pontszámodat és oldj fel célzott fejlesztéseket.",
-    "gamification_cta": "Végezd el az ingyenes felmérést →"
+    "gamification_cta": "Végezd el az ingyenes felmérést →",
+    "nb_menu_scan_title": "5. Étlap-szkenner és automatikus kitöltés",
+    "nb_menu_scan_desc": "Töltse fel bármely étlap fotóját, PDF-jét vagy weboldal URL-jét. A mesterséges intelligencia kinyeri az összes ételt, árat, leírást, allergént és összetevőt — majd egyetlen kattintással feltölti az étlap szerkesztőjét."
   },
   "Pricing": {
     "title": "Tiszta árazás, valódi hatás.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Adatvédelem",
     "footer_terms": "Feltételek",
     "nano_banana_title": "A Következő Generációs Csomag. (Intelligencia által működtetve).",
-    "nano_banana_subtitle": "Fedezze fel négy új eszközünket az akadálymentes éttermi menedzsmenthez.",
+    "nano_banana_subtitle": "Fedezze fel öt új eszközünket a zökkenőmentes éttermi irányításhoz.",
     "nb_haccp_title": "1. Kódrétegmentes HACCP Készítő",
     "nb_haccp_desc": "Készítse el saját auditformáit egy mozdulattal. Egyéni élelmiszer-biztonság, digitálisan aláírva és megváltoztathatatlan.",
     "nb_sonar_title": "2. Sonar & Készségmátrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Az állomási ellenőrzések és a műszak-jelentkezések nem mikromenedzselés, ha gamifikálva vannak. Tartsd magas a morált egy transzparens logkönyvvel.",
     "gamification_title": "Mérd Meg Az Intelligenciádat",
     "gamification_desc": "Milyen tiszta az operatív rálátásod? Végezz egy 2 perces felmérést, hogy felfedezd az operatív érettségi pontod és feloldhass célzott fejlesztéseket.",
-    "gamification_cta": "Végezd el az ingyenes felmérést →"
+    "gamification_cta": "Végezd el az ingyenes felmérést →",
+    "nb_menu_scan_title": "5. Étlap-szkenner és automatikus kitöltés",
+    "nb_menu_scan_desc": "Töltse fel bármely étlap fotóját, PDF-jét vagy weboldal URL-jét. A mesterséges intelligencia kinyeri az összes ételt, árat, leírást, allergént és összetevőt — majd egyetlen kattintással feltölti az étlap szerkesztőjét."
   },
   "Auth": {
     "login_title": "RiveHub",

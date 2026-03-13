@@ -17,11 +17,11 @@ const menuExtractionSchema = z.object({
         'Allergens detected from the description or dish name. Use standard categories: ' +
         'Gluten, Dairy, Eggs, Fish, Shellfish, Tree Nuts, Peanuts, Soy, Sesame, Sulfites, Celery, Mustard, Lupin, Mollusks.'
       ),
-      inferredIngredients: z.array(z.object({
-        name: z.string().describe('Ingredient name (e.g. salmon, butter, flour).'),
-        estimatedQuantity: z.string().optional().describe('Rough quantity if inferable (e.g. "200g", "2 fillets"). Omit if unknown.'),
-        unit: z.string().optional().describe('Unit of measure (g, kg, L, ml, unit). Omit if unknown.'),
-      })).default([]).describe('Infer 2-5 key ingredients per dish from the name and description. Focus on main proteins, starches, and notable ingredients.'),
+      ingredients: z.array(z.object({
+        name: z.string().describe('Ingredient name exactly as listed on the menu (e.g. salmon, butter, flour).'),
+        estimatedQuantity: z.string().optional().describe('Quantity if explicitly stated (e.g. "200g", "2 fillets"). Omit if not listed.'),
+        unit: z.string().optional().describe('Unit of measure if explicitly stated (g, kg, L, ml, unit). Omit if not listed.'),
+      })).default([]).describe('Extract ingredients ONLY if explicitly listed on the menu (in the dish description or ingredient list). Do NOT guess or infer ingredients. Return empty array if no ingredients are mentioned.'),
       confidence: z.number().min(0).max(1).describe('Confidence in extraction accuracy: 1.0 = perfectly clear, 0.5 = partially readable, 0.0 = guessing.'),
     })),
   })),
@@ -60,7 +60,7 @@ Règles :
 1. Identifie chaque section/catégorie du menu (Entrées, Plats, Desserts, Boissons, etc.)
 2. Pour chaque plat : nom exact, description complète, prix
 3. Détecte les allergènes à partir des descriptions (ex: "crème" → Dairy, "panure" → Gluten, "crevettes" → Shellfish)
-4. Infère 2-5 ingrédients principaux par plat à partir du nom et de la description
+4. Extrais les ingrédients UNIQUEMENT s'ils sont explicitement listés sur le menu. Ne devine PAS les ingrédients. Si aucun ingrédient n'est mentionné, laisse la liste vide.
 5. Attribue un score de confiance (0-1) basé sur la lisibilité
 6. Si le menu est bilingue, utilise la langue principale
 7. Si le menu a plusieurs pages, extrais TOUT

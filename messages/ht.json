@@ -79,7 +79,7 @@
     "footer_terms": "Kondisyon",
     "sticky_cta": "Kòmanse grasati",
     "nano_banana_title": "Swit Jenerasyon Pwochen. (Pwisans pa Entelijans).",
-    "nano_banana_subtitle": "Dekouvri kat nouvo zouti nou yo pou jesyon restoran san fwotman.",
+    "nano_banana_subtitle": "Dekouvri senk nouvo zouti nou yo pou jesyon restoran san pwoblèm.",
     "nano_banana_badge": "KAPASITE NOU YO 2026",
     "nest_net_profit": "Gwenn Nèt",
     "nest_cash_flow": "Dinamik Flux Lajan",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Oditan estasyon ak sinatir chanj yo se pa mikrogèrans lè yo gamifye. Kenbe moral wo ak yon jounal transpan.",
     "gamification_title": "Mezire Entèlijans ou",
     "gamification_desc": "Konbyen klè vizibilite w ye? Fè yon evalyasyon 2-minit pou dekouvri nòt matirite operasyonèl ou epi debloke amelyorasyon sible.",
-    "gamification_cta": "Fè evalyasyon gratis → "
+    "gamification_cta": "Fè evalyasyon gratis → ",
+    "nb_menu_scan_title": "5. Skane Meni & Otomatik Ranpli",
+    "nb_menu_scan_desc": "Telechaje yon foto, PDF oswa URL sit wèb nenpòt meni. AI ekstré chak plat, pri, deskripsyon, alejen ak engredyan — epi ranpli editè meni ou a nan yon klik."
   },
   "Pricing": {
     "title": "Pri klè, enpak rèyèl.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Konfidansyalite",
     "footer_terms": "Kondisyon",
     "nano_banana_title": "Swit Jenerasyon Pwochen. (Pwovoke pa Entèlijans).",
-    "nano_banana_subtitle": "Dekouvri kat nouvo zouti nou pou jesyon restowan san friksyon.",
+    "nano_banana_subtitle": "Dekouvri senk nouvo zouti nou yo pou jesyon restoran san pwoblèm.",
     "nb_haccp_title": "1. Konstriktè HACCP San Kod",
     "nb_haccp_desc": "Bati fòm odita ou avèk jès. Sekirite manje customize, siynen dijitalman ak imuabl.",
     "nb_sonar_title": "2. Sonar & Matris Konpetans",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Idit estasyon ak siy-of chif yo pa monkontwòl lè yo gamifye. Kenbe mo sou wo avèk yon jounal transparan.",
     "gamification_title": "Mezire Entèlijans ou",
     "gamification_desc": "Konbyen klè vizibilite ou? Fè yon evatyasyon 2-minit pou dekouvri nòt matirite operasyonèl ou ak bloke meliyorasyon siblel.",
-    "gamification_cta": "Pran evatyasyon gratis →"
+    "gamification_cta": "Pran evatyasyon gratis →",
+    "nb_menu_scan_title": "5. Skane Meni & Otomatik Ranpli",
+    "nb_menu_scan_desc": "Telechaje yon foto, PDF oswa URL sit wèb nenpòt meni. AI ekstré chak plat, pri, deskripsyon, alejen ak engredyan — epi ranpli editè meni ou a nan yon klik."
   },
   "Auth": {
     "login_title": "RiveHub",

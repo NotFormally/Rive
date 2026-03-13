@@ -79,7 +79,7 @@
     "footer_terms": "Masharti",
     "sticky_cta": "Anzisha bila malipo",
     "nano_banana_title": "Seti ya Kizazi Kijacho. (Inayofanya kazi na Akili).",
-    "nano_banana_subtitle": "Gundua zana nne mpya za udhibiti wa mgahawa bila maneno makubwa.",
+    "nano_banana_subtitle": "Kugundua zana zetu tano mpya za usimamizi wa mgahawa bila matatizo.",
     "nano_banana_badge": "UWEZO MPYA 2026",
     "nest_net_profit": "Faida Halisi",
     "nest_cash_flow": "Mienendo ya Mtiririko wa Pesa",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Uchunguzi wa kituo na kuandika kwa maamuzi si kusimamia wakati kinachezwa. Endelea na hali ya morale kwa jurnal inayojua.",
     "gamification_title": "Pima Akili Yako",
     "gamification_desc": "Macho yako ni wazi kiasi gani? Chukua tathmini ya dakika 2 kupata alama ya ukomavu wa utendaji na kufungua maboresho yenye lengo.",
-    "gamification_cta": "Chukua tathmini bila malipo →"
+    "gamification_cta": "Chukua tathmini bila malipo →",
+    "nb_menu_scan_title": "5. Skaner ya Menyu na Kujaza Kiotomatiki",
+    "nb_menu_scan_desc": "Pakia picha, PDF au URL ya tovuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, alerjeni na kigeu — kisha inapopiga menyu yako katika gurudumu moja."
   },
   "Pricing": {
     "title": "Bei iliyofafanuliwa, matokeo yenye madhimisho.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Faragha",
     "footer_terms": "Masharti",
     "nano_banana_title": "Suite ya Kizazi Kipya. (Inatumia Akili).",
-    "nano_banana_subtitle": "Gundua zana nne za kipya kwa usimamizi wa restoran bila mzozo.",
+    "nano_banana_subtitle": "Kugundua zana zetu tano mpya za usimamizi wa mgahawa bila matatizo.",
     "nb_haccp_title": "1. Mjenzi wa HACCP Bila Koodi",
     "nb_haccp_desc": "Buni fomu zako mwenyewe za ukaguzi kwa swipu. Usalama wa chakula maalum, iliyosaidia kidijitali na isiyobadilika.",
     "nb_sonar_title": "2. Sonar & Tumbo la Ujuzi",
@@ -402,7 +404,9 @@
     "brigade_f3_desc": "Ukaguzi wa kituo na kuzakafika kwa wao si udhibiti mkubwa wakati umezatuziwa. Eneza morale hai kwa andoto iliyoonekana.",
     "gamification_title": "Pima Akili Yako",
     "gamification_desc": "Je, macho yako ni wazi kiasi gani? Kamatia tathmini ya dakika 2 ili kugundua alama yako ya kuzaa na fungua maboresho yanayolengana.",
-    "gamification_cta": "Kamatia tathmini ya bure →"
+    "gamification_cta": "Kamatia tathmini ya bure →",
+    "nb_menu_scan_title": "5. Skaner ya Menyu na Kujaza Kiotomatiki",
+    "nb_menu_scan_desc": "Pakia picha, PDF au URL ya tovuti ya menyu yoyote. AI inatoa kila chakula, bei, maelezo, alerjeni na kigeu — kisha inapopiga menyu yako katika gurudumu moja."
   },
   "Auth": {
     "login_title": "RiveHub",

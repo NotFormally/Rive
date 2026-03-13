@@ -14,7 +14,7 @@ const menuFromUrlSchema = z.object({
       description: z.string().default(''),
       price: z.number(),
       allergens: z.array(z.string()).default([]),
-      inferredIngredients: z.array(z.object({
+      ingredients: z.array(z.object({
         name: z.string(),
         estimatedQuantity: z.string().optional(),
         unit: z.string().optional(),
@@ -105,7 +105,7 @@ Règles :
 1. Identifie les catégories/sections du menu
 2. Extrais chaque plat avec nom, description, prix
 3. Détecte les allergènes si mentionnés
-4. Infère 2-5 ingrédients principaux par plat
+4. Extrais les ingrédients UNIQUEMENT s'ils sont explicitement listés. Ne devine PAS les ingrédients. Liste vide si non mentionnés.
 5. Prix en nombre (sans symbole de devise)
 6. Score de confiance basé sur la clarté des données`,
           },

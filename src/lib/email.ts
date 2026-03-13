@@ -4,6 +4,7 @@ import { PaymentConfirmationEmail } from '@/emails/PaymentConfirmationEmail';
 import { SubscriptionCancelledEmail } from '@/emails/SubscriptionCancelledEmail';
 import { TeamInviteEmail } from '@/emails/TeamInviteEmail';
 import { MonthlyReportEmail } from '@/emails/MonthlyReportEmail';
+import { OnboardingNudgeEmail } from '@/emails/OnboardingNudgeEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_fallback_for_build');
 const FROM = 'Rive <dock@rivehub.com>';
@@ -14,6 +15,7 @@ export type EmailPayload =
   | { type: 'subscription_cancelled'; to: string; restaurantName: string }
   | { type: 'team_invite'; to: string; restaurantName: string; roleName: string; inviteUrl: string }
   | { type: 'monthly_report'; to: string; restaurantName: string; month: string; learnings: string[]; feedbackCount: number; accuracyImprovement: number; siteUrl: string }
+  | { type: 'onboarding_nudge'; to: string; restaurantName: string; daysSinceSignup: number; variant: '7d' | '14d' | '30d'; quotaUsage?: { metric: string; used: number; limit: number }[] }
   | { type: 'churn_alert'; to: string; restaurantName: string; daysSinceLastFeedback: number; calibrationCount: number; feedbackDays: number }
   | { type: 'admin_signup_notification'; to: string; restaurantName: string; email: string; locale: string }
   | { type: 'admin_subscription_notification'; to: string; restaurantName: string; email: string; tier: string }
@@ -34,6 +36,14 @@ const SUBJECTS: Record<EmailPayload['type'], string | ((p: EmailPayload) => stri
   monthly_report: (p) =>
     p.type === 'monthly_report'
       ? `Rapport mensuel Rive — ${p.month}`
+      : '',
+  onboarding_nudge: (p) =>
+    p.type === 'onboarding_nudge'
+      ? p.variant === '7d'
+        ? `${p.restaurantName} — 7 jours sur Rive 🌊`
+        : p.variant === '14d'
+          ? `${p.restaurantName} — Votre résumé de 2 semaines`
+          : `${p.restaurantName} — Prêt à passer au niveau supérieur ?`
       : '',
   churn_alert: (p) =>
     p.type === 'churn_alert'
@@ -93,6 +103,13 @@ function getReactComponent(payload: EmailPayload) {
         feedbackCount: payload.feedbackCount,
         accuracyImprovement: payload.accuracyImprovement,
         siteUrl: payload.siteUrl,
+      });
+    case 'onboarding_nudge':
+      return OnboardingNudgeEmail({
+        restaurantName: payload.restaurantName,
+        daysSinceSignup: payload.daysSinceSignup,
+        variant: payload.variant,
+        quotaUsage: payload.quotaUsage,
       });
     case 'churn_alert':
     case 'admin_signup_notification':

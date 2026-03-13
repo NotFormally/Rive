@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-admin';
+import { sendEmail } from '@/lib/email';
 import type { Database } from '@/types/supabase';
 
 // =============================================================================
@@ -154,6 +155,36 @@ export async function GET(req: Request) {
             upsertError
           );
           continue;
+        }
+
+        // 6. Send monthly report email to restaurant owner
+        try {
+          const { data: profile } = await admin
+            .from('restaurant_profiles')
+            .select('user_id')
+            .eq('id', restaurant.id)
+            .single() as { data: { user_id: string } | null; error: Error | null };
+
+          if (profile?.user_id) {
+            const { data: userData } = await admin.auth.admin.getUserById(profile.user_id);
+            const ownerEmail = userData?.user?.email;
+
+            if (ownerEmail && learnings.length > 0) {
+              await sendEmail({
+                type: 'monthly_report',
+                to: ownerEmail,
+                restaurantName: restaurant.name,
+                month: monthLabel,
+                learnings,
+                feedbackCount: feedbackCount ?? 0,
+                accuracyImprovement,
+                siteUrl: 'https://rivehub.com/fr',
+              });
+              console.log(`[Cron/MonthlyReport] Email sent to ${ownerEmail} for ${restaurant.name}`);
+            }
+          }
+        } catch (emailErr) {
+          console.error(`[Cron/MonthlyReport] Email failed for ${restaurant.id}:`, emailErr instanceof Error ? emailErr.message : String(emailErr));
         }
 
         processed++;

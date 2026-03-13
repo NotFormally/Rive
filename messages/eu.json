@@ -79,7 +79,7 @@
     "footer_terms": "Baldintzak",
     "sticky_cta": "Hasi doakoan",
     "nano_banana_title": "Hurrengo belaunaldiko Suite. (Inteligentzia bideratua).",
-    "nano_banana_subtitle": "Aurkitu gure lau tresna berriak restaurante-kudeaketa makurtu gabea lortzeko.",
+    "nano_banana_subtitle": "Aurkitu gure bost tresna berri jabetza-kudeaketa arin eta oztopoz gabeko.",
     "nano_banana_badge": "GAITASUN BERRIAK 2026",
     "nest_net_profit": "Saria Garbia",
     "nest_cash_flow": "Likideztasun-fluxuaren Dinamika",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Estazioaren auditoriak eta turnoaren sinatzeak ez dira mikromanajeamendua gameifikatu denean. Morala altua mantendu atzeman egunkaria gardena.",
     "gamification_title": "Neurtu zure Adimena",
     "gamification_desc": "Zenbat garbi da zure ikuspegi? Egin 2 minutuko autoebaluazioa zure eragiketa-heldutsasun puntuazioa aurkitzeko eta helburuko hobekuntzak iraunkortu.",
-    "gamification_cta": "Egin doan ebaluazioa →"
+    "gamification_cta": "Egin doan ebaluazioa →",
+    "nb_menu_scan_title": "5. Menu Eskaneratzailea eta Automatikoa Betetzea",
+    "nb_menu_scan_desc": "Igo edozein menuaren argazkia, PDF edo webguneko URLa. AI-ak plater bakoitza, prezioa, deskribapena, alergeno eta osagaia ateratzen ditu — gero menu editorea betetzea klik batean."
   },
   "Pricing": {
     "title": "Zehatz prezio, benetako eragina.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Pribatutasuna",
     "footer_terms": "Baldintzak",
     "nano_banana_title": "Hurrengo Belaunaldiko Suite. (Inteligentziaren bidez gaindatua).",
-    "nano_banana_subtitle": "Aurkitu gure lau tresna berriak erraztasun gabeko errestaurante kudeaketarako.",
+    "nano_banana_subtitle": "Aurkitu gure bost tresna berri jabetza-kudeaketa arin eta oztopoz gabeko.",
     "nb_haccp_title": "1. Kode-ez gabeko HACCP Eraikitzailea",
     "nb_haccp_desc": "Sortu zure behartzat egindako adierazpen-formak. Normalizazko elikadura-segurtasun digitalean sinatuak eta aldagaitzak.",
     "nb_sonar_title": "2. Sonar & Skills Matrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Gela auditentziak eta aldiz sinatzea ez dira mikromanaguak ludifikatuak direnean. Morala altua mantendu zuzenbidearen logbookekin.",
     "gamification_title": "Zure Adimendua Neurtu",
     "gamification_desc": "Zenbatean dago zure ikusgarritasuna? Hartu 2 minutuko ebaluazioa zure operazio garatze mailaren aurreskua aurkitzeko eta desblokeatua hobetzea helburutzeko.",
-    "gamification_cta": "Libreko ebaluazioa hartu →"
+    "gamification_cta": "Libreko ebaluazioa hartu →",
+    "nb_menu_scan_title": "5. Menu Eskaneratzailea eta Automatikoa Betetzea",
+    "nb_menu_scan_desc": "Igo edozein menuaren argazkia, PDF edo webguneko URLa. AI-ak plater bakoitza, prezioa, deskribapena, alergeno eta osagaia ateratzen ditu — gero menu editorea betetzea klik batean."
   },
   "Auth": {
     "login_title": "RiveHub",

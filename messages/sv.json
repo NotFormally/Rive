@@ -79,7 +79,7 @@
     "footer_terms": "Villkor",
     "sticky_cta": "Starta kostnadsfritt",
     "nano_banana_title": "Nästa generations svit. (Driven av intelligens).",
-    "nano_banana_subtitle": "Upptäck våra fyra nya verktyg för friktionsfri restaurangledning.",
+    "nano_banana_subtitle": "Upptäck våra fem nya verktyg för problemfri restaurangledning.",
     "nano_banana_badge": "NYA FUNKTIONER 2026",
     "nest_net_profit": "Nettoresultat",
     "nest_cash_flow": "Kassaflödesdynamik",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Stationsrevisioner och skiftavslutningar är inte mikroledning när de är gamifierade. Håll moralen högt med en transparent operationsjournal.",
     "gamification_title": "Mät Din Intelligens",
     "gamification_desc": "Hur klar är din överblick? Gör en 2-minuters bedömning för att upptäcka din operativa mognadsnivå och låsa upp riktade förbättringar.",
-    "gamification_cta": "Gör den kostnadsfria bedömningen →"
+    "gamification_cta": "Gör den kostnadsfria bedömningen →",
+    "nb_menu_scan_title": "5. Menyskanner & Automatisk ifyllning",
+    "nb_menu_scan_desc": "Ladda upp ett foto, PDF eller webbadress till en meny. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan i din menyeditor med ett klick."
   },
   "Pricing": {
     "title": "Tydlig prissättning, verklig effekt.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Integritet",
     "footer_terms": "Villkor",
     "nano_banana_title": "Next-Gen-sviten. (Driven av intelligens).",
-    "nano_banana_subtitle": "Upptäck våra fyra nya verktyg för sömlös restaurangstyrning.",
+    "nano_banana_subtitle": "Upptäck våra fem nya verktyg för problemfri restaurangledning.",
     "nb_haccp_title": "1. HACCP-verktyg utan kodning",
     "nb_haccp_desc": "Bygg dina egna granskningsformulär med ett svep. Anpassad livsmedelssäkerhet, digitalt signerad och oföränderlig.",
     "nb_sonar_title": "2. Sonar & Kompetensmatris",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Stationsrevisioner och skiftutskrivningar är inte mikroledning när de är gamifierade. Håll moralen högt med en transparent logbok.",
     "gamification_title": "Mät Din Intelligens",
     "gamification_desc": "Hur tydlig är din överblick? Genomför en 2-minuters bedömning för att upptäcka ditt operativa mognadsvärde och låsa upp riktade förbättringar.",
-    "gamification_cta": "Gör den kostnadsfria bedömningen →"
+    "gamification_cta": "Gör den kostnadsfria bedömningen →",
+    "nb_menu_scan_title": "5. Menyskanner & Automatisk ifyllning",
+    "nb_menu_scan_desc": "Ladda upp ett foto, PDF eller webbadress till en meny. AI extraherar alla rätter, priser, beskrivningar, allergener och ingredienser — och fyller sedan i din menyeditor med ett klick."
   },
   "Auth": {
     "login_title": "RiveHub",

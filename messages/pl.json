@@ -178,7 +178,7 @@
     "widget_running": "PROTOKÓŁ W TRAKCIE",
     "sticky_cta": "Zacznij za darmo",
     "nano_banana_title": "Pakiet nowej generacji. (Zasilany sztuczną inteligencją).",
-    "nano_banana_subtitle": "Odkryj nasze cztery nowe narzędzia do bezproblemowego zarządzania restauracją.",
+    "nano_banana_subtitle": "Odkryj pięć nowych narzędzi do bezproblemowego zarządzania restauracją.",
     "nano_banana_badge": "NOWE MOŻLIWOŚCI 2026",
     "nest_net_profit": "Zysk netto",
     "nest_cash_flow": "Dynamika przepływów pieniężnych",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Audyty stanowisk i podpisywanie się ze zmian nie są mikrozarządzaniem, gdy są gamifikowane. Utrzymuj wysokie morale dzięki przejrzystemu dziennikowi pokładowemu.",
     "gamification_title": "Zmierz swoją Inteligencję",
     "gamification_desc": "Jak jasna jest Twoja widoczność? Wykonaj 2-minutową ocenę, aby odkryć swój wynik dojrzałości operacyjnej i odblokować ukierunkowane ulepszenia.",
-    "gamification_cta": "Weź udział w bezpłatnej ocenie →"
+    "gamification_cta": "Weź udział w bezpłatnej ocenie →",
+    "nb_menu_scan_title": "5. Skaner menu i automatyczne wypełnianie",
+    "nb_menu_scan_desc": "Prześlij zdjęcie, plik PDF lub adres URL strony internetowej dowolnego menu. Sztuczna inteligencja wyodrębnia wszystkie potrawy, ceny, opisy, alergeny i składniki — a następnie wypełnia edytor menu jednym klikiem."
   },
   "Pricing": {
     "title": "Przejrzyste ceny, rzeczywisty wpływ.",
@@ -349,7 +351,7 @@
     "footer_privacy": "Prywatność",
     "footer_terms": "Warunki",
     "nano_banana_title": "Pakiet Nowej Generacji. (Obsługiwany przez Inteligencję).",
-    "nano_banana_subtitle": "Odkryj cztery nowe narzędzia do bezproblemowego zarządzania restauracją.",
+    "nano_banana_subtitle": "Odkryj pięć nowych narzędzi do bezproblemowego zarządzania restauracją.",
     "nb_haccp_title": "1. Konstruktor HACCP bez Kodu",
     "nb_haccp_desc": "Zbuduj swoje własne formularze audytu gestem. Niestandardowe bezpieczeństwo żywności, cyfrowo podpisane i niezmienne.",
     "nb_sonar_title": "2. Sonar i Macierz Umiejętności",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Audyty stanowisk i potwierdzenia zmian nie są mikrozarządzaniem, gdy są gryfikowane. Utrzymuj wysokie morale dzięki przejrzystemu dziennikowi pokładowemu.",
     "gamification_title": "Zmierz Swoją Inteligencję",
     "gamification_desc": "Jak jasna jest twoja widoczność? Wykonaj 2-minutową ocenę, aby odkryć swój wynik dojrzałości operacyjnej i odblokować ukierunkowane ulepszenia.",
-    "gamification_cta": "Wykonaj bezpłatną ocenę →"
+    "gamification_cta": "Wykonaj bezpłatną ocenę →",
+    "nb_menu_scan_title": "5. Skaner menu i automatyczne wypełnianie",
+    "nb_menu_scan_desc": "Prześlij zdjęcie, plik PDF lub adres URL strony internetowej dowolnego menu. Sztuczna inteligencja wyodrębnia wszystkie potrawy, ceny, opisy, alergeny i składniki — a następnie wypełnia edytor menu jednym klikiem."
   },
   "Auth": {
     "login_title": "RiveHub",

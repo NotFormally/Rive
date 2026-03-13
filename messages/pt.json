@@ -163,7 +163,7 @@
     "widget_running": "PROTOCOLO EM EXECUÇÃO",
     "sticky_cta": "Comece gratuitamente",
     "nano_banana_title": "A Suite de Próxima Geração. (Impulsionada por Inteligência).",
-    "nano_banana_subtitle": "Descubra nossas quatro novas ferramentas para gestão de restaurante sem atrito.",
+    "nano_banana_subtitle": "Descubra nossas cinco novas ferramentas para gerenciamento de restaurante sem atrito.",
     "nano_banana_badge": "NOVAS CAPACIDADES 2026",
     "nest_net_profit": "Lucro Líquido",
     "nest_cash_flow": "Dinâmica de Fluxo de Caixa",
@@ -233,7 +233,9 @@
     "brigade_f3_desc": "Auditorias de estação e assinaturas de turno não são microgerenciamento quando gamificadas. Mantenha o moral alto com um logbook transparente.",
     "gamification_title": "Meça Sua Inteligência",
     "gamification_desc": "Quão clara é sua visibilidade? Faça uma avaliação de 2 minutos para descobrir seu score de maturidade operacional e desbloqueie melhorias direcionadas.",
-    "gamification_cta": "Faça a avaliação gratuita →"
+    "gamification_cta": "Faça a avaliação gratuita →",
+    "nb_menu_scan_title": "5. Scanner de Menu e Preenchimento Automático",
+    "nb_menu_scan_desc": "Envie uma foto, PDF ou URL do site de qualquer menu. A IA extrai todos os pratos, preços, descrições, alérgenos e ingredientes — e preenche seu editor de menu em um clique."
   },
   "Pricing": {
     "title": "Preços claros, impacto real.",
@@ -334,7 +336,7 @@
     "footer_privacy": "Privacidade",
     "footer_terms": "Termos",
     "nano_banana_title": "A Suite de Próxima Geração. (Desenvolvida por Inteligência).",
-    "nano_banana_subtitle": "Descubra nossas quatro novas ferramentas para gerenciamento de restaurante sem fricção.",
+    "nano_banana_subtitle": "Descubra nossas cinco novas ferramentas para gerenciamento de restaurante sem atrito.",
     "nb_haccp_title": "1. Construtor HACCP Sem Código",
     "nb_haccp_desc": "Crie seus próprios formulários de auditoria com um toque. Segurança alimentar personalizada, assinada digitalmente e imutável.",
     "nb_sonar_title": "2. Sonar & Matriz de Habilidades",
@@ -386,7 +388,9 @@
     "brigade_f3_desc": "Auditorias de estação e confirmações de turno não são microgerenciamento quando gamificados. Mantenha o moral alto com um logbook transparente.",
     "gamification_title": "Meça Sua Inteligência",
     "gamification_desc": "Quão clara é sua visibilidade? Faça uma avaliação de 2 minutos para descobrir sua pontuação de maturidade operacional e desbloqueie melhorias direcionadas.",
-    "gamification_cta": "Faça a avaliação gratuita →"
+    "gamification_cta": "Faça a avaliação gratuita →",
+    "nb_menu_scan_title": "5. Scanner de Menu e Preenchimento Automático",
+    "nb_menu_scan_desc": "Envie uma foto, PDF ou URL do site de qualquer menu. A IA extrai todos os pratos, preços, descrições, alérgenos e ingredientes — e preenche seu editor de menu em um clique."
   },
   "Auth": {
     "login_title": "RiveHub",

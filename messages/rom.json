@@ -79,7 +79,7 @@
     "footer_terms": "Terms",
     "sticky_cta": "Shuro kai bezmishe",
     "nano_banana_title": "The Next-Gen Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Kheles beshara naverakanna devlura restaurant management.",
+    "nano_banana_subtitle": "Odkryj naše pět nových nástrojů pro bezproblémovou správu restaurace.",
     "nano_banana_badge": "NEW CAPABILITIES 2026",
     "nest_net_profit": "Net Profit",
     "nest_cash_flow": "Cash Flow Dynamics",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Stacija auditi agi shift sign-offa na si micromanagement jal gamifikirela. Morale si thav okhlo transparenti logbuk sata.",
     "gamification_title": "Tumo Inteligenća Mapel",
     "gamification_desc": "Sar chhora si tumo vidimata? Avel 2-minuta assessmenta phenel tumo operacionali maturiti skora agi unlock targeta improveménta.",
-    "gamification_cta": "Avel frika assessmenta →"
+    "gamification_cta": "Avel frika assessmenta →",
+    "nb_menu_scan_title": "5. Skener Menu a Automatické Vyplnění",
+    "nb_menu_scan_desc": "Nahraj fotografii, PDF nebo URL webové stránky libovolného menu. AI extrahuje každé jídlo, cenu, popis, alergen a ingredienci — poté naplní tvůj editor menu jedním kliknutím."
   },
   "Pricing": {
     "title": "Jasna cena, pravi uticaj.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Privacy",
     "footer_terms": "Terms",
     "nano_banana_title": "O Next-Gen Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Discover our four new tools for frictionless restaurant management.",
+    "nano_banana_subtitle": "Odkryj naše pět nových nástrojů pro bezproblémovou správu restaurace.",
     "nb_haccp_title": "1. No-Code HACCP Builder",
     "nb_haccp_desc": "Build your own audit forms with a swipe. Custom food safety, digitally signed and immutable.",
     "nb_sonar_title": "2. Sonar & Skills Matrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Stacija audituri rai shifta sign-offa na rai mikromanezhment kada gamifizel. Khandel bukhalo mora sare transpareantno logbuka.",
     "gamification_title": "Mezurel Tui Inteligencia",
     "gamification_desc": "Kaj tikno tui vidimo rai? Anil 2-minut asesment panda dikhel tui operacionalo sikhtalipaqo skori rai avilel target sudarqe.",
-    "gamification_cta": "Anil basnasqo asesment →"
+    "gamification_cta": "Anil basnasqo asesment →",
+    "nb_menu_scan_title": "5. Skener Menu a Automatické Vyplnění",
+    "nb_menu_scan_desc": "Nahraj fotografii, PDF nebo URL webové stránky libovolného menu. AI extrahuje každé jídlo, cenu, popis, alergen a ingredienci — poté naplní tvůj editor menu jedním kliknutím."
   },
   "Auth": {
     "login_title": "RiveHub",

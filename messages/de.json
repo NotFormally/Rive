@@ -178,7 +178,7 @@
     "widget_running": "LAUFENDES PROTOKOLL",
     "sticky_cta": "Kostenlos starten",
     "nano_banana_title": "Die Next-Gen Suite. (Angetrieben durch Intelligenz).",
-    "nano_banana_subtitle": "Entdecken Sie unsere vier neuen Tools für nahtlose Restaurantverwaltung.",
+    "nano_banana_subtitle": "Entdecken Sie unsere fünf neuen Tools für reibungsloses Restaurantmanagement.",
     "nano_banana_badge": "NEUE FUNKTIONEN 2026",
     "nest_net_profit": "Nettogewinn",
     "nest_cash_flow": "Liquiditätsdynamik",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Stationsaudits und Schichtsignierungen sind keine Mikromanagement, wenn sie gamifiziert sind. Halten Sie die Moral mit einem transparenten Logbuch hoch.",
     "gamification_title": "Messen Sie Ihre Intelligenz",
     "gamification_desc": "Wie klar ist Ihre Übersicht? Absolvieren Sie eine 2-minütige Bewertung, um Ihren operativen Reifungsgrad zu ermitteln und gezielte Verbesserungen freizuschalten.",
-    "gamification_cta": "Kostenlose Bewertung durchführen →"
+    "gamification_cta": "Kostenlose Bewertung durchführen →",
+    "nb_menu_scan_title": "5. Menü-Scanner & automatisches Ausfüllen",
+    "nb_menu_scan_desc": "Laden Sie ein Foto, eine PDF-Datei oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jedes Gericht, jeden Preis, jede Beschreibung, jeden Allergen und jede Zutat – und füllt dann Ihren Menü-Editor mit einem Klick aus."
   },
   "Pricing": {
     "title": "Transparente Preise mit echter Auswirkung.",
@@ -349,7 +351,7 @@
     "footer_privacy": "Datenschutz",
     "footer_terms": "Bedingungen",
     "nano_banana_title": "Die nächste Generation Suite. (Betrieben von Intelligenz).",
-    "nano_banana_subtitle": "Entdecken Sie unsere vier neuen Tools für müheloses Restaurantmanagement.",
+    "nano_banana_subtitle": "Entdecken Sie unsere fünf neuen Tools für reibungsloses Restaurantmanagement.",
     "nb_haccp_title": "1. No-Code HACCP Builder",
     "nb_haccp_desc": "Erstellen Sie Ihre eigenen Audit-Formulare per Wischgeste. Benutzerdefinierte Lebensmittelsicherheit, digital signiert und unveränderlich.",
     "nb_sonar_title": "2. Sonar & Fähigkeitsmatrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Stationsprüfungen und Schichtabmeldungen sind keine Mikromanagement, wenn sie spielifiziert werden. Halten Sie die Moral hoch mit einem transparenten Betriebsprotokoll.",
     "gamification_title": "Messen Sie Ihre Intelligenz",
     "gamification_desc": "Wie klar ist Ihre Sichtbarkeit? Führen Sie eine 2-minütige Bewertung durch, um Ihren operativen Reifescore zu entdecken und gezielte Verbesserungen freizuschalten.",
-    "gamification_cta": "Kostenlose Bewertung durchführen →"
+    "gamification_cta": "Kostenlose Bewertung durchführen →",
+    "nb_menu_scan_title": "5. Menü-Scanner & automatisches Ausfüllen",
+    "nb_menu_scan_desc": "Laden Sie ein Foto, eine PDF-Datei oder eine Website-URL eines beliebigen Menüs hoch. Die KI extrahiert jedes Gericht, jeden Preis, jede Beschreibung, jeden Allergen und jede Zutat – und füllt dann Ihren Menü-Editor mit einem Klick aus."
   },
   "Auth": {
     "login_title": "RiveHub",

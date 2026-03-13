@@ -79,7 +79,7 @@
     "footer_terms": "Seera",
     "sticky_cta": "Jalqaba bilisaatti",
     "nano_banana_title": "Suitii Teknoloji Haaraa. (Herrega Biroo Gargaara).",
-    "nano_banana_subtitle": "Meeshaalee afmaa haaraa kan bulchiinsa resturontaa sagalee qabu argaa.",
+    "nano_banana_subtitle": "Meeshaalee lamaan jaalqabaa keessaniif galmee bulchiinsaa nyaataa madaalamtoonii argaa.",
     "nano_banana_badge": "DANDEETTII HAARAA 2026",
     "nest_net_profit": "Guraannoo Gala",
     "nest_cash_flow": "Sooquu Maaliyyaa",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Audiin tuqaa fi seenaa gidduu jedhuu yeroo gamified ta'e hanqaaqa ta'uu miti. Waan mul'ata gidduu ta'e tuulummaa ol ta'ee loobookii ta'e haa hojiirra.",
     "gamification_title": "Hubannoo Kee Jiidha",
     "gamification_desc": "Mul'atni kee ol-seenuun qallee ta'a? Haaltura 2-daqiiqaa yeroo ta'ee hubannoo ol-seenuun hojiirra buufata kee argachuu fi fooyyessuu gara ta'e banaadhee.",
-    "gamification_cta": "Haaltura bilisaa fudhadhu →"
+    "gamification_cta": "Haaltura bilisaa fudhadhu →",
+    "nb_menu_scan_title": "5. Scan Galmeee & Guutuu Ofmeedhaan",
+    "nb_menu_scan_desc": "Murtii, PDF ykn URL webbisaayitii galmee kamiyyuu ol kaasiif. AI midhaan, gatii, ibsa, waan nama hafu fi geeddoo hunduu baasaa galmee gulaleessaa keessan tokko cuqaasaan guutaa."
   },
   "Pricing": {
     "title": "Gatii muldhata, misilii dhugaa.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Sireekaa",
     "footer_terms": "Seera",
     "nano_banana_title": "Suutin Gara Itti Aanu. (Invaadhaa Jidha).",
-    "nano_banana_subtitle": "Meeshaalee afran haaraa kana hoggana midhaa malee cimsaa argaa.",
+    "nano_banana_subtitle": "Meeshaalee lamaan jaalqabaa keessaniif galmee bulchiinsaa nyaataa madaalamtoonii argaa.",
     "nb_haccp_title": "1. Ijaarsa HACCP Koodii Baatuu",
     "nb_haccp_desc": "Formii murtee keessan ijaaraa qabxii lamaan waliin. Iffataad midhaa addaa, dubaallu dijitalii fi hin jijjiiramuu.",
     "nb_sonar_title": "2. Sonar & Matrix Dandeettii",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Sakattii baraa fi mallattoo jecha shaffaa hin taʼu yeroo taasasame. Miira ol-sani deebisaa giidaa jaamuu logbuuk ifaa keessa.",
     "gamification_title": "Fayyaa Keessan Midhagaa",
     "gamification_desc": "Calaqqiyan kee malli midhagaa? Tilmaamama yeroo 2-daqiqa fudhachuu murteessaa maturityy hojiiwwaan kee argaa fi raawwii gargaaramuu banaa.",
-    "gamification_cta": "Tilmaamama bilisaa fudhachuu →"
+    "gamification_cta": "Tilmaamama bilisaa fudhachuu →",
+    "nb_menu_scan_title": "5. Scan Galmeee & Guutuu Ofmeedhaan",
+    "nb_menu_scan_desc": "Murtii, PDF ykn URL webbisaayitii galmee kamiyyuu ol kaasiif. AI midhaan, gatii, ibsa, waan nama hafu fi geeddoo hunduu baasaa galmee gulaleessaa keessan tokko cuqaasaan guutaa."
   },
   "Auth": {
     "login_title": "RiveHub",

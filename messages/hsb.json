@@ -79,7 +79,7 @@
     "footer_terms": "Wobmejenja",
     "sticky_cta": "Sćeł zadarmo",
     "nano_banana_title": "Přichodna generacija Suite. (Pohanjana přez inteligenciju).",
-    "nano_banana_subtitle": "Wotkryj naše štyri nowe nastroje za bezdotykowe wjedźenje restauracije.",
+    "nano_banana_subtitle": "Wotkryj naše pjeć nowych nastrojow za bjez trenja wjedocu restauracije.",
     "nano_banana_badge": "NOWE MÓŽNOSTKI 2026",
     "nest_net_profit": "Čisty Profit",
     "nest_cash_flow": "Dynamika Protoku Hotowości",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Rewizije stancije a zaslědowanja směny najsu mikromenajerstwo, hdyž gamifikacija. Dźerž moralu wysoku z transparentnym logbukom.",
     "gamification_title": "Měr swojsku inteligencu",
     "gamification_desc": "Kotre jasna je twoja widomosć? Čin 2-minutowu estimaciju za wotkrywanje swojskeho skora operaciskeje dojěłosćy a wotkrytje zaměrjene polepšenja.",
-    "gamification_cta": "Čin hady wotkrywanje →"
+    "gamification_cta": "Čin hady wotkrywanje →",
+    "nb_menu_scan_title": "5. Skenerowanje menow a Awtomatiske Popołnjenje",
+    "nb_menu_scan_desc": "Nahraj fotografiju, PDF abo URL websydła kóždeho menow. KI ekstrahujo kóždu jadłowu, cenu, opisanje, alergeny a ingrediency — potom popołnja twój editor menow z jednym kliknjenjom."
   },
   "Pricing": {
     "title": "Jasne zaměřenje, skutkowe wliwy.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Priwatnosć",
     "footer_terms": "Podmjenki",
     "nano_banana_title": "Sada nasledujeće generacije. (Pohanjane přez intelignence).",
-    "nano_banana_subtitle": "Zjednoć naše štyrje nowe nastroje za bezzwisćowne riadjenje restauracije.",
+    "nano_banana_subtitle": "Wotkryj naše pjeć nowych nastrojow za bjez trenja wjedocu restauracije.",
     "nb_haccp_title": "1. Gradowadła HACCP beze koda",
     "nb_haccp_desc": "Zbuduj swoje awtenske formulary z mahom. Zašćitowana hódła, digitalne podpisana a njezměnjliwa.",
     "nb_sonar_title": "2. Sonar a Matrica Zručnosćow",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Staniski awdity a podpisanja změny njejsu micromanagement, hdyž gamifikuju. Mor wysoko dźerž z transparentnym logbukom.",
     "gamification_title": "Měrić twoju inteligencu",
     "gamification_desc": "Kiž jasna je twoja widźomosć? Przepij 2-minutowy test, zo by twój operaciscy zrelosćowy skóre wutknal a cilene zmoknjenja wothlasował.",
-    "gamification_cta": "Wozwólny test přewjesć →"
+    "gamification_cta": "Wozwólny test přewjesć →",
+    "nb_menu_scan_title": "5. Skenerowanje menow a Awtomatiske Popołnjenje",
+    "nb_menu_scan_desc": "Nahraj fotografiju, PDF abo URL websydła kóždeho menow. KI ekstrahujo kóždu jadłowu, cenu, opisanje, alergeny a ingrediency — potom popołnja twój editor menow z jednym kliknjenjom."
   },
   "Auth": {
     "login_title": "RiveHub",

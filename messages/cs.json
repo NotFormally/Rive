@@ -79,7 +79,7 @@
     "footer_terms": "Podmínky",
     "sticky_cta": "Začněte zdarma",
     "nano_banana_title": "Sada příští generace. (Poháněna inteligencí).",
-    "nano_banana_subtitle": "Objevte čtyři nové nástroje pro bezproblémovou správu restaurace.",
+    "nano_banana_subtitle": "Objevte naše pět nových nástrojů pro bezproblémovou správu restaurace.",
     "nano_banana_badge": "NOVÉ SCHOPNOSTI 2026",
     "nest_net_profit": "Čistý zisk",
     "nest_cash_flow": "Dynamika peněžních toků",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Audity stanic a podpisy směn nejsou mikromanagement, když jsou gamifikované. Udržujte morálku vysokou s průhledným logem.",
     "gamification_title": "Změřte si svou inteligenci",
     "gamification_desc": "Jak jasný máte přehled? Absolvujte 2minutový test a zjistěte své skóre operační zralosti a odemkněte cílená zlepšení.",
-    "gamification_cta": "Absolvujte bezplatný test →"
+    "gamification_cta": "Absolvujte bezplatný test →",
+    "nb_menu_scan_title": "5. SkenerMenu & Automatické vyplnění",
+    "nb_menu_scan_desc": "Nahrajte foto, PDF nebo adresu URL webu jakéhokoli menu. AI extrahuje každé jídlo, cenu, popis, alergeny a ingredience — poté naplní editor vašeho menu jediným kliknutím."
   },
   "Pricing": {
     "title": "Jasné ceny, skutečný dopad.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Ochrana osobních údajů",
     "footer_terms": "Podmínky",
     "nano_banana_title": "Balíček nové generace. (Poháněno inteligencí).",
-    "nano_banana_subtitle": "Objevte naše čtyři nové nástroje pro bezproblémové řízení restaurace.",
+    "nano_banana_subtitle": "Objevte naše pět nových nástrojů pro bezproblémovou správu restaurace.",
     "nb_haccp_title": "1. Tvůrce HACCP bez kódu",
     "nb_haccp_desc": "Vytvořte si vlastní formuláře auditu jedním tahem. Vlastní bezpečnost potravin, digitálně podepsaná a neměnná.",
     "nb_sonar_title": "2. Sonar a matice dovedností",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Audity stanic a podepsání směn nejsou mikrovláda, když jsou hry. Udržujte vysokou morálku s transparentním logem operací.",
     "gamification_title": "Měřte Vaši Inteligenci",
     "gamification_desc": "Jak jasný je váš přehled? Absolvujte 2minutové hodnocení a objev vaš skór operační zralosti a odemkněte cílená zlepšení.",
-    "gamification_cta": "Absolvujte bezplatné hodnocení →"
+    "gamification_cta": "Absolvujte bezplatné hodnocení →",
+    "nb_menu_scan_title": "5. Skener Menu & Automatické vyplnění",
+    "nb_menu_scan_desc": "Nahrajte foto, PDF nebo adresu URL webu jakéhokoli menu. AI extrahuje každé jídlo, cenu, popis, alergeny a ingredience — poté naplní editor vašeho menu jediným kliknutím."
   },
   "Auth": {
     "login_title": "RiveHub",

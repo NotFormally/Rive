@@ -178,7 +178,7 @@
     "widget_running": "RUNNING PROTOCOL",
     "sticky_cta": "Magsimula nang libre",
     "nano_banana_title": "Ang Next-Gen Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Tuklasin ang aming apat na bagong tools para sa seamless restaurant management.",
+    "nano_banana_subtitle": "Tuklasin ang aming limang bagong tool para sa walang abala na pamamahala ng restaurant.",
     "nano_banana_badge": "NEW CAPABILITIES 2026",
     "nest_net_profit": "Net Profit",
     "nest_cash_flow": "Cash Flow Dynamics",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Ang station audit at shift sign-off ay hindi micromanagement kapag naging laro. Panatilihing mataas ang morale gamit ang transparent na logbook.",
     "gamification_title": "Sukatin ang Iyong Talino",
     "gamification_desc": "Gaano kadali ang iyong visibility? Magsagawa ng 2-minuto assessment upang matuklasan ang iyong operational maturity score at magbukas ng targeted improvements.",
-    "gamification_cta": "Gawin ang libreng assessment →"
+    "gamification_cta": "Gawin ang libreng assessment →",
+    "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
+    "nb_menu_scan_desc": "I-upload ang larawan, PDF o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa isang click."
   },
   "Pricing": {
     "title": "Malinaw na presyo, tunay na epekto.",
@@ -349,7 +351,7 @@
     "footer_privacy": "Privacy",
     "footer_terms": "Terms",
     "nano_banana_title": "Ang Susunod na Henerasyon ng Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Tuklasin ang aming apat na bagong tool para sa walang abala na restaurant management.",
+    "nano_banana_subtitle": "Tuklasin ang aming limang bagong tool para sa walang abala na pamamahala ng restaurant.",
     "nb_haccp_title": "1. No-Code HACCP Builder",
     "nb_haccp_desc": "Bumuo ng iyong sariling audit forms sa isang swipe. Custom food safety, digitally signed at immutable.",
     "nb_sonar_title": "2. Sonar & Skills Matrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Ang station audits at shift sign-offs ay hindi micromanagement kapag gamified. Panatilihing mataas ang morale sa transparent na logbook.",
     "gamification_title": "Sukatin ang Iyong Katalinuhan",
     "gamification_desc": "Gaano clear ang iyong visibility? Gumawa ng 2-minuto assessment upang malaman ang iyong operational maturity score at unlock ang targeted improvements.",
-    "gamification_cta": "Kunin ang libreng assessment →"
+    "gamification_cta": "Kunin ang libreng assessment →",
+    "nb_menu_scan_title": "5. Menu Scanner & Auto-Populate",
+    "nb_menu_scan_desc": "I-upload ang larawan, PDF o website URL ng anumang menu. Ang AI ay nag-extract ng bawat putahe, presyo, paglalarawan, allergen at sangkap — pagkatapos ay pinopuno ang iyong menu editor sa isang click."
   },
   "Auth": {
     "login_title": "RiveHub",

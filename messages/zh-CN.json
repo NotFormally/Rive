@@ -163,7 +163,7 @@
     "widget_running": "运行协议",
     "sticky_cta": "免费开始",
     "nano_banana_title": "下一代套件。(由智能驱动)。",
-    "nano_banana_subtitle": "探索我们四个全新工具，实现无缝的餐厅管理。",
+    "nano_banana_subtitle": "发现我们的五款新工具，实现无缝餐厅管理。",
     "nano_banana_badge": "2026 年新功能",
     "nest_net_profit": "净利润",
     "nest_cash_flow": "现金流动态",
@@ -233,7 +233,9 @@
     "brigade_f3_desc": "当游戏化应用于站点审计和班次签到时，这不再是微观管理。通过透明的操作日志保持士气高涨。",
     "gamification_title": "衡量您的智能水平",
     "gamification_desc": "您的可见性有多清晰？参与 2 分钟的评估，发现您的运营成熟度评分，并解锁针对性改进。",
-    "gamification_cta": "进行免费评估 →"
+    "gamification_cta": "进行免费评估 →",
+    "nb_menu_scan_title": "5. 菜单扫描和自动填充",
+    "nb_menu_scan_desc": "上传任何菜单的照片、PDF 或网站链接。AI 会自动提取每道菜品、价格、描述、过敏原和食材信息 — 然后一键填充到你的菜单编辑器中。"
   },
   "Pricing": {
     "title": "清晰的定价，真实的价值。",
@@ -334,7 +336,7 @@
     "footer_privacy": "隐私政策",
     "footer_terms": "服务条款",
     "nano_banana_title": "新一代套件。（由智能驱动）。",
-    "nano_banana_subtitle": "探索我们四大新工具，实现无缝餐厅管理。",
+    "nano_banana_subtitle": "发现我们的五款新工具，实现无缝餐厅管理。",
     "nb_haccp_title": "1. 无代码 HACCP 构建器",
     "nb_haccp_desc": "轻松构建自定义审计表单。数字化食品安全方案，支持电子签名和不可篡改。",
     "nb_sonar_title": "2. 声纳系统与技能矩阵",
@@ -386,7 +388,9 @@
     "brigade_f3_desc": "当工作站审核和班次签核被游戏化时，它们就不再是微观管理。通过透明的工作日志让士气保持高涨。",
     "gamification_title": "评估你的运营智能",
     "gamification_desc": "你的可视化程度如何？花 2 分钟进行评估，发现你的运营成熟度得分，并解锁针对性改进方案。",
-    "gamification_cta": "进行免费评估 →"
+    "gamification_cta": "进行免费评估 →",
+    "nb_menu_scan_title": "5. 菜单扫描和自动填充",
+    "nb_menu_scan_desc": "上传任何菜单的照片、PDF 或网站链接。AI 会自动提取每道菜品、价格、描述、过敏原和食材信息 — 然后一键填充到你的菜单编辑器中。"
   },
   "Auth": {
     "login_title": "RiveHub",

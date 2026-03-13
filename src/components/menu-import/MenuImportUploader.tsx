@@ -119,7 +119,7 @@ export function MenuImportUploader({ onExtracted, status, setStatus, setErrorMes
           description: descCol >= 0 ? (cols[descCol]?.trim() || '') : '',
           price: priceCol >= 0 ? parseFloat(cols[priceCol]?.replace(/[^0-9.,-]/g, '').replace(',', '.') || '0') || 0 : 0,
           allergens: [],
-          inferredIngredients: [],
+          ingredients: [],
           confidence: 1.0,
         });
       }

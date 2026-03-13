@@ -79,7 +79,7 @@
     "footer_terms": "Condiții",
     "sticky_cta": "Începe gratuit",
     "nano_banana_title": "Suite de Generație Următoare. (Alimentată de Inteligență).",
-    "nano_banana_subtitle": "Descoperă cele patru instrumente noi pentru gestionarea restaurantelor fără frecare.",
+    "nano_banana_subtitle": "Descoperiți cele cinci instrumente noi pentru gestionarea restaurantului fără obstacole.",
     "nano_banana_badge": "CAPABILITĂȚI NOI 2026",
     "nest_net_profit": "Profit Net",
     "nest_cash_flow": "Dinamica Fluxului de Numerar",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Auditurile stației și semnarea schimburilor nu sunt micromanagement când sunt gamificate. Păstrează moralul ridicat cu un jurnal transparent.",
     "gamification_title": "Măsoară-ți Inteligența",
     "gamification_desc": "Cât de clară este vizibilitatea ta? Fă o evaluare de 2 minute pentru a-ți descoperi scorul de maturitate operațională și a debloca îmbunătățiri țintite.",
-    "gamification_cta": "Urmează evaluarea gratuită →"
+    "gamification_cta": "Urmează evaluarea gratuită →",
+    "nb_menu_scan_title": "5. Scanner de meniu și completare automată",
+    "nb_menu_scan_desc": "Încărcați o fotografie, PDF sau URL de site web al oricărui meniu. IA extrage fiecare fel de mâncare, preț, descriere, alergen și ingredient — apoi completează editorul de meniu cu un singur clic."
   },
   "Pricing": {
     "title": "Prețuri clare, impact real.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Confidențialitate",
     "footer_terms": "Termeni",
     "nano_banana_title": "Suite de Următoare Generație. (Alimentată de Inteligență).",
-    "nano_banana_subtitle": "Descoperă patru instrumente noi pentru gestiunea restaurantului fără fricțiuni.",
+    "nano_banana_subtitle": "Descoperiți cele cinci instrumente noi pentru gestionarea restaurantului fără obstacole.",
     "nb_haccp_title": "1. Constructor HACCP Fără Cod",
     "nb_haccp_desc": "Construiește propriile tale formulare de audit cu o mișcare. Siguranță alimentară personalizată, semnat digital și imutabil.",
     "nb_sonar_title": "2. Sonar & Matricea Competențelor",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Auditurile stației și confirmările de schimb nu sunt micromanagement când sunt gamificate. Mențin moralul ridicat cu un jurnal transparent.",
     "gamification_title": "Măsoară Inteligența Ta",
     "gamification_desc": "Cât de clară este vizibilitatea ta? Completeaza o evaluare de 2 minute pentru a descoperi scorul de maturitate operațională și a debloca îmbunătățiri direcționate.",
-    "gamification_cta": "Fă evaluarea gratuită →"
+    "gamification_cta": "Fă evaluarea gratuită →",
+    "nb_menu_scan_title": "5. Scanner de meniu și completare automată",
+    "nb_menu_scan_desc": "Încărcați o fotografie, PDF sau URL de site web al oricărui meniu. IA extrage fiecare fel de mâncare, preț, descriere, alergen și ingredient — apoi completează editorul de meniu cu un singur clic."
   },
   "Auth": {
     "login_title": "RiveHub",

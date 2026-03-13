@@ -79,7 +79,7 @@
     "footer_terms": "Ìkò Àpejọ",
     "sticky_cta": "Bẹ̀rẹ̀ fún ọ̀fẹ́",
     "nano_banana_title": "Ìpilẹ̀ Ojúu Ìgbà Tuntun. (Ọ̀nà tí Ọgbọ́n Ń Ṣ'iṣẹ́).",
-    "nano_banana_subtitle": "Ṣàwárí àwọn ohun ẹ̀ka méjì tuntun fún ìṣakójọ òpó idílé tí ó dáa.",
+    "nano_banana_subtitle": "Ṣawari àwọn ohun èlò márùn tuntun wa fun iṣẹ̀ ìṣàkójú ilé oúnjẹ tí kò ní ìyasọtọ̀.",
     "nano_banana_badge": "ÀGBẸ̀JÁDỌ TUNTUN 2026",
     "nest_net_profit": "Ọ̀nà Ọrọ̀ Tálákà",
     "nest_cash_flow": "Ìsàlọ̀po Owó",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Àwọn áìkàn ibodè àti ìkẹ́kọ̀ àkókò ìgbà kìí ṣe ìtáyọ àbẹ nígbà tí wọ́n ń gbẹ́. Paá inú àti ìfọ̀ pẹ̀lú logbook tí ó hàn.",
     "gamification_title": "Kán Àwọn Ìmọ̀ Rẹ",
     "gamification_desc": "Báwo ló ṣe ìmọ̀ rẹ? Ṣe àwòrán 2-ìkejì láti ríi òye iṣẹ́ rẹ àti ṣí àwọn ìlọsíìsì tí a yan.",
-    "gamification_cta": "Ṣe àwòrán ìdánilójú àìta →"
+    "gamification_cta": "Ṣe àwòrán ìdánilójú àìta →",
+    "nb_menu_scan_title": "5. Awo-ìwé Ọrọ̀ & Ìmúparun Otómáátìkì",
+    "nb_menu_scan_desc": "Gbe sílẹ̀ àwòrán, PDF tàbí ìtò URL tí ilé oúnjẹ ọ̀kan. AI yóò yọ kúrò gbogbo jòó ní, idiyele, àsọye, ẹ̀kún àti nǹkan tí a lo — àti yóò kópa rẹ̀ lọ́wọ̀ àgbéléwọn ọrọ̀rọ̀ rẹ nibi kan."
   },
   "Pricing": {
     "title": "Ìdẹ̀wọ́ tó ró, ìpilẹ̀ òtítọ́.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Siri-siri",
     "footer_terms": "Awọn Ofin",
     "nano_banana_title": "Suite Ẹkọ Tuntun. (Ti a ṣe nipasẹ Ọgbọn).",
-    "nano_banana_subtitle": "Ṣawari awọn ohun-elu mẹrin tuntun fun iṣakoso ile-ounjẹ ti o rọrun.",
+    "nano_banana_subtitle": "Ṣawari àwọn ohun èlò márùn tuntun wa fun iṣẹ̀ ìṣàkójú ilé oúnjẹ tí kò ní ìyasọtọ̀.",
     "nb_haccp_title": "1. Elewe HACCP Ti Kii ṣe Koodu",
     "nb_haccp_desc": "Ṣe awọn fọọmu ayẹwo tirẹ pẹlu fififo. Aabo ounjẹ ti a ṣapejọ, ti a ainini dijitali ati ti kii ṣe iyipada.",
     "nb_sonar_title": "2. Sonar & Àkójú Ọgá Idile",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Àwọn ìtọ́jú ọ̀pọ̀ àti ìkíìkí àkọkọ ní àìsigbàkọ nígbà tí a ń fi sòro to ó. Mú ìrílú ẹgbẹ gá nípa àkójú tí gbogbo ẹnìkàn mọ̀.",
     "gamification_title": "Wé Ìmọ̀ Rẹ",
     "gamification_desc": "Nínú ojúìmọ̀ rẹ pẹ́ mẹ́? Ṣe àfikún ìdákẹ́ oníìkéjì ìmẹ́ dó sí àwọn ìlànà ìṣẹ́ rẹ àti wọ́ọ wà sínú àwọn àyípadà tí a gbésẹ.",
-    "gamification_cta": "Ṣe àfikún ìdákẹ́ ọfẹ́ →"
+    "gamification_cta": "Ṣe àfikún ìdákẹ́ ọfẹ́ →",
+    "nb_menu_scan_title": "5. Awo-ìwé Ọrọ̀ & Ìmúparun Otómáátìkì",
+    "nb_menu_scan_desc": "Gbe sílẹ̀ àwòrán, PDF tàbí ìtò URL tí ilé oúnjẹ ọ̀kan. AI yóò yọ kúrò gbogbo jòó ní, idiyele, àsọye, ẹ̀kún àti nǹkan tí a lo — àti yóò kópa rẹ̀ lọ́wọ̀ àgbéléwọn ọrọ̀rọ̀ rẹ nibi kan."
   },
   "Auth": {
     "login_title": "RiveHub",

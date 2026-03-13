@@ -79,7 +79,7 @@
     "footer_terms": "Cundizioni",
     "sticky_cta": "Cumincià gratuitamente",
     "nano_banana_title": "A Suite di Nuova Generazione. (Pussibilitata da l'Intelligenza).",
-    "nano_banana_subtitle": "Scupri i nostri quattru strumenti novi per a gestione di ristorante senza attriti.",
+    "nano_banana_subtitle": "Scupri i nostri cinque novi strumenti per una gestione di i vostri taverni senza difficultà.",
     "nano_banana_badge": "NUOVE CAPACITÀ 2026",
     "nest_net_profit": "Profittu Netu",
     "nest_cash_flow": "Dinamica di Flussu di Cassa",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "I audit di stazione è i sign-off di turnu ùn sò micca microgestionu quandu sò gamificati. Mantene u murale altu cù un logbook trasparente.",
     "gamification_title": "Misura a Vosra Intelligenza",
     "gamification_desc": "Quantu è chiara a vosra visibilità? Fate una valutazione di 2 minuti per scuprì u vostru scoru di maturità operaziunale è sblocchì migliurame mirate.",
-    "gamification_cta": "Fate a valutazione gratuita →"
+    "gamification_cta": "Fate a valutazione gratuita →",
+    "nb_menu_scan_title": "5. Scanner di Minuta & Auto-Populazione",
+    "nb_menu_scan_desc": "Carica una foto, un PDF o l'URL d'un situ di qualsiasi minuta. L'IA estrae tutti i piatti, prezzi, descrizioni, allergeni è ingredienti — è poi popula l'editor di a minuta in un clic solu."
   },
   "Pricing": {
     "title": "Prezzi chiari, impattu reale.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Privacità",
     "footer_terms": "Cundizioni",
     "nano_banana_title": "A Suite di Prossima Generazione. (Putenziata da Intelligenza).",
-    "nano_banana_subtitle": "Scuperite i nostri quattru novi strumenti per una gestione di ristorante senza attrittu.",
+    "nano_banana_subtitle": "Scupri i nostri cinque novi strumenti per una gestione di i vostri taverni senza difficultà.",
     "nb_haccp_title": "1. Costruttore HACCP Senza Codice",
     "nb_haccp_desc": "Custruite e vostre forme d'auditu cù un giu. Sicurezza alimentaria persunalizata, firmata digitalmente è immutabile.",
     "nb_sonar_title": "2. Sonar & Matrice di Cumpetenze",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "I audit di stazione è i sign-off di turnu ùn sò micca microgestione quandu sò gamificati. Mantene u murale altu cù un logbook trasparente.",
     "gamification_title": "Misura a Vostra Intelligenza",
     "gamification_desc": "Quantu hè clara a vostra visibilità? Fà una valutazione di 2 minuti per scuprì u vostru scoru di maturità operaziunale è schjappate miglioramenti mirati.",
-    "gamification_cta": "Fà a valutazione gratuita →"
+    "gamification_cta": "Fà a valutazione gratuita →",
+    "nb_menu_scan_title": "5. Scanner di Minuta & Auto-Populazione",
+    "nb_menu_scan_desc": "Carica una foto, un PDF o l'URL d'un situ di qualsiasi minuta. L'IA estrae tutti i piatti, prezzi, descrizioni, allergeni è ingredienti — è poi popula l'editor di a minuta in un clic solu."
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -79,7 +79,7 @@
     "footer_terms": "Sharuɗɗa",
     "sticky_cta": "Fara bure",
     "nano_banana_title": "Saitin Na Jiya. (Mai Ƙarfi ta Ilimi).",
-    "nano_banana_subtitle": "Gano kayan aiki namu hudu na sabon jiya don saura sudaji.",
+    "nano_banana_subtitle": "Gano da kayan aikin biya guda biyar don sarrafa gida cikin rashin matsi.",
     "nano_banana_badge": "IKON SABON 2026",
     "nest_net_profit": "Nƙefo na Jiya",
     "nest_cash_flow": "Jigon Tsari na Kuɗi",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Binciken gida da sanya hannu na jiya ba binkasa ba ne lokacin da aka yi ta wasa. Ci gida girman mutane tare da bayanan logbook mai kwanciyar hankali.",
     "gamification_title": "Auna Hanyarka",
     "gamification_desc": "Menene ƙaranƙaryar ku? Dauki bayanan 2-minute don gano matsakaicin shirya na aiki naka da bude ƙarfi na nuni.",
-    "gamification_cta": "Dauki bayanan na kyauta →"
+    "gamification_cta": "Dauki bayanan na kyauta →",
+    "nb_menu_scan_title": "5. Duba Jerin Abinci & Cikakke Kai Tsaye",
+    "nb_menu_scan_desc": "Kada hoto, PDF ko adreshin gida na jerin abinci. AI yana haifar da kowane jiya, farashin, bayanai, gida masu kauna da sinadari — sannan yana cikakke editon jerin abinci na gida a dambe guda."
   },
   "Pricing": {
     "title": "Farashin da aka sarƙa, tasiri na ainihi.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Sirri",
     "footer_terms": "Sharafi",
     "nano_banana_title": "Suite na Sabon-Jini. (Saida ta Hankali).",
-    "nano_banana_subtitle": "Gano kayan aiki guda hudu na sabon na sarrafa gida baɗin daɗi.",
+    "nano_banana_subtitle": "Gano da kayan aikin biya guda biyar don sarrafa gida cikin rashin matsi.",
     "nb_haccp_title": "1. Ginin HACCP babu lamari",
     "nb_haccp_desc": "Gina ninka buɗi niyoyin tantance tare da sauri. Sarrafa cin abinci na kwakwa, da siginewa na siyya da baɗin canja.",
     "nb_sonar_title": "2. Sonar & Matrices Ƙarfin",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Jadwalin tashin hankali da damje-damjen agogon ba su ne kudewar kai lokacin da aka yi wasa. Jiya damje-damje mai sauƙi tare da bayyanin logbook.",
     "gamification_title": "Auna Sani Naka",
     "gamification_desc": "Shin, inane ne duba-dubakak? Karanta abin mintina 2 don gano yankin tsarin ka da buɗe ingantattun mabambanci.",
-    "gamification_cta": "Karanta abin mintina kyauta →"
+    "gamification_cta": "Karanta abin mintina kyauta →",
+    "nb_menu_scan_title": "5. Duba Jerin Abinci & Cikakke Kai Tsaye",
+    "nb_menu_scan_desc": "Kada hoto, PDF ko adreshin gida na jerin abinci. AI yana haifar da kowane jiya, farashin, bayanai, gida masu kauna da sinadari — sannan yana cikakke editon jerin abinci na gida a dambe guda."
   },
   "Auth": {
     "login_title": "RiveHub",

@@ -91,8 +91,8 @@ export async function bulkSaveMenuImport(
           translations: {},
         });
 
-        if (item.inferredIngredients && item.inferredIngredients.length > 0) {
-          itemIngredientMap.set(itemId, item.inferredIngredients);
+        if (item.ingredients && item.ingredients.length > 0) {
+          itemIngredientMap.set(itemId, item.ingredients);
         }
       }
     }

@@ -178,7 +178,7 @@
     "widget_running": "実行中のプロトコル",
     "sticky_cta": "無料で開始",
     "nano_banana_title": "次世代スイート。(インテリジェンス搭載)。",
-    "nano_banana_subtitle": "レストラン運営をスムーズにする4つの新しいツールをご紹介します。",
+    "nano_banana_subtitle": "レストラン運営をスムーズにする5つの新しいツールを発見してください。",
     "nano_banana_badge": "新機能 2026",
     "nest_net_profit": "純利益",
     "nest_cash_flow": "キャッシュフロー分析",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "ステーション監査とシフトサインオフがゲーミフィケーションされていれば、マイクロマネジメントではありません。透明なログブックでモラルを高く保ちます。",
     "gamification_title": "あなたの知能を測定する",
     "gamification_desc": "可視性はどの程度ですか?2分間の評価に参加して、運営成熟度スコアを発見し、ターゲット化された改善を解除してください。",
-    "gamification_cta": "無料評価を受ける →"
+    "gamification_cta": "無料評価を受ける →",
+    "nb_menu_scan_title": "5. メニュースキャナー & 自動入力",
+    "nb_menu_scan_desc": "メニューの写真、PDF、またはウェブサイトURLをアップロードしてください。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、ワンクリックでメニューエディターに自動入力されます。"
   },
   "Pricing": {
     "title": "明確な価格設定、実質的なインパクト。",
@@ -349,7 +351,7 @@
     "footer_privacy": "プライバシー",
     "footer_terms": "利用規約",
     "nano_banana_title": "次世代スイート。（インテリジェンス搭載）。",
-    "nano_banana_subtitle": "レストラン管理を簡素化する4つの新しいツールをご紹介します。",
+    "nano_banana_subtitle": "レストラン運営をスムーズにする5つの新しいツールを発見してください。",
     "nb_haccp_title": "1. ノーコードHACCPビルダー",
     "nb_haccp_desc": "スワイプで独自の監査フォームを構築。カスタム食品安全、デジタル署名と不変性。",
     "nb_sonar_title": "2. ソナー & スキルマトリックス",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "ステーション監査とシフト署名はゲーミング化すれば微管理ではない。透明なロジブックで士気を高く保つ。",
     "gamification_title": "あなたの知能を測定する",
     "gamification_desc": "可視性はどのくらい明確か?2分間の評価を実施して、運営成熟度スコアを発見し、ターゲット改善をアンロック。",
-    "gamification_cta": "無料評価を受ける →"
+    "gamification_cta": "無料評価を受ける →",
+    "nb_menu_scan_title": "5. メニュースキャナー & 自動入力",
+    "nb_menu_scan_desc": "メニューの写真、PDF、またはウェブサイトURLをアップロードしてください。AIがすべての料理、価格、説明、アレルゲン、材料を抽出し、ワンクリックでメニューエディターに自動入力されます。"
   },
   "Auth": {
     "login_title": "RiveHub",

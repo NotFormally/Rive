@@ -79,7 +79,7 @@
     "footer_terms": "Bedingunge",
     "sticky_cta": "Kostenlos starte",
     "nano_banana_title": "D Nächscht-Generation Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Entdecke üseri vier neue Tools für problemlose Restaurant-Verwaltung.",
+    "nano_banana_subtitle": "Entdeck ä füf nüü Wärkzüg für mühellos Räschtorant-Management.",
     "nano_banana_badge": "NEUE FUNKTIONEN 2026",
     "nest_net_profit": "Reingewinn",
     "nest_cash_flow": "Liquiditätsdynamike",
@@ -248,7 +248,9 @@
     "brigade_f3_desc": "Station-Audits und Schicht-Unterschrifte sind kei Mikromanagemänt, wenn si gamifiziert sind. Halte d'Moral hoch mit nem transparänte Logbüech.",
     "gamification_title": "Miss dini Intelligänz",
     "gamification_desc": "Wie klar isch dini Sichtbarkeit? Mach e 2-Minute-Assessmänt und entdecke din operationali Reifä-Score – entschlüss e zielgerichti Verbesserunge.",
-    "gamification_cta": "Mach d'kostenlos Assessmänt →"
+    "gamification_cta": "Mach d'kostenlos Assessmänt →",
+    "nb_menu_scan_title": "5. Menükarte Scanner & Automatisch Usfülle",
+    "nb_menu_scan_desc": "Lade ä Foto, PDF oder Website-URL vun ere Menükarte ufe. KI extrahiert all Gricht, Priis, Beschribig, Allerge und Zutate — und füllt dini Menü-Editor mit eim Klick uus."
   },
   "Pricing": {
     "title": "Transparente Preise, echte Auswirkung.",
@@ -301,7 +303,7 @@
     "footer_privacy": "Datenschutz",
     "footer_terms": "Bedingunge",
     "nano_banana_title": "De Next-Gen Suite. (Powered by Intelligence).",
-    "nano_banana_subtitle": "Entdecke üse vier neui Tools für mühellose Restaurant-Verwaltung.",
+    "nano_banana_subtitle": "Entdeck ä füf nüü Wärkzüg für mühellos Räschtorant-Management.",
     "nb_haccp_title": "1. No-Code HACCP Builder",
     "nb_haccp_desc": "Baue dini eigene Audit-Formulare mit eme Wisch. Benutzerdefiniert Lebensmittelsicherheit, digital signiert und unveränderlich.",
     "nb_sonar_title": "2. Sonar & Skills Matrix",
@@ -401,7 +403,9 @@
     "brigade_f3_desc": "Statiospruefige und Schicht-Abmäldige sind nid Mikromanagemänt, wenn si gamifiziert sin. Halte d Moral hoch mit ärem transparänte Logbuech.",
     "gamification_title": "Miss din Intelligänz",
     "gamification_desc": "Wie klar isch din Überblick? Mach e 2-Minute Bewärtig, um din operationale Reifegrat z entdecke und zielgricheti Verbässrige z entsperre.",
-    "gamification_cta": "Mach d koschtenlosi Bewärtig →"
+    "gamification_cta": "Mach d koschtenlosi Bewärtig →",
+    "nb_menu_scan_title": "5. Menükarte Scanner & Automatisch Usfülle",
+    "nb_menu_scan_desc": "Lade ä Foto, PDF oder Website-URL vun ere Menükarte ufe. KI extrahiert all Gricht, Priis, Beschribig, Allerge und Zutate — und füllt dini Menü-Editor mit eim Klick uus."
   },
   "Auth": {
     "login_title": "RiveHub",

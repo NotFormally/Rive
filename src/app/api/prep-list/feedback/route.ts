@@ -122,6 +122,8 @@ export async function PATCH(req: Request) {
         recipesEntered: scoreData.recipes_entered,
         feedbackDays: updatedFeedbackDays,
         feedbackStreak: updatedStreak,
+        weatherFeedbacks: 0,          // Not recalculated in feedback loop
+        weatherCalibrationScore: 0,
       });
 
       await auth.supabase

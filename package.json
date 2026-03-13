@@ -10,7 +10,18 @@
     "i18n:watch": "node scripts/i18n-sync.js",
     "i18n:sync": "node scripts/i18n-sync.js --once",
     "i18n:sync:force": "node scripts/i18n-sync.js --once --force",
-    "i18n:lint": "node scripts/i18n-lint.js"
+    "i18n:lint": "node scripts/i18n-lint.js",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:p0": "playwright test tests/auth tests/public/landing.spec.ts tests/public/pricing.spec.ts tests/dashboard/access.spec.ts",
+    "test:p1": "playwright test tests/dashboard/sidebar.spec.ts tests/dashboard/journal.spec.ts tests/dashboard/carte.spec.ts tests/dashboard/haccp.spec.ts tests/dashboard/food-cost.spec.ts tests/dashboard/settings.spec.ts tests/dashboard/i18n.spec.ts",
+    "test:p2": "playwright test tests/public/menu.spec.ts tests/public/demo.spec.ts tests/public/audit.spec.ts tests/public/errors.spec.ts tests/api tests/dashboard/navigation.spec.ts tests/mobile tests/performance",
+    "test:a11y": "playwright test tests/a11y",
+    "test:visual": "playwright test tests/visual",
+    "test:visual:update": "playwright test tests/visual --update-snapshots",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.46",
@@ -52,6 +63,7 @@
     "wink-sentiment": "^5.0.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

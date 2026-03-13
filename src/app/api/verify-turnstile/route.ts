@@ -1,3 +1,23 @@
+// =============================================================================
+// Cloudflare Turnstile Server-Side Verification
+//
+// SETUP GUIDE:
+//   1. Go to https://dash.cloudflare.com → Turnstile (left sidebar)
+//   2. Click "Add Site"
+//   3. Enter your domain (e.g., rivehub.com) and select widget type:
+//      - "Managed" (recommended): Cloudflare decides challenge type
+//      - "Non-Interactive": invisible to users, purely passive
+//      - "Invisible": no visible widget, challenge only when suspicious
+//   4. Copy the Site Key → set as NEXT_PUBLIC_TURNSTILE_SITE_KEY in .env.local
+//   5. Copy the Secret Key → set as TURNSTILE_SECRET_KEY in .env.local
+//
+// TEST KEYS (for development — always pass):
+//   Site Key:   1x00000000000000000000AA
+//   Secret Key: 1x0000000000000000000000000000000AA
+//
+// PROTECTED PAGES: /signup, /login, /invite
+// =============================================================================
+
 import { NextResponse } from "next/server";
 
 const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;

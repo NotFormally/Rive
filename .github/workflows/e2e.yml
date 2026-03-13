@@ -1,0 +1,119 @@
+name: E2E Tests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    # Weekly full suite — Sundays at 03:00 UTC
+    - cron: '0 3 * * 0'
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+  TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+  TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+  # Service role key for provisioning dedicated test users in CI
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+  # Set STAGING_URL secret to run tests against staging instead of local dev server
+  PLAYWRIGHT_BASE_URL: ${{ secrets.STAGING_URL || '' }}
+
+jobs:
+  # P0 gate — runs on every PR (fast, ~3 min)
+  p0-gate:
+    name: P0 Core Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run P0 tests
+        run: npx playwright test tests/auth tests/public/landing.spec.ts tests/public/pricing.spec.ts tests/dashboard/access.spec.ts --reporter=list
+
+      - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-report
+          path: playwright-report/
+          retention-days: 7
+
+  # P1 regression — runs on push to main
+  p1-regression:
+    name: P1 Business Critical Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event_name == 'push' || github.event_name == 'schedule'
+    needs: p0-gate
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run P0 + P1 tests
+        run: npx playwright test --project=setup --project=public --project=authenticated --reporter=list
+
+      - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-report
+          path: playwright-report/
+          retention-days: 7
+
+  # Full suite — weekly schedule
+  full-suite:
+    name: Full E2E Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: github.event_name == 'schedule'
+    needs: p1-regression
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run all tests
+        run: npx playwright test --reporter=list
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-report
+          path: playwright-report/
+          retention-days: 14

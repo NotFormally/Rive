@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useRef, Suspense } from "react";
 import { useRouter, Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
 function LoginForm() {
   const t = useTranslations("Auth");
@@ -19,12 +20,39 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // Turnstile
+  const turnstileRef = useRef<TurnstileInstance>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) return;
 
     setLoading(true);
     setError("");
+
+    // Verify Turnstile token server-side
+    if (turnstileToken) {
+      try {
+        const tsRes = await fetch("/api/verify-turnstile", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: turnstileToken }),
+        });
+        const tsData = await tsRes.json();
+        if (!tsData.success) {
+          setError(t("error_turnstile"));
+          setLoading(false);
+          turnstileRef.current?.reset();
+          setTurnstileToken(null);
+          return;
+        }
+      } catch {
+        // Fail open — don't block login if verification service is down
+        console.warn("[turnstile] Verification request failed, proceeding");
+      }
+    }
 
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
@@ -105,6 +133,21 @@ function LoginForm() {
                 placeholder="••••••••"
                 className="w-full px-4 py-2.5 border border-border rounded-xl text-sm font-outfit bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50"
                 disabled={loading}
+              />
+            </div>
+
+            {/* Cloudflare Turnstile — bot protection */}
+            <div className="flex justify-center">
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={turnstileSiteKey}
+                onSuccess={setTurnstileToken}
+                onError={() => setTurnstileToken(null)}
+                onExpire={() => setTurnstileToken(null)}
+                options={{
+                  theme: "auto",
+                  size: "compact",
+                }}
               />
             </div>
 

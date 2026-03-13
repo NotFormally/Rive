@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { loadFoodCostData, calculateItemFoodCost, FoodCostResult } from '@/lib/food-cost';
 import { loadMenuFromSupabase } from '@/lib/menu-store';
+import { fetchForecast, geocodeAddress, analyzeServiceImpact, type WeatherAlert, type DailyForecast } from '@/lib/weather';
 
 // =============================================================================
 // Smart Prep Engine — Predictive Preparation Planning
@@ -67,11 +68,114 @@ export type AggregatedIngredient = {
 };
 
 export type PrepAlert = {
-  type: 'dietary' | 'anomaly' | 'vip' | 'occasion' | 'volume';
+  type: 'dietary' | 'anomaly' | 'vip' | 'occasion' | 'volume' | 'weather';
   severity: 'info' | 'warning' | 'critical';
   message: string;
   details?: Record<string, unknown>;
 };
+
+// ---------------------------------------------------------------------------
+// Weather-based cover adjustment
+// ---------------------------------------------------------------------------
+
+export type WeatherCoverModifier = {
+  modifier: number;        // Multiplier (e.g., 0.75 = -25% covers)
+  alertType: WeatherAlert['type'] | null;
+  reason: string;
+};
+
+/**
+ * Returns a cover multiplier based on weather alerts for the target date.
+ * Multiple alerts stack — we take the most impactful (lowest) modifier.
+ */
+export function getWeatherCoverModifier(alerts: WeatherAlert[], targetDate: string): WeatherCoverModifier {
+  const dayAlerts = alerts.filter(a => a.day === targetDate);
+
+  if (dayAlerts.length === 0) {
+    return { modifier: 1.0, alertType: null, reason: 'Pas d\'alerte météo' };
+  }
+
+  // Map alert types to cover modifiers (worst case within range)
+  const modifiers: Record<WeatherAlert['type'], { modifier: number; reason: string }> = {
+    storm:  { modifier: 0.70, reason: 'Orage prévu — réduction estimée de 30% des couverts' },
+    snow:   { modifier: 0.65, reason: 'Neige prévue — réduction estimée de 35% des couverts' },
+    rain:   { modifier: 0.80, reason: 'Pluie prévue — réduction estimée de 20% des couverts' },
+    wind:   { modifier: 0.80, reason: 'Vents forts — réduction estimée de 20% des couverts' },
+    cold:   { modifier: 0.90, reason: 'Grand froid — réduction estimée de 10% des couverts' },
+    heat:   { modifier: 0.90, reason: 'Canicule — réduction estimée de 10% des couverts' },
+  };
+
+  // Find most impactful (lowest modifier)
+  let worstModifier = 1.0;
+  let worstType: WeatherAlert['type'] | null = null;
+  let worstReason = '';
+
+  for (const alert of dayAlerts) {
+    const m = modifiers[alert.type];
+    if (m && m.modifier < worstModifier) {
+      worstModifier = m.modifier;
+      worstType = alert.type;
+      worstReason = m.reason;
+    }
+  }
+
+  return { modifier: worstModifier, alertType: worstType, reason: worstReason };
+}
+
+/**
+ * Returns weather-specific menu demand multipliers per category.
+ * Used to adjust individual item predictions based on weather conditions.
+ */
+export type WeatherDemandMultipliers = {
+  soups: number;
+  hotBeverages: number;
+  salads: number;
+  coldDesserts: number;
+  comfortFood: number;
+  delivery: number;
+};
+
+export function getWeatherDemandMultipliers(alerts: WeatherAlert[], targetDate: string): WeatherDemandMultipliers {
+  const base: WeatherDemandMultipliers = {
+    soups: 1.0, hotBeverages: 1.0, salads: 1.0,
+    coldDesserts: 1.0, comfortFood: 1.0, delivery: 1.0,
+  };
+
+  const dayAlerts = alerts.filter(a => a.day === targetDate);
+  for (const alert of dayAlerts) {
+    switch (alert.type) {
+      case 'rain':
+      case 'storm':
+        base.soups *= 1.25;
+        base.hotBeverages *= 1.20;
+        base.comfortFood *= 1.15;
+        base.delivery *= 1.30;
+        base.salads *= 0.85;
+        break;
+      case 'cold':
+      case 'snow':
+        base.soups *= 1.40;
+        base.hotBeverages *= 1.60;
+        base.comfortFood *= 1.30;
+        base.salads *= 0.70;
+        base.coldDesserts *= 0.75;
+        break;
+      case 'heat':
+        base.salads *= 1.40;
+        base.coldDesserts *= 1.35;
+        base.hotBeverages *= 0.60;
+        base.soups *= 0.70;
+        base.delivery *= 1.15;
+        break;
+      case 'wind':
+        base.delivery *= 1.20;
+        base.comfortFood *= 1.10;
+        break;
+    }
+  }
+
+  return base;
+}
 
 export type PrepListResult = {
   coverEstimation: CoverEstimation;
@@ -80,6 +184,8 @@ export type PrepListResult = {
   alerts: PrepAlert[];
   estimatedFoodCost: number;
   generationLevel: 1 | 2 | 3;
+  weatherModifier: WeatherCoverModifier | null;
+  weatherDemand: WeatherDemandMultipliers | null;
 };
 
 // ---------------------------------------------------------------------------
@@ -520,16 +626,68 @@ export async function generatePrepList(
   // Calculate walk-in ratio from historical data
   const walkInRatio = await calculateWalkInRatio(supabase, restaurantId, dayOfWeek, config.lookbackWeeks);
 
-  // Estimate total covers
-  const coverEstimation = estimateCovers(
+  // Estimate total covers (before weather adjustment)
+  const rawCoverEstimation = estimateCovers(
     allReservations,
     walkInRatio,
     config.safetyBuffer,
     config.servicePeriod,
   );
 
+  // ---- WEATHER ADJUSTMENT ----
+  // Fetch weather forecast and adjust covers based on weather conditions
+  let weatherModifier: WeatherCoverModifier | null = null;
+  let weatherDemand: WeatherDemandMultipliers | null = null;
+  let weatherAlerts: WeatherAlert[] = [];
+
+  try {
+    // Fetch restaurant address for geocoding
+    const { data: profile } = await supabase
+      .from('restaurant_profiles')
+      .select('address')
+      .eq('id', restaurantId)
+      .single();
+
+    if (profile?.address) {
+      const coords = await geocodeAddress(profile.address);
+      if (coords) {
+        const forecast = await fetchForecast(coords);
+        if (forecast) {
+          weatherAlerts = analyzeServiceImpact(forecast.daily);
+          weatherModifier = getWeatherCoverModifier(weatherAlerts, config.targetDate);
+          weatherDemand = getWeatherDemandMultipliers(weatherAlerts, config.targetDate);
+        }
+      }
+    }
+  } catch (err) {
+    // Weather is non-blocking — graceful degradation
+    console.warn('[prep-engine] Weather fetch failed, proceeding without adjustment:', err);
+  }
+
+  // Apply weather modifier to covers
+  const coverEstimation = { ...rawCoverEstimation };
+  if (weatherModifier && weatherModifier.modifier < 1.0) {
+    coverEstimation.estimatedTotal = Math.round(rawCoverEstimation.estimatedTotal * weatherModifier.modifier);
+    coverEstimation.estimatedWalkIns = Math.round(rawCoverEstimation.estimatedWalkIns * weatherModifier.modifier);
+  }
+
   // Extract dietary and occasion alerts from reservation notes
   const alerts: PrepAlert[] = extractDietaryAlerts(allReservations);
+
+  // Add weather alerts as prep alerts
+  if (weatherModifier && weatherModifier.modifier < 1.0) {
+    alerts.push({
+      type: 'weather',
+      severity: weatherModifier.modifier <= 0.70 ? 'critical' : 'warning',
+      message: weatherModifier.reason,
+      details: {
+        modifier: weatherModifier.modifier,
+        alertType: weatherModifier.alertType,
+        originalCovers: rawCoverEstimation.estimatedTotal,
+        adjustedCovers: coverEstimation.estimatedTotal,
+      },
+    });
+  }
 
   // Start building the result at Level 1
   let generationLevel: 1 | 2 | 3 = 1;
@@ -716,6 +874,8 @@ export async function generatePrepList(
     alerts,
     estimatedFoodCost: Math.round(estimatedFoodCost * 100) / 100,
     generationLevel,
+    weatherModifier,
+    weatherDemand,
   };
 }
 

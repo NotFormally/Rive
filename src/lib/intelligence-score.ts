@@ -14,6 +14,8 @@ export type IntelligenceScoreData = {
   recipesEntered: number;
   feedbackDays: number;
   feedbackStreak: number;
+  weatherFeedbacks: number;        // Number of weather outcome feedbacks recorded
+  weatherCalibrationScore: number; // Average calibration accuracy (0-100)
 };
 
 export type IntelligenceScoreResult = {
@@ -52,6 +54,14 @@ export function calculateIntelligenceScore(data: IntelligenceScoreData): Intelli
   if (data.feedbackStreak >= 28) rawScore += 5;
   else if (data.feedbackStreak >= 7) rawScore += Math.round(((data.feedbackStreak - 7) / 21) * 5);
 
+  // Weather calibration: +5 points (unlocks final Expert tier)
+  // Requires 10+ weather feedbacks with avg calibration > 60%
+  if (data.weatherFeedbacks >= 10 && data.weatherCalibrationScore >= 60) {
+    rawScore += 5;
+  } else if (data.weatherFeedbacks >= 3) {
+    rawScore += Math.round((Math.min(10, data.weatherFeedbacks) / 10) * 3);
+  }
+
   // Asymptotic cap — never reach 100%
   const score = Math.min(98, rawScore);
 
@@ -76,7 +86,10 @@ export function calculateIntelligenceScore(data: IntelligenceScoreData): Intelli
     nextMilestone = 'Donnez 7 jours de feedback pour passer à Calibré';
     nextMilestoneScore = 80;
   } else if (score < 95) {
-    nextMilestone = '4 semaines de feedback consécutif pour atteindre Expert';
+    const needsWeather = data.weatherFeedbacks < 10 || data.weatherCalibrationScore < 60;
+    nextMilestone = needsWeather
+      ? 'Calibrez 10+ prévisions météo et maintenez un streak de 4 semaines pour atteindre Expert'
+      : '4 semaines de feedback consécutif pour atteindre Expert';
     nextMilestoneScore = 95;
   }
 

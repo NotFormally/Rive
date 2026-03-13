@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter, Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { supabase } from "@/lib/supabase";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
 function InviteAcceptContent() {
   const router = useRouter();
@@ -13,9 +14,15 @@ function InviteAcceptContent() {
   const locale = useLocale();
   const t = useTranslations("Invite");
 
-  const [status, setStatus] = useState<"loading" | "success" | "error" | "login_needed">("loading");
+  const [status, setStatus] = useState<"loading" | "success" | "error" | "login_needed" | "verifying">("loading");
   const [message, setMessage] = useState("");
   const [restaurantId, setRestaurantId] = useState<string | null>(null);
+
+  // Turnstile
+  const turnstileRef = useRef<TurnstileInstance>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+  const turnstileVerifiedRef = useRef(false);
 
   useEffect(() => {
     if (!token) {
@@ -24,7 +31,38 @@ function InviteAcceptContent() {
       return;
     }
 
+    // Wait for Turnstile to complete before proceeding
+    if (!turnstileToken && !turnstileVerifiedRef.current) {
+      setStatus("verifying");
+      return;
+    }
+
     const acceptInvite = async () => {
+      // Verify Turnstile token server-side (if available)
+      if (turnstileToken && !turnstileVerifiedRef.current) {
+        try {
+          const tsRes = await fetch("/api/verify-turnstile", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: turnstileToken }),
+          });
+          const tsData = await tsRes.json();
+          if (!tsData.success) {
+            setStatus("error");
+            setMessage(t("error_turnstile"));
+            turnstileRef.current?.reset();
+            setTurnstileToken(null);
+            return;
+          }
+          turnstileVerifiedRef.current = true;
+        } catch {
+          // Fail open
+          turnstileVerifiedRef.current = true;
+        }
+      }
+
+      setStatus("loading");
+
       const { data: { session } } = await supabase.auth.getSession();
 
       if (!session) {
@@ -60,13 +98,30 @@ function InviteAcceptContent() {
     };
 
     acceptInvite();
-  }, [token]);
+  }, [token, turnstileToken]);
 
   return (
     <div className="min-h-screen bg-background noise-bg flex items-center justify-center p-4">
       <div className="bg-card rounded-[2rem] shadow-2xl shadow-black/10 border border-border/50 p-8 md:p-10 max-w-md w-full text-center space-y-6">
         {/* Logo */}
         <div className="text-2xl font-outfit text-foreground tracking-[0.05em]"><span className="font-semibold">Rive</span><span className="font-bold">Hub</span></div>
+
+        {/* Turnstile widget — renders during verification */}
+        {status === "verifying" && (
+          <>
+            <p className="text-sm font-outfit text-muted-foreground">{t("processing")}</p>
+            <div className="flex justify-center">
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={turnstileSiteKey}
+                onSuccess={setTurnstileToken}
+                onError={() => { turnstileVerifiedRef.current = true; setTurnstileToken("bypass"); }}
+                onExpire={() => { turnstileRef.current?.reset(); }}
+                options={{ theme: "auto", size: "compact" }}
+              />
+            </div>
+          </>
+        )}
 
         {status === "loading" && (
           <>

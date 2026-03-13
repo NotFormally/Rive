@@ -77,6 +77,8 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+tests/.auth/
+tests/test-results/
 
 # ============================================
 # CONFIDENTIAL — Never commit to public repo

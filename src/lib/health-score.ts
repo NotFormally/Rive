@@ -12,6 +12,7 @@ import type { Database } from '@/types/supabase';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { getPlaceDetails, findNearbyCompetitors, calculateVisibilityScore } from '@/lib/google-places';
 import { aggregateReviews, sentimentToScore } from '@/lib/review-sentiment';
+import { getWeatherCalibrationStats } from '@/lib/weather-demand';
 
 import type { PlaceDetails, NearbyCompetitor } from '@/lib/google-places';
 import type { AggregatedSentiment } from '@/lib/review-sentiment';

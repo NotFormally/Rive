@@ -50,6 +50,26 @@ export async function PATCH(req: NextRequest) {
     const feedbackDays = streakData?.feedback_days ?? 0;
     const feedbackStreak = streakData?.current_streak ?? 0;
 
+    // 3b. Fetch weather calibration data
+    let weatherFeedbacks = 0;
+    let weatherCalibrationScore = 0;
+    try {
+      const { data: weatherData } = await admin
+        .from('weather_impact_history')
+        .select('calibration_score')
+        .eq('restaurant_id', restaurantId)
+        .not('calibration_score', 'is', null);
+
+      if (weatherData && weatherData.length > 0) {
+        weatherFeedbacks = weatherData.length;
+        weatherCalibrationScore = Math.round(
+          weatherData.reduce((sum: number, w: { calibration_score: number }) => sum + w.calibration_score, 0) / weatherData.length
+        );
+      }
+    } catch {
+      // Weather tables may not exist yet — graceful degradation
+    }
+
     // 4. Calculate score
     const scoreData: IntelligenceScoreData = {
       libroConnected,
@@ -57,6 +77,8 @@ export async function PATCH(req: NextRequest) {
       recipesEntered: recipesEntered ?? 0,
       feedbackDays,
       feedbackStreak,
+      weatherFeedbacks,
+      weatherCalibrationScore,
     };
 
     const result = calculateIntelligenceScore(scoreData);

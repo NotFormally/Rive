@@ -512,7 +512,7 @@
     "nav_menu_import": "Enporzhiañ a Diouer"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistem en-dro",
     "header_title": "Gwelout evit an noz",
     "section_tasks": "Tachioù an deiz",
     "no_tasks": "N'eus ket a zach roet evit neuze.",
@@ -656,7 +656,9 @@
     "translating": "O droidigezh...",
     "translate_to": "Troidigezhiañ d'ar {lang}",
     "btn_delete_title": "Disteurel",
-    "label_date": "Deiziad"
+    "label_date": "Deiziad",
+    "type_note": "Notenn",
+    "filter_all": "Pep tra"
   },
   "Common": {
     "loading": "O kargañ...",

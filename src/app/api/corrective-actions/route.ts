@@ -4,6 +4,7 @@ import { MODEL_CREATE } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { quickGuard } from '@/lib/security/prompt-guard';
+import { quickXssGuard } from '@/lib/security/xss-guard';
 
 export async function POST(req: Request) {
   try {
@@ -21,6 +22,8 @@ export async function POST(req: Request) {
     if (taskDescription) {
       const blocked = quickGuard(taskDescription, 'corrective-actions');
       if (blocked) return blocked;
+      const xssBlocked = quickXssGuard(taskDescription, 'corrective-actions');
+      if (xssBlocked) return xssBlocked;
     }
 
     const prompt = `Tu es un expert en sécurité alimentaire (MAPAQ) au Québec. 

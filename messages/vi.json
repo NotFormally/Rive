@@ -550,7 +550,7 @@
     "monthly_energy": "Sử Dụng Năng Lượng Hàng Tháng",
     "monthly_water": "Tiêu Thụ Nước Hàng Tháng",
     "last_30_days": "30 Ngày Qua",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Hệ thống hoạt động",
     "schedule_day_wed": "Thứ Tư",
     "schedule_day_tue": "Thứ Ba",
     "schedule_day_thu": "Thứ Năm",
@@ -656,7 +656,9 @@
     "translating": "Đang dịch...",
     "translate_to": "Dịch sang {lang}",
     "btn_delete_title": "Xóa",
-    "label_date": "Ngày tháng"
+    "label_date": "Ngày tháng",
+    "type_note": "Ghi chú",
+    "filter_all": "Tất cả"
   },
   "Common": {
     "error_unknown": "Không xác định",

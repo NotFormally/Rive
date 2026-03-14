@@ -550,7 +550,7 @@
     "monthly_energy": "월간 에너지 사용량",
     "monthly_water": "월간 수도 사용량",
     "last_30_days": "지난 30일",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "시스템 가동 중",
     "schedule_day_wed": "수",
     "schedule_day_tue": "화",
     "schedule_day_thu": "목",
@@ -656,7 +656,9 @@
     "translating": "번역 중...",
     "translate_to": "{lang}로 번역",
     "btn_delete_title": "삭제",
-    "label_date": "날짜"
+    "label_date": "날짜",
+    "type_note": "메모",
+    "filter_all": "전체"
   },
   "Common": {
     "error_unknown": "알 수 없음",

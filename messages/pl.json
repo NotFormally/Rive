@@ -550,7 +550,7 @@
     "monthly_energy": "Zużycie Energii Miesięczne",
     "monthly_water": "Zużycie Wody Miesięczne",
     "last_30_days": "Ostatnie 30 Dni",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "System działa",
     "schedule_day_wed": "Śr",
     "schedule_day_tue": "Wt",
     "schedule_day_thu": "Czw",
@@ -656,7 +656,9 @@
     "translating": "Tłumaczenie...",
     "translate_to": "Przetłumacz na {lang}",
     "btn_delete_title": "Usuń",
-    "label_date": "Data"
+    "label_date": "Data",
+    "type_note": "Notatka",
+    "filter_all": "Wszystkie"
   },
   "Common": {
     "error_unknown": "Nieznany",

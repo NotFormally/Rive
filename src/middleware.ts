@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { generateCsrfToken, validateCsrf, csrfCookieHeader, CSRF_COOKIE_NAME } from '@/lib/security/csrf';
 
 // ---------------------------------------------------------------------------
 // Inline locale config (avoids importing routing.ts which pulls next-intl
@@ -26,6 +27,20 @@ const HEADER_LOCALE = 'x-next-intl-locale';
 
 const PROTECTED_ROUTES = ["/dashboard", "/admin"];
 const AUTH_ROUTES = ["/login", "/signup"];
+
+// ---------------------------------------------------------------------------
+// API routes exempt from CSRF validation
+// (webhooks use signature auth, cron uses secret tokens, auth callbacks are
+//  OAuth flows, public endpoints have no session to hijack)
+// ---------------------------------------------------------------------------
+const CSRF_EXEMPT_PREFIXES = [
+  '/api/stripe/webhook',     // Stripe signature verification
+  '/api/webhooks/',          // External webhooks (reservations, etc.)
+  '/api/cron/',              // Server-to-server cron jobs
+  '/api/auth/',              // OAuth callbacks (Meta, TikTok)
+  '/api/notify-signup',      // Public signup notification (pre-auth)
+  '/api/verify-turnstile',   // Cloudflare Turnstile verification (pre-auth)
+];
 
 // ---------------------------------------------------------------------------
 // Lightweight i18n routing (replaces next-intl/middleware to cut Edge bundle)
@@ -104,18 +119,55 @@ function handleI18nRouting(request: NextRequest): NextResponse {
 }
 
 // ---------------------------------------------------------------------------
+// CSRF validation for API routes
+// ---------------------------------------------------------------------------
+
+function handleApiCsrf(request: NextRequest): NextResponse | Response {
+  const pathname = request.nextUrl.pathname;
+
+  // Skip exempt routes (webhooks, cron, auth callbacks, public endpoints)
+  if (CSRF_EXEMPT_PREFIXES.some(prefix => pathname.startsWith(prefix))) {
+    return NextResponse.next();
+  }
+
+  // Only validate CSRF for mutating methods
+  const method = request.method.toUpperCase();
+  if (method === 'GET' || method === 'HEAD' || method === 'OPTIONS') {
+    return NextResponse.next();
+  }
+
+  // Validate CSRF (returns null if valid, Response if blocked)
+  const csrfBlocked = validateCsrf(request);
+  if (csrfBlocked) return csrfBlocked;
+
+  return NextResponse.next();
+}
+
+// ---------------------------------------------------------------------------
 // Main middleware
 // ---------------------------------------------------------------------------
 
 export default async function middleware(request: NextRequest) {
-  const response = handleI18nRouting(request);
-
   const pathname = request.nextUrl.pathname;
+
+  // ── API routes: CSRF validation only (no i18n) ──
+  if (pathname.startsWith('/api/')) {
+    return handleApiCsrf(request);
+  }
+
+  // ── Page routes: i18n + auth + CSRF cookie ──
+  const response = handleI18nRouting(request);
 
   const isProtected = PROTECTED_ROUTES.some((route) =>
     pathname.includes(route)
   );
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname.includes(route));
+
+  // ── Set CSRF cookie on ALL page visits (not just protected routes) ──
+  if (!request.cookies.get(CSRF_COOKIE_NAME)) {
+    const token = generateCsrfToken();
+    response.headers.append('Set-Cookie', csrfCookieHeader(token));
+  }
 
   if (!isProtected && !isAuthRoute) {
     return response;
@@ -171,5 +223,6 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  // Include both page routes and API routes (API needs CSRF validation)
+  matcher: ['/((?!_next|_vercel|.*\\..*).*)',]
 };

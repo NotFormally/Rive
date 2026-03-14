@@ -512,7 +512,7 @@
     "nav_menu_import": "Importazione di Menus"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistema Operativu",
     "header_title": "Panoramica",
     "section_tasks": "Compiti di Oghje",
     "no_tasks": "Niscia cumpita assignata per avà.",
@@ -656,7 +656,9 @@
     "translating": "Traduzzione in cursu...",
     "translate_to": "Traduci à {lang}",
     "btn_delete_title": "Cancella",
-    "label_date": "Data"
+    "label_date": "Data",
+    "type_note": "Nota",
+    "filter_all": "Tutti"
   },
   "Common": {
     "loading": "Caricamentu...",

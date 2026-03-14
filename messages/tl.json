@@ -550,7 +550,7 @@
     "monthly_energy": "Buwanang Paggamit ng Enerhiya",
     "monthly_water": "Buwanang Paggamit ng Tubig",
     "last_30_days": "Nakaraang 30 Araw",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistema Gumagana",
     "schedule_day_wed": "Miy",
     "schedule_day_tue": "Mar",
     "schedule_day_thu": "Hue",
@@ -656,7 +656,9 @@
     "translating": "Nagsasalin...",
     "translate_to": "Isalin sa {lang}",
     "btn_delete_title": "Tanggalin",
-    "label_date": "Petsa"
+    "label_date": "Petsa",
+    "type_note": "Tala",
+    "filter_all": "Lahat"
   },
   "Common": {
     "error_unknown": "Hindi kilala",

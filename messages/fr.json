@@ -512,7 +512,7 @@
     "nav_menu_import": "Import de menu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.SYSTEME_OPERATIONNEL",
+    "system_operational": "Système Opérationnel",
     "header_title": "Aperçu",
     "section_tasks": "Tâches du jour",
     "no_tasks": "Aucune tâche assignée pour le moment.",
@@ -656,7 +656,9 @@
     "translating": "Traduction en cours...",
     "translate_to": "Traduire en {lang}",
     "btn_delete_title": "Supprimer",
-    "label_date": "Date"
+    "label_date": "Date",
+    "type_note": "Note",
+    "filter_all": "Tous"
   },
   "Common": {
     "loading": "Chargement...",

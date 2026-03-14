@@ -512,7 +512,7 @@
     "nav_menu_import": "Speisekort-Import"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "System löppt",
     "header_title": "Översicht",
     "section_tasks": "Tüskn van Vandaag",
     "no_tasks": "Noch keen Tüskn todeelt.",
@@ -656,7 +656,9 @@
     "translating": "Töverstellen...",
     "translate_to": "Töversetzen to {lang}",
     "btn_delete_title": "Lööschen",
-    "label_date": "Datum"
+    "label_date": "Datum",
+    "type_note": "Notiz",
+    "filter_all": "All"
   },
   "Common": {
     "loading": "Laadt...",

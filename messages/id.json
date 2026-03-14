@@ -550,7 +550,7 @@
     "monthly_energy": "Penggunaan Energi Bulanan",
     "monthly_water": "Konsumsi Air Bulanan",
     "last_30_days": "30 Hari Terakhir",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistem Beroperasi",
     "schedule_day_wed": "Rab",
     "schedule_day_tue": "Sel",
     "schedule_day_thu": "Kam",
@@ -656,7 +656,9 @@
     "translating": "Menerjemahkan...",
     "translate_to": "Terjemahkan ke {lang}",
     "btn_delete_title": "Hapus",
-    "label_date": "Tanggal"
+    "label_date": "Tanggal",
+    "type_note": "Catatan",
+    "filter_all": "Semua"
   },
   "Common": {
     "error_unknown": "Tidak diketahui",

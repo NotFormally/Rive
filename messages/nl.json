@@ -550,7 +550,7 @@
     "monthly_energy": "Maandelijks Energieverbruik",
     "monthly_water": "Maandelijks Waterverbruik",
     "last_30_days": "Laatste 30 Dagen",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Systeem operationeel",
     "schedule_day_wed": "Woe",
     "schedule_day_tue": "Din",
     "schedule_day_thu": "Don",
@@ -656,7 +656,9 @@
     "translating": "Vertalen...",
     "translate_to": "Vertaal naar {lang}",
     "btn_delete_title": "Verwijderen",
-    "label_date": "Datum"
+    "label_date": "Datum",
+    "type_note": "Notitie",
+    "filter_all": "Alle"
   },
   "Common": {
     "error_unknown": "Onbekend",

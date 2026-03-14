@@ -512,7 +512,7 @@
     "nav_menu_import": "Itupale Ounjẹ Wole"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Ètò Ń Ṣiṣẹ́",
     "header_title": "Akopọ Ọjọ",
     "section_tasks": "Iṣẹ Ọjọ Oni",
     "no_tasks": "Ko si iṣẹ ti a yan fun yin pupo.",
@@ -656,7 +656,9 @@
     "translating": "Ń ṣe ìtúmọ̀...",
     "translate_to": "Túmọ̀ sí {lang}",
     "btn_delete_title": "Paṛọ",
-    "label_date": "Ọjọ́"
+    "label_date": "Ọjọ́",
+    "type_note": "Àkọsílẹ̀",
+    "filter_all": "Gbogbo"
   },
   "Common": {
     "loading": "Ń ẹ̀rọ̀...",

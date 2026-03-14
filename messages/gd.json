@@ -512,7 +512,7 @@
     "nav_menu_import": "Clàr-bìdh Ionadail"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Siostam ag Obair",
     "header_title": "Foir-shealladh",
     "section_tasks": "Gnothaichean an-diugh",
     "no_tasks": "Chan eil gnothaichean air an sònrachadh fhathast.",
@@ -656,7 +656,9 @@
     "translating": "A' tionndadh...",
     "translate_to": "Eadar-theangaich gu {lang}",
     "btn_delete_title": "Cuir dheth",
-    "label_date": "Ceann-là"
+    "label_date": "Ceann-là",
+    "type_note": "Nòta",
+    "filter_all": "Na h-uile"
   },
   "Common": {
     "loading": "A' luchdachadh...",

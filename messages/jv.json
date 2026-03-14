@@ -512,7 +512,7 @@
     "nav_menu_import": "Impor Menu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistem Operasional",
     "header_title": "Gambaran Umum",
     "section_tasks": "Tugas Hari Ini",
     "no_tasks": "Tidak ada tugas yang ditugaskan.",
@@ -656,7 +656,9 @@
     "translating": "Diterjemahké...",
     "translate_to": "Terjemahké menyang {lang}",
     "btn_delete_title": "Hapus",
-    "label_date": "Tanggal"
+    "label_date": "Tanggal",
+    "type_note": "Cathetan",
+    "filter_all": "Kabeh"
   },
   "Common": {
     "loading": "Loading...",

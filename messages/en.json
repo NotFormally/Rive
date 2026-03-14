@@ -609,7 +609,7 @@
     "role_editor": "Editor"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "System Operational",
     "header_title": "Overview",
     "section_tasks": "Today's Tasks",
     "no_tasks": "No tasks assigned yet.",
@@ -753,7 +753,9 @@
     "translating": "Translating...",
     "translate_to": "Translate to {lang}",
     "btn_delete_title": "Delete",
-    "label_date": "Date"
+    "label_date": "Date",
+    "type_note": "Note",
+    "filter_all": "All"
   },
   "Common": {
     "loading": "Loading...",

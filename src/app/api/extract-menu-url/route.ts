@@ -5,6 +5,7 @@ import { MODEL_EXTRACT } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { quickGuard } from '@/lib/security/prompt-guard';
+import { quickXssGuard } from '@/lib/security/xss-guard';
 
 const menuFromUrlSchema = z.object({
   currency: z.string().optional(),
@@ -41,6 +42,8 @@ export async function POST(req: Request) {
 
     const blocked = quickGuard(url, 'extract-menu-url');
     if (blocked) return blocked;
+    const xssBlocked = quickXssGuard(url, 'extract-menu-url');
+    if (xssBlocked) return xssBlocked;
 
     // Validate it looks like an UberEats or delivery platform URL
     const validDomains = ['ubereats.com', 'doordash.com', 'deliveroo.com', 'grubhub.com', 'skipthedishes.com'];

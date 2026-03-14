@@ -13,6 +13,7 @@
  */
 
 import { guardInput, guardOutput, type GuardVerdict } from '../src/lib/security/prompt-guard';
+import { guardXss, type XssVerdict } from '../src/lib/security/xss-guard';
 import { ALL_ATTACKS, mutatePayload, type Attack, CATALOG_STATS } from '../src/lib/security/attack-catalog';
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -20,10 +21,11 @@ import { ALL_ATTACKS, mutatePayload, type Attack, CATALOG_STATS } from '../src/l
 type TestResult = {
   attack: Attack;
   guardVerdict: GuardVerdict;
+  xssVerdict?: XssVerdict;
   httpStatus?: number;
   httpBody?: string;
   injectionSucceeded: boolean;  // Did the attack bypass ALL defenses?
-  guardCaught: boolean;         // Did prompt-guard catch it?
+  guardCaught: boolean;         // Did prompt-guard or xss-guard catch it?
   aiResisted: boolean;          // Did the AI refuse even without guard?
   notes: string;
 };
@@ -297,18 +299,27 @@ async function runAttack(attack: Attack, route: RouteConfig): Promise<TestResult
   // Step 1: Test against prompt-guard
   const guardVerdict = guardInput(attack.payload, { context: route.name });
 
+  // Step 1b: Test against xss-guard (for XSS category attacks)
+  const xssVerdict = attack.category === 'XSS' ? guardXss(attack.payload) : undefined;
+
   const result: TestResult = {
     attack,
     guardVerdict,
+    xssVerdict,
     injectionSucceeded: false,
-    guardCaught: !guardVerdict.safe,
+    guardCaught: !guardVerdict.safe || (xssVerdict ? !xssVerdict.safe : false),
     aiResisted: false,
     notes: '',
   };
 
-  // If guard catches it, no need to test HTTP (unless we want to verify)
+  // If either guard catches it, no need to test HTTP
   if (!guardVerdict.safe) {
     result.notes = `Blocked by prompt-guard (score=${guardVerdict.score}, flags=[${guardVerdict.flags.join(', ')}])`;
+    return result;
+  }
+
+  if (xssVerdict && !xssVerdict.safe) {
+    result.notes = `Blocked by xss-guard (score=${xssVerdict.score}, flags=[${xssVerdict.flags.join(', ')}])`;
     return result;
   }
 

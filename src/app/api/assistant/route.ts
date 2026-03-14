@@ -5,6 +5,7 @@ import { MODEL_CREATE } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { guardInput, injectCanary, guardOutput } from '@/lib/security/prompt-guard';
+import { quickXssGuard } from '@/lib/security/xss-guard';
 
 export const maxDuration = 60;
 
@@ -31,6 +32,8 @@ export async function POST(req: Request) {
           { status: 403, headers: { 'Content-Type': 'application/json' } }
         );
       }
+      const xssBlocked = quickXssGuard(lastMessage.content, 'assistant');
+      if (xssBlocked) return xssBlocked;
     }
 
     const messages = await convertToModelMessages(uiMessages);

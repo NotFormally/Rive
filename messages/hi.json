@@ -535,7 +535,7 @@
     "monthly_energy": "मासिक ऊर्जा उपयोग",
     "monthly_water": "मासिक जल खपत",
     "last_30_days": "पिछले 30 दिन",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "सिस्टम चालू है",
     "schedule_day_wed": "बुध",
     "schedule_day_tue": "मंगल",
     "schedule_day_thu": "गुरु",
@@ -641,7 +641,9 @@
     "translating": "अनुवाद हो रहा है...",
     "translate_to": "{lang} में अनुवाद करें",
     "btn_delete_title": "हटाएं",
-    "label_date": "तारीख"
+    "label_date": "तारीख",
+    "type_note": "नोट",
+    "filter_all": "सभी"
   },
   "Common": {
     "error_unknown": "अज्ञात",

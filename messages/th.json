@@ -550,7 +550,7 @@
     "monthly_energy": "การใช้พลังงานรายเดือน",
     "monthly_water": "ปริมาณการใช้น้ำรายเดือน",
     "last_30_days": "30 วันที่ผ่านมา",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "ระบบทำงานปกติ",
     "schedule_day_wed": "พุธ",
     "schedule_day_tue": "อังคาร",
     "schedule_day_thu": "พฤหัสบดี",
@@ -656,7 +656,9 @@
     "translating": "กำลังแปล...",
     "translate_to": "แปลเป็น {lang}",
     "btn_delete_title": "ลบ",
-    "label_date": "วันที่"
+    "label_date": "วันที่",
+    "type_note": "โน้ต",
+    "filter_all": "ทั้งหมด"
   },
   "Common": {
     "error_unknown": "ไม่ทราบ",

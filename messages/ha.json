@@ -512,7 +512,7 @@
     "nav_menu_import": "Shafin Jerin Abinci"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Tsarin yana Aiki",
     "header_title": "Musamman",
     "section_tasks": "Ayyukan Jiya",
     "no_tasks": "Babu ayyuka da aka sanya tunanin su.",
@@ -656,7 +656,9 @@
     "translating": "Yana jidida...",
     "translate_to": "Gida zuwa {lang}",
     "btn_delete_title": "Kawar",
-    "label_date": "Kwanan"
+    "label_date": "Kwanan",
+    "type_note": "Bayani",
+    "filter_all": "Duka"
   },
   "Common": {
     "loading": "Yana buɗi...",

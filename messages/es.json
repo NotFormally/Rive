@@ -535,7 +535,7 @@
     "monthly_energy": "Consumo Mensual de Energía",
     "monthly_water": "Consumo Mensual de Agua",
     "last_30_days": "Últimos 30 Días",
-    "system_operational": "DASHBOARD.SISTEMA_OPERATIVO",
+    "system_operational": "Sistema Operativo",
     "schedule_day_wed": "Mié",
     "schedule_day_tue": "Mar",
     "schedule_day_thu": "Jue",
@@ -641,7 +641,9 @@
     "translating": "Traduciendo...",
     "translate_to": "Traducir a {lang}",
     "btn_delete_title": "Eliminar",
-    "label_date": "Fecha"
+    "label_date": "Fecha",
+    "type_note": "Nota",
+    "filter_all": "Todos"
   },
   "Common": {
     "error_unknown": "Desconocido",

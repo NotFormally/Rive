@@ -512,7 +512,7 @@
     "nav_menu_import": "Enpòte Meni"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistèm Operasyonèl",
     "header_title": "Apèsi jèn",
     "section_tasks": "Travay Jodi a",
     "no_tasks": "Pa gen travay asiyen ankò.",
@@ -656,7 +656,9 @@
     "translating": "Ap tradwi...",
     "translate_to": "Tradwi an {lang}",
     "btn_delete_title": "Efase",
-    "label_date": "Dat"
+    "label_date": "Dat",
+    "type_note": "Nòt",
+    "filter_all": "Tout"
   },
   "Common": {
     "loading": "Chajman...",

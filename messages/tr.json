@@ -535,7 +535,7 @@
     "monthly_energy": "Aylık Enerji Tüketimi",
     "monthly_water": "Aylık Su Tüketimi",
     "last_30_days": "Son 30 Gün",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistem Çalışıyor",
     "schedule_day_wed": "Çar",
     "schedule_day_tue": "Sal",
     "schedule_day_thu": "Per",
@@ -641,7 +641,9 @@
     "translating": "Çevriliyor...",
     "translate_to": "{lang} diline çevir",
     "btn_delete_title": "Sil",
-    "label_date": "Tarih"
+    "label_date": "Tarih",
+    "type_note": "Not",
+    "filter_all": "Tümü"
   },
   "Common": {
     "error_unknown": "Bilinmeyen",

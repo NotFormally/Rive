@@ -512,7 +512,7 @@
     "nav_menu_import": "Nawozenje meni"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "System w běhu",
     "header_title": "Přehlad",
     "section_tasks": "Dzešnjace nadaće",
     "no_tasks": "Hišće žane nadaće přidělene.",
@@ -656,7 +656,9 @@
     "translating": "Tłumaczenie...",
     "translate_to": "Przetłumacz na {lang}",
     "btn_delete_title": "Usuń",
-    "label_date": "Data"
+    "label_date": "Data",
+    "type_note": "Zapisk",
+    "filter_all": "Wšě"
   },
   "Common": {
     "loading": "Ładowanie...",

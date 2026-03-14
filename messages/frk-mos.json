@@ -512,7 +512,7 @@
     "nav_menu_import": "Menü-Importéierung"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Système Opérationnel",
     "header_title": "Iwwerbléck",
     "section_tasks": "Haut's Aufgaben",
     "no_tasks": "Nó keng Aufgaben zougewisen.",
@@ -656,7 +656,9 @@
     "translating": "Iwwersetzt...",
     "translate_to": "Iwwersetzen zu {lang}",
     "btn_delete_title": "Läschen",
-    "label_date": "Datum"
+    "label_date": "Datum",
+    "type_note": "Note",
+    "filter_all": "Tous"
   },
   "Common": {
     "loading": "Luet...",

@@ -656,7 +656,9 @@
     "translating": "በ translate...",
     "translate_to": "ወደ {lang} ይተርጉሙ",
     "btn_delete_title": "ሰርዝ",
-    "label_date": "ቀን"
+    "label_date": "ቀን",
+    "type_note": "ማስታወሻ",
+    "filter_all": "ሁሉም"
   },
   "Common": {
     "loading": "በሚጫን...",

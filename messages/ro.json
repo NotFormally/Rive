@@ -512,7 +512,7 @@
     "nav_menu_import": "Importare Meniu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistem Operațional",
     "header_title": "Prezentare generală",
     "section_tasks": "Sarcinile de Astazi",
     "no_tasks": "Nicio sarcină asignată încă.",
@@ -656,7 +656,9 @@
     "translate_to": "Traduce în {lang}",
     "translated_badge": "Tradus de AI (Sursă: {lang})",
     "translating": "Se traduce...",
-    "translation_quota_reached": "Cota de traducere atinsă. Upgrade la un plan superior."
+    "translation_quota_reached": "Cota de traducere atinsă. Upgrade la un plan superior.",
+    "type_note": "Notă",
+    "filter_all": "Toate"
   },
   "Common": {
     "loading": "Se încarcă...",

@@ -535,7 +535,7 @@
     "monthly_energy": "Месячное потребление энергии",
     "monthly_water": "Месячное потребление воды",
     "last_30_days": "Последние 30 дней",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Система работает",
     "schedule_day_wed": "Ср",
     "schedule_day_tue": "Вт",
     "schedule_day_thu": "Чт",
@@ -641,7 +641,9 @@
     "translating": "Перевод...",
     "translate_to": "Перевести на {lang}",
     "btn_delete_title": "Удалить",
-    "label_date": "Дата"
+    "label_date": "Дата",
+    "type_note": "Заметка",
+    "filter_all": "Все"
   },
   "Common": {
     "error_unknown": "Неизвестная ошибка",

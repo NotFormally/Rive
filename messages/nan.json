@@ -550,7 +550,7 @@
     "monthly_energy": "月度能源使用量",
     "monthly_water": "月度用水量",
     "last_30_days": "最近 30 天",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "系統運作中",
     "schedule_day_wed": "週三",
     "schedule_day_tue": "週二",
     "schedule_day_thu": "週四",
@@ -656,7 +656,9 @@
     "translating": "翻譯中...",
     "translate_to": "翻譯為 {lang}",
     "btn_delete_title": "刪除",
-    "label_date": "日期"
+    "label_date": "日期",
+    "type_note": "筆記",
+    "filter_all": "全部"
   },
   "Common": {
     "error_unknown": "不明",

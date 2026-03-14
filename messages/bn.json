@@ -535,7 +535,7 @@
     "monthly_energy": "মাসিক শক্তি ব্যবহার",
     "monthly_water": "মাসিক জল খরচ",
     "last_30_days": "গত ৩০ দিন",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "সিস্টেম চালু আছে",
     "schedule_day_wed": "বুধ",
     "schedule_day_tue": "মঙ্গল",
     "schedule_day_thu": "বৃহ",
@@ -641,7 +641,9 @@
     "translating": "অনুবাদ করছে...",
     "translate_to": "{lang}-এ অনুবাদ করুন",
     "btn_delete_title": "মুছে ফেলুন",
-    "label_date": "তারিখ"
+    "label_date": "তারিখ",
+    "type_note": "নোট",
+    "filter_all": "সব"
   },
   "Common": {
     "error_unknown": "অজানা",

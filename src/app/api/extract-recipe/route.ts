@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
 import { quickGuard } from '@/lib/security/prompt-guard';
+import { quickXssGuard } from '@/lib/security/xss-guard';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || "", // From Higgs config / RiveHub .env.local
@@ -32,6 +33,8 @@ export async function POST(req: NextRequest) {
 
     const blocked = quickGuard(transcription, 'extract-recipe');
     if (blocked) return blocked;
+    const xssBlocked = quickXssGuard(transcription, 'extract-recipe');
+    if (xssBlocked) return xssBlocked;
 
     // Call Claude 3.5 Sonnet to map raw voice to structured JSON
     const message = await anthropic.messages.create({

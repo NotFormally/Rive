@@ -535,7 +535,7 @@
     "monthly_energy": "மாதிக ஆற்றல் பயன்பாடு",
     "monthly_water": "மாதிக நீர் நுகர்வு",
     "last_30_days": "கடந்த 30 நாட்கள்",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "அமைப்பு இயங்குகிறது",
     "schedule_day_wed": "புதன்",
     "schedule_day_tue": "செவ்வாய்",
     "schedule_day_thu": "வியாழன்",
@@ -641,7 +641,9 @@
     "translating": "மொழிபெயர்க்கப்படுகிறது...",
     "translate_to": "{lang} க்கு மொழிபெயர்க்கவும்",
     "btn_delete_title": "நீக்கவும்",
-    "label_date": "தேதி"
+    "label_date": "தேதி",
+    "type_note": "குறிப்பு",
+    "filter_all": "அனைத்தும்"
   },
   "Common": {
     "error_unknown": "தெரியாதது",

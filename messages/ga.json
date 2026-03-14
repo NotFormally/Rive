@@ -512,7 +512,7 @@
     "nav_menu_import": "Iompórtáil an Bhia-roinn"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Córas ag Feidhmiú",
     "header_title": "Forbhreathnú",
     "section_tasks": "Tascanna an Lae",
     "no_tasks": "Níor sannaidh aon thasc fós.",
@@ -656,7 +656,9 @@
     "translating": "Ag aistriú...",
     "translate_to": "Aistrigh go {lang}",
     "btn_delete_title": "Scrios",
-    "label_date": "Dáta"
+    "label_date": "Dáta",
+    "type_note": "Nóta",
+    "filter_all": "Gach ceann"
   },
   "Common": {
     "loading": "Ag lódáil...",

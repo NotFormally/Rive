@@ -513,7 +513,7 @@
     "nav_menu_import": "Uagizaji wa Menyu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Mfumo Unafanya Kazi",
     "header_title": "Muhtasari",
     "section_tasks": "Kazi za Leo",
     "no_tasks": "Hakuna kazi iliyopewa bado.",
@@ -657,7 +657,9 @@
     "translating": "Inatafsiri...",
     "translate_to": "Tafsiri hadi {lang}",
     "btn_delete_title": "Futa",
-    "label_date": "Tarehe"
+    "label_date": "Tarehe",
+    "type_note": "Dokezo",
+    "filter_all": "Zote"
   },
   "Common": {
     "loading": "Inapakia...",

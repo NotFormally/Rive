@@ -535,7 +535,7 @@
     "monthly_energy": "ਮਾਸਿਕ ਊਰਜਾ ਵਰਤੋਂ",
     "monthly_water": "ਮਾਸਿਕ ਪਾਣੀ ਦੀ ਖਪਤ",
     "last_30_days": "ਪਿਛਲੇ 30 ਦਿਨ",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "ਸਿਸਟਮ ਚਾਲੂ ਹੈ",
     "schedule_day_wed": "ਬੁੱਧ",
     "schedule_day_tue": "ਮੰਗਲ",
     "schedule_day_thu": "ਵੀਰ",
@@ -641,7 +641,9 @@
     "translating": "ਅਨੁਵਾਦ ਕਿਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
     "translate_to": "{lang} ਵਿੱਚ ਅਨੁਵਾਦ ਕਰੋ",
     "btn_delete_title": "ਮਿਟਾਓ",
-    "label_date": "ਮਿਤੀ"
+    "label_date": "ਮਿਤੀ",
+    "type_note": "ਨੋਟ",
+    "filter_all": "ਸਾਰੇ"
   },
   "Common": {
     "error_unknown": "ਅਣਜਾਣ",

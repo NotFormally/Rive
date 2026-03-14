@@ -512,7 +512,7 @@
     "nav_menu_import": "مینو درآمد"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "سسٹم فعال ہے",
     "header_title": "جائزہ",
     "section_tasks": "آج کے کام",
     "no_tasks": "ابھی کوئی کام مختص نہیں ہوا۔",
@@ -656,7 +656,9 @@
     "translating": "ترجمہ جاری ہے...",
     "translate_to": "{lang} میں ترجمہ کریں",
     "btn_delete_title": "حذف کریں",
-    "label_date": "تاریخ"
+    "label_date": "تاریخ",
+    "type_note": "نوٹ",
+    "filter_all": "سب"
   },
   "Common": {
     "loading": "لوڈ جاری ہے...",

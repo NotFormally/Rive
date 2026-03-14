@@ -535,7 +535,7 @@
     "monthly_energy": "استهلاك الطاقة الشهري",
     "monthly_water": "استهلاك المياه الشهري",
     "last_30_days": "آخر 30 يوم",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "النظام يعمل",
     "schedule_day_wed": "الأربعاء",
     "schedule_day_tue": "الثلاثاء",
     "schedule_day_thu": "الخميس",
@@ -641,7 +641,9 @@
     "translating": "جاري الترجمة...",
     "translate_to": "ترجم إلى {lang}",
     "btn_delete_title": "حذف",
-    "label_date": "التاريخ"
+    "label_date": "التاريخ",
+    "type_note": "ملاحظة",
+    "filter_all": "الكل"
   },
   "Common": {
     "error_unknown": "غير معروف",

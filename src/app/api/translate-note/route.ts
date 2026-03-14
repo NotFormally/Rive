@@ -4,6 +4,7 @@ import { MODEL_EXTRACT } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { quickGuardMultiple } from '@/lib/security/prompt-guard';
+import { quickXssGuard } from '@/lib/security/xss-guard';
 
 const TRANSLATION_SYSTEM_PROMPT = `Tu es l'expert en communication multilingue et traduction opérationnelle de RiveHub, un système IA de pointe dédié à la gestion de restaurants gastronomiques et commerciaux.
 
@@ -34,6 +35,8 @@ export async function POST(req: Request) {
 
     const blocked = quickGuardMultiple({ text, summary }, 'translate-note');
     if (blocked) return blocked;
+    const xssBlocked = quickXssGuard(text, 'translate-note');
+    if (xssBlocked) return xssBlocked;
 
     const langMap: Record<string, string> = {
       // Major

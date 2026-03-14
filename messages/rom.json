@@ -512,7 +512,7 @@
     "nav_menu_import": "Importi Meniu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sistemo Operacional",
     "header_title": "Vedere de ansamblu",
     "section_tasks": "Sarcinile de Astazi",
     "no_tasks": "Nu au fost atribuite sarcini încă.",
@@ -656,7 +656,9 @@
     "translating": "Se traduce...",
     "translate_to": "Traduce în {lang}",
     "btn_delete_title": "Șterge",
-    "label_date": "Data"
+    "label_date": "Data",
+    "type_note": "Notă",
+    "filter_all": "Sa"
   },
   "Common": {
     "loading": "Se încarcă...",

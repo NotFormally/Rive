@@ -512,7 +512,7 @@
     "nav_menu_import": "Kuusuu Galma Seenuu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Sirni Hojiin Jira",
     "header_title": "Ilaalcha Waloo",
     "section_tasks": "Hojii Harʼa",
     "no_tasks": "Hojiin kan ramaddame hin jiru.",
@@ -656,7 +656,9 @@
     "translating": "Hiikkaa jira...",
     "translate_to": "{lang} tti hiikuu",
     "btn_delete_title": "Haqi",
-    "label_date": "Guyyaa"
+    "label_date": "Guyyaa",
+    "type_note": "Yaadannoo",
+    "filter_all": "Hunda"
   },
   "Common": {
     "loading": "Fe'aa jira...",

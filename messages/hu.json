@@ -512,7 +512,7 @@
     "nav_menu_import": "Menü importálása"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Rendszer üzemel",
     "header_title": "Áttekintés",
     "section_tasks": "Mai feladatok",
     "no_tasks": "Még nincsenek hozzárendelt feladatok.",
@@ -656,7 +656,9 @@
     "translating": "Fordítás...",
     "translate_to": "Fordítás erre: {lang}",
     "btn_delete_title": "Törlés",
-    "label_date": "Dátum"
+    "label_date": "Dátum",
+    "type_note": "Jegyzet",
+    "filter_all": "Összes"
   },
   "Common": {
     "loading": "Betöltés...",

@@ -512,7 +512,7 @@
     "nav_menu_import": "Εισαγωγή Μενού"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Σύστημα σε λειτουργία",
     "header_title": "Επισκόπηση",
     "section_tasks": "Εργασίες για Σήμερα",
     "no_tasks": "Δεν έχουν ανατεθεί εργασίες ακόμα.",
@@ -656,7 +656,9 @@
     "translating": "Μετάφραση...",
     "translate_to": "Μετάφραση σε {lang}",
     "btn_delete_title": "Διαγραφή",
-    "label_date": "Ημερομηνία"
+    "label_date": "Ημερομηνία",
+    "type_note": "Σημείωση",
+    "filter_all": "Όλα"
   },
   "Common": {
     "loading": "Φόρτωση...",

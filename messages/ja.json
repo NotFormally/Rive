@@ -550,7 +550,7 @@
     "monthly_energy": "月間エネルギー使用量",
     "monthly_water": "月間水道使用量",
     "last_30_days": "過去30日間",
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "システム稼働中",
     "schedule_day_wed": "水",
     "schedule_day_tue": "火",
     "schedule_day_thu": "木",
@@ -656,7 +656,9 @@
     "translating": "翻訳中...",
     "translate_to": "{lang} に翻訳",
     "btn_delete_title": "削除",
-    "label_date": "日付"
+    "label_date": "日付",
+    "type_note": "メモ",
+    "filter_all": "すべて"
   },
   "Common": {
     "error_unknown": "不明",

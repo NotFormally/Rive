@@ -468,7 +468,7 @@
     "honeypot_website": "وبسایت"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "سیستم عملیاتی",
     "header_title": "نمای کلی",
     "section_tasks": "وظایف امروز",
     "no_tasks": "هیچ وظیفه‌ای هنوز اختصاص داده نشده است.",
@@ -572,7 +572,9 @@
     "supplier": "تامین‌کننده",
     "amount": "مبلغ کل",
     "items": "اقلام",
-    "empty_state": "هنوز یادداشتی نیست. اولین مشاهده خود را اضافه کنید."
+    "empty_state": "هنوز یادداشتی نیست. اولین مشاهده خود را اضافه کنید.",
+    "type_note": "یادداشت",
+    "filter_all": "همه"
   },
   "MenuEditor": {
     "title": "🍽️ مدیر منو",

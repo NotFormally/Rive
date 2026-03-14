@@ -512,7 +512,7 @@
     "nav_menu_import": "Menuimport"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Systeem operationeel",
     "header_title": "Overzicht",
     "section_tasks": "Taken voor vandaag",
     "no_tasks": "Nog geen taken toegewezen.",
@@ -656,7 +656,9 @@
     "translating": "Vertalen...",
     "translate_to": "Vertalen naar {lang}",
     "btn_delete_title": "Verwijderen",
-    "label_date": "Datum"
+    "label_date": "Datum",
+    "type_note": "Notitie",
+    "filter_all": "Alle"
   },
   "Common": {
     "loading": "Laden...",

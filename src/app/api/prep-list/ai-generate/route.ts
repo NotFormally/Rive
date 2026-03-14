@@ -3,6 +3,7 @@ import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { MODEL_CREATE } from '@/lib/ai-models';
 import { quickGuard } from '@/lib/security/prompt-guard';
+import { quickXssGuard } from '@/lib/security/xss-guard';
 
 export const maxDuration = 60; // Allow enough time for LLM
 
@@ -24,6 +25,8 @@ export async function POST(req: Request) {
     if (context) {
       const blocked = quickGuard(context, 'prep-list-ai-generate');
       if (blocked) return blocked;
+      const xssBlocked = quickXssGuard(context, 'prep-list-ai-generate');
+      if (xssBlocked) return xssBlocked;
     }
 
     // 1. Fetch the prep list and items from DB

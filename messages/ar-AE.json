@@ -512,7 +512,7 @@
     "nav_menu_import": "استيراد القائمة"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "النظام يعمل",
     "header_title": "النظرة العامة",
     "section_tasks": "مهام اليوم",
     "no_tasks": "لم يتم تعيين أي مهام بعد.",
@@ -656,7 +656,9 @@
     "translating": "جاري الترجمة...",
     "translate_to": "ترجم إلى {lang}",
     "btn_delete_title": "حذف",
-    "label_date": "التاريخ"
+    "label_date": "التاريخ",
+    "type_note": "ملاحظة",
+    "filter_all": "الكل"
   },
   "Common": {
     "loading": "جاري التحميل...",

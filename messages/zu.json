@@ -512,7 +512,7 @@
     "nav_menu_import": "Ukungenisa Imenyu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Isistimu Isebenza",
     "header_title": "Umbiko Omfushane",
     "section_tasks": "Umsebenzi Wangilona",
     "no_tasks": "Awekho umsebenzi omiswe okwamanje.",
@@ -656,7 +656,9 @@
     "translating": "Ihumusha...",
     "translate_to": "Humusha ku-{lang}",
     "btn_delete_title": "Susa",
-    "label_date": "Usuku"
+    "label_date": "Usuku",
+    "type_note": "Isibalulo",
+    "filter_all": "Konke"
   },
   "Common": {
     "loading": "Iyalayida...",

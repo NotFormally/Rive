@@ -512,7 +512,7 @@
     "nav_menu_import": "Import menu"
   },
   "Dashboard": {
-    "system_operational": "DASHBOARD.OPERATIONAL_SYSTEM",
+    "system_operational": "Systém v provozu",
     "header_title": "Přehled",
     "section_tasks": "Dnešní úkoly",
     "no_tasks": "Zatím nejsou přiřazeny žádné úkoly.",
@@ -656,7 +656,9 @@
     "translating": "Překlad probíhá...",
     "translate_to": "Přeložit na {lang}",
     "btn_delete_title": "Smazat",
-    "label_date": "Datum"
+    "label_date": "Datum",
+    "type_note": "Poznámka",
+    "filter_all": "Vše"
   },
   "Common": {
     "loading": "Načítání...",

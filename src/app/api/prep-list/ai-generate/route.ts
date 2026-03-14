@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
 import { MODEL_CREATE } from '@/lib/ai-models';
+import { quickGuard } from '@/lib/security/prompt-guard';
 
 export const maxDuration = 60; // Allow enough time for LLM
 
@@ -18,6 +19,11 @@ export async function POST(req: Request) {
 
     if (!prep_list_id) {
       return NextResponse.json({ error: 'Missing prep_list_id' }, { status: 400 });
+    }
+
+    if (context) {
+      const blocked = quickGuard(context, 'prep-list-ai-generate');
+      if (blocked) return blocked;
     }
 
     // 1. Fetch the prep list and items from DB

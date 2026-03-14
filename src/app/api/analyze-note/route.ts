@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { MODEL_EXTRACT } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
+import { quickGuard } from '@/lib/security/prompt-guard';
 
 export async function POST(req: Request) {
   try {
@@ -20,6 +21,10 @@ export async function POST(req: Request) {
     if (!note) {
       return new Response('Note text is required', { status: 400 });
     }
+
+    // Prompt injection guard
+    const blocked = quickGuard(note, 'analyze-note');
+    if (blocked) return blocked;
 
     try {
       const { object } = await generateObject({

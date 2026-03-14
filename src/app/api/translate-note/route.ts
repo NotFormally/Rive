@@ -3,6 +3,7 @@ import { generateText } from 'ai';
 import { MODEL_EXTRACT } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
+import { quickGuardMultiple } from '@/lib/security/prompt-guard';
 
 const TRANSLATION_SYSTEM_PROMPT = `Tu es l'expert en communication multilingue et traduction opérationnelle de RiveHub, un système IA de pointe dédié à la gestion de restaurants gastronomiques et commerciaux.
 
@@ -30,6 +31,9 @@ export async function POST(req: Request) {
     if (!text || !targetLanguage) {
       return new Response('Text and target language are required', { status: 400 });
     }
+
+    const blocked = quickGuardMultiple({ text, summary }, 'translate-note');
+    if (blocked) return blocked;
 
     const langMap: Record<string, string> = {
       // Major

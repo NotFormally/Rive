@@ -32,8 +32,9 @@ export async function checkRateLimit(
 
   const admin = getSupabaseAdmin();
   if (!admin) {
-    // No service role key — skip rate limiting (fail open)
-    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS };
+    // No service role key — fail CLOSED to prevent abuse
+    console.error('[rate-limit] No service role key — blocking request (fail closed)');
+    return { allowed: false, remaining: 0 };
   }
 
   // Count recent requests
@@ -45,9 +46,9 @@ export async function checkRateLimit(
     .gte('created_at', windowStart);
 
   if (error) {
-    // On error, allow the request but don't log (fail open)
-    console.error('Rate limit check failed:', error);
-    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS };
+    // On error, fail closed to prevent abuse during outages
+    console.error('[rate-limit] Check failed — blocking request (fail closed):', error.message);
+    return { allowed: false, remaining: 0 };
   }
 
   const currentCount = count || 0;

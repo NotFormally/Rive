@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { MODEL_EXTRACT } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
+import { quickGuard } from '@/lib/security/prompt-guard';
 
 const menuFromUrlSchema = z.object({
   currency: z.string().optional(),
@@ -37,6 +38,9 @@ export async function POST(req: Request) {
     if (!url || typeof url !== 'string') {
       return new Response(JSON.stringify({ error: 'URL is required' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
+
+    const blocked = quickGuard(url, 'extract-menu-url');
+    if (blocked) return blocked;
 
     // Validate it looks like an UberEats or delivery platform URL
     const validDomains = ['ubereats.com', 'doordash.com', 'deliveroo.com', 'grubhub.com', 'skipthedishes.com'];

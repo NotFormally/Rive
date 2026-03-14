@@ -3,6 +3,7 @@ import { generateText } from 'ai';
 import { MODEL_CREATE } from '@/lib/ai-models';
 import { requireAuth, unauthorized } from '@/lib/auth';
 import { checkRateLimit, tooManyRequests } from '@/lib/rate-limit';
+import { quickGuard } from '@/lib/security/prompt-guard';
 
 export async function POST(req: Request) {
   try {
@@ -15,6 +16,12 @@ export async function POST(req: Request) {
     if (!rateLimit.allowed) return tooManyRequests();
 
     const { taskDescription, temperature } = await req.json();
+
+    // Prompt injection guard
+    if (taskDescription) {
+      const blocked = quickGuard(taskDescription, 'corrective-actions');
+      if (blocked) return blocked;
+    }
 
     const prompt = `Tu es un expert en sécurité alimentaire (MAPAQ) au Québec. 
 Un employé de restaurant vient de relever une température anormale lors de l'inspection suivante: "${taskDescription}".
